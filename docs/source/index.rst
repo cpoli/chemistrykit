@@ -19,6 +19,14 @@ plan; only the domains below exist so far.
   acid/base equilibria with Henderson-Hasselbalch buffers, titration
   curves, Ksp solubility equilibria, and Debye-Huckel activity
   coefficients.
+- :mod:`chemistrykit.md` -- molecular dynamics and force fields: the
+  Lennard-Jones fluid in reduced units (periodic boundary conditions,
+  a Verlet neighbor list, pressure, g(r)), Morse/Buckingham/harmonic
+  bonded potentials, and velocity-rescaling/Nose-Hoover thermostats.
+- :mod:`chemistrykit.statmech` -- statistical mechanics of molecules:
+  translational/rotational/vibrational partition functions and their
+  thermodynamic functions, the Maxwell-Boltzmann speed distribution, and
+  a canonical-ensemble lattice-gas adsorption model.
 
 Conventionally imported as ``ck``:
 
@@ -32,6 +40,9 @@ Conventionally imported as ``ck``:
    acid = ck.solutions.WeakAcid(Ca=0.1, Ka=1.8e-5)
    print(acid.pH())
 
+   fluid = ck.md.LJFluid.from_lattice(n_per_side=6, density=0.7, temperature=1.0)
+   result = fluid.run(dt=0.002, n_steps=2000)
+
 .. toctree::
    :maxdepth: 2
    :caption: API reference
@@ -39,6 +50,8 @@ Conventionally imported as ``ck``:
    api/kinetics
    api/thermo
    api/solutions
+   api/md
+   api/statmech
 
 .. toctree::
    :maxdepth: 2
@@ -47,3 +60,5 @@ Conventionally imported as ``ck``:
    examples/kinetics
    examples/thermo
    examples/solutions
+   examples/md
+   examples/statmech
