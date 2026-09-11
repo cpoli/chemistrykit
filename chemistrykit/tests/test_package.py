@@ -22,3 +22,11 @@ def test_constants_and_integrators_are_modules():
 
 def test_kinetics_subpackage_is_declared_in_all():
     assert "kinetics" in ck.__all__
+
+
+def test_thermo_subpackage_is_declared_in_all():
+    assert "thermo" in ck.__all__
+
+
+def test_domain_subpackage_versions_match_top_level_version():
+    assert ck.thermo.__version__ == ck.__version__

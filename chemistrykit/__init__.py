@@ -5,6 +5,7 @@ Import as ``ck`` by convention::
     import chemistrykit as ck
     ck.kinetics.FirstOrder(k=0.1, C0=1.0)
     ck.kinetics.StoichiometricNetwork.consecutive(k1=1.0, k2=0.3)
+    ck.thermo.VanDerWaals(a=0.1448, b=3.913e-5)
     ck.constants.R
     ck.integrators.rk4_integrate(...)
 
@@ -16,7 +17,7 @@ the domains listed in ``__all__`` below exist so far -- see
 ``chemistrykit-spec.md`` for the full 14-domain plan and build order.
 """
 
-from chemistrykit import constants, integrators, kinetics
+from chemistrykit import constants, integrators, kinetics, thermo
 
 __version__ = "0.1.0"
 
@@ -24,4 +25,5 @@ __all__ = [
     "constants",
     "integrators",
     "kinetics",
+    "thermo",
 ]
