@@ -1,0 +1,103 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chemistrykit"
+version = "0.1.0"
+description = "Unified numerical toolkit for computational chemistry: reaction kinetics, thermodynamics, quantum chemistry, electrochemistry, spectroscopy, and more, sharing common ODE integrators and chemical constants."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "chemistrykit contributors" }]
+keywords = [
+    "chemistry",
+    "computational-chemistry",
+    "reaction-kinetics",
+    "thermodynamics",
+    "quantum-chemistry",
+    "electrochemistry",
+    "spectroscopy",
+    "physical-chemistry",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Chemistry",
+]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "matplotlib>=3.6",
+    "numba>=0.58",
+    "plotly>=5.15",
+    "sympy>=1.11",
+    "tqdm>=4.65",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7.0", "pytest-cov", "hypothesis>=6.90", "pillow>=9.0"]
+docs = [
+    "sphinx>=7.0",
+    "pydata-sphinx-theme>=0.15",
+    "sphinx-autodoc-typehints>=1.25",
+    "myst-parser>=2.0",
+    "sphinx-gallery>=0.15",
+    "sphinx-design>=0.6",
+]
+dev = ["chemistrykit[test,docs]", "ruff>=0.6", "mypy>=1.10", "pre-commit>=3.7"]
+
+[project.urls]
+Homepage = "https://github.com/chemistrykit/chemistrykit"
+Issues = "https://github.com/chemistrykit/chemistrykit/issues"
+Changelog = "https://github.com/chemistrykit/chemistrykit/blob/main/CHANGELOG.md"
+Documentation = "https://chemistrykit.readthedocs.io"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["chemistrykit*"]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "chemistrykit/integrators/tests",
+    "chemistrykit/tests",
+]
+
+[tool.ruff]
+line-length = 160
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM"]
+ignore = [
+    "E731", # lambda assignment: used deliberately for short rate-law/closure expressions
+    "B023", # loop-variable closures: intentional in model-builder factory functions
+    "E741", # single-letter names t/A/B/k: standard chemical-kinetics notation throughout this package
+    "SIM108", # if/else vs ternary: kept as if/else for readability around multi-line chemistry expressions
+    "SIM300", # yoda-condition rewrites: not an improvement for pytest.approx(...) == value assertions
+    "UP045", # X | None vs Optional[X]: keep Optional[] for clarity, it's equally valid under `from __future__ import annotations`
+]
+
+[tool.ruff.lint.per-file-ignores]
+"chemistrykit/*/tests/*" = ["E501", "E402"] # E402: pytest.importorskip(...) before imports, for optional-dependency tests
+"docs/*" = ["E501", "I001", "E402"]
+
+[tool.ruff.format]
+line-ending = "lf"
+
+[tool.mypy]
+python_version = "3.9"
+ignore_missing_imports = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+# The codebase does not fully type-check yet (mostly matplotlib/numpy stub
+# gaps around animation and array-typed arguments); this config exists so
+# type checking can be adopted incrementally rather than skipped entirely.
+# See CONTRIBUTING.md.
+check_untyped_defs = false
