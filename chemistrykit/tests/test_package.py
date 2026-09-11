@@ -36,7 +36,12 @@ def test_md_subpackage_is_declared_in_all():
     assert "md" in ck.__all__
 
 
+def test_statmech_subpackage_is_declared_in_all():
+    assert "statmech" in ck.__all__
+
+
 def test_domain_subpackage_versions_match_top_level_version():
     assert ck.thermo.__version__ == ck.__version__
     assert ck.solutions.__version__ == ck.__version__
     assert ck.md.__version__ == ck.__version__
+    assert ck.statmech.__version__ == ck.__version__
