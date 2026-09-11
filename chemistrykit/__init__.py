@@ -20,7 +20,7 @@ the domains listed in ``__all__`` below exist so far -- see
 ``chemistrykit-spec.md`` for the full 14-domain plan and build order.
 """
 
-from chemistrykit import constants, integrators, kinetics, md, solutions, statmech, thermo
+from chemistrykit import constants, integrators, kinetics, md, quantum, solutions, statmech, thermo
 
 __version__ = "0.1.0"
 
@@ -32,4 +32,5 @@ __all__ = [
     "solutions",
     "md",
     "statmech",
+    "quantum",
 ]
