@@ -112,7 +112,7 @@ PERIODIC_TABLE: dict[str, Element] = {symbol: Element(z, symbol, name, mass) for
 PERIODIC_TABLE_BY_NUMBER: dict[int, Element] = {e.atomic_number: e for e in PERIODIC_TABLE.values()}
 
 
-def get_element(symbol_or_number: "str | int") -> Element:
+def get_element(symbol_or_number: str | int) -> Element:
     """Look up an :class:`Element` by symbol or atomic number.
 
     Parameters
