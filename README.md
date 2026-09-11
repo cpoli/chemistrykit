@@ -17,7 +17,10 @@ conventions of the sibling project
 
 This is an early, in-progress build. Only `chemistrykit.kinetics` (reaction
 kinetics) is implemented so far, as the reference domain the remaining 13
-domains will follow -- see `chemistrykit-spec.md` for the full plan.
+domains will follow -- see `chemistrykit-spec.md` for the full plan. It
+covers elementary integrated rate laws, the Arrhenius equation,
+Michaelis-Menten enzyme kinetics, a general stoichiometric
+reaction-network engine, and the Brusselator oscillator.
 
 ## Install
 

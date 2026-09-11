@@ -8,9 +8,9 @@ def test_top_level_imports_expose_declared_subpackages():
         assert hasattr(ck, name), f"chemistrykit.{name} is in __all__ but not importable"
 
 
-def test_version_is_a_string():
+def test_version_is_a_string_and_matches_kinetics_version():
     assert isinstance(ck.__version__, str)
-    assert ck.__version__
+    assert ck.__version__ == ck.kinetics.__version__
 
 
 def test_constants_and_integrators_are_modules():
@@ -18,3 +18,7 @@ def test_constants_and_integrators_are_modules():
 
     assert isinstance(ck.constants, types.ModuleType)
     assert isinstance(ck.integrators, types.ModuleType)
+
+
+def test_kinetics_subpackage_is_declared_in_all():
+    assert "kinetics" in ck.__all__

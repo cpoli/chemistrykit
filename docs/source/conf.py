@@ -64,9 +64,11 @@ source_suffix = {
 }
 
 # Subpackages with a sphinx-gallery-formatted examples/<name>/ directory.
-# Empty for now -- add each of the 14 chemistry domains from
-# chemistrykit-spec.md to this list as it lands.
-_GALLERY_SUBPACKAGES: list[str] = []
+# Add each remaining chemistry domain from chemistrykit-spec.md to this
+# list as it lands.
+_GALLERY_SUBPACKAGES: list[str] = [
+    "kinetics",
+]
 
 sphinx_gallery_conf = {
     "examples_dirs": [f"../../examples/{name}" for name in _GALLERY_SUBPACKAGES],
