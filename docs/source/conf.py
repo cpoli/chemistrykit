@@ -68,6 +68,8 @@ source_suffix = {
 # list as it lands.
 _GALLERY_SUBPACKAGES: list[str] = [
     "kinetics",
+    "thermo",
+    "solutions",
 ]
 
 sphinx_gallery_conf = {
