@@ -21,6 +21,21 @@ def test_redox_titration_equivalence_potential_general_n1_n2_weighted_average():
     assert E_eq == pytest.approx(expected, abs=1e-6)
 
 
+def test_redox_titration_equivalence_potential_stable_for_v_just_below_V_eq():
+    # A volume one ULP below V_eq (as could arise from an
+    # independently-computed volume array, not the exact same float as
+    # titration.equivalence_volume()) must still resolve to the
+    # equivalence-point weighted average, not fall through to the
+    # ordinary before-equivalence branch's defensive clamp.
+    titration = RedoxTitration(E1_standard=0.771, n1=1, E2_standard=1.72, n2=1, C_analyte=0.10, V_analyte=0.050, C_titrant=0.10)
+    V_eq = titration.equivalence_volume()
+    v_below = np.nextafter(V_eq, -np.inf)
+    v_above = np.nextafter(V_eq, np.inf)
+    expected = (0.771 + 1.72) / 2.0
+    assert titration.response_at(np.array([v_below]))[0] == pytest.approx(expected, abs=1e-6)
+    assert titration.response_at(np.array([v_above]))[0] == pytest.approx(expected, abs=1e-6)
+
+
 def test_redox_titration_curve_is_monotonic_increasing():
     titration = RedoxTitration(E1_standard=0.771, n1=1, E2_standard=1.72, n2=1, C_analyte=0.10, V_analyte=0.050, C_titrant=0.10)
     V = np.linspace(1e-6, 0.09, 3000)

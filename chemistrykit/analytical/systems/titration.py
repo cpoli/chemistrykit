@@ -124,12 +124,21 @@ class RedoxTitration(TitrationCurve):
         a = self.C_analyte * self.V_analyte
         E = np.empty_like(V)
         for i, v in enumerate(V):
-            if v < V_eq:
+            # The isclose check must come first: a `v` that is a tiny
+            # floating-point epsilon *below* V_eq (e.g. from an
+            # independently-computed volume array, or plain round-off)
+            # would otherwise fall into the `v < V_eq` branch below, where
+            # `x` clamps to within 1e-12 of `a` regardless of how close
+            # `v` actually is to V_eq -- silently returning a physically
+            # meaningless clamped potential instead of the correct
+            # equivalence-point value, for a `v` indistinguishable from
+            # V_eq at any reasonable tolerance.
+            if np.isclose(v, V_eq, rtol=1e-9, atol=1e-15):
+                E[i] = (self.n1 * self.E1_standard + self.n2 * self.E2_standard) / (self.n1 + self.n2)
+            elif v < V_eq:
                 x = (self.n2 / self.n1) * self.C_titrant * v  # mol analyte oxidized
                 x = min(x, a * (1.0 - 1e-12))
                 E[i] = self.E1_standard - RT_n1F * np.log((a - x) / x)
-            elif np.isclose(v, V_eq, rtol=1e-9, atol=1e-15):
-                E[i] = (self.n1 * self.E1_standard + self.n2 * self.E2_standard) / (self.n1 + self.n2)
             else:
                 E[i] = self.E2_standard + RT_n2F * np.log((v - V_eq) / V_eq)
         return E
