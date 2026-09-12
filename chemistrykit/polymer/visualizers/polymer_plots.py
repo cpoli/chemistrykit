@@ -85,13 +85,15 @@ def plot_molecular_weight_distribution(x, fraction, ax=None, label: str = "", **
     return ax
 
 
-def plot_carothers_curve(p, Xn, ax=None):
+def plot_carothers_curve(p, Xn, ax=None, **kwargs):
     """Plot the Carothers-equation degree of polymerization against extent of reaction.
 
     Parameters
     ----------
     p, Xn : array-like of float
     ax : matplotlib.axes.Axes, optional
+    **kwargs
+        Forwarded to ``ax.plot`` (e.g. ``label=...``).
 
     Returns
     -------
@@ -99,7 +101,7 @@ def plot_carothers_curve(p, Xn, ax=None):
     """
     if ax is None:
         _, ax = plt.subplots()
-    ax.plot(np.asarray(p, dtype=np.float64), np.asarray(Xn, dtype=np.float64))
+    ax.plot(np.asarray(p, dtype=np.float64), np.asarray(Xn, dtype=np.float64), **kwargs)
     ax.set_xlabel("extent of reaction p")
     ax.set_ylabel(r"$\bar{X}_n$")
     ax.set_title("Carothers equation")

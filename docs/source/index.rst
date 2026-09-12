@@ -58,6 +58,19 @@ plan; only the domains below exist so far.
   and the photochemical quantum yield via Beer-Lambert; Stern-Volmer
   quenching with a static-vs-dynamic diagnostic; and photostationary-
   state kinetics for a two-state photoswitch.
+- :mod:`chemistrykit.surface` -- surface chemistry and catalysis:
+  Langmuir, Freundlich, and BET adsorption isotherms with their standard
+  linearizations for fitting parameters from data; Langmuir-Hinshelwood
+  single- and dual-site surface-reaction kinetics; and a
+  turnover-frequency/rate-enhancement catalysis model built on
+  :mod:`chemistrykit.kinetics`'s Arrhenius equation.
+- :mod:`chemistrykit.polymer` -- polymer chemistry: ideal random-walk
+  chain statistics and the Flory exponent for real chains under
+  theta/good/poor solvent conditions; molecular-weight-distribution
+  statistics and the closed-form Flory-Schulz distribution;
+  step-growth kinetics via the Carothers equation; and chain-growth/
+  free-radical polymerization kinetics built on
+  :mod:`chemistrykit.kinetics`'s reaction-network engine.
 
 Conventionally imported as ``ck``:
 
@@ -88,6 +101,8 @@ Conventionally imported as ``ck``:
    api/structure
    api/electrochem
    api/photochem
+   api/surface
+   api/polymer
 
 .. toctree::
    :maxdepth: 2
@@ -103,3 +118,5 @@ Conventionally imported as ``ck``:
    examples/structure
    examples/electrochem
    examples/photochem
+   examples/surface
+   examples/polymer

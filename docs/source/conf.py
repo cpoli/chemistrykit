@@ -77,6 +77,8 @@ _GALLERY_SUBPACKAGES: list[str] = [
     "structure",
     "electrochem",
     "photochem",
+    "surface",
+    "polymer",
 ]
 
 sphinx_gallery_conf = {
