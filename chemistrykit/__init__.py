@@ -9,6 +9,8 @@ Import as ``ck`` by convention::
     ck.solutions.WeakAcid(Ca=0.1, Ka=1.8e-5).pH()
     ck.md.LJFluid.from_lattice(n_per_side=4, density=0.6, temperature=1.0)
     ck.statmech.MaxwellBoltzmannSpeedDistribution(mass=6.63e-26, temperature=298.15)
+    ck.structure.determine_point_group(water_molecule)
+    ck.spectro.rotational_spectrum(rotor, J_max=10, temperature=300.0)
     ck.constants.R
     ck.integrators.rk4_integrate(...)
 
@@ -20,7 +22,7 @@ the domains listed in ``__all__`` below exist so far -- see
 ``chemistrykit-spec.md`` for the full 14-domain plan and build order.
 """
 
-from chemistrykit import constants, integrators, kinetics, md, quantum, solutions, statmech, thermo
+from chemistrykit import constants, integrators, kinetics, md, quantum, solutions, spectro, statmech, structure, thermo
 
 __version__ = "0.1.0"
 
@@ -33,4 +35,6 @@ __all__ = [
     "md",
     "statmech",
     "quantum",
+    "spectro",
+    "structure",
 ]

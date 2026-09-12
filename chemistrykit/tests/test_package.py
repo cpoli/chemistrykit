@@ -40,8 +40,23 @@ def test_statmech_subpackage_is_declared_in_all():
     assert "statmech" in ck.__all__
 
 
+def test_quantum_subpackage_is_declared_in_all():
+    assert "quantum" in ck.__all__
+
+
+def test_spectro_subpackage_is_declared_in_all():
+    assert "spectro" in ck.__all__
+
+
+def test_structure_subpackage_is_declared_in_all():
+    assert "structure" in ck.__all__
+
+
 def test_domain_subpackage_versions_match_top_level_version():
     assert ck.thermo.__version__ == ck.__version__
     assert ck.solutions.__version__ == ck.__version__
     assert ck.md.__version__ == ck.__version__
     assert ck.statmech.__version__ == ck.__version__
+    assert ck.quantum.__version__ == ck.__version__
+    assert ck.spectro.__version__ == ck.__version__
+    assert ck.structure.__version__ == ck.__version__
