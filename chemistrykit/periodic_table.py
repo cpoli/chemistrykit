@@ -22,7 +22,16 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-__all__ = ["Element", "PERIODIC_TABLE", "get_element", "molar_mass"]
+__all__ = [
+    "Element",
+    "PERIODIC_TABLE",
+    "get_element",
+    "molar_mass",
+    "PAULING_ELECTRONEGATIVITY",
+    "MAIN_GROUP_VALENCE_ELECTRONS",
+    "electronegativity",
+    "valence_electrons",
+]
 
 
 @dataclass(frozen=True)
@@ -161,3 +170,172 @@ def molar_mass(formula_counts: dict) -> float:
     18.015
     """
     return sum(get_element(symbol).atomic_mass * count for symbol, count in formula_counts.items())
+
+
+#: Pauling-scale electronegativities, Z=1 (H) through Z=54 (Xe), as tabulated
+#: by A. L. Allred, *J. Inorg. Nucl. Chem.* 17, 215 (1961) -- the standard
+#: modern compilation of L. Pauling's original scale (*The Nature of the
+#: Chemical Bond*, 3rd ed., 1960, Ch. 3) reproduced in most general-chemistry
+#: textbooks and the CRC Handbook of Chemistry and Physics. The noble gases
+#: He, Ne, and Ar have no conventionally tabulated Pauling value (they form
+#: essentially no compounds on which to calibrate one) and are omitted;
+#: :func:`electronegativity` raises `KeyError` for them, same as for any
+#: element past Xe.
+PAULING_ELECTRONEGATIVITY: dict[str, float] = {
+    "H": 2.20,
+    "Li": 0.98,
+    "Be": 1.57,
+    "B": 2.04,
+    "C": 2.55,
+    "N": 3.04,
+    "O": 3.44,
+    "F": 3.98,
+    "Na": 0.93,
+    "Mg": 1.31,
+    "Al": 1.61,
+    "Si": 1.90,
+    "P": 2.19,
+    "S": 2.58,
+    "Cl": 3.16,
+    "K": 0.82,
+    "Ca": 1.00,
+    "Sc": 1.36,
+    "Ti": 1.54,
+    "V": 1.63,
+    "Cr": 1.66,
+    "Mn": 1.55,
+    "Fe": 1.83,
+    "Co": 1.88,
+    "Ni": 1.91,
+    "Cu": 1.90,
+    "Zn": 1.65,
+    "Ga": 1.81,
+    "Ge": 2.01,
+    "As": 2.18,
+    "Se": 2.55,
+    "Br": 2.96,
+    "Kr": 3.00,
+    "Rb": 0.82,
+    "Sr": 0.95,
+    "Y": 1.22,
+    "Zr": 1.33,
+    "Nb": 1.6,
+    "Mo": 2.16,
+    "Tc": 1.9,
+    "Ru": 2.2,
+    "Rh": 2.28,
+    "Pd": 2.20,
+    "Ag": 1.93,
+    "Cd": 1.69,
+    "In": 1.78,
+    "Sn": 1.96,
+    "Sb": 2.05,
+    "Te": 2.1,
+    "I": 2.66,
+    "Xe": 2.60,
+}
+
+#: Number of valence (outermost-shell) electrons in the *neutral, free* atom,
+#: following the main-group (representative-element) octet-rule counting
+#: convention of G. N. Lewis (*J. Am. Chem. Soc.* 38, 762 (1916)) and I.
+#: Langmuir (*J. Am. Chem. Soc.* 41, 868 (1919)): equal to the old-style
+#: "A group" number (1, 2, then 3-8 for groups 13-18). Restricted to
+#: main-group elements Z=1-54 (groups 1, 2, and 13-18) -- d-block elements
+#: do not have a similarly unambiguous single "valence electron count" for
+#: Lewis-structure formal-charge/oxidation-state bookkeeping (which
+#: (n-1)d electrons count as "valence" is itself a modeling choice) and are
+#: not included; :func:`valence_electrons` raises `KeyError` for them.
+#: Used by :mod:`chemistrykit.structure.systems.lewis` for formal-charge and
+#: oxidation-state assignment.
+MAIN_GROUP_VALENCE_ELECTRONS: dict[str, int] = {
+    "H": 1,
+    "He": 2,
+    "Li": 1,
+    "Be": 2,
+    "B": 3,
+    "C": 4,
+    "N": 5,
+    "O": 6,
+    "F": 7,
+    "Ne": 8,
+    "Na": 1,
+    "Mg": 2,
+    "Al": 3,
+    "Si": 4,
+    "P": 5,
+    "S": 6,
+    "Cl": 7,
+    "Ar": 8,
+    "K": 1,
+    "Ca": 2,
+    "Ga": 3,
+    "Ge": 4,
+    "As": 5,
+    "Se": 6,
+    "Br": 7,
+    "Kr": 8,
+    "Rb": 1,
+    "Sr": 2,
+    "In": 3,
+    "Sn": 4,
+    "Sb": 5,
+    "Te": 6,
+    "I": 7,
+    "Xe": 8,
+}
+
+
+def electronegativity(symbol: str) -> float:
+    """Look up an element's Pauling-scale electronegativity.
+
+    Parameters
+    ----------
+    symbol : str
+        Element symbol (e.g. ``"O"``).
+
+    Returns
+    -------
+    float
+
+    Raises
+    ------
+    KeyError
+        If `symbol` has no conventionally tabulated Pauling value (e.g. a
+        noble gas, or an element past Xe).
+
+    Examples
+    --------
+    >>> electronegativity("F")
+    3.98
+    >>> electronegativity("O") > electronegativity("H")
+    True
+    """
+    return PAULING_ELECTRONEGATIVITY[symbol]
+
+
+def valence_electrons(symbol: str) -> int:
+    """Look up a main-group element's neutral-atom valence-electron count.
+
+    Parameters
+    ----------
+    symbol : str
+        Element symbol (e.g. ``"O"``).
+
+    Returns
+    -------
+    int
+
+    Raises
+    ------
+    KeyError
+        If `symbol` is not a main-group element covered by
+        :data:`MAIN_GROUP_VALENCE_ELECTRONS` (e.g. a d-block metal).
+
+    Examples
+    --------
+    >>> valence_electrons("O")
+    6
+    >>> valence_electrons("Na")
+    1
+    """
+    return MAIN_GROUP_VALENCE_ELECTRONS[symbol]
