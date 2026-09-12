@@ -72,6 +72,7 @@ _GALLERY_SUBPACKAGES: list[str] = [
     "solutions",
     "md",
     "statmech",
+    "quantum",
 ]
 
 sphinx_gallery_conf = {

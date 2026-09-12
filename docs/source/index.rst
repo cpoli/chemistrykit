@@ -27,6 +27,12 @@ plan; only the domains below exist so far.
   translational/rotational/vibrational partition functions and their
   thermodynamic functions, the Maxwell-Boltzmann speed distribution, and
   a canonical-ensemble lattice-gas adsorption model.
+- :mod:`chemistrykit.quantum` -- quantum chemistry: particle-in-a-box
+  models (with the free-electron model of conjugated-dye color); the
+  quantum harmonic oscillator vs. the exact Morse potential; the rigid
+  rotor; hydrogen-like orbitals; Huckel molecular-orbital theory and its
+  4n+2 aromaticity rule; a minimal variational treatment of H2+; and
+  Rayleigh-Schrodinger perturbation theory for the anharmonic oscillator.
 
 Conventionally imported as ``ck``:
 
@@ -52,6 +58,7 @@ Conventionally imported as ``ck``:
    api/solutions
    api/md
    api/statmech
+   api/quantum
 
 .. toctree::
    :maxdepth: 2
@@ -62,3 +69,4 @@ Conventionally imported as ``ck``:
    examples/solutions
    examples/md
    examples/statmech
+   examples/quantum
