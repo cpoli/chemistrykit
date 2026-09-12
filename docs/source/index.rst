@@ -33,6 +33,18 @@ plan; only the domains below exist so far.
   rotor; hydrogen-like orbitals; Huckel molecular-orbital theory and its
   4n+2 aromaticity rule; a minimal variational treatment of H2+; and
   Rayleigh-Schrodinger perturbation theory for the anharmonic oscillator.
+- :mod:`chemistrykit.spectro` -- spectroscopy: the Beer-Lambert
+  absorbance law and its stray-light deviation from linearity;
+  rigid-rotor rotational spectra with isotope shifts; harmonic vs. Morse
+  vibrational band positions plus a Wilson GF-matrix triatomic
+  normal-mode calculation; Franck-Condon vibronic progressions; and a
+  first-order NMR multiplet simulator.
+- :mod:`chemistrykit.structure` -- molecular structure and bonding: a
+  lightweight ``Molecule`` container; VSEPR geometry prediction with real
+  3D coordinate generation; point-group determination from 3D
+  coordinates and character tables; bond order from the Pauling length
+  correlation and Huckel-theory MO coefficients; and formal-charge/
+  oxidation-state assignment from a Lewis structure.
 
 Conventionally imported as ``ck``:
 
@@ -59,6 +71,8 @@ Conventionally imported as ``ck``:
    api/md
    api/statmech
    api/quantum
+   api/spectro
+   api/structure
 
 .. toctree::
    :maxdepth: 2
@@ -70,3 +84,5 @@ Conventionally imported as ``ck``:
    examples/md
    examples/statmech
    examples/quantum
+   examples/spectro
+   examples/structure

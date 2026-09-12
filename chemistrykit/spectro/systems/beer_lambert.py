@@ -12,7 +12,7 @@ import numpy as np
 __all__ = ["absorbance", "transmittance", "concentration_from_absorbance", "apparent_absorbance_with_stray_light"]
 
 
-def absorbance(molar_absorptivity: float, concentration: float, path_length: float) -> float:
+def absorbance(molar_absorptivity: float, concentration, path_length: float):
     r"""The Beer-Lambert law: :math:`A=\varepsilon c l`.
 
     Linear in concentration by construction -- the exact relationship
@@ -26,14 +26,14 @@ def absorbance(molar_absorptivity: float, concentration: float, path_length: flo
     ----------
     molar_absorptivity : float
         Molar absorptivity :math:`\varepsilon`, in L mol^-1 cm^-1.
-    concentration : float
+    concentration : float or array-like of float
         Concentration `c`, in mol/L.
     path_length : float
         Path length `l`, in cm.
 
     Returns
     -------
-    float
+    float or ndarray
         Absorbance (dimensionless).
 
     Examples
@@ -43,19 +43,20 @@ def absorbance(molar_absorptivity: float, concentration: float, path_length: flo
     >>> absorbance(5000.0, 4.0e-5, 1.0) == 2.0 * absorbance(5000.0, 2.0e-5, 1.0)
     True
     """
-    return float(molar_absorptivity * concentration * path_length)
+    result = molar_absorptivity * np.asarray(concentration, dtype=np.float64) * path_length
+    return float(result) if result.ndim == 0 else result
 
 
-def transmittance(absorbance_value: float) -> float:
+def transmittance(absorbance_value):
     r"""Transmittance :math:`T=10^{-A}`, the fraction of incident light transmitted.
 
     Parameters
     ----------
-    absorbance_value : float
+    absorbance_value : float or array-like of float
 
     Returns
     -------
-    float
+    float or ndarray
         In :math:`[0, 1]`.
 
     Examples
@@ -65,15 +66,16 @@ def transmittance(absorbance_value: float) -> float:
     >>> round(transmittance(1.0), 6)
     0.1
     """
-    return float(10.0 ** (-absorbance_value))
+    result = 10.0 ** (-np.asarray(absorbance_value, dtype=np.float64))
+    return float(result) if result.ndim == 0 else result
 
 
-def concentration_from_absorbance(absorbance_value: float, molar_absorptivity: float, path_length: float) -> float:
+def concentration_from_absorbance(absorbance_value, molar_absorptivity: float, path_length: float):
     r"""Invert the Beer-Lambert law for concentration: :math:`c=A/(\varepsilon l)`.
 
     Parameters
     ----------
-    absorbance_value : float
+    absorbance_value : float or array-like of float
     molar_absorptivity : float
         In L mol^-1 cm^-1.
     path_length : float
@@ -81,7 +83,7 @@ def concentration_from_absorbance(absorbance_value: float, molar_absorptivity: f
 
     Returns
     -------
-    float
+    float or ndarray
         Concentration, in mol/L.
 
     Examples
@@ -90,7 +92,8 @@ def concentration_from_absorbance(absorbance_value: float, molar_absorptivity: f
     >>> round(c, 8)
     2e-05
     """
-    return float(absorbance_value / (molar_absorptivity * path_length))
+    result = np.asarray(absorbance_value, dtype=np.float64) / (molar_absorptivity * path_length)
+    return float(result) if result.ndim == 0 else result
 
 
 def apparent_absorbance_with_stray_light(molar_absorptivity: float, concentration: float, path_length: float, stray_light_fraction: float) -> float:
