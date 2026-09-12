@@ -19,6 +19,13 @@ def test_reaction_quotient_of_pure_products_and_reactants():
     assert reaction_quotient([1.0, 1.0], [-2.0, 1.0]) == pytest.approx(1.0)
 
 
+def test_reaction_quotient_matches_target_k_at_equilibrium_mole_fractions():
+    """N2O4 <-> 2 NO2 at the mole fractions for Q = K = 4 (xi = sqrt(K/(4+K)))."""
+    xi = np.sqrt(4.0 / 8.0)
+    x_n2o4, x_no2 = (1.0 - xi) / (1.0 + xi), 2.0 * xi / (1.0 + xi)
+    assert reaction_quotient([x_n2o4, x_no2], [-1.0, 2.0]) == pytest.approx(4.0)
+
+
 def test_kp_kc_round_trip():
     Kc, delta_n, T = 3.7, 2.0, 400.0
     Kp = kp_from_kc(Kc, delta_n, T)

@@ -61,11 +61,16 @@ def reaction_quotient(activities, stoich_coeffs):
 
     Examples
     --------
-    For :math:`N_2O_4 \rightleftharpoons 2NO_2`, at the point where
-    :math:`Q = K = 4`:
+    For :math:`N_2O_4 \rightleftharpoons 2NO_2`, at the equilibrium mole
+    fractions corresponding to :math:`Q = K = 4` (i.e. extent
+    :math:`\xi = \sqrt{K/(4+K)}`, as in
+    :func:`solve_equilibrium_composition`'s worked example below):
 
-    >>> round(float(reaction_quotient([0.293, 1.414], [-1.0, 2.0])), 3)
-    6.824
+    >>> import numpy as np
+    >>> xi = np.sqrt(4.0 / 8.0)
+    >>> x_N2O4, x_NO2 = (1.0 - xi) / (1.0 + xi), 2.0 * xi / (1.0 + xi)
+    >>> round(float(reaction_quotient([x_N2O4, x_NO2], [-1.0, 2.0])), 3)
+    4.0
     """
     activities = np.asarray(activities, dtype=np.float64)
     stoich_coeffs = np.asarray(stoich_coeffs, dtype=np.float64)
