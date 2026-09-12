@@ -15,6 +15,7 @@ Import as ``ck`` by convention::
     ck.photochem.jablonski_network(kf=2.0, kic=1.0, kisc=0.5, kp=0.3, kic_T=0.2)
     ck.surface.LangmuirIsotherm(K=2.0, qmax=5.0).loading(P=1.0)
     ck.polymer.IdealChain().end_to_end_distance(n=1000, b=0.5)
+    ck.crystal.FaceCenteredCubicPacking().packing_fraction()
     ck.constants.R
     ck.integrators.rk4_integrate(...)
 
@@ -28,6 +29,7 @@ the domains listed in ``__all__`` below exist so far -- see
 
 from chemistrykit import (
     constants,
+    crystal,
     electrochem,
     integrators,
     kinetics,
@@ -60,4 +62,5 @@ __all__ = [
     "photochem",
     "surface",
     "polymer",
+    "crystal",
 ]
