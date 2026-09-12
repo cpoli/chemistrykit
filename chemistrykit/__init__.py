@@ -16,18 +16,20 @@ Import as ``ck`` by convention::
     ck.surface.LangmuirIsotherm(K=2.0, qmax=5.0).loading(P=1.0)
     ck.polymer.IdealChain().end_to_end_distance(n=1000, b=0.5)
     ck.crystal.FaceCenteredCubicPacking().packing_fraction()
+    ck.analytical.fit_calibration([0, 1, 2, 3], [0.1, 1.0, 2.1, 2.9]).lod()
     ck.constants.R
     ck.integrators.rk4_integrate(...)
 
 chemistrykit mirrors the architecture of the sibling project physicskit
 (pk): one subpackage per chemistry domain, sharing common ODE integrators
 (:mod:`chemistrykit.integrators`) and physical/chemical constants
-(:mod:`chemistrykit.constants`). This is an early, in-progress build: only
-the domains listed in ``__all__`` below exist so far -- see
-``chemistrykit-spec.md`` for the full 14-domain plan and build order.
+(:mod:`chemistrykit.constants`). All 14 domains from
+``chemistrykit-spec.md``'s build plan are implemented; see ``__all__``
+below for the full list.
 """
 
 from chemistrykit import (
+    analytical,
     constants,
     crystal,
     electrochem,
@@ -63,4 +65,5 @@ __all__ = [
     "surface",
     "polymer",
     "crystal",
+    "analytical",
 ]
