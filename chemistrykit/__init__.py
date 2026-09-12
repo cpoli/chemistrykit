@@ -13,6 +13,7 @@ Import as ``ck`` by convention::
     ck.spectro.rotational_spectrum(rotor, J_max=10, temperature=300.0)
     ck.electrochem.nernst_potential(E_standard=0.34, n=2, Q=0.01)
     ck.photochem.jablonski_network(kf=2.0, kic=1.0, kisc=0.5, kp=0.3, kic_T=0.2)
+    ck.surface.LangmuirIsotherm(K=2.0, qmax=5.0).loading(P=1.0)
     ck.constants.R
     ck.integrators.rk4_integrate(...)
 
@@ -24,7 +25,7 @@ the domains listed in ``__all__`` below exist so far -- see
 ``chemistrykit-spec.md`` for the full 14-domain plan and build order.
 """
 
-from chemistrykit import constants, electrochem, integrators, kinetics, md, photochem, quantum, solutions, spectro, statmech, structure, thermo
+from chemistrykit import constants, electrochem, integrators, kinetics, md, photochem, quantum, solutions, spectro, statmech, structure, surface, thermo
 
 __version__ = "0.1.0"
 
@@ -41,4 +42,5 @@ __all__ = [
     "structure",
     "electrochem",
     "photochem",
+    "surface",
 ]
