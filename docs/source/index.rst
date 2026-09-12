@@ -45,6 +45,19 @@ plan; only the domains below exist so far.
   coordinates and character tables; bond order from the Pauling length
   correlation and Huckel-theory MO coefficients; and formal-charge/
   oxidation-state assignment from a Lewis structure.
+- :mod:`chemistrykit.electrochem` -- electrochemistry: the Nernst
+  equation for standard and concentration cells with Debye-Huckel
+  activity corrections; a curated standard-reduction-potential table
+  with redox-couple balancing; Butler-Volmer electrode kinetics and
+  Tafel-plot linearization; galvanic vs. electrolytic cells and
+  Faraday's laws of electrolysis; and a simplified constant-current
+  battery discharge model with Peukert's-law rate dependence.
+- :mod:`chemistrykit.photochem` -- photochemistry: Jablonski-diagram
+  excited-state kinetics built on :mod:`chemistrykit.kinetics`'s
+  reaction-network engine; fluorescence/phosphorescence quantum yields
+  and the photochemical quantum yield via Beer-Lambert; Stern-Volmer
+  quenching with a static-vs-dynamic diagnostic; and photostationary-
+  state kinetics for a two-state photoswitch.
 
 Conventionally imported as ``ck``:
 
@@ -73,6 +86,8 @@ Conventionally imported as ``ck``:
    api/quantum
    api/spectro
    api/structure
+   api/electrochem
+   api/photochem
 
 .. toctree::
    :maxdepth: 2
@@ -86,3 +101,5 @@ Conventionally imported as ``ck``:
    examples/quantum
    examples/spectro
    examples/structure
+   examples/electrochem
+   examples/photochem
