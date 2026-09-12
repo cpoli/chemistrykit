@@ -11,8 +11,6 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from chemistrykit.photochem.utils.regression import LinearFit, linear_fit
-
 __all__ = [
     "stern_volmer_ratio",
     "dynamic_quenching_constant",
@@ -161,8 +159,13 @@ def fit_stern_volmer(Q, intensity_ratio) -> SternVolmerFit:
     """
     Q = np.asarray(Q, dtype=np.float64)
     intensity_ratio = np.asarray(intensity_ratio, dtype=np.float64)
-    fit: LinearFit = linear_fit(Q, intensity_ratio)
-    return SternVolmerFit(Ksv=fit.slope, r_squared=fit.r_squared)
+    shift = intensity_ratio - 1.0
+    Ksv = float(np.sum(Q * shift) / np.sum(Q * Q))
+    residuals = shift - Ksv * Q
+    ss_res = float(np.sum(residuals**2))
+    ss_tot = float(np.sum(shift**2))
+    r_squared = 1.0 - ss_res / ss_tot if ss_tot > 0 else 1.0
+    return SternVolmerFit(Ksv=Ksv, r_squared=r_squared)
 
 
 def classify_quenching_mechanism(intensity_ratio_slope: float, lifetime_ratio_slope: float, rtol: float = 0.1) -> str:

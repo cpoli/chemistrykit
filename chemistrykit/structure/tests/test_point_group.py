@@ -61,6 +61,20 @@ def _bf3():
     return Molecule(symbols=["B", "F", "F", "F"], coordinates=[[0.0, 0.0, 0.0]] + positions)
 
 
+def _sf6():
+    """Sulfur hexafluoride: a regular octahedron, ligands on the +/-x, +/-y, +/-z axes."""
+    r = 1.56
+    positions = [
+        [r, 0.0, 0.0],
+        [-r, 0.0, 0.0],
+        [0.0, r, 0.0],
+        [0.0, -r, 0.0],
+        [0.0, 0.0, r],
+        [0.0, 0.0, -r],
+    ]
+    return Molecule(symbols=["S", "F", "F", "F", "F", "F", "F"], coordinates=[[0.0, 0.0, 0.0]] + positions)
+
+
 def test_water_is_c2v():
     result = determine_point_group(_water())
     assert result.group_name == "C2v"
@@ -100,6 +114,19 @@ def test_boron_trifluoride_is_d3h():
     result = determine_point_group(_bf3())
     assert result.group_name == "D3h"
     assert result.has_sigma_h is True
+
+
+def test_sulfur_hexafluoride_is_oh():
+    # Regression test: with ligands placed exactly on the cardinal axes,
+    # SF6's true C3 axes run through the body diagonals (e.g. (1,1,1)),
+    # a direction no pairwise combination of two axis-aligned ligand
+    # vectors can reach -- only a three-way sum can. Before candidate_axes
+    # included three-way sums, this molecule was misclassified as D4h
+    # (only the C4 axes along the ligand directions were ever found).
+    result = determine_point_group(_sf6())
+    assert result.group_name == "Oh"
+    assert result.n_c3_axes >= 4
+    assert result.has_inversion_center is True
 
 
 def test_isolated_atom_is_asymmetric_top_c1_or_higher_not_crashing():

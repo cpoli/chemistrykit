@@ -39,6 +39,26 @@ def test_fit_stern_volmer_recovers_known_ksv():
     assert fit.r_squared == pytest.approx(1.0, abs=1e-9)
 
 
+def test_fit_stern_volmer_constrains_intercept_to_one():
+    # Regression test: fit_stern_volmer is documented to fit I0/I = 1 +
+    # Ksv*[Q] with the intercept fixed at exactly 1 (physically required
+    # at [Q]=0), by regressing the shift (I0/I - 1) through the origin --
+    # not a free-intercept ordinary-least-squares fit of the raw ratio.
+    # With noiseless data the two approaches coincide (both exactly
+    # recover the true line), so only noisy data distinguishes them; a
+    # free-intercept fit of this data gives a different, and slightly
+    # off, Ksv than the documented through-origin fit.
+    Ksv_true = 42.0
+    Q = np.array([0.0, 0.002, 0.004, 0.008, 0.016])
+    ratio = stern_volmer_ratio(Ksv_true, Q) + np.array([0.0, 0.01, -0.02, 0.015, -0.01])
+    fit = fit_stern_volmer(Q, ratio)
+    shift = ratio - 1.0
+    expected_ksv = np.sum(Q * shift) / np.sum(Q * Q)
+    free_intercept_slope = np.polyfit(Q, ratio, 1)[0]
+    assert fit.Ksv == pytest.approx(expected_ksv)
+    assert fit.Ksv != pytest.approx(free_intercept_slope)
+
+
 def test_classify_quenching_mechanism_dynamic():
     assert classify_quenching_mechanism(intensity_ratio_slope=40.0, lifetime_ratio_slope=40.0) == "dynamic"
 

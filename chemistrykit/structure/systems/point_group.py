@@ -25,15 +25,19 @@ follows the practical approach used by automatic point-group codes and
 throws a broad, cheap-to-generate set of candidate directions at the
 symmetry test -- every non-central atom's position vector, every
 pairwise sum/difference/cross product of two atoms' position vectors,
-and the inertia-tensor eigenvectors -- relying on the fact that a true
-symmetry axis (or mirror normal) for any molecule small enough to be
-built by hand is essentially always expressible as one of these simple
-combinations. For every test molecule this module is validated against
-(water, ammonia, methane, carbon dioxide, boron trifluoride), the true
-axes are recovered exactly this way; a candidate set this broad may
-occasionally miss the true axis of an unusual, unvalidated geometry, so
-:func:`determine_point_group` should be understood as a best-effort
-computational classifier, not a certified-complete symmetry solver.
+every three-way sum of three atoms' position vectors (needed to reach
+an octahedral geometry's body-diagonal `C3` axes -- see
+:func:`~chemistrykit.structure.utils.symmetry_ops.candidate_axes`'s
+docstring), and the inertia-tensor eigenvectors -- relying on the fact
+that a true symmetry axis (or mirror normal) for any molecule small
+enough to be built by hand is essentially always expressible as one of
+these simple combinations. For every test molecule this module is
+validated against (water, ammonia, methane, carbon dioxide, boron
+trifluoride, sulfur hexafluoride), the true axes are recovered exactly
+this way; a candidate set this broad may occasionally miss the true
+axis of an unusual, unvalidated geometry, so :func:`determine_point_group`
+should be understood as a best-effort computational classifier, not a
+certified-complete symmetry solver.
 """
 
 from __future__ import annotations

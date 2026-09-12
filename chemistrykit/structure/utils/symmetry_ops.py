@@ -150,12 +150,23 @@ def candidate_axes(coords: np.ndarray, tol: float = 1e-6) -> list:
     """Generate candidate symmetry-axis/mirror-normal directions from a set of atomic positions.
 
     Every non-central atom's position vector, every pairwise sum,
-    difference, and cross product of two atoms' position vectors, and
-    the inertia-tensor eigenvectors -- a broad, cheap candidate set that
+    difference, and cross product of two atoms' position vectors, every
+    three-way sum of three atoms' position vectors, and the
+    inertia-tensor eigenvectors -- a broad, cheap candidate set that
     contains the true symmetry axis/mirror-plane normal for essentially
     any small, hand-built molecular geometry (see
     :mod:`chemistrykit.structure.systems.point_group`'s module docstring
     for the reasoning and its validated test cases).
+
+    The three-way sums are needed for octahedral (`Oh`) geometries such
+    as SF6: with ligands placed exactly on the +/-x, +/-y, +/-z axes, the
+    true `C3` axes run through the body diagonals (e.g. `(1, 1, 1)`), a
+    direction no *pairwise* sum/difference/cross product of two
+    axis-aligned ligand vectors can produce (two orthogonal unit vectors
+    only ever combine to a face-diagonal-type direction, e.g.
+    `(1, 1, 0)`, or their cross product, the third cardinal axis) --
+    summing three mutually orthogonal ligand vectors is required to reach
+    the body diagonal itself.
 
     Parameters
     ----------
@@ -182,6 +193,10 @@ def candidate_axes(coords: np.ndarray, tol: float = 1e-6) -> list:
         for combo in (coords[i] + coords[j], coords[i] - coords[j], np.cross(coords[i], coords[j])):
             if np.linalg.norm(combo) > tol:
                 candidates.append(combo / np.linalg.norm(combo))
+    for i, j, k in itertools.combinations(range(n), 3):
+        combo = coords[i] + coords[j] + coords[k]
+        if np.linalg.norm(combo) > tol:
+            candidates.append(combo / np.linalg.norm(combo))
     inertia = np.zeros((3, 3))
     for v in coords:
         inertia += np.eye(3) * np.dot(v, v) - np.outer(v, v)
