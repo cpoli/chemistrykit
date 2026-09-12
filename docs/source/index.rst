@@ -3,9 +3,8 @@ chemistrykit
 
 **chemistrykit** is a unified numerical toolkit for computational
 chemistry, sharing common ODE integrators and chemical constants across
-domain subpackages. This is an early, in-progress build -- see
-``chemistrykit-spec.md`` in the repository root for the full 14-domain
-plan; only the domains below exist so far.
+domain subpackages. All 14 domains from ``chemistrykit-spec.md`` (in the
+repository root) are implemented, listed below.
 
 - :mod:`chemistrykit.kinetics` -- reaction kinetics: integrated rate laws,
   the Arrhenius equation, Michaelis-Menten enzyme kinetics, a general
@@ -71,6 +70,21 @@ plan; only the domains below exist so far.
   step-growth kinetics via the Carothers equation; and chain-growth/
   free-radical polymerization kinetics built on
   :mod:`chemistrykit.kinetics`'s reaction-network engine.
+- :mod:`chemistrykit.crystal` -- crystallography and solid-state
+  chemistry: the 7 crystal systems and general unit-cell volume;
+  hard-sphere packing (packing fraction, coordination number) for
+  SC/BCC/FCC/HCP lattices; ionic-crystal lattice energy via the
+  Born-Lande and Kapustinskii equations, backed by a genuinely
+  converging (Evjen-method) numerical Madelung constant; Bragg's law and
+  powder-XRD peak positions with structure factors and systematic
+  absences; and Schottky/Frenkel point-defect equilibrium.
+- :mod:`chemistrykit.analytical` -- analytical chemistry: redox and
+  complexometric (EDTA) titration-curve simulation with
+  equivalence-point detection, alongside :mod:`chemistrykit.solutions`'s
+  acid-base titrations; chromatographic plate theory and the van Deemter
+  equation; linear-regression calibration curves with IUPAC-convention
+  limits of detection/quantitation; and propagation-of-uncertainty
+  formulas plus Dixon's Q-test for outlier rejection.
 
 Conventionally imported as ``ck``:
 
@@ -103,6 +117,8 @@ Conventionally imported as ``ck``:
    api/photochem
    api/surface
    api/polymer
+   api/crystal
+   api/analytical
 
 .. toctree::
    :maxdepth: 2
@@ -120,3 +136,5 @@ Conventionally imported as ``ck``:
    examples/photochem
    examples/surface
    examples/polymer
+   examples/crystal
+   examples/analytical

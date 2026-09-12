@@ -64,8 +64,7 @@ source_suffix = {
 }
 
 # Subpackages with a sphinx-gallery-formatted examples/<name>/ directory.
-# Add each remaining chemistry domain from chemistrykit-spec.md to this
-# list as it lands.
+# All 14 domains from chemistrykit-spec.md are now implemented.
 _GALLERY_SUBPACKAGES: list[str] = [
     "kinetics",
     "thermo",
@@ -79,6 +78,8 @@ _GALLERY_SUBPACKAGES: list[str] = [
     "photochem",
     "surface",
     "polymer",
+    "crystal",
+    "analytical",
 ]
 
 sphinx_gallery_conf = {
