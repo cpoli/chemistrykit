@@ -26,5 +26,6 @@ Sections
   temperature dependence of an equilibrium constant, and the
   Gibbs-energy-minimization equilibrium-composition solver.
 - **mixtures** -- Raoult's-law P-x-y diagrams for an ideal binary
-  solution, and the colligative properties (freezing-point depression,
-  boiling-point elevation, osmotic pressure).
+  solution, the colligative properties (freezing-point depression,
+  boiling-point elevation, osmotic pressure), and Henry's law vs.
+  Raoult's law as the two limiting laws of a real solution.

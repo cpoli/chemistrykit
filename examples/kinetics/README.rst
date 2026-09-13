@@ -26,6 +26,7 @@ Sections
   substrate-depletion progress curve.
 - **networks** -- the general stoichiometric reaction-network engine:
   parallel, consecutive (A->B->C), and reversible mechanisms, each checked
-  against its closed-form solution, plus the steady-state approximation.
+  against its closed-form solution, plus the steady-state approximation
+  and a chain-branching explosion mechanism.
 - **oscillators** -- the Brusselator: a chemical mechanism whose kinetics
   support a stable limit cycle rather than relaxing to equilibrium.
