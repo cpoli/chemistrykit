@@ -163,7 +163,7 @@ molecules arranged on `M` lattice sites -- via the numerically exact
 :func:`chemistrykit.statmech.ln_binomial` rather than Stirling's
 approximation -- and shows it maximized at half filling, exactly where
 the number of microscopic arrangements `W` is largest. The named
-constant itself, :data:`chemistrykit.constants.K_B`, is the quantity
+constant itself, ``chemistrykit.constants.K_B``, is the quantity
 every entropy and heat-capacity formula throughout this package is built
 from.
 
@@ -425,7 +425,7 @@ built entirely on classical molecular statistics.
 
 *Connection:* this package implements no Bose-Einstein or Fermi-Dirac
 distribution -- every partition function in
-:mod:`chemistrykit.statmech.systems.partition_functions` is built on the
+``chemistrykit.statmech.systems.partition_functions`` is built on the
 classical Maxwell-Boltzmann counting these results show is only ever a
 limiting case -- but
 :func:`chemistrykit.statmech.thermal_de_broglie_wavelength`'s own

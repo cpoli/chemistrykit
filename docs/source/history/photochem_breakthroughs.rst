@@ -48,10 +48,10 @@ is the starting axiom of all quantitative photochemistry: before asking
 *how much* light was absorbed in the first place, a quantity every later
 entry in this chronology depends on.
 
-*Implementation:* :func:`chemistrykit.photochem.systems.quantum_yield.photons_absorbed`
+*Implementation:* :func:`~chemistrykit.photochem.photons_absorbed`
 computes exactly this quantity -- the absorbed photon flux
 :math:`I_{abs}=I_0(1-10^{-A})`, via
-:func:`chemistrykit.spectro.systems.beer_lambert.transmittance` -- and is
+:func:`~chemistrykit.spectro.transmittance` -- and is
 the quantity every quantum-yield calculation in this module divides by,
 never the incident flux itself, precisely because the Grotthuss-Draper
 law says only the absorbed portion can do anything.
@@ -89,7 +89,7 @@ which every real photoreaction's efficiency, from a completely dark
 super-unity yields of a radical chain reaction (see 1913-1918, below),
 could now be measured and compared.
 
-*Implementation:* :func:`chemistrykit.photochem.systems.quantum_yield.photochemical_quantum_yield`
+*Implementation:* :func:`~chemistrykit.photochem.photochemical_quantum_yield`
 implements exactly this ratio, :math:`\Phi=` moles product formed /
 moles photons absorbed; its doctest reproduces the simplest case the
 Stark-Einstein law describes -- one photon absorbed, one product molecule
@@ -130,12 +130,12 @@ quantum yield with no upper bound at all.
 
 *Connection:* this package models the direct, non-chain excited-state
 photophysics that the Stark-Einstein law describes exactly --
-:func:`chemistrykit.photochem.systems.quantum_yield.photochemical_quantum_yield`'s
+:func:`~chemistrykit.photochem.photochemical_quantum_yield`'s
 docstring explicitly flags that a radical-chain photoreaction is the real
 exception to its otherwise generally applicable :math:`0\le\Phi\le1`
 range, without separately modeling a chain-propagation mechanism (which
 belongs to general reaction kinetics rather than to the photophysics this
-subpackage otherwise covers); :func:`~chemistrykit.photochem.systems.jablonski.jablonski_network`,
+subpackage otherwise covers); :func:`~chemistrykit.photochem.jablonski_network`,
 by contrast, is a purely unimolecular decay network with no amplification
 step of any kind, illustrating by construction the opposite (bounded,
 :math:`\Phi\le1`) regime this entry's chain-reaction exception departs
@@ -179,16 +179,16 @@ completely unchanged.
 
    \frac{I_0}{I} = 1 + K_{sv}[Q], \qquad K_{sv} = k_q\tau_0
 
-*Implementation:* :func:`chemistrykit.photochem.systems.stern_volmer.stern_volmer_ratio`
+*Implementation:* :func:`~chemistrykit.photochem.stern_volmer_ratio`
 implements exactly this equation, and
-:func:`~chemistrykit.photochem.systems.stern_volmer.dynamic_quenching_constant`
+:func:`~chemistrykit.photochem.dynamic_quenching_constant`
 the :math:`K_{sv}=k_q\tau_0` relationship for the dynamic case.
-:func:`~chemistrykit.photochem.systems.stern_volmer.fit_stern_volmer`
+:func:`~chemistrykit.photochem.fit_stern_volmer`
 recovers :math:`K_{sv}` from synthetic intensity-ratio data by a
 through-the-origin linear regression on the shift :math:`I_0/I-1`
 (the physically required zero-quencher intercept fixed at exactly 1
 rather than left as a free-fit parameter), and
-:func:`~chemistrykit.photochem.systems.stern_volmer.classify_quenching_mechanism`
+:func:`~chemistrykit.photochem.classify_quenching_mechanism`
 implements the dynamic-vs-static diagnostic described above, comparing
 the independently measured intensity-ratio and lifetime-ratio slopes.
 
@@ -217,7 +217,7 @@ decay channels, and hence the resulting quantum yield, depends only on
 the rate constants out of that one lowest excited state, never on which
 higher state or vibrational level the exciting photon originally reached.
 
-*Implementation:* :func:`chemistrykit.photochem.systems.quantum_yield.fluorescence_quantum_yield`
+*Implementation:* :func:`~chemistrykit.photochem.fluorescence_quantum_yield`
 is, by construction, a function purely of the three :math:`S_1` decay
 rate constants (:math:`\Phi_f=k_f/(k_f+k_{ic}+k_{isc})`) and takes no
 excitation-wavelength or excitation-energy parameter at all -- exactly
@@ -250,14 +250,14 @@ rate process competing with all the others for the same finite excited-
 state population, exactly the same mass-action mathematics as an ordinary
 chemical reaction network.
 
-*Implementation:* :func:`chemistrykit.photochem.systems.jablonski.jablonski_network`
+*Implementation:* :func:`~chemistrykit.photochem.jablonski_network`
 builds precisely this three-state (:math:`S_1`, :math:`T_1`, :math:`S_0`)
 diagram directly as a
 :class:`chemistrykit.kinetics.systems.networks.StoichiometricNetwork` --
 reusing the kinetics domain's general mass-action reaction-network engine
 rather than reimplementing rate-equation integration, since a Jablonski
 diagram *is*, mathematically, nothing more than a branching-then-
-consecutive first-order reaction network. :func:`~chemistrykit.photochem.systems.jablonski.jablonski_populations_analytic`
+consecutive first-order reaction network. :func:`~chemistrykit.photochem.jablonski_populations_analytic`
 gives the closed-form Bateman-equation solution for all three
 populations, checked in this module's own test suite to agree with the
 network's numerical integration to better than :math:`10^{-10}`.
@@ -287,11 +287,11 @@ milliseconds to seconds rather than the nanoseconds typical of allowed
 fluorescent transitions, before it finally, reluctantly, emits.
 
 *Implementation:* the :math:`T_1` state in
-:func:`chemistrykit.photochem.systems.jablonski.jablonski_network` is
+:func:`~chemistrykit.photochem.jablonski_network` is
 exactly the triplet state Lewis and Kasha identified, decaying at the
-comparatively slow combined rate :math:`k_p+k_{ic,T}`; :func:`chemistrykit.photochem.systems.quantum_yield.phosphorescence_quantum_yield`
+comparatively slow combined rate :math:`k_p+k_{ic,T}`; :func:`~chemistrykit.photochem.phosphorescence_quantum_yield`
 computes the probability that an excited molecule both reaches this
-triplet state (via :func:`~chemistrykit.photochem.systems.quantum_yield.intersystem_crossing_yield`)
+triplet state (via :func:`~chemistrykit.photochem.intersystem_crossing_yield`)
 and then decays radiatively from it -- the product of exactly the two
 successive branching probabilities Lewis and Kasha's triplet-state
 picture implies.
@@ -327,7 +327,7 @@ of its own to point to -- flash photolysis is fundamentally an
 experimental technique for observing transient species, not itself an
 algorithm -- but the time-resolved :math:`S_1(t)` and :math:`T_1(t)`
 population traces
-:func:`chemistrykit.photochem.systems.jablonski.jablonski_network`
+:func:`~chemistrykit.photochem.jablonski_network`
 computes are exactly the kind of transient, sub-second intermediate-
 species kinetics flash photolysis made directly observable for the first
 time, rather than only inferable from a reaction's eventual products.
@@ -358,7 +358,7 @@ whichever :math:`S_n` (:math:`n\ge2`) a photon actually populates,
 Kasha's rule guarantees it collapses to :math:`S_1` before anything else
 of photochemical consequence happens.
 
-*Connection:* :func:`chemistrykit.photochem.systems.jablonski.jablonski_network`'s
+*Connection:* :func:`~chemistrykit.photochem.jablonski_network`'s
 minimal three-state structure -- exactly one representative singlet
 excited state (:math:`S_1`) and one representative triplet
 (:math:`T_1`), rather than a separate state for every electronic level a
@@ -392,16 +392,16 @@ into -- against which real photoswitching experiments (a widely used
 class of molecular tools, from azobenzenes to diarylethenes) could be
 quantitatively checked.
 
-*Implementation:* :func:`chemistrykit.photochem.systems.photostationary_state.photoswitch_rate_constants`
+*Implementation:* :func:`~chemistrykit.photochem.photoswitch_rate_constants`
 converts quantum yields and molar absorptivities into the pseudo-first-
 order rate constants :math:`k_{AB}`, :math:`k_{BA}` in Fischer's
 low-optical-density approximation;
-:func:`~chemistrykit.photochem.systems.photostationary_state.photoswitch_network`
-reuses :meth:`chemistrykit.kinetics.systems.networks.StoichiometricNetwork.reversible`
+:func:`~chemistrykit.photochem.photoswitch_network`
+reuses :meth:`~chemistrykit.kinetics.StoichiometricNetwork.reversible`
 directly (a photoswitch under simultaneous forward/reverse photolysis
 being, mathematically, the identical reversible first-order network a
 thermally reversible reaction would be), and
-:func:`~chemistrykit.photochem.systems.photostationary_state.photostationary_state`
+:func:`~chemistrykit.photochem.photostationary_state`
 gives Fischer's exact algebraic PSS ratio
 :math:`[B]_{pss}/[A]_{pss}=k_{AB}/k_{BA}` -- checked in this module's own
 example against direct long-time numerical integration of the ODE

@@ -138,12 +138,12 @@ energy :math:`E_a` extracted from an "Arrhenius plot" (:math:`\ln k`
 against :math:`1/T`) remain, over a century later, the standard way any
 new reaction's temperature sensitivity is reported.
 
-*Implementation:* :func:`chemistrykit.kinetics.systems.arrhenius.arrhenius_rate_constant`
-evaluates :math:`k(T)` directly; :func:`~chemistrykit.kinetics.systems.arrhenius.fit_arrhenius`
+*Implementation:* :func:`~chemistrykit.kinetics.arrhenius_rate_constant`
+evaluates :math:`k(T)` directly; :func:`~chemistrykit.kinetics.fit_arrhenius`
 recovers :math:`(E_a, A)` from synthetic noisy rate-vs-temperature data via
 exactly the linearized Arrhenius-plot method, returning an
 :class:`~chemistrykit.kinetics.systems.arrhenius.ArrheniusFit`, and
-:func:`chemistrykit.kinetics.visualizers.kinetics_plots.plot_arrhenius`
+``chemistrykit.kinetics.visualizers.kinetics_plots.plot_arrhenius()``
 draws the plot itself.
 
 *References:* S. Arrhenius, "Über die Reaktionsgeschwindigkeit bei der
@@ -179,7 +179,7 @@ chemistry result in its own right.
 
 *Connection:* chemistrykit.kinetics has no standalone implementation of
 Lotka's original two- or three-species chemical scheme, but
-:meth:`chemistrykit.kinetics.systems.oscillators.Brusselator.is_above_hopf_threshold`
+:meth:`~chemistrykit.kinetics.Brusselator.is_above_hopf_threshold`
 draws exactly the distinction Lotka's model lacks: below its threshold
 the Brusselator's fixed point is a stable focus, and above it, a genuine
 attracting limit cycle -- structurally stable to small perturbations,
@@ -220,15 +220,15 @@ all of enzyme kinetics that followed, and the direct ancestor of the
 Lineweaver-Burk linearization built on top of it two decades later (see
 1934, below).
 
-*Implementation:* :func:`chemistrykit.kinetics.systems.enzyme.michaelis_menten_rate`
+*Implementation:* :func:`~chemistrykit.kinetics.michaelis_menten_rate`
 evaluates exactly this rate law, and
 :class:`~chemistrykit.kinetics.systems.enzyme.MichaelisMentenProgress`
 integrates the corresponding substrate-depletion progress curve
 ``d[S]/dt = -Vmax*[S]/(Km+[S])`` numerically -- the assay curve an enzyme
 kinetics experiment actually records, as opposed to the *initial*-rate
-snapshots :func:`michaelis_menten_rate` itself describes;
-:func:`~chemistrykit.kinetics.systems.enzyme.competitive_inhibition_rate`
-and :func:`~chemistrykit.kinetics.systems.enzyme.noncompetitive_inhibition_rate`
+snapshots :func:`~chemistrykit.kinetics.michaelis_menten_rate` itself describes;
+:func:`~chemistrykit.kinetics.competitive_inhibition_rate`
+and :func:`~chemistrykit.kinetics.noncompetitive_inhibition_rate`
 extend the same rate law to the two classic modes of enzyme inhibition.
 
 *References:* L. Michaelis and M. L. Menten, "Die Kinetik der
@@ -273,13 +273,13 @@ Lindemann-Christiansen mechanism.
 *Implementation:* while chemistrykit.kinetics has no dedicated
 activation/deactivation unimolecular-mechanism class, the steady-state
 logic Lindemann applied to :math:`A^*` is exactly what
-:func:`chemistrykit.kinetics.systems.networks.ssa_intermediate_concentration`
+:func:`~chemistrykit.kinetics.ssa_intermediate_concentration`
 demonstrates for the analogous two-step chain `A -> B -> C`: it
 computes the steady-state estimate :math:`[B]_{ssa} = (k_1/k_2)[A](t)`,
 and the example below shows it converging to the numerically integrated
 exact intermediate concentration -- via
 :class:`~chemistrykit.kinetics.systems.networks.StoichiometricNetwork`
-and the closed-form :func:`~chemistrykit.kinetics.systems.networks.consecutive_analytic`
+and the closed-form :func:`~chemistrykit.kinetics.consecutive_analytic`
 (Bateman) solution -- as the second step is made increasingly fast
 relative to the first, precisely the separation-of-timescales condition
 the approximation requires.
@@ -367,10 +367,10 @@ The double-reciprocal plot survives today mainly as a clear diagnostic
 picture (e.g. for reading off the qualitative signature of an inhibition
 mode), rather than as a fitting method to be trusted quantitatively.
 
-*Implementation:* :func:`chemistrykit.kinetics.systems.enzyme.fit_lineweaver_burk`
+*Implementation:* :func:`~chemistrykit.kinetics.fit_lineweaver_burk`
 implements exactly this double-reciprocal ordinary-least-squares fit,
 returning a :class:`~chemistrykit.kinetics.systems.enzyme.MichaelisMentenFit`,
-and :func:`chemistrykit.kinetics.visualizers.kinetics_plots.plot_lineweaver_burk`
+and ``chemistrykit.kinetics.visualizers.kinetics_plots.plot_lineweaver_burk()``
 draws the plot -- reused in the same example as the underlying
 Michaelis-Menten rate law it linearizes.
 
@@ -409,7 +409,7 @@ partition-function-based transition-state rate calculation, but
 :class:`chemistrykit.kinetics.systems.arrhenius.ArrheniusFit`'s empirical
 `A` and `Ea` are exactly the two quantities transition-state theory set
 out to explain from first principles rather than merely measure --
-:func:`~chemistrykit.kinetics.systems.arrhenius.fit_arrhenius` recovers
+:func:`~chemistrykit.kinetics.fit_arrhenius` recovers
 them from data the same way a real kinetics lab would, without needing
 any transition-state calculation to do so.
 
@@ -452,7 +452,7 @@ reaction's chemistry rather than serving as an abstract minimal example.
 
 *Connection:* chemistrykit.kinetics does not implement the
 Belousov-Zhabotinsky mechanism or the Oregonator specifically, but
-:meth:`chemistrykit.kinetics.systems.oscillators.Brusselator.is_above_hopf_threshold`
+:meth:`~chemistrykit.kinetics.Brusselator.is_above_hopf_threshold`
 and the limit-cycle behavior it distinguishes are exactly the
 mathematical mechanism -- a chemical Hopf bifurcation to sustained,
 structurally stable oscillation -- that both the Oregonator and the
@@ -505,9 +505,9 @@ reaction.
 
 *Implementation:* :class:`chemistrykit.kinetics.systems.oscillators.Brusselator`
 integrates exactly this two-variable system;
-:meth:`~chemistrykit.kinetics.systems.oscillators.Brusselator.fixed_point`
+:meth:`~chemistrykit.kinetics.Brusselator.fixed_point`
 returns the steady state :math:`(A, B/A)` and
-:meth:`~chemistrykit.kinetics.systems.oscillators.Brusselator.is_above_hopf_threshold`
+:meth:`~chemistrykit.kinetics.Brusselator.is_above_hopf_threshold`
 tests Prigogine and Lefever's exact bifurcation condition :math:`B > 1 +
 A^2`; the example below integrates the same mechanism on both sides of
 that threshold and shows relaxation to the fixed point below it giving

@@ -59,12 +59,12 @@ foundational to quantitative chemical analysis that entire instrument
 classes (the spectrophotometer) and laboratory techniques (concentration
 determination by UV-Vis) exist purely to exploit it.
 
-*Implementation:* :func:`chemistrykit.spectro.systems.beer_lambert.absorbance`
+*Implementation:* :func:`~chemistrykit.spectro.absorbance`
 implements exactly this law, with
-:func:`~chemistrykit.spectro.systems.beer_lambert.transmittance` and
-:func:`~chemistrykit.spectro.systems.beer_lambert.concentration_from_absorbance`
+:func:`~chemistrykit.spectro.transmittance` and
+:func:`~chemistrykit.spectro.concentration_from_absorbance`
 as its direct consequence and inverse;
-:func:`~chemistrykit.spectro.systems.beer_lambert.apparent_absorbance_with_stray_light`
+:func:`~chemistrykit.spectro.apparent_absorbance_with_stray_light`
 models one specific, well-characterized instrumental effect (stray light
 reaching the detector without passing through the full sample path) that
 causes real instruments to deviate from this exact linearity at high
@@ -151,7 +151,7 @@ emission spectroscopy an accepted analytical technique overnight.
 subpackage produces -- a set of positions and relative intensities,
 :class:`chemistrykit.spectro.core.base_system.Spectrum` -- is exactly
 the object Bunsen and Kirchhoff's method reads a substance's identity
-from; :func:`chemistrykit.spectro.utils.lineshapes.broaden_stick_spectrum`
+from; :func:`~chemistrykit.spectro.broaden_stick_spectrum`
 turns that idealized stick pattern into the continuous, finite-resolution
 curve any real spectrometer -- Bunsen and Kirchhoff's prism instrument
 included -- actually records.
@@ -194,10 +194,10 @@ different heat capacities.
 *Implementation:*
 :class:`chemistrykit.quantum.systems.rigid_rotor.RigidRotor` implements
 exactly this quantized energy-level formula;
-:func:`chemistrykit.spectro.systems.rotational.rotational_line_wavenumbers`
+:func:`~chemistrykit.spectro.rotational_line_wavenumbers`
 converts its :math:`\Delta J=\pm1` transition energies into the evenly-
 :math:`2B`-spaced line positions Dennison's theory predicts, and
-:func:`~chemistrykit.spectro.systems.rotational.rotational_spectrum`
+:func:`~chemistrykit.spectro.rotational_spectrum`
 adds the Boltzmann-population intensity pattern that determines which of
 those evenly-spaced lines is actually the strongest.
 
@@ -233,9 +233,9 @@ or Raman vibrational band.
 *Implementation:*
 :class:`chemistrykit.quantum.systems.harmonic_oscillator.MorseOscillator`
 solves exactly this potential;
-:func:`chemistrykit.spectro.systems.vibrational.morse_transition_wavenumbers`
+:func:`~chemistrykit.spectro.morse_transition_wavenumbers`
 reports its :math:`0\to v` overtone wavenumbers, and
-:func:`~chemistrykit.spectro.systems.vibrational.anharmonicity_from_overtones`
+:func:`~chemistrykit.spectro.anharmonicity_from_overtones`
 inverts two observed band positions to recover the spectroscopic
 constants :math:`\omega_e`, :math:`\omega_ex_e` -- exactly the standard
 procedure by which a real molecule's anharmonicity is measured from its
@@ -276,7 +276,7 @@ inertia, predictably lowers every rotational constant and every line
 position by exactly the same calculable ratio.
 
 *Implementation:*
-:func:`chemistrykit.spectro.systems.rotational.isotope_shift_ratio`
+:func:`~chemistrykit.spectro.isotope_shift_ratio`
 computes exactly this reduced-mass-ratio prediction for the shift
 between two isotopologues' rotational constants (and hence every line
 position), the calculation Townes-era microwave spectroscopists used
@@ -327,12 +327,12 @@ origin band, while a large :math:`S` spreads a long progression peaking
 near :math:`v'\approx S`.
 
 *Implementation:*
-:func:`chemistrykit.spectro.systems.electronic.huang_rhys_factor` computes
+:func:`~chemistrykit.spectro.huang_rhys_factor` computes
 exactly this :math:`S`;
-:func:`~chemistrykit.spectro.systems.electronic.franck_condon_factor` and
-:func:`~chemistrykit.spectro.systems.electronic.franck_condon_progression`
+:func:`~chemistrykit.spectro.franck_condon_factor` and
+:func:`~chemistrykit.spectro.franck_condon_progression`
 implement the resulting Poisson-distributed Franck-Condon factors, and
-:func:`~chemistrykit.spectro.systems.electronic.franck_condon_spectrum`
+:func:`~chemistrykit.spectro.franck_condon_spectrum`
 assembles the full vibronic stick spectrum from them.
 
 *References:* J. Franck, "Elementary Processes of Photochemical
@@ -418,7 +418,7 @@ internal-coordinate functions (bond stretches plus a bend, linearized
 for a linear equilibrium geometry per Wilson, Decius and Cross's own
 prescription), combined into the mass-weighted :math:`G` matrix and a
 diagonal valence-force-field :math:`F` matrix, and solved via
-:meth:`~chemistrykit.spectro.systems.vibrational.TriatomicNormalModes.solve`.
+:meth:`~chemistrykit.spectro.TriatomicNormalModes.solve`.
 
 *References:* E. B. Wilson Jr., "A Method of Obtaining the Expanded
 Secular Equation for the Vibration Frequencies of a Molecule," J. Chem.
@@ -456,7 +456,7 @@ follows Herzberg's own prescription (Ch. I.3 of the 1945 volume) for a
 linear equilibrium geometry's ill-defined bond-angle coordinate --
 switching to a linearized transverse-displacement bend coordinate that
 stays well-behaved at exactly 180 degrees -- and its
-:attr:`~chemistrykit.spectro.systems.vibrational.NormalModeResult.is_linear`
+:attr:`~chemistrykit.spectro.NormalModeResult.is_linear`
 flag and docstring make the resulting bend mode's double degeneracy
 explicit rather than silently reporting only one of the two degenerate
 components as if it were the whole story.
@@ -488,12 +488,12 @@ that a molecule's NMR spectrum reports directly on its chemical structure
 rather than being a single line per isotope.
 
 *Implementation:* every quantity
-:mod:`chemistrykit.spectro.systems.nmr` operates on -- a
+``chemistrykit.spectro.systems.nmr`` operates on -- a
 ``chemical_shift_ppm``, positioned relative to a reference compound --
 presupposes exactly this chemical-shift phenomenon Bloch and Purcell's
 discovery made observable;
-:func:`chemistrykit.spectro.systems.nmr.first_order_multiplet` and
-:func:`~chemistrykit.spectro.systems.nmr.multi_coupling_multiplet` build
+:func:`~chemistrykit.spectro.first_order_multiplet` and
+:func:`~chemistrykit.spectro.multi_coupling_multiplet` build
 the resulting NMR :class:`~chemistrykit.spectro.core.base_system.Spectrum`
 directly from a chemical shift plus its coupling pattern.
 
@@ -528,13 +528,13 @@ given by the binomial coefficients -- Pascal's triangle -- symmetric
 about the unperturbed shift.
 
 *Implementation:*
-:func:`chemistrykit.spectro.systems.nmr.multiplicity` implements exactly
+:func:`~chemistrykit.spectro.multiplicity` implements exactly
 the n+1 rule, and
-:func:`~chemistrykit.spectro.systems.nmr.pascals_triangle_intensities`
+:func:`~chemistrykit.spectro.pascals_triangle_intensities`
 the resulting binomial relative intensities;
-:func:`~chemistrykit.spectro.systems.nmr.first_order_multiplet` builds a
+:func:`~chemistrykit.spectro.first_order_multiplet` builds a
 single multiplet from one set of equivalent coupled neighbors, and
-:func:`~chemistrykit.spectro.systems.nmr.multi_coupling_multiplet`
+:func:`~chemistrykit.spectro.multi_coupling_multiplet`
 generalizes it to several *inequivalent* coupling partners acting
 independently and multiplicatively -- a genuine doublet of triplets, for
 instance.
@@ -577,15 +577,15 @@ idealized profiles remains the standard first diagnostic for identifying
 which broadening mechanism -- or mixture of both -- dominates a given
 spectroscopic measurement.
 
-*Implementation:* :func:`chemistrykit.spectro.utils.lineshapes.gaussian`
-and :func:`~chemistrykit.spectro.utils.lineshapes.lorentzian` implement
+*Implementation:* :func:`~chemistrykit.spectro.gaussian`
+and :func:`~chemistrykit.spectro.lorentzian` implement
 exactly these two normalized profiles, and
-:func:`~chemistrykit.spectro.utils.lineshapes.voigt` their convolution
+:func:`~chemistrykit.spectro.voigt` their convolution
 via the numerically stable Faddeeva-function evaluation
-(:func:`scipy.special.wofz`);
-:func:`~chemistrykit.spectro.utils.lineshapes.broaden_stick_spectrum`
+(:obj:`scipy.special.wofz`);
+:func:`~chemistrykit.spectro.broaden_stick_spectrum`
 applies any of the three to an entire stick spectrum at once, and
-:meth:`chemistrykit.spectro.core.base_system.Spectrum.broaden` exposes
+:meth:`~chemistrykit.spectro.Spectrum.broaden` exposes
 that broadening directly on every model's output spectrum.
 
 *References:* A. A. Michelson, "On the Broadening of Spectral Lines,"

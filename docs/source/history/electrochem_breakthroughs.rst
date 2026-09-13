@@ -61,9 +61,9 @@ just not the source.
 in series to boost the available voltage -- is the direct ancestor of
 every battery in this package, and the potential difference it exploits
 between two different metals is exactly what
-:data:`chemistrykit.electrochem.systems.standard_potentials.STANDARD_REDUCTION_POTENTIALS`
+``chemistrykit.electrochem.systems.standard_potentials.STANDARD_REDUCTION_POTENTIALS``
 tabulates for each metal's reduction couple, and what
-:func:`~chemistrykit.electrochem.systems.standard_potentials.cell_potential`
+:func:`~chemistrykit.electrochem.cell_potential`
 combines into a cell voltage (see 1836, below, for the two-metal cell
 this package's own worked example uses).
 :class:`chemistrykit.electrochem.systems.battery.ConstantCurrentBattery`
@@ -98,12 +98,12 @@ as a phenomenon preceded, by more than three decades, Faraday's
 quantitative laws of exactly how much substance a given charge transforms
 (see 1834, below).
 
-*Implementation:* :func:`chemistrykit.electrochem.systems.electrolysis.minimum_applied_voltage_electrolytic`,
+*Implementation:* :func:`~chemistrykit.electrochem.minimum_applied_voltage_electrolytic`,
 applied to the H+/H2 and O2/H2O half-reactions already in
-:data:`~chemistrykit.electrochem.systems.standard_potentials.STANDARD_REDUCTION_POTENTIALS`
-via :func:`~chemistrykit.electrochem.systems.standard_potentials.cell_potential`,
+``STANDARD_REDUCTION_POTENTIALS``
+via :func:`~chemistrykit.electrochem.cell_potential`,
 reproduces the textbook 1.23 V theoretical decomposition voltage of
-water, and :func:`~chemistrykit.electrochem.systems.electrolysis.moles_from_charge`
+water, and :func:`~chemistrykit.electrochem.moles_from_charge`
 recovers the 2:1 hydrogen-to-oxygen mole (and, by Avogadro's law, volume)
 ratio Nicholson and Carlisle observed, directly from the two half-reactions'
 electron counts (2 for H2, 4 for O2).
@@ -136,11 +136,11 @@ day could provide, but a sufficiently large voltaic battery could.
 
 *Connection:* the potassium and sodium half-reactions Davy's electrolysis
 targeted are two of the most negative entries in
-:data:`chemistrykit.electrochem.systems.standard_potentials.STANDARD_REDUCTION_POTENTIALS`
+``chemistrykit.electrochem.systems.standard_potentials.STANDARD_REDUCTION_POTENTIALS``
 (:math:`K^++e^-\to K`, :math:`-2.93` V; :math:`Na^++e^-\to Na`,
 :math:`-2.71` V) -- exactly the quantitative statement of why these
 metals resisted every purely chemical reduction attempt before Davy's,
-and why :func:`~chemistrykit.electrochem.systems.electrolysis.minimum_applied_voltage_electrolytic`
+and why :func:`~chemistrykit.electrochem.minimum_applied_voltage_electrolytic`
 returns such a large forcing voltage when applied to either couple.
 
 *References:* H. Davy, "The Bakerian Lecture, on Some New Phenomena of
@@ -179,11 +179,11 @@ Greek for "to go") for the electrolyte's migrating charged constituents.
 
    m = \frac{QM}{nF}, \qquad Q = It
 
-*Implementation:* :func:`chemistrykit.electrochem.systems.electrolysis.charge_from_current`
-computes :math:`Q=It`; :func:`~chemistrykit.electrochem.systems.electrolysis.moles_from_charge`
-and :func:`~chemistrykit.electrochem.systems.electrolysis.mass_from_charge`
+*Implementation:* :func:`~chemistrykit.electrochem.charge_from_current`
+computes :math:`Q=It`; :func:`~chemistrykit.electrochem.moles_from_charge`
+and :func:`~chemistrykit.electrochem.mass_from_charge`
 implement Faraday's first law directly, and
-:func:`~chemistrykit.electrochem.systems.electrolysis.faradays_law_mass`
+:func:`~chemistrykit.electrochem.faradays_law_mass`
 combines all three into the single-call form used throughout this
 gallery -- its doctest verifies the defining linearity (doubling the
 current exactly doubles the deposited mass) that was Faraday's original
@@ -217,14 +217,14 @@ electrochemical cell reliable and reproducible enough to serve as a
 practical voltage reference and a working power source for early
 telegraphy.
 
-*Implementation:* :func:`chemistrykit.electrochem.systems.standard_potentials.cell_potential`
-and :func:`~chemistrykit.electrochem.systems.standard_potentials.standard_cell_potential`
+*Implementation:* :func:`~chemistrykit.electrochem.cell_potential`
+and :func:`~chemistrykit.electrochem.standard_cell_potential`
 combine exactly the Cu2+/Cu and Zn2+/Zn half-reactions Daniell paired,
 both already in
-:data:`~chemistrykit.electrochem.systems.standard_potentials.STANDARD_REDUCTION_POTENTIALS`
+``STANDARD_REDUCTION_POTENTIALS``
 -- their doctests reproduce the textbook 1.10 V Daniell-cell potential
 directly, and
-:func:`~chemistrykit.electrochem.systems.standard_potentials.balance_redox_reaction`
+:func:`~chemistrykit.electrochem.balance_redox_reaction`
 gives the (here trivial, both sides already 2-electron) mass-balancing
 multiples for the overall reaction.
 
@@ -253,11 +253,11 @@ work in thermochemistry."
 
    E = E^\circ - \frac{RT}{nF}\ln Q
 
-*Implementation:* :func:`chemistrykit.electrochem.systems.nernst.nernst_potential`
+*Implementation:* :func:`~chemistrykit.electrochem.nernst_potential`
 implements exactly this equation; its doctest confirms it reduces to
 :math:`E^\circ` at :math:`Q=1` and that increasing product-side activity
 lowers the cell potential, per Le Chatelier's principle.
-:func:`~chemistrykit.electrochem.systems.nernst.concentration_cell_potential`
+:func:`~chemistrykit.electrochem.concentration_cell_potential`
 specializes it to :math:`E^\circ=0`, reproducing the textbook ~59 mV per
 decade of concentration ratio for a one-electron couple at 25 degC.
 
@@ -291,9 +291,9 @@ engineering more than a century later.
 
    t = \frac{C_p}{I^k}, \qquad C_{eff}(I) = I\,t(I) = C_p I^{1-k}
 
-*Implementation:* :func:`chemistrykit.electrochem.systems.battery.peukert_discharge_time`
+*Implementation:* :func:`~chemistrykit.electrochem.peukert_discharge_time`
 implements exactly this power law, and
-:func:`~chemistrykit.electrochem.systems.battery.effective_capacity`
+:func:`~chemistrykit.electrochem.effective_capacity`
 the delivered-capacity-vs-rate relationship it implies -- constant at
 :math:`k=1` (the idealized, rate-independent battery), falling with
 increasing current at the realistic :math:`k>1` lead-acid case.
@@ -332,11 +332,11 @@ to explain it.
 
    \eta = b\log_{10}\!\left(\frac{i}{i_0}\right), \qquad b_{anodic} = \frac{2.303RT}{\alpha nF}
 
-*Implementation:* :func:`chemistrykit.electrochem.systems.butler_volmer.tafel_slope`
+*Implementation:* :func:`~chemistrykit.electrochem.tafel_slope`
 computes exactly this slope from the charge-transfer coefficient, and
-:func:`~chemistrykit.electrochem.systems.butler_volmer.tafel_overpotential`
+:func:`~chemistrykit.electrochem.tafel_overpotential`
 the resulting linearized overpotential-current relationship;
-:func:`~chemistrykit.electrochem.systems.butler_volmer.fit_tafel_plot`
+:func:`~chemistrykit.electrochem.fit_tafel_plot`
 performs the reverse operation Tafel's own experimentalists needed --
 recovering the Tafel slope and exchange current density by linear
 regression against measured (:math:`\eta`, :math:`\log_{10}i`) data.
@@ -361,13 +361,13 @@ first principles, why real electrolyte solutions systematically deviate
 from ideal (Nernstian, unit-activity-coefficient) behavior more strongly
 as concentration and ionic charge increase.
 
-*Implementation:* :mod:`chemistrykit.electrochem.systems.nernst` reuses
+*Implementation:* ``chemistrykit.electrochem.systems.nernst`` reuses
 this package's existing Debye-Hückel machinery
-(:mod:`chemistrykit.solutions.systems.activity`, developed for solution
-equilibria) rather than reimplementing it: :func:`chemistrykit.electrochem.systems.nernst.activity_corrected_reaction_quotient`
+(``chemistrykit.solutions.systems.activity``, developed for solution
+equilibria) rather than reimplementing it: :func:`~chemistrykit.electrochem.activity_corrected_reaction_quotient`
 builds a reaction quotient from Debye-Hückel-corrected activities instead
 of raw concentrations, and
-:func:`~chemistrykit.electrochem.systems.nernst.nernst_potential_with_activity`
+:func:`~chemistrykit.electrochem.nernst_potential_with_activity`
 feeds that corrected quotient into the Nernst equation directly -- its
 doctest confirms the correction vanishes in the dilute limit, recovering
 the ideal Nernst potential, exactly as Debye-Hückel theory predicts.
@@ -401,14 +401,14 @@ above), finally giving Tafel's law a microscopic kinetic derivation.
    i = i_0\left[\exp\!\left(\frac{\alpha nF\eta}{RT}\right)
                 -\exp\!\left(-\frac{(1-\alpha)nF\eta}{RT}\right)\right]
 
-*Implementation:* :func:`chemistrykit.electrochem.systems.butler_volmer.butler_volmer_current_density`
+*Implementation:* :func:`~chemistrykit.electrochem.butler_volmer_current_density`
 implements exactly this equation; its doctest confirms the net current
 vanishes exactly at zero overpotential, the equation's defining dynamic-
 equilibrium property.
-:func:`~chemistrykit.electrochem.systems.butler_volmer.exchange_current_density`
+:func:`~chemistrykit.electrochem.exchange_current_density`
 computes :math:`i_0` itself from a standard heterogeneous rate constant
 and bulk concentrations, and the module's own numerical check (comparing
-:func:`~chemistrykit.electrochem.systems.butler_volmer.tafel_overpotential`
+:func:`~chemistrykit.electrochem.tafel_overpotential`
 against the full equation at 300 mV overpotential, agreeing to better
 than 0.5%) is a direct demonstration of the high-overpotential
 Tafel-law limit described above.
@@ -437,11 +437,11 @@ half-reaction always mean its *reduction* potential -- the convention
 this package, and every modern textbook table, now uses without comment.
 
 *Implementation:* every value in
-:data:`chemistrykit.electrochem.systems.standard_potentials.STANDARD_REDUCTION_POTENTIALS`
+``chemistrykit.electrochem.systems.standard_potentials.STANDARD_REDUCTION_POTENTIALS``
 is tabulated as a Stockholm-convention reduction potential, and
-:func:`~chemistrykit.electrochem.systems.standard_potentials.cell_potential`'s
+:func:`~chemistrykit.electrochem.cell_potential`'s
 cathode-minus-anode combination rule, together with
-:func:`~chemistrykit.electrochem.systems.standard_potentials.is_spontaneous`'s
+:func:`~chemistrykit.electrochem.is_spontaneous`'s
 sign convention (:math:`E_{cell}>0\iff` spontaneous), work correctly
 precisely *because* both half-reactions are consistently expressed in
 this single, internationally agreed sign convention rather than a

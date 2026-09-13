@@ -49,8 +49,8 @@ same rigorous footing as gravimetric analysis, and made "titration" a
 routine laboratory word rather than a specialist's trick.
 
 *Implementation:* :class:`chemistrykit.solutions.core.base_system.Titration`
-and its shared :meth:`~chemistrykit.solutions.core.base_system.Titration.curve`/
-:meth:`~chemistrykit.solutions.core.base_system.Titration.find_equivalence_point`
+and its shared :meth:`~chemistrykit.solutions.Titration.curve`/
+:meth:`~chemistrykit.solutions.Titration.find_equivalence_point`
 machinery are the modern, numerical descendants of exactly what Gay-Lussac
 and Mohr did by eye and burette: an equivalence point located as the
 steepest-ascent inflection of a titration curve, the mathematical
@@ -85,11 +85,11 @@ law applied to one specific reaction; it is the single mathematical idea
 every other entry in this chronology is built on.
 
 *Implementation:*
-:attr:`chemistrykit.solutions.core.base_system.WeakElectrolyte.equilibrium_constant`
+:attr:`~chemistrykit.solutions.WeakElectrolyte.equilibrium_constant`
 and the exact cubic charge-balance equations solved in
-:mod:`chemistrykit.solutions.systems.acid_base` are direct statements of
+``chemistrykit.solutions.systems.acid_base`` are direct statements of
 the mass-action law for a weak acid or base equilibrium, and
-:func:`chemistrykit.solutions.systems.solubility.ksp_from_molar_solubility`
+:func:`~chemistrykit.solutions.ksp_from_molar_solubility`
 is the same law applied to a solid-liquid solubility equilibrium instead.
 
 *References:* C. M. Guldberg and P. Waage, "Studies Concerning Affinity,"
@@ -121,14 +121,14 @@ mass-action expression for :math:`K_{sp}`, worked through in full,
 quantifies precisely.
 
 *Implementation:*
-:func:`chemistrykit.solutions.systems.solubility.molar_solubility_with_common_ion`
+:func:`~chemistrykit.solutions.molar_solubility_with_common_ion`
 solves the exact common-ion polynomial for any salt stoichiometry (not
 merely the textbook 1:1 quadratic special case), and directly demonstrates
 the suppression Le Chatelier's principle predicts: AgCl's molar
 solubility drops by orders of magnitude as independently sourced
 :math:`\text{Cl}^-` is added, compared against the common-ion-free
 solubility from
-:func:`~chemistrykit.solutions.systems.solubility.molar_solubility_from_ksp`.
+:func:`~chemistrykit.solutions.molar_solubility_from_ksp`.
 
 *References:* H. Le Chatelier, "Sur un enonce general des lois des
 equilibres chimiques," Comptes Rendus de l'Academie des Sciences 99,
@@ -167,7 +167,7 @@ it.
 substance, Arrhenius's dissociation theory made computational: it treats
 a weak acid or base as *partially*, not fully, dissociated into its ions
 at equilibrium, and
-:meth:`~chemistrykit.solutions.core.base_system.WeakElectrolyte.percent_dissociation`
+:meth:`~chemistrykit.solutions.WeakElectrolyte.percent_dissociation`
 reports exactly the dissociated fraction whose very existence Arrhenius's
 own examiners doubted.
 
@@ -198,7 +198,7 @@ described above.
 *Implementation:*
 :class:`chemistrykit.solutions.systems.acid_base.WeakAcid` reproduces
 Ostwald's dilution law directly: evaluating
-:meth:`~chemistrykit.solutions.core.base_system.WeakElectrolyte.percent_dissociation`
+:meth:`~chemistrykit.solutions.WeakElectrolyte.percent_dissociation`
 at fixed :math:`K_a` across a range of total concentrations :math:`C_a`
 reproduces the characteristic rise in dissociated fraction with dilution,
 computed here from the exact cubic charge-balance solution rather than
@@ -227,9 +227,9 @@ predicts only qualitatively (see above), now reduced to an exact
 algebraic relationship.
 
 *Implementation:*
-:func:`chemistrykit.solutions.systems.solubility.ksp_from_molar_solubility`
+:func:`~chemistrykit.solutions.ksp_from_molar_solubility`
 and its inverse
-:func:`~chemistrykit.solutions.systems.solubility.molar_solubility_from_ksp`
+:func:`~chemistrykit.solutions.molar_solubility_from_ksp`
 implement exactly Nernst's constant-product relation for a general
 :math:`M_pX_q` stoichiometry.
 
@@ -261,10 +261,10 @@ introduced pH scale (below, itself barely a few years old at the time)
 gave chemists a logarithmic quantity to measure in the first place.
 
 *Implementation:*
-:func:`chemistrykit.solutions.systems.acid_base.henderson_hasselbalch_ph`
+:func:`~chemistrykit.solutions.henderson_hasselbalch_ph`
 implements exactly Hasselbalch's logarithmic form, and
 :class:`chemistrykit.solutions.systems.acid_base.Buffer` -- together with
-its :meth:`~chemistrykit.solutions.systems.acid_base.Buffer.from_target_ph`
+its :meth:`~chemistrykit.solutions.Buffer.from_target_ph`
 constructor, which inverts the equation to design a buffer for a target
 pH from a fixed total concentration -- is built directly on top of it.
 
@@ -299,14 +299,14 @@ precision this package's exact concentration-based equilibrium models
 target.
 
 *Implementation:*
-:func:`chemistrykit.solutions.systems.acid_base.ph_from_h` and its inverse
-:func:`~chemistrykit.solutions.systems.acid_base.h_from_ph` implement
+:func:`~chemistrykit.solutions.ph_from_h` and its inverse
+:func:`~chemistrykit.solutions.h_from_ph` implement
 exactly Sorensen's negative-log-concentration definition
-(:func:`~chemistrykit.solutions.systems.acid_base.poh_from_oh` and
-:func:`~chemistrykit.solutions.systems.acid_base.oh_from_poh` do the same
+(:func:`~chemistrykit.solutions.poh_from_oh` and
+:func:`~chemistrykit.solutions.oh_from_poh` do the same
 for hydroxide); every pH value computed anywhere else in this
-subpackage -- :meth:`chemistrykit.solutions.systems.acid_base.WeakAcid.pH`,
-every :meth:`~chemistrykit.solutions.core.base_system.Titration.curve`,
+subpackage -- :meth:`~chemistrykit.solutions.WeakAcid.pH`,
+every :meth:`~chemistrykit.solutions.Titration.curve`,
 the Henderson-Hasselbalch buffer above -- is built on this one definition.
 
 *References:* S. P. L. Sorensen, "Ueber die Messung und die Bedeutung der
@@ -378,11 +378,11 @@ exactly why an extended form (below) was needed within just a few years.
    \log_{10}\gamma = -A z^2 \sqrt{I}
 
 *Implementation:*
-:func:`chemistrykit.solutions.systems.activity.ionic_strength` computes
+:func:`~chemistrykit.solutions.ionic_strength` computes
 the ionic strength :math:`I` central to the whole theory, and
-:func:`~chemistrykit.solutions.systems.activity.activity_coefficient_debye_huckel_limiting`
+:func:`~chemistrykit.solutions.activity_coefficient_debye_huckel_limiting`
 implements the limiting law itself, using the literature value
-:data:`~chemistrykit.solutions.systems.activity.DEBYE_HUCKEL_A_25C` for
+``DEBYE_HUCKEL_A_25C`` for
 aqueous solutions at 25 degC.
 
 *References:* P. Debye and E. Huckel, "Zur Theorie der Elektrolyte,"
@@ -413,7 +413,7 @@ called the Guntelberg approximation.
    \log_{10}\gamma = \frac{-A z^2 \sqrt{I}}{1 + Ba\sqrt{I}}, \qquad Ba \approx 1
 
 *Implementation:*
-:func:`chemistrykit.solutions.systems.activity.activity_coefficient_debye_huckel_extended`
+:func:`~chemistrykit.solutions.activity_coefficient_debye_huckel_extended`
 implements exactly this extended form, with its ``Ba`` parameter
 defaulting to 1.0 -- the Guntelberg approximation's own simplification --
 and reduces to the plain limiting law as :math:`I \to 0`, exactly as it

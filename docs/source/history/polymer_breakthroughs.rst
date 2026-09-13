@@ -57,12 +57,12 @@ generally accepted. He was awarded the 1953 Nobel Prize in Chemistry
 *Connection:* every model in :mod:`chemistrykit.polymer` presupposes
 Staudinger's hypothesis as settled fact rather than a live controversy --
 a polymer chain's end-to-end distance
-(:mod:`chemistrykit.polymer.systems.chain_statistics`), the closed-form
+(``chemistrykit.polymer.systems.chain_statistics``), the closed-form
 distribution of chain lengths produced by a polymerization
-(:mod:`~chemistrykit.polymer.systems.molecular_weight_distribution`), and
+(``molecular_weight_distribution``), and
 the degree of polymerization reached by a given reaction mechanism
-(:mod:`~chemistrykit.polymer.systems.step_growth`,
-:mod:`~chemistrykit.polymer.systems.chain_growth`) are all quantities
+(``step_growth``,
+``chain_growth``) are all quantities
 that only make sense once a polymer is understood to be one long, real,
 covalently bonded molecule of a *definite* length, not a colloidal
 aggregate with no molecular identity of its own.
@@ -114,11 +114,11 @@ below, where high molecular weight appears essentially immediately, even
 at low overall monomer conversion.
 
 *Implementation:*
-:func:`chemistrykit.polymer.systems.step_growth.degree_of_polymerization`
+:func:`~chemistrykit.polymer.degree_of_polymerization`
 implements exactly the Carothers equation, with
-:func:`~chemistrykit.polymer.systems.step_growth.extent_of_reaction_for_DP`
+:func:`~chemistrykit.polymer.extent_of_reaction_for_DP`
 inverting it to find the conversion needed for a target chain length, and
-:func:`~chemistrykit.polymer.systems.step_growth.degree_of_polymerization_stoichiometric_imbalance`
+:func:`~chemistrykit.polymer.degree_of_polymerization_stoichiometric_imbalance`
 generalizing it to the case of a stoichiometric imbalance between the two
 functional groups (or a deliberately added monofunctional "chain
 stopper"), which caps the attainable degree of polymerization even at
@@ -208,20 +208,20 @@ but, however far the reaction is driven, never exceeds -- exactly 2 as
 chemistry.
 
 *Implementation:*
-:func:`chemistrykit.polymer.systems.molecular_weight_distribution.flory_schulz_number_fraction`
+:func:`~chemistrykit.polymer.flory_schulz_number_fraction`
 and
-:func:`~chemistrykit.polymer.systems.molecular_weight_distribution.flory_schulz_weight_fraction`
+:func:`~chemistrykit.polymer.flory_schulz_weight_fraction`
 implement exactly this distribution;
-:func:`~chemistrykit.polymer.systems.molecular_weight_distribution.flory_schulz_number_average_DP`,
-:func:`~chemistrykit.polymer.systems.molecular_weight_distribution.flory_schulz_weight_average_DP`,
+:func:`~chemistrykit.polymer.flory_schulz_number_average_DP`,
+:func:`~chemistrykit.polymer.flory_schulz_weight_average_DP`,
 and
-:func:`~chemistrykit.polymer.systems.molecular_weight_distribution.flory_schulz_pdi`
+:func:`~chemistrykit.polymer.flory_schulz_pdi`
 give its closed-form moments, cross-checked in
-:mod:`chemistrykit.polymer.tests.test_molecular_weight_distribution`
+``chemistrykit.polymer.tests.test_molecular_weight_distribution``
 against direct numerical summation of the distribution via the shared
 ``chemistrykit.polymer.utils.moments.number_average`` /
-``weight_average`` helpers, which also compute :func:`~chemistrykit.polymer.systems.molecular_weight_distribution.number_average_molar_mass`
-and :func:`~chemistrykit.polymer.systems.molecular_weight_distribution.weight_average_molar_mass`
+``weight_average`` helpers, which also compute :func:`~chemistrykit.polymer.number_average_molar_mass`
+and :func:`~chemistrykit.polymer.weight_average_molar_mass`
 directly from any measured (count, molar mass) distribution, Flory-Schulz
 or otherwise.
 
@@ -258,19 +258,19 @@ relating the kinetics to the resulting polymer's degree of
 polymerization.
 
 *Implementation:*
-:func:`chemistrykit.polymer.systems.chain_growth.free_radical_network`
+:func:`~chemistrykit.polymer.free_radical_network`
 builds the full initiation/propagation/termination mechanism as a
 :class:`chemistrykit.kinetics.systems.networks.StoichiometricNetwork` and
 integrates it numerically (reusing the kinetics domain's general
 mass-action reaction-network engine rather than hand-rolling new ODE
 machinery);
-:func:`~chemistrykit.polymer.systems.chain_growth.steady_state_radical_concentration`
+:func:`~chemistrykit.polymer.steady_state_radical_concentration`
 implements exactly Flory's closed-form :math:`[M^\bullet]_{ss}`, used as
 a direct cross-check against the numerically integrated network in
-:mod:`chemistrykit.polymer.tests.test_chain_growth`;
-:func:`~chemistrykit.polymer.systems.chain_growth.steady_state_rate_of_polymerization`
+``chemistrykit.polymer.tests.test_chain_growth``;
+:func:`~chemistrykit.polymer.steady_state_rate_of_polymerization`
 and
-:func:`~chemistrykit.polymer.systems.chain_growth.kinetic_chain_length`
+:func:`~chemistrykit.polymer.kinetic_chain_length`
 implement the resulting :math:`R_p\propto\sqrt{[I]}` rate law and the
 kinetic chain length itself.
 
@@ -302,10 +302,10 @@ theta condition -- the solvent quality at which a real chain's excluded
 volume is effectively cancelled out and it behaves, to leading order,
 exactly like Kuhn's ideal random walk above.
 
-*Connection:* :mod:`chemistrykit.polymer.systems.chain_statistics` uses
+*Connection:* ``chemistrykit.polymer.systems.chain_statistics`` uses
 Flory and Huggins's theta/good/poor solvent-quality vocabulary directly
 (``chemistrykit.polymer.systems.chain_statistics.FLORY_EXPONENTS``,
-:func:`~chemistrykit.polymer.systems.chain_statistics.flory_exponent`),
+:func:`~chemistrykit.polymer.flory_exponent`),
 but works at the level of the resulting Flory exponent
 :math:`\nu` for chain-size scaling rather than implementing the
 underlying lattice free energy or the :math:`\chi` parameter itself,
@@ -339,14 +339,14 @@ practical experimental measurement rather than a purely theoretical
 distinction.
 
 *Implementation:*
-:func:`chemistrykit.polymer.systems.molecular_weight_distribution.weight_average_molar_mass`
+:func:`~chemistrykit.polymer.weight_average_molar_mass`
 implements exactly the moment light scattering measures,
 :math:`M_w=\sum N_iM_i^2/\sum N_iM_i`, via the shared
-:func:`chemistrykit.polymer.utils.moments.weight_average` helper;
-:func:`~chemistrykit.polymer.systems.molecular_weight_distribution.number_average_molar_mass`
+``chemistrykit.polymer.utils.moments.weight_average()`` helper;
+:func:`~chemistrykit.polymer.number_average_molar_mass`
 implements the complementary :math:`M_n` an osmometry- or
 end-group-based measurement would instead give, and
-:func:`~chemistrykit.polymer.systems.molecular_weight_distribution.polydispersity_index`
+:func:`~chemistrykit.polymer.polydispersity_index`
 computes their ratio.
 
 *References:* P. Debye, "Light Scattering in Solutions," *J. Appl.
@@ -376,7 +376,7 @@ chain carries two radicals' worth of added monomer), but
 only one radical's worth).
 
 *Implementation:*
-:func:`chemistrykit.polymer.systems.chain_growth.free_radical_network`'s
+:func:`~chemistrykit.polymer.free_radical_network`'s
 `mode` parameter selects between exactly these two termination
 stoichiometries -- one dead chain per termination event for
 ``mode="combination"``, two for ``mode="disproportionation"`` -- while
@@ -423,10 +423,10 @@ physical chemistry of the macromolecules."
 *Implementation:*
 :class:`chemistrykit.polymer.systems.chain_statistics.RealChain`
 implements exactly this scaling law, :math:`R=bn^\nu`, with
-:meth:`~chemistrykit.polymer.systems.chain_statistics.RealChain.theta_solvent`,
-:meth:`~chemistrykit.polymer.systems.chain_statistics.RealChain.good_solvent`,
+:meth:`~chemistrykit.polymer.RealChain.theta_solvent`,
+:meth:`~chemistrykit.polymer.RealChain.good_solvent`,
 and
-:meth:`~chemistrykit.polymer.systems.chain_statistics.RealChain.poor_solvent`
+:meth:`~chemistrykit.polymer.RealChain.poor_solvent`
 building it with exactly Flory's :math:`\nu=1/2,\,3/5,\,1/3`
 (``chemistrykit.polymer.systems.chain_statistics.FLORY_EXPONENTS``);
 at the theta point it reduces exactly to
@@ -471,7 +471,7 @@ exactly, for the good-solvent case -- a deliberate choice of the classic,
 easily-derived value rather than the more precise
 renormalization-group estimate above, which this package does not
 implement; the two differ by less than 2%, small enough that
-:mod:`chemistrykit.polymer.systems.chain_statistics`'s qualitative
+``chemistrykit.polymer.systems.chain_statistics``'s qualitative
 point (a good solvent swells a chain measurably beyond the ideal,
 theta-solvent scaling) is unaffected by which value is used.
 

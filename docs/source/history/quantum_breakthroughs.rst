@@ -19,7 +19,7 @@ conjugated pi systems, and the Gaussian-basis variational machinery that,
 in Roothaan and Hall's hands, turned Hartree-Fock theory from a
 principle into a computer program. A handful of results below (the
 Schrodinger equation itself, foremost) are shared ancestry with
-:mod:`physicskit.quantum`'s own general treatment of quantum mechanics
+``physicskit.quantum``'s own general treatment of quantum mechanics
 and are only briefly set the scene here; the chronology's real subject is
 the distinct cast of chemists who spent the following quarter-century
 turning that equation into a working theory of the chemical bond. Each
@@ -58,7 +58,7 @@ placed together in the same spatial orbital: two electrons filling
 bonding molecular orbital (rather than one each in the bonding and
 antibonding orbitals) is exactly a quantum-mechanical shared electron
 pair, and
-:meth:`chemistrykit.quantum.systems.huckel.HuckelSystem.pi_electron_energy`'s
+:meth:`~chemistrykit.quantum.HuckelSystem.pi_electron_energy`'s
 "two electrons per orbital, lowest energy first" Aufbau filling rule is
 the same pairing principle applied systematically across an entire
 conjugated pi system.
@@ -111,13 +111,13 @@ solutions for a particle confined to a box
 :class:`~chemistrykit.quantum.systems.particle_in_box.ParticleInBox3D`)
 are the same equation applied to the other textbook potential this
 package builds on. Rayleigh-Schrodinger perturbation theory itself is
-implemented in :mod:`chemistrykit.quantum.systems.perturbation`:
-:func:`~chemistrykit.quantum.systems.perturbation.quartic_perturbation_first_order_correction`
+implemented in ``chemistrykit.quantum.systems.perturbation``:
+:func:`~chemistrykit.quantum.quartic_perturbation_first_order_correction`
 gives the first-order energy shift from a quartic anharmonic term
 directly from the harmonic-oscillator ladder-operator matrix elements
-(:func:`~chemistrykit.quantum.systems.perturbation.position_operator_matrix`),
+(:func:`~chemistrykit.quantum.position_operator_matrix`),
 checked in turn against
-:func:`~chemistrykit.quantum.systems.perturbation.anharmonic_energy_levels`'s
+:func:`~chemistrykit.quantum.anharmonic_energy_levels`'s
 exact numerical diagonalization of the same truncated problem.
 
 *References:* E. Schrodinger, "Quantisierung als Eigenwertproblem
@@ -163,12 +163,12 @@ bulk thermodynamic property.
 
 *Implementation:* :class:`chemistrykit.quantum.systems.rigid_rotor.RigidRotor`
 implements exactly this spectrum,
-:meth:`~chemistrykit.quantum.systems.rigid_rotor.RigidRotor.degeneracy`
+:meth:`~chemistrykit.quantum.RigidRotor.degeneracy`
 gives :math:`g_J`, and
-:meth:`~chemistrykit.quantum.systems.rigid_rotor.RigidRotor.transition_energy`
+:meth:`~chemistrykit.quantum.RigidRotor.transition_energy`
 confirms the evenly-spaced-by-:math:`2B` microwave selection-rule
 prediction directly;
-:meth:`~chemistrykit.quantum.systems.rigid_rotor.RigidRotor.from_diatomic`
+:meth:`~chemistrykit.quantum.RigidRotor.from_diatomic`
 builds the model straight from a real molecule's atomic masses and bond
 length, exactly the direction (bond length from measured microwave
 spectrum) rotational spectroscopy runs in practice.
@@ -202,7 +202,7 @@ identical-particle exchange rather than being assumed.
 
 *Implementation:* the full two-electron exchange and Coulomb integrals
 Heitler and London's original calculation needed are beyond this
-package's scope (:mod:`chemistrykit.quantum.utils.basis_sets` implements
+package's scope (``chemistrykit.quantum.utils.basis_sets`` implements
 only the one-electron integrals
 :class:`~chemistrykit.quantum.systems.hartree_fock.H2PlusVariational`
 needs for H2+), but the same qualitative mechanism -- a spatially symmetric
@@ -254,7 +254,7 @@ a matrix eigenvalue problem.
 builds exactly this LCAO ansatz for H2+, obtaining the bonding
 (:math:`+`) and antibonding (:math:`-`) combinations directly as the two
 eigenvectors of its 2x2 secular equation
-(:meth:`~chemistrykit.quantum.systems.hartree_fock.H2PlusVariational.solve`),
+(:meth:`~chemistrykit.quantum.H2PlusVariational.solve`),
 with the bonding combination's energy genuinely lower -- the basic
 molecular-orbital picture of a covalent bond, obtained here by actual
 diagonalization rather than assumed.
@@ -296,8 +296,8 @@ intensities to bond-dissociation thermochemistry.
 
 *Implementation:* :class:`chemistrykit.quantum.systems.harmonic_oscillator.MorseOscillator`
 implements exactly these exact vibrational eigenvalues, with
-:attr:`~chemistrykit.quantum.systems.harmonic_oscillator.MorseOscillator.v_max`
-giving the highest bound level; :func:`~chemistrykit.quantum.systems.harmonic_oscillator.compare_harmonic_vs_morse`
+:attr:`~chemistrykit.quantum.MorseOscillator.v_max`
+giving the highest bound level; :func:`~chemistrykit.quantum.compare_harmonic_vs_morse`
 tabulates it directly against
 :class:`~chemistrykit.quantum.systems.harmonic_oscillator.QuantumHarmonicOscillator`'s
 perfectly evenly spaced levels at the same force constant, showing the two
@@ -332,9 +332,9 @@ satisfy the rule; cyclobutadiene's 4 do not, and are correspondingly
 
 *Implementation:* :class:`chemistrykit.quantum.systems.huckel.HuckelSystem`
 builds exactly this Hamiltonian and diagonalizes it via
-:func:`chemistrykit.quantum.utils.secular_equation.solve_secular_equation`
+:func:`~chemistrykit.quantum.solve_secular_equation`
 with the orthonormal-basis approximation (``S=None``);
-:func:`~chemistrykit.quantum.systems.huckel.is_aromatic_by_huckel_rule`
+:func:`~chemistrykit.quantum.is_aromatic_by_huckel_rule`
 checks the :math:`4n+2` rule directly against the *computed* spectrum's
 actual degeneracies (not just electron counting), correctly confirming
 benzene aromatic and cyclobutadiene not.
@@ -366,7 +366,7 @@ had not: it made quantum-mechanical bonding concepts into the chemist's
 own working vocabulary, "resonance energy" and "hybridization" foremost
 among them, still in daily use.
 
-*Connection:* :meth:`chemistrykit.quantum.systems.huckel.HuckelSystem.delocalization_energy`
+*Connection:* :meth:`~chemistrykit.quantum.HuckelSystem.delocalization_energy`
 computes exactly what Pauling's own vocabulary calls a "resonance
 energy": the extra stabilization a delocalized Huckel calculation
 predicts relative to the same pi electrons confined to isolated,
@@ -405,11 +405,11 @@ it) visible at a glance.
    E_k^{\text{linear}} = \alpha+2\beta\cos\!\left(\frac{k\pi}{n+1}\right), \qquad
    E_k^{\text{cyclic}} = \alpha+2\beta\cos\!\left(\frac{2\pi k}{n}\right)
 
-*Implementation:* :func:`chemistrykit.quantum.systems.huckel.linear_polyene_eigenvalues`
-and :func:`~chemistrykit.quantum.systems.huckel.cyclic_polyene_eigenvalues`
+*Implementation:* :func:`~chemistrykit.quantum.linear_polyene_eigenvalues`
+and :func:`~chemistrykit.quantum.cyclic_polyene_eigenvalues`
 implement exactly these two closed forms, used throughout this
 subpackage's tests and examples as an independent analytic cross-check
-of :meth:`~chemistrykit.quantum.systems.huckel.HuckelSystem.solve`'s
+of :meth:`~chemistrykit.quantum.HuckelSystem.solve`'s
 numerical diagonalization -- for benzene, reproducing the textbook Frost-
 circle pattern :math:`\alpha+2\beta`, :math:`\alpha+\beta` (doubly
 degenerate), :math:`\alpha-\beta` (doubly degenerate), :math:`\alpha-2\beta`
@@ -443,7 +443,7 @@ before running anything more expensive.
 
    \Delta E = \frac{h^2}{8mL^2}\left(n_\pi+1\right), \qquad \lambda = \frac{hc}{\Delta E}
 
-*Implementation:* :func:`chemistrykit.quantum.systems.particle_in_box.conjugated_dye_absorption_wavelength`
+*Implementation:* :func:`~chemistrykit.quantum.conjugated_dye_absorption_wavelength`
 implements exactly this HOMO-LUMO transition-energy formula on top of
 :class:`~chemistrykit.quantum.systems.particle_in_box.ParticleInBox1D`,
 correctly predicting a cyanine-dye-like chain's absorption in the visible
@@ -480,13 +480,13 @@ accuracy while keeping every integral computable in closed form -- the
 foundation essentially every general-purpose quantum-chemistry program
 since has been built on.
 
-*Implementation:* :class:`chemistrykit.quantum.utils.basis_sets.GaussianPrimitive`
+*Implementation:* ``chemistrykit.quantum.utils.basis_sets.GaussianPrimitive``
 implements exactly such a normalized s-type Gaussian primitive, and
-:func:`~chemistrykit.quantum.utils.basis_sets.overlap_integral`,
-:func:`~chemistrykit.quantum.utils.basis_sets.kinetic_integral`, and
-:func:`~chemistrykit.quantum.utils.basis_sets.nuclear_attraction_integral`
+``overlap_integral()``,
+``kinetic_integral()``, and
+``nuclear_attraction_integral()``
 give exactly the closed-form Gaussian-product integrals Boys's method
-produces (via :func:`~chemistrykit.quantum.utils.basis_sets.boys_f0`, the
+produces (via ``boys_f0()``, the
 zeroth-order Boys function the nuclear-attraction integral reduces to for
 s-type functions), used directly by
 :class:`chemistrykit.quantum.systems.hartree_fock.H2PlusVariational` to
@@ -525,7 +525,7 @@ functional descendants alike.
 
    HC = SCE
 
-*Implementation:* :func:`chemistrykit.quantum.utils.secular_equation.solve_secular_equation`
+*Implementation:* :func:`~chemistrykit.quantum.solve_secular_equation`
 implements exactly this generalized eigenvalue problem -- via
 :func:`scipy.linalg.eigh` when a genuine (non-orthogonal) overlap matrix
 `S` is supplied, or the ordinary eigenvalue problem
@@ -536,7 +536,7 @@ variational model in this subpackage
 :class:`~chemistrykit.quantum.systems.huckel.HuckelSystem`) reduces to;
 :class:`~chemistrykit.quantum.systems.hartree_fock.H2PlusVariational`'s
 own iterative
-:meth:`~chemistrykit.quantum.systems.hartree_fock.H2PlusVariational.optimize_exponent`
+:meth:`~chemistrykit.quantum.H2PlusVariational.optimize_exponent`
 (re-solving the secular equation at each trial exponent) is a minimal,
 one-parameter echo of the self-consistent-field loop Roothaan-Hall
 calculations run in full generality.

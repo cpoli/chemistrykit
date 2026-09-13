@@ -57,7 +57,7 @@ of a single general phenomenon rather than isolated curiosities, did.
 *Connection:* every model in :mod:`chemistrykit.surface` -- an isotherm
 describing how much of a reactant sits on a catalytic surface, a
 Langmuir-Hinshelwood rate law describing how fast it reacts there, or
-:mod:`~chemistrykit.surface.systems.catalysis`'s turnover and
+``catalysis``'s turnover and
 rate-enhancement metrics describing how effective the resulting catalyst
 is -- is a quantitative descendant of the general phenomenon Berzelius
 named and Doebereiner's platinum first exhibited in dramatic, tabletop
@@ -103,10 +103,10 @@ same products, and the resulting rate enhancement is a pure exponential
 in how much that activation energy drops.
 
 *Implementation:*
-:func:`chemistrykit.surface.systems.catalysis.compare_catalyzed_rate`
+:func:`~chemistrykit.surface.compare_catalyzed_rate`
 implements exactly this picture, evaluating catalyzed and uncatalyzed
 rate constants via
-:func:`chemistrykit.kinetics.systems.arrhenius.arrhenius_rate_constant`
+:func:`~chemistrykit.kinetics.arrhenius_rate_constant`
 (reused directly rather than reimplemented, per this package's
 convention of not duplicating shared kinetics machinery across domains)
 and reporting their ratio as the rate enhancement -- Ostwald's
@@ -153,9 +153,9 @@ qualitative rule of thumb rather than a mathematical relationship; giving
 it quantitative, structural content took the multiplet theory and
 volcano-curve formalism described below.
 
-*Connection:* :mod:`chemistrykit.surface.systems.catalysis`'s
-:func:`~chemistrykit.surface.systems.catalysis.compare_catalyzed_rate`
-and :func:`~chemistrykit.surface.systems.catalysis.turnover_frequency`
+*Connection:* ``chemistrykit.surface.systems.catalysis``'s
+:func:`~chemistrykit.surface.compare_catalyzed_rate`
+and :func:`~chemistrykit.surface.turnover_frequency`
 quantify a catalyst's *activity* once a reaction pathway is chosen, but
 say nothing about *which* metal or binding strength is optimal for a
 given reaction -- the qualitative selection principle Sabatier
@@ -192,10 +192,10 @@ should not be extrapolated to pressures far outside the range it was
 fitted to, where any real surface eventually saturates.
 
 *Implementation:*
-:func:`chemistrykit.surface.systems.freundlich.freundlich_loading` and
+:func:`~chemistrykit.surface.freundlich_loading` and
 :class:`~chemistrykit.surface.systems.freundlich.FreundlichIsotherm`
 implement exactly this power law;
-:func:`~chemistrykit.surface.systems.freundlich.fit_freundlich` recovers
+:func:`~chemistrykit.surface.fit_freundlich` recovers
 :math:`(K_f, n)` from data via the standard logarithmic linearization,
 :math:`\ln q = \ln K_f + (1/n)\ln P`, reusing the shared
 ``chemistrykit.surface.utils.regression.linear_fit`` ordinary-least-
@@ -236,16 +236,16 @@ research chemist of his era, made him the first American industrial
 scientist to receive a Nobel Prize in the sciences.
 
 *Implementation:*
-:func:`chemistrykit.surface.systems.langmuir.langmuir_coverage`
+:func:`~chemistrykit.surface.langmuir_coverage`
 implements exactly this coverage law, and
 :class:`~chemistrykit.surface.systems.langmuir.LangmuirIsotherm` wraps it
 with a monolayer capacity `qmax` to give the loading
 :math:`q(P)=q_{max}\theta(P)`; its
-:meth:`~chemistrykit.surface.systems.langmuir.LangmuirIsotherm.half_saturation_pressure`
+:meth:`~chemistrykit.surface.LangmuirIsotherm.half_saturation_pressure`
 returns the pressure :math:`P=1/K` at which coverage is exactly one-half
 -- the defining, exactly solvable feature Langmuir's model has and
 Freundlich's does not.
-:func:`~chemistrykit.surface.systems.langmuir.fit_langmuir` recovers
+:func:`~chemistrykit.surface.fit_langmuir` recovers
 :math:`(K, q_{max})` from data via the standard :math:`1/q`-vs-:math:`1/P`
 linearization.
 
@@ -287,14 +287,14 @@ sharp poisoning of a catalyst's activity by an excess of one reagent, or
 a strongly binding contaminant.
 
 *Implementation:*
-:func:`chemistrykit.surface.systems.langmuir_hinshelwood.lh_rate_single_site`
+:func:`~chemistrykit.surface.lh_rate_single_site`
 implements the single-reactant rate law
 :math:`\text{rate}=k\theta_A=kK_AP_A/(1+K_AP_A)`, built directly on
-:func:`chemistrykit.surface.systems.langmuir.langmuir_coverage` rather
+:func:`~chemistrykit.surface.langmuir_coverage` rather
 than re-deriving the coverage expression, per this module's own stated
 convention; it visibly interpolates between first order (low pressure)
 and zero order (saturated surface) in :math:`P_A`.
-:func:`~chemistrykit.surface.systems.langmuir_hinshelwood.lh_rate_dual_site`
+:func:`~chemistrykit.surface.lh_rate_dual_site`
 implements the competitive two-reactant case,
 :math:`\text{rate}=k\theta_A\theta_B` with each :math:`\theta` reduced by
 the *other* species' occupancy of the shared site pool, and reproduces
@@ -331,7 +331,7 @@ mechanistic detail of a real, non-uniform catalytic surface to a directly
 measurable kinetic regularity.
 
 *Connection:*
-:func:`chemistrykit.surface.systems.catalysis.compare_catalyzed_rate`
+:func:`~chemistrykit.surface.compare_catalyzed_rate`
 takes the two Arrhenius parameters for the catalyzed and uncatalyzed
 pathways as independent inputs -- `A_catalyzed` defaults to
 `A_uncatalyzed` only as a simplifying assumption the function's own
@@ -385,7 +385,7 @@ Broensted-Evans-Polanyi module -- both require geometric and
 electronic-structure detail well beyond
 :mod:`chemistrykit.surface`'s scope -- but the qualitative volcano
 *shape* itself is reproduced directly from
-:func:`chemistrykit.surface.systems.langmuir.langmuir_coverage`: modeling
+:func:`~chemistrykit.surface.langmuir_coverage`: modeling
 a two-step surface mechanism whose rate needs both an occupied site (to
 hold the reacting intermediate) and an empty site (for the next step)
 gives a toy rate :math:`\propto\theta(1-\theta)`, maximized exactly at
@@ -431,15 +431,15 @@ technique across catalysis and materials science, and remains so today
 -- most modern commercial surface-area analyzers still report a "BET
 surface area" as their headline number.
 
-*Implementation:* :func:`chemistrykit.surface.systems.bet.bet_loading`
+*Implementation:* :func:`~chemistrykit.surface.bet_loading`
 and :class:`~chemistrykit.surface.systems.bet.BETIsotherm` implement
 exactly this multilayer isotherm;
-:func:`~chemistrykit.surface.systems.bet.fit_bet` recovers
+:func:`~chemistrykit.surface.fit_bet` recovers
 :math:`(V_m, C)` from data via the standard linearization,
 :math:`x/[V(1-x)] = 1/(V_mC) + [(C-1)/(V_mC)]x`. As the module docstring
-for :mod:`chemistrykit.surface.systems.bet` notes and
-:mod:`chemistrykit.surface.tests.test_bet` verifies numerically, BET
-reduces exactly to :func:`chemistrykit.surface.systems.langmuir.langmuir_coverage`
+for ``chemistrykit.surface.systems.bet`` notes and
+``chemistrykit.surface.tests.test_bet`` verifies numerically, BET
+reduces exactly to :func:`~chemistrykit.surface.langmuir_coverage`
 in the limit :math:`P_0\to\infty` at fixed :math:`K=C/P_0` -- the limit in
 which the vapor never approaches saturation, so multilayer condensation
 never has a chance to set in and only the monolayer term survives,
@@ -475,10 +475,10 @@ actually *counting* active sites accurately enough to compute it with
 confidence.
 
 *Implementation:*
-:func:`chemistrykit.surface.systems.catalysis.turnover_frequency`
+:func:`~chemistrykit.surface.turnover_frequency`
 implements exactly this per-site rate,
 :math:`\text{TOF}=\text{rate}/[\text{active sites}]`, while
-:func:`~chemistrykit.surface.systems.catalysis.turnover_number` implements
+:func:`~chemistrykit.surface.turnover_number` implements
 the complementary, dimensionless *durability* measure -- total catalytic
 cycles performed per site over the lifetime of a reaction, rather than
 an instantaneous rate -- returned together with the underlying

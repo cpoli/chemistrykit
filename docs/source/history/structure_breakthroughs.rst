@@ -52,10 +52,10 @@ research distasteful -- a reaction the tetrahedral-carbon model
 outlived by well over a century.
 
 *Implementation:*
-:func:`chemistrykit.structure.systems.vsepr.domain_positions` generates
+:func:`~chemistrykit.structure.domain_positions` generates
 exactly this tetrahedral vertex arrangement for a steric number of 4 (the
 same construction used for methane in
-:func:`~chemistrykit.structure.systems.vsepr.build_vsepr_molecule`), with
+:func:`~chemistrykit.structure.build_vsepr_molecule`), with
 every pair of vertices subtending the exact tetrahedral angle,
 109.4712 degrees; building a tetrahedral center with four genuinely
 different substituents on top of those same coordinates and testing
@@ -94,11 +94,11 @@ motif rather than an infinite periodic lattice -- that became, and
 remains, the universal notation for molecular symmetry in chemistry.
 
 *Implementation:* every point group
-:func:`chemistrykit.structure.systems.point_group.determine_point_group`
+:func:`~chemistrykit.structure.determine_point_group`
 returns -- ``"C2v"``, ``"Td"``, ``"D_inf_h"``, and so on -- is spelled in
 exactly Schoenflies's own notation, and
 :class:`~chemistrykit.structure.systems.point_group.PointGroupCharacterTable`
-together with :data:`~chemistrykit.structure.systems.point_group.CHARACTER_TABLES`
+together with ``CHARACTER_TABLES``
 tabulate the standard character tables under that same naming scheme.
 
 *References:* A. Schoenflies, *Krystallsysteme und Krystallstructur*
@@ -132,14 +132,14 @@ domain arrangement VSEPR theory (see 1940-1970, below) later predicted
 from first principles for any steric-number-6 center, transition metal
 or main-group alike.
 
-*Connection:* :func:`chemistrykit.structure.systems.vsepr.domain_positions`
+*Connection:* :func:`~chemistrykit.structure.domain_positions`
 with ``steric_number=6`` generates precisely Werner's proposed
 octahedral vertex arrangement, and
-:func:`chemistrykit.structure.systems.point_group.determine_point_group`
+:func:`~chemistrykit.structure.determine_point_group`
 classifies a regular six-coordinate structure built on those vertices as
 :math:`O_h` -- recovering, by direct geometric symmetry testing rather
 than isomer-counting, the same octahedral picture Werner had to infer
-indirectly; :mod:`chemistrykit.structure.systems.point_group`'s recently
+indirectly; ``chemistrykit.structure.systems.point_group``'s recently
 fixed handling of the four body-diagonal :math:`C_3` axes an
 :math:`O_h` structure requires (see the module's candidate-axis
 docstring) is exactly what makes that classification correct for a
@@ -176,9 +176,9 @@ charge on each atom to what the free, neutral atom would have.
 :class:`chemistrykit.structure.systems.lewis.LewisStructure` represents
 exactly this dot-and-line bookkeeping -- element symbols, bond orders,
 and lone-pair counts -- and its
-:meth:`~chemistrykit.structure.systems.lewis.LewisStructure.formal_charges`
+:meth:`~chemistrykit.structure.LewisStructure.formal_charges`
 computes the formula above directly;
-:meth:`~chemistrykit.structure.systems.lewis.LewisStructure.total_formal_charge`
+:meth:`~chemistrykit.structure.LewisStructure.total_formal_charge`
 implements the standard self-consistency check that a valid Lewis
 structure's formal charges must sum to the molecule's actual net charge.
 
@@ -213,12 +213,12 @@ to more), and compare the resulting electron count to the free atom's.
    OS = V - \left(2N + \sum_{\text{bonds at this atom}} w\cdot(\text{bond order}\times2)\right)
 
 *Implementation:*
-:meth:`chemistrykit.structure.systems.lewis.LewisStructure.oxidation_states`
+:meth:`~chemistrykit.structure.LewisStructure.oxidation_states`
 implements exactly this fully-ionic-limit bookkeeping, using Pauling-scale
-electronegativities from :func:`chemistrykit.periodic_table.electronegativity`
+electronegativities from ``chemistrykit.periodic_table.electronegativity()``
 to decide, bond by bond, which atom is assigned the shared electrons --
 the direct computational counterpart of
-:meth:`~chemistrykit.structure.systems.lewis.LewisStructure.formal_charges`'s
+:meth:`~chemistrykit.structure.LewisStructure.formal_charges`'s
 evenly-split, Lewis-style convention on the very same
 :class:`~chemistrykit.structure.systems.lewis.LewisStructure`.
 
@@ -254,7 +254,7 @@ result of crystal-field theory, and still the first thing taught in any
 treatment of transition-metal complex color and magnetism.
 
 *Implementation:*
-:func:`chemistrykit.structure.systems.point_group.get_character_table`
+:func:`~chemistrykit.structure.get_character_table`
 returns exactly the :math:`O_h` character table Bethe's analysis is built
 on, with :class:`~chemistrykit.structure.systems.point_group.PointGroupCharacterTable`'s
 ``Eg``/``T2g`` irreps (and their tabulated dimensions, 2 and 3
@@ -292,9 +292,9 @@ practicing chemists. Pauling was awarded the 1954 Nobel Prize in
 Chemistry for this body of work.
 
 *Implementation:*
-:func:`chemistrykit.periodic_table.electronegativity` tabulates exactly
+``chemistrykit.periodic_table.electronegativity()`` tabulates exactly
 the Pauling scale values this paper introduced, and
-:meth:`chemistrykit.structure.systems.lewis.LewisStructure.oxidation_states`
+:meth:`~chemistrykit.structure.LewisStructure.oxidation_states`
 (see 1916, above) uses them directly to decide, bond by bond, which atom
 is the more electronegative partner -- the same electronegativity
 comparison Pauling's own ionic-character argument is built on.
@@ -332,7 +332,7 @@ demonstrations that aromatic delocalization is real rather than a mere
 notational convenience.
 
 *Implementation:*
-:func:`chemistrykit.structure.systems.bonding.coulson_pi_bond_order`
+:func:`~chemistrykit.structure.coulson_pi_bond_order`
 implements exactly this formula, computed directly from
 :class:`chemistrykit.quantum.systems.huckel.HuckelSystem`'s molecular-
 orbital coefficients -- reusing :mod:`chemistrykit.quantum`'s existing
@@ -371,16 +371,16 @@ produce the full catalogue of real molecular shapes (bent, trigonal
 pyramidal, seesaw, T-shaped, square pyramidal, square planar, and more).
 
 *Implementation:*
-:func:`chemistrykit.structure.systems.vsepr.domain_positions` generates
+:func:`~chemistrykit.structure.domain_positions` generates
 the five idealized polyhedra's genuine 3D vertex coordinates directly
 from their defining symmetry (not a shape-name lookup table), and
 :class:`~chemistrykit.structure.systems.vsepr.VSEPRGeometry` together with
-:func:`~chemistrykit.structure.systems.vsepr.build_vsepr_molecule`
+:func:`~chemistrykit.structure.build_vsepr_molecule`
 implement Gillespie and Nyholm's lone-pair-placement rule -- lone pairs
 preferentially occupy the least sterically crowded available positions --
 reproducing water's bent AX2E2 shape, sulfur tetrafluoride's seesaw
 AX4E1 shape, and xenon tetrafluoride's square-planar AX4E2 shape exactly
-this way, with :data:`~chemistrykit.structure.systems.vsepr.AXE_SHAPE_NAMES`
+this way, with ``AXE_SHAPE_NAMES``
 tabulating Gillespie's own AXE nomenclature for each combination.
 
 *References:* N. V. Sidgwick and H. M. Powell, "Bakerian Lecture.
@@ -416,11 +416,11 @@ picture Coulson's molecular-orbital theory (see 1939, above) reaches from
 the electronic structure side rather than the geometric one.
 
 *Implementation:*
-:func:`chemistrykit.structure.systems.bonding.bond_order_from_length` and
+:func:`~chemistrykit.structure.bond_order_from_length` and
 its exact inverse
-:func:`~chemistrykit.structure.systems.bonding.bond_length_from_order`
+:func:`~chemistrykit.structure.bond_length_from_order`
 implement exactly this formula, with
-:data:`~chemistrykit.structure.systems.bonding.PAULING_C_C_CONSTANT`
+``PAULING_C_C_CONSTANT``
 Pauling's own carbon-carbon correlation constant (flagged explicitly in
 the module as needing re-fitting for any other bond type, which this
 module does not tabulate).
@@ -453,10 +453,10 @@ this notational standardization was a comparatively small, but
 enduringly practical, contribution.
 
 *Implementation:* every irreducible-representation label in
-:data:`chemistrykit.structure.systems.point_group.CHARACTER_TABLES` --
+``chemistrykit.structure.systems.point_group.CHARACTER_TABLES`` --
 ``"A1"``, ``"B2"``, ``"Eg"``, ``"T2u"``, and so on, for every point group
 this package tabulates -- is spelled in exactly Mulliken's notation, and
-:meth:`chemistrykit.structure.systems.point_group.PointGroupCharacterTable.character`
+:meth:`~chemistrykit.structure.PointGroupCharacterTable.character`
 looks up a specific character by exactly these labels.
 
 *References:* R. S. Mulliken, "Report on Notation for the Spectra of
@@ -487,7 +487,7 @@ three-center-four-electron bonds, or otherwise -- turned out to be
 correct: it predicts a hypervalent center's geometry correctly regardless
 of the underlying electronic mechanism, simply by counting domains.
 
-*Connection:* :func:`chemistrykit.structure.systems.vsepr.domain_positions`
+*Connection:* :func:`~chemistrykit.structure.domain_positions`
 generates the five- and six-domain polyhedra (trigonal bipyramidal,
 octahedral) that every hypervalent AX5/AX6-type molecule this package's
 own gallery builds -- sulfur tetrafluoride, xenon tetrafluoride, sulfur

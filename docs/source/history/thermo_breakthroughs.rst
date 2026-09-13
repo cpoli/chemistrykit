@@ -51,10 +51,10 @@ fugacity framework explained why both idealizations, despite disagreeing
 everywhere in between, are each exactly right at their own end of the
 composition range.
 
-*Implementation:* :func:`chemistrykit.thermo.systems.mixtures.henry_law_pressure`
+*Implementation:* :func:`~chemistrykit.thermo.henry_law_pressure`
 implements exactly this proportionality; the example below builds an
 illustrative real (non-ideal) partial-pressure curve, using
-:func:`~chemistrykit.thermo.systems.mixtures.raoult_vapor_pressure` for
+:func:`~chemistrykit.thermo.raoult_vapor_pressure` for
 the other limit, and shows it hugging the Henry's-law line at the dilute
 end and the Raoult's-law line at the nearly-pure end of the same
 composition range.
@@ -103,10 +103,10 @@ implements Clapeyron's combined gas law directly (its ``molar_volume``
 recovers the textbook 22.4 L/mol at standard temperature and pressure
 exactly); :class:`chemistrykit.thermo.systems.phase_equilibria.ClausiusClapeyron`
 implements the integrated Clausius-Clapeyron vapor-pressure equation, with
-:meth:`~chemistrykit.thermo.systems.phase_equilibria.ClausiusClapeyron.boiling_point`
+:meth:`~chemistrykit.thermo.ClausiusClapeyron.boiling_point`
 inverting it to find the temperature at which a liquid boils under any
 given pressure, and
-:meth:`~chemistrykit.thermo.systems.phase_equilibria.ClausiusClapeyron.from_two_points`
+:meth:`~chemistrykit.thermo.ClausiusClapeyron.from_two_points`
 extracting an unknown enthalpy of vaporization from two measured
 points on the boundary.
 
@@ -144,18 +144,18 @@ stoichiometric coefficient, equals a constant, the equilibrium constant
 
    Q = \prod_i a_i^{\nu_i} \overset{\text{equilibrium}}{=} K
 
-*Implementation:* :func:`chemistrykit.thermo.systems.equilibrium.reaction_quotient`
+*Implementation:* :func:`~chemistrykit.thermo.reaction_quotient`
 computes exactly this product directly from a set of activities and
-signed stoichiometric coefficients; :func:`~chemistrykit.thermo.systems.equilibrium.kp_from_kc`
-and :func:`~chemistrykit.thermo.systems.equilibrium.kc_from_kp` convert
+signed stoichiometric coefficients; :func:`~chemistrykit.thermo.kp_from_kc`
+and :func:`~chemistrykit.thermo.kc_from_kp` convert
 between the pressure- and concentration-based forms of the same
 equilibrium constant. The Gibbs-energy-minimization approach implemented
-by :func:`~chemistrykit.thermo.systems.equilibrium.solve_equilibrium_composition`
+by :func:`~chemistrykit.thermo.solve_equilibrium_composition`
 (see 1876, below) is the modern generalization of the same equilibrium
 condition -- at its minimum, :math:`dG/d\xi_j = \sum_i \nu_{ij}\mu_i = 0`
 for every reaction `j`, which is exactly :math:`Q_j = K_j` reached by a
 different numerical route -- and the example below verifies this equality
-directly, confirming that :func:`reaction_quotient`, evaluated at the
+directly, confirming that :func:`~chemistrykit.thermo.reaction_quotient`, evaluated at the
 solver's own converged equilibrium composition, reproduces the target
 equilibrium constant.
 
@@ -199,8 +199,8 @@ for this equation.
 
 *Implementation:* :class:`chemistrykit.thermo.systems.equations_of_state.VanDerWaals`
 implements exactly this equation of state, solving its cubic for
-:math:`V_m` via :func:`chemistrykit.thermo.utils.cubic_roots.real_positive_roots`;
-:meth:`~chemistrykit.thermo.systems.equations_of_state.VanDerWaals.from_critical_constants`
+:math:`V_m` via ``chemistrykit.thermo.utils.cubic_roots.real_positive_roots()``;
+:meth:`~chemistrykit.thermo.VanDerWaals.from_critical_constants`
 builds an instance directly from a substance's measured critical
 temperature and pressure, and the resulting universal critical
 compressibility factor :math:`Z_c = P_c V_c/(RT_c) = 3/8` -- independent
@@ -247,12 +247,12 @@ they were independently working out had already been solved, more
 generally, by an American mathematical physicist working in relative
 isolation at Yale.
 
-*Implementation:* :func:`chemistrykit.thermo.systems.phase_equilibria.gibbs_phase_rule`
+*Implementation:* :func:`~chemistrykit.thermo.gibbs_phase_rule`
 implements the phase rule directly; the ideal-gas chemical potential
 :math:`\mu_i = \Delta G_{f,i}^\circ + RT\ln(x_i P/P^\circ)` used by
-:func:`chemistrykit.thermo.systems.equilibrium.gibbs_energy_of_mixture`
+:func:`~chemistrykit.thermo.gibbs_energy_of_mixture`
 and minimized by
-:func:`~chemistrykit.thermo.systems.equilibrium.solve_equilibrium_composition`
+:func:`~chemistrykit.thermo.solve_equilibrium_composition`
 is exactly Gibbs's chemical-potential framework, applied here to solve
 for a reacting mixture's equilibrium composition by direct free-energy
 minimization rather than by solving :math:`Q=K` algebraically -- the
@@ -286,13 +286,13 @@ established -- a stable equilibrium sits at a genuine minimum of the free
 energy, and a minimum, by definition, pushes back against any small
 displacement away from it.
 
-*Implementation:* :func:`chemistrykit.thermo.systems.equilibrium.van_t_hoff_equilibrium_constant`
+*Implementation:* :func:`~chemistrykit.thermo.van_t_hoff_equilibrium_constant`
 demonstrates exactly Le Chatelier's temperature prediction: for an
 endothermic reaction (positive :math:`\Delta H^\circ`), the equilibrium
 constant provably increases as temperature rises, in the direction that
 partially absorbs the added heat, and its docstring example verifies
 this monotonic increase directly; the equilibrium-composition solver
-:func:`~chemistrykit.thermo.systems.equilibrium.solve_equilibrium_composition`
+:func:`~chemistrykit.thermo.solve_equilibrium_composition`
 demonstrates the same qualitative shift-toward-relief behavior for
 arbitrary reacting mixtures, since it is, by construction, always
 sitting at the free-energy minimum Le Chatelier's principle describes
@@ -333,14 +333,14 @@ Chemistry in 1901, "in recognition of the extraordinary services he has
 rendered by the discovery of the laws of chemical dynamics and osmotic
 pressure in solutions."
 
-*Implementation:* :func:`chemistrykit.thermo.systems.mixtures.osmotic_pressure`
+*Implementation:* :func:`~chemistrykit.thermo.osmotic_pressure`
 implements exactly this equation, and
-:func:`~chemistrykit.thermo.systems.mixtures.freezing_point_depression`
-and :func:`~chemistrykit.thermo.systems.mixtures.boiling_point_elevation`
+:func:`~chemistrykit.thermo.freezing_point_depression`
+and :func:`~chemistrykit.thermo.boiling_point_elevation`
 implement the closely related colligative-property laws
 :math:`\Delta T = iKb` sharing the same van't Hoff factor `i` convention,
 using the tabulated solvent constants in
-:data:`~chemistrykit.thermo.systems.mixtures.CRYOSCOPIC_CONSTANTS`; the
+``CRYOSCOPIC_CONSTANTS``; the
 example below computes all three colligative properties for an aqueous
 NaCl solution with :math:`i=2`.
 
@@ -380,12 +380,12 @@ generally deviate from it except in the dilute-solvent limit, exactly the
 composition regime in which Henry's law (1803, above) takes over
 describing the *solute* instead.
 
-*Implementation:* :func:`chemistrykit.thermo.systems.mixtures.raoult_vapor_pressure`
+*Implementation:* :func:`~chemistrykit.thermo.raoult_vapor_pressure`
 implements this proportionality directly, and
 :class:`~chemistrykit.thermo.systems.mixtures.BinaryIdealSolution`
 combines it with Dalton's law for both components of a binary mixture,
-via :meth:`~chemistrykit.thermo.systems.mixtures.BinaryIdealSolution.total_pressure`
-and :meth:`~chemistrykit.thermo.systems.mixtures.BinaryIdealSolution.vapor_composition`,
+via :meth:`~chemistrykit.thermo.BinaryIdealSolution.total_pressure`
+and :meth:`~chemistrykit.thermo.BinaryIdealSolution.vapor_composition`,
 to produce the full P-x-y vapor-liquid-equilibrium picture the example
 below plots for an idealized benzene/toluene mixture.
 
@@ -421,8 +421,8 @@ plug into an equilibrium calculation at all.
 *Connection:* chemistrykit.thermo has no standalone third-law or
 absolute-entropy calculation, but the standard Gibbs energies of
 formation (``gibbs_formation``) that
-:func:`chemistrykit.thermo.systems.equilibrium.gibbs_energy_of_mixture`
-and :func:`~chemistrykit.thermo.systems.equilibrium.solve_equilibrium_composition`
+:func:`~chemistrykit.thermo.gibbs_energy_of_mixture`
+and :func:`~chemistrykit.thermo.solve_equilibrium_composition`
 take as input are exactly the kind of absolute thermodynamic reference
 quantity the third law makes well defined in the first place -- without
 Nernst's and Planck's fixed entropy zero-point, "the" Gibbs energy of
@@ -464,8 +464,8 @@ gas mixtures.
 
 *Implementation:* :class:`chemistrykit.thermo.systems.equations_of_state.RedlichKwong`
 implements exactly this equation of state, again solving its cubic in
-:math:`V_m` via :func:`chemistrykit.thermo.utils.cubic_roots.real_positive_roots`;
-:meth:`~chemistrykit.thermo.systems.equations_of_state.RedlichKwong.from_critical_constants`
+:math:`V_m` via ``chemistrykit.thermo.utils.cubic_roots.real_positive_roots()``;
+:meth:`~chemistrykit.thermo.RedlichKwong.from_critical_constants`
 builds an instance from a substance's critical constants and reproduces
 Redlich-Kwong's own universal critical compressibility factor
 :math:`Z_c = 1/3` -- a different, and for most real gases somewhat more

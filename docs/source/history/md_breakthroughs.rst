@@ -43,11 +43,11 @@ legitimate way to extract equilibrium thermodynamic quantities from
 molecular dynamics at all.
 
 *Connection:*
-:meth:`chemistrykit.md.systems.lj_fluid.LJFluid.from_lattice` initializes
+:meth:`~chemistrykit.md.LJFluid.from_lattice` initializes
 particle velocities by drawing each Cartesian component independently
 from a Gaussian of variance :math:`k_BT/m` -- exactly Maxwell's velocity
 distribution -- and
-:func:`chemistrykit.md.visualizers.md_plots.plot_speed_distribution`
+``chemistrykit.md.visualizers.md_plots.plot_speed_distribution()``
 checks the distribution of speeds that actually emerges from a *running*
 simulated trajectory against the analytic Maxwell-Boltzmann prediction
 with no fitting involved: a direct demonstration of the ergodic
@@ -86,7 +86,7 @@ century since.
 *Implementation:*
 :class:`chemistrykit.md.systems.lj_fluid.LennardJones` implements exactly
 this two-term potential, with
-:attr:`~chemistrykit.md.systems.lj_fluid.LennardJones.r_min` giving the
+:attr:`~chemistrykit.md.LennardJones.r_min` giving the
 exact potential-minimum separation; :class:`~chemistrykit.md.systems.lj_fluid.LJFluid`
 builds an entire many-body fluid out of nothing but pairwise sums of this
 one interaction, evaluated over a periodically rebuilt neighbor list (see
@@ -123,7 +123,7 @@ and diverging increasingly far from it away from equilibrium.
 
 *Implementation:* :class:`chemistrykit.md.systems.pair_potentials.Morse`
 implements exactly this potential, and its
-:meth:`~chemistrykit.md.systems.pair_potentials.Morse.from_force_constant`
+:meth:`~chemistrykit.md.Morse.from_force_constant`
 constructor builds one whose curvature at equilibrium matches a given
 :class:`~chemistrykit.md.systems.pair_potentials.HarmonicBond` exactly, so
 the two can be compared directly as
@@ -194,14 +194,14 @@ matter, like a small patch cut out of an effectively infinite bulk fluid
 rather than a finite droplet dominated by its own surface.
 
 *Implementation:*
-:func:`chemistrykit.md.utils.pbc.wrap_positions` and
-:func:`~chemistrykit.md.utils.pbc.minimum_image_displacement` implement
+:func:`~chemistrykit.md.wrap_positions` and
+:func:`~chemistrykit.md.minimum_image_displacement` implement
 exactly these two pieces of the scheme, and every periodic
 :class:`chemistrykit.md.systems.lj_fluid.LJFluid` simulation in this
 package depends on both: positions are wrapped back into the primary cell
 after every step, and every pairwise force and radial-distribution-function
 calculation is evaluated under the minimum-image convention via
-:func:`chemistrykit.md.utils.neighbor_list.build_neighbor_list`.
+:func:`~chemistrykit.md.build_neighbor_list`.
 
 *References:* N. Metropolis, A. W. Rosenbluth, M. N. Rosenbluth, A. H.
 Teller, and E. Teller, "Equation of State Calculations by Fast Computing
@@ -273,9 +273,9 @@ predictive tool for real materials rather than a purely idealized-model
 exercise.
 
 *Implementation:*
-:meth:`chemistrykit.md.systems.lj_fluid.LJFluid.from_lattice`, run at
+:meth:`~chemistrykit.md.LJFluid.from_lattice`, run at
 liquid-argon-like reduced density and temperature, together with
-:meth:`~chemistrykit.md.systems.lj_fluid.LJFluid.radial_distribution_function`,
+:meth:`~chemistrykit.md.LJFluid.radial_distribution_function`,
 reproduce exactly the kind of calculation -- a Lennard-Jones model
 liquid's structure, computed from an integrated trajectory rather than
 assumed -- that Rahman's paper pioneered; the energy-conservation check
@@ -323,16 +323,16 @@ algorithm, differing only in which auxiliary quantities are stored
 between steps.
 
 *Implementation:*
-:meth:`chemistrykit.md.core.base_system.MolecularDynamicsSystem.step`
+:meth:`~chemistrykit.md.MolecularDynamicsSystem.step`
 advances every system in this subpackage using
-:func:`chemistrykit.integrators.velocity_verlet_step` -- an alias, as
-:mod:`chemistrykit.integrators`'s own module docstring notes, for the
+``chemistrykit.integrators.velocity_verlet_step()`` -- an alias, as
+``chemistrykit.integrators``'s own module docstring notes, for the
 same kick-drift-kick leapfrog scheme, in the velocity-Verlet bookkeeping
 of Swope et al. (1982) -- and
 :class:`chemistrykit.md.utils.neighbor_list.VerletNeighborList` implements
 Verlet's own skin-list optimization directly, rebuilding only every
 ``rebuild_every`` calls rather than at every step.
-:meth:`chemistrykit.md.systems.lj_fluid.LJFluid.radial_distribution_function`
+:meth:`~chemistrykit.md.LJFluid.radial_distribution_function`
 computes the same g(r) diagnostic Verlet used to characterize the
 Lennard-Jones fluid's structure.
 
@@ -371,7 +371,7 @@ approximation, a hard-sphere-like packing problem.
 *Implementation:* setting
 :class:`chemistrykit.md.systems.lj_fluid.LJFluid`'s ``cutoff`` parameter
 to exactly
-:attr:`chemistrykit.md.systems.lj_fluid.LennardJones.r_min` (:math:`=
+:attr:`~chemistrykit.md.LennardJones.r_min` (:math:`=
 2^{1/6}\sigma`) reproduces precisely the WCA purely repulsive reference
 potential -- the Lennard-Jones force is repulsive at every separation up
 to its own minimum, so truncating there removes the attractive tail

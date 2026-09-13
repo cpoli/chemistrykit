@@ -52,17 +52,17 @@ order might look like at the atomic scale.
 "integrant molecule" mechanism, is exactly the modern idea that a crystal
 reduces to a lattice classified by the equalities and inequalities among
 six parameters -- what
-:func:`chemistrykit.crystal.systems.crystal_systems.classify_crystal_system`
+:func:`~chemistrykit.crystal.classify_crystal_system`
 computes directly, sorting a unit cell into one of the 7 crystal systems
 purely from :math:`(a,b,c,\alpha,\beta,\gamma)`, with
-:func:`~chemistrykit.crystal.systems.crystal_systems.unit_cell_volume`
+:func:`~chemistrykit.crystal.unit_cell_volume`
 giving the corresponding general cell-volume formula. Hauy's rational-
 index law itself survives essentially unchanged in modern notation as the
 integer Miller indices :math:`(h,k,l)` (formalized by Whewell and Miller a
 few decades later) that index every reflection and atomic-plane spacing
-throughout :mod:`chemistrykit.crystal.systems.xrd` -- the `hkl` argument
-of :func:`~chemistrykit.crystal.systems.xrd.structure_factor` and
-:func:`~chemistrykit.crystal.systems.xrd.d_spacing_cubic` is, in substance,
+throughout ``chemistrykit.crystal.systems.xrd`` -- the `hkl` argument
+of :func:`~chemistrykit.crystal.structure_factor` and
+:func:`~chemistrykit.crystal.d_spacing_cubic` is, in substance,
 Hauy's own rational triple of intercepts.
 
 *References:* R. J. Hauy, *Essai d'une théorie sur la structure des
@@ -90,7 +90,7 @@ underneath every space group and every concrete lattice model in this
 package.
 
 *Implementation:* three of the four hard-sphere lattices in
-:mod:`chemistrykit.crystal.systems.packing` --
+``chemistrykit.crystal.systems.packing`` --
 :class:`~chemistrykit.crystal.systems.packing.SimpleCubicPacking`,
 :class:`~chemistrykit.crystal.systems.packing.BodyCenteredCubicPacking`,
 and :class:`~chemistrykit.crystal.systems.packing.FaceCenteredCubicPacking`
@@ -105,7 +105,7 @@ hexagonal Bravais lattice, which is why its coordination number (12)
 matches FCC's close packing even though the underlying lattice is
 different in kind, not just in centering. The same three cubic Bravais
 lattices reappear as the conventional-cell bases (`_CUBIC_BASES`) that
-:func:`chemistrykit.crystal.systems.xrd.powder_xrd_peaks` sums over below.
+:func:`~chemistrykit.crystal.powder_xrd_peaks` sums over below.
 
 *References:* A. Bravais, "Mémoire sur les systèmes formés par des points
 distribués régulièrement sur un plan ou dans l'espace," J. Ecole
@@ -142,12 +142,12 @@ terms of the scattered-wave momentum transfer matching a reciprocal-
 lattice vector, a transmission-geometry formulation this package does not
 implement directly; instead, following the Braggs' equivalent and more
 widely used reflection-geometry recasting below,
-:func:`chemistrykit.crystal.systems.xrd.structure_factor` computes exactly
+:func:`~chemistrykit.crystal.structure_factor` computes exactly
 the kinematic amplitude
 :math:`F_{hkl}=\sum_j f_j\exp[2\pi i(hx_j+ky_j+lz_j)]` whose squared
 modulus is what a real diffraction experiment -- Laue's transmission
 photograph or a modern powder pattern alike -- actually measures, with
-:func:`~chemistrykit.crystal.systems.xrd.powder_xrd_peaks` assembling full
+:func:`~chemistrykit.crystal.powder_xrd_peaks` assembling full
 simulated patterns from it.
 
 *References:* W. Friedrich, P. Knipping, and M. Laue, "Interferenz-
@@ -183,12 +183,12 @@ for the work, the only father-son pair to share a Nobel Prize in the same
 field to date, with W. L. Bragg -- 25 at the time of the award -- still
 the youngest Nobel laureate in the sciences.
 
-*Implementation:* :func:`chemistrykit.crystal.systems.xrd.bragg_angle`
+*Implementation:* :func:`~chemistrykit.crystal.bragg_angle`
 solves exactly the equation above for :math:`\theta`, given a `d`-spacing
-and wavelength; :func:`~chemistrykit.crystal.systems.xrd.d_spacing_cubic`
+and wavelength; :func:`~chemistrykit.crystal.d_spacing_cubic`
 supplies `d` for a cubic lattice's :math:`(hkl)` planes, and
-:func:`~chemistrykit.crystal.systems.xrd.powder_xrd_peaks` combines both
-with :func:`~chemistrykit.crystal.systems.xrd.structure_factor` -- dropping
+:func:`~chemistrykit.crystal.powder_xrd_peaks` combines both
+with :func:`~chemistrykit.crystal.structure_factor` -- dropping
 reflections with zero structure factor (systematic absences, the modern
 tool the Braggs lacked but which falls directly out of the same theory) --
 to enumerate an entire simulated powder pattern exactly the way the
@@ -227,9 +227,9 @@ and a single empirically fitted repulsion exponent.
 
 *Implementation:* :class:`chemistrykit.crystal.systems.lattice_energy.BornLandeLatticeEnergy`
 evaluates exactly this equation;
-:data:`chemistrykit.crystal.utils.reference_data.BORN_EXPONENTS` reproduces
+``chemistrykit.crystal.utils.reference_data.BORN_EXPONENTS`` reproduces
 Born and Lande's own noble-gas-configuration exponent table, and
-:func:`~chemistrykit.crystal.utils.reference_data.average_born_exponent`
+``average_born_exponent()``
 implements the standard prescription (arithmetic mean of the two ions'
 exponents) for a salt of two different ion types.
 
@@ -258,11 +258,11 @@ paper does not resolve -- and what would remain a subtlety for over a
 decade -- is that the defining lattice sum is only *conditionally*
 convergent, a complication taken up by Evjen below.
 
-*Implementation:* :func:`chemistrykit.crystal.systems.madelung.madelung_constant_nacl`
+*Implementation:* :func:`~chemistrykit.crystal.madelung_constant_nacl`
 computes exactly this NaCl Madelung constant (via the genuinely convergent
 Evjen-method summation described in the next entry, rather than the naive
 sum Madelung's own paper does not distinguish from the correct one), and
-:data:`~chemistrykit.crystal.systems.madelung.MADELUNG_CONSTANT_NACL_LITERATURE`
+``MADELUNG_CONSTANT_NACL_LITERATURE``
 records the accepted literature value it reproduces to 5 significant
 figures; :class:`chemistrykit.crystal.systems.lattice_energy.BornLandeLatticeEnergy`
 consumes it directly as the `madelung_constant` feeding Born and Lande's
@@ -295,7 +295,7 @@ defect, was the first of the two canonical point-defect mechanisms in
 ionic solids to be identified; the second, the Schottky defect, followed
 four years later.
 
-*Implementation:* :func:`chemistrykit.crystal.systems.defects.frenkel_defect_concentration`
+*Implementation:* :func:`~chemistrykit.crystal.frenkel_defect_concentration`
 implements exactly the resulting Boltzmann-factor equilibrium population,
 :math:`n_F=\sqrt{NN_i}\exp(-\Delta H_F/2k_BT)`, with `N` the number of
 normal lattice sites and :math:`N_i` the number of available interstitial
@@ -325,10 +325,10 @@ conductivity in real crystals are controlled by exactly this kind of
 point-defect population, rather than being simply the failure of an
 otherwise-perfect lattice.
 
-*Implementation:* :func:`chemistrykit.crystal.systems.defects.schottky_defect_concentration`
+*Implementation:* :func:`~chemistrykit.crystal.schottky_defect_concentration`
 implements the corresponding Boltzmann-factor equilibrium population,
 :math:`n_S=N\exp(-\Delta H_S/2k_BT)`, and
-:func:`chemistrykit.crystal.visualizers.crystal_plots.plot_defect_concentration_vs_temperature`
+``chemistrykit.crystal.visualizers.crystal_plots.plot_defect_concentration_vs_temperature()``
 plots it directly alongside the Frenkel population above, on the same
 semi-log temperature axis, making the shared Boltzmann-factor functional
 form -- and the very different magnitudes two different formation
@@ -358,7 +358,7 @@ restoring genuine, rapidly converging convergence to the correct
 conditionally-convergent limit. Evjen's method remains the standard
 textbook technique for evaluating Madelung constants by direct summation.
 
-*Implementation:* :func:`chemistrykit.crystal.utils.lattice_sums.evjen_lattice_sum_cubic_alternating`
+*Implementation:* ``chemistrykit.crystal.utils.lattice_sums.evjen_lattice_sum_cubic_alternating()``
 implements exactly this fractional-boundary-weighting scheme over a simple
 cubic lattice of alternating unit charges -- the object NaCl's Madelung
 sum reduces to once its two interpenetrating FCC sublattices are combined
@@ -367,7 +367,7 @@ runnable demonstration that a naive, unweighted truncated sum genuinely
 does oscillate (standard deviation over `n_shells` = 6..10 well above
 0.05) while the Evjen-weighted sum has already converged
 (standard deviation below :math:`10^{-4}`) over the same range;
-:func:`chemistrykit.crystal.systems.madelung.madelung_constant_nacl`
+:func:`~chemistrykit.crystal.madelung_constant_nacl`
 is the NaCl-specific wrapper that consumes it.
 
 *References:* H. M. Evjen, "On the Stability of Certain Heteropolar
@@ -429,7 +429,7 @@ radii throughout structural and solid-state chemistry, radius-ratio
 rules, and, as below, the Kapustinskii equation's radius-only lattice-
 energy estimates.
 
-*Implementation:* :data:`chemistrykit.crystal.utils.reference_data.SHANNON_IONIC_RADII_PM`
+*Implementation:* ``chemistrykit.crystal.utils.reference_data.SHANNON_IONIC_RADII_PM``
 tabulates Shannon's 6-coordinate (octahedral) effective ionic radii for
 the common main-group ions used in this domain's Kapustinskii-equation
 examples and tests -- consumed directly as the `r_cation_pm`/`r_anion_pm`

@@ -46,12 +46,12 @@ scatter around a straight line rather than falling exactly on one -- the
 single technique underneath essentially every calibration curve run in an
 analytical laboratory since.
 
-*Implementation:* :func:`chemistrykit.analytical.utils.regression.linear_fit`
+*Implementation:* ``chemistrykit.analytical.utils.regression.linear_fit()``
 performs exactly this ordinary-least-squares fit
 (``y = slope*x + intercept``), and additionally reports the residual
 standard error :math:`s_{y/x}` that a calibration curve's detection limits
 (below, 1983) are built from;
-:func:`chemistrykit.analytical.systems.calibration.fit_calibration` wraps
+:func:`~chemistrykit.analytical.fit_calibration` wraps
 it into a :class:`~chemistrykit.analytical.systems.calibration.LinearCalibration`
 usable directly for predicting concentration from a measured signal.
 
@@ -90,7 +90,7 @@ the standard large-equilibrium-constant approximation -- the analyte
 couple's potential before the equivalence volume, the titrant couple's
 potential after it, and the classical weighted-average result
 :math:`E_{eq}=(n_1E^\circ_1+n_2E^\circ_2)/(n_1+n_2)` exactly at
-equivalence -- with :meth:`~chemistrykit.analytical.core.base_system.TitrationCurve.find_equivalence_point`
+equivalence -- with :meth:`~chemistrykit.analytical.TitrationCurve.find_equivalence_point`
 (inherited from the shared
 :class:`~chemistrykit.analytical.core.base_system.TitrationCurve` base)
 locating the endpoint numerically, as the point of steepest potential
@@ -120,10 +120,10 @@ and extended into the dominant separation technique of modern analytical
 chemistry, beginning with Martin and Synge's work below.
 
 *Implementation:* Tsvet's column is the physical apparatus that every
-formula in :mod:`chemistrykit.analytical.systems.chromatography` is built
+formula in ``chemistrykit.analytical.systems.chromatography`` is built
 to quantify -- a mixture separating into discrete, differently-retained
 bands as it migrates through a stationary phase --
-:func:`chemistrykit.analytical.systems.chromatography.simulate_chromatogram`
+:func:`~chemistrykit.analytical.simulate_chromatogram`
 renders that outcome directly, as a sum of separately-retained Gaussian
 elution peaks on a simulated detector trace, the modern instrumental
 descendant of Tsvet's visually banded column.
@@ -158,11 +158,11 @@ retention time and width:
 Martin and Synge received the 1952 Nobel Prize in Chemistry for the
 development of partition chromatography.
 
-*Implementation:* :func:`chemistrykit.analytical.systems.chromatography.theoretical_plates`
+*Implementation:* :func:`~chemistrykit.analytical.theoretical_plates`
 implements exactly this formula (and its equivalent full-width-at-half-
 maximum form, :math:`N=5.545(t_R/w_{1/2})^2`, verified in its own
 docstring to agree with the base-width form for a Gaussian peak of
-consistent shape); :func:`~chemistrykit.analytical.systems.chromatography.plate_height`
+consistent shape); :func:`~chemistrykit.analytical.plate_height`
 converts a plate count into the column-length-per-plate `H` that the van
 Deemter equation below predicts directly.
 
@@ -229,9 +229,9 @@ critical-value table in 1991 using more accurate Monte Carlo methods, and
 it is Rorabacher's revised table, not the original Dean-Dixon values, that
 this package (and most modern textbooks) actually use.
 
-*Implementation:* :func:`chemistrykit.analytical.systems.qtest.dixon_q_test`
+*Implementation:* :func:`~chemistrykit.analytical.dixon_q_test`
 implements exactly this gap-over-range statistic and compares it against
-:data:`~chemistrykit.analytical.systems.qtest.Q_CRITICAL_TABLE`, which
+``Q_CRITICAL_TABLE``, which
 reproduces Rorabacher's revised (not the original Dean-Dixon) critical
 values for sample sizes 3-10 at 90%, 95%, and 99% confidence.
 
@@ -270,13 +270,13 @@ experiments confirm -- a single optimum flow velocity,
 van Deemter equation remains the standard framework for understanding and
 optimizing chromatographic column performance to this day.
 
-*Implementation:* :func:`chemistrykit.analytical.systems.chromatography.van_deemter_H`
+*Implementation:* :func:`~chemistrykit.analytical.van_deemter_H`
 implements exactly this equation;
-:func:`~chemistrykit.analytical.systems.chromatography.optimum_flow_velocity`
-and :func:`~chemistrykit.analytical.systems.chromatography.minimum_plate_height`
+:func:`~chemistrykit.analytical.optimum_flow_velocity`
+and :func:`~chemistrykit.analytical.minimum_plate_height`
 give the closed-form optimum velocity and minimum plate height from
 :math:`dH/du=0`, each verified in its own docstring against a direct
-numerical scan of :func:`van_deemter_H` itself.
+numerical scan of :func:`~chemistrykit.analytical.van_deemter_H` itself.
 
 *References:* J. J. van Deemter, F. J. Zuiderweg, and A. Klinkenberg,
 "Longitudinal Diffusion and Resistance to Mass Transfer as Causes of
@@ -301,7 +301,7 @@ the standard for gas chromatography within a generation.
 
 *Implementation:* an open-tubular column is not modeled as a separate
 class in this package, but is exactly the :math:`A=0` special case of the
-same :func:`chemistrykit.analytical.systems.chromatography.van_deemter_H`
+same :func:`~chemistrykit.analytical.van_deemter_H`
 already used for the general (packed-column) case above -- the identical
 equation, with one physically motivated term switched off, rather than a
 separate model requiring its own implementation.
@@ -334,12 +334,12 @@ approximation. Ku's paper, still cited in modern metrology guidance, is
 the standard citation for the propagation-of-uncertainty formula as
 practiced in analytical and physical chemistry laboratories today.
 
-*Implementation:* :func:`chemistrykit.analytical.systems.uncertainty.propagate_uncertainty`
+*Implementation:* :func:`~chemistrykit.analytical.propagate_uncertainty`
 evaluates the general formula above directly via numerical partial
 derivatives, for a function with no simple closed form;
-:func:`~chemistrykit.analytical.systems.uncertainty.propagate_sum`,
-:func:`~chemistrykit.analytical.systems.uncertainty.propagate_product`, and
-:func:`~chemistrykit.analytical.systems.uncertainty.propagate_power` give
+:func:`~chemistrykit.analytical.propagate_sum`,
+:func:`~chemistrykit.analytical.propagate_product`, and
+:func:`~chemistrykit.analytical.propagate_power` give
 the closed-form sum/product/power shortcuts of the same formula, each
 verified in this package's tests to agree with the general numerical
 form for the corresponding operation.
@@ -372,11 +372,11 @@ standard error. Their recommendation was adopted by IUPAC and remains the
 standard convention for reporting an analytical method's detection and
 quantitation limits today.
 
-*Implementation:* :meth:`chemistrykit.analytical.systems.calibration.LinearCalibration.lod`
-and :meth:`~chemistrykit.analytical.systems.calibration.LinearCalibration.loq`
+*Implementation:* :meth:`~chemistrykit.analytical.LinearCalibration.lod`
+and :meth:`~chemistrykit.analytical.LinearCalibration.loq`
 implement exactly these two formulas, drawing the slope `m` and residual
 standard error :math:`s_{y/x}` directly from the
-:func:`~chemistrykit.analytical.systems.calibration.fit_calibration`
+:func:`~chemistrykit.analytical.fit_calibration`
 least-squares fit (see 1805, above) -- so that LOQ is, by construction,
 always exactly :math:`10/3.3` times LOD, a ratio fixed purely by Long and
 Winefordner's convention and independent of any particular data set.

@@ -102,6 +102,12 @@ Conventionally imported as ``ck``:
    result = fluid.run(dt=0.002, n_steps=2000)
 
 .. toctree::
+   :maxdepth: 1
+   :caption: History
+
+   history/index
+
+.. toctree::
    :maxdepth: 2
    :caption: API reference
 
