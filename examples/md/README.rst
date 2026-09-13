@@ -18,10 +18,14 @@ Sections
 --------
 
 - **lj_fluid** -- an NVE Lennard-Jones fluid run: energy conservation,
-  the radial distribution function g(r), and a cross-check of the
+  the radial distribution function g(r), a cross-check of the
   simulated speed distribution against
-  :mod:`chemistrykit.statmech`'s Maxwell-Boltzmann distribution.
-- **pair_potentials** -- Morse vs. harmonic bond potentials, and the
-  classical vibration of a two-body :class:`~chemistrykit.md.systems.pair_potentials.DiatomicOscillator`.
+  :mod:`chemistrykit.statmech`'s Maxwell-Boltzmann distribution, and a
+  purely repulsive (Weeks-Chandler-Andersen) fluid showing
+  packing-driven positional order at high density.
+- **pair_potentials** -- Morse vs. harmonic bond potentials, the
+  classical vibration of a two-body :class:`~chemistrykit.md.systems.pair_potentials.DiatomicOscillator`,
+  and a small bonded molecule vibrating under coupled harmonic
+  bond-stretch and angle-bend terms.
 - **thermostats** -- comparing an unthermostatted (NVE) run against
   velocity-rescaling and Nose-Hoover temperature control.
