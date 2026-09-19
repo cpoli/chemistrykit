@@ -3,8 +3,8 @@
 | | |
 |:--|:-:|
 | Package | [![PyPI version](https://img.shields.io/pypi/v/chemistrykit)](https://pypi.org/project/chemistrykit/) [![Python versions](https://img.shields.io/pypi/pyversions/chemistrykit)](https://pypi.org/project/chemistrykit/) |
-| Quality | [![License](https://img.shields.io/github/license/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/blob/main/LICENSE) [![CI](https://github.com/cpoli/chemistrykit/actions/workflows/ci.yml/badge.svg)](https://github.com/cpoli/chemistrykit/actions/workflows/ci.yml) [![Coverage](https://img.shields.io/codecov/c/github/cpoli/chemistrykit)](https://codecov.io/gh/cpoli/chemistrykit) |
-| Documentation | [![Docs](https://readthedocs.org/projects/chemistrykit/badge/?version=latest)](https://chemistrykit.readthedocs.io) |
+| Quality | [![License](https://img.shields.io/github/license/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/blob/main/LICENSE) [![CI](https://github.com/cpoli/chemistrykit/actions/workflows/ci.yml/badge.svg)](https://github.com/cpoli/chemistrykit/actions/workflows/ci.yml) [![Coverage](https://img.shields.io/codecov/c/github/cpoli/chemistrykit)](https://codecov.io/gh/cpoli/chemistrykit) [![Coverage (manual)](https://img.shields.io/badge/coverage-96%25-brightgreen)](#coverage) |
+| Documentation | [![Docs](https://img.shields.io/badge/docs-cpoli.github.io%2Fchemistrykit-blue)](https://cpoli.github.io/chemistrykit/) |
 | Code style | [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) |
 | Downloads | [![Downloads](https://static.pepy.tech/badge/chemistrykit)](https://pepy.tech/project/chemistrykit) [![Downloads/Month](https://static.pepy.tech/badge/chemistrykit/month)](https://pepy.tech/project/chemistrykit) |
 | Community | [![GitHub Stars](https://img.shields.io/github/stars/cpoli/chemistrykit?style=social)](https://github.com/cpoli/chemistrykit) [![GitHub Forks](https://img.shields.io/github/forks/cpoli/chemistrykit?style=social)](https://github.com/cpoli/chemistrykit) [![Contributors](https://img.shields.io/github/contributors/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/graphs/contributors) [![Last Commit](https://img.shields.io/github/last-commit/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/commits/main) |
@@ -97,9 +97,37 @@ Both commands, plus `ruff check`/`ruff format --check`, run in CI on
 every PR (`.github/workflows/ci.yml`) across Python 3.9-3.12 on Linux and
 macOS. See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a PR.
 
+### Coverage
+
+```bash
+MPLBACKEND=Agg pytest -q --cov=chemistrykit --cov-report=term
+```
+
+774 tests, 96% line coverage overall. Per-subpackage coverage:
+
+| Subpackage | Coverage | | Subpackage | Coverage |
+|:--|--:|---|:--|--:|
+| `analytical` | 99% | | `solutions` | 99% |
+| `crystal` | 99% | | `spectro` | 99% |
+| `electrochem` | 99% | | `statmech` | 99% |
+| `kinetics` | 93% | | `structure` | 98% |
+| `md` | 89% | | `surface` | 99% |
+| `photochem` | 95% | | `thermo` | 99% |
+| `polymer` | 99% | | `integrators` | 47% |
+| `quantum` | 98% | | `constants` | 84% |
+
+`visualizers/` modules are smoke-tested only (correct return type/shape,
+or that `anim.save()` succeeds) rather than covered line-by-line, per the
+testing convention in [CLAUDE.md](CLAUDE.md). `integrators` sits lower
+because several of its fixed-step/adaptive methods aren't exercised
+directly by its own tests, only indirectly through the subpackages
+(`kinetics`, `md`) that call into it; `constants` includes a few
+rarely-used unit-conversion helpers not hit by any test.
+
 ## Docs
 
-Built docs are hosted at <https://chemistrykit.readthedocs.io>. To build
+Built docs are hosted at <https://cpoli.github.io/chemistrykit/>, served
+from the `gh-pages` branch. To build
 locally:
 
 ```bash
