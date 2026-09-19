@@ -1,5 +1,5 @@
 Spectral lineshapes
-=====================
+---------------------
 
 The Gaussian, Lorentzian, and Voigt lineshapes, and the two physically
 distinct broadening mechanisms (Doppler/inhomogeneous vs.

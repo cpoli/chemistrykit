@@ -1,5 +1,5 @@
 Huckel molecular-orbital theory
-=================================
+---------------------------------
 
 Building and diagonalizing the Huckel secular matrix for butadiene and
 benzene, cross-checked against the closed-form Coulson/Frost eigenvalue

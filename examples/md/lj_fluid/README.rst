@@ -1,5 +1,5 @@
 Lennard-Jones fluid
-====================
+--------------------
 
 An equilibrated NVE Lennard-Jones fluid: energy conservation, the radial
 distribution function g(r), a cross-check of the simulated velocity

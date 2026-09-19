@@ -1,5 +1,5 @@
 BET isotherm
-==============
+--------------
 
 The BET multilayer adsorption isotherm, its linearization for fitting
 (Vm, C), and its numerical reduction to the Langmuir isotherm when

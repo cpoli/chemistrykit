@@ -1,5 +1,5 @@
 Molecular-weight distribution
-================================
+--------------------------------
 
 Mn/Mw/PDI summary statistics, and the closed-form Flory-Schulz
 (most-probable) chain-length distribution for an ideal step-growth

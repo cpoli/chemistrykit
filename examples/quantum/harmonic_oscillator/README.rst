@@ -1,5 +1,5 @@
 Harmonic oscillator vs. Morse potential
-=========================================
+-----------------------------------------
 
 The quantum harmonic oscillator's perfectly evenly spaced vibrational
 levels, compared against the exact (anharmonic) Morse-potential levels
