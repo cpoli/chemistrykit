@@ -1,0 +1,1428 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chemistrykit.md.systems.pair_potentials &#8212; chemistrykit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../../../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/chemistrykit/md/systems/pair_potentials';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">chemistrykit</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/chemistrykit/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/chemistrykit/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">chemistrykit.md.systems.pair_potentials</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for chemistrykit.md.systems.pair_potentials</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Additional pairwise/angle potentials, and small bonded-force-field systems.</span>
+
+<span class="sd">:class:`Morse` and :class:`Buckingham` are alternative *non-bonded*</span>
+<span class="sd">radial potentials (like :class:`~chemistrykit.md.systems.lj_fluid.LennardJones`,</span>
+<span class="sd">but with different repulsive/attractive functional forms);</span>
+<span class="sd">:class:`HarmonicBond` and :class:`HarmonicAngle` are the *bonded* terms</span>
+<span class="sd">used to hold a molecule&#39;s internal geometry together in a classical force</span>
+<span class="sd">field. :class:`DiatomicOscillator` and :class:`HarmonicMolecule` are</span>
+<span class="sd">small, non-periodic :class:`~chemistrykit.md.core.base_system.MolecularDynamicsSystem`</span>
+<span class="sd">demonstrations built from these terms.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">njit</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.md.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">AnglePotential</span><span class="p">,</span> <span class="n">MolecularDynamicsSystem</span><span class="p">,</span> <span class="n">PairPotential</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Morse&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Buckingham&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HarmonicBond&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HarmonicAngle&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DiatomicOscillator&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HarmonicMolecule&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="Morse">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.Morse">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Morse</span><span class="p">(</span><span class="n">PairPotential</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Morse interatomic potential.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        U(r) = D_e\left[1 - e^{-a(r-r_e)}\right]^2 - D_e</span>
+
+<span class="sd">    A three-parameter anharmonic bond potential: dissociation energy</span>
+<span class="sd">    :math:`D_e`, equilibrium separation :math:`r_e`, and a width</span>
+<span class="sd">    parameter `a` controlling the curvature at the minimum (related to</span>
+<span class="sd">    the harmonic force constant there by :math:`k = 2D_ea^2`, see</span>
+<span class="sd">    :attr:`force_constant`) -- P. M. Morse, *Phys. Rev.* 34, 57 (1929);</span>
+<span class="sd">    Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 12 (used there</span>
+<span class="sd">    for vibrational anharmonicity; see also</span>
+<span class="sd">    :class:`~chemistrykit.md.systems.pair_potentials.DiatomicOscillator`,</span>
+<span class="sd">    whose classical vibration this potential drives).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    De : float</span>
+<span class="sd">        Dissociation energy (well depth), must be positive.</span>
+<span class="sd">    a : float</span>
+<span class="sd">        Width parameter (inverse length), must be positive.</span>
+<span class="sd">    re : float</span>
+<span class="sd">        Equilibrium separation.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Exactly reproduces the well depth and zero force at the minimum:</span>
+
+<span class="sd">    &gt;&gt;&gt; morse = Morse(De=4.0, a=1.5, re=1.0)</span>
+<span class="sd">    &gt;&gt;&gt; round(float(morse.energy(morse.re)), 10)</span>
+<span class="sd">    -4.0</span>
+<span class="sd">    &gt;&gt;&gt; round(float(morse.force_scalar(morse.re)), 10)</span>
+<span class="sd">    0.0</span>
+
+<span class="sd">    And the dissociation limit :math:`U(r\to\infty) \to 0`:</span>
+
+<span class="sd">    &gt;&gt;&gt; round(float(morse.energy(20.0)), 6)</span>
+<span class="sd">    -0.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">De</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">re</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">De</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;De and a must be positive&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">De</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">De</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">re</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">re</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Morse.energy">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.Morse.energy">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">re</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">De</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">De</span></div>
+
+
+<div class="viewcode-block" id="Morse.force_scalar">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.Morse.force_scalar">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">force_scalar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">re</span><span class="p">))</span>
+        <span class="k">return</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">De</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">force_constant</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Harmonic force constant at the minimum, :math:`k=2D_ea^2`.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">De</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span>
+
+<div class="viewcode-block" id="Morse.from_force_constant">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.Morse.from_force_constant">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_force_constant</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">De</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">re</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Morse</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Build a :class:`Morse` potential from :math:`D_e`, a harmonic force constant `k`, and `re`.</span>
+
+<span class="sd">        Inverts :math:`k=2D_ea^2` for :math:`a=\sqrt{k/(2D_e)}`, so the</span>
+<span class="sd">        curvature at the minimum matches a given harmonic bond exactly</span>
+<span class="sd">        while still capturing anharmonicity/dissociation away from it.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        De : float</span>
+<span class="sd">        k : float</span>
+<span class="sd">        re : float</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Morse</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; morse = Morse.from_force_constant(De=4.0, k=10.0, re=1.0)</span>
+<span class="sd">        &gt;&gt;&gt; round(morse.force_constant, 6)</span>
+<span class="sd">        10.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">De</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">De</span><span class="o">=</span><span class="n">De</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">re</span><span class="o">=</span><span class="n">re</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Buckingham">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.Buckingham">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Buckingham</span><span class="p">(</span><span class="n">PairPotential</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Buckingham (exp-6) pair potential.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        U(r) = A e^{-Br} - \frac{C}{r^6}</span>
+
+<span class="sd">    An alternative to Lennard-Jones for the short-range repulsion,</span>
+<span class="sd">    replacing the :math:`r^{-12}` term with an exponential (closer to the</span>
+<span class="sd">    true quantum-mechanical electron-overlap repulsion) at the cost of an</span>
+<span class="sd">    unphysical turnover to :math:`U\to-\infty` as :math:`r\to0` that pure</span>
+<span class="sd">    LJ does not have -- R. A. Buckingham, *Proc. R. Soc. A* 168, 264</span>
+<span class="sd">    (1938); used extensively for rare-gas potentials and ionic-crystal</span>
+<span class="sd">    lattice energies (see the future ``chemistrykit.crystal``).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A : float</span>
+<span class="sd">        Repulsive prefactor (energy units), must be positive.</span>
+<span class="sd">    B : float</span>
+<span class="sd">        Repulsive exponential decay rate (inverse length), must be positive.</span>
+<span class="sd">    C : float</span>
+<span class="sd">        Dispersion (attractive :math:`r^{-6}`) coefficient (energy *</span>
+<span class="sd">        length\ :sup:`6`), must be non-negative.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    At large separation the potential is dominated by the (attractive,</span>
+<span class="sd">    slower-decaying) dispersion term, so both the energy and the force</span>
+<span class="sd">    are negative:</span>
+
+<span class="sd">    &gt;&gt;&gt; pot = Buckingham(A=1.0e4, B=3.0, C=1.0)</span>
+<span class="sd">    &gt;&gt;&gt; bool(pot.energy(10.0) &lt; 0.0)</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; bool(pot.force_scalar(10.0) &lt; 0.0)</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">C</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">A</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">B</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A and B must be positive&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">C</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;C must be non-negative&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Buckingham.energy">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.Buckingham.energy">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">/</span> <span class="n">r</span><span class="o">**</span><span class="mi">6</span></div>
+
+
+<div class="viewcode-block" id="Buckingham.force_scalar">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.Buckingham.force_scalar">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">force_scalar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="o">-</span> <span class="mf">6.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">/</span> <span class="n">r</span><span class="o">**</span><span class="mi">7</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="HarmonicBond">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.HarmonicBond">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">HarmonicBond</span><span class="p">(</span><span class="n">PairPotential</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A harmonic (Hookean) bond-stretch potential.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        U(r) = \frac{1}{2}k(r-r_0)^2</span>
+
+<span class="sd">    The simplest bonded term in a classical force field -- the small</span>
+<span class="sd">    -oscillation limit of any real bond potential, including</span>
+<span class="sd">    :class:`Morse` (Atkins &amp; de Paula, *Physical Chemistry*, 11th ed.,</span>
+<span class="sd">    Ch. 8, the classical harmonic oscillator).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    k : float</span>
+<span class="sd">        Force constant, must be positive.</span>
+<span class="sd">    r0 : float</span>
+<span class="sd">        Equilibrium bond length.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; bond = HarmonicBond(k=50.0, r0=1.0)</span>
+<span class="sd">    &gt;&gt;&gt; float(bond.energy(1.0))</span>
+<span class="sd">    0.0</span>
+<span class="sd">    &gt;&gt;&gt; round(float(bond.force_scalar(1.1)), 10)</span>
+<span class="sd">    -5.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">r0</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;k must be positive&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">r0</span><span class="p">)</span>
+
+<div class="viewcode-block" id="HarmonicBond.energy">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.HarmonicBond.energy">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">r0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="HarmonicBond.force_scalar">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.HarmonicBond.force_scalar">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">force_scalar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">r0</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="HarmonicAngle">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.HarmonicAngle">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">HarmonicAngle</span><span class="p">(</span><span class="n">AnglePotential</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A harmonic bond-angle-bending potential.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        U(\theta) = \frac{1}{2}k_\theta(\theta-\theta_0)^2</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    k_theta : float</span>
+<span class="sd">        Force constant (energy per radian squared), must be positive.</span>
+<span class="sd">    theta0 : float</span>
+<span class="sd">        Equilibrium angle, in radians.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; angle = HarmonicAngle(k_theta=100.0, theta0=1.9106)  # ~109.47 deg, tetrahedral</span>
+<span class="sd">    &gt;&gt;&gt; float(angle.energy(angle.theta0))</span>
+<span class="sd">    0.0</span>
+<span class="sd">    &gt;&gt;&gt; float(angle.torque(angle.theta0))</span>
+<span class="sd">    -0.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k_theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">theta0</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">k_theta</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;k_theta must be positive&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k_theta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">k_theta</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">theta0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">theta0</span><span class="p">)</span>
+
+<div class="viewcode-block" id="HarmonicAngle.energy">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.HarmonicAngle.energy">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_theta</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="HarmonicAngle.torque">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.HarmonicAngle.torque">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">torque</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">k_theta</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta0</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_make_bond_accel_njit</span><span class="p">(</span><span class="n">kind_code</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">p0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">p1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">p2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">m1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">m2</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a standalone ``@njit`` acceleration function for a 2-body bond potential.</span>
+
+<span class="sd">    Factory closing over the fixed bond parameters and a ``kind_code``</span>
+<span class="sd">    (0 = :class:`HarmonicBond`, 1 = :class:`Morse`) selecting which</span>
+<span class="sd">    closed-form radial force to evaluate, following the same</span>
+<span class="sd">    factory-closure pattern as</span>
+<span class="sd">    :func:`chemistrykit.md.systems.lj_fluid._make_lj_accel_njit`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    kind_code : int</span>
+<span class="sd">    p0, p1, p2 : float</span>
+<span class="sd">        Bond potential parameters: ``(k, r0, unused)`` for harmonic,</span>
+<span class="sd">        ``(De, a, re)`` for Morse.</span>
+<span class="sd">    m1, m2 : float</span>
+<span class="sd">        Masses of the two atoms.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    callable</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">accel</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">dy</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">dz</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dx</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">dy</span> <span class="o">+</span> <span class="n">dz</span> <span class="o">*</span> <span class="n">dz</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">kind_code</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="n">p0</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">p1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">p1</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">p2</span><span class="p">))</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">p1</span> <span class="o">*</span> <span class="n">p0</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">fx</span><span class="p">,</span> <span class="n">fy</span><span class="p">,</span> <span class="n">fz</span> <span class="o">=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">/</span> <span class="n">r</span><span class="p">,</span> <span class="n">f</span> <span class="o">*</span> <span class="n">dy</span> <span class="o">/</span> <span class="n">r</span><span class="p">,</span> <span class="n">f</span> <span class="o">*</span> <span class="n">dz</span> <span class="o">/</span> <span class="n">r</span>
+        <span class="n">acc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">acc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">fx</span> <span class="o">/</span> <span class="n">m1</span>
+        <span class="n">acc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">fy</span> <span class="o">/</span> <span class="n">m1</span>
+        <span class="n">acc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">fz</span> <span class="o">/</span> <span class="n">m1</span>
+        <span class="n">acc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">fx</span> <span class="o">/</span> <span class="n">m2</span>
+        <span class="n">acc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">fy</span> <span class="o">/</span> <span class="n">m2</span>
+        <span class="n">acc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">fz</span> <span class="o">/</span> <span class="n">m2</span>
+        <span class="k">return</span> <span class="n">acc</span>
+
+    <span class="k">return</span> <span class="n">accel</span>
+
+
+<div class="viewcode-block" id="DiatomicOscillator">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.DiatomicOscillator">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DiatomicOscillator</span><span class="p">(</span><span class="n">MolecularDynamicsSystem</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Two atoms bound by a radial potential: classical bond-vibration MD.</span>
+
+<span class="sd">    A textbook two-body problem: with no external forces, the</span>
+<span class="sd">    center-of-mass moves uniformly and the relative coordinate oscillates</span>
+<span class="sd">    as if a single particle of the reduced mass :math:`\mu=m_1m_2/(m_1+m_2)`</span>
+<span class="sd">    were moving in the bond potential itself. For a</span>
+<span class="sd">    :class:`~chemistrykit.md.systems.pair_potentials.HarmonicBond`, this</span>
+<span class="sd">    gives the exact classical vibration period</span>
+<span class="sd">    :math:`T=2\pi\sqrt{\mu/k}` (see :meth:`harmonic_period`), which the</span>
+<span class="sd">    simulated trajectory is checked against in the test suite.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    potential : HarmonicBond or Morse</span>
+<span class="sd">        The bond potential.</span>
+<span class="sd">    m1, m2 : float</span>
+<span class="sd">        Atomic masses.</span>
+<span class="sd">    r0 : float</span>
+<span class="sd">        Initial bond length.</span>
+<span class="sd">    v_rel0 : float, default 0.0</span>
+<span class="sd">        Initial relative (radial) velocity along `axis`.</span>
+<span class="sd">    axis : array-like, shape (3,), default (1, 0, 0)</span>
+<span class="sd">        Bond direction.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">potential</span><span class="p">,</span> <span class="n">m1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">m2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">r0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">v_rel0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)):</span>
+        <span class="n">axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">axis</span> <span class="o">=</span> <span class="n">axis</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+        <span class="n">total_mass</span> <span class="o">=</span> <span class="n">m1</span> <span class="o">+</span> <span class="n">m2</span>
+        <span class="n">r1</span> <span class="o">=</span> <span class="p">(</span><span class="n">m2</span> <span class="o">/</span> <span class="n">total_mass</span><span class="p">)</span> <span class="o">*</span> <span class="n">r0</span> <span class="o">*</span> <span class="n">axis</span>
+        <span class="n">r2</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">m1</span> <span class="o">/</span> <span class="n">total_mass</span><span class="p">)</span> <span class="o">*</span> <span class="n">r0</span> <span class="o">*</span> <span class="n">axis</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="p">(</span><span class="n">m2</span> <span class="o">/</span> <span class="n">total_mass</span><span class="p">)</span> <span class="o">*</span> <span class="n">v_rel0</span> <span class="o">*</span> <span class="n">axis</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">m1</span> <span class="o">/</span> <span class="n">total_mass</span><span class="p">)</span> <span class="o">*</span> <span class="n">v_rel0</span> <span class="o">*</span> <span class="n">axis</span>
+        <span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">])</span>
+        <span class="n">velocities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">potential</span><span class="p">,</span> <span class="n">HarmonicBond</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_accel_njit</span> <span class="o">=</span> <span class="n">_make_bond_accel_njit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">potential</span><span class="o">.</span><span class="n">k</span><span class="p">,</span> <span class="n">potential</span><span class="o">.</span><span class="n">r0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">m1</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">m2</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">potential</span><span class="p">,</span> <span class="n">Morse</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_accel_njit</span> <span class="o">=</span> <span class="n">_make_bond_accel_njit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">potential</span><span class="o">.</span><span class="n">De</span><span class="p">,</span> <span class="n">potential</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">potential</span><span class="o">.</span><span class="n">re</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">m1</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">m2</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;DiatomicOscillator supports HarmonicBond or Morse potentials&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">potential</span> <span class="o">=</span> <span class="n">potential</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">velocities</span><span class="p">,</span> <span class="p">[</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">])</span>
+
+<div class="viewcode-block" id="DiatomicOscillator.forces_and_potential">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.DiatomicOscillator.forces_and_potential">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forces_and_potential</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">positions</span><span class="p">):</span>
+        <span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">diff</span><span class="p">))</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">force_scalar</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+        <span class="n">force_on_0</span> <span class="o">=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">diff</span> <span class="o">/</span> <span class="n">r</span>
+        <span class="n">forces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">force_on_0</span><span class="p">,</span> <span class="o">-</span><span class="n">force_on_0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">forces</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">potential</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="DiatomicOscillator.degrees_of_freedom">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.DiatomicOscillator.degrees_of_freedom">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">degrees_of_freedom</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A single relative-coordinate (bond-stretch) vibrational degree of freedom.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="DiatomicOscillator.bond_length">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.DiatomicOscillator.bond_length">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">bond_length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Current separation between the two atoms.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span></div>
+
+
+<div class="viewcode-block" id="DiatomicOscillator.harmonic_period">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.DiatomicOscillator.harmonic_period">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">harmonic_period</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">m1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">m2</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Classical vibration period for a harmonic bond, :math:`T=2\pi\sqrt{\mu/k}`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k : float</span>
+<span class="sd">            Harmonic force constant.</span>
+<span class="sd">        m1, m2 : float</span>
+<span class="sd">            Atomic masses.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; round(float(DiatomicOscillator.harmonic_period(k=1.0, m1=1.0, m2=1.0)), 6)</span>
+<span class="sd">        4.442883</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mu</span> <span class="o">=</span> <span class="n">m1</span> <span class="o">*</span> <span class="n">m2</span> <span class="o">/</span> <span class="p">(</span><span class="n">m1</span> <span class="o">+</span> <span class="n">m2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mu</span> <span class="o">/</span> <span class="n">k</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_make_harmonic_molecule_accel_njit</span><span class="p">(</span><span class="n">bonds</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">angles</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">masses</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a standalone ``@njit`` acceleration function for harmonic bonds + angles.</span>
+
+<span class="sd">    Factory closing over fixed structural arrays (bond and angle</span>
+<span class="sd">    topology/parameters, and per-atom masses), following the same</span>
+<span class="sd">    pattern as :func:`chemistrykit.kinetics.systems.networks._make_mass_action_rhs`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    bonds : ndarray, shape (n_bonds, 4)</span>
+<span class="sd">        Rows ``(i, j, k, r0)``.</span>
+<span class="sd">    angles : ndarray, shape (n_angles, 5)</span>
+<span class="sd">        Rows ``(i, j, k, k_theta, theta0)``, angle at vertex `j`.</span>
+<span class="sd">    masses : ndarray, shape (n_atoms,)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    callable</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bonds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">bonds</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">masses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">masses</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">n_bonds</span> <span class="o">=</span> <span class="n">bonds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">n_angles</span> <span class="o">=</span> <span class="n">angles</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">accel</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">positions</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">forces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_bonds</span><span class="p">):</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bonds</span><span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bonds</span><span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">bonds</span><span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+            <span class="n">r0</span> <span class="o">=</span> <span class="n">bonds</span><span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+            <span class="n">dx</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="n">dy</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">dz</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dx</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">dy</span> <span class="o">+</span> <span class="n">dz</span> <span class="o">*</span> <span class="n">dz</span><span class="p">)</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">r0</span><span class="p">)</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">/</span> <span class="n">r</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">dy</span> <span class="o">/</span> <span class="n">r</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">dz</span> <span class="o">/</span> <span class="n">r</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">/</span> <span class="n">r</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">dy</span> <span class="o">/</span> <span class="n">r</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">dz</span> <span class="o">/</span> <span class="n">r</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_angles</span><span class="p">):</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">angles</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">angles</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">kk</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">angles</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+            <span class="n">k_theta</span> <span class="o">=</span> <span class="n">angles</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+            <span class="n">theta0</span> <span class="o">=</span> <span class="n">angles</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+            <span class="n">v1x</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="n">v1y</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">v1z</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+            <span class="n">v2x</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="n">kk</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="n">v2y</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="n">kk</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">v2z</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="n">kk</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+            <span class="n">r1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">v1x</span> <span class="o">*</span> <span class="n">v1x</span> <span class="o">+</span> <span class="n">v1y</span> <span class="o">*</span> <span class="n">v1y</span> <span class="o">+</span> <span class="n">v1z</span> <span class="o">*</span> <span class="n">v1z</span><span class="p">)</span>
+            <span class="n">r2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">v2x</span> <span class="o">*</span> <span class="n">v2x</span> <span class="o">+</span> <span class="n">v2y</span> <span class="o">*</span> <span class="n">v2y</span> <span class="o">+</span> <span class="n">v2z</span> <span class="o">*</span> <span class="n">v2z</span><span class="p">)</span>
+            <span class="n">cos_theta</span> <span class="o">=</span> <span class="p">(</span><span class="n">v1x</span> <span class="o">*</span> <span class="n">v2x</span> <span class="o">+</span> <span class="n">v1y</span> <span class="o">*</span> <span class="n">v2y</span> <span class="o">+</span> <span class="n">v1z</span> <span class="o">*</span> <span class="n">v2z</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">r1</span> <span class="o">*</span> <span class="n">r2</span><span class="p">)</span>
+            <span class="n">cos_theta</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">cos_theta</span><span class="p">))</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">cos_theta</span><span class="p">)</span>
+            <span class="n">sin_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">cos_theta</span> <span class="o">*</span> <span class="n">cos_theta</span><span class="p">,</span> <span class="mf">1.0e-12</span><span class="p">))</span>
+            <span class="n">coef</span> <span class="o">=</span> <span class="n">k_theta</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta</span> <span class="o">-</span> <span class="n">theta0</span><span class="p">)</span> <span class="o">/</span> <span class="n">sin_theta</span>
+            <span class="n">fix</span> <span class="o">=</span> <span class="n">coef</span> <span class="o">*</span> <span class="p">(</span><span class="n">v2x</span> <span class="o">/</span> <span class="p">(</span><span class="n">r1</span> <span class="o">*</span> <span class="n">r2</span><span class="p">)</span> <span class="o">-</span> <span class="n">cos_theta</span> <span class="o">*</span> <span class="n">v1x</span> <span class="o">/</span> <span class="p">(</span><span class="n">r1</span> <span class="o">*</span> <span class="n">r1</span><span class="p">))</span>
+            <span class="n">fiy</span> <span class="o">=</span> <span class="n">coef</span> <span class="o">*</span> <span class="p">(</span><span class="n">v2y</span> <span class="o">/</span> <span class="p">(</span><span class="n">r1</span> <span class="o">*</span> <span class="n">r2</span><span class="p">)</span> <span class="o">-</span> <span class="n">cos_theta</span> <span class="o">*</span> <span class="n">v1y</span> <span class="o">/</span> <span class="p">(</span><span class="n">r1</span> <span class="o">*</span> <span class="n">r1</span><span class="p">))</span>
+            <span class="n">fiz</span> <span class="o">=</span> <span class="n">coef</span> <span class="o">*</span> <span class="p">(</span><span class="n">v2z</span> <span class="o">/</span> <span class="p">(</span><span class="n">r1</span> <span class="o">*</span> <span class="n">r2</span><span class="p">)</span> <span class="o">-</span> <span class="n">cos_theta</span> <span class="o">*</span> <span class="n">v1z</span> <span class="o">/</span> <span class="p">(</span><span class="n">r1</span> <span class="o">*</span> <span class="n">r1</span><span class="p">))</span>
+            <span class="n">fkx</span> <span class="o">=</span> <span class="n">coef</span> <span class="o">*</span> <span class="p">(</span><span class="n">v1x</span> <span class="o">/</span> <span class="p">(</span><span class="n">r1</span> <span class="o">*</span> <span class="n">r2</span><span class="p">)</span> <span class="o">-</span> <span class="n">cos_theta</span> <span class="o">*</span> <span class="n">v2x</span> <span class="o">/</span> <span class="p">(</span><span class="n">r2</span> <span class="o">*</span> <span class="n">r2</span><span class="p">))</span>
+            <span class="n">fky</span> <span class="o">=</span> <span class="n">coef</span> <span class="o">*</span> <span class="p">(</span><span class="n">v1y</span> <span class="o">/</span> <span class="p">(</span><span class="n">r1</span> <span class="o">*</span> <span class="n">r2</span><span class="p">)</span> <span class="o">-</span> <span class="n">cos_theta</span> <span class="o">*</span> <span class="n">v2y</span> <span class="o">/</span> <span class="p">(</span><span class="n">r2</span> <span class="o">*</span> <span class="n">r2</span><span class="p">))</span>
+            <span class="n">fkz</span> <span class="o">=</span> <span class="n">coef</span> <span class="o">*</span> <span class="p">(</span><span class="n">v1z</span> <span class="o">/</span> <span class="p">(</span><span class="n">r1</span> <span class="o">*</span> <span class="n">r2</span><span class="p">)</span> <span class="o">-</span> <span class="n">cos_theta</span> <span class="o">*</span> <span class="n">v2z</span> <span class="o">/</span> <span class="p">(</span><span class="n">r2</span> <span class="o">*</span> <span class="n">r2</span><span class="p">))</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">fix</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">fiy</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">fiz</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">kk</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">fkx</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">kk</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">fky</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">kk</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">fkz</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="n">fix</span> <span class="o">+</span> <span class="n">fkx</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">fiy</span> <span class="o">+</span> <span class="n">fky</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-=</span> <span class="n">fiz</span> <span class="o">+</span> <span class="n">fkz</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/=</span> <span class="n">masses</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/=</span> <span class="n">masses</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">/=</span> <span class="n">masses</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">forces</span>
+
+    <span class="k">return</span> <span class="n">accel</span>
+
+
+<div class="viewcode-block" id="HarmonicMolecule">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.HarmonicMolecule">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">HarmonicMolecule</span><span class="p">(</span><span class="n">MolecularDynamicsSystem</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A small, non-periodic cluster of atoms held together by harmonic bonds and angles.</span>
+
+<span class="sd">    A minimal molecular &quot;force field&quot;: mirrors</span>
+<span class="sd">    :class:`chemistrykit.kinetics.systems.networks.StoichiometricNetwork`&#39;s</span>
+<span class="sd">    structural-array-and-factory-closure pattern, but for bonded-force</span>
+<span class="sd">    evaluation instead of mass-action reaction rates. The angle-bending</span>
+<span class="sd">    force is derived from the chain rule</span>
+<span class="sd">    :math:`\vec F_i=-dU/d\theta\cdot d\theta/d\vec r_i` applied to</span>
+<span class="sd">    :math:`\theta=\arccos(\hat v_1\cdot\hat v_2)`, a standard force-field</span>
+<span class="sd">    result (e.g. Leach, *Molecular Modelling: Principles and</span>
+<span class="sd">    Applications*, 2nd ed., Ch. 4).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    positions, velocities : array-like, shape (n_atoms, 3)</span>
+<span class="sd">    masses : array-like, shape (n_atoms,)</span>
+<span class="sd">    bonds : sequence of (i, j, k, r0), optional</span>
+<span class="sd">        Harmonic bonds between atom indices `i`, `j` with force constant</span>
+<span class="sd">        `k` and equilibrium length `r0`.</span>
+<span class="sd">    angles : sequence of (i, j, k, k_theta, theta0), optional</span>
+<span class="sd">        Harmonic angle terms at vertex atom `j` (between bonds `i-j` and</span>
+<span class="sd">        `k-j`) with force constant `k_theta` and equilibrium angle</span>
+<span class="sd">        `theta0` (radians).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">velocities</span><span class="p">,</span> <span class="n">masses</span><span class="p">,</span> <span class="n">bonds</span><span class="p">:</span> <span class="n">Sequence</span> <span class="o">=</span> <span class="p">(),</span> <span class="n">angles</span><span class="p">:</span> <span class="n">Sequence</span> <span class="o">=</span> <span class="p">()):</span>
+        <span class="n">masses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">masses</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">bonds</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">bonds</span><span class="p">)</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_accel_njit</span> <span class="o">=</span> <span class="n">_make_harmonic_molecule_accel_njit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bonds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">angles</span><span class="p">,</span> <span class="n">masses</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">velocities</span><span class="p">,</span> <span class="n">masses</span><span class="p">)</span>
+
+<div class="viewcode-block" id="HarmonicMolecule.forces_and_potential">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.HarmonicMolecule.forces_and_potential">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forces_and_potential</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">positions</span><span class="p">):</span>
+        <span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">forces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
+        <span class="n">potential</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">r0</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span><span class="p">:</span>
+            <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">diff</span><span class="p">))</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">r0</span><span class="p">)</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">diff</span> <span class="o">/</span> <span class="n">r</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">diff</span> <span class="o">/</span> <span class="n">r</span>
+            <span class="n">potential</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">r0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">k_theta</span><span class="p">,</span> <span class="n">theta0</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">angles</span><span class="p">:</span>
+            <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">j</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+            <span class="n">v1</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">v2</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">r1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v1</span><span class="p">))</span>
+            <span class="n">r2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v2</span><span class="p">))</span>
+            <span class="n">cos_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">r1</span> <span class="o">*</span> <span class="n">r2</span><span class="p">),</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">cos_theta</span><span class="p">))</span>
+            <span class="n">sin_theta</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">cos_theta</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="mf">1e-12</span><span class="p">)</span>
+            <span class="n">coef</span> <span class="o">=</span> <span class="n">k_theta</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta</span> <span class="o">-</span> <span class="n">theta0</span><span class="p">)</span> <span class="o">/</span> <span class="n">sin_theta</span>
+            <span class="n">f_i</span> <span class="o">=</span> <span class="n">coef</span> <span class="o">*</span> <span class="p">(</span><span class="n">v2</span> <span class="o">/</span> <span class="p">(</span><span class="n">r1</span> <span class="o">*</span> <span class="n">r2</span><span class="p">)</span> <span class="o">-</span> <span class="n">cos_theta</span> <span class="o">*</span> <span class="n">v1</span> <span class="o">/</span> <span class="n">r1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">f_k</span> <span class="o">=</span> <span class="n">coef</span> <span class="o">*</span> <span class="p">(</span><span class="n">v1</span> <span class="o">/</span> <span class="p">(</span><span class="n">r1</span> <span class="o">*</span> <span class="n">r2</span><span class="p">)</span> <span class="o">-</span> <span class="n">cos_theta</span> <span class="o">*</span> <span class="n">v2</span> <span class="o">/</span> <span class="n">r2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">f_i</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="n">f_k</span>
+            <span class="n">forces</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="n">f_i</span> <span class="o">+</span> <span class="n">f_k</span>
+            <span class="n">potential</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">k_theta</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta</span> <span class="o">-</span> <span class="n">theta0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="n">forces</span><span class="p">,</span> <span class="n">potential</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, chemistrykit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

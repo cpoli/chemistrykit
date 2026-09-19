@@ -1,0 +1,1689 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>chemistrykit.statmech &#8212; chemistrykit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/statmech';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="chemistrykit.structure" href="structure.html" />
+    <link rel="prev" title="chemistrykit.spectro" href="spectro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/chemistrykit_logo_transparent.png" class="logo__image only-light" alt="chemistrykit logo"/>
+    <img src="../_static/chemistrykit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="chemistrykit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="analytical.html">chemistrykit.analytical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crystal.html">chemistrykit.crystal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electrochem.html">chemistrykit.electrochem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinetics.html">chemistrykit.kinetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="md.html">chemistrykit.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photochem.html">chemistrykit.photochem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polymer.html">chemistrykit.polymer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quantum.html">chemistrykit.quantum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions.html">chemistrykit.solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spectro.html">chemistrykit.spectro</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">chemistrykit.statmech</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">chemistrykit.structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surface.html">chemistrykit.surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermo.html">chemistrykit.thermo</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">chemistrykit.statmech</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="chemistrykit-statmech">
+<h1>chemistrykit.statmech<a class="headerlink" href="#chemistrykit-statmech" title="Link to this heading">#</a></h1>
+<div class="subpkg-nav docutils container">
+<p><a class="reference internal" href="../_generated/subpackages/statmech.html"><span class="doc">chemistrykit.statmech hub</span></a> · <a class="reference internal" href="../history/statmech_breakthroughs.html"><span class="doc">History</span></a> · <a class="reference internal" href="gallery/statmech/index.html"><span class="doc">Examples</span></a> · <a class="reference internal" href="#"><span class="doc">API reference</span></a></p>
+</div>
+<p id="module-chemistrykit.statmech">chemistrykit.statmech: statistical mechanics of molecules.</p>
+<p>Translational/rotational/vibrational partition functions and the
+thermodynamic functions (U, S, Cv) derived from them (including the
+Sackur-Tetrode translational entropy); the Maxwell-Boltzmann speed
+distribution; and a canonical-ensemble lattice-gas adsorption model
+(a statistical-mechanical derivation of the Langmuir isotherm).</p>
+<p><a class="reference internal" href="md.html#module-chemistrykit.md" title="chemistrykit.md"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.md</span></code></a>’s trajectories are a natural cross-check for this
+domain’s distribution functions – see
+<code class="docutils literal notranslate"><span class="pre">examples/md/lj_fluid/plot_02_maxwell_boltzmann_check.py</span></code>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.statmech.IdealGasMolecule">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">IdealGasMolecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moment_of_inertia</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symmetry_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vibrational_frequencies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#IdealGasMolecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.IdealGasMolecule" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Combined translational + rotational + vibrational thermodynamic functions for one ideal-gas species.</p>
+<p>Sums the independent contributions of a
+<a class="reference internal" href="#chemistrykit.statmech.TranslationalPartitionFunction" title="chemistrykit.statmech.TranslationalPartitionFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TranslationalPartitionFunction</span></code></a>, an optional
+<a class="reference internal" href="#chemistrykit.statmech.RotationalPartitionFunctionLinear" title="chemistrykit.statmech.RotationalPartitionFunctionLinear"><code class="xref py py-class docutils literal notranslate"><span class="pre">RotationalPartitionFunctionLinear</span></code></a>, and zero or more
+<a class="reference internal" href="#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic" title="chemistrykit.statmech.VibrationalPartitionFunctionHarmonic"><code class="xref py py-class docutils literal notranslate"><span class="pre">VibrationalPartitionFunctionHarmonic</span></code></a> modes – valid because
+the total molecular partition function factorizes,
+<span class="math notranslate nohighlight">\(q=q_{\text{trans}}q_{\text{rot}}q_{\text{vib},1}q_{\text{vib},2}\cdots\)</span>,
+whenever these degrees of freedom are independent (the standard
+approximation for a rigid-rotor/harmonic-oscillator molecule; Atkins
+&amp; de Paula, <em>Physical Chemistry</em>, 11th ed., Ch. 13.1).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mass</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Molecular mass, in kg.</p></li>
+<li><p><strong>volume</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Container volume, in m^3.</p></li>
+<li><p><strong>moment_of_inertia</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Moment of inertia for a linear-rotor rotational contribution; omit
+for an atom (no rotational degrees of freedom).</p></li>
+<li><p><strong>symmetry_number</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>vibrational_frequencies</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – Vibrational mode frequencies, in Hz.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>At very high temperature every mode approaches its classical
+equipartition heat capacity: <span class="math notranslate nohighlight">\(\frac32R\)</span> (translation) +
+<span class="math notranslate nohighlight">\(R\)</span> (linear rotation) + <span class="math notranslate nohighlight">\(R\)</span> per vibrational mode:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">molecule</span> <span class="o">=</span> <span class="n">IdealGasMolecule</span><span class="p">(</span><span class="n">mass</span><span class="o">=</span><span class="mf">6.63e-26</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="mf">1.0e-3</span><span class="p">,</span> <span class="n">moment_of_inertia</span><span class="o">=</span><span class="mf">1.45e-46</span><span class="p">,</span> <span class="n">vibrational_frequencies</span><span class="o">=</span><span class="p">[</span><span class="mf">8.7e13</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cv_over_R</span> <span class="o">=</span> <span class="n">molecule</span><span class="o">.</span><span class="n">heat_capacity_v</span><span class="p">(</span><span class="mf">1.0e7</span><span class="p">)</span> <span class="o">/</span> <span class="mf">8.31446261815324</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">Cv_over_R</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">3.5</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.IdealGasMolecule.entropy">
+<span class="sig-name descname"><span class="pre">entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#IdealGasMolecule.entropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.IdealGasMolecule.entropy" title="Link to this definition">#</a></dt>
+<dd><p>Total entropy: sum of each mode’s contribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>N</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.IdealGasMolecule.heat_capacity_v">
+<span class="sig-name descname"><span class="pre">heat_capacity_v</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#IdealGasMolecule.heat_capacity_v"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.IdealGasMolecule.heat_capacity_v" title="Link to this definition">#</a></dt>
+<dd><p>Total heat capacity: sum of each mode’s contribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>N</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.IdealGasMolecule.internal_energy">
+<span class="sig-name descname"><span class="pre">internal_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#IdealGasMolecule.internal_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.IdealGasMolecule.internal_energy" title="Link to this definition">#</a></dt>
+<dd><p>Total internal energy: sum of each mode’s contribution. See <code class="xref py py-meth docutils literal notranslate"><span class="pre">chemistrykit.statmech.core.base_system.PartitionFunction.internal_energy()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>N</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.IdealGasMolecule.thermodynamic_functions">
+<span class="sig-name descname"><span class="pre">thermodynamic_functions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#IdealGasMolecule.thermodynamic_functions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.IdealGasMolecule.thermodynamic_functions" title="Link to this definition">#</a></dt>
+<dd><p>Bundle q, U, S, Cv, and A at temperature <cite>T</cite> into a <a class="reference internal" href="#chemistrykit.statmech.ThermodynamicFunctions" title="chemistrykit.statmech.core.base_system.ThermodynamicFunctions"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThermodynamicFunctions</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.statmech.ThermodynamicFunctions" title="chemistrykit.statmech.core.base_system.ThermodynamicFunctions"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThermodynamicFunctions</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>chemistrykit.statmech.core.base_system.ThermodynamicFunctions</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.statmech.LatticeGasAdsorption">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">LatticeGasAdsorption</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adsorption_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/lattice_gas.html#LatticeGasAdsorption"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.LatticeGasAdsorption" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Non-interacting lattice-gas model of adsorption on <cite>M</cite> independent sites.</p>
+<p>Each site’s single-site grand partition function is
+<span class="math notranslate nohighlight">\(\xi=1+\lambda e^{\beta\epsilon}\)</span> (empty, or occupied with
+Boltzmann factor <span class="math notranslate nohighlight">\(e^{\beta\epsilon}\)</span> weighted by the gas-phase
+fugacity <span class="math notranslate nohighlight">\(\lambda=e^{\beta\mu}\)</span>); since the <cite>M</cite> sites are
+independent, <span class="math notranslate nohighlight">\(\Xi=\xi^M\)</span> and the average coverage is
+<span class="math notranslate nohighlight">\(\theta=\langle N\rangle/M=1/(1+e^{-\beta(\mu+\epsilon)})\)</span>.
+Using the ideal-gas chemical potential
+<span class="math notranslate nohighlight">\(\mu=k_BT\ln(P\Lambda^3/k_BT)\)</span> (with <span class="math notranslate nohighlight">\(\Lambda\)</span> the
+thermal de Broglie wavelength,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.statmech.utils.thermal_wavelength.thermal_de_broglie_wavelength()</span></code>)
+turns this into exactly the Langmuir isotherm <span class="math notranslate nohighlight">\(\theta=P/(P+P_0)\)</span>
+(see <a class="reference internal" href="#chemistrykit.statmech.LatticeGasAdsorption.coverage" title="chemistrykit.statmech.LatticeGasAdsorption.coverage"><code class="xref py py-meth docutils literal notranslate"><span class="pre">coverage()</span></code></a>, <a class="reference internal" href="#chemistrykit.statmech.LatticeGasAdsorption.p_half" title="chemistrykit.statmech.LatticeGasAdsorption.p_half"><code class="xref py py-meth docutils literal notranslate"><span class="pre">p_half()</span></code></a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>adsorption_energy</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Binding energy per adsorbed molecule, in J (positive = favorable
+adsorption).</p></li>
+<li><p><strong>mass</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Mass of the adsorbing gas molecule, in kg.</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Absolute temperature, in K.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.LatticeGasAdsorption.canonical_entropy">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">canonical_entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/lattice_gas.html#LatticeGasAdsorption.canonical_entropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.LatticeGasAdsorption.canonical_entropy" title="Link to this definition">#</a></dt>
+<dd><p>Canonical (fixed-<cite>N</cite>) combinatorial entropy <span class="math notranslate nohighlight">\(S=k_B\ln\binom{M}{N}\)</span>.</p>
+<p>The exact configurational entropy of placing <cite>N</cite> indistinguishable
+adsorbed molecules on <cite>M</cite> distinguishable sites with no
+interactions, computed via the numerically exact
+<code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.statmech.utils.combinatorics.ln_binomial()</span></code>
+(rather than Stirling’s approximation).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Number of occupied sites (0 &lt;= N &lt;= M).</p></li>
+<li><p><strong>M</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Total number of sites.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – Entropy, in J/K.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Zero at the two fully-ordered extremes (all sites empty, or all
+full – only one microstate each), and maximal exactly at half
+filling, where it approaches the large-<cite>M</cite> Stirling estimate
+<span class="math notranslate nohighlight">\(Mk_B\ln2\)</span> (McQuarrie, <em>Statistical Mechanics</em>, Ch. 8.1):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">LatticeGasAdsorption</span><span class="o">.</span><span class="n">canonical_entropy</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LatticeGasAdsorption</span><span class="o">.</span><span class="n">canonical_entropy</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="mi">100_000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S_half</span> <span class="o">=</span> <span class="n">LatticeGasAdsorption</span><span class="o">.</span><span class="n">canonical_entropy</span><span class="p">(</span><span class="n">M</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">relative_error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S_half</span> <span class="o">-</span> <span class="n">M</span> <span class="o">*</span> <span class="mf">1.380649e-23</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">M</span> <span class="o">*</span> <span class="mf">1.380649e-23</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">relative_error</span> <span class="o">&lt;</span> <span class="mf">1e-4</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.LatticeGasAdsorption.coverage">
+<span class="sig-name descname"><span class="pre">coverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/lattice_gas.html#LatticeGasAdsorption.coverage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.LatticeGasAdsorption.coverage" title="Link to this definition">#</a></dt>
+<dd><p>Fractional coverage <span class="math notranslate nohighlight">\(\theta(P) = P/(P+P_0)\)</span> – the Langmuir isotherm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Gas pressure, in Pa.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Coverage is exactly one-half at <span class="math notranslate nohighlight">\(P=P_0\)</span> by construction,
+and approaches the physical limits of 0 (vacuum) and 1
+(saturation) at the extremes:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">LatticeGasAdsorption</span><span class="p">(</span><span class="n">adsorption_energy</span><span class="o">=</span><span class="mf">3.0e-20</span><span class="p">,</span> <span class="n">mass</span><span class="o">=</span><span class="mf">4.65e-26</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">300.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">coverage</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">p_half</span><span class="p">())),</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">coverage</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">coverage</span><span class="p">(</span><span class="mf">1.0e15</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.9999</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.LatticeGasAdsorption.p_half">
+<span class="sig-name descname"><span class="pre">p_half</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/lattice_gas.html#LatticeGasAdsorption.p_half"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.LatticeGasAdsorption.p_half" title="Link to this definition">#</a></dt>
+<dd><p>Pressure at half coverage, <span class="math notranslate nohighlight">\(P_0=(k_BT/\Lambda^3)e^{-\epsilon/k_BT}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Pressure, in Pa.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.LatticeGasAdsorption.thermal_wavelength">
+<span class="sig-name descname"><span class="pre">thermal_wavelength</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/lattice_gas.html#LatticeGasAdsorption.thermal_wavelength"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.LatticeGasAdsorption.thermal_wavelength" title="Link to this definition">#</a></dt>
+<dd><p>The gas molecule’s thermal de Broglie wavelength at <cite>T</cite>. See <code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.statmech.utils.thermal_wavelength.thermal_de_broglie_wavelength()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">MaxwellBoltzmannSpeedDistribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.380649e-23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/maxwell_boltzmann.html#MaxwellBoltzmannSpeedDistribution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The Maxwell-Boltzmann speed distribution for a gas of mass <cite>mass</cite> at <cite>temperature</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mass</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Molecular mass (in kg for SI/real units; in reduced units, e.g.
+those of <a class="reference internal" href="md.html#chemistrykit.md.LJFluid" title="chemistrykit.md.systems.lj_fluid.LJFluid"><code class="xref py py-class docutils literal notranslate"><span class="pre">chemistrykit.md.systems.lj_fluid.LJFluid</span></code></a>, pass
+the reduced mass and <code class="docutils literal notranslate"><span class="pre">k_b=1.0</span></code>).</p></li>
+<li><p><strong>temperature</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Absolute temperature.</p></li>
+<li><p><strong>k_b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Boltzmann constant, in the same unit system as <cite>mass</cite>/<cite>temperature</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>The three characteristic speeds stand in the fixed ratio
+<span class="math notranslate nohighlight">\(v_p:\bar v:v_{\text{rms}} = \sqrt2:\sqrt{8/\pi}:\sqrt3\)</span>,
+independent of mass or temperature – a purely geometric property of
+the distribution’s shape (Atkins &amp; de Paula, <em>Physical Chemistry</em>,
+11th ed., Ch. 1.2b):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dist</span> <span class="o">=</span> <span class="n">MaxwellBoltzmannSpeedDistribution</span><span class="p">(</span><span class="n">mass</span><span class="o">=</span><span class="mf">6.63e-26</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">298.15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vp</span><span class="p">,</span> <span class="n">vbar</span><span class="p">,</span> <span class="n">vrms</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">most_probable_speed</span><span class="p">(),</span> <span class="n">dist</span><span class="o">.</span><span class="n">mean_speed</span><span class="p">(),</span> <span class="n">dist</span><span class="o">.</span><span class="n">rms_speed</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">([</span><span class="n">vbar</span> <span class="o">/</span> <span class="n">vp</span><span class="p">,</span> <span class="n">vrms</span> <span class="o">/</span> <span class="n">vp</span><span class="p">],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">8.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>The pdf integrates to 1 over all speeds:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">quad</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">total</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/maxwell_boltzmann.html#MaxwellBoltzmannSpeedDistribution.cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution.cdf" title="Link to this definition">#</a></dt>
+<dd><p>Cumulative probability <span class="math notranslate nohighlight">\(P(V\leq v)\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[F(v) = \mathrm{erf}(av) - \frac{2}{\sqrt\pi}av\,e^{-(av)^2},
+\qquad a=\sqrt{\frac{m}{2k_BT}}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dist</span> <span class="o">=</span> <span class="n">MaxwellBoltzmannSpeedDistribution</span><span class="p">(</span><span class="n">mass</span><span class="o">=</span><span class="mf">6.63e-26</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">298.15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution.mean_speed">
+<span class="sig-name descname"><span class="pre">mean_speed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/maxwell_boltzmann.html#MaxwellBoltzmannSpeedDistribution.mean_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution.mean_speed" title="Link to this definition">#</a></dt>
+<dd><p>See <a class="reference internal" href="#chemistrykit.statmech.mean_speed" title="chemistrykit.statmech.mean_speed"><code class="xref py py-func docutils literal notranslate"><span class="pre">mean_speed()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution.most_probable_speed">
+<span class="sig-name descname"><span class="pre">most_probable_speed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/maxwell_boltzmann.html#MaxwellBoltzmannSpeedDistribution.most_probable_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution.most_probable_speed" title="Link to this definition">#</a></dt>
+<dd><p>See <a class="reference internal" href="#chemistrykit.statmech.most_probable_speed" title="chemistrykit.statmech.most_probable_speed"><code class="xref py py-func docutils literal notranslate"><span class="pre">most_probable_speed()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution.pdf">
+<span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/maxwell_boltzmann.html#MaxwellBoltzmannSpeedDistribution.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution.pdf" title="Link to this definition">#</a></dt>
+<dd><p>Probability density f(v) at speed(s) <cite>v</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Must be non-negative.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution.rms_speed">
+<span class="sig-name descname"><span class="pre">rms_speed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/maxwell_boltzmann.html#MaxwellBoltzmannSpeedDistribution.rms_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution.rms_speed" title="Link to this definition">#</a></dt>
+<dd><p>See <a class="reference internal" href="#chemistrykit.statmech.rms_speed" title="chemistrykit.statmech.rms_speed"><code class="xref py py-func docutils literal notranslate"><span class="pre">rms_speed()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/maxwell_boltzmann.html#MaxwellBoltzmannSpeedDistribution.sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution.sample" title="Link to this definition">#</a></dt>
+<dd><p>Draw <cite>n</cite> random speeds from this distribution.</p>
+<p>Each of the 3 Cartesian velocity components of a classical ideal
+gas is independently Gaussian-distributed with variance
+<span class="math notranslate nohighlight">\(k_BT/m\)</span>; the <em>speed</em> (the norm of the velocity vector) of
+such a vector is exactly Maxwell-Boltzmann distributed, which is
+the simplest way to sample it (no inverse-CDF / rejection-sampling
+machinery needed).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>rng</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" title="(in NumPy v2.5)"><em>numpy.random.Generator</em></a><em>, or </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray, shape (n,)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dist</span> <span class="o">=</span> <span class="n">MaxwellBoltzmannSpeedDistribution</span><span class="p">(</span><span class="n">mass</span><span class="o">=</span><span class="mf">6.63e-26</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">298.15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">speeds</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">200_000</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">speeds</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">dist</span><span class="o">.</span><span class="n">mean_speed</span><span class="p">())</span> <span class="o">/</span> <span class="n">dist</span><span class="o">.</span><span class="n">mean_speed</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.statmech.PartitionFunction">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">PartitionFunction</span></span><a class="reference internal" href="../_modules/chemistrykit/statmech/core/base_system.html#PartitionFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.PartitionFunction" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<p>Common interface for a single-mode molecular partition function.</p>
+<p>Every method accepts <cite>N</cite>, the number of independent, non-interacting
+copies of this mode contributing to an extensive thermodynamic
+quantity – <cite>N</cite> moles’ worth of molecules if <cite>N</cite> is left at its
+default of Avogadro’s number (giving molar quantities directly), a
+single molecule’s contribution if <code class="docutils literal notranslate"><span class="pre">N=1</span></code>, or any other ensemble
+size.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.PartitionFunction.entropy">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/core/base_system.html#PartitionFunction.entropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.PartitionFunction.entropy" title="Link to this definition">#</a></dt>
+<dd><p>Return the entropy S(T) contributed by this mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Entropy, in J/K.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.PartitionFunction.heat_capacity_v">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">heat_capacity_v</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/core/base_system.html#PartitionFunction.heat_capacity_v"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.PartitionFunction.heat_capacity_v" title="Link to this definition">#</a></dt>
+<dd><p>Return the constant-volume heat capacity Cv(T) contributed by this mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Heat capacity, in J/K.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.PartitionFunction.helmholtz_free_energy">
+<span class="sig-name descname"><span class="pre">helmholtz_free_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/core/base_system.html#PartitionFunction.helmholtz_free_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.PartitionFunction.helmholtz_free_energy" title="Link to this definition">#</a></dt>
+<dd><p>Return <span class="math notranslate nohighlight">\(A=U-TS\)</span> for this mode, from <a class="reference internal" href="#chemistrykit.statmech.PartitionFunction.internal_energy" title="chemistrykit.statmech.PartitionFunction.internal_energy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">internal_energy()</span></code></a> and <a class="reference internal" href="#chemistrykit.statmech.PartitionFunction.entropy" title="chemistrykit.statmech.PartitionFunction.entropy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">entropy()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Helmholtz free energy, in J.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.PartitionFunction.internal_energy">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">internal_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/core/base_system.html#PartitionFunction.internal_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.PartitionFunction.internal_energy" title="Link to this definition">#</a></dt>
+<dd><p>Return <span class="math notranslate nohighlight">\(U(T)-U(0) = Nk_BT^2(\partial\ln q/\partial T)_V\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperature, in K.</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Number of molecules/modes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Energy, in J (relative to this mode’s own ground state).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.PartitionFunction.value">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/core/base_system.html#PartitionFunction.value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.PartitionFunction.value" title="Link to this definition">#</a></dt>
+<dd><p>Return the partition function q(T) for a single molecule/mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperature, in K.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.statmech.RotationalPartitionFunctionLinear">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">RotationalPartitionFunctionLinear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">moment_of_inertia</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symmetry_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#RotationalPartitionFunctionLinear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.RotationalPartitionFunctionLinear" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.statmech.PartitionFunction" title="chemistrykit.statmech.core.base_system.PartitionFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">PartitionFunction</span></code></a></p>
+<p>The rotational partition function of a linear rigid rotor, high-temperature (classical) limit.</p>
+<div class="math notranslate nohighlight">
+\[q_{\text{rot}} = \frac{T}{\sigma\Theta_{\text{rot}}}, \qquad
+\Theta_{\text{rot}} = \frac{h^2}{8\pi^2Ik_B}\]</div>
+<p>where <cite>I</cite> is the moment of inertia and <span class="math notranslate nohighlight">\(\sigma\)</span> the rotational
+symmetry number (2 for a homonuclear diatomic, 1 for heteronuclear).
+This is the classical (high-temperature) approximation to the exact
+sum over quantized rotational levels, valid whenever
+<span class="math notranslate nohighlight">\(T\gg\Theta_{\text{rot}}\)</span> – true at room temperature for
+essentially every molecule except H2 and its isotopologues (McQuarrie,
+<em>Statistical Mechanics</em>, Ch. 6.3; Atkins &amp; de Paula, <em>Physical
+Chemistry</em>, 11th ed., Ch. 13.2c). Because this classical limit is
+used, <a class="reference internal" href="#chemistrykit.statmech.RotationalPartitionFunctionLinear.internal_energy" title="chemistrykit.statmech.RotationalPartitionFunctionLinear.internal_energy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">internal_energy()</span></code></a> and <a class="reference internal" href="#chemistrykit.statmech.RotationalPartitionFunctionLinear.heat_capacity_v" title="chemistrykit.statmech.RotationalPartitionFunctionLinear.heat_capacity_v"><code class="xref py py-meth docutils literal notranslate"><span class="pre">heat_capacity_v()</span></code></a> are the
+exact equipartition values (<span class="math notranslate nohighlight">\(Nk_BT\)</span> and <span class="math notranslate nohighlight">\(Nk_B\)</span>
+respectively, from 2 rotational quadratic degrees of freedom) rather
+than a sum over levels – this is the approximation being flagged.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>moment_of_inertia</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Moment of inertia, in kg m^2.</p></li>
+<li><p><strong>symmetry_number</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Rotational symmetry number <span class="math notranslate nohighlight">\(\sigma\)</span>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">RotationalPartitionFunctionLinear</span><span class="p">(</span><span class="n">moment_of_inertia</span><span class="o">=</span><span class="mf">1.45e-46</span><span class="p">,</span> <span class="n">symmetry_number</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># ~HCl-like</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">heat_capacity_v</span><span class="p">(</span><span class="mf">298.15</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.380649e-23</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.RotationalPartitionFunctionLinear.entropy">
+<span class="sig-name descname"><span class="pre">entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#RotationalPartitionFunctionLinear.entropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.RotationalPartitionFunctionLinear.entropy" title="Link to this definition">#</a></dt>
+<dd><p>Return the entropy S(T) contributed by this mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Entropy, in J/K.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.RotationalPartitionFunctionLinear.heat_capacity_v">
+<span class="sig-name descname"><span class="pre">heat_capacity_v</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#RotationalPartitionFunctionLinear.heat_capacity_v"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.RotationalPartitionFunctionLinear.heat_capacity_v" title="Link to this definition">#</a></dt>
+<dd><p>Return the constant-volume heat capacity Cv(T) contributed by this mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Heat capacity, in J/K.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.RotationalPartitionFunctionLinear.internal_energy">
+<span class="sig-name descname"><span class="pre">internal_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#RotationalPartitionFunctionLinear.internal_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.RotationalPartitionFunctionLinear.internal_energy" title="Link to this definition">#</a></dt>
+<dd><p>Return <span class="math notranslate nohighlight">\(U(T)-U(0) = Nk_BT^2(\partial\ln q/\partial T)_V\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperature, in K.</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Number of molecules/modes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Energy, in J (relative to this mode’s own ground state).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chemistrykit.statmech.RotationalPartitionFunctionLinear.rotational_temperature">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">rotational_temperature</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.statmech.RotationalPartitionFunctionLinear.rotational_temperature" title="Link to this definition">#</a></dt>
+<dd><p>The rotational temperature <span class="math notranslate nohighlight">\(\Theta_{\text{rot}}=h^2/(8\pi^2Ik_B)\)</span>, in K.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.RotationalPartitionFunctionLinear.value">
+<span class="sig-name descname"><span class="pre">value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#RotationalPartitionFunctionLinear.value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.RotationalPartitionFunctionLinear.value" title="Link to this definition">#</a></dt>
+<dd><p>Return the partition function q(T) for a single molecule/mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperature, in K.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.statmech.ThermodynamicFunctions">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">ThermodynamicFunctions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">U</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Cv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/core/base_system.html#ThermodynamicFunctions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.ThermodynamicFunctions" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A snapshot of one mode’s (or a combined molecule’s) thermodynamic functions at a given T.</p>
+<p>Returned by
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">chemistrykit.statmech.systems.partition_functions.IdealGasMolecule.thermodynamic_functions()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>U</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>S</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>Cv</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>A</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.statmech.ThermodynamicFunctions.A">
+<span class="sig-name descname"><span class="pre">A</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.statmech.ThermodynamicFunctions.A" title="Link to this definition">#</a></dt>
+<dd><p>Helmholtz free energy, <code class="docutils literal notranslate"><span class="pre">U</span> <span class="pre">-</span> <span class="pre">T*S</span></code>, in J.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.statmech.ThermodynamicFunctions.Cv">
+<span class="sig-name descname"><span class="pre">Cv</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.statmech.ThermodynamicFunctions.Cv" title="Link to this definition">#</a></dt>
+<dd><p>Constant-volume heat capacity, in J/K.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.statmech.ThermodynamicFunctions.S">
+<span class="sig-name descname"><span class="pre">S</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.statmech.ThermodynamicFunctions.S" title="Link to this definition">#</a></dt>
+<dd><p>Entropy, in J/K.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.statmech.ThermodynamicFunctions.T">
+<span class="sig-name descname"><span class="pre">T</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.statmech.ThermodynamicFunctions.T" title="Link to this definition">#</a></dt>
+<dd><p>Temperature, in K.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.statmech.ThermodynamicFunctions.U">
+<span class="sig-name descname"><span class="pre">U</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.statmech.ThermodynamicFunctions.U" title="Link to this definition">#</a></dt>
+<dd><p>Internal energy (relative to the ground state), in J.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.statmech.ThermodynamicFunctions.q">
+<span class="sig-name descname"><span class="pre">q</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.statmech.ThermodynamicFunctions.q" title="Link to this definition">#</a></dt>
+<dd><p>The (combined) partition function value at <cite>T</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.statmech.TranslationalPartitionFunction">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">TranslationalPartitionFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#TranslationalPartitionFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.TranslationalPartitionFunction" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.statmech.PartitionFunction" title="chemistrykit.statmech.core.base_system.PartitionFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">PartitionFunction</span></code></a></p>
+<p>The translational partition function of a particle in a box (volume) <cite>V</cite>.</p>
+<div class="math notranslate nohighlight">
+\[q_{\text{trans}} = \left(\frac{2\pi mk_BT}{h^2}\right)^{3/2}V\]</div>
+<p>the high-temperature (particle-in-a-box energy levels essentially
+continuous) limit of the exact 3D particle-in-a-box partition
+function, valid whenever <span class="math notranslate nohighlight">\(V^{1/3}\gg\Lambda\)</span> (the thermal de
+Broglie wavelength, <code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.statmech.utils.thermal_wavelength.thermal_de_broglie_wavelength()</span></code>)
+– true for any real gas well above its condensation point (McQuarrie,
+<em>Statistical Mechanics</em>, Ch. 6.1). Because translational motion
+permutes identical molecules through the same physical states (unlike
+the rotational/vibrational modes below, which are internal to each
+molecule), the <cite>N</cite>-molecule thermodynamic functions here include the
+<span class="math notranslate nohighlight">\(1/N!\)</span> indistinguishability correction, giving the
+Sackur-Tetrode entropy (see <a class="reference internal" href="#chemistrykit.statmech.TranslationalPartitionFunction.entropy" title="chemistrykit.statmech.TranslationalPartitionFunction.entropy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">entropy()</span></code></a>, <a class="reference internal" href="#chemistrykit.statmech.sackur_tetrode_entropy" title="chemistrykit.statmech.sackur_tetrode_entropy"><code class="xref py py-func docutils literal notranslate"><span class="pre">sackur_tetrode_entropy()</span></code></a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mass</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Molecular mass, in kg.</p></li>
+<li><p><strong>volume</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Container volume, in m^3.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Internal energy is exactly the equipartition value <span class="math notranslate nohighlight">\(\frac32Nk_BT\)</span>
+(3 translational quadratic degrees of freedom) at every temperature –
+the classical limit is essentially exact here:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">TranslationalPartitionFunction</span><span class="p">(</span><span class="n">mass</span><span class="o">=</span><span class="mf">6.63e-26</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="mf">1.0e-3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">internal_energy</span><span class="p">(</span><span class="mf">298.15</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="mf">1.380649e-23</span> <span class="o">*</span> <span class="mf">298.15</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.TranslationalPartitionFunction.entropy">
+<span class="sig-name descname"><span class="pre">entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#TranslationalPartitionFunction.entropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.TranslationalPartitionFunction.entropy" title="Link to this definition">#</a></dt>
+<dd><p>Return the Sackur-Tetrode translational entropy.</p>
+<div class="math notranslate nohighlight">
+\[S = Nk_B\left[\ln\left(\frac{q_{\text{trans}}}{N}\right) + \frac{5}{2}\right]\]</div>
+<p>(O. Sackur, <em>Ann. Phys.</em> 36, 958 (1911); H. Tetrode, <em>Ann.
+Phys.</em> 38, 434 (1912); Atkins &amp; de Paula, <em>Physical Chemistry</em>,
+11th ed., eq. 13.24.) See also the standalone convenience
+function <a class="reference internal" href="#chemistrykit.statmech.sackur_tetrode_entropy" title="chemistrykit.statmech.sackur_tetrode_entropy"><code class="xref py py-func docutils literal notranslate"><span class="pre">sackur_tetrode_entropy()</span></code></a> for computing this
+directly from <cite>P</cite> and <cite>T</cite> without building a container volume by
+hand.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>N</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.TranslationalPartitionFunction.heat_capacity_v">
+<span class="sig-name descname"><span class="pre">heat_capacity_v</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#TranslationalPartitionFunction.heat_capacity_v"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.TranslationalPartitionFunction.heat_capacity_v" title="Link to this definition">#</a></dt>
+<dd><p>Return the constant-volume heat capacity Cv(T) contributed by this mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Heat capacity, in J/K.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.TranslationalPartitionFunction.internal_energy">
+<span class="sig-name descname"><span class="pre">internal_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#TranslationalPartitionFunction.internal_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.TranslationalPartitionFunction.internal_energy" title="Link to this definition">#</a></dt>
+<dd><p>Return <span class="math notranslate nohighlight">\(U(T)-U(0) = Nk_BT^2(\partial\ln q/\partial T)_V\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperature, in K.</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Number of molecules/modes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Energy, in J (relative to this mode’s own ground state).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.TranslationalPartitionFunction.value">
+<span class="sig-name descname"><span class="pre">value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#TranslationalPartitionFunction.value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.TranslationalPartitionFunction.value" title="Link to this definition">#</a></dt>
+<dd><p>Return the partition function q(T) for a single molecule/mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperature, in K.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.statmech.VibrationalPartitionFunctionHarmonic">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">VibrationalPartitionFunctionHarmonic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frequency</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#VibrationalPartitionFunctionHarmonic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.statmech.PartitionFunction" title="chemistrykit.statmech.core.base_system.PartitionFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">PartitionFunction</span></code></a></p>
+<p>The vibrational partition function of a single harmonic-oscillator mode.</p>
+<div class="math notranslate nohighlight">
+\[q_{\text{vib}} = \frac{1}{1-e^{-\Theta_{\text{vib}}/T}}, \qquad
+\Theta_{\text{vib}} = \frac{h\nu}{k_B}\]</div>
+<p>with energies measured from the <span class="math notranslate nohighlight">\(v=0\)</span> ground vibrational level
+(Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed., Ch. 13.2d).
+Unlike <a class="reference internal" href="#chemistrykit.statmech.RotationalPartitionFunctionLinear" title="chemistrykit.statmech.RotationalPartitionFunctionLinear"><code class="xref py py-class docutils literal notranslate"><span class="pre">RotationalPartitionFunctionLinear</span></code></a>’s classical limit,
+this is an <em>exact</em> closed form within the harmonic approximation,
+valid at every temperature – it is the harmonic-potential assumption
+itself (rather than a classical/high-<cite>T</cite> truncation) that is
+approximate, since real bonds are anharmonic (see
+<a class="reference internal" href="md.html#chemistrykit.md.Morse" title="chemistrykit.md.systems.pair_potentials.Morse"><code class="xref py py-class docutils literal notranslate"><span class="pre">chemistrykit.md.systems.pair_potentials.Morse</span></code></a>).
+<a class="reference internal" href="#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.heat_capacity_v" title="chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.heat_capacity_v"><code class="xref py py-meth docutils literal notranslate"><span class="pre">heat_capacity_v()</span></code></a> is the Einstein-solid heat-capacity formula
+(A. Einstein, <em>Ann. Phys.</em> 22, 180 (1907)), reused here for a single
+vibrational mode rather than a 3D solid’s lattice vibrations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>frequency</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Vibrational frequency, in Hz.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>The Einstein/vibrational heat capacity interpolates between 0 (T=0,
+the mode is frozen out) and the classical equipartition value
+<span class="math notranslate nohighlight">\(Nk_B\)</span> (<span class="math notranslate nohighlight">\(T\to\infty\)</span>, one quadratic kinetic + one
+quadratic potential term):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">VibrationalPartitionFunctionHarmonic</span><span class="p">(</span><span class="n">frequency</span><span class="o">=</span><span class="mf">8.7e13</span><span class="p">)</span>  <span class="c1"># ~HCl-like, ~2900 cm^-1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">heat_capacity_v</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)),</span> <span class="mi">30</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ratio</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">heat_capacity_v</span><span class="p">(</span><span class="mf">1.0e6</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.380649e-23</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="mf">0.99</span> <span class="o">&lt;</span> <span class="n">ratio</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.entropy">
+<span class="sig-name descname"><span class="pre">entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#VibrationalPartitionFunctionHarmonic.entropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.entropy" title="Link to this definition">#</a></dt>
+<dd><p>Return the entropy S(T) contributed by this mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Entropy, in J/K.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.from_wavenumber">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_wavenumber</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavenumber_cm_inv</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#VibrationalPartitionFunctionHarmonic.from_wavenumber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.from_wavenumber" title="Link to this definition">#</a></dt>
+<dd><p>Build from a vibrational wavenumber in cm^-1 via <span class="math notranslate nohighlight">\(\nu=c\tilde\nu\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>wavenumber_cm_inv</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Wavenumber <span class="math notranslate nohighlight">\(\tilde\nu\)</span>, in cm^-1 (the usual IR-spectroscopy unit).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic" title="chemistrykit.statmech.systems.partition_functions.VibrationalPartitionFunctionHarmonic"><code class="xref py py-class docutils literal notranslate"><span class="pre">VibrationalPartitionFunctionHarmonic</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>VibrationalPartitionFunctionHarmonic</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">VibrationalPartitionFunctionHarmonic</span><span class="o">.</span><span class="n">from_wavenumber</span><span class="p">(</span><span class="mf">2886.0</span><span class="p">)</span>  <span class="c1"># HCl fundamental</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">frequency</span> <span class="o">/</span> <span class="mf">1.0e13</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">8.652</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.heat_capacity_v">
+<span class="sig-name descname"><span class="pre">heat_capacity_v</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#VibrationalPartitionFunctionHarmonic.heat_capacity_v"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.heat_capacity_v" title="Link to this definition">#</a></dt>
+<dd><p>Return the constant-volume heat capacity Cv(T) contributed by this mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Heat capacity, in J/K.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.internal_energy">
+<span class="sig-name descname"><span class="pre">internal_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#VibrationalPartitionFunctionHarmonic.internal_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.internal_energy" title="Link to this definition">#</a></dt>
+<dd><p>Return <span class="math notranslate nohighlight">\(U(T)-U(0) = Nk_BT^2(\partial\ln q/\partial T)_V\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperature, in K.</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Number of molecules/modes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Energy, in J (relative to this mode’s own ground state).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.value">
+<span class="sig-name descname"><span class="pre">value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#VibrationalPartitionFunctionHarmonic.value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.value" title="Link to this definition">#</a></dt>
+<dd><p>Return the partition function q(T) for a single molecule/mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperature, in K.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.vibrational_temperature">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">vibrational_temperature</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.vibrational_temperature" title="Link to this definition">#</a></dt>
+<dd><p>The vibrational temperature <span class="math notranslate nohighlight">\(\Theta_{\text{vib}}=h\nu/k_B\)</span>, in K.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.statmech.ln_binomial">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">ln_binomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/utils/combinatorics.html#ln_binomial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.ln_binomial" title="Link to this definition">#</a></dt>
+<dd><p>Return <span class="math notranslate nohighlight">\(\ln\binom{n}{k} = \ln n! - \ln k! - \ln(n-k)!\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Agrees with direct combinatorics for small, exact integers:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">ln_binomial</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">))),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">10.0</span>
+</pre></div>
+</div>
+<p>And, for large <cite>n</cite>, the peak degeneracy at <span class="math notranslate nohighlight">\(k=n/2\)</span> approaches
+Stirling’s classic large-<cite>n</cite> estimate <span class="math notranslate nohighlight">\(\ln\binom{n}{n/2}\approx
+n\ln2\)</span> (the basis of the large-<cite>M</cite> limit checked in
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.statmech.systems.lattice_gas</span></code>):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">100_000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">relative_error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ln_binomial</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">relative_error</span> <span class="o">&lt;</span> <span class="mf">1e-4</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.statmech.ln_factorial">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">ln_factorial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/utils/combinatorics.html#ln_factorial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.ln_factorial" title="Link to this definition">#</a></dt>
+<dd><p>Return <span class="math notranslate nohighlight">\(\ln(n!)\)</span>, via the exact log-gamma function <span class="math notranslate nohighlight">\(\ln\Gamma(n+1)\)</span>.</p>
+<p>Traditional statistical-mechanics derivations of combinatorial
+entropy approximate <span class="math notranslate nohighlight">\(\ln n!\)</span> with Stirling’s approximation
+(<span class="math notranslate nohighlight">\(\ln n! \approx n\ln n - n\)</span>); chemistrykit instead uses
+SciPy’s numerically exact <code class="docutils literal notranslate"><span class="pre">gammaln</span></code> (accurate to floating-point
+precision for every <span class="math notranslate nohighlight">\(n\geq0\)</span>, including small <cite>n</cite> where
+Stirling’s approximation is poor), so no accuracy is sacrificed for
+the sake of matching the textbook derivation – the two agree closely
+only in the large-<cite>n</cite> limit that <a class="reference internal" href="#chemistrykit.statmech.ln_binomial" title="chemistrykit.statmech.ln_binomial"><code class="xref py py-func docutils literal notranslate"><span class="pre">ln_binomial()</span></code></a>’s docstring
+checks explicitly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Need not be an integer (<span class="math notranslate nohighlight">\(\Gamma(n+1)\)</span> generalizes <cite>n!</cite>).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">ln_factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">120</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.statmech.mean_speed">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">mean_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.380649e-23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/maxwell_boltzmann.html#mean_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.mean_speed" title="Link to this definition">#</a></dt>
+<dd><p>Mean speed, <span class="math notranslate nohighlight">\(\bar v=\sqrt{8k_BT/(\pi m)}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mass</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>temperature</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>k_b</strong> (float, default <code class="xref py py-data docutils literal notranslate"><span class="pre">chemistrykit.constants.K_B</span></code>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.statmech.most_probable_speed">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">most_probable_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.380649e-23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/maxwell_boltzmann.html#most_probable_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.most_probable_speed" title="Link to this definition">#</a></dt>
+<dd><p>Most probable speed, <span class="math notranslate nohighlight">\(v_p=\sqrt{2k_BT/m}\)</span> – where <span class="math notranslate nohighlight">\(f(v)\)</span> peaks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mass</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>temperature</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>k_b</strong> (float, default <code class="xref py py-data docutils literal notranslate"><span class="pre">chemistrykit.constants.K_B</span></code>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.statmech.rms_speed">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">rms_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.380649e-23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/maxwell_boltzmann.html#rms_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.rms_speed" title="Link to this definition">#</a></dt>
+<dd><p>Root-mean-square speed, <span class="math notranslate nohighlight">\(v_{\text{rms}}=\sqrt{3k_BT/m}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mass</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>temperature</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>k_b</strong> (float, default <code class="xref py py-data docutils literal notranslate"><span class="pre">chemistrykit.constants.K_B</span></code>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.statmech.sackur_tetrode_entropy">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">sackur_tetrode_entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.31446261815324</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#sackur_tetrode_entropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.sackur_tetrode_entropy" title="Link to this definition">#</a></dt>
+<dd><p>Molar translational entropy of an ideal gas via the Sackur-Tetrode equation.</p>
+<p>A convenience wrapper around
+<a class="reference internal" href="#chemistrykit.statmech.TranslationalPartitionFunction.entropy" title="chemistrykit.statmech.TranslationalPartitionFunction.entropy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TranslationalPartitionFunction.entropy()</span></code></a> that takes the
+pressure directly, using the ideal-gas volume per molecule
+<span class="math notranslate nohighlight">\(V/N=k_BT/P\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mass</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Molecular mass, in kg.</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Absolute temperature, in K.</p></li>
+<li><p><strong>P</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pressure, in Pa.</p></li>
+<li><p><strong>R_gas</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Molar entropy, in J/(mol K).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>The textbook value for argon gas at 298.15 K and 1 bar is
+<span class="math notranslate nohighlight">\(S_m^\circ\approx154.8\)</span> J/(mol K) (Atkins &amp; de Paula, <em>Physical
+Chemistry</em>, 11th ed., Table 13.1):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy.constants</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">sackur_tetrode_entropy</span><span class="p">(</span><span class="n">mass</span><span class="o">=</span><span class="mf">39.948</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">atomic_mass</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">298.15</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="mf">1.0e5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">S</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">154.8</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.statmech.thermal_de_broglie_wavelength">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">thermal_de_broglie_wavelength</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/utils/thermal_wavelength.html#thermal_de_broglie_wavelength"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.thermal_de_broglie_wavelength" title="Link to this definition">#</a></dt>
+<dd><p>Return the thermal de Broglie wavelength <span class="math notranslate nohighlight">\(\Lambda=h/\sqrt{2\pi mk_BT}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mass</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Particle mass, in kg.</p></li>
+<li><p><strong>temperature</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperature, in K.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Wavelength, in m.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>For argon at room temperature, Lambda is a small fraction of an
+angstrom – far shorter than the mean interparticle spacing in a
+gas at atmospheric pressure, confirming that treating translational
+motion classically (as the ideal gas law does) is an excellent
+approximation there:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy.constants</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wavelength</span> <span class="o">=</span> <span class="n">thermal_de_broglie_wavelength</span><span class="p">(</span><span class="n">mass</span><span class="o">=</span><span class="mf">39.948</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">atomic_mass</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">298.15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">wavelength</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="spectro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">chemistrykit.spectro</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="structure.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">chemistrykit.structure</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.IdealGasMolecule"><code class="docutils literal notranslate"><span class="pre">IdealGasMolecule</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.IdealGasMolecule.entropy"><code class="docutils literal notranslate"><span class="pre">IdealGasMolecule.entropy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.IdealGasMolecule.heat_capacity_v"><code class="docutils literal notranslate"><span class="pre">IdealGasMolecule.heat_capacity_v()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.IdealGasMolecule.internal_energy"><code class="docutils literal notranslate"><span class="pre">IdealGasMolecule.internal_energy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.IdealGasMolecule.thermodynamic_functions"><code class="docutils literal notranslate"><span class="pre">IdealGasMolecule.thermodynamic_functions()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.LatticeGasAdsorption"><code class="docutils literal notranslate"><span class="pre">LatticeGasAdsorption</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.LatticeGasAdsorption.canonical_entropy"><code class="docutils literal notranslate"><span class="pre">LatticeGasAdsorption.canonical_entropy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.LatticeGasAdsorption.coverage"><code class="docutils literal notranslate"><span class="pre">LatticeGasAdsorption.coverage()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.LatticeGasAdsorption.p_half"><code class="docutils literal notranslate"><span class="pre">LatticeGasAdsorption.p_half()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.LatticeGasAdsorption.thermal_wavelength"><code class="docutils literal notranslate"><span class="pre">LatticeGasAdsorption.thermal_wavelength()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution"><code class="docutils literal notranslate"><span class="pre">MaxwellBoltzmannSpeedDistribution</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution.cdf"><code class="docutils literal notranslate"><span class="pre">MaxwellBoltzmannSpeedDistribution.cdf()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution.mean_speed"><code class="docutils literal notranslate"><span class="pre">MaxwellBoltzmannSpeedDistribution.mean_speed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution.most_probable_speed"><code class="docutils literal notranslate"><span class="pre">MaxwellBoltzmannSpeedDistribution.most_probable_speed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution.pdf"><code class="docutils literal notranslate"><span class="pre">MaxwellBoltzmannSpeedDistribution.pdf()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution.rms_speed"><code class="docutils literal notranslate"><span class="pre">MaxwellBoltzmannSpeedDistribution.rms_speed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution.sample"><code class="docutils literal notranslate"><span class="pre">MaxwellBoltzmannSpeedDistribution.sample()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.PartitionFunction"><code class="docutils literal notranslate"><span class="pre">PartitionFunction</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.PartitionFunction.entropy"><code class="docutils literal notranslate"><span class="pre">PartitionFunction.entropy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.PartitionFunction.heat_capacity_v"><code class="docutils literal notranslate"><span class="pre">PartitionFunction.heat_capacity_v()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.PartitionFunction.helmholtz_free_energy"><code class="docutils literal notranslate"><span class="pre">PartitionFunction.helmholtz_free_energy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.PartitionFunction.internal_energy"><code class="docutils literal notranslate"><span class="pre">PartitionFunction.internal_energy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.PartitionFunction.value"><code class="docutils literal notranslate"><span class="pre">PartitionFunction.value()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.RotationalPartitionFunctionLinear"><code class="docutils literal notranslate"><span class="pre">RotationalPartitionFunctionLinear</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.RotationalPartitionFunctionLinear.entropy"><code class="docutils literal notranslate"><span class="pre">RotationalPartitionFunctionLinear.entropy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.RotationalPartitionFunctionLinear.heat_capacity_v"><code class="docutils literal notranslate"><span class="pre">RotationalPartitionFunctionLinear.heat_capacity_v()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.RotationalPartitionFunctionLinear.internal_energy"><code class="docutils literal notranslate"><span class="pre">RotationalPartitionFunctionLinear.internal_energy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.RotationalPartitionFunctionLinear.rotational_temperature"><code class="docutils literal notranslate"><span class="pre">RotationalPartitionFunctionLinear.rotational_temperature</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.RotationalPartitionFunctionLinear.value"><code class="docutils literal notranslate"><span class="pre">RotationalPartitionFunctionLinear.value()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.ThermodynamicFunctions"><code class="docutils literal notranslate"><span class="pre">ThermodynamicFunctions</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.ThermodynamicFunctions.A"><code class="docutils literal notranslate"><span class="pre">ThermodynamicFunctions.A</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.ThermodynamicFunctions.Cv"><code class="docutils literal notranslate"><span class="pre">ThermodynamicFunctions.Cv</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.ThermodynamicFunctions.S"><code class="docutils literal notranslate"><span class="pre">ThermodynamicFunctions.S</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.ThermodynamicFunctions.T"><code class="docutils literal notranslate"><span class="pre">ThermodynamicFunctions.T</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.ThermodynamicFunctions.U"><code class="docutils literal notranslate"><span class="pre">ThermodynamicFunctions.U</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.ThermodynamicFunctions.q"><code class="docutils literal notranslate"><span class="pre">ThermodynamicFunctions.q</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.TranslationalPartitionFunction"><code class="docutils literal notranslate"><span class="pre">TranslationalPartitionFunction</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.TranslationalPartitionFunction.entropy"><code class="docutils literal notranslate"><span class="pre">TranslationalPartitionFunction.entropy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.TranslationalPartitionFunction.heat_capacity_v"><code class="docutils literal notranslate"><span class="pre">TranslationalPartitionFunction.heat_capacity_v()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.TranslationalPartitionFunction.internal_energy"><code class="docutils literal notranslate"><span class="pre">TranslationalPartitionFunction.internal_energy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.TranslationalPartitionFunction.value"><code class="docutils literal notranslate"><span class="pre">TranslationalPartitionFunction.value()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic"><code class="docutils literal notranslate"><span class="pre">VibrationalPartitionFunctionHarmonic</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.entropy"><code class="docutils literal notranslate"><span class="pre">VibrationalPartitionFunctionHarmonic.entropy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.from_wavenumber"><code class="docutils literal notranslate"><span class="pre">VibrationalPartitionFunctionHarmonic.from_wavenumber()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.heat_capacity_v"><code class="docutils literal notranslate"><span class="pre">VibrationalPartitionFunctionHarmonic.heat_capacity_v()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.internal_energy"><code class="docutils literal notranslate"><span class="pre">VibrationalPartitionFunctionHarmonic.internal_energy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.value"><code class="docutils literal notranslate"><span class="pre">VibrationalPartitionFunctionHarmonic.value()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.vibrational_temperature"><code class="docutils literal notranslate"><span class="pre">VibrationalPartitionFunctionHarmonic.vibrational_temperature</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.ln_binomial"><code class="docutils literal notranslate"><span class="pre">ln_binomial()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.ln_factorial"><code class="docutils literal notranslate"><span class="pre">ln_factorial()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.mean_speed"><code class="docutils literal notranslate"><span class="pre">mean_speed()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.most_probable_speed"><code class="docutils literal notranslate"><span class="pre">most_probable_speed()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.rms_speed"><code class="docutils literal notranslate"><span class="pre">rms_speed()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.sackur_tetrode_entropy"><code class="docutils literal notranslate"><span class="pre">sackur_tetrode_entropy()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.thermal_de_broglie_wavelength"><code class="docutils literal notranslate"><span class="pre">thermal_de_broglie_wavelength()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/api/statmech.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, chemistrykit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

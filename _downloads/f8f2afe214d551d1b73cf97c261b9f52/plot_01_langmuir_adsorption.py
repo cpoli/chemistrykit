@@ -1,0 +1,59 @@
+r"""
+A canonical-ensemble derivation of the Langmuir adsorption isotherm
+=======================================================================
+
+:class:`~chemistrykit.statmech.LatticeGasAdsorption` models `M`
+independent, non-interacting adsorption sites, each either empty or
+occupied with binding energy :math:`\epsilon`. Treating the sites in
+equilibrium with an ideal-gas reservoir gives exactly the Langmuir
+isotherm :math:`\theta=P/(P+P_0)` -- shown here for two binding
+strengths, alongside the purely combinatorial (fixed-`N`, canonical)
+configurational entropy of the lattice, which is maximal at half filling.
+"""
+
+# %%
+import matplotlib.pyplot as plt
+import numpy as np
+
+from chemistrykit.statmech import LatticeGasAdsorption
+
+nitrogen_mass = 28.0 * 1.66053906660e-27  # kg
+
+weak = LatticeGasAdsorption(adsorption_energy=1.5e-20, mass=nitrogen_mass, T=298.15)
+strong = LatticeGasAdsorption(adsorption_energy=4.0e-20, mass=nitrogen_mass, T=298.15)
+
+P = np.logspace(2, 10, 300)
+
+fig, axes = plt.subplots(1, 2, figsize=(11, 4.5))
+for model, label in [(weak, "weak binding"), (strong, "strong binding")]:
+    axes[0].plot(P, model.coverage(P), label=f"{label} (P0 = {model.p_half():.2e} Pa)")
+axes[0].set_xscale("log")
+axes[0].axhline(0.5, color="gray", linestyle=":", linewidth=0.8)
+axes[0].set_xlabel("P (Pa)")
+axes[0].set_ylabel("coverage (theta)")
+axes[0].set_title("Langmuir isotherms")
+axes[0].legend()
+
+# The purely combinatorial entropy of arranging `N` indistinguishable
+# molecules on `M` sites is maximal at half filling (N=M/2), where the
+# number of distinguishable arrangements is largest:
+M = 500
+N_values = np.arange(0, M + 1, 5)
+S = np.array([LatticeGasAdsorption.canonical_entropy(N, M) for N in N_values])
+
+axes[1].plot(N_values / M, S / 1.380649e-23, color="steelblue")
+axes[1].axvline(0.5, color="gray", linestyle=":", linewidth=0.8)
+axes[1].set_xlabel("N / M (fractional occupancy)")
+axes[1].set_ylabel("S / k_B")
+axes[1].set_title(f"Canonical configurational entropy (M = {M})")
+fig.tight_layout()
+
+plt.show()
+
+# %%
+# Stronger binding shifts the isotherm to lower pressure (saturation is
+# reached "more easily" when adsorption is more favorable) -- exactly
+# what :meth:`~chemistrykit.statmech.LatticeGasAdsorption.p_half` predicts.
+# The configurational entropy panel above shows the complementary,
+# purely combinatorial result: filling is most disordered, and entropy
+# is maximal, at half occupancy (N=M/2).

@@ -1,0 +1,1734 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>chemistrykit.electrochem &#8212; chemistrykit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/electrochem';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="chemistrykit.kinetics" href="kinetics.html" />
+    <link rel="prev" title="chemistrykit.crystal" href="crystal.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/chemistrykit_logo_transparent.png" class="logo__image only-light" alt="chemistrykit logo"/>
+    <img src="../_static/chemistrykit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="chemistrykit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="analytical.html">chemistrykit.analytical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crystal.html">chemistrykit.crystal</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">chemistrykit.electrochem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinetics.html">chemistrykit.kinetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="md.html">chemistrykit.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photochem.html">chemistrykit.photochem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polymer.html">chemistrykit.polymer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quantum.html">chemistrykit.quantum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions.html">chemistrykit.solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spectro.html">chemistrykit.spectro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmech.html">chemistrykit.statmech</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">chemistrykit.structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surface.html">chemistrykit.surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermo.html">chemistrykit.thermo</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">chemistrykit.electrochem</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="chemistrykit-electrochem">
+<h1>chemistrykit.electrochem<a class="headerlink" href="#chemistrykit-electrochem" title="Link to this heading">#</a></h1>
+<div class="subpkg-nav docutils container">
+<p><a class="reference internal" href="../_generated/subpackages/electrochem.html"><span class="doc">chemistrykit.electrochem hub</span></a> · <a class="reference internal" href="../history/electrochem_breakthroughs.html"><span class="doc">History</span></a> · <a class="reference internal" href="gallery/electrochem/index.html"><span class="doc">Examples</span></a> · <a class="reference internal" href="#"><span class="doc">API reference</span></a></p>
+</div>
+<p id="module-chemistrykit.electrochem">chemistrykit.electrochem: electrochemistry.</p>
+<p>The Nernst equation for standard and concentration cells (with an
+activity-coefficient-corrected variant built on
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.solutions.systems.activity</span></code>); a curated table of
+standard reduction potentials with redox-couple balancing and
+cell-potential combination; Butler-Volmer electrode kinetics, exchange
+current density, and Tafel-plot linearization; galvanic vs. electrolytic
+cells and Faraday’s laws of electrolysis; and a simplified constant-
+current battery discharge/capacity model with Peukert’s-law rate
+dependence.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.BatteryDischargeModel">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">BatteryDischargeModel</span></span><a class="reference internal" href="../_modules/chemistrykit/electrochem/core/base_system.html#BatteryDischargeModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.BatteryDischargeModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<p>Common interface for a simplified constant-current battery discharge model.</p>
+<p><strong>Simplified model, flagged explicitly</strong>: a real battery’s discharge
+behavior involves a nonlinear open-circuit-voltage-vs-state-of-charge
+curve, temperature dependence, cycle aging, and relaxation effects
+under load – none of that is modeled here. This captures only the
+two textbook-level effects usually taught alongside each other: a
+constant ohmic (IR) voltage drop under load, and the empirical
+Peukert’s-law dependence of <em>effective</em> capacity on discharge rate
+(W. Peukert, <em>Elektrotechnische Zeitschrift</em> 20, 20 (1897); see
+Linden &amp; Reddy, <em>Handbook of Batteries</em>, 3rd ed., Ch. 3.3).</p>
+<p>Concrete subclasses implement <a class="reference internal" href="#chemistrykit.electrochem.BatteryDischargeModel.state_of_charge" title="chemistrykit.electrochem.BatteryDischargeModel.state_of_charge"><code class="xref py py-meth docutils literal notranslate"><span class="pre">state_of_charge()</span></code></a> and
+<a class="reference internal" href="#chemistrykit.electrochem.BatteryDischargeModel.terminal_voltage" title="chemistrykit.electrochem.BatteryDischargeModel.terminal_voltage"><code class="xref py py-meth docutils literal notranslate"><span class="pre">terminal_voltage()</span></code></a>; <a class="reference internal" href="#chemistrykit.electrochem.BatteryDischargeModel.discharge_curve" title="chemistrykit.electrochem.BatteryDischargeModel.discharge_curve"><code class="xref py py-meth docutils literal notranslate"><span class="pre">discharge_curve()</span></code></a> is then available on
+every subclass for free, mirroring how
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">chemistrykit.solutions.core.base_system.Titration.curve()</span></code> is
+shared machinery built once atop each subclass’s <code class="docutils literal notranslate"><span class="pre">pH_at</span></code>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.BatteryDischargeModel.discharge_curve">
+<span class="sig-name descname"><span class="pre">discharge_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/core/base_system.html#BatteryDischargeModel.discharge_curve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.BatteryDischargeModel.discharge_curve" title="Link to this definition">#</a></dt>
+<dd><p>Compute the full discharge curve over a range of elapsed times.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Elapsed discharge times to evaluate at.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.electrochem.DischargeResult" title="chemistrykit.electrochem.core.base_system.DischargeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">DischargeResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>DischargeResult</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.BatteryDischargeModel.state_of_charge">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">state_of_charge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/core/base_system.html#BatteryDischargeModel.state_of_charge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.BatteryDischargeModel.state_of_charge" title="Link to this definition">#</a></dt>
+<dd><p>Return the fraction of rated capacity remaining at time(s) <cite>t</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Elapsed discharge time.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – In <span class="math notranslate nohighlight">\([0, 1]\)</span>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.BatteryDischargeModel.terminal_voltage">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">terminal_voltage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/core/base_system.html#BatteryDischargeModel.terminal_voltage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.BatteryDischargeModel.terminal_voltage" title="Link to this definition">#</a></dt>
+<dd><p>Return the terminal voltage at time(s) <cite>t</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Elapsed discharge time.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Terminal voltage, in V (0 once the battery is exhausted).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.ConstantCurrentBattery">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">ConstantCurrentBattery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capacity_peukert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_nominal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_resistance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/battery.html#ConstantCurrentBattery"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.ConstantCurrentBattery" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.electrochem.BatteryDischargeModel" title="chemistrykit.electrochem.core.base_system.BatteryDischargeModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BatteryDischargeModel</span></code></a></p>
+<p>A battery discharged at constant current, with a Peukert-law-limited runtime and an ohmic voltage sag.</p>
+<p><strong>Simplified model</strong> (see the module and
+<a class="reference internal" href="#chemistrykit.electrochem.BatteryDischargeModel" title="chemistrykit.electrochem.core.base_system.BatteryDischargeModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BatteryDischargeModel</span></code></a>
+docstrings): the open-circuit voltage is treated as constant at
+<cite>v_nominal</cite> until the Peukert-law discharge time is reached, at
+which point the battery is treated as instantaneously exhausted
+(voltage drops to 0); the only voltage variation modeled during
+discharge is a constant ohmic sag <span class="math notranslate nohighlight">\(IR_{internal}\)</span>, not the
+smoothly declining open-circuit-voltage-vs-state-of-charge curve of
+a real cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>capacity_peukert</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Peukert capacity constant, in <span class="math notranslate nohighlight">\(A^k\cdot h\)</span>.</p></li>
+<li><p><strong>current</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Constant discharge current, in A.</p></li>
+<li><p><strong>v_nominal</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Open-circuit (fully charged) terminal voltage, in V.</p></li>
+<li><p><strong>internal_resistance</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Internal (ohmic) resistance, in ohms.</p></li>
+<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Peukert exponent.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">battery</span> <span class="o">=</span> <span class="n">ConstantCurrentBattery</span><span class="p">(</span><span class="n">capacity_peukert</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">current</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">v_nominal</span><span class="o">=</span><span class="mf">3.7</span><span class="p">,</span> <span class="n">internal_resistance</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">battery</span><span class="o">.</span><span class="n">discharge_time</span><span class="p">(),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">battery</span><span class="o">.</span><span class="n">terminal_voltage</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">3.65</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">battery</span><span class="o">.</span><span class="n">terminal_voltage</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.ConstantCurrentBattery.discharge_time">
+<span class="sig-name descname"><span class="pre">discharge_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/battery.html#ConstantCurrentBattery.discharge_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.ConstantCurrentBattery.discharge_time" title="Link to this definition">#</a></dt>
+<dd><p>Total discharge time (runtime until exhausted), in h.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.ConstantCurrentBattery.state_of_charge">
+<span class="sig-name descname"><span class="pre">state_of_charge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/battery.html#ConstantCurrentBattery.state_of_charge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.ConstantCurrentBattery.state_of_charge" title="Link to this definition">#</a></dt>
+<dd><p>Return the fraction of rated capacity remaining at time(s) <cite>t</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Elapsed discharge time.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – In <span class="math notranslate nohighlight">\([0, 1]\)</span>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.ConstantCurrentBattery.terminal_voltage">
+<span class="sig-name descname"><span class="pre">terminal_voltage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/battery.html#ConstantCurrentBattery.terminal_voltage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.ConstantCurrentBattery.terminal_voltage" title="Link to this definition">#</a></dt>
+<dd><p>Return the terminal voltage at time(s) <cite>t</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Elapsed discharge time.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Terminal voltage, in V (0 once the battery is exhausted).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.DischargeResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">DischargeResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voltage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_of_charge</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/core/base_system.html#DischargeResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.DischargeResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for the output of a <a class="reference internal" href="#chemistrykit.electrochem.BatteryDischargeModel.discharge_curve" title="chemistrykit.electrochem.BatteryDischargeModel.discharge_curve"><code class="xref py py-meth docutils literal notranslate"><span class="pre">BatteryDischargeModel.discharge_curve()</span></code></a> call.</p>
+<p>Mirrors <a class="reference internal" href="solutions.html#chemistrykit.solutions.TitrationResult" title="chemistrykit.solutions.core.base_system.TitrationResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">chemistrykit.solutions.core.base_system.TitrationResult</span></code></a>
+(a stable, dataclass return type for a curve traced out over an
+independent variable – there, titrant volume; here, elapsed time).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>voltage</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>state_of_charge</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.DischargeResult.state_of_charge">
+<span class="sig-name descname"><span class="pre">state_of_charge</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.electrochem.DischargeResult.state_of_charge" title="Link to this definition">#</a></dt>
+<dd><p>Fraction of rated capacity remaining at each time in <cite>t</cite>, in [0, 1].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.DischargeResult.t">
+<span class="sig-name descname"><span class="pre">t</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.electrochem.DischargeResult.t" title="Link to this definition">#</a></dt>
+<dd><p>Elapsed discharge time, in the same time unit as the model’s rate constants (h if <cite>current</cite> is in A and <cite>capacity</cite> in Ah).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.DischargeResult.voltage">
+<span class="sig-name descname"><span class="pre">voltage</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.electrochem.DischargeResult.voltage" title="Link to this definition">#</a></dt>
+<dd><p>Terminal voltage at each time in <cite>t</cite>, in V.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.HalfReaction">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">HalfReaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_standard</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/standard_potentials.html#HalfReaction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.HalfReaction" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A single tabulated standard reduction half-reaction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Short label, e.g. <code class="docutils literal notranslate"><span class="pre">&quot;Cu2+/Cu&quot;</span></code> for <span class="math notranslate nohighlight">\(Cu^{2+} + 2e^-       o Cu\)</span>.</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of electrons transferred in the half-reaction as written
+(in the reduction direction).</p></li>
+<li><p><strong>E_standard</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Standard reduction potential, in V vs. SHE.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.HalfReaction.E_standard">
+<span class="sig-name descname"><span class="pre">E_standard</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.electrochem.HalfReaction.E_standard" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.HalfReaction.n">
+<span class="sig-name descname"><span class="pre">n</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#chemistrykit.electrochem.HalfReaction.n" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.HalfReaction.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#chemistrykit.electrochem.HalfReaction.name" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.TafelFit">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">TafelFit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tafel_slope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exchange_current_density</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_squared</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/butler_volmer.html#TafelFit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.TafelFit" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Result of fitting <span class="math notranslate nohighlight">\(\log_{10}|i|\)</span> vs. <span class="math notranslate nohighlight">\(\eta\)</span> data to a Tafel line.</p>
+<p>Since <span class="math notranslate nohighlight">\(\eta = b\log_{10}i - b\log_{10}i_0\)</span>, a plot of <cite>eta</cite>
+against <span class="math notranslate nohighlight">\(\log_{10}|i|\)</span> is a straight line of slope <cite>b</cite> (the
+Tafel slope) and intercept <span class="math notranslate nohighlight">\(-b\log_{10}i_0\)</span>, from which the
+exchange current density <span class="math notranslate nohighlight">\(i_0=10^{-\text{intercept}/b}\)</span>
+follows.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tafel_slope</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>exchange_current_density</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>r_squared</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.TafelFit.exchange_current_density">
+<span class="sig-name descname"><span class="pre">exchange_current_density</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.electrochem.TafelFit.exchange_current_density" title="Link to this definition">#</a></dt>
+<dd><p>Fitted exchange current density <span class="math notranslate nohighlight">\(i_0\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.TafelFit.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/butler_volmer.html#TafelFit.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.TafelFit.predict" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate the fitted Tafel line’s overpotential at current density(-ies) <cite>i</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>i</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.TafelFit.r_squared">
+<span class="sig-name descname"><span class="pre">r_squared</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.electrochem.TafelFit.r_squared" title="Link to this definition">#</a></dt>
+<dd><p>Coefficient of determination of the linear fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.TafelFit.tafel_slope">
+<span class="sig-name descname"><span class="pre">tafel_slope</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.electrochem.TafelFit.tafel_slope" title="Link to this definition">#</a></dt>
+<dd><p>Fitted Tafel slope <cite>b</cite>, in V/decade.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.activity_corrected_reaction_quotient">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">activity_corrected_reaction_quotient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">concentrations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">charges</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stoich_coeffs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extended</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ba</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/nernst.html#activity_corrected_reaction_quotient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.activity_corrected_reaction_quotient" title="Link to this definition">#</a></dt>
+<dd><p>Reaction quotient built from Debye-Huckel activity-corrected concentrations rather than raw concentrations.</p>
+<p><span class="math notranslate nohighlight">\(Q = \prod_i a_i^{\nu_i} = \prod_i (\gamma_i c_i / c^\circ)^{\nu_i}\)</span>
+(with <span class="math notranslate nohighlight">\(c^\circ = 1\)</span> mol/L implicit throughout, matching the
+convention of <code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.thermo.systems.equilibrium.reaction_quotient()</span></code>),
+where every ion’s activity coefficient <span class="math notranslate nohighlight">\(\gamma_i\)</span> is evaluated
+at the <em>mixture’s</em> ionic strength via
+<code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.solutions.systems.activity.ionic_strength()</span></code> and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.solutions.systems.activity.activity_coefficient_debye_huckel_extended()</span></code>
+– reusing this package’s existing Debye-Huckel machinery rather than
+assuming unit activity coefficients, per Bard &amp; Faulkner,
+<em>Electrochemical Methods</em>, 2nd ed., Ch. 2.1.3. Only ionic species
+(<span class="math notranslate nohighlight">\(z\neq0\)</span>) get a nontrivial activity coefficient; a neutral
+species or a pure solid/liquid passed with <cite>charges=0</cite> is treated as
+ideal (<span class="math notranslate nohighlight">\(\gamma=1\)</span>), the usual convention for a species at unit
+activity by definition (e.g. the solid electrode itself).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>concentrations</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Concentration of each species, in mol/L.</p></li>
+<li><p><strong>charges</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Charge number of each species (0 for a neutral species / pure
+solid or liquid).</p></li>
+<li><p><strong>stoich_coeffs</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Signed net stoichiometric coefficient of each species (positive
+for products, negative for reactants), same order as
+<cite>concentrations</cite>.</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Absolute temperature; only used insofar as
+<code class="xref py py-data docutils literal notranslate"><span class="pre">chemistrykit.solutions.systems.activity.DEBYE_HUCKEL_A_25C</span></code>
+is itself a 25 degC value – this function does not otherwise
+adjust <cite>A</cite> for <cite>T</cite>, an approximation reasonable near room
+temperature only.</p></li>
+<li><p><strong>extended</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Use the extended Debye-Huckel law (valid to higher ionic
+strength) rather than the limiting law.</p></li>
+<li><p><strong>Ba</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Ion-size parameter for the extended law; see
+<code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.solutions.systems.activity.activity_coefficient_debye_huckel_extended()</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>At vanishing ionic strength (dilute limit), activity coefficients
+are all 1 and this reduces to the raw-concentration reaction
+quotient:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e-9</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nu</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">activity_corrected_reaction_quotient</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">nu</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.001</span>
+</pre></div>
+</div>
+<p>At higher ionic strength the two differently-charged species’
+activity coefficients diverge from each other and from 1, so the
+activity-corrected quotient deviates from the raw-concentration
+ratio (here <span class="math notranslate nohighlight">\(c_1/c_0=0.1\)</span>):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Q_raw</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Q_corrected</span> <span class="o">=</span> <span class="n">activity_corrected_reaction_quotient</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">nu</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">Q_corrected</span> <span class="o">-</span> <span class="n">Q_raw</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-3</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.balance_redox_reaction">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">balance_redox_reaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cathode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anode</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/standard_potentials.html#balance_redox_reaction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.balance_redox_reaction" title="Link to this definition">#</a></dt>
+<dd><p>Electron-balancing multiples for combining two half-reactions into one overall redox reaction.</p>
+<p>Half-reaction potentials combine as-is (see <a class="reference internal" href="#chemistrykit.electrochem.cell_potential" title="chemistrykit.electrochem.cell_potential"><code class="xref py py-func docutils literal notranslate"><span class="pre">cell_potential()</span></code></a>),
+but <em>mass-balancing</em> the overall reaction – and therefore computing
+e.g. how much of each species is consumed per mole of overall
+reaction via Faraday’s laws
+(<code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.electrochem.systems.electrolysis</span></code>) – requires
+each half-reaction to transfer the same number of electrons. The
+standard recipe (Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed.,
+Ch. 6.9) multiplies the cathode half-reaction by
+<span class="math notranslate nohighlight">\(n_{anode}/\gcd(n_{cathode},n_{anode})\)</span> and the anode
+half-reaction by <span class="math notranslate nohighlight">\(n_{cathode}/\gcd(n_{cathode},n_{anode})\)</span>, so
+both sides transfer <span class="math notranslate nohighlight">\(\mathrm{lcm}(n_{cathode},n_{anode})\)</span>
+electrons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cathode</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.electrochem.HalfReaction" title="chemistrykit.electrochem.systems.standard_potentials.HalfReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">HalfReaction</span></code></a></span>)</p></li>
+<li><p><strong>anode</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.electrochem.HalfReaction" title="chemistrykit.electrochem.systems.standard_potentials.HalfReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">HalfReaction</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cathode_multiple, anode_multiple, n_total</strong> (<em>int</em>) – Multiples applied to the cathode and anode half-reactions, and
+the resulting total number of electrons transferred by the
+balanced overall reaction.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p><span class="math notranslate nohighlight">\(Zn + Cu^{2+} \to Zn^{2+} + Cu\)</span> needs no rebalancing (both
+transfer 2 electrons already):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.electrochem.systems.standard_potentials</span><span class="w"> </span><span class="kn">import</span> <span class="n">STANDARD_REDUCTION_POTENTIALS</span> <span class="k">as</span> <span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">balance_redox_reaction</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="s2">"Cu2+/Cu"</span><span class="p">],</span> <span class="n">T</span><span class="p">[</span><span class="s2">"Zn2+/Zn"</span><span class="p">])</span>
+<span class="go">(1, 1, 2)</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(MnO_4^- + 5Fe^{2+} \to \dots\)</span> needs Fe balanced 5-fold against
+Mn’s single 5-electron step:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">balance_redox_reaction</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="s2">"MnO4-/Mn2+"</span><span class="p">],</span> <span class="n">T</span><span class="p">[</span><span class="s2">"Fe3+/Fe2+"</span><span class="p">])</span>
+<span class="go">(1, 5, 5)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.butler_volmer_current_density">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">butler_volmer_current_density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.31446261815324</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">F</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">96485.33212331001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/butler_volmer.html#butler_volmer_current_density"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.butler_volmer_current_density" title="Link to this definition">#</a></dt>
+<dd><p>The Butler-Volmer equation for net electrode current density.</p>
+<div class="math notranslate nohighlight">
+\[i = i_0\left[\exp\!\left(\frac{\alpha n F\eta}{RT}\right)
+             -\exp\!\left(-\frac{(1-\alpha)nF\eta}{RT}\right)\right]\]</div>
+<p>where <span class="math notranslate nohighlight">\(\eta = E - E_{eq}\)</span> is the overpotential, <span class="math notranslate nohighlight">\(i_0\)</span> the
+exchange current density, and <span class="math notranslate nohighlight">\(\alpha\)</span> the (cathodic) charge
+transfer coefficient (Bard &amp; Faulkner, <em>Electrochemical Methods</em>,
+2nd ed., Ch. 3.3, eq. 3.3.11). The first term is the anodic
+(oxidation) partial current, the second the cathodic (reduction)
+partial current; at <span class="math notranslate nohighlight">\(\eta=0\)</span> they exactly cancel, so no net
+current flows at equilibrium even though both partial reactions are
+still occurring (a genuinely dynamic equilibrium, unlike a
+thermodynamic “nothing is happening”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Exchange current density, in A/m^2 (or any consistent current-
+density unit; the same unit is returned).</p></li>
+<li><p><strong>eta</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Overpotential, in V.</p></li>
+<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Charge transfer (symmetry) coefficient, in <span class="math notranslate nohighlight">\((0, 1)\)</span>; 0.5 is
+the common approximation for a simple, symmetric one-electron
+step.</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of electrons transferred in the rate-determining step.</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Absolute temperature, in K.</p></li>
+<li><p><strong>R_gas</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Gas constant, in J mol^-1 K^-1.</p></li>
+<li><p><strong>F</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Faraday constant, in C/mol.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>At zero overpotential the net current is exactly zero:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">butler_volmer_current_density</span><span class="p">(</span><span class="n">i0</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)),</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<p>A positive overpotential drives net anodic (positive) current:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">butler_volmer_current_density</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.cell_potential">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">cell_potential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cathode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anode</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/standard_potentials.html#cell_potential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.cell_potential" title="Link to this definition">#</a></dt>
+<dd><p>Standard cell potential from two half-reactions: <span class="math notranslate nohighlight">\(E^\circ_{cell} = E^\circ_{cathode} - E^\circ_{anode}\)</span>.</p>
+<p>Both potentials are used exactly as tabulated <em>reduction</em> potentials
+– the anode’s is not negated by hand and neither is scaled by the
+number of electrons it transfers, because electrode potential is an
+intensive quantity (a per-electron driving force), unaffected by how
+many electrons the balanced overall reaction happens to require
+(Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed., Ch. 6.9). See
+<a class="reference internal" href="#chemistrykit.electrochem.balance_redox_reaction" title="chemistrykit.electrochem.balance_redox_reaction"><code class="xref py py-func docutils literal notranslate"><span class="pre">balance_redox_reaction()</span></code></a> for the electron-balancing arithmetic
+this potential calculation deliberately does <em>not</em> need.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cathode</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.electrochem.HalfReaction" title="chemistrykit.electrochem.systems.standard_potentials.HalfReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">HalfReaction</span></code></a></span>) – The half-reaction that runs as a reduction (gains electrons).</p></li>
+<li><p><strong>anode</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.electrochem.HalfReaction" title="chemistrykit.electrochem.systems.standard_potentials.HalfReaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">HalfReaction</span></code></a></span>) – The half-reaction that runs as an oxidation (loses electrons);
+its tabulated <em>reduction</em> potential is passed in unchanged.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – Standard cell potential, in V. Positive means the reaction as
+paired (cathode reduction + anode oxidation) is spontaneous.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>The classic Daniell cell, Cu cathode / Zn anode:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.electrochem.systems.standard_potentials</span><span class="w"> </span><span class="kn">import</span> <span class="n">STANDARD_REDUCTION_POTENTIALS</span> <span class="k">as</span> <span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">cell_potential</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="s2">"Cu2+/Cu"</span><span class="p">],</span> <span class="n">T</span><span class="p">[</span><span class="s2">"Zn2+/Zn"</span><span class="p">]),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">1.1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.charge_from_current">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">charge_from_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/electrolysis.html#charge_from_current"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.charge_from_current" title="Link to this definition">#</a></dt>
+<dd><p>Charge passed at constant current: <span class="math notranslate nohighlight">\(Q = It\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>current</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Current, in A.</p></li>
+<li><p><strong>time</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Time, in s.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Charge, in C.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">charge_from_current</span><span class="p">(</span><span class="n">current</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mf">3600.0</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">7200.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.concentration_cell_potential">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">concentration_cell_potential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_cathode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_anode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.31446261815324</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">F</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">96485.33212331001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/nernst.html#concentration_cell_potential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.concentration_cell_potential" title="Link to this definition">#</a></dt>
+<dd><p>Cell potential of a concentration cell: <span class="math notranslate nohighlight">\(E = \frac{RT}{nF}\ln(C_{cathode}/C_{anode})\)</span>.</p>
+<p>A concentration cell pairs two half-cells built from the <em>same</em>
+electrode material and redox couple, differing only in the
+concentration of the dissolved species – so <span class="math notranslate nohighlight">\(E^\circ = 0\)</span>
+identically (both half-reactions have the same standard potential)
+and the entire driving force comes from the Nernst equation’s
+activity term (Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed.,
+Ch. 6.10). By convention the more concentrated compartment is the
+cathode (reduction is favored there, consuming ions and diluting
+that side, driving the system toward equalized concentrations).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of electrons transferred per formula unit of the redox
+couple (e.g. 2 for <span class="math notranslate nohighlight">\(M^{2+} + 2e^- \to M\)</span>).</p></li>
+<li><p><strong>C_cathode</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Ion concentrations in the cathode and anode compartments, in the
+same units (an activity-coefficient-corrected value is more
+accurate at high concentration – see
+<a class="reference internal" href="#chemistrykit.electrochem.nernst_potential_with_activity" title="chemistrykit.electrochem.nernst_potential_with_activity"><code class="xref py py-func docutils literal notranslate"><span class="pre">nernst_potential_with_activity()</span></code></a>).</p></li>
+<li><p><strong>C_anode</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Ion concentrations in the cathode and anode compartments, in the
+same units (an activity-coefficient-corrected value is more
+accurate at high concentration – see
+<a class="reference internal" href="#chemistrykit.electrochem.nernst_potential_with_activity" title="chemistrykit.electrochem.nernst_potential_with_activity"><code class="xref py py-func docutils literal notranslate"><span class="pre">nernst_potential_with_activity()</span></code></a>).</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Absolute temperature, in K.</p></li>
+<li><p><strong>R_gas</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Gas constant, in J mol^-1 K^-1.</p></li>
+<li><p><strong>F</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Faraday constant, in C/mol.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Cell potential, in V. Positive when <cite>C_cathode &gt; C_anode</cite>, zero
+at equal concentrations (no net driving force between two
+identical half-cells).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Equal concentrations give exactly zero cell potential:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">concentration_cell_potential</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">C_cathode</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span> <span class="n">C_anode</span><span class="o">=</span><span class="mf">0.10</span><span class="p">)),</span> <span class="mi">9</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<p>A tenfold concentration difference in a 1-electron couple at 25 degC
+gives the textbook ~59 mV per decade:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">concentration_cell_potential</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">C_cathode</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span> <span class="n">C_anode</span><span class="o">=</span><span class="mf">0.010</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.0592</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.effective_capacity">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">effective_capacity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capacity_peukert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/battery.html#effective_capacity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.effective_capacity" title="Link to this definition">#</a></dt>
+<dd><p>Effective delivered capacity at a given discharge current: <span class="math notranslate nohighlight">\(C_{eff}(I) = I\,t(I) = C_p I^{1-k}\)</span>.</p>
+<p>At the ideal Peukert exponent <span class="math notranslate nohighlight">\(k=1\)</span>, this is exactly
+<span class="math notranslate nohighlight">\(C_p\)</span> regardless of current – a battery that delivers its
+full rated capacity no matter how fast it is discharged. Real
+batteries (<span class="math notranslate nohighlight">\(k&gt;1\)</span>) deliver progressively less effective
+capacity as the discharge current increases, the practical meaning
+of “capacity fade with rate” (Linden &amp; Reddy, <em>Handbook of
+Batteries</em>, 3rd ed., Ch. 3.3).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>capacity_peukert</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Peukert capacity constant, in <span class="math notranslate nohighlight">\(A^k\cdot h\)</span>.</p></li>
+<li><p><strong>current</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Constant discharge current, in A.</p></li>
+<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Peukert exponent.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Effective capacity, in Ah.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>At <cite>k=1</cite>, effective capacity is independent of current (the ideal,
+rate-independent battery):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c_low</span> <span class="o">=</span> <span class="n">effective_capacity</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">current</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c_high</span> <span class="o">=</span> <span class="n">effective_capacity</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">current</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">c_low</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">c_high</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">(10.0, 10.0)</span>
+</pre></div>
+</div>
+<p>At <cite>k&gt;1</cite>, effective capacity decreases as discharge current
+increases – the real-battery “capacity fade at high rate” effect:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c_low</span> <span class="o">=</span> <span class="n">effective_capacity</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">current</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c_high</span> <span class="o">=</span> <span class="n">effective_capacity</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">current</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">c_high</span> <span class="o">&lt;</span> <span class="n">c_low</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.exchange_current_density">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">exchange_current_density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_ox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_red</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">F</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">96485.33212331001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/butler_volmer.html#exchange_current_density"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.exchange_current_density" title="Link to this definition">#</a></dt>
+<dd><p>Exchange current density from a standard heterogeneous rate constant and bulk concentrations.</p>
+<div class="math notranslate nohighlight">
+\[i_0 = nFk^0 C_{ox}^{1-\alpha}C_{red}^{\alpha}\]</div>
+<p>(Bard &amp; Faulkner, <em>Electrochemical Methods</em>, 2nd ed., Ch. 3.4, eq.
+3.4.6) – the current density that flows equally in both directions
+at equilibrium, before any net overpotential is applied.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Standard heterogeneous electron-transfer rate constant, in m/s
+(or a consistent length/time unit).</p></li>
+<li><p><strong>C_ox</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Bulk concentrations of the oxidized and reduced forms, in
+mol/m^3 (consistent with <cite>k0</cite>’s length unit).</p></li>
+<li><p><strong>C_red</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Bulk concentrations of the oxidized and reduced forms, in
+mol/m^3 (consistent with <cite>k0</cite>’s length unit).</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Electrons transferred.</p></li>
+<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Charge transfer coefficient.</p></li>
+<li><p><strong>F</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Faraday constant, in C/mol.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – Exchange current density, in A/m^2.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Symmetric concentrations and alpha=0.5 give a simple, order-1-free-of-composition result:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i0</span> <span class="o">=</span> <span class="n">exchange_current_density</span><span class="p">(</span><span class="n">k0</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">C_ox</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">C_red</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.964853</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.faradays_law_mass">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">faradays_law_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molar_mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">efficiency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">F</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">96485.33212331001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/electrolysis.html#faradays_law_mass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.faradays_law_mass" title="Link to this definition">#</a></dt>
+<dd><p>Mass deposited/consumed by electrolysis at constant current: <span class="math notranslate nohighlight">\(m = ItM\eta/(nF)\)</span>.</p>
+<p>Combines <a class="reference internal" href="#chemistrykit.electrochem.charge_from_current" title="chemistrykit.electrochem.charge_from_current"><code class="xref py py-func docutils literal notranslate"><span class="pre">charge_from_current()</span></code></a> and <a class="reference internal" href="#chemistrykit.electrochem.mass_from_charge" title="chemistrykit.electrochem.mass_from_charge"><code class="xref py py-func docutils literal notranslate"><span class="pre">mass_from_charge()</span></code></a>
+(Faraday’s laws of electrolysis together, Bard &amp; Faulkner,
+<em>Electrochemical Methods</em>, 2nd ed., Ch. 1.3.3), with an optional
+current (faradaic) efficiency <span class="math notranslate nohighlight">\(\eta\in(0,1]\)</span> for the common
+real-world case where a side reaction (e.g. competing gas evolution)
+consumes some of the current without depositing the desired product.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>current</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Applied current, in A.</p></li>
+<li><p><strong>time</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Duration, in s.</p></li>
+<li><p><strong>molar_mass</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Molar mass of the deposited/consumed species, in g/mol.</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Electrons transferred per formula unit.</p></li>
+<li><p><strong>efficiency</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Current (faradaic) efficiency, in <span class="math notranslate nohighlight">\((0, 1]\)</span>; 1.0 is the
+ideal, no-side-reaction case.</p></li>
+<li><p><strong>F</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Faraday constant, in C/mol.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Mass, in g.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <cite>efficiency</cite> is not in <span class="math notranslate nohighlight">\((0, 1]\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Copper electrorefining, <span class="math notranslate nohighlight">\(Cu^{2+}+2e^-\to Cu\)</span> (M=63.546 g/mol,
+n=2), run at 10 A for 1 hour: mass scales linearly with both current
+and time, the direct experimental test of Faraday’s first law.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span> <span class="o">=</span> <span class="n">faradays_law_mass</span><span class="p">(</span><span class="n">current</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mf">3600.0</span><span class="p">,</span> <span class="n">molar_mass</span><span class="o">=</span><span class="mf">63.546</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span> <span class="o">=</span> <span class="n">faradays_law_mass</span><span class="p">(</span><span class="n">current</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mf">3600.0</span><span class="p">,</span> <span class="n">molar_mass</span><span class="o">=</span><span class="mf">63.546</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">m2</span> <span class="o">/</span> <span class="n">m1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">11.8549</span>
+</pre></div>
+</div>
+<p>Reduced current efficiency proportionally reduces the mass deposited:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m_ideal</span> <span class="o">=</span> <span class="n">faradays_law_mass</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">3600.0</span><span class="p">,</span> <span class="mf">63.546</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">efficiency</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m_90pct</span> <span class="o">=</span> <span class="n">faradays_law_mass</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">3600.0</span><span class="p">,</span> <span class="mf">63.546</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">efficiency</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">m_90pct</span> <span class="o">/</span> <span class="n">m_ideal</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.9</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.fit_tafel_plot">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">fit_tafel_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/butler_volmer.html#fit_tafel_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.fit_tafel_plot" title="Link to this definition">#</a></dt>
+<dd><p>Fit high-overpotential (<cite>eta</cite>, <cite>i</cite>) data to a Tafel line and recover <cite>b</cite> and <span class="math notranslate nohighlight">\(i_0\)</span>.</p>
+<p>Linearizes <span class="math notranslate nohighlight">\(\eta = b\log_{10}i - b\log_{10}i_0\)</span> and fits by
+ordinary least squares against <span class="math notranslate nohighlight">\(x=\log_{10}|i|\)</span> – the
+experimental Tafel-plot analysis (Bard &amp; Faulkner, <em>Electrochemical
+Methods</em>, 2nd ed., Ch. 3.4), structurally identical to
+<code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.kinetics.systems.arrhenius.fit_arrhenius()</span></code>’s
+Arrhenius plot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eta</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Overpotentials, in V (should be restricted to the high-<cite>|eta|</cite>
+Tafel regime for the linear approximation to hold).</p></li>
+<li><p><strong>i</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Corresponding current densities.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.electrochem.TafelFit" title="chemistrykit.electrochem.systems.butler_volmer.TafelFit"><code class="xref py py-class docutils literal notranslate"><span class="pre">TafelFit</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>TafelFit</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Generate exact high-overpotential data from a known <span class="math notranslate nohighlight">\((b, i_0)\)</span>
+and recover both:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i0_true</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mf">2e-6</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">butler_volmer_current_density</span><span class="p">(</span><span class="n">i0_true</span><span class="p">,</span> <span class="n">eta</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fit</span> <span class="o">=</span> <span class="n">fit_tafel_plot</span><span class="p">(</span><span class="n">eta</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">exchange_current_density</span> <span class="o">/</span> <span class="n">i0_true</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.is_spontaneous">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">is_spontaneous</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">E_cell</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/standard_potentials.html#is_spontaneous"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.is_spontaneous" title="Link to this definition">#</a></dt>
+<dd><p>Whether a cell reaction is spontaneous as written, from its cell potential.</p>
+<p><span class="math notranslate nohighlight">\(E_{cell} &gt; 0 \iff \Delta G = -nFE_{cell} &lt; 0\)</span>, the spontaneity
+criterion (Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed., Ch.
+6.9). A spontaneous cell reaction discharges <em>galvanically</em>
+(delivers electrical work); a non-spontaneous one must be driven
+<em>electrolytically</em> by an externally applied voltage exceeding
+<span class="math notranslate nohighlight">\(|E_{cell}|\)</span> in the opposing sense – see
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.electrochem.systems.electrolysis</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>E_cell</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Cell potential (standard or Nernst-corrected), in V.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>bool</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_spontaneous</span><span class="p">(</span><span class="mf">1.10</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_spontaneous</span><span class="p">(</span><span class="o">-</span><span class="mf">0.76</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.mass_from_charge">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">mass_from_charge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">charge</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molar_mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">F</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">96485.33212331001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/electrolysis.html#mass_from_charge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.mass_from_charge" title="Link to this definition">#</a></dt>
+<dd><p>Mass of substance deposited/consumed: <span class="math notranslate nohighlight">\(m = QM/(nF)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>charge</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Charge passed, in C.</p></li>
+<li><p><strong>molar_mass</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Molar mass of the species, in g/mol.</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Electrons transferred per formula unit.</p></li>
+<li><p><strong>F</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Faraday constant, in C/mol.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Mass, in g.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Silver electroplating, <span class="math notranslate nohighlight">\(Ag^+ + e^- \to Ag\)</span> (n=1, M=107.87 g/mol):
+depositing 1 mol of electrons’ worth of charge deposits exactly one
+mole (107.87 g) of silver:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">mass_from_charge</span><span class="p">(</span><span class="n">charge</span><span class="o">=</span><span class="mf">96485.332</span><span class="p">,</span> <span class="n">molar_mass</span><span class="o">=</span><span class="mf">107.87</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">107.87</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.minimum_applied_voltage_electrolytic">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">minimum_applied_voltage_electrolytic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">E_cell</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/electrolysis.html#minimum_applied_voltage_electrolytic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.minimum_applied_voltage_electrolytic" title="Link to this definition">#</a></dt>
+<dd><p>Minimum externally applied voltage to drive a non-spontaneous (electrolytic) cell reaction.</p>
+<p>A cell reaction with <span class="math notranslate nohighlight">\(E_{cell}&lt;0\)</span> is non-spontaneous as
+written and will not run galvanically; forcing it to run
+(electrolysis) requires an externally applied voltage of at least
+<span class="math notranslate nohighlight">\(|E_{cell}|\)</span>, opposing the cell’s natural (spontaneous
+reverse) direction (Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th
+ed., Ch. 6.10). <strong>Approximation flagged</strong>: this is the
+thermodynamic minimum only – a real electrolysis cell also needs
+to overcome activation overpotential at each electrode (see
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.electrochem.systems.butler_volmer</span></code>) and ohmic
+(solution-resistance) losses, so the practically applied voltage is
+always somewhat larger than this minimum.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>E_cell</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Cell potential of the reaction as written, in V (should be
+negative – i.e. the reaction is non-spontaneous – for
+electrolysis to be the relevant regime; see
+<code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.electrochem.systems.standard_potentials.is_spontaneous()</span></code>).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – Minimum applied voltage magnitude, in V.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Electrolyzing molten NaCl (reversing the spontaneous
+Na/Cl2 cell reaction, <span class="math notranslate nohighlight">\(E_{cell}=-4.07\)</span> V as written for
+Na deposition):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">minimum_applied_voltage_electrolytic</span><span class="p">(</span><span class="o">-</span><span class="mf">4.07</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">4.07</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.moles_from_charge">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">moles_from_charge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">charge</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">F</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">96485.33212331001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/electrolysis.html#moles_from_charge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.moles_from_charge" title="Link to this definition">#</a></dt>
+<dd><p>Faraday’s first law: moles of substance transformed <span class="math notranslate nohighlight">\(= Q/(nF)\)</span>.</p>
+<p>One mole of electrons (<span class="math notranslate nohighlight">\(F\)</span> coulombs) transforms exactly
+<span class="math notranslate nohighlight">\(1/n\)</span> mole of a species undergoing an <cite>n</cite>-electron
+electrode reaction – charge passed is directly proportional to the
+amount of chemical change, the historically first-discovered
+electrochemical stoichiometry relationship (Faraday, 1834; Bard &amp;
+Faulkner, <em>Electrochemical Methods</em>, 2nd ed., Ch. 1.3.3).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>charge</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Charge passed, in C.</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Electrons transferred per formula unit of the species.</p></li>
+<li><p><strong>F</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Faraday constant, in C/mol.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Amount transformed, in mol.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Doubling the charge exactly doubles the moles transformed (Faraday’s
+first law’s defining linearity):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">moles_from_charge</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="mf">96485.332</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">moles_from_charge</span><span class="p">(</span><span class="mf">96485.332</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.nernst_potential">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">nernst_potential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">E_standard</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.31446261815324</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">F</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">96485.33212331001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/nernst.html#nernst_potential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.nernst_potential" title="Link to this definition">#</a></dt>
+<dd><p>The Nernst equation: <span class="math notranslate nohighlight">\(E = E^\circ - \frac{RT}{nF}\ln Q\)</span>.</p>
+<p>Relates a cell’s potential under arbitrary (non-standard-state)
+conditions to its standard potential and the reaction quotient <cite>Q</cite>
+of the overall cell reaction (Bard &amp; Faulkner, <em>Electrochemical
+Methods</em>, 2nd ed., Ch. 2.1, eq. 2.1.13).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>E_standard</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Standard cell potential <span class="math notranslate nohighlight">\(E^\circ\)</span>, in V.</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of electrons transferred in the balanced overall cell
+reaction (see <code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.electrochem.systems.standard_potentials.balance_redox_reaction()</span></code>).</p></li>
+<li><p><strong>Q</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Reaction quotient of the overall cell reaction (activities of
+products over reactants, each raised to its stoichiometric
+coefficient).</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Absolute temperature, in K.</p></li>
+<li><p><strong>R_gas</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Gas constant, in J mol^-1 K^-1.</p></li>
+<li><p><strong>F</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Faraday constant, in C/mol.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>At <span class="math notranslate nohighlight">\(Q = 1\)</span> (unit activity of every species – the standard
+state by definition), the Nernst equation reduces exactly to
+<span class="math notranslate nohighlight">\(E^\circ\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">nernst_potential</span><span class="p">(</span><span class="n">E_standard</span><span class="o">=</span><span class="mf">1.10</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.1</span>
+</pre></div>
+</div>
+<p>Increasing the product-side activity (<cite>Q &gt; 1</cite>) lowers the cell
+potential below standard, per Le Chatelier’s principle applied to
+the driving reaction:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">nernst_potential</span><span class="p">(</span><span class="mf">1.10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1.10</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.nernst_potential_with_activity">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">nernst_potential_with_activity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">E_standard</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concentrations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">charges</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stoich_coeffs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extended</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ba</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/nernst.html#nernst_potential_with_activity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.nernst_potential_with_activity" title="Link to this definition">#</a></dt>
+<dd><p>The Nernst equation with <cite>Q</cite> built from Debye-Huckel activity-corrected concentrations.</p>
+<p>Combines <a class="reference internal" href="#chemistrykit.electrochem.activity_corrected_reaction_quotient" title="chemistrykit.electrochem.activity_corrected_reaction_quotient"><code class="xref py py-func docutils literal notranslate"><span class="pre">activity_corrected_reaction_quotient()</span></code></a> with
+<a class="reference internal" href="#chemistrykit.electrochem.nernst_potential" title="chemistrykit.electrochem.nernst_potential"><code class="xref py py-func docutils literal notranslate"><span class="pre">nernst_potential()</span></code></a> – the “reuse <cite>chemistrykit.solutions</cite>’s
+activity-coefficient machinery” version of the Nernst equation, as
+opposed to <a class="reference internal" href="#chemistrykit.electrochem.nernst_potential" title="chemistrykit.electrochem.nernst_potential"><code class="xref py py-func docutils literal notranslate"><span class="pre">nernst_potential()</span></code></a>’s assumption of ideal (unit
+activity coefficient) behavior. Real electrochemical cells, like
+real solution equilibria, deviate from ideal Nernstian behavior at
+concentrations much above dilute (Bard &amp; Faulkner, <em>Electrochemical
+Methods</em>, 2nd ed., Ch. 2.1.3).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>E_standard</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Standard cell potential, in V.</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Electrons transferred in the balanced overall cell reaction.</p></li>
+<li><p><strong>concentrations</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – As in <a class="reference internal" href="#chemistrykit.electrochem.activity_corrected_reaction_quotient" title="chemistrykit.electrochem.activity_corrected_reaction_quotient"><code class="xref py py-func docutils literal notranslate"><span class="pre">activity_corrected_reaction_quotient()</span></code></a>.</p></li>
+<li><p><strong>charges</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – As in <a class="reference internal" href="#chemistrykit.electrochem.activity_corrected_reaction_quotient" title="chemistrykit.electrochem.activity_corrected_reaction_quotient"><code class="xref py py-func docutils literal notranslate"><span class="pre">activity_corrected_reaction_quotient()</span></code></a>.</p></li>
+<li><p><strong>stoich_coeffs</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – As in <a class="reference internal" href="#chemistrykit.electrochem.activity_corrected_reaction_quotient" title="chemistrykit.electrochem.activity_corrected_reaction_quotient"><code class="xref py py-func docutils literal notranslate"><span class="pre">activity_corrected_reaction_quotient()</span></code></a>.</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>extended</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>)</p></li>
+<li><p><strong>Ba</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>In the dilute limit, this recovers the ideal Nernst potential to
+high accuracy:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e-6</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nu</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Q_raw</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ideal</span> <span class="o">=</span> <span class="n">nernst_potential</span><span class="p">(</span><span class="mf">0.34</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="n">Q_raw</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corrected</span> <span class="o">=</span> <span class="n">nernst_potential_with_activity</span><span class="p">(</span><span class="mf">0.34</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">concentrations</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">charges</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">stoich_coeffs</span><span class="o">=</span><span class="n">nu</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">ideal</span> <span class="o">-</span> <span class="n">corrected</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-4</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.peukert_discharge_time">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">peukert_discharge_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capacity_peukert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/battery.html#peukert_discharge_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.peukert_discharge_time" title="Link to this definition">#</a></dt>
+<dd><p>Peukert’s-law discharge time at constant current: <span class="math notranslate nohighlight">\(t = C_p / I^k\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(C_p\)</span> (the “Peukert capacity”, in <span class="math notranslate nohighlight">\(A^k\cdot h\)</span>) and the
+Peukert exponent <span class="math notranslate nohighlight">\(k\)</span> are empirical constants of a given
+battery chemistry/construction, fitted from discharge tests at
+several currents (Linden &amp; Reddy, <em>Handbook of Batteries</em>, 3rd ed.,
+Ch. 3.3, eq. 3.5). <span class="math notranslate nohighlight">\(k=1\)</span> is the ideal case (discharge time
+inversely proportional to current, i.e. a current-independent
+delivered capacity, see <a class="reference internal" href="#chemistrykit.electrochem.effective_capacity" title="chemistrykit.electrochem.effective_capacity"><code class="xref py py-func docutils literal notranslate"><span class="pre">effective_capacity()</span></code></a>); real batteries
+typically have <span class="math notranslate nohighlight">\(k&gt;1\)</span> (lead-acid: <span class="math notranslate nohighlight">\(k\approx1.1-1.3\)</span>),
+reflecting the fact that a higher discharge rate delivers <em>less</em>
+total capacity than a lower one before the same cutoff voltage is
+reached.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>capacity_peukert</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Peukert capacity constant <span class="math notranslate nohighlight">\(C_p\)</span>, in <span class="math notranslate nohighlight">\(A^k\cdot h\)</span>
+(numerically equal to the rated capacity in Ah only when <cite>k=1</cite>).</p></li>
+<li><p><strong>current</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Constant discharge current, in A.</p></li>
+<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Peukert exponent, <span class="math notranslate nohighlight">\(\geq1\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float or ndarray</em> – Discharge time, in h.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>At <cite>k=1</cite> (the ideal case), discharge time is exactly inversely
+proportional to current:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">peukert_discharge_time</span><span class="p">(</span><span class="n">capacity_peukert</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">current</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">peukert_discharge_time</span><span class="p">(</span><span class="n">capacity_peukert</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">current</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">2.5</span>
+</pre></div>
+</div>
+<p>At <cite>k&gt;1</cite>, doubling the current more than halves the discharge time:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t1</span> <span class="o">=</span> <span class="n">peukert_discharge_time</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">current</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t2</span> <span class="o">=</span> <span class="n">peukert_discharge_time</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">current</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">t2</span> <span class="o">&lt;</span> <span class="n">t1</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.standard_cell_potential">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">standard_cell_potential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cathode_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anode_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/standard_potentials.html#standard_cell_potential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.standard_cell_potential" title="Link to this definition">#</a></dt>
+<dd><p>Look up two half-reactions by name in <code class="xref py py-data docutils literal notranslate"><span class="pre">STANDARD_REDUCTION_POTENTIALS</span></code> and combine them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cathode_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Keys into <code class="xref py py-data docutils literal notranslate"><span class="pre">STANDARD_REDUCTION_POTENTIALS</span></code>.</p></li>
+<li><p><strong>anode_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Keys into <code class="xref py py-data docutils literal notranslate"><span class="pre">STANDARD_REDUCTION_POTENTIALS</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – Standard cell potential, in V.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">standard_cell_potential</span><span class="p">(</span><span class="s2">"Cu2+/Cu"</span><span class="p">,</span> <span class="s2">"Zn2+/Zn"</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">1.1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.tafel_overpotential">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">tafel_overpotential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.31446261815324</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">F</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">96485.33212331001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'anodic'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/butler_volmer.html#tafel_overpotential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.tafel_overpotential" title="Link to this definition">#</a></dt>
+<dd><p>The linearized Tafel-equation overpotential at high <span class="math notranslate nohighlight">\(|\eta|\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\eta = b\log_{10}(i/i_0)\)</span>, dropping the Butler-Volmer
+equation’s back-reaction exponential term (valid once
+<span class="math notranslate nohighlight">\(|\eta|\gtrsim100/n\)</span> mV, where that term is negligible
+compared to the dominant one – Bard &amp; Faulkner, <em>Electrochemical
+Methods</em>, 2nd ed., Ch. 3.4). <strong>Approximation flagged</strong>: this is the
+high-overpotential limit of <a class="reference internal" href="#chemistrykit.electrochem.butler_volmer_current_density" title="chemistrykit.electrochem.butler_volmer_current_density"><code class="xref py py-func docutils literal notranslate"><span class="pre">butler_volmer_current_density()</span></code></a>,
+not the exact equation – it is inaccurate near <span class="math notranslate nohighlight">\(\eta=0\)</span> where
+both exponential terms matter (see the module examples gallery for a
+numerical comparison across overpotential).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Current density (same sign/branch as <cite>branch</cite>), in the same
+units as <cite>i0</cite>.</p></li>
+<li><p><strong>i0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Exchange current density.</p></li>
+<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>R_gas</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>F</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>branch</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Overpotential, in V.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>At high overpotential the Tafel approximation agrees closely with
+the full Butler-Volmer equation (checked here to better than 0.5%
+at 300 mV):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i0</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eta_true</span> <span class="o">=</span> <span class="mf">0.30</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i_full</span> <span class="o">=</span> <span class="n">butler_volmer_current_density</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span> <span class="n">eta_true</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eta_tafel</span> <span class="o">=</span> <span class="n">tafel_overpotential</span><span class="p">(</span><span class="n">i_full</span><span class="p">,</span> <span class="n">i0</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="s2">"anodic"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">eta_tafel</span> <span class="o">-</span> <span class="n">eta_true</span><span class="p">)</span> <span class="o">/</span> <span class="n">eta_true</span> <span class="o">&lt;</span> <span class="mf">0.005</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.electrochem.tafel_slope">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">tafel_slope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.31446261815324</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">F</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">96485.33212331001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'anodic'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/butler_volmer.html#tafel_slope"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.tafel_slope" title="Link to this definition">#</a></dt>
+<dd><p>The Tafel slope <span class="math notranslate nohighlight">\(b\)</span>, in V per decade of current.</p>
+<p>From linearizing the dominant (far-from-equilibrium) exponential
+term of the Butler-Volmer equation and rewriting in terms of
+<span class="math notranslate nohighlight">\(\log_{10}i\)</span> (Bard &amp; Faulkner, <em>Electrochemical Methods</em>, 2nd
+ed., Ch. 3.4, eq. 3.4.11-3.4.13):</p>
+<div class="math notranslate nohighlight">
+\[b_{anodic} = \frac{2.303RT}{\alpha n F}, \qquad
+b_{cathodic} = \frac{2.303RT}{(1-\alpha) n F}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Charge transfer coefficient.</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Electrons transferred.</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>R_gas</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>F</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>branch</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Which high-overpotential branch’s slope to return.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – Tafel slope, in V/decade (positive for the anodic branch,
+negative for the cathodic one, matching the sign convention
+that <span class="math notranslate nohighlight">\(\eta\)</span> increases with <span class="math notranslate nohighlight">\(\log_{10}i\)</span> on the
+anodic branch and decreases with it on the cathodic one).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>With <cite>alpha=0.5</cite> and a one-electron step at 25 degC, the anodic and
+cathodic slopes have equal magnitude (the symmetric-barrier case):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b_a</span> <span class="o">=</span> <span class="n">tafel_slope</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="s2">"anodic"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b_c</span> <span class="o">=</span> <span class="n">tafel_slope</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="s2">"cathodic"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">b_a</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">b_c</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">(0.1183, -0.1183)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="crystal.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">chemistrykit.crystal</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="kinetics.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">chemistrykit.kinetics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.BatteryDischargeModel"><code class="docutils literal notranslate"><span class="pre">BatteryDischargeModel</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.BatteryDischargeModel.discharge_curve"><code class="docutils literal notranslate"><span class="pre">BatteryDischargeModel.discharge_curve()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.BatteryDischargeModel.state_of_charge"><code class="docutils literal notranslate"><span class="pre">BatteryDischargeModel.state_of_charge()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.BatteryDischargeModel.terminal_voltage"><code class="docutils literal notranslate"><span class="pre">BatteryDischargeModel.terminal_voltage()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.ConstantCurrentBattery"><code class="docutils literal notranslate"><span class="pre">ConstantCurrentBattery</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.ConstantCurrentBattery.discharge_time"><code class="docutils literal notranslate"><span class="pre">ConstantCurrentBattery.discharge_time()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.ConstantCurrentBattery.state_of_charge"><code class="docutils literal notranslate"><span class="pre">ConstantCurrentBattery.state_of_charge()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.ConstantCurrentBattery.terminal_voltage"><code class="docutils literal notranslate"><span class="pre">ConstantCurrentBattery.terminal_voltage()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.DischargeResult"><code class="docutils literal notranslate"><span class="pre">DischargeResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.DischargeResult.state_of_charge"><code class="docutils literal notranslate"><span class="pre">DischargeResult.state_of_charge</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.DischargeResult.t"><code class="docutils literal notranslate"><span class="pre">DischargeResult.t</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.DischargeResult.voltage"><code class="docutils literal notranslate"><span class="pre">DischargeResult.voltage</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.HalfReaction"><code class="docutils literal notranslate"><span class="pre">HalfReaction</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.HalfReaction.E_standard"><code class="docutils literal notranslate"><span class="pre">HalfReaction.E_standard</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.HalfReaction.n"><code class="docutils literal notranslate"><span class="pre">HalfReaction.n</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.HalfReaction.name"><code class="docutils literal notranslate"><span class="pre">HalfReaction.name</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.TafelFit"><code class="docutils literal notranslate"><span class="pre">TafelFit</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.TafelFit.exchange_current_density"><code class="docutils literal notranslate"><span class="pre">TafelFit.exchange_current_density</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.TafelFit.predict"><code class="docutils literal notranslate"><span class="pre">TafelFit.predict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.TafelFit.r_squared"><code class="docutils literal notranslate"><span class="pre">TafelFit.r_squared</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.TafelFit.tafel_slope"><code class="docutils literal notranslate"><span class="pre">TafelFit.tafel_slope</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.activity_corrected_reaction_quotient"><code class="docutils literal notranslate"><span class="pre">activity_corrected_reaction_quotient()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.balance_redox_reaction"><code class="docutils literal notranslate"><span class="pre">balance_redox_reaction()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.butler_volmer_current_density"><code class="docutils literal notranslate"><span class="pre">butler_volmer_current_density()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.cell_potential"><code class="docutils literal notranslate"><span class="pre">cell_potential()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.charge_from_current"><code class="docutils literal notranslate"><span class="pre">charge_from_current()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.concentration_cell_potential"><code class="docutils literal notranslate"><span class="pre">concentration_cell_potential()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.effective_capacity"><code class="docutils literal notranslate"><span class="pre">effective_capacity()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.exchange_current_density"><code class="docutils literal notranslate"><span class="pre">exchange_current_density()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.faradays_law_mass"><code class="docutils literal notranslate"><span class="pre">faradays_law_mass()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.fit_tafel_plot"><code class="docutils literal notranslate"><span class="pre">fit_tafel_plot()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.is_spontaneous"><code class="docutils literal notranslate"><span class="pre">is_spontaneous()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.mass_from_charge"><code class="docutils literal notranslate"><span class="pre">mass_from_charge()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.minimum_applied_voltage_electrolytic"><code class="docutils literal notranslate"><span class="pre">minimum_applied_voltage_electrolytic()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.moles_from_charge"><code class="docutils literal notranslate"><span class="pre">moles_from_charge()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.nernst_potential"><code class="docutils literal notranslate"><span class="pre">nernst_potential()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.nernst_potential_with_activity"><code class="docutils literal notranslate"><span class="pre">nernst_potential_with_activity()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.peukert_discharge_time"><code class="docutils literal notranslate"><span class="pre">peukert_discharge_time()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.standard_cell_potential"><code class="docutils literal notranslate"><span class="pre">standard_cell_potential()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.tafel_overpotential"><code class="docutils literal notranslate"><span class="pre">tafel_overpotential()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.electrochem.tafel_slope"><code class="docutils literal notranslate"><span class="pre">tafel_slope()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/api/electrochem.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, chemistrykit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

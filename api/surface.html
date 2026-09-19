@@ -1,0 +1,1577 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>chemistrykit.surface &#8212; chemistrykit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/surface';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="chemistrykit.thermo" href="thermo.html" />
+    <link rel="prev" title="chemistrykit.structure" href="structure.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/chemistrykit_logo_transparent.png" class="logo__image only-light" alt="chemistrykit logo"/>
+    <img src="../_static/chemistrykit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="chemistrykit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="analytical.html">chemistrykit.analytical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crystal.html">chemistrykit.crystal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electrochem.html">chemistrykit.electrochem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinetics.html">chemistrykit.kinetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="md.html">chemistrykit.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photochem.html">chemistrykit.photochem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polymer.html">chemistrykit.polymer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quantum.html">chemistrykit.quantum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions.html">chemistrykit.solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spectro.html">chemistrykit.spectro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmech.html">chemistrykit.statmech</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">chemistrykit.structure</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">chemistrykit.surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermo.html">chemistrykit.thermo</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">chemistrykit.surface</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="chemistrykit-surface">
+<h1>chemistrykit.surface<a class="headerlink" href="#chemistrykit-surface" title="Link to this heading">#</a></h1>
+<div class="subpkg-nav docutils container">
+<p><a class="reference internal" href="../_generated/subpackages/surface.html"><span class="doc">chemistrykit.surface hub</span></a> · <a class="reference internal" href="../history/surface_breakthroughs.html"><span class="doc">History</span></a> · <a class="reference internal" href="gallery/surface/index.html"><span class="doc">Examples</span></a> · <a class="reference internal" href="#"><span class="doc">API reference</span></a></p>
+</div>
+<p id="module-chemistrykit.surface">chemistrykit.surface: surface chemistry and heterogeneous catalysis.</p>
+<p>Langmuir, Freundlich, and BET adsorption isotherms, each with its
+standard linearization for fitting parameters from data; Langmuir-
+Hinshelwood surface-reaction kinetics (single- and dual-site mechanisms);
+and a turnover-number/rate-enhancement catalysis model built on
+<a class="reference internal" href="kinetics.html#module-chemistrykit.kinetics" title="chemistrykit.kinetics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.kinetics</span></code></a>’s Arrhenius equation.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.surface.AdsorptionIsotherm">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">AdsorptionIsotherm</span></span><a class="reference internal" href="../_modules/chemistrykit/surface/core/base_system.html#AdsorptionIsotherm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.AdsorptionIsotherm" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<p>Common interface for an equilibrium adsorption isotherm.</p>
+<p>Concrete subclasses (<a class="reference internal" href="#chemistrykit.surface.LangmuirIsotherm" title="chemistrykit.surface.systems.langmuir.LangmuirIsotherm"><code class="xref py py-class docutils literal notranslate"><span class="pre">chemistrykit.surface.systems.langmuir.LangmuirIsotherm</span></code></a>,
+<a class="reference internal" href="#chemistrykit.surface.FreundlichIsotherm" title="chemistrykit.surface.systems.freundlich.FreundlichIsotherm"><code class="xref py py-class docutils literal notranslate"><span class="pre">chemistrykit.surface.systems.freundlich.FreundlichIsotherm</span></code></a>,
+<a class="reference internal" href="#chemistrykit.surface.BETIsotherm" title="chemistrykit.surface.systems.bet.BETIsotherm"><code class="xref py py-class docutils literal notranslate"><span class="pre">chemistrykit.surface.systems.bet.BETIsotherm</span></code></a>) implement
+<a class="reference internal" href="#chemistrykit.surface.AdsorptionIsotherm.loading" title="chemistrykit.surface.AdsorptionIsotherm.loading"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loading()</span></code></a>, the amount adsorbed at a given equilibrium pressure;
+<a class="reference internal" href="#chemistrykit.surface.AdsorptionIsotherm.fractional_coverage" title="chemistrykit.surface.AdsorptionIsotherm.fractional_coverage"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fractional_coverage()</span></code></a> (relative to a model-specific saturation
+loading) is then available for every subclass for free.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.surface.AdsorptionIsotherm.fractional_coverage">
+<span class="sig-name descname"><span class="pre">fractional_coverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/core/base_system.html#AdsorptionIsotherm.fractional_coverage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.AdsorptionIsotherm.fractional_coverage" title="Link to this definition">#</a></dt>
+<dd><p>Return the loading as a fraction of the saturation (monolayer) loading.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – In <span class="math notranslate nohighlight">\([0, 1]\)</span> for a genuine monolayer model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.surface.AdsorptionIsotherm.loading">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">loading</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/core/base_system.html#AdsorptionIsotherm.loading"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.AdsorptionIsotherm.loading" title="Link to this definition">#</a></dt>
+<dd><p>Return the amount adsorbed at equilibrium pressure(s) <cite>P</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Equilibrium (partial) pressure of the adsorbate.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Amount adsorbed, in whatever units the model’s capacity
+parameter was given (e.g. mol/g, cm^3(STP)/g).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.surface.AdsorptionIsotherm.saturation_loading">
+<span class="sig-name descname"><span class="pre">saturation_loading</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></span><a class="headerlink" href="#chemistrykit.surface.AdsorptionIsotherm.saturation_loading" title="Link to this definition">#</a></dt>
+<dd><p>Saturation (monolayer) loading used to normalize
+<a class="reference internal" href="#chemistrykit.surface.AdsorptionIsotherm.fractional_coverage" title="chemistrykit.surface.AdsorptionIsotherm.fractional_coverage"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fractional_coverage()</span></code></a>. Concrete subclasses set this in
+<code class="docutils literal notranslate"><span class="pre">__init__</span></code> (Langmuir/BET: a genuine monolayer capacity;
+Freundlich has no saturation loading, so its subclass overrides
+<a class="reference internal" href="#chemistrykit.surface.AdsorptionIsotherm.fractional_coverage" title="chemistrykit.surface.AdsorptionIsotherm.fractional_coverage"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fractional_coverage()</span></code></a> to raise instead).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.surface.BETFit">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">BETFit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_squared</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/bet.html#BETFit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.BETFit" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Result of fitting loading-vs-pressure data to the BET isotherm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Vm</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>C</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>P0</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>r_squared</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.surface.BETFit.C">
+<span class="sig-name descname"><span class="pre">C</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.surface.BETFit.C" title="Link to this definition">#</a></dt>
+<dd><p>Fitted BET energy constant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.surface.BETFit.P0">
+<span class="sig-name descname"><span class="pre">P0</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.surface.BETFit.P0" title="Link to this definition">#</a></dt>
+<dd><p>Saturation vapor pressure used (an input to the fit, not itself fitted).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.surface.BETFit.Vm">
+<span class="sig-name descname"><span class="pre">Vm</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.surface.BETFit.Vm" title="Link to this definition">#</a></dt>
+<dd><p>Fitted monolayer capacity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.surface.BETFit.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/bet.html#BETFit.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.BETFit.predict" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate the fitted BET isotherm at pressure(s) <cite>P</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.surface.BETFit.r_squared">
+<span class="sig-name descname"><span class="pre">r_squared</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.surface.BETFit.r_squared" title="Link to this definition">#</a></dt>
+<dd><p>Coefficient of determination of the linearized fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.surface.BETFit.to_isotherm">
+<span class="sig-name descname"><span class="pre">to_isotherm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/bet.html#BETFit.to_isotherm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.BETFit.to_isotherm" title="Link to this definition">#</a></dt>
+<dd><p>Return a <a class="reference internal" href="#chemistrykit.surface.BETIsotherm" title="chemistrykit.surface.BETIsotherm"><code class="xref py py-class docutils literal notranslate"><span class="pre">BETIsotherm</span></code></a> built from the fitted parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.surface.BETIsotherm" title="chemistrykit.surface.systems.bet.BETIsotherm"><code class="xref py py-class docutils literal notranslate"><span class="pre">BETIsotherm</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.surface.BETIsotherm">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">BETIsotherm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/bet.html#BETIsotherm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.BETIsotherm" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.surface.AdsorptionIsotherm" title="chemistrykit.surface.core.base_system.AdsorptionIsotherm"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdsorptionIsotherm</span></code></a></p>
+<p>The BET multilayer adsorption isotherm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Vm</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Monolayer capacity.</p></li>
+<li><p><strong>C</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – BET energy constant.</p></li>
+<li><p><strong>P0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Saturation vapor pressure of the adsorbate.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">iso</span> <span class="o">=</span> <span class="n">BETIsotherm</span><span class="p">(</span><span class="n">Vm</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">P0</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">iso</span><span class="o">.</span><span class="n">loading</span><span class="p">(</span><span class="n">P</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">2.0387</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.surface.BETIsotherm.loading">
+<span class="sig-name descname"><span class="pre">loading</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/bet.html#BETIsotherm.loading"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.BETIsotherm.loading" title="Link to this definition">#</a></dt>
+<dd><p>Return the amount adsorbed at equilibrium pressure(s) <cite>P</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Equilibrium (partial) pressure of the adsorbate.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Amount adsorbed, in whatever units the model’s capacity
+parameter was given (e.g. mol/g, cm^3(STP)/g).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.surface.CatalyticRateComparison">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">CatalyticRateComparison</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k_uncatalyzed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_catalyzed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rate_enhancement</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta_Ea</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/catalysis.html#CatalyticRateComparison"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.CatalyticRateComparison" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Result of comparing a catalyzed and uncatalyzed rate constant at a given temperature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k_uncatalyzed</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>k_catalyzed</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>rate_enhancement</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>delta_Ea</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.surface.CatalyticRateComparison.delta_Ea">
+<span class="sig-name descname"><span class="pre">delta_Ea</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.surface.CatalyticRateComparison.delta_Ea" title="Link to this definition">#</a></dt>
+<dd><p>Activation-energy reduction <span class="math notranslate nohighlight">\(E_{a,uncat}-E_{a,cat}\)</span>, in J/mol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.surface.CatalyticRateComparison.k_catalyzed">
+<span class="sig-name descname"><span class="pre">k_catalyzed</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.surface.CatalyticRateComparison.k_catalyzed" title="Link to this definition">#</a></dt>
+<dd><p>Catalyzed rate constant at temperature <cite>T</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.surface.CatalyticRateComparison.k_uncatalyzed">
+<span class="sig-name descname"><span class="pre">k_uncatalyzed</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.surface.CatalyticRateComparison.k_uncatalyzed" title="Link to this definition">#</a></dt>
+<dd><p>Uncatalyzed rate constant at temperature <cite>T</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.surface.CatalyticRateComparison.rate_enhancement">
+<span class="sig-name descname"><span class="pre">rate_enhancement</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.surface.CatalyticRateComparison.rate_enhancement" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(k_{catalyzed}/k_{uncatalyzed}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.surface.FreundlichFit">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">FreundlichFit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Kf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_squared</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/freundlich.html#FreundlichFit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.FreundlichFit" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Result of fitting loading-vs-pressure data to the Freundlich isotherm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Kf</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>r_squared</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.surface.FreundlichFit.Kf">
+<span class="sig-name descname"><span class="pre">Kf</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.surface.FreundlichFit.Kf" title="Link to this definition">#</a></dt>
+<dd><p>Fitted Freundlich capacity constant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.surface.FreundlichFit.n">
+<span class="sig-name descname"><span class="pre">n</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.surface.FreundlichFit.n" title="Link to this definition">#</a></dt>
+<dd><p>Fitted Freundlich heterogeneity exponent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.surface.FreundlichFit.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/freundlich.html#FreundlichFit.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.FreundlichFit.predict" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate the fitted Freundlich isotherm at pressure(s) <cite>P</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.surface.FreundlichFit.r_squared">
+<span class="sig-name descname"><span class="pre">r_squared</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.surface.FreundlichFit.r_squared" title="Link to this definition">#</a></dt>
+<dd><p>Coefficient of determination of the linearized (<code class="docutils literal notranslate"><span class="pre">log</span> <span class="pre">q</span></code> vs <code class="docutils literal notranslate"><span class="pre">log</span> <span class="pre">P</span></code>) fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.surface.FreundlichFit.to_isotherm">
+<span class="sig-name descname"><span class="pre">to_isotherm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/freundlich.html#FreundlichFit.to_isotherm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.FreundlichFit.to_isotherm" title="Link to this definition">#</a></dt>
+<dd><p>Return a <a class="reference internal" href="#chemistrykit.surface.FreundlichIsotherm" title="chemistrykit.surface.FreundlichIsotherm"><code class="xref py py-class docutils literal notranslate"><span class="pre">FreundlichIsotherm</span></code></a> built from the fitted parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.surface.FreundlichIsotherm" title="chemistrykit.surface.systems.freundlich.FreundlichIsotherm"><code class="xref py py-class docutils literal notranslate"><span class="pre">FreundlichIsotherm</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.surface.FreundlichIsotherm">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">FreundlichIsotherm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Kf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/freundlich.html#FreundlichIsotherm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.FreundlichIsotherm" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.surface.AdsorptionIsotherm" title="chemistrykit.surface.core.base_system.AdsorptionIsotherm"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdsorptionIsotherm</span></code></a></p>
+<p>The Freundlich adsorption isotherm <span class="math notranslate nohighlight">\(q(P) = K_f P^{1/n}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Kf</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Freundlich capacity constant.</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Freundlich heterogeneity exponent.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Unlike <a class="reference internal" href="#chemistrykit.surface.LangmuirIsotherm" title="chemistrykit.surface.systems.langmuir.LangmuirIsotherm"><code class="xref py py-class docutils literal notranslate"><span class="pre">LangmuirIsotherm</span></code></a>,
+the Freundlich isotherm has no saturation (monolayer) loading, so
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">fractional_coverage()</span></code>
+is not physically meaningful here and raises <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#NotImplementedError" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotImplementedError</span></code></a>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">iso</span> <span class="o">=</span> <span class="n">FreundlichIsotherm</span><span class="p">(</span><span class="n">Kf</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">iso</span><span class="o">.</span><span class="n">loading</span><span class="p">(</span><span class="n">P</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">2.5</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.surface.FreundlichIsotherm.fractional_coverage">
+<span class="sig-name descname"><span class="pre">fractional_coverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/freundlich.html#FreundlichIsotherm.fractional_coverage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.FreundlichIsotherm.fractional_coverage" title="Link to this definition">#</a></dt>
+<dd><p>Return the loading as a fraction of the saturation (monolayer) loading.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – In <span class="math notranslate nohighlight">\([0, 1]\)</span> for a genuine monolayer model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.surface.FreundlichIsotherm.loading">
+<span class="sig-name descname"><span class="pre">loading</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/freundlich.html#FreundlichIsotherm.loading"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.FreundlichIsotherm.loading" title="Link to this definition">#</a></dt>
+<dd><p>Return the amount adsorbed at equilibrium pressure(s) <cite>P</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Equilibrium (partial) pressure of the adsorbate.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Amount adsorbed, in whatever units the model’s capacity
+parameter was given (e.g. mol/g, cm^3(STP)/g).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.surface.LangmuirFit">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">LangmuirFit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">K</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_squared</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/langmuir.html#LangmuirFit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.LangmuirFit" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Result of fitting loading-vs-pressure data to the Langmuir isotherm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>K</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>qmax</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>r_squared</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.surface.LangmuirFit.K">
+<span class="sig-name descname"><span class="pre">K</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.surface.LangmuirFit.K" title="Link to this definition">#</a></dt>
+<dd><p>Fitted Langmuir equilibrium constant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.surface.LangmuirFit.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/langmuir.html#LangmuirFit.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.LangmuirFit.predict" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate the fitted Langmuir isotherm at pressure(s) <cite>P</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.surface.LangmuirFit.qmax">
+<span class="sig-name descname"><span class="pre">qmax</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.surface.LangmuirFit.qmax" title="Link to this definition">#</a></dt>
+<dd><p>Fitted monolayer capacity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.surface.LangmuirFit.r_squared">
+<span class="sig-name descname"><span class="pre">r_squared</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.surface.LangmuirFit.r_squared" title="Link to this definition">#</a></dt>
+<dd><p>Coefficient of determination of the linearized (<code class="docutils literal notranslate"><span class="pre">1/q</span></code> vs <code class="docutils literal notranslate"><span class="pre">1/P</span></code>) fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.surface.LangmuirFit.to_isotherm">
+<span class="sig-name descname"><span class="pre">to_isotherm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/langmuir.html#LangmuirFit.to_isotherm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.LangmuirFit.to_isotherm" title="Link to this definition">#</a></dt>
+<dd><p>Return a <a class="reference internal" href="#chemistrykit.surface.LangmuirIsotherm" title="chemistrykit.surface.LangmuirIsotherm"><code class="xref py py-class docutils literal notranslate"><span class="pre">LangmuirIsotherm</span></code></a> built from the fitted parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.surface.LangmuirIsotherm" title="chemistrykit.surface.systems.langmuir.LangmuirIsotherm"><code class="xref py py-class docutils literal notranslate"><span class="pre">LangmuirIsotherm</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.surface.LangmuirIsotherm">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">LangmuirIsotherm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">K</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/langmuir.html#LangmuirIsotherm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.LangmuirIsotherm" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.surface.AdsorptionIsotherm" title="chemistrykit.surface.core.base_system.AdsorptionIsotherm"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdsorptionIsotherm</span></code></a></p>
+<p>The Langmuir monolayer adsorption isotherm <span class="math notranslate nohighlight">\(q(P) = q_{max}\,KP/(1+KP)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>K</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Langmuir equilibrium constant, inverse to <cite>P</cite>’s units.</p></li>
+<li><p><strong>qmax</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Monolayer (saturation) capacity, in whatever amount unit <cite>q</cite> is
+measured in (e.g. mol/g).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">iso</span> <span class="o">=</span> <span class="n">LangmuirIsotherm</span><span class="p">(</span><span class="n">K</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">qmax</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">iso</span><span class="o">.</span><span class="n">loading</span><span class="p">(</span><span class="n">P</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">2.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">iso</span><span class="o">.</span><span class="n">fractional_coverage</span><span class="p">(</span><span class="n">P</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.surface.LangmuirIsotherm.half_saturation_pressure">
+<span class="sig-name descname"><span class="pre">half_saturation_pressure</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/langmuir.html#LangmuirIsotherm.half_saturation_pressure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.LangmuirIsotherm.half_saturation_pressure" title="Link to this definition">#</a></dt>
+<dd><p>Return the pressure <span class="math notranslate nohighlight">\(P=1/K\)</span> at which coverage is exactly one-half.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">LangmuirIsotherm</span><span class="p">(</span><span class="n">K</span><span class="o">=</span><span class="mf">4.0</span><span class="p">)</span><span class="o">.</span><span class="n">half_saturation_pressure</span><span class="p">()</span>
+<span class="go">0.25</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.surface.LangmuirIsotherm.loading">
+<span class="sig-name descname"><span class="pre">loading</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/langmuir.html#LangmuirIsotherm.loading"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.LangmuirIsotherm.loading" title="Link to this definition">#</a></dt>
+<dd><p>Return the amount adsorbed at equilibrium pressure(s) <cite>P</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Equilibrium (partial) pressure of the adsorbate.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Amount adsorbed, in whatever units the model’s capacity
+parameter was given (e.g. mol/g, cm^3(STP)/g).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.surface.bet_loading">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">bet_loading</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/bet.html#bet_loading"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.bet_loading" title="Link to this definition">#</a></dt>
+<dd><p>The BET isotherm <span class="math notranslate nohighlight">\(V(P) = V_m Cx/[(1-x)(1-x+Cx)]\)</span>, <span class="math notranslate nohighlight">\(x=P/P_0\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Vm</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Monolayer capacity (e.g. cm^3(STP)/g or mol/g).</p></li>
+<li><p><strong>C</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – BET energy constant (<span class="math notranslate nohighlight">\(C \gg 1\)</span> gives a sharp “knee” at
+monolayer completion; <span class="math notranslate nohighlight">\(C \to 1\)</span> washes it out).</p></li>
+<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Equilibrium pressure, in the same units as <cite>P0</cite>.</p></li>
+<li><p><strong>P0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Saturation vapor pressure of the adsorbate at the experiment’s
+temperature.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Volume (or amount) adsorbed. Diverges as <span class="math notranslate nohighlight">\(P \to P_0\)</span>
+(formal bulk condensation); only valid for <span class="math notranslate nohighlight">\(P &lt; P_0\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>At zero pressure nothing is adsorbed:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">bet_loading</span><span class="p">(</span><span class="n">Vm</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">P0</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)),</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<p>BET reduces to the Langmuir isotherm when the saturation pressure is
+far above the working pressure range (multilayer condensation
+suppressed) – see the module docstring for the derivation:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.surface.systems.langmuir</span><span class="w"> </span><span class="kn">import</span> <span class="n">langmuir_coverage</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">K</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P0</span> <span class="o">=</span> <span class="mf">1.0e7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Vm</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="n">K</span> <span class="o">*</span> <span class="n">P0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">V_bet</span> <span class="o">=</span> <span class="n">bet_loading</span><span class="p">(</span><span class="n">Vm</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">P0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">theta_langmuir</span> <span class="o">=</span> <span class="n">langmuir_coverage</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">V_bet</span><span class="p">,</span> <span class="n">Vm</span> <span class="o">*</span> <span class="n">theta_langmuir</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.surface.compare_catalyzed_rate">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">compare_catalyzed_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ea_uncatalyzed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ea_catalyzed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_uncatalyzed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_catalyzed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.31446261815324</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/catalysis.html#compare_catalyzed_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.compare_catalyzed_rate" title="Link to this definition">#</a></dt>
+<dd><p>Compare catalyzed vs. uncatalyzed Arrhenius rate constants at temperature <cite>T</cite>.</p>
+<p>Both rate constants are evaluated with
+<code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.kinetics.systems.arrhenius.arrhenius_rate_constant()</span></code>;
+when the two mechanisms share the same pre-exponential factor <cite>A</cite>
+(the common simplifying assumption – see Atkins &amp; de Paula, <em>Physical
+Chemistry</em>, 11th ed., Ch. 22.5), the rate enhancement reduces to a
+pure exponential in the activation-energy reduction:</p>
+<div class="math notranslate nohighlight">
+\[\frac{k_{cat}}{k_{uncat}} = \exp\!\left(\frac{E_{a,uncat}-E_{a,cat}}{RT}\right)\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Ea_uncatalyzed</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Activation energies of the uncatalyzed and catalyzed pathways, in
+J/mol (<code class="docutils literal notranslate"><span class="pre">Ea_catalyzed</span> <span class="pre">&lt;</span> <span class="pre">Ea_uncatalyzed</span></code> for a genuine catalyst).</p></li>
+<li><p><strong>Ea_catalyzed</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Activation energies of the uncatalyzed and catalyzed pathways, in
+J/mol (<code class="docutils literal notranslate"><span class="pre">Ea_catalyzed</span> <span class="pre">&lt;</span> <span class="pre">Ea_uncatalyzed</span></code> for a genuine catalyst).</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Absolute temperature, in K.</p></li>
+<li><p><strong>A_uncatalyzed</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pre-exponential factor of the uncatalyzed pathway.</p></li>
+<li><p><strong>A_catalyzed</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Pre-exponential factor of the catalyzed pathway. Defaults to
+<cite>A_uncatalyzed</cite> (the common simplifying assumption that the
+catalyst changes only <span class="math notranslate nohighlight">\(E_a\)</span>, not the attempt frequency).</p></li>
+<li><p><strong>R_gas</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Gas constant, in J mol^-1 K^-1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.surface.CatalyticRateComparison" title="chemistrykit.surface.systems.catalysis.CatalyticRateComparison"><code class="xref py py-class docutils literal notranslate"><span class="pre">CatalyticRateComparison</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>CatalyticRateComparison</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>With equal pre-exponential factors, the rate enhancement is exactly
+<span class="math notranslate nohighlight">\(\exp(\Delta E_a/RT)\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">comparison</span> <span class="o">=</span> <span class="n">compare_catalyzed_rate</span><span class="p">(</span><span class="n">Ea_uncatalyzed</span><span class="o">=</span><span class="mf">80e3</span><span class="p">,</span> <span class="n">Ea_catalyzed</span><span class="o">=</span><span class="mf">50e3</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">298.15</span><span class="p">,</span> <span class="n">A_uncatalyzed</span><span class="o">=</span><span class="mf">1e13</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expected</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">80e3</span> <span class="o">-</span> <span class="mf">50e3</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">8.31446261815324</span> <span class="o">*</span> <span class="mf">298.15</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">comparison</span><span class="o">.</span><span class="n">rate_enhancement</span> <span class="o">/</span> <span class="n">expected</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>A catalyst that lowers <span class="math notranslate nohighlight">\(E_a\)</span> by 30 kJ/mol at room temperature
+speeds the reaction up by many orders of magnitude:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">comparison</span><span class="o">.</span><span class="n">rate_enhancement</span> <span class="o">&gt;</span> <span class="mf">1.0e5</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.surface.fit_bet">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">fit_bet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/bet.html#fit_bet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.fit_bet" title="Link to this definition">#</a></dt>
+<dd><p>Fit loading-vs-pressure data to the BET isotherm via its linearization.</p>
+<p>The BET equation rearranges to a straight line in <span class="math notranslate nohighlight">\(x=P/P_0\)</span>
+(Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed., Ch. 22.1;
+Brunauer, Emmett &amp; Teller 1938):</p>
+<div class="math notranslate nohighlight">
+\[\frac{x}{V(1-x)} = \frac{1}{V_m C} + \frac{C-1}{V_m C}\,x\]</div>
+<p>so plotting <span class="math notranslate nohighlight">\(x/[V(1-x)]\)</span> against <cite>x</cite> gives a straight line of
+intercept <span class="math notranslate nohighlight">\(1/(V_mC)\)</span> and slope <span class="math notranslate nohighlight">\((C-1)/(V_mC)\)</span>; solving
+the two simultaneously gives <span class="math notranslate nohighlight">\(V_m = 1/(\text{slope}+\text{intercept})\)</span>
+and <span class="math notranslate nohighlight">\(C = 1 + \text{slope}/\text{intercept}\)</span>. Fitting is normally
+restricted to the range <span class="math notranslate nohighlight">\(0.05 \lesssim x \lesssim 0.35\)</span>, where
+the BET assumptions are most reliable (Atkins &amp; de Paula, <em>loc. cit.</em>)
+– not enforced here, since this function only performs the
+regression on whatever data it is given.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>P</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Equilibrium pressures (at least 2 distinct values, all <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">P0</span></code>).</p></li>
+<li><p><strong>V</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Corresponding measured adsorbed volumes/amounts.</p></li>
+<li><p><strong>P0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Saturation vapor pressure of the adsorbate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.surface.BETFit" title="chemistrykit.surface.systems.bet.BETFit"><code class="xref py py-class docutils literal notranslate"><span class="pre">BETFit</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>BETFit</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Generate exact data from a known <span class="math notranslate nohighlight">\((V_m, C)\)</span> and recover them:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">P0</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">V</span> <span class="o">=</span> <span class="n">BETIsotherm</span><span class="p">(</span><span class="n">Vm</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">80.0</span><span class="p">,</span> <span class="n">P0</span><span class="o">=</span><span class="n">P0</span><span class="p">)</span><span class="o">.</span><span class="n">loading</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fit</span> <span class="o">=</span> <span class="n">fit_bet</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">P0</span><span class="o">=</span><span class="n">P0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">Vm</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">C</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">(5.0, 80.0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">r_squared</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.surface.fit_freundlich">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">fit_freundlich</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/freundlich.html#fit_freundlich"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.fit_freundlich" title="Link to this definition">#</a></dt>
+<dd><p>Fit loading-vs-pressure data to the Freundlich isotherm via its linearization.</p>
+<p>Taking logarithms of <span class="math notranslate nohighlight">\(q = K_f P^{1/n}\)</span> gives a straight line
+(Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed., Ch. 22.1):</p>
+<div class="math notranslate nohighlight">
+\[\ln q = \ln K_f + \frac{1}{n}\ln P\]</div>
+<p>so plotting <span class="math notranslate nohighlight">\(\ln q\)</span> against <span class="math notranslate nohighlight">\(\ln P\)</span> gives a straight line
+of intercept <span class="math notranslate nohighlight">\(\ln K_f\)</span> and slope <span class="math notranslate nohighlight">\(1/n\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>P</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Equilibrium pressures (at least 2 distinct positive values).</p></li>
+<li><p><strong>q</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Corresponding measured loadings (all positive).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.surface.FreundlichFit" title="chemistrykit.surface.systems.freundlich.FreundlichFit"><code class="xref py py-class docutils literal notranslate"><span class="pre">FreundlichFit</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>FreundlichFit</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Generate exact data from a known <span class="math notranslate nohighlight">\((K_f, n)\)</span> and recover them:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">FreundlichIsotherm</span><span class="p">(</span><span class="n">Kf</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span><span class="o">.</span><span class="n">loading</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fit</span> <span class="o">=</span> <span class="n">fit_freundlich</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">Kf</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">(4.0, 2.5)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">r_squared</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.surface.fit_langmuir">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">fit_langmuir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/langmuir.html#fit_langmuir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.fit_langmuir" title="Link to this definition">#</a></dt>
+<dd><p>Fit loading-vs-pressure data to the Langmuir isotherm via its linearization.</p>
+<p>The Langmuir equation <span class="math notranslate nohighlight">\(q = q_{max}KP/(1+KP)\)</span> is inverted to a
+straight line (Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed., Ch.
+22.1):</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{q} = \frac{1}{q_{max}} + \frac{1}{q_{max}K}\cdot\frac{1}{P}\]</div>
+<p>so plotting <span class="math notranslate nohighlight">\(1/q\)</span> against <span class="math notranslate nohighlight">\(1/P\)</span> gives a straight line of
+intercept <span class="math notranslate nohighlight">\(1/q_{max}\)</span> and slope <span class="math notranslate nohighlight">\(1/(q_{max}K)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>P</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Equilibrium pressures (at least 2 distinct positive values).</p></li>
+<li><p><strong>q</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Corresponding measured loadings (all positive).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.surface.LangmuirFit" title="chemistrykit.surface.systems.langmuir.LangmuirFit"><code class="xref py py-class docutils literal notranslate"><span class="pre">LangmuirFit</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>LangmuirFit</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Generate exact data from a known <span class="math notranslate nohighlight">\((K, q_{max})\)</span> and recover them:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">LangmuirIsotherm</span><span class="p">(</span><span class="n">K</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">qmax</span><span class="o">=</span><span class="mf">8.0</span><span class="p">)</span><span class="o">.</span><span class="n">loading</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fit</span> <span class="o">=</span> <span class="n">fit_langmuir</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">K</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">qmax</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">(3.0, 8.0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">r_squared</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.surface.freundlich_loading">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">freundlich_loading</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Kf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/freundlich.html#freundlich_loading"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.freundlich_loading" title="Link to this definition">#</a></dt>
+<dd><p>The Freundlich isotherm <span class="math notranslate nohighlight">\(q = K_f P^{1/n}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Kf</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Freundlich capacity constant (the loading at <span class="math notranslate nohighlight">\(P=1\)</span>, in the
+pressure units used).</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Freundlich heterogeneity exponent (<span class="math notranslate nohighlight">\(n&gt;1\)</span> is the usual,
+“favorable” case; <span class="math notranslate nohighlight">\(n=1\)</span> recovers a linear (Henry’s-law-like)
+isotherm).</p></li>
+<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Equilibrium (partial) pressure of the adsorbate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>At unit pressure, the loading equals <span class="math notranslate nohighlight">\(K_f\)</span> exactly, by
+construction:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">freundlich_loading</span><span class="p">(</span><span class="n">Kf</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)),</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">2.5</span>
+</pre></div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">n=1</span></code> the isotherm is exactly linear in <cite>P</cite>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">freundlich_loading</span><span class="p">(</span><span class="n">Kf</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="n">P</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="n">P</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.surface.langmuir_coverage">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">langmuir_coverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">K</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/langmuir.html#langmuir_coverage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.langmuir_coverage" title="Link to this definition">#</a></dt>
+<dd><p>The Langmuir isotherm’s fractional surface coverage <span class="math notranslate nohighlight">\(\theta = KP/(1+KP)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>K</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Langmuir equilibrium (adsorption) constant, inverse to <cite>P</cite>’s
+units (e.g. 1/Pa for <cite>P</cite> in Pa).</p></li>
+<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Equilibrium (partial) pressure of the adsorbate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Fractional coverage <span class="math notranslate nohighlight">\(\theta \in [0, 1)\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Coverage is exactly one-half at the half-saturation pressure
+<span class="math notranslate nohighlight">\(P = 1/K\)</span> – the defining, exactly-solvable feature of the
+Langmuir isotherm (Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed.,
+Ch. 22.1):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">langmuir_coverage</span><span class="p">(</span><span class="n">K</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)),</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+<p>Coverage saturates toward 1 at high pressure and vanishes at zero
+pressure:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">langmuir_coverage</span><span class="p">(</span><span class="n">K</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)),</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">langmuir_coverage</span><span class="p">(</span><span class="n">K</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="mf">1.0e6</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.surface.lh_rate_dual_site">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">lh_rate_dual_site</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P_A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P_B</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/langmuir_hinshelwood.html#lh_rate_dual_site"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.lh_rate_dual_site" title="Link to this definition">#</a></dt>
+<dd><p>Dual-site (bimolecular) Langmuir-Hinshelwood rate: two species compete for the same sites.</p>
+<p>Two reactants A and B adsorb <em>competitively</em> onto the same pool of
+surface sites, and react where an A and a B happen to sit on
+neighboring sites – the classic mechanism for, e.g., the catalytic
+oxidation <span class="math notranslate nohighlight">\(2CO+O_2 \to 2CO_2\)</span> on a metal surface (Atkins &amp; de
+Paula, <em>Physical Chemistry</em>, 11th ed., Ch. 22.5). Competitive Langmuir
+adsorption gives each species’ coverage as</p>
+<div class="math notranslate nohighlight">
+\[\theta_A = \frac{K_AP_A}{1+K_AP_A+K_BP_B}, \qquad
+\theta_B = \frac{K_BP_B}{1+K_AP_A+K_BP_B}\]</div>
+<p>and the surface-reaction rate is <span class="math notranslate nohighlight">\(k\theta_A\theta_B\)</span>. A
+characteristic (and often counterintuitive) feature: for fixed
+<span class="math notranslate nohighlight">\(P_B\)</span>, the rate is <em>not</em> monotonic in <span class="math notranslate nohighlight">\(P_A\)</span> – it rises
+at low <span class="math notranslate nohighlight">\(P_A\)</span> (more A available to react) but falls again at
+high <span class="math notranslate nohighlight">\(P_A\)</span> (A crowds B off the surface entirely), peaking at an
+intermediate pressure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Surface-reaction rate constant.</p></li>
+<li><p><strong>K_A</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Langmuir adsorption equilibrium constants of A and B.</p></li>
+<li><p><strong>K_B</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Langmuir adsorption equilibrium constants of A and B.</p></li>
+<li><p><strong>P_A</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Partial pressures of A and B.</p></li>
+<li><p><strong>P_B</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Partial pressures of A and B.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>At low coverage of both species (<span class="math notranslate nohighlight">\(K_AP_A,K_BP_B \ll 1\)</span>, the
+denominator <span class="math notranslate nohighlight">\(\approx 1\)</span>), the rate reduces to the naive
+mass-action product <span class="math notranslate nohighlight">\(kK_AP_AK_BP_B\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="p">,</span> <span class="n">K_A</span><span class="p">,</span> <span class="n">K_B</span> <span class="o">=</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1e-4</span><span class="p">,</span> <span class="mf">2e-4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1e-4</span><span class="p">,</span> <span class="mf">3e-4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rate</span> <span class="o">=</span> <span class="n">lh_rate_dual_site</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">K_A</span><span class="p">,</span> <span class="n">P_A</span><span class="p">,</span> <span class="n">K_B</span><span class="p">,</span> <span class="n">P_B</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">rate</span><span class="p">,</span> <span class="n">k</span> <span class="o">*</span> <span class="n">K_A</span> <span class="o">*</span> <span class="n">P_A</span> <span class="o">*</span> <span class="n">K_B</span> <span class="o">*</span> <span class="n">P_B</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>The rate vanishes if either reactant is entirely absent (nothing to
+react <em>with</em>, even at full coverage of the other):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">lh_rate_dual_site</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">K_A</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">P_A</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">K_B</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">P_B</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)),</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<p>The rate is non-monotonic in <span class="math notranslate nohighlight">\(P_A\)</span> at fixed <span class="math notranslate nohighlight">\(P_B\)</span>
+(rises, then falls, as A crowds B off the surface):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">P_A_scan</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rate_scan</span> <span class="o">=</span> <span class="n">lh_rate_dual_site</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">K_A</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">P_A</span><span class="o">=</span><span class="n">P_A_scan</span><span class="p">,</span> <span class="n">K_B</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">P_B</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">peak_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">rate_scan</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="mi">0</span> <span class="o">&lt;</span> <span class="n">peak_index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">P_A_scan</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.surface.lh_rate_single_site">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">lh_rate_single_site</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P_A</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/langmuir_hinshelwood.html#lh_rate_single_site"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.lh_rate_single_site" title="Link to this definition">#</a></dt>
+<dd><p>Single-site Langmuir-Hinshelwood rate: a lone adsorbed species reacts unimolecularly.</p>
+<p>A single reactant A adsorbs onto the catalytic surface (Langmuir
+equilibrium, constant <span class="math notranslate nohighlight">\(K_A\)</span>) and then reacts <em>on the surface</em>
+at a rate proportional to its own coverage <span class="math notranslate nohighlight">\(\theta_A\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\text{rate} = k\,\theta_A = \frac{kK_AP_A}{1+K_AP_A}\]</div>
+<p>(Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed., Ch. 22.5, eq.
+22.19). At low pressure (<span class="math notranslate nohighlight">\(K_AP_A \ll 1\)</span>) this reduces to a rate
+that is first order in <span class="math notranslate nohighlight">\(P_A\)</span>; at high pressure
+(<span class="math notranslate nohighlight">\(K_AP_A \gg 1\)</span>, the surface saturated with A) it becomes zero
+order in <span class="math notranslate nohighlight">\(P_A\)</span> – the hallmark Langmuir-Hinshelwood pressure
+dependence, qualitatively different from a simple gas-phase
+elementary reaction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Surface-reaction rate constant (the rate at full coverage,
+<span class="math notranslate nohighlight">\(\theta_A=1\)</span>).</p></li>
+<li><p><strong>K_A</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Langmuir adsorption equilibrium constant of A.</p></li>
+<li><p><strong>P_A</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Partial pressure of A.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>At the Langmuir half-saturation pressure <span class="math notranslate nohighlight">\(P_A=1/K_A\)</span>, the rate
+is exactly half the saturation (zero-order) rate <cite>k</cite>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">lh_rate_single_site</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">K_A</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">P_A</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)),</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+<p>Low-pressure limit is (to leading order) first order in <cite>P_A</cite>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="p">,</span> <span class="n">K_A</span> <span class="o">=</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P_small</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1e-4</span><span class="p">,</span> <span class="mf">2e-4</span><span class="p">,</span> <span class="mf">4e-4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rate</span> <span class="o">=</span> <span class="n">lh_rate_single_site</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">K_A</span><span class="p">,</span> <span class="n">P_small</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">rate</span><span class="p">,</span> <span class="n">k</span> <span class="o">*</span> <span class="n">K_A</span> <span class="o">*</span> <span class="n">P_small</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.surface.turnover_frequency">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">turnover_frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">active_site_concentration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/catalysis.html#turnover_frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.turnover_frequency" title="Link to this definition">#</a></dt>
+<dd><p>Turnover frequency <span class="math notranslate nohighlight">\(\text{TOF} = \text{rate}/[\text{active sites}]\)</span>.</p>
+<p>The rate of product formation per catalytic active site per unit
+time – the standard measure of intrinsic catalytic activity,
+independent of how much catalyst is used (Atkins &amp; de Paula,
+<em>Physical Chemistry</em>, 11th ed., Ch. 22.6).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rate</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Reaction (product-formation) rate, in concentration/time.</p></li>
+<li><p><strong>active_site_concentration</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Concentration (or amount) of catalytically active sites, in the
+same amount units as <cite>rate</cite>’s numerator.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – TOF, in 1/time.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">turnover_frequency</span><span class="p">(</span><span class="n">rate</span><span class="o">=</span><span class="mf">5.0e-3</span><span class="p">,</span> <span class="n">active_site_concentration</span><span class="o">=</span><span class="mf">2.0e-6</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">2500.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.surface.turnover_number">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.surface.</span></span><span class="sig-name descname"><span class="pre">turnover_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">moles_converted</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moles_catalyst</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/surface/systems/catalysis.html#turnover_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.surface.turnover_number" title="Link to this definition">#</a></dt>
+<dd><p>Turnover number <span class="math notranslate nohighlight">\(\text{TON} = n_{\text{converted}}/n_{\text{catalyst}}\)</span>.</p>
+<p>The total number of catalytic cycles a given amount of catalyst has
+performed over the course of a reaction – a dimensionless measure of
+catalyst <em>durability/efficiency</em>, as distinct from <a class="reference internal" href="#chemistrykit.surface.turnover_frequency" title="chemistrykit.surface.turnover_frequency"><code class="xref py py-func docutils literal notranslate"><span class="pre">turnover_frequency()</span></code></a>’s
+measure of instantaneous <em>activity</em> (Atkins &amp; de Paula, <em>Physical
+Chemistry</em>, 11th ed., Ch. 22.6).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>moles_converted</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Total moles of substrate converted to product.</p></li>
+<li><p><strong>moles_catalyst</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Moles of catalyst (active sites) used.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – Dimensionless.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">turnover_number</span><span class="p">(</span><span class="n">moles_converted</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">moles_catalyst</span><span class="o">=</span><span class="mf">1.0e-4</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">5000.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="structure.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">chemistrykit.structure</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="thermo.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">chemistrykit.thermo</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.AdsorptionIsotherm"><code class="docutils literal notranslate"><span class="pre">AdsorptionIsotherm</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.AdsorptionIsotherm.fractional_coverage"><code class="docutils literal notranslate"><span class="pre">AdsorptionIsotherm.fractional_coverage()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.AdsorptionIsotherm.loading"><code class="docutils literal notranslate"><span class="pre">AdsorptionIsotherm.loading()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.AdsorptionIsotherm.saturation_loading"><code class="docutils literal notranslate"><span class="pre">AdsorptionIsotherm.saturation_loading</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.BETFit"><code class="docutils literal notranslate"><span class="pre">BETFit</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.BETFit.C"><code class="docutils literal notranslate"><span class="pre">BETFit.C</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.BETFit.P0"><code class="docutils literal notranslate"><span class="pre">BETFit.P0</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.BETFit.Vm"><code class="docutils literal notranslate"><span class="pre">BETFit.Vm</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.BETFit.predict"><code class="docutils literal notranslate"><span class="pre">BETFit.predict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.BETFit.r_squared"><code class="docutils literal notranslate"><span class="pre">BETFit.r_squared</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.BETFit.to_isotherm"><code class="docutils literal notranslate"><span class="pre">BETFit.to_isotherm()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.BETIsotherm"><code class="docutils literal notranslate"><span class="pre">BETIsotherm</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.BETIsotherm.loading"><code class="docutils literal notranslate"><span class="pre">BETIsotherm.loading()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.CatalyticRateComparison"><code class="docutils literal notranslate"><span class="pre">CatalyticRateComparison</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.CatalyticRateComparison.delta_Ea"><code class="docutils literal notranslate"><span class="pre">CatalyticRateComparison.delta_Ea</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.CatalyticRateComparison.k_catalyzed"><code class="docutils literal notranslate"><span class="pre">CatalyticRateComparison.k_catalyzed</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.CatalyticRateComparison.k_uncatalyzed"><code class="docutils literal notranslate"><span class="pre">CatalyticRateComparison.k_uncatalyzed</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.CatalyticRateComparison.rate_enhancement"><code class="docutils literal notranslate"><span class="pre">CatalyticRateComparison.rate_enhancement</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.FreundlichFit"><code class="docutils literal notranslate"><span class="pre">FreundlichFit</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.FreundlichFit.Kf"><code class="docutils literal notranslate"><span class="pre">FreundlichFit.Kf</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.FreundlichFit.n"><code class="docutils literal notranslate"><span class="pre">FreundlichFit.n</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.FreundlichFit.predict"><code class="docutils literal notranslate"><span class="pre">FreundlichFit.predict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.FreundlichFit.r_squared"><code class="docutils literal notranslate"><span class="pre">FreundlichFit.r_squared</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.FreundlichFit.to_isotherm"><code class="docutils literal notranslate"><span class="pre">FreundlichFit.to_isotherm()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.FreundlichIsotherm"><code class="docutils literal notranslate"><span class="pre">FreundlichIsotherm</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.FreundlichIsotherm.fractional_coverage"><code class="docutils literal notranslate"><span class="pre">FreundlichIsotherm.fractional_coverage()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.FreundlichIsotherm.loading"><code class="docutils literal notranslate"><span class="pre">FreundlichIsotherm.loading()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.LangmuirFit"><code class="docutils literal notranslate"><span class="pre">LangmuirFit</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.LangmuirFit.K"><code class="docutils literal notranslate"><span class="pre">LangmuirFit.K</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.LangmuirFit.predict"><code class="docutils literal notranslate"><span class="pre">LangmuirFit.predict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.LangmuirFit.qmax"><code class="docutils literal notranslate"><span class="pre">LangmuirFit.qmax</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.LangmuirFit.r_squared"><code class="docutils literal notranslate"><span class="pre">LangmuirFit.r_squared</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.LangmuirFit.to_isotherm"><code class="docutils literal notranslate"><span class="pre">LangmuirFit.to_isotherm()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.LangmuirIsotherm"><code class="docutils literal notranslate"><span class="pre">LangmuirIsotherm</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.LangmuirIsotherm.half_saturation_pressure"><code class="docutils literal notranslate"><span class="pre">LangmuirIsotherm.half_saturation_pressure()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.LangmuirIsotherm.loading"><code class="docutils literal notranslate"><span class="pre">LangmuirIsotherm.loading()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.bet_loading"><code class="docutils literal notranslate"><span class="pre">bet_loading()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.compare_catalyzed_rate"><code class="docutils literal notranslate"><span class="pre">compare_catalyzed_rate()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.fit_bet"><code class="docutils literal notranslate"><span class="pre">fit_bet()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.fit_freundlich"><code class="docutils literal notranslate"><span class="pre">fit_freundlich()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.fit_langmuir"><code class="docutils literal notranslate"><span class="pre">fit_langmuir()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.freundlich_loading"><code class="docutils literal notranslate"><span class="pre">freundlich_loading()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.langmuir_coverage"><code class="docutils literal notranslate"><span class="pre">langmuir_coverage()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.lh_rate_dual_site"><code class="docutils literal notranslate"><span class="pre">lh_rate_dual_site()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.lh_rate_single_site"><code class="docutils literal notranslate"><span class="pre">lh_rate_single_site()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.turnover_frequency"><code class="docutils literal notranslate"><span class="pre">turnover_frequency()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.surface.turnover_number"><code class="docutils literal notranslate"><span class="pre">turnover_number()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/api/surface.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, chemistrykit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

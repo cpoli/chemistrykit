@@ -1,0 +1,1115 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chemistrykit.thermo.systems.mixtures &#8212; chemistrykit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../../../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/chemistrykit/thermo/systems/mixtures';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">chemistrykit</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/chemistrykit/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/chemistrykit/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">chemistrykit.thermo.systems.mixtures</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for chemistrykit.thermo.systems.mixtures</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Raoult&#39;s/Henry&#39;s law mixtures and colligative properties.</span>
+
+<span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 5 (&quot;Simple</span>
+<span class="sd">mixtures&quot;) throughout: Sec. 5.4 for Raoult&#39;s and Henry&#39;s laws, Sec. 5.5</span>
+<span class="sd">for the colligative properties (freezing-point depression, boiling-point</span>
+<span class="sd">elevation, osmotic pressure).</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">R</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;raoult_vapor_pressure&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BinaryIdealSolution&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;henry_law_pressure&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CRYOSCOPIC_CONSTANTS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;freezing_point_depression&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;boiling_point_elevation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;osmotic_pressure&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="raoult_vapor_pressure">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.raoult_vapor_pressure">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">raoult_vapor_pressure</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">P_pure</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Raoult&#39;s law: :math:`P_A = x_A P_A^*`.</span>
+
+<span class="sd">    The partial vapor pressure of a component in an ideal mixture is</span>
+<span class="sd">    proportional to its mole fraction, with the pure-component vapor</span>
+<span class="sd">    pressure as the constant of proportionality (F. M. Raoult, 1887;</span>
+<span class="sd">    Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 5.4a).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : float or array-like of float</span>
+<span class="sd">        Mole fraction of the component in the liquid.</span>
+<span class="sd">    P_pure : float</span>
+<span class="sd">        Vapor pressure of the pure component, :math:`P_A^*`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float or ndarray</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; round(float(raoult_vapor_pressure(x=0.4, P_pure=100.0)), 6)</span>
+<span class="sd">    40.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">P_pure</span></div>
+
+
+
+<div class="viewcode-block" id="BinaryIdealSolution">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.BinaryIdealSolution">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BinaryIdealSolution</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A binary liquid mixture obeying Raoult&#39;s law for both components.</span>
+
+<span class="sd">    Combining Raoult&#39;s law for each component with Dalton&#39;s law for the</span>
+<span class="sd">    vapor phase gives the total vapor pressure as a function of liquid</span>
+<span class="sd">    composition, and the vapor-phase composition in equilibrium with it</span>
+<span class="sd">    (Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 5.4a):</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        P_{tot}(x_A) = x_A P_A^* + (1-x_A) P_B^*, \qquad</span>
+<span class="sd">        y_A = \frac{x_A P_A^*}{P_{tot}(x_A)}</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    P_A_star : float</span>
+<span class="sd">        Vapor pressure of pure A.</span>
+<span class="sd">    P_B_star : float</span>
+<span class="sd">        Vapor pressure of pure B.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">P_A_star</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">P_B_star</span><span class="p">:</span> <span class="nb">float</span>
+
+<div class="viewcode-block" id="BinaryIdealSolution.total_pressure">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.BinaryIdealSolution.total_pressure">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">total_pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_A</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Total vapor pressure above a liquid of composition `x_A`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x_A : float or array-like of float</span>
+<span class="sd">            Liquid-phase mole fraction of A.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float or ndarray</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x_A</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x_A</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">P_A_star</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x_A</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">P_B_star</span></div>
+
+
+<div class="viewcode-block" id="BinaryIdealSolution.vapor_composition">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.BinaryIdealSolution.vapor_composition">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vapor_composition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_A</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Vapor-phase mole fraction of A, :math:`y_A`, in equilibrium with liquid composition `x_A`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x_A : float or array-like of float</span>
+<span class="sd">            Liquid-phase mole fraction of A.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float or ndarray</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        For a 1:1 mixture of equally volatile components, the vapor has</span>
+<span class="sd">        the same composition as the liquid:</span>
+
+<span class="sd">        &gt;&gt;&gt; solution = BinaryIdealSolution(P_A_star=100.0, P_B_star=100.0)</span>
+<span class="sd">        &gt;&gt;&gt; round(float(solution.vapor_composition(0.5)), 6)</span>
+<span class="sd">        0.5</span>
+
+<span class="sd">        The more volatile component (higher pure vapor pressure) is</span>
+<span class="sd">        enriched in the vapor relative to the liquid:</span>
+
+<span class="sd">        &gt;&gt;&gt; solution = BinaryIdealSolution(P_A_star=200.0, P_B_star=50.0)</span>
+<span class="sd">        &gt;&gt;&gt; bool(solution.vapor_composition(0.5) &gt; 0.5)</span>
+<span class="sd">        True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x_A</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x_A</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">P_A_star</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_pressure</span><span class="p">(</span><span class="n">x_A</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="henry_law_pressure">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.henry_law_pressure">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">henry_law_pressure</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">K_H</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Henry&#39;s law: :math:`P_B = x_B K_H`.</span>
+
+<span class="sd">    For a dilute solute B, the partial vapor pressure is proportional to</span>
+<span class="sd">    its mole fraction with the (empirical, solute- and solvent-specific)</span>
+<span class="sd">    Henry&#39;s law constant :math:`K_H` as the proportionality constant --</span>
+<span class="sd">    unlike Raoult&#39;s law, :math:`K_H \neq P_B^*` in general, because the</span>
+<span class="sd">    solute&#39;s local environment in dilute solution (surrounded by solvent)</span>
+<span class="sd">    differs from pure solute (W. Henry, *Philos. Trans. R. Soc.* 93, 29</span>
+<span class="sd">    (1803); Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 5.4b).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : float or array-like of float</span>
+<span class="sd">        Mole fraction of the (dilute) solute in solution.</span>
+<span class="sd">    K_H : float</span>
+<span class="sd">        Henry&#39;s law constant for this solute/solvent pair, same pressure</span>
+<span class="sd">        units as the desired result.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float or ndarray</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; round(float(henry_law_pressure(x=0.001, K_H=1.5e5)), 3)</span>
+<span class="sd">    150.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">K_H</span></div>
+
+
+
+<span class="c1">#: Cryoscopic (Kf) and ebullioscopic (Kb) constants for common solvents,</span>
+<span class="c1">#: in K kg/mol (i.e. per unit *molality*), plus each solvent&#39;s normal</span>
+<span class="c1">#: freezing/boiling point in K -- commonly tabulated literature values</span>
+<span class="c1">#: (Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Table 5.4). Provided</span>
+<span class="c1">#: for convenience; :func:`freezing_point_depression` and</span>
+<span class="c1">#: :func:`boiling_point_elevation` also accept `Kf`/`Kb` directly for any</span>
+<span class="c1">#: solvent not listed here.</span>
+<span class="n">CRYOSCOPIC_CONSTANTS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;water&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Kf&quot;</span><span class="p">:</span> <span class="mf">1.86</span><span class="p">,</span> <span class="s2">&quot;Kb&quot;</span><span class="p">:</span> <span class="mf">0.51</span><span class="p">,</span> <span class="s2">&quot;Tf&quot;</span><span class="p">:</span> <span class="mf">273.15</span><span class="p">,</span> <span class="s2">&quot;Tb&quot;</span><span class="p">:</span> <span class="mf">373.15</span><span class="p">},</span>
+    <span class="s2">&quot;benzene&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Kf&quot;</span><span class="p">:</span> <span class="mf">5.12</span><span class="p">,</span> <span class="s2">&quot;Kb&quot;</span><span class="p">:</span> <span class="mf">2.53</span><span class="p">,</span> <span class="s2">&quot;Tf&quot;</span><span class="p">:</span> <span class="mf">278.65</span><span class="p">,</span> <span class="s2">&quot;Tb&quot;</span><span class="p">:</span> <span class="mf">353.25</span><span class="p">},</span>
+    <span class="s2">&quot;camphor&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Kf&quot;</span><span class="p">:</span> <span class="mf">37.7</span><span class="p">,</span> <span class="s2">&quot;Kb&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Tf&quot;</span><span class="p">:</span> <span class="mf">452.65</span><span class="p">,</span> <span class="s2">&quot;Tb&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+    <span class="s2">&quot;acetic_acid&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Kf&quot;</span><span class="p">:</span> <span class="mf">3.90</span><span class="p">,</span> <span class="s2">&quot;Kb&quot;</span><span class="p">:</span> <span class="mf">3.07</span><span class="p">,</span> <span class="s2">&quot;Tf&quot;</span><span class="p">:</span> <span class="mf">289.75</span><span class="p">,</span> <span class="s2">&quot;Tb&quot;</span><span class="p">:</span> <span class="mf">391.05</span><span class="p">},</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="freezing_point_depression">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.freezing_point_depression">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">freezing_point_depression</span><span class="p">(</span><span class="n">Kf</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Freezing-point depression :math:`\Delta T_f = i K_f b`.</span>
+
+<span class="sd">    A colligative property: it depends on the *number* of dissolved</span>
+<span class="sd">    solute particles per kg of solvent, not their identity (Atkins &amp; de</span>
+<span class="sd">    Paula, *Physical Chemistry*, 11th ed., Ch. 5.5). See also</span>
+<span class="sd">    :mod:`chemistrykit.solutions`, which uses the same van&#39;t Hoff factor</span>
+<span class="sd">    `i` convention for strong-electrolyte dissociation, but does not</span>
+<span class="sd">    duplicate this colligative-property machinery -- it lives here in</span>
+<span class="sd">    `chemistrykit.thermo` only.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Kf : float</span>
+<span class="sd">        Cryoscopic constant of the solvent, in K kg/mol (see</span>
+<span class="sd">        :data:`CRYOSCOPIC_CONSTANTS` for common solvents).</span>
+<span class="sd">    b : float</span>
+<span class="sd">        Molality of solute, in mol/kg.</span>
+<span class="sd">    i : float, default 1.0</span>
+<span class="sd">        Van&#39;t Hoff factor: the number of particles each formula unit of</span>
+<span class="sd">        solute dissociates into (1 for a nonelectrolyte, 2 for e.g. NaCl</span>
+<span class="sd">        assuming complete dissociation).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Freezing-point depression, in K (the new freezing point is</span>
+<span class="sd">        :math:`T_f^* - \Delta T_f`).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    A 1.00 molal aqueous NaCl solution (i=2, ideal complete dissociation):</span>
+
+<span class="sd">    &gt;&gt;&gt; round(freezing_point_depression(Kf=1.86, b=1.00, i=2.0), 2)</span>
+<span class="sd">    3.72</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="n">Kf</span> <span class="o">*</span> <span class="n">b</span></div>
+
+
+
+<div class="viewcode-block" id="boiling_point_elevation">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.boiling_point_elevation">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">boiling_point_elevation</span><span class="p">(</span><span class="n">Kb</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Boiling-point elevation :math:`\Delta T_b = i K_b b`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Kb : float</span>
+<span class="sd">        Ebullioscopic constant of the solvent, in K kg/mol (see</span>
+<span class="sd">        :data:`CRYOSCOPIC_CONSTANTS` for common solvents).</span>
+<span class="sd">    b : float</span>
+<span class="sd">        Molality of solute, in mol/kg.</span>
+<span class="sd">    i : float, default 1.0</span>
+<span class="sd">        Van&#39;t Hoff factor (see :func:`freezing_point_depression`).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Boiling-point elevation, in K.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; round(boiling_point_elevation(Kb=0.51, b=1.00, i=2.0), 2)</span>
+<span class="sd">    1.02</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="n">Kb</span> <span class="o">*</span> <span class="n">b</span></div>
+
+
+
+<div class="viewcode-block" id="osmotic_pressure">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.osmotic_pressure">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">osmotic_pressure</span><span class="p">(</span><span class="n">M</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The van&#39;t Hoff equation for osmotic pressure, :math:`\Pi = i M R T`.</span>
+
+<span class="sd">    Formally identical to the ideal gas law -- van&#39;t Hoff originally</span>
+<span class="sd">    noted the (coincidental, but pedagogically useful) analogy (J. H.</span>
+<span class="sd">    van&#39;t Hoff, 1887; Atkins &amp; de Paula, *Physical Chemistry*, 11th ed.,</span>
+<span class="sd">    Ch. 5.5e).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    M : float</span>
+<span class="sd">        Molarity of solute, in mol/m^3 (use ``M_mol_per_L * 1000`` to</span>
+<span class="sd">        convert from the more commonly tabulated mol/L).</span>
+<span class="sd">    T : float</span>
+<span class="sd">        Absolute temperature, in K.</span>
+<span class="sd">    i : float, default 1.0</span>
+<span class="sd">        Van&#39;t Hoff factor (see :func:`freezing_point_depression`).</span>
+<span class="sd">    R_gas : float, default :data:`chemistrykit.constants.R`</span>
+<span class="sd">        Gas constant, in J mol^-1 K^-1; with `M` in mol/m^3 this gives</span>
+<span class="sd">        `Pi` in Pa.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Osmotic pressure, in Pa.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    A 0.100 mol/L (=100 mol/m^3) nonelectrolyte solution at 298.15 K:</span>
+
+<span class="sd">    &gt;&gt;&gt; round(osmotic_pressure(M=100.0, T=298.15) / 1000.0, 2)</span>
+<span class="sd">    247.9</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="n">M</span> <span class="o">*</span> <span class="n">R_gas</span> <span class="o">*</span> <span class="n">T</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, chemistrykit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,234 @@
+:orphan:
+
+Examples
+========
+
+This gallery walks through every public feature of
+``chemistrykit.photochem``: Jablonski-diagram excited-state kinetics
+(reusing ``chemistrykit.kinetics``'s reaction-network engine),
+fluorescence/phosphorescence quantum yields and the photochemical
+quantum yield via Beer-Lambert, Stern-Volmer quenching with a
+static-vs-dynamic diagnostic, and photostationary-state kinetics for a
+two-state photoswitch.
+
+Each script in this gallery is self-contained and can be run directly
+with ``python examples/photochem/<section>/<script>.py``. Every script
+also carries an RST module docstring as its title/description and uses
+``# %%`` markers to split narrative text from code, which is exactly what
+Sphinx-Gallery renders into the pages below -- the script *is* the source
+of truth for what you see, not a copy of it.
+
+Sections
+--------
+
+- **jablonski** -- the 3-state Jablonski excited-state decay network,
+  checked against its closed-form population solution.
+- **quantum_yield** -- fluorescence/phosphorescence quantum yields, and
+  the photochemical quantum yield via Beer-Lambert photon absorption.
+- **stern_volmer** -- Stern-Volmer quenching, fitting a quenching
+  constant, and distinguishing static from dynamic quenching.
+- **photostationary_state** -- the photostationary state of a two-state
+  photoswitch under simultaneous forward/reverse photolysis, checked
+  against long-time numerical integration.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Jablonski-diagram kinetics
+============================
+
+The 3-state (S1, T1, S0) Jablonski excited-state decay network, checked
+against its closed-form population solution.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="jablonski_network builds the 3-state (S1, T1, S0) Jablonski excited-state decay network as a StoichiometricNetwork -- reusing the kinetics domain&#x27;s general mass-action reaction-network engine rather than reimplementing rate-equation integration. The numerical integration is checked here against jablonski_populations_analytic&#x27;s closed-form solution.">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/jablonski/images/thumb/sphx_glr_plot_01_jablonski_kinetics_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/jablonski/plot_01_jablonski_kinetics`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Jablonski-diagram excited-state kinetics</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Photostationary state
+========================
+
+Photostationary-state kinetics of a two-state photoswitch under
+simultaneous forward/reverse photolysis, checked against long-time
+numerical integration.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A photoswitch A &lt;-&gt; B under simultaneous forward and reverse photolysis reaches a photostationary state (PSS) rather than running to completion. photoswitch_network reuses reversible directly, and photostationary_state gives the exact algebraic PSS composition -- checked here against direct long-time numerical integration of the ODE system.">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/photostationary_state/images/thumb/sphx_glr_plot_01_photoswitch_pss_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/photostationary_state/plot_01_photoswitch_pss`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Photostationary-state kinetics of a two-state photoswitch</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Quantum yields
+================
+
+Fluorescence/phosphorescence quantum yields, and the photochemical
+quantum yield via Beer-Lambert photon absorption.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="fluorescence_quantum_yield and phosphorescence_quantum_yield are simple branching-ratio calculations from Jablonski-diagram rate constants. photons_absorbed reuses chemistrykit.spectro.systems.beer_lambert&#x27;s transmittance to compute the photon flux actually absorbed by a sample, which feeds directly into photochemical_quantum_yield.">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/quantum_yield/images/thumb/sphx_glr_plot_01_quantum_yields_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/quantum_yield/plot_01_quantum_yields`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Fluorescence/phosphorescence quantum yields, and photon absorption via Beer-Lambert</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Stern-Volmer quenching
+========================
+
+Stern-Volmer quenching, fitting a quenching constant, and distinguishing
+static from dynamic quenching.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="stern_volmer_ratio gives the linear intensity-ratio-vs-quencher-concentration relationship; fit_stern_volmer recovers the Stern-Volmer constant from synthetic data. Measuring both the intensity-ratio and lifetime-ratio slopes lets classify_quenching_mechanism distinguish a purely dynamic (collisional) mechanism from a purely static (ground-state complexation) one.">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/stern_volmer/images/thumb/sphx_glr_plot_01_stern_volmer_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/stern_volmer/plot_01_stern_volmer`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Stern-Volmer quenching, and distinguishing static from dynamic mechanisms</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+   :includehidden:
+
+
+   /api/gallery/photochem/jablonski/index.rst
+   /api/gallery/photochem/photostationary_state/index.rst
+   /api/gallery/photochem/quantum_yield/index.rst
+   /api/gallery/photochem/stern_volmer/index.rst
+
+
+
+.. only:: html
+
+ .. rst-class:: sphx-glr-signature
+
+    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_

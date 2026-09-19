@@ -1,0 +1,1558 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>chemistrykit.crystal &#8212; chemistrykit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/crystal';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="chemistrykit.electrochem" href="electrochem.html" />
+    <link rel="prev" title="chemistrykit.analytical" href="analytical.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/chemistrykit_logo_transparent.png" class="logo__image only-light" alt="chemistrykit logo"/>
+    <img src="../_static/chemistrykit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="chemistrykit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="analytical.html">chemistrykit.analytical</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">chemistrykit.crystal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electrochem.html">chemistrykit.electrochem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinetics.html">chemistrykit.kinetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="md.html">chemistrykit.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photochem.html">chemistrykit.photochem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polymer.html">chemistrykit.polymer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quantum.html">chemistrykit.quantum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions.html">chemistrykit.solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spectro.html">chemistrykit.spectro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmech.html">chemistrykit.statmech</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">chemistrykit.structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surface.html">chemistrykit.surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermo.html">chemistrykit.thermo</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">chemistrykit.crystal</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="chemistrykit-crystal">
+<h1>chemistrykit.crystal<a class="headerlink" href="#chemistrykit-crystal" title="Link to this heading">#</a></h1>
+<div class="subpkg-nav docutils container">
+<p><a class="reference internal" href="../_generated/subpackages/crystal.html"><span class="doc">chemistrykit.crystal hub</span></a> · <a class="reference internal" href="../history/crystal_breakthroughs.html"><span class="doc">History</span></a> · <a class="reference internal" href="gallery/crystal/index.html"><span class="doc">Examples</span></a> · <a class="reference internal" href="#"><span class="doc">API reference</span></a></p>
+</div>
+<p id="module-chemistrykit.crystal">chemistrykit.crystal: crystallography and solid-state chemistry.</p>
+<p>The 7 crystal systems and the general unit-cell-volume formula; hard-
+sphere packing (packing fraction, coordination number, atoms per cell)
+for the simple cubic, body-centered cubic, face-centered cubic, and
+(ideal) hexagonal close-packed lattices; ionic-crystal lattice energy via
+the Born-Lande and Kapustinskii equations, and the Madelung constant of
+the NaCl structure from a genuinely converging (Evjen-method) lattice
+summation; Bragg’s law and powder-XRD peak positions with structure
+factors (including systematic absences) for cubic lattices; and
+Schottky/Frenkel point-defect equilibrium.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.crystal.BodyCenteredCubicPacking">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.crystal.</span></span><span class="sig-name descname"><span class="pre">BodyCenteredCubicPacking</span></span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/packing.html#BodyCenteredCubicPacking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.BodyCenteredCubicPacking" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.crystal.LatticePacking" title="chemistrykit.crystal.core.base_system.LatticePacking"><code class="xref py py-class docutils literal notranslate"><span class="pre">LatticePacking</span></code></a></p>
+<p>Body-centered cubic (BCC) packing: 2 lattice points per cell, spheres touching along the body diagonal.</p>
+<p>The body diagonal has length <span class="math notranslate nohighlight">\(\sqrt3 a\)</span> and spans 4 sphere
+radii (corner sphere - center sphere - opposite corner sphere), so
+<span class="math notranslate nohighlight">\(r=\sqrt3a/4\)</span>; 2 atoms per conventional cell (8 corners x 1/8 +
+1 body center), 8 nearest neighbors (Ashcroft &amp; Mermin, Ch. 4).</p>
+<p class="rubric">Examples</p>
+<p>The exact atomic packing factor is <span class="math notranslate nohighlight">\(\sqrt3\pi/8\approx0.6802\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">BodyCenteredCubicPacking</span><span class="p">()</span><span class="o">.</span><span class="n">packing_fraction</span><span class="p">()),</span> <span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">8.0</span><span class="p">),</span> <span class="mi">6</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.crystal.BodyCenteredCubicPacking.atomic_radius">
+<span class="sig-name descname"><span class="pre">atomic_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/packing.html#BodyCenteredCubicPacking.atomic_radius"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.BodyCenteredCubicPacking.atomic_radius" title="Link to this definition">#</a></dt>
+<dd><p>Return the touching-sphere radius implied by lattice constant <cite>a</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.crystal.BodyCenteredCubicPacking.atoms_per_cell">
+<span class="sig-name descname"><span class="pre">atoms_per_cell</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2.0</span></span><a class="headerlink" href="#chemistrykit.crystal.BodyCenteredCubicPacking.atoms_per_cell" title="Link to this definition">#</a></dt>
+<dd><p>Number of lattice points (spheres) per conventional unit cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.crystal.BodyCenteredCubicPacking.coordination_number">
+<span class="sig-name descname"><span class="pre">coordination_number</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></span><a class="headerlink" href="#chemistrykit.crystal.BodyCenteredCubicPacking.coordination_number" title="Link to this definition">#</a></dt>
+<dd><p>Number of nearest neighbors each sphere touches.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.crystal.BodyCenteredCubicPacking.unit_cell_volume">
+<span class="sig-name descname"><span class="pre">unit_cell_volume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/packing.html#BodyCenteredCubicPacking.unit_cell_volume"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.BodyCenteredCubicPacking.unit_cell_volume" title="Link to this definition">#</a></dt>
+<dd><p>Return the (conventional) unit-cell volume for lattice constant <cite>a</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Cubic (or, for HCP, basal) lattice constant.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.crystal.BornLandeLatticeEnergy">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.crystal.</span></span><span class="sig-name descname"><span class="pre">BornLandeLatticeEnergy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cation_charge</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anion_charge</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">born_exponent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">madelung_constant</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/lattice_energy.html#BornLandeLatticeEnergy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.BornLandeLatticeEnergy" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.crystal.LatticeEnergyModel" title="chemistrykit.crystal.core.base_system.LatticeEnergyModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">LatticeEnergyModel</span></code></a></p>
+<p>The Born-Lande equation for ionic-crystal lattice energy.</p>
+<div class="math notranslate nohighlight">
+\[U = -\frac{N_A M |z_+z_-|e^2}{4\pi\varepsilon_0 r_0}\left(1-\frac1n\right)\]</div>
+<p>The Madelung constant <cite>M</cite> accounts for the electrostatic sum over the
+whole lattice; the Born-repulsion correction <span class="math notranslate nohighlight">\((1-1/n)\)</span> accounts
+for short-range electron-cloud repulsion at the equilibrium spacing
+<cite>r0</cite> (<cite>n</cite> the Born exponent, from
+<code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.crystal.utils.reference_data.average_born_exponent()</span></code>)
+(Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed., eq. 20A.5).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cation_charge</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Cation charge number (e.g. 1 for Na+, 2 for Mg2+); sign is
+ignored (absolute value used).</p></li>
+<li><p><strong>anion_charge</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Anion charge number (e.g. 1 for Cl-, 2 for O2-); sign is ignored.</p></li>
+<li><p><strong>r0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Equilibrium nearest-neighbor (cation-anion) distance, in meters.</p></li>
+<li><p><strong>born_exponent</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Born exponent <cite>n</cite> (typically 5-12; see
+<code class="xref py py-data docutils literal notranslate"><span class="pre">chemistrykit.crystal.utils.reference_data.BORN_EXPONENTS</span></code>).</p></li>
+<li><p><strong>madelung_constant</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Madelung constant of the crystal structure (the default is only
+appropriate for a rock-salt-structure salt; other structures
+(CsCl, fluorite, …) have different Madelung constants not
+computed by this package, and must be supplied explicitly).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>NaCl (<span class="math notranslate nohighlight">\(r_0=282\,\text{pm}\)</span>, Born exponent 8 – the Ne/Ar
+average): the Born-Lande estimate comes out close to, but (as
+expected for this level of approximation) somewhat less negative
+than, the experimental Born-Haber-cycle value of about
+<span class="math notranslate nohighlight">\(-787\,\text{kJ/mol}\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">BornLandeLatticeEnergy</span><span class="p">(</span><span class="n">cation_charge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">anion_charge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r0</span><span class="o">=</span><span class="mf">282e-12</span><span class="p">,</span> <span class="n">born_exponent</span><span class="o">=</span><span class="mf">8.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">lattice_energy</span><span class="p">()</span> <span class="o">/</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># kJ/mol</span>
+<span class="go">-753.4</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.crystal.BornLandeLatticeEnergy.lattice_energy">
+<span class="sig-name descname"><span class="pre">lattice_energy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/lattice_energy.html#BornLandeLatticeEnergy.lattice_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.BornLandeLatticeEnergy.lattice_energy" title="Link to this definition">#</a></dt>
+<dd><p>Return the (negative, exothermic-formation-convention) lattice energy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Lattice energy, in J/mol (negative for a stable ionic solid).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.crystal.FaceCenteredCubicPacking">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.crystal.</span></span><span class="sig-name descname"><span class="pre">FaceCenteredCubicPacking</span></span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/packing.html#FaceCenteredCubicPacking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.FaceCenteredCubicPacking" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.crystal.LatticePacking" title="chemistrykit.crystal.core.base_system.LatticePacking"><code class="xref py py-class docutils literal notranslate"><span class="pre">LatticePacking</span></code></a></p>
+<p>Face-centered cubic (FCC) packing: 4 lattice points per cell, spheres touching along a face diagonal.</p>
+<p>The face diagonal has length <span class="math notranslate nohighlight">\(\sqrt2a\)</span> and spans 4 sphere
+radii, so <span class="math notranslate nohighlight">\(r=\sqrt2a/4\)</span>; 4 atoms per conventional cell (8
+corners x 1/8 + 6 faces x 1/2), 12 nearest neighbors – the
+close-packed maximum for identical spheres (Ashcroft &amp; Mermin, Ch. 4).</p>
+<p class="rubric">Examples</p>
+<p>The exact atomic packing factor, <span class="math notranslate nohighlight">\(\pi/(3\sqrt2)\approx0.7405\)</span>,
+is the well-known maximum density for identical spheres on a regular
+lattice:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">FaceCenteredCubicPacking</span><span class="p">()</span><span class="o">.</span><span class="n">packing_fraction</span><span class="p">()),</span> <span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="p">(</span><span class="mf">3.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">))),</span> <span class="mi">6</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.crystal.FaceCenteredCubicPacking.atomic_radius">
+<span class="sig-name descname"><span class="pre">atomic_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/packing.html#FaceCenteredCubicPacking.atomic_radius"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.FaceCenteredCubicPacking.atomic_radius" title="Link to this definition">#</a></dt>
+<dd><p>Return the touching-sphere radius implied by lattice constant <cite>a</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.crystal.FaceCenteredCubicPacking.atoms_per_cell">
+<span class="sig-name descname"><span class="pre">atoms_per_cell</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4.0</span></span><a class="headerlink" href="#chemistrykit.crystal.FaceCenteredCubicPacking.atoms_per_cell" title="Link to this definition">#</a></dt>
+<dd><p>Number of lattice points (spheres) per conventional unit cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.crystal.FaceCenteredCubicPacking.coordination_number">
+<span class="sig-name descname"><span class="pre">coordination_number</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">12</span></span><a class="headerlink" href="#chemistrykit.crystal.FaceCenteredCubicPacking.coordination_number" title="Link to this definition">#</a></dt>
+<dd><p>Number of nearest neighbors each sphere touches.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.crystal.FaceCenteredCubicPacking.unit_cell_volume">
+<span class="sig-name descname"><span class="pre">unit_cell_volume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/packing.html#FaceCenteredCubicPacking.unit_cell_volume"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.FaceCenteredCubicPacking.unit_cell_volume" title="Link to this definition">#</a></dt>
+<dd><p>Return the (conventional) unit-cell volume for lattice constant <cite>a</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Cubic (or, for HCP, basal) lattice constant.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.crystal.HexagonalClosePacking">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.crystal.</span></span><span class="sig-name descname"><span class="pre">HexagonalClosePacking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c_over_a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/packing.html#HexagonalClosePacking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.HexagonalClosePacking" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.crystal.LatticePacking" title="chemistrykit.crystal.core.base_system.LatticePacking"><code class="xref py py-class docutils literal notranslate"><span class="pre">LatticePacking</span></code></a></p>
+<p>Hexagonal close-packed (HCP) packing on the primitive hexagonal cell.</p>
+<p>The primitive hexagonal cell (basal rhombus of side <cite>a</cite>, height <cite>c</cite>)
+has volume <span class="math notranslate nohighlight">\(V=\frac{\sqrt3}{2}a^2c\)</span> and contains 2 lattice
+points (the ABAB stacking’s 2-atom basis); each sphere touches 12
+nearest neighbors (6 in-plane, 3 in the layer above, 3 below), the
+same coordination as FCC – both are close-packed arrangements of
+identical spheres, differing only in stacking sequence (ABAB… vs.
+ABCABC…), which is why they share the same maximum packing
+fraction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>c_over_a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – The stacking-axis-to-basal-plane-edge ratio <span class="math notranslate nohighlight">\(c/a\)</span>. Defaults
+to the <em>ideal</em> close-packing value <span class="math notranslate nohighlight">\(\sqrt{8/3}\approx1.633\)</span>
+(Ashcroft &amp; Mermin, Ch. 4), derived purely from geometry (equal
+touching spheres stacked ABAB); real HCP metals deviate from this
+(e.g. Mg: 1.624, Zn: 1.856 – Zn’s anomalously large ratio means
+its actual packing fraction is <em>below</em> the ideal value below, an
+approximation this model does not otherwise account for), so
+passing the real <cite>c_over_a</cite> gives a more accurate, but no longer
+exactly <span class="math notranslate nohighlight">\(\pi/(3\sqrt2)\)</span>, packing fraction.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>At the ideal <span class="math notranslate nohighlight">\(c/a\)</span>, the packing fraction exactly matches FCC’s
+<span class="math notranslate nohighlight">\(\pi/(3\sqrt2)\approx0.7405\)</span> – verified numerically here rather
+than assumed, since it is not obvious by inspection that two
+differently-stacked lattices share an atomic packing factor:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.crystal.systems.packing</span><span class="w"> </span><span class="kn">import</span> <span class="n">FaceCenteredCubicPacking</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hcp_pf</span> <span class="o">=</span> <span class="n">HexagonalClosePacking</span><span class="p">()</span><span class="o">.</span><span class="n">packing_fraction</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fcc_pf</span> <span class="o">=</span> <span class="n">FaceCenteredCubicPacking</span><span class="p">()</span><span class="o">.</span><span class="n">packing_fraction</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">hcp_pf</span><span class="p">),</span> <span class="mi">9</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">fcc_pf</span><span class="p">),</span> <span class="mi">9</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>A non-ideal <code class="docutils literal notranslate"><span class="pre">c_over_a</span></code> (e.g. zinc’s 1.856) gives a <em>lower</em> packing
+fraction, since the spheres no longer touch snugly in the stacking
+direction:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">HexagonalClosePacking</span><span class="p">(</span><span class="n">c_over_a</span><span class="o">=</span><span class="mf">1.856</span><span class="p">)</span><span class="o">.</span><span class="n">packing_fraction</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">HexagonalClosePacking</span><span class="p">()</span><span class="o">.</span><span class="n">packing_fraction</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.crystal.HexagonalClosePacking.atomic_radius">
+<span class="sig-name descname"><span class="pre">atomic_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/packing.html#HexagonalClosePacking.atomic_radius"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.HexagonalClosePacking.atomic_radius" title="Link to this definition">#</a></dt>
+<dd><p>Return the touching-sphere radius implied by lattice constant <cite>a</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.crystal.HexagonalClosePacking.atoms_per_cell">
+<span class="sig-name descname"><span class="pre">atoms_per_cell</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2.0</span></span><a class="headerlink" href="#chemistrykit.crystal.HexagonalClosePacking.atoms_per_cell" title="Link to this definition">#</a></dt>
+<dd><p>Number of lattice points (spheres) per conventional unit cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.crystal.HexagonalClosePacking.coordination_number">
+<span class="sig-name descname"><span class="pre">coordination_number</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">12</span></span><a class="headerlink" href="#chemistrykit.crystal.HexagonalClosePacking.coordination_number" title="Link to this definition">#</a></dt>
+<dd><p>Number of nearest neighbors each sphere touches.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.crystal.HexagonalClosePacking.unit_cell_volume">
+<span class="sig-name descname"><span class="pre">unit_cell_volume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/packing.html#HexagonalClosePacking.unit_cell_volume"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.HexagonalClosePacking.unit_cell_volume" title="Link to this definition">#</a></dt>
+<dd><p>Return the (conventional) unit-cell volume for lattice constant <cite>a</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Cubic (or, for HCP, basal) lattice constant.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.crystal.KapustinskiiLatticeEnergy">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.crystal.</span></span><span class="sig-name descname"><span class="pre">KapustinskiiLatticeEnergy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_ions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cation_charge</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anion_charge</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_cation_pm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_anion_pm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/lattice_energy.html#KapustinskiiLatticeEnergy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.KapustinskiiLatticeEnergy" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.crystal.LatticeEnergyModel" title="chemistrykit.crystal.core.base_system.LatticeEnergyModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">LatticeEnergyModel</span></code></a></p>
+<p>The Kapustinskii equation: an ionic-radii-only estimate of lattice energy, no Madelung constant required.</p>
+<div class="math notranslate nohighlight">
+\[U = -\frac{\kappa\,\nu\,|z_+z_-|}{r_++r_-}\left(1-\frac{d}{r_++r_-}\right)\]</div>
+<p>with <span class="math notranslate nohighlight">\(\kappa=1.2025\times10^5\,\text{kJ pm mol}^{-1}\)</span> and
+<span class="math notranslate nohighlight">\(d=34.5\,\text{pm}\)</span> empirical constants fitted so this
+reproduces experimental/Born-Lande lattice energies without needing a
+structure-specific Madelung constant – useful for salts (or
+hypothetical salts) whose crystal structure is unknown (A. F.
+Kapustinskii, <em>Q. Rev. Chem. Soc.</em> 10, 283 (1956); Atkins &amp; de Paula,
+<em>Physical Chemistry</em>, 11th ed., Ch. 20A.2). This is itself an
+approximation, typically agreeing with more detailed calculations to
+within about 5%.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_ions</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of ions per formula unit (e.g. 2 for NaCl, 3 for CaF2/Na2O).</p></li>
+<li><p><strong>cation_charge</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Cation charge number; sign ignored.</p></li>
+<li><p><strong>anion_charge</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Anion charge number; sign ignored.</p></li>
+<li><p><strong>r_cation_pm</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Cation radius, in picometers (e.g. a Shannon effective ionic
+radius,
+<code class="xref py py-data docutils literal notranslate"><span class="pre">chemistrykit.crystal.utils.reference_data.SHANNON_IONIC_RADII_PM</span></code>).</p></li>
+<li><p><strong>r_anion_pm</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Anion radius, in picometers.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>NaCl again, this time from ionic radii alone (no Madelung constant,
+no crystal structure assumed) – close to, but not identical to, the
+Born-Lande estimate above, as expected of two different
+approximations to the same quantity:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">KapustinskiiLatticeEnergy</span><span class="p">(</span><span class="n">n_ions</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cation_charge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">anion_charge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r_cation_pm</span><span class="o">=</span><span class="mf">102.0</span><span class="p">,</span> <span class="n">r_anion_pm</span><span class="o">=</span><span class="mf">181.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">lattice_energy</span><span class="p">()</span> <span class="o">/</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># kJ/mol</span>
+<span class="go">-746.2</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.crystal.KapustinskiiLatticeEnergy.lattice_energy">
+<span class="sig-name descname"><span class="pre">lattice_energy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/lattice_energy.html#KapustinskiiLatticeEnergy.lattice_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.KapustinskiiLatticeEnergy.lattice_energy" title="Link to this definition">#</a></dt>
+<dd><p>Return the (negative, exothermic-formation-convention) lattice energy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Lattice energy, in J/mol (negative for a stable ionic solid).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.crystal.LatticeEnergyModel">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.crystal.</span></span><span class="sig-name descname"><span class="pre">LatticeEnergyModel</span></span><a class="reference internal" href="../_modules/chemistrykit/crystal/core/base_system.html#LatticeEnergyModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.LatticeEnergyModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<p>Common interface for a model estimating an ionic crystal’s lattice energy.</p>
+<p>Concrete subclasses (<a class="reference internal" href="#chemistrykit.crystal.BornLandeLatticeEnergy" title="chemistrykit.crystal.systems.lattice_energy.BornLandeLatticeEnergy"><code class="xref py py-class docutils literal notranslate"><span class="pre">chemistrykit.crystal.systems.lattice_energy.BornLandeLatticeEnergy</span></code></a>,
+<a class="reference internal" href="#chemistrykit.crystal.KapustinskiiLatticeEnergy" title="chemistrykit.crystal.systems.lattice_energy.KapustinskiiLatticeEnergy"><code class="xref py py-class docutils literal notranslate"><span class="pre">KapustinskiiLatticeEnergy</span></code></a>)
+implement <a class="reference internal" href="#chemistrykit.crystal.LatticeEnergyModel.lattice_energy" title="chemistrykit.crystal.LatticeEnergyModel.lattice_energy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">lattice_energy()</span></code></a>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.crystal.LatticeEnergyModel.lattice_energy">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">lattice_energy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/core/base_system.html#LatticeEnergyModel.lattice_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.LatticeEnergyModel.lattice_energy" title="Link to this definition">#</a></dt>
+<dd><p>Return the (negative, exothermic-formation-convention) lattice energy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em> – Lattice energy, in J/mol (negative for a stable ionic solid).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.crystal.LatticePacking">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.crystal.</span></span><span class="sig-name descname"><span class="pre">LatticePacking</span></span><a class="reference internal" href="../_modules/chemistrykit/crystal/core/base_system.html#LatticePacking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.LatticePacking" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<p>Common interface for a hard-sphere packing model of a simple Bravais lattice.</p>
+<p>Concrete subclasses (<a class="reference internal" href="#chemistrykit.crystal.SimpleCubicPacking" title="chemistrykit.crystal.systems.packing.SimpleCubicPacking"><code class="xref py py-class docutils literal notranslate"><span class="pre">chemistrykit.crystal.systems.packing.SimpleCubicPacking</span></code></a>,
+<a class="reference internal" href="#chemistrykit.crystal.BodyCenteredCubicPacking" title="chemistrykit.crystal.systems.packing.BodyCenteredCubicPacking"><code class="xref py py-class docutils literal notranslate"><span class="pre">BodyCenteredCubicPacking</span></code></a>,
+<a class="reference internal" href="#chemistrykit.crystal.FaceCenteredCubicPacking" title="chemistrykit.crystal.systems.packing.FaceCenteredCubicPacking"><code class="xref py py-class docutils literal notranslate"><span class="pre">FaceCenteredCubicPacking</span></code></a>,
+<a class="reference internal" href="#chemistrykit.crystal.HexagonalClosePacking" title="chemistrykit.crystal.systems.packing.HexagonalClosePacking"><code class="xref py py-class docutils literal notranslate"><span class="pre">HexagonalClosePacking</span></code></a>)
+set the class attributes <cite>coordination_number</cite> and <cite>atoms_per_cell</cite>,
+and implement <a class="reference internal" href="#chemistrykit.crystal.unit_cell_volume" title="chemistrykit.crystal.unit_cell_volume"><code class="xref py py-meth docutils literal notranslate"><span class="pre">unit_cell_volume()</span></code></a> and <a class="reference internal" href="#chemistrykit.crystal.LatticePacking.atomic_radius" title="chemistrykit.crystal.LatticePacking.atomic_radius"><code class="xref py py-meth docutils literal notranslate"><span class="pre">atomic_radius()</span></code></a>;
+<a class="reference internal" href="#chemistrykit.crystal.LatticePacking.packing_fraction" title="chemistrykit.crystal.LatticePacking.packing_fraction"><code class="xref py py-meth docutils literal notranslate"><span class="pre">packing_fraction()</span></code></a> is then available for every subclass for
+free, exactly as <code class="xref py py-meth docutils literal notranslate"><span class="pre">chemistrykit.surface.core.base_system.AdsorptionIsotherm.fractional_coverage()</span></code>
+is built once atop each concrete isotherm’s <code class="docutils literal notranslate"><span class="pre">loading</span></code>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.crystal.LatticePacking.atomic_radius">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">atomic_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/core/base_system.html#LatticePacking.atomic_radius"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.LatticePacking.atomic_radius" title="Link to this definition">#</a></dt>
+<dd><p>Return the touching-sphere radius implied by lattice constant <cite>a</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.crystal.LatticePacking.atoms_per_cell">
+<span class="sig-name descname"><span class="pre">atoms_per_cell</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.crystal.LatticePacking.atoms_per_cell" title="Link to this definition">#</a></dt>
+<dd><p>Number of lattice points (spheres) per conventional unit cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.crystal.LatticePacking.coordination_number">
+<span class="sig-name descname"><span class="pre">coordination_number</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#chemistrykit.crystal.LatticePacking.coordination_number" title="Link to this definition">#</a></dt>
+<dd><p>Number of nearest neighbors each sphere touches.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.crystal.LatticePacking.packing_fraction">
+<span class="sig-name descname"><span class="pre">packing_fraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/core/base_system.html#LatticePacking.packing_fraction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.LatticePacking.packing_fraction" title="Link to this definition">#</a></dt>
+<dd><p>Return the fraction of the unit cell’s volume occupied by touching spheres.</p>
+<div class="math notranslate nohighlight">
+\[\text{APF} = \frac{Z \cdot \frac{4}{3}\pi r^3}{V_{cell}}\]</div>
+<p>with <cite>Z</cite> = <a class="reference internal" href="#chemistrykit.crystal.LatticePacking.atoms_per_cell" title="chemistrykit.crystal.LatticePacking.atoms_per_cell"><code class="xref py py-attr docutils literal notranslate"><span class="pre">atoms_per_cell</span></code></a> and <cite>r</cite> from <a class="reference internal" href="#chemistrykit.crystal.LatticePacking.atomic_radius" title="chemistrykit.crystal.LatticePacking.atomic_radius"><code class="xref py py-meth docutils literal notranslate"><span class="pre">atomic_radius()</span></code></a>
+– independent of <cite>a</cite> for any of these lattices (both the sphere
+volume and the cell volume scale as <span class="math notranslate nohighlight">\(a^3\)</span>), so the default
+<cite>a=1.0</cite> is only a placeholder unit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Lattice constant (cancels out of the result).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.crystal.LatticePacking.unit_cell_volume">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">unit_cell_volume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/core/base_system.html#LatticePacking.unit_cell_volume"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.LatticePacking.unit_cell_volume" title="Link to this definition">#</a></dt>
+<dd><p>Return the (conventional) unit-cell volume for lattice constant <cite>a</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Cubic (or, for HCP, basal) lattice constant.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.crystal.SimpleCubicPacking">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.crystal.</span></span><span class="sig-name descname"><span class="pre">SimpleCubicPacking</span></span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/packing.html#SimpleCubicPacking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.SimpleCubicPacking" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.crystal.LatticePacking" title="chemistrykit.crystal.core.base_system.LatticePacking"><code class="xref py py-class docutils literal notranslate"><span class="pre">LatticePacking</span></code></a></p>
+<p>Simple cubic (SC) packing: one lattice point per cell, spheres touching along the cell edge.</p>
+<p>Touching along the edge gives <span class="math notranslate nohighlight">\(r = a/2\)</span>, one sphere per cell,
+and 6 nearest neighbors (Ashcroft &amp; Mermin, Ch. 4).</p>
+<p class="rubric">Examples</p>
+<p>The exact, textbook atomic packing factor is <span class="math notranslate nohighlight">\(\pi/6\approx0.5236\)</span>
+(the least efficient of the four lattices here):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">SimpleCubicPacking</span><span class="p">()</span><span class="o">.</span><span class="n">packing_fraction</span><span class="p">()),</span> <span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.crystal.SimpleCubicPacking.atomic_radius">
+<span class="sig-name descname"><span class="pre">atomic_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/packing.html#SimpleCubicPacking.atomic_radius"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.SimpleCubicPacking.atomic_radius" title="Link to this definition">#</a></dt>
+<dd><p>Return the touching-sphere radius implied by lattice constant <cite>a</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.crystal.SimpleCubicPacking.atoms_per_cell">
+<span class="sig-name descname"><span class="pre">atoms_per_cell</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></span><a class="headerlink" href="#chemistrykit.crystal.SimpleCubicPacking.atoms_per_cell" title="Link to this definition">#</a></dt>
+<dd><p>Number of lattice points (spheres) per conventional unit cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.crystal.SimpleCubicPacking.coordination_number">
+<span class="sig-name descname"><span class="pre">coordination_number</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></span><a class="headerlink" href="#chemistrykit.crystal.SimpleCubicPacking.coordination_number" title="Link to this definition">#</a></dt>
+<dd><p>Number of nearest neighbors each sphere touches.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.crystal.SimpleCubicPacking.unit_cell_volume">
+<span class="sig-name descname"><span class="pre">unit_cell_volume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/packing.html#SimpleCubicPacking.unit_cell_volume"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.SimpleCubicPacking.unit_cell_volume" title="Link to this definition">#</a></dt>
+<dd><p>Return the (conventional) unit-cell volume for lattice constant <cite>a</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Cubic (or, for HCP, basal) lattice constant.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.crystal.XRDPeak">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.crystal.</span></span><span class="sig-name descname"><span class="pre">XRDPeak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hkl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_spacing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">two_theta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative_intensity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/xrd.html#XRDPeak"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.XRDPeak" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A single allowed powder-XRD reflection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hkl</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a>)</p></li>
+<li><p><strong>d_spacing</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>two_theta</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>relative_intensity</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.crystal.XRDPeak.d_spacing">
+<span class="sig-name descname"><span class="pre">d_spacing</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.crystal.XRDPeak.d_spacing" title="Link to this definition">#</a></dt>
+<dd><p>Interplanar spacing, same length unit as the input lattice constant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.crystal.XRDPeak.hkl">
+<span class="sig-name descname"><span class="pre">hkl</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a></span><a class="headerlink" href="#chemistrykit.crystal.XRDPeak.hkl" title="Link to this definition">#</a></dt>
+<dd><p>Miller indices <span class="math notranslate nohighlight">\((h,k,l)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a> of <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.crystal.XRDPeak.relative_intensity">
+<span class="sig-name descname"><span class="pre">relative_intensity</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.crystal.XRDPeak.relative_intensity" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(|F_{hkl}|^2\)</span>, not multiplicity- or Lorentz-polarization-corrected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.crystal.XRDPeak.two_theta">
+<span class="sig-name descname"><span class="pre">two_theta</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.crystal.XRDPeak.two_theta" title="Link to this definition">#</a></dt>
+<dd><p>Diffraction angle <span class="math notranslate nohighlight">\(2\theta\)</span>, in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.crystal.bragg_angle">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.crystal.</span></span><span class="sig-name descname"><span class="pre">bragg_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/xrd.html#bragg_angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.bragg_angle" title="Link to this definition">#</a></dt>
+<dd><p>Solve Bragg’s law <span class="math notranslate nohighlight">\(n\lambda=2d\sin\theta\)</span> for the diffraction angle <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Interplanar (<cite>d</cite>-)spacing, in the same length unit as <cite>wavelength</cite>.</p></li>
+<li><p><strong>wavelength</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – X-ray wavelength.</p></li>
+<li><p><strong>order</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Diffraction order <cite>n</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Bragg angle <span class="math notranslate nohighlight">\(\theta\)</span>, in radians. <code class="docutils literal notranslate"><span class="pre">nan</span></code> where
+<span class="math notranslate nohighlight">\(n\lambda/(2d) &gt; 1\)</span> (no diffraction possible at that
+spacing/wavelength/order).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Cu-Kalpha (<span class="math notranslate nohighlight">\(\lambda=154.18\,\text{pm}\)</span>) reflecting off a 3.0 A
+(300 pm) <cite>d</cite>-spacing:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">theta</span> <span class="o">=</span> <span class="n">bragg_angle</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mf">300.0</span><span class="p">,</span> <span class="n">wavelength</span><span class="o">=</span><span class="mf">154.18</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">theta</span><span class="p">)),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">14.89</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="mf">300.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="mf">154.18</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.crystal.classify_crystal_system">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.crystal.</span></span><span class="sig-name descname"><span class="pre">classify_crystal_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/crystal_systems.html#classify_crystal_system"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.classify_crystal_system" title="Link to this definition">#</a></dt>
+<dd><p>Classify a unit cell into one of the 7 crystal systems from its lattice parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Unit-cell edge lengths (any consistent length unit).</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Unit-cell edge lengths (any consistent length unit).</p></li>
+<li><p><strong>c</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Unit-cell edge lengths (any consistent length unit).</p></li>
+<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Interaxial angles, in degrees (<span class="math notranslate nohighlight">\(\alpha\)</span> between <cite>b</cite> and
+<cite>c</cite>, <span class="math notranslate nohighlight">\(\beta\)</span> between <cite>a</cite> and <cite>c</cite>, <span class="math notranslate nohighlight">\(\gamma\)</span> between
+<cite>a</cite> and <cite>b</cite>, the standard crystallographic convention).</p></li>
+<li><p><strong>beta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Interaxial angles, in degrees (<span class="math notranslate nohighlight">\(\alpha\)</span> between <cite>b</cite> and
+<cite>c</cite>, <span class="math notranslate nohighlight">\(\beta\)</span> between <cite>a</cite> and <cite>c</cite>, <span class="math notranslate nohighlight">\(\gamma\)</span> between
+<cite>a</cite> and <cite>b</cite>, the standard crystallographic convention).</p></li>
+<li><p><strong>gamma</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Interaxial angles, in degrees (<span class="math notranslate nohighlight">\(\alpha\)</span> between <cite>b</cite> and
+<cite>c</cite>, <span class="math notranslate nohighlight">\(\beta\)</span> between <cite>a</cite> and <cite>c</cite>, <span class="math notranslate nohighlight">\(\gamma\)</span> between
+<cite>a</cite> and <cite>b</cite>, the standard crystallographic convention).</p></li>
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Absolute tolerance for treating two lengths, or an angle and a
+reference angle, as equal.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>str</em> – One of <code class="docutils literal notranslate"><span class="pre">&quot;cubic&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;tetragonal&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;orthorhombic&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;hexagonal&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;trigonal&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;monoclinic&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;triclinic&quot;</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A cell with all edges and angles equal to a right angle is cubic:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">classify_crystal_system</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">)</span>
+<span class="go">'cubic'</span>
+</pre></div>
+</div>
+<p>Hexagonal graphite-like cell (<span class="math notranslate nohighlight">\(a=b\neq c\)</span>, <span class="math notranslate nohighlight">\(\gamma=120°\)</span>):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">classify_crystal_system</span><span class="p">(</span><span class="mf">2.46</span><span class="p">,</span> <span class="mf">2.46</span><span class="p">,</span> <span class="mf">6.71</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">120.0</span><span class="p">)</span>
+<span class="go">'hexagonal'</span>
+</pre></div>
+</div>
+<p>A cell with no special equalities at all is triclinic:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">classify_crystal_system</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">,</span> <span class="mf">80.0</span><span class="p">,</span> <span class="mf">85.0</span><span class="p">,</span> <span class="mf">95.0</span><span class="p">)</span>
+<span class="go">'triclinic'</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.crystal.d_spacing_cubic">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.crystal.</span></span><span class="sig-name descname"><span class="pre">d_spacing_cubic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/xrd.html#d_spacing_cubic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.d_spacing_cubic" title="Link to this definition">#</a></dt>
+<dd><p>Interplanar spacing for the <span class="math notranslate nohighlight">\((hkl)\)</span> plane of a cubic lattice, <span class="math notranslate nohighlight">\(d=a/\sqrt{h^2+k^2+l^2}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Cubic lattice constant.</p></li>
+<li><p><strong>h</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Miller indices (not all zero).</p></li>
+<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Miller indices (not all zero).</p></li>
+<li><p><strong>l</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Miller indices (not all zero).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">d_spacing_cubic</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">l</span><span class="o">=</span><span class="mi">1</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">2.309401</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.crystal.frenkel_defect_concentration">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.crystal.</span></span><span class="sig-name descname"><span class="pre">frenkel_defect_concentration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_interstitial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta_h</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/defects.html#frenkel_defect_concentration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.frenkel_defect_concentration" title="Link to this definition">#</a></dt>
+<dd><p>Equilibrium number of Frenkel defects (a cation displaced to an interstitial site).</p>
+<div class="math notranslate nohighlight">
+\[n_F = \sqrt{NN_i}\exp\!\left(-\frac{\Delta H_F}{2k_BT}\right)\]</div>
+<p>valid for <span class="math notranslate nohighlight">\(n_F\ll N,N_i\)</span> (West, <em>Solid State Chemistry and its
+Applications</em>, 2nd ed., Ch. 1.4, eq. 1.14); reduces to the Schottky
+form with <span class="math notranslate nohighlight">\(N_i\to N\)</span> up to the geometric- vs. arithmetic-mean
+site count.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Number of normal cation lattice sites.</p></li>
+<li><p><strong>N_interstitial</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Number of available interstitial sites.</p></li>
+<li><p><strong>delta_h</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Enthalpy of formation of one Frenkel defect (one vacancy + one
+interstitial), in J.</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperature(s), in K.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">300.0</span><span class="p">,</span> <span class="mf">600.0</span><span class="p">,</span> <span class="mf">900.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">frenkel_defect_concentration</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mf">1e20</span><span class="p">,</span> <span class="n">N_interstitial</span><span class="o">=</span><span class="mf">1e20</span><span class="p">,</span> <span class="n">delta_h</span><span class="o">=</span><span class="mf">2.5e-19</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>With equal site counts N=N_i, this reduces to the Schottky formula’s
+functional form (same exponential factor, prefactor N instead of
+sqrt(N*N)=N – they coincide):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.crystal.systems.defects</span><span class="w"> </span><span class="kn">import</span> <span class="n">schottky_defect_concentration</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_frenkel</span> <span class="o">=</span> <span class="n">frenkel_defect_concentration</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mf">1e20</span><span class="p">,</span> <span class="n">N_interstitial</span><span class="o">=</span><span class="mf">1e20</span><span class="p">,</span> <span class="n">delta_h</span><span class="o">=</span><span class="mf">2.5e-19</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">500.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_schottky</span> <span class="o">=</span> <span class="n">schottky_defect_concentration</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mf">1e20</span><span class="p">,</span> <span class="n">delta_h</span><span class="o">=</span><span class="mf">2.5e-19</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">500.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">n_frenkel</span> <span class="o">-</span> <span class="n">n_schottky</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_schottky</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.crystal.madelung_constant_nacl">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.crystal.</span></span><span class="sig-name descname"><span class="pre">madelung_constant_nacl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_shells</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/madelung.html#madelung_constant_nacl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.madelung_constant_nacl" title="Link to this definition">#</a></dt>
+<dd><p>Compute the NaCl Madelung constant via Evjen’s converging lattice summation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n_shells</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Half-width (in simple-cubic lattice units) of the summation
+region passed to
+<code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.crystal.utils.lattice_sums.evjen_lattice_sum_cubic_alternating()</span></code>.
+The default already agrees with the literature value
+(<code class="xref py py-data docutils literal notranslate"><span class="pre">MADELUNG_CONSTANT_NACL_LITERATURE</span></code>) to 5 significant
+figures.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">madelung_constant_nacl</span><span class="p">(),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">1.7476</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">madelung_constant_nacl</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.747565</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.crystal.powder_xrd_peaks">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.crystal.</span></span><span class="sig-name descname"><span class="pre">powder_xrd_peaks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lattice_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hkl_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/xrd.html#powder_xrd_peaks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.powder_xrd_peaks" title="Link to this definition">#</a></dt>
+<dd><p>Enumerate the allowed powder-XRD peaks of a cubic Bravais lattice up to a Miller-index cutoff.</p>
+<p>Iterates every <span class="math notranslate nohighlight">\((h,k,l)\)</span> with <span class="math notranslate nohighlight">\(0\le h,k,l\le\)</span> <cite>hkl_max</cite>
+(not all zero), computes each reflection’s structure factor via
+<a class="reference internal" href="#chemistrykit.crystal.structure_factor" title="chemistrykit.crystal.structure_factor"><code class="xref py py-func docutils literal notranslate"><span class="pre">structure_factor()</span></code></a> (dropping systematically-absent
+reflections, <span class="math notranslate nohighlight">\(|F_{hkl}|^2&lt;10^{-9}\)</span>) and Bragg angle via
+<a class="reference internal" href="#chemistrykit.crystal.bragg_angle" title="chemistrykit.crystal.bragg_angle"><code class="xref py py-func docutils literal notranslate"><span class="pre">bragg_angle()</span></code></a> (dropping reflections with no real solution),
+and returns the surviving peaks sorted by <span class="math notranslate nohighlight">\(2\theta\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lattice_type</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Cubic Bravais lattice type (see <code class="xref py py-data docutils literal notranslate"><span class="pre">_CUBIC_BASES</span></code>).</p></li>
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Cubic lattice constant, in the same length unit as <cite>wavelength</cite>.</p></li>
+<li><p><strong>wavelength</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – X-ray wavelength.</p></li>
+<li><p><strong>hkl_max</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Largest Miller index to search (non-negative indices only, since
+<span class="math notranslate nohighlight">\(d_{hkl}\)</span> and <span class="math notranslate nohighlight">\(|F_{hkl}|\)</span> depend only on
+<span class="math notranslate nohighlight">\(h^2+k^2+l^2\)</span> and the mixed-parity pattern, both invariant
+under sign flips of any index).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>list of XRDPeak</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>BCC iron’s first powder line is (110), not (100) – (100) is
+systematically absent since <span class="math notranslate nohighlight">\(1+0+0=1\)</span> is odd:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">peaks</span> <span class="o">=</span> <span class="n">powder_xrd_peaks</span><span class="p">(</span><span class="s2">"BCC"</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">286.65</span><span class="p">,</span> <span class="n">wavelength</span><span class="o">=</span><span class="mf">154.18</span><span class="p">,</span> <span class="n">hkl_max</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">peaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hkl</span>
+<span class="go">(1, 1, 0)</span>
+</pre></div>
+</div>
+<p>FCC’s first line is (111) – (100) and (110) are both absent (mixed
+parity):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">peaks</span> <span class="o">=</span> <span class="n">powder_xrd_peaks</span><span class="p">(</span><span class="s2">"FCC"</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">408.6</span><span class="p">,</span> <span class="n">wavelength</span><span class="o">=</span><span class="mf">154.18</span><span class="p">,</span> <span class="n">hkl_max</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">peaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hkl</span>
+<span class="go">(1, 1, 1)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.crystal.schottky_defect_concentration">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.crystal.</span></span><span class="sig-name descname"><span class="pre">schottky_defect_concentration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta_h</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/defects.html#schottky_defect_concentration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.schottky_defect_concentration" title="Link to this definition">#</a></dt>
+<dd><p>Equilibrium number of Schottky defects (paired cation+anion vacancies).</p>
+<div class="math notranslate nohighlight">
+\[n_S = N\exp\!\left(-\frac{\Delta H_S}{2k_BT}\right)\]</div>
+<p>valid for <span class="math notranslate nohighlight">\(n_S\ll N\)</span> (West, <em>Solid State Chemistry and its
+Applications</em>, 2nd ed., Ch. 1.4, eq. 1.10).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Number of cation (equivalently, formula-unit) sites in the crystal.</p></li>
+<li><p><strong>delta_h</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Enthalpy of formation of one Schottky defect (one cation vacancy
++ one anion vacancy), in J.</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperature(s), in K.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Number of Schottky defects, <span class="math notranslate nohighlight">\(n_S \le N\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Defect concentration increases with temperature (more thermal energy
+to pay the formation enthalpy):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">300.0</span><span class="p">,</span> <span class="mf">600.0</span><span class="p">,</span> <span class="mf">900.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">schottky_defect_concentration</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mf">1e20</span><span class="p">,</span> <span class="n">delta_h</span><span class="o">=</span><span class="mf">2.0e-19</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>At very low temperature, essentially no defects form:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">schottky_defect_concentration</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mf">1e20</span><span class="p">,</span> <span class="n">delta_h</span><span class="o">=</span><span class="mf">2.0e-19</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.crystal.structure_factor">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.crystal.</span></span><span class="sig-name descname"><span class="pre">structure_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hkl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scattering_factors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/xrd.html#structure_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.structure_factor" title="Link to this definition">#</a></dt>
+<dd><p>The kinematic structure factor <span class="math notranslate nohighlight">\(F_{hkl}=\sum_j f_j\exp[2\pi i(hx_j+ky_j+lz_j)]\)</span>.</p>
+<p>Summed over the atoms in one unit cell at fractional coordinates
+<cite>basis</cite>; <span class="math notranslate nohighlight">\(|F_{hkl}|^2\)</span> is proportional to a reflection’s
+diffracted intensity, and <span class="math notranslate nohighlight">\(F_{hkl}=0\)</span> identically for certain
+<span class="math notranslate nohighlight">\((hkl)\)</span> combinations depending on the lattice centering –
+“systematic absences” (West, <em>Solid State Chemistry and its
+Applications</em>, 2nd ed., Ch. 5.4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hkl</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em> of </em><em>(</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>)</em>) – Miller indices.</p></li>
+<li><p><strong>basis</strong> (<em>sequence</em><em> of </em><em>(</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>)</em>) – Fractional atomic coordinates of every atom in the unit cell.</p></li>
+<li><p><strong>scattering_factors</strong> (<em>sequence</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Per-atom scattering factor/amplitude <cite>f_j</cite>, same length as
+<cite>basis</cite>. Defaults to 1.0 for every atom (structure of the
+lattice alone, ignoring atomic form-factor variation).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#complex" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">complex</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>complex</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A single atom per cell (simple cubic) never has a systematically
+absent reflection – <span class="math notranslate nohighlight">\(F_{hkl}=f\)</span> for every <cite>(hkl)</cite>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="n">structure_factor</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">[(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)]))</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>Body-centered cubic: <span class="math notranslate nohighlight">\(F_{hkl}=0\)</span> whenever <span class="math notranslate nohighlight">\(h+k+l\)</span> is odd:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bcc_basis</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">structure_factor</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">bcc_basis</span><span class="p">)),</span> <span class="mi">9</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">structure_factor</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">bcc_basis</span><span class="p">)),</span> <span class="mi">9</span><span class="p">)</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.crystal.unit_cell_volume">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.crystal.</span></span><span class="sig-name descname"><span class="pre">unit_cell_volume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/crystal/systems/crystal_systems.html#unit_cell_volume"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.crystal.unit_cell_volume" title="Link to this definition">#</a></dt>
+<dd><p>General unit-cell volume from the six lattice parameters, valid for any crystal system.</p>
+<div class="math notranslate nohighlight">
+\[V = abc\sqrt{1-\cos^2\alpha-\cos^2\beta-\cos^2\gamma+2\cos\alpha\cos\beta\cos\gamma}\]</div>
+<p>(Ashcroft &amp; Mermin, <em>Solid State Physics</em>, 1976, derived from the
+scalar triple product of the three edge vectors). Reduces to
+<span class="math notranslate nohighlight">\(V=abc\)</span> for any right-angle cell (cubic/tetragonal/
+orthorhombic) and to <span class="math notranslate nohighlight">\(V=\frac{\sqrt3}{2}a^2c\)</span> for hexagonal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Unit-cell edge lengths.</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Unit-cell edge lengths.</p></li>
+<li><p><strong>c</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Unit-cell edge lengths.</p></li>
+<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Interaxial angles, in degrees.</p></li>
+<li><p><strong>beta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Interaxial angles, in degrees.</p></li>
+<li><p><strong>gamma</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Interaxial angles, in degrees.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A right-angle (orthorhombic/cubic/tetragonal) cell reduces to <span class="math notranslate nohighlight">\(abc\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">unit_cell_volume</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">24.0</span>
+</pre></div>
+</div>
+<p>A hexagonal cell (<span class="math notranslate nohighlight">\(a=b\)</span>, <span class="math notranslate nohighlight">\(\gamma=120°\)</span>) matches the
+textbook shortcut <span class="math notranslate nohighlight">\(\frac{\sqrt3}{2}a^2c\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mf">2.46</span><span class="p">,</span> <span class="mf">6.71</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">V_general</span> <span class="o">=</span> <span class="n">unit_cell_volume</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">120.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">V_hex_shortcut</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">c</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">V_general</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">V_hex_shortcut</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="analytical.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">chemistrykit.analytical</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="electrochem.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">chemistrykit.electrochem</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.BodyCenteredCubicPacking"><code class="docutils literal notranslate"><span class="pre">BodyCenteredCubicPacking</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.BodyCenteredCubicPacking.atomic_radius"><code class="docutils literal notranslate"><span class="pre">BodyCenteredCubicPacking.atomic_radius()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.BodyCenteredCubicPacking.atoms_per_cell"><code class="docutils literal notranslate"><span class="pre">BodyCenteredCubicPacking.atoms_per_cell</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.BodyCenteredCubicPacking.coordination_number"><code class="docutils literal notranslate"><span class="pre">BodyCenteredCubicPacking.coordination_number</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.BodyCenteredCubicPacking.unit_cell_volume"><code class="docutils literal notranslate"><span class="pre">BodyCenteredCubicPacking.unit_cell_volume()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.BornLandeLatticeEnergy"><code class="docutils literal notranslate"><span class="pre">BornLandeLatticeEnergy</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.BornLandeLatticeEnergy.lattice_energy"><code class="docutils literal notranslate"><span class="pre">BornLandeLatticeEnergy.lattice_energy()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.FaceCenteredCubicPacking"><code class="docutils literal notranslate"><span class="pre">FaceCenteredCubicPacking</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.FaceCenteredCubicPacking.atomic_radius"><code class="docutils literal notranslate"><span class="pre">FaceCenteredCubicPacking.atomic_radius()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.FaceCenteredCubicPacking.atoms_per_cell"><code class="docutils literal notranslate"><span class="pre">FaceCenteredCubicPacking.atoms_per_cell</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.FaceCenteredCubicPacking.coordination_number"><code class="docutils literal notranslate"><span class="pre">FaceCenteredCubicPacking.coordination_number</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.FaceCenteredCubicPacking.unit_cell_volume"><code class="docutils literal notranslate"><span class="pre">FaceCenteredCubicPacking.unit_cell_volume()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.HexagonalClosePacking"><code class="docutils literal notranslate"><span class="pre">HexagonalClosePacking</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.HexagonalClosePacking.atomic_radius"><code class="docutils literal notranslate"><span class="pre">HexagonalClosePacking.atomic_radius()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.HexagonalClosePacking.atoms_per_cell"><code class="docutils literal notranslate"><span class="pre">HexagonalClosePacking.atoms_per_cell</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.HexagonalClosePacking.coordination_number"><code class="docutils literal notranslate"><span class="pre">HexagonalClosePacking.coordination_number</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.HexagonalClosePacking.unit_cell_volume"><code class="docutils literal notranslate"><span class="pre">HexagonalClosePacking.unit_cell_volume()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.KapustinskiiLatticeEnergy"><code class="docutils literal notranslate"><span class="pre">KapustinskiiLatticeEnergy</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.KapustinskiiLatticeEnergy.lattice_energy"><code class="docutils literal notranslate"><span class="pre">KapustinskiiLatticeEnergy.lattice_energy()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.LatticeEnergyModel"><code class="docutils literal notranslate"><span class="pre">LatticeEnergyModel</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.LatticeEnergyModel.lattice_energy"><code class="docutils literal notranslate"><span class="pre">LatticeEnergyModel.lattice_energy()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.LatticePacking"><code class="docutils literal notranslate"><span class="pre">LatticePacking</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.LatticePacking.atomic_radius"><code class="docutils literal notranslate"><span class="pre">LatticePacking.atomic_radius()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.LatticePacking.atoms_per_cell"><code class="docutils literal notranslate"><span class="pre">LatticePacking.atoms_per_cell</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.LatticePacking.coordination_number"><code class="docutils literal notranslate"><span class="pre">LatticePacking.coordination_number</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.LatticePacking.packing_fraction"><code class="docutils literal notranslate"><span class="pre">LatticePacking.packing_fraction()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.LatticePacking.unit_cell_volume"><code class="docutils literal notranslate"><span class="pre">LatticePacking.unit_cell_volume()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.SimpleCubicPacking"><code class="docutils literal notranslate"><span class="pre">SimpleCubicPacking</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.SimpleCubicPacking.atomic_radius"><code class="docutils literal notranslate"><span class="pre">SimpleCubicPacking.atomic_radius()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.SimpleCubicPacking.atoms_per_cell"><code class="docutils literal notranslate"><span class="pre">SimpleCubicPacking.atoms_per_cell</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.SimpleCubicPacking.coordination_number"><code class="docutils literal notranslate"><span class="pre">SimpleCubicPacking.coordination_number</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.SimpleCubicPacking.unit_cell_volume"><code class="docutils literal notranslate"><span class="pre">SimpleCubicPacking.unit_cell_volume()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.XRDPeak"><code class="docutils literal notranslate"><span class="pre">XRDPeak</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.XRDPeak.d_spacing"><code class="docutils literal notranslate"><span class="pre">XRDPeak.d_spacing</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.XRDPeak.hkl"><code class="docutils literal notranslate"><span class="pre">XRDPeak.hkl</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.XRDPeak.relative_intensity"><code class="docutils literal notranslate"><span class="pre">XRDPeak.relative_intensity</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.XRDPeak.two_theta"><code class="docutils literal notranslate"><span class="pre">XRDPeak.two_theta</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.bragg_angle"><code class="docutils literal notranslate"><span class="pre">bragg_angle()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.classify_crystal_system"><code class="docutils literal notranslate"><span class="pre">classify_crystal_system()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.d_spacing_cubic"><code class="docutils literal notranslate"><span class="pre">d_spacing_cubic()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.frenkel_defect_concentration"><code class="docutils literal notranslate"><span class="pre">frenkel_defect_concentration()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.madelung_constant_nacl"><code class="docutils literal notranslate"><span class="pre">madelung_constant_nacl()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.powder_xrd_peaks"><code class="docutils literal notranslate"><span class="pre">powder_xrd_peaks()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.schottky_defect_concentration"><code class="docutils literal notranslate"><span class="pre">schottky_defect_concentration()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.structure_factor"><code class="docutils literal notranslate"><span class="pre">structure_factor()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.crystal.unit_cell_volume"><code class="docutils literal notranslate"><span class="pre">unit_cell_volume()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/api/crystal.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, chemistrykit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

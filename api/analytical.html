@@ -1,0 +1,1571 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>chemistrykit.analytical &#8212; chemistrykit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/analytical';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="chemistrykit.crystal" href="crystal.html" />
+    <link rel="prev" title="API" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/chemistrykit_logo_transparent.png" class="logo__image only-light" alt="chemistrykit logo"/>
+    <img src="../_static/chemistrykit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="chemistrykit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">chemistrykit.analytical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crystal.html">chemistrykit.crystal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electrochem.html">chemistrykit.electrochem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinetics.html">chemistrykit.kinetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="md.html">chemistrykit.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photochem.html">chemistrykit.photochem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polymer.html">chemistrykit.polymer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quantum.html">chemistrykit.quantum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions.html">chemistrykit.solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spectro.html">chemistrykit.spectro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmech.html">chemistrykit.statmech</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">chemistrykit.structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surface.html">chemistrykit.surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermo.html">chemistrykit.thermo</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">chemistrykit.analytical</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="chemistrykit-analytical">
+<h1>chemistrykit.analytical<a class="headerlink" href="#chemistrykit-analytical" title="Link to this heading">#</a></h1>
+<div class="subpkg-nav docutils container">
+<p><a class="reference internal" href="../_generated/subpackages/analytical.html"><span class="doc">chemistrykit.analytical hub</span></a> · <a class="reference internal" href="../history/analytical_breakthroughs.html"><span class="doc">History</span></a> · <a class="reference internal" href="gallery/analytical/index.html"><span class="doc">Examples</span></a> · <a class="reference internal" href="#"><span class="doc">API reference</span></a></p>
+</div>
+<p id="module-chemistrykit.analytical">chemistrykit.analytical: analytical chemistry.</p>
+<p>Acid-base titration curves are provided by
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.solutions.systems.titration</span></code>; this subpackage adds
+redox and complexometric (EDTA) titration-curve simulation with
+equivalence-point detection; chromatographic plate theory and the van
+Deemter equation (resolution, selectivity); linear-regression calibration
+curves with IUPAC-convention limits of detection/quantitation; and
+propagation-of-uncertainty formulas plus Dixon’s Q-test for outlier
+rejection.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.analytical.EDTATitration">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">EDTATitration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">C_metal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V_metal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_conditional</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_edta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/titration.html#EDTATitration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.EDTATitration" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.analytical.TitrationCurve" title="chemistrykit.analytical.core.base_system.TitrationCurve"><code class="xref py py-class docutils literal notranslate"><span class="pre">TitrationCurve</span></code></a></p>
+<p>A complexometric titration of a metal ion M by EDTA, via the conditional formation constant.</p>
+<p>Models the 1:1 complexation <span class="math notranslate nohighlight">\(M+Y\rightleftharpoons MY\)</span> exactly
+(no large-K approximation needed, unlike <a class="reference internal" href="#chemistrykit.analytical.RedoxTitration" title="chemistrykit.analytical.RedoxTitration"><code class="xref py py-class docutils literal notranslate"><span class="pre">RedoxTitration</span></code></a>),
+using the <em>conditional</em> formation constant <span class="math notranslate nohighlight">\(K_f'\)</span> – the
+effective (pH- and side-reaction-corrected) formation constant at the
+titration’s fixed pH (Harris, <em>Quantitative Chemical Analysis</em>, 9th
+ed., Ch. 12.2; folding pH-dependence into a single conditional
+constant, rather than modeling EDTA’s stepwise protonation
+equilibria explicitly, is itself the standard simplification this
+class makes, flagged here as an approximation).</p>
+<p>Mass balance on total metal <span class="math notranslate nohighlight">\(C_M\)</span> and total EDTA added
+<span class="math notranslate nohighlight">\(C_Y\)</span> (both diluted by the growing total volume), with
+<span class="math notranslate nohighlight">\(x=[MY]\)</span>, <span class="math notranslate nohighlight">\([M]=C_M-x\)</span>, <span class="math notranslate nohighlight">\([Y]=C_Y-x\)</span>, and
+<span class="math notranslate nohighlight">\(K_f'=x/[(C_M-x)(C_Y-x)]\)</span>, gives the exact quadratic</p>
+<div class="math notranslate nohighlight">
+\[K_f'x^2-\left[K_f'(C_M+C_Y)+1\right]x+K_f'C_MC_Y=0\]</div>
+<p>solved here in closed form for the physical root <span class="math notranslate nohighlight">\(0\le x\le
+\min(C_M,C_Y)\)</span>, then <span class="math notranslate nohighlight">\(pM=-\log_{10}[M]\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>C_metal</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial metal-ion concentration, in mol/L.</p></li>
+<li><p><strong>V_metal</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial metal-ion solution volume, in L.</p></li>
+<li><p><strong>K_conditional</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Conditional formation constant <span class="math notranslate nohighlight">\(K_f'\)</span> at the titration pH.</p></li>
+<li><p><strong>C_edta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Titrant (EDTA) concentration, in mol/L.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>At the equivalence volume (<span class="math notranslate nohighlight">\(C_M=C_Y\)</span>), <cite>pM</cite> approaches the
+textbook large-<span class="math notranslate nohighlight">\(K_f'\)</span> approximation <span class="math notranslate nohighlight">\(pM\approx
+\frac12\log_{10}(K_f'/C_{M,eq})\)</span>
+(Harris, <em>Quantitative Chemical Analysis</em>, 9th ed., eq. 12.2) as
+<span class="math notranslate nohighlight">\(K_f'\)</span> grows – verified here rather than assumed, since the
+approximation formula is itself only a limit of the exact quadratic
+solved above:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">titration</span> <span class="o">=</span> <span class="n">EDTATitration</span><span class="p">(</span><span class="n">C_metal</span><span class="o">=</span><span class="mf">0.010</span><span class="p">,</span> <span class="n">V_metal</span><span class="o">=</span><span class="mf">0.050</span><span class="p">,</span> <span class="n">K_conditional</span><span class="o">=</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">C_edta</span><span class="o">=</span><span class="mf">0.010</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">V_eq</span> <span class="o">=</span> <span class="n">titration</span><span class="o">.</span><span class="n">equivalence_volume</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pM_exact</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">titration</span><span class="o">.</span><span class="n">response_at</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">V_eq</span><span class="p">]))[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C_M_eq</span> <span class="o">=</span> <span class="n">titration</span><span class="o">.</span><span class="n">C_metal</span> <span class="o">*</span> <span class="n">titration</span><span class="o">.</span><span class="n">V_metal</span> <span class="o">/</span> <span class="p">(</span><span class="n">titration</span><span class="o">.</span><span class="n">V_metal</span> <span class="o">+</span> <span class="n">V_eq</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pM_approx</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mf">1e12</span> <span class="o">/</span> <span class="n">C_M_eq</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">pM_exact</span> <span class="o">-</span> <span class="n">pM_approx</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.analytical.EDTATitration.equivalence_volume">
+<span class="sig-name descname"><span class="pre">equivalence_volume</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/titration.html#EDTATitration.equivalence_volume"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.EDTATitration.equivalence_volume" title="Link to this definition">#</a></dt>
+<dd><p>Return the exact (stoichiometric, 1:1) equivalence volume.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.analytical.EDTATitration.response_at">
+<span class="sig-name descname"><span class="pre">response_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/titration.html#EDTATitration.response_at"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.EDTATitration.response_at" title="Link to this definition">#</a></dt>
+<dd><p>Return the titration’s response variable at each titrant volume in <cite>V</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>V</strong> (<em>ndarray</em>) – Volume(s) of titrant added, in L.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.analytical.LinearCalibration">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">LinearCalibration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intercept</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_squared</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residual_std_error</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/calibration.html#LinearCalibration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.LinearCalibration" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A fitted instrument-response-vs-concentration calibration curve, <code class="docutils literal notranslate"><span class="pre">signal</span> <span class="pre">=</span> <span class="pre">slope*conc</span> <span class="pre">+</span> <span class="pre">intercept</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>slope</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>intercept</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>r_squared</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>residual_std_error</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.analytical.LinearCalibration.intercept">
+<span class="sig-name descname"><span class="pre">intercept</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.analytical.LinearCalibration.intercept" title="Link to this definition">#</a></dt>
+<dd><p>Signal at zero concentration (ideally the blank signal).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.analytical.LinearCalibration.lod">
+<span class="sig-name descname"><span class="pre">lod</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/calibration.html#LinearCalibration.lod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.LinearCalibration.lod" title="Link to this definition">#</a></dt>
+<dd><p>Limit of detection, <span class="math notranslate nohighlight">\(\text{LOD}=3.3\,s_{y/x}/|m|\)</span> (IUPAC convention).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.analytical.LinearCalibration.loq">
+<span class="sig-name descname"><span class="pre">loq</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/calibration.html#LinearCalibration.loq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.LinearCalibration.loq" title="Link to this definition">#</a></dt>
+<dd><p>Limit of quantitation, <span class="math notranslate nohighlight">\(\text{LOQ}=10\,s_{y/x}/|m|\)</span> (IUPAC convention).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.analytical.LinearCalibration.predict_concentration">
+<span class="sig-name descname"><span class="pre">predict_concentration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/calibration.html#LinearCalibration.predict_concentration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.LinearCalibration.predict_concentration" title="Link to this definition">#</a></dt>
+<dd><p>Invert the calibration to estimate concentration from a measured signal.</p>
+<div class="math notranslate nohighlight">
+\[\hat c = (y_{measured} - b)/m\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>signal</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.analytical.LinearCalibration.predict_signal">
+<span class="sig-name descname"><span class="pre">predict_signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">concentration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/calibration.html#LinearCalibration.predict_signal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.LinearCalibration.predict_signal" title="Link to this definition">#</a></dt>
+<dd><p>Predict the instrument signal at given concentration(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>concentration</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.analytical.LinearCalibration.r_squared">
+<span class="sig-name descname"><span class="pre">r_squared</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.analytical.LinearCalibration.r_squared" title="Link to this definition">#</a></dt>
+<dd><p>Coefficient of determination of the fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.analytical.LinearCalibration.residual_std_error">
+<span class="sig-name descname"><span class="pre">residual_std_error</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.analytical.LinearCalibration.residual_std_error" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(s_{y/x}\)</span>, the residual standard error about the fit
+(Harris, <em>Quantitative Chemical Analysis</em>, 9th ed., Ch. 4.5).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.analytical.LinearCalibration.slope">
+<span class="sig-name descname"><span class="pre">slope</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.analytical.LinearCalibration.slope" title="Link to this definition">#</a></dt>
+<dd><p>Sensitivity, signal units per concentration unit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.analytical.QTestResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">QTestResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">suspect_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q_statistic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q_critical</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reject</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/qtest.html#QTestResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.QTestResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Result of a <a class="reference internal" href="#chemistrykit.analytical.dixon_q_test" title="chemistrykit.analytical.dixon_q_test"><code class="xref py py-func docutils literal notranslate"><span class="pre">dixon_q_test()</span></code></a> call.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>suspect_value</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>Q_statistic</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>Q_critical</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>reject</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.analytical.QTestResult.Q_critical">
+<span class="sig-name descname"><span class="pre">Q_critical</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.analytical.QTestResult.Q_critical" title="Link to this definition">#</a></dt>
+<dd><p>The critical value looked up from <code class="xref py py-data docutils literal notranslate"><span class="pre">Q_CRITICAL_TABLE</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.analytical.QTestResult.Q_statistic">
+<span class="sig-name descname"><span class="pre">Q_statistic</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.analytical.QTestResult.Q_statistic" title="Link to this definition">#</a></dt>
+<dd><p>The computed Q statistic, gap/range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.analytical.QTestResult.reject">
+<span class="sig-name descname"><span class="pre">reject</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#chemistrykit.analytical.QTestResult.reject" title="Link to this definition">#</a></dt>
+<dd><p>Whether the suspect value is rejected as an outlier (<code class="docutils literal notranslate"><span class="pre">Q_statistic</span> <span class="pre">&gt;</span> <span class="pre">Q_critical</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.analytical.QTestResult.suspect_value">
+<span class="sig-name descname"><span class="pre">suspect_value</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.analytical.QTestResult.suspect_value" title="Link to this definition">#</a></dt>
+<dd><p>The data point tested (the minimum or maximum of the set).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.analytical.RedoxTitration">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">RedoxTitration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">E1_standard</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E2_standard</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_analyte</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V_analyte</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_titrant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/titration.html#RedoxTitration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.RedoxTitration" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.analytical.TitrationCurve" title="chemistrykit.analytical.core.base_system.TitrationCurve"><code class="xref py py-class docutils literal notranslate"><span class="pre">TitrationCurve</span></code></a></p>
+<p>A potentiometric redox titration: a reduced analyte titrated by an oxidizing titrant.</p>
+<p>Models the general reaction <span class="math notranslate nohighlight">\(n_2\,\text{Red}_1 + n_1\,\text{Ox}_2
+\rightarrow n_2\,\text{Ox}_1 + n_1\,\text{Red}_2\)</span> in the standard
+large-equilibrium-constant (“quantitative reaction”) approximation
+(Harris, <em>Quantitative Chemical Analysis</em>, 9th ed., Ch. 16), under
+which electron-balance stoichiometry alone (not a numerical
+equilibrium solve) fixes the composition at every titrant volume:</p>
+<ul>
+<li><p><strong>Before the equivalence volume</strong> <span class="math notranslate nohighlight">\(V_{eq}=n_1C_{analyte}V_{analyte}/(n_2C_{titrant})\)</span>,
+the analyte couple sets the potential via the Nernst equation, using
+the fraction of analyte already oxidized (fixed by the moles of
+titrant added, via the electron balance <span class="math notranslate nohighlight">\(n_1x=n_2C_{titrant}V\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[E = E^\circ_1 - \frac{RT}{n_1F}\ln\frac{[\text{Red}_1]}{[\text{Ox}_1]}\]</div>
+</li>
+<li><p><strong>At the equivalence point</strong>, the classical weighted-average result
+(from adding the two Nernst equations):</p>
+<div class="math notranslate nohighlight">
+\[E_{eq} = \frac{n_1E^\circ_1+n_2E^\circ_2}{n_1+n_2}\]</div>
+</li>
+<li><p><strong>Past the equivalence volume</strong>, the titrant couple sets the
+potential from the (now excess) unreacted titrant:</p>
+<div class="math notranslate nohighlight">
+\[E = E^\circ_2 - \frac{RT}{n_2F}\ln\frac{[\text{Red}_2]}{[\text{Ox}_2]}\]</div>
+</li>
+</ul>
+<p>For the common case <span class="math notranslate nohighlight">\(n_1=n_2\)</span> (e.g. Fe2+/Ce4+, both
+1-electron couples) this reduces to the textbook symmetric titration
+curve with <span class="math notranslate nohighlight">\(E_{eq}=(E^\circ_1+E^\circ_2)/2\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>E1_standard</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Standard reduction potential of the analyte couple (Ox1/Red1), in V.</p></li>
+<li><p><strong>n1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Electrons transferred in the analyte half-reaction.</p></li>
+<li><p><strong>E2_standard</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Standard reduction potential of the titrant couple (Ox2/Red2), in V.</p></li>
+<li><p><strong>n2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Electrons transferred in the titrant half-reaction.</p></li>
+<li><p><strong>C_analyte</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial analyte (Red1) concentration, in mol/L.</p></li>
+<li><p><strong>V_analyte</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial analyte volume, in L.</p></li>
+<li><p><strong>C_titrant</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Titrant (Ox2) concentration, in mol/L.</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Absolute temperature, in K.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Fe2+ (E=0.771 V) titrated by Ce4+ (E=1.72 V), both 1-electron
+couples: at the equivalence volume, <cite>E</cite> is exactly the arithmetic
+mean of the two standard potentials – the textbook symmetric-curve
+result:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">titration</span> <span class="o">=</span> <span class="n">RedoxTitration</span><span class="p">(</span><span class="n">E1_standard</span><span class="o">=</span><span class="mf">0.771</span><span class="p">,</span> <span class="n">n1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">E2_standard</span><span class="o">=</span><span class="mf">1.72</span><span class="p">,</span> <span class="n">n2</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">C_analyte</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span> <span class="n">V_analyte</span><span class="o">=</span><span class="mf">0.050</span><span class="p">,</span> <span class="n">C_titrant</span><span class="o">=</span><span class="mf">0.10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">V_eq</span> <span class="o">=</span> <span class="n">titration</span><span class="o">.</span><span class="n">equivalence_volume</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">titration</span><span class="o">.</span><span class="n">response_at</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">V_eq</span><span class="p">]))[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">((</span><span class="mf">0.771</span> <span class="o">+</span> <span class="mf">1.72</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.analytical.RedoxTitration.equivalence_volume">
+<span class="sig-name descname"><span class="pre">equivalence_volume</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/titration.html#RedoxTitration.equivalence_volume"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.RedoxTitration.equivalence_volume" title="Link to this definition">#</a></dt>
+<dd><p>Return the exact (stoichiometric, electron-balance) equivalence volume.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.analytical.RedoxTitration.response_at">
+<span class="sig-name descname"><span class="pre">response_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/titration.html#RedoxTitration.response_at"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.RedoxTitration.response_at" title="Link to this definition">#</a></dt>
+<dd><p>Return the titration’s response variable at each titrant volume in <cite>V</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>V</strong> (<em>ndarray</em>) – Volume(s) of titrant added, in L.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.analytical.TitrationCurve">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">TitrationCurve</span></span><a class="reference internal" href="../_modules/chemistrykit/analytical/core/base_system.html#TitrationCurve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.TitrationCurve" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<p>Common base for a potentiometric titration-curve model whose response is not pH.</p>
+<p>Concrete subclasses implement <a class="reference internal" href="#chemistrykit.analytical.TitrationCurve.response_at" title="chemistrykit.analytical.TitrationCurve.response_at"><code class="xref py py-meth docutils literal notranslate"><span class="pre">response_at()</span></code></a>; <a class="reference internal" href="#chemistrykit.analytical.TitrationCurve.curve" title="chemistrykit.analytical.TitrationCurve.curve"><code class="xref py py-meth docutils literal notranslate"><span class="pre">curve()</span></code></a> and
+<a class="reference internal" href="#chemistrykit.analytical.TitrationCurve.find_equivalence_point" title="chemistrykit.analytical.TitrationCurve.find_equivalence_point"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_equivalence_point()</span></code></a> are then available for free, mirroring
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">chemistrykit.solutions.core.base_system.Titration.curve()</span></code>/
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">find_equivalence_point()</span></code>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.analytical.TitrationCurve.curve">
+<span class="sig-name descname"><span class="pre">curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/core/base_system.html#TitrationCurve.curve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.TitrationCurve.curve" title="Link to this definition">#</a></dt>
+<dd><p>Compute the full titration curve over a range of titrant volumes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>V</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Volumes of titrant added, in L.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.analytical.TitrationCurveResult" title="chemistrykit.analytical.core.base_system.TitrationCurveResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">TitrationCurveResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>TitrationCurveResult</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.analytical.TitrationCurve.find_equivalence_point">
+<span class="sig-name descname"><span class="pre">find_equivalence_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/core/base_system.html#TitrationCurve.find_equivalence_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.TitrationCurve.find_equivalence_point" title="Link to this definition">#</a></dt>
+<dd><p>Numerically locate the equivalence point as the point of steepest response change.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>V</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – A sufficiently fine grid of titrant volumes spanning the
+equivalence point, in L.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.analytical.TitrationCurve.response_at">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">response_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/core/base_system.html#TitrationCurve.response_at"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.TitrationCurve.response_at" title="Link to this definition">#</a></dt>
+<dd><p>Return the titration’s response variable at each titrant volume in <cite>V</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>V</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Volume(s) of titrant added, in L.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.analytical.TitrationCurveResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">TitrationCurveResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/core/base_system.html#TitrationCurveResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.TitrationCurveResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for the output of a <a class="reference internal" href="#chemistrykit.analytical.TitrationCurve.curve" title="chemistrykit.analytical.TitrationCurve.curve"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TitrationCurve.curve()</span></code></a> call.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>response</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.analytical.TitrationCurveResult.V">
+<span class="sig-name descname"><span class="pre">V</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.analytical.TitrationCurveResult.V" title="Link to this definition">#</a></dt>
+<dd><p>Volume(s) of titrant added, in L (or any consistent volume unit).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.analytical.TitrationCurveResult.response">
+<span class="sig-name descname"><span class="pre">response</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.analytical.TitrationCurveResult.response" title="Link to this definition">#</a></dt>
+<dd><p>The titration’s response variable at each volume in <cite>V</cite>
+(e.g. electrode potential <cite>E</cite> in volts, or <cite>pM</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.analytical.dixon_q_test">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">dixon_q_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.95</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suspect</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/qtest.html#dixon_q_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.dixon_q_test" title="Link to this definition">#</a></dt>
+<dd><p>Test whether the smallest or largest value in a small data set is an outlier.</p>
+<div class="math notranslate nohighlight">
+\[Q = \frac{\text{gap}}{\text{range}}\]</div>
+<p>where “gap” is the absolute difference between the suspect value and
+its nearest neighbor, and “range” is the difference between the
+largest and smallest values in the set (Harris, <em>Quantitative
+Chemical Analysis</em>, 9th ed., Ch. 4.6). The suspect value is rejected
+as an outlier if <span class="math notranslate nohighlight">\(Q&gt;Q_{crit}\)</span> for the sample size and
+confidence level chosen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – The data set, 3 to 10 points.</p></li>
+<li><p><strong>confidence</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Confidence level for the critical value.</p></li>
+<li><p><strong>suspect</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Which point to test. <code class="docutils literal notranslate"><span class="pre">&quot;auto&quot;</span></code> tests whichever of the minimum or
+maximum is farther (in absolute value) from the sample mean.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.analytical.QTestResult" title="chemistrykit.analytical.systems.qtest.QTestResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">QTestResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>QTestResult</em></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <cite>data</cite> has fewer than 3 or more than 10 points, or
+    <cite>confidence</cite> is not one of the tabulated levels.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A clear outlier in a small data set is correctly rejected at 95%
+confidence:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">dixon_q_test</span><span class="p">([</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.1</span><span class="p">,</span> <span class="mf">10.2</span><span class="p">,</span> <span class="mf">10.3</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">],</span> <span class="n">confidence</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">suspect_value</span>
+<span class="go">15.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">reject</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>A borderline value that is <em>not</em> extreme enough is retained:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">dixon_q_test</span><span class="p">([</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.1</span><span class="p">,</span> <span class="mf">10.2</span><span class="p">,</span> <span class="mf">10.3</span><span class="p">,</span> <span class="mf">10.9</span><span class="p">],</span> <span class="n">confidence</span><span class="o">=</span><span class="mf">0.99</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">reject</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.analytical.fit_calibration">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">fit_calibration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">concentration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/calibration.html#fit_calibration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.fit_calibration" title="Link to this definition">#</a></dt>
+<dd><p>Fit a linear calibration curve (signal vs. concentration) by ordinary least squares.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>concentration</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Known standard concentrations (at least 3 distinct values, so the
+residual standard error is defined).</p></li>
+<li><p><strong>signal</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Corresponding measured instrument signals.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.analytical.LinearCalibration" title="chemistrykit.analytical.systems.calibration.LinearCalibration"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearCalibration</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>LinearCalibration</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>LOQ is always exactly <span class="math notranslate nohighlight">\(10/3.3\)</span> times LOD, by definition,
+regardless of the data:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">conc</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">signal</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">,</span> <span class="mf">1.98</span><span class="p">,</span> <span class="mf">3.10</span><span class="p">,</span> <span class="mf">3.95</span><span class="p">,</span> <span class="mf">5.08</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cal</span> <span class="o">=</span> <span class="n">fit_calibration</span><span class="p">(</span><span class="n">conc</span><span class="p">,</span> <span class="n">signal</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">cal</span><span class="o">.</span><span class="n">loq</span><span class="p">()</span> <span class="o">/</span> <span class="n">cal</span><span class="o">.</span><span class="n">lod</span><span class="p">(),</span> <span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="mf">10.0</span> <span class="o">/</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>A perfect (noiseless) calibration has zero residual error and hence
+zero LOD/LOQ:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cal_perfect</span> <span class="o">=</span> <span class="n">fit_calibration</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cal_perfect</span><span class="o">.</span><span class="n">lod</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">1e-9</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.analytical.minimum_plate_height">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">minimum_plate_height</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/chromatography.html#minimum_plate_height"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.minimum_plate_height" title="Link to this definition">#</a></dt>
+<dd><p>The minimum plate height <span class="math notranslate nohighlight">\(H_{min}=A+2\sqrt{BC}\)</span>, at the optimum flow velocity.</p>
+<p>Substituting <a class="reference internal" href="#chemistrykit.analytical.optimum_flow_velocity" title="chemistrykit.analytical.optimum_flow_velocity"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimum_flow_velocity()</span></code></a> into
+<a class="reference internal" href="#chemistrykit.analytical.van_deemter_H" title="chemistrykit.analytical.van_deemter_H"><code class="xref py py-func docutils literal notranslate"><span class="pre">van_deemter_H()</span></code></a> (Harris, <em>Quantitative Chemical Analysis</em>, 9th
+ed., Ch. 23.4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>B</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>C</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Matches direct evaluation of <a class="reference internal" href="#chemistrykit.analytical.van_deemter_H" title="chemistrykit.analytical.van_deemter_H"><code class="xref py py-func docutils literal notranslate"><span class="pre">van_deemter_H()</span></code></a> at the optimum
+velocity from <a class="reference internal" href="#chemistrykit.analytical.optimum_flow_velocity" title="chemistrykit.analytical.optimum_flow_velocity"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimum_flow_velocity()</span></code></a>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.05</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u_opt</span> <span class="o">=</span> <span class="n">optimum_flow_velocity</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">minimum_plate_height</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">van_deemter_H</span><span class="p">(</span><span class="n">u_opt</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">)),</span> <span class="mi">6</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.analytical.optimum_flow_velocity">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">optimum_flow_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/chromatography.html#optimum_flow_velocity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.optimum_flow_velocity" title="Link to this definition">#</a></dt>
+<dd><p>The flow velocity <span class="math notranslate nohighlight">\(u_{opt}=\sqrt{B/C}\)</span> minimizing the van Deemter equation.</p>
+<p>Found by <span class="math notranslate nohighlight">\(dH/du=-B/u^2+C=0\)</span> (Harris, <em>Quantitative Chemical
+Analysis</em>, 9th ed., Ch. 23.4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>B</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Van Deemter longitudinal-diffusion and mass-transfer coefficients.</p></li>
+<li><p><strong>C</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Van Deemter longitudinal-diffusion and mass-transfer coefficients.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">optimum_flow_velocity</span><span class="p">(</span><span class="n">B</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">0.05</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">6.324555</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.analytical.plate_height">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">plate_height</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/chromatography.html#plate_height"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.plate_height" title="Link to this definition">#</a></dt>
+<dd><p>Plate height (HETP) <span class="math notranslate nohighlight">\(H=L/N\)</span>, the column length per theoretical plate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Column length <cite>L</cite>, e.g. in cm.</p></li>
+<li><p><strong>N</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Number of theoretical plates.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">plate_height</span><span class="p">(</span><span class="n">column_length</span><span class="o">=</span><span class="mf">25.0</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mf">6400.0</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.003906</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.analytical.propagate_power">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">propagate_power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exponent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/uncertainty.html#propagate_power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.propagate_power" title="Link to this definition">#</a></dt>
+<dd><p>Absolute uncertainty of <span class="math notranslate nohighlight">\(y=x^n\)</span>, <span class="math notranslate nohighlight">\(\sigma_y=|n|\,|x|^{n-1}\sigma_x\)</span>.</p>
+<p>Equivalently <span class="math notranslate nohighlight">\(\sigma_y/|y|=|n|\,\sigma_x/|x|\)</span> (Harris,
+<em>Quantitative Chemical Analysis</em>, 9th ed., Ch. 3.2).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – The base <cite>x</cite>.</p></li>
+<li><p><strong>sigma</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Absolute uncertainty of <cite>x</cite>.</p></li>
+<li><p><strong>exponent</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – The exponent <cite>n</cite> (need not be an integer).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p><span class="math notranslate nohighlight">\(y=x^2\)</span> with <span class="math notranslate nohighlight">\(x=3.0\pm0.1\)</span>: relative uncertainty doubles:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">propagate_power</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.6</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.analytical.propagate_product">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">propagate_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigmas</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/uncertainty.html#propagate_product"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.propagate_product" title="Link to this definition">#</a></dt>
+<dd><p>Absolute uncertainty of a product or quotient of independent quantities.</p>
+<p>Relative uncertainties add in quadrature (Harris, <em>Quantitative
+Chemical Analysis</em>, 9th ed., Ch. 3.2):</p>
+<div class="math notranslate nohighlight">
+\[\frac{\sigma_y}{|y|}=\sqrt{\sum_i\left(\frac{\sigma_i}{x_i}\right)^2},
+\qquad y=\prod_i x_i^{\pm1}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – The value of each factor (as it appears in the product/quotient,
+e.g. use <code class="docutils literal notranslate"><span class="pre">1/x</span></code> for a quantity in the denominator – see the
+Examples).</p></li>
+<li><p><strong>sigmas</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute uncertainty of each factor, same order as <cite>values</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – Absolute uncertainty of the product <span class="math notranslate nohighlight">\(y=\prod_i\)</span> <cite>values[i]</cite>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p><span class="math notranslate nohighlight">\(y=a\times b\)</span> with <span class="math notranslate nohighlight">\(a=2.0\pm0.1\)</span>, <span class="math notranslate nohighlight">\(b=3.0\pm0.2\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="mf">3.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sigma_y</span> <span class="o">=</span> <span class="n">propagate_product</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">sigma_y</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+<p>A quotient <span class="math notranslate nohighlight">\(y=a/b\)</span> is a product with <cite>b</cite> replaced by <span class="math notranslate nohighlight">\(1/b\)</span>
+(relative uncertainty of <span class="math notranslate nohighlight">\(1/b\)</span> equals that of <cite>b</cite>):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">sigma_a</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="p">,</span> <span class="n">sigma_b</span> <span class="o">=</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">0.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sigma_y</span> <span class="o">=</span> <span class="n">propagate_product</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">b</span><span class="p">],</span> <span class="p">[</span><span class="n">sigma_a</span><span class="p">,</span> <span class="n">sigma_b</span> <span class="o">/</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">sigma_y</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.176777</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.analytical.propagate_sum">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">propagate_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigmas</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/uncertainty.html#propagate_sum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.propagate_sum" title="Link to this definition">#</a></dt>
+<dd><p>Absolute uncertainty of a sum or difference of independent quantities, <span class="math notranslate nohighlight">\(\sigma=\sqrt{\sum_i\sigma_i^2}\)</span>.</p>
+<p>Applies identically whether the terms are added or subtracted (Harris,
+<em>Quantitative Chemical Analysis</em>, 9th ed., Ch. 3.2) – only the
+<em>absolute</em> uncertainties of each term matter, not their signs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sigmas</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute uncertainty of each term.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Two equal uncertainties combine to <span class="math notranslate nohighlight">\(\sigma\sqrt2\)</span>, not <span class="math notranslate nohighlight">\(2\sigma\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">propagate_sum</span><span class="p">([</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.028284</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.analytical.propagate_uncertainty">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">propagate_uncertainty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigmas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/uncertainty.html#propagate_uncertainty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.propagate_uncertainty" title="Link to this definition">#</a></dt>
+<dd><p>General first-order uncertainty propagation for an arbitrary differentiable function.</p>
+<p>Evaluates <span class="math notranslate nohighlight">\(\sigma_y=\sqrt{\sum_i(\partial f/\partial
+x_i)^2\sigma_i^2}\)</span> (Harris, <em>Quantitative Chemical Analysis</em>, 9th ed.,
+Ch. 3.2, eq. 3.2) with each partial derivative estimated by a
+central finite difference – useful for a function with no simple
+closed-form propagation rule (e.g. a pH from a Nernst equation, or a
+rate constant from an Arrhenius fit), at the cost of losing the exact
+closed-form results <a class="reference internal" href="#chemistrykit.analytical.propagate_sum" title="chemistrykit.analytical.propagate_sum"><code class="xref py py-func docutils literal notranslate"><span class="pre">propagate_sum()</span></code></a>/<a class="reference internal" href="#chemistrykit.analytical.propagate_product" title="chemistrykit.analytical.propagate_product"><code class="xref py py-func docutils literal notranslate"><span class="pre">propagate_product()</span></code></a>/
+<a class="reference internal" href="#chemistrykit.analytical.propagate_power" title="chemistrykit.analytical.propagate_power"><code class="xref py py-func docutils literal notranslate"><span class="pre">propagate_power()</span></code></a> give for their specific operations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<em>callable</em>) – <code class="docutils literal notranslate"><span class="pre">func(*values)</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code>.</p></li>
+<li><p><strong>values</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – The value of each independent variable, in the order <cite>func</cite> expects.</p></li>
+<li><p><strong>sigmas</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute uncertainty of each variable, same order as <cite>values</cite>.</p></li>
+<li><p><strong>h</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Relative step size for the central finite difference.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Reproduces <a class="reference internal" href="#chemistrykit.analytical.propagate_product" title="chemistrykit.analytical.propagate_product"><code class="xref py py-func docutils literal notranslate"><span class="pre">propagate_product()</span></code></a> for a simple product, since both
+implement the same general formula:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.analytical.systems.uncertainty</span><span class="w"> </span><span class="kn">import</span> <span class="n">propagate_product</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sigma_general</span> <span class="o">=</span> <span class="n">propagate_uncertainty</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sigma_closed_form</span> <span class="o">=</span> <span class="n">propagate_product</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">sigma_general</span> <span class="o">-</span> <span class="n">sigma_closed_form</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.analytical.resolution">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">resolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tR1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tR2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/chromatography.html#resolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.resolution" title="Link to this definition">#</a></dt>
+<dd><p>Chromatographic resolution <span class="math notranslate nohighlight">\(R_s=2(t_{R,2}-t_{R,1})/(w_1+w_2)\)</span> between two adjacent peaks.</p>
+<p><span class="math notranslate nohighlight">\(R_s\ge1.5\)</span> is the conventional criterion for baseline
+separation (Harris, <em>Quantitative Chemical Analysis</em>, 9th ed., eq.
+23.21).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tR1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Retention times of the earlier- and later-eluting peaks.</p></li>
+<li><p><strong>tR2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Retention times of the earlier- and later-eluting peaks.</p></li>
+<li><p><strong>w1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Base widths of the two peaks, same time units.</p></li>
+<li><p><strong>w2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Base widths of the two peaks, same time units.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">resolution</span><span class="p">(</span><span class="n">tR1</span><span class="o">=</span><span class="mf">9.0</span><span class="p">,</span> <span class="n">tR2</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">w1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">w2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.analytical.retention_factor">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">retention_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">retention_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dead_time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/chromatography.html#retention_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.retention_factor" title="Link to this definition">#</a></dt>
+<dd><p>The retention (capacity) factor <span class="math notranslate nohighlight">\(k=(t_R-t_0)/t_0\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>retention_time</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Analyte retention time <span class="math notranslate nohighlight">\(t_R\)</span>.</p></li>
+<li><p><strong>dead_time</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Column dead time (retention time of an unretained species) <span class="math notranslate nohighlight">\(t_0\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">retention_factor</span><span class="p">(</span><span class="n">retention_time</span><span class="o">=</span><span class="mf">12.0</span><span class="p">,</span> <span class="n">dead_time</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">5.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.analytical.selectivity_factor">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">selectivity_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/chromatography.html#selectivity_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.selectivity_factor" title="Link to this definition">#</a></dt>
+<dd><p>The selectivity (relative retention) factor <span class="math notranslate nohighlight">\(\alpha=k_2/k_1\)</span> (<span class="math notranslate nohighlight">\(k_2\ge k_1\)</span> by convention).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Retention factors of the earlier- and later-eluting peaks.</p></li>
+<li><p><strong>k2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Retention factors of the earlier- and later-eluting peaks.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">selectivity_factor</span><span class="p">(</span><span class="n">k1</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mf">5.0</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">2.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.analytical.simulate_chromatogram">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">simulate_chromatogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retention_times</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitudes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/chromatography.html#simulate_chromatogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.simulate_chromatogram" title="Link to this definition">#</a></dt>
+<dd><p>Simulate a chromatogram as a sum of Gaussian elution peaks of plate-count-consistent width.</p>
+<p>Reuses <code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.spectro.utils.lineshapes.gaussian()</span></code> (each
+elution peak is, to a good approximation, Gaussian – the same
+plate-theory result that underlies <a class="reference internal" href="#chemistrykit.analytical.theoretical_plates" title="chemistrykit.analytical.theoretical_plates"><code class="xref py py-func docutils literal notranslate"><span class="pre">theoretical_plates()</span></code></a>), with
+each peak’s FWHM set by <span class="math notranslate nohighlight">\(w_{1/2}=t_R\sqrt{8\ln2/N}\)</span> (inverting
+<a class="reference internal" href="#chemistrykit.analytical.theoretical_plates" title="chemistrykit.analytical.theoretical_plates"><code class="xref py py-func docutils literal notranslate"><span class="pre">theoretical_plates()</span></code></a>’s half-height form,
+<span class="math notranslate nohighlight">\(N=5.545(t_R/w_{1/2})^2\)</span> with <span class="math notranslate nohighlight">\(5.545\approx8\ln2\)</span>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Time grid to evaluate the chromatogram on.</p></li>
+<li><p><strong>centers</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Retention time of each peak (alias for <cite>retention_times</cite>, kept
+for a natural call signature with <code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.spectro.utils.lineshapes.broaden_stick_spectrum()</span></code>).</p></li>
+<li><p><strong>retention_times</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – If given, overrides <cite>centers</cite>.</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Number of theoretical plates (assumed equal for every peak, the
+common simplifying assumption for a single column/method).</p></li>
+<li><p><strong>amplitudes</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Relative peak heights; defaults to 1.0 for every peak.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>ndarray, shape matching <cite>t</cite></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A single simulated peak’s apparent plate count (recovered from its
+numerically-measured FWHM) matches the <cite>N</cite> it was built from:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mi">200001</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N_true</span> <span class="o">=</span> <span class="mf">10000.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chrom</span> <span class="o">=</span> <span class="n">simulate_chromatogram</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="p">[</span><span class="mf">10.0</span><span class="p">],</span> <span class="n">N</span><span class="o">=</span><span class="n">N_true</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">half_max</span> <span class="o">=</span> <span class="n">chrom</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">/</span> <span class="mf">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">above</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">chrom</span> <span class="o">&gt;=</span> <span class="n">half_max</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fwhm</span> <span class="o">=</span> <span class="n">above</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">above</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N_recovered</span> <span class="o">=</span> <span class="n">theoretical_plates</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">fwhm</span><span class="p">,</span> <span class="n">width_type</span><span class="o">=</span><span class="s2">"half_height"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">N_recovered</span> <span class="o">-</span> <span class="n">N_true</span><span class="p">)</span> <span class="o">/</span> <span class="n">N_true</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.analytical.theoretical_plates">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">theoretical_plates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">retention_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">peak_width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'base'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/chromatography.html#theoretical_plates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.theoretical_plates" title="Link to this definition">#</a></dt>
+<dd><p>Number of theoretical plates <cite>N</cite> from a peak’s retention time and width.</p>
+<p>For a Gaussian elution peak (Harris, <em>Quantitative Chemical
+Analysis</em>, 9th ed., eq. 23.19-23.20):</p>
+<div class="math notranslate nohighlight">
+\[N = 16\left(\frac{t_R}{w_{base}}\right)^2 = 5.545\left(\frac{t_R}{w_{1/2}}\right)^2\]</div>
+<p>where <span class="math notranslate nohighlight">\(w_{base}\)</span> is the width at the peak base (tangents to the
+inflection points) and <span class="math notranslate nohighlight">\(w_{1/2}\)</span> is the full width at half
+maximum – the numeric prefactor differs only because a Gaussian’s
+base width (4 standard deviations) and FWHM
+(<span class="math notranslate nohighlight">\(2\sqrt{2\ln2}\,\sigma\)</span>) are different multiples of <cite>sigma</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>retention_time</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Peak retention time <span class="math notranslate nohighlight">\(t_R\)</span>.</p></li>
+<li><p><strong>peak_width</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Peak width, in the same units as <cite>retention_time</cite>, of the type
+selected by <cite>width_type</cite>.</p></li>
+<li><p><strong>width_type</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A peak eluting at 10.0 min with a 0.5 min base width:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">theoretical_plates</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">width_type</span><span class="o">=</span><span class="s2">"base"</span><span class="p">)),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">6400.0</span>
+</pre></div>
+</div>
+<p>The two width conventions must agree for a Gaussian peak of
+consistent shape (base width = 4 sigma, FWHM =
+<span class="math notranslate nohighlight">\(2\sqrt{2\ln2}\,\sigma\approx2.3548\sigma\)</span>):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.125</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N_base</span> <span class="o">=</span> <span class="n">theoretical_plates</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">width_type</span><span class="o">=</span><span class="s2">"base"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N_half</span> <span class="o">=</span> <span class="n">theoretical_plates</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">2.3548</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">width_type</span><span class="o">=</span><span class="s2">"half_height"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">N_base</span> <span class="o">-</span> <span class="n">N_half</span><span class="p">)</span> <span class="o">/</span> <span class="n">N_base</span> <span class="o">&lt;</span> <span class="mf">1e-3</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.analytical.van_deemter_H">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.analytical.</span></span><span class="sig-name descname"><span class="pre">van_deemter_H</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/analytical/systems/chromatography.html#van_deemter_H"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.analytical.van_deemter_H" title="Link to this definition">#</a></dt>
+<dd><p>The van Deemter equation: plate height <cite>H</cite> as a function of mobile-phase linear velocity <cite>u</cite>.</p>
+<div class="math notranslate nohighlight">
+\[H = A + \frac{B}{u} + Cu\]</div>
+<p>with <cite>A</cite> the eddy-diffusion term (velocity-independent band
+broadening from unequal flow paths), <cite>B</cite> the longitudinal-molecular-
+diffusion term (dominant at low <cite>u</cite>), and <cite>C</cite> the mass-transfer-
+resistance term (dominant at high <cite>u</cite>) (J. J. van Deemter, F. J.
+Zuiderweg, A. Klinkenberg, <em>Chem. Eng. Sci.</em> 5, 271 (1956); Harris,
+<em>Quantitative Chemical Analysis</em>, 9th ed., Ch. 23.4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Mobile-phase linear velocity.</p></li>
+<li><p><strong>A</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Van Deemter coefficients (all non-negative for a physical column).</p></li>
+<li><p><strong>B</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Van Deemter coefficients (all non-negative for a physical column).</p></li>
+<li><p><strong>C</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Van Deemter coefficients (all non-negative for a physical column).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">van_deemter_H</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">2.1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">API</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="crystal.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">chemistrykit.crystal</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.EDTATitration"><code class="docutils literal notranslate"><span class="pre">EDTATitration</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.EDTATitration.equivalence_volume"><code class="docutils literal notranslate"><span class="pre">EDTATitration.equivalence_volume()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.EDTATitration.response_at"><code class="docutils literal notranslate"><span class="pre">EDTATitration.response_at()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.LinearCalibration"><code class="docutils literal notranslate"><span class="pre">LinearCalibration</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.LinearCalibration.intercept"><code class="docutils literal notranslate"><span class="pre">LinearCalibration.intercept</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.LinearCalibration.lod"><code class="docutils literal notranslate"><span class="pre">LinearCalibration.lod()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.LinearCalibration.loq"><code class="docutils literal notranslate"><span class="pre">LinearCalibration.loq()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.LinearCalibration.predict_concentration"><code class="docutils literal notranslate"><span class="pre">LinearCalibration.predict_concentration()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.LinearCalibration.predict_signal"><code class="docutils literal notranslate"><span class="pre">LinearCalibration.predict_signal()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.LinearCalibration.r_squared"><code class="docutils literal notranslate"><span class="pre">LinearCalibration.r_squared</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.LinearCalibration.residual_std_error"><code class="docutils literal notranslate"><span class="pre">LinearCalibration.residual_std_error</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.LinearCalibration.slope"><code class="docutils literal notranslate"><span class="pre">LinearCalibration.slope</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.QTestResult"><code class="docutils literal notranslate"><span class="pre">QTestResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.QTestResult.Q_critical"><code class="docutils literal notranslate"><span class="pre">QTestResult.Q_critical</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.QTestResult.Q_statistic"><code class="docutils literal notranslate"><span class="pre">QTestResult.Q_statistic</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.QTestResult.reject"><code class="docutils literal notranslate"><span class="pre">QTestResult.reject</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.QTestResult.suspect_value"><code class="docutils literal notranslate"><span class="pre">QTestResult.suspect_value</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.RedoxTitration"><code class="docutils literal notranslate"><span class="pre">RedoxTitration</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.RedoxTitration.equivalence_volume"><code class="docutils literal notranslate"><span class="pre">RedoxTitration.equivalence_volume()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.RedoxTitration.response_at"><code class="docutils literal notranslate"><span class="pre">RedoxTitration.response_at()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.TitrationCurve"><code class="docutils literal notranslate"><span class="pre">TitrationCurve</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.TitrationCurve.curve"><code class="docutils literal notranslate"><span class="pre">TitrationCurve.curve()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.TitrationCurve.find_equivalence_point"><code class="docutils literal notranslate"><span class="pre">TitrationCurve.find_equivalence_point()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.TitrationCurve.response_at"><code class="docutils literal notranslate"><span class="pre">TitrationCurve.response_at()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.TitrationCurveResult"><code class="docutils literal notranslate"><span class="pre">TitrationCurveResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.TitrationCurveResult.V"><code class="docutils literal notranslate"><span class="pre">TitrationCurveResult.V</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.TitrationCurveResult.response"><code class="docutils literal notranslate"><span class="pre">TitrationCurveResult.response</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.dixon_q_test"><code class="docutils literal notranslate"><span class="pre">dixon_q_test()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.fit_calibration"><code class="docutils literal notranslate"><span class="pre">fit_calibration()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.minimum_plate_height"><code class="docutils literal notranslate"><span class="pre">minimum_plate_height()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.optimum_flow_velocity"><code class="docutils literal notranslate"><span class="pre">optimum_flow_velocity()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.plate_height"><code class="docutils literal notranslate"><span class="pre">plate_height()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.propagate_power"><code class="docutils literal notranslate"><span class="pre">propagate_power()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.propagate_product"><code class="docutils literal notranslate"><span class="pre">propagate_product()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.propagate_sum"><code class="docutils literal notranslate"><span class="pre">propagate_sum()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.propagate_uncertainty"><code class="docutils literal notranslate"><span class="pre">propagate_uncertainty()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.resolution"><code class="docutils literal notranslate"><span class="pre">resolution()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.retention_factor"><code class="docutils literal notranslate"><span class="pre">retention_factor()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.selectivity_factor"><code class="docutils literal notranslate"><span class="pre">selectivity_factor()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.simulate_chromatogram"><code class="docutils literal notranslate"><span class="pre">simulate_chromatogram()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.theoretical_plates"><code class="docutils literal notranslate"><span class="pre">theoretical_plates()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.analytical.van_deemter_H"><code class="docutils literal notranslate"><span class="pre">van_deemter_H()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/api/analytical.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, chemistrykit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

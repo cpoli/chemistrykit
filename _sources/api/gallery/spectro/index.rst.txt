@@ -1,0 +1,339 @@
+:orphan:
+
+Examples
+========
+
+This gallery walks through every public feature of ``chemistrykit.spectro``:
+the Beer-Lambert absorbance law and its stray-light deviation from
+linearity; rigid-rotor rotational spectra with isotope shifts; harmonic
+vs. Morse-potential vibrational band positions, plus a genuine triatomic
+normal-mode calculation; Franck-Condon vibronic progressions for
+electronic spectra; and a first-order NMR multiplet simulator.
+
+Each script in this gallery is self-contained and can be run directly with
+``python examples/spectro/<section>/<script>.py``. Every script also
+carries an RST module docstring as its title/description and uses ``# %%``
+markers to split narrative text from code, which is exactly what
+Sphinx-Gallery renders into the pages below -- the script *is* the source of
+truth for what you see, not a copy of it.
+
+Sections
+--------
+
+- **beer_lambert** -- the Beer-Lambert absorbance law and its stray-light
+  deviation from linearity at high concentration.
+- **rotational** -- rigid-rotor rotational spectra, relative line
+  intensities, and the H/D isotope shift.
+- **vibrational** -- harmonic vs. Morse IR band positions and
+  anharmonicity constants, and a Wilson GF-matrix normal-mode calculation
+  for CO2 and H2O.
+- **electronic** -- Franck-Condon vibronic progressions in a UV-Vis
+  absorption band.
+- **nmr** -- first-order NMR multiplet simulation, from simple n+1
+  multiplets to a genuine doublet of triplets.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Beer-Lambert law
+=================
+
+The Beer-Lambert absorbance law, and its stray-light deviation from
+linearity at high concentration.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Absorbance is exactly linear in concentration by the ideal Beer-Lambert law. A small amount of instrumental stray light (light that reaches the detector without having passed through the fully absorbing sample path) causes the apparent absorbance to fall increasingly below the true value as concentration -- and hence true absorbance -- increases, the classic &quot;rolling over&quot; deviation seen in real UV-Vis instruments.">
+
+.. only:: html
+
+  .. image:: /api/gallery/spectro/beer_lambert/images/thumb/sphx_glr_plot_01_beer_lambert_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/spectro/beer_lambert/plot_01_beer_lambert`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Beer-Lambert absorbance, and its deviation from linearity at high concentration</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Electronic spectra
+====================
+
+Franck-Condon vibronic progressions for a UV-Vis electronic absorption
+band.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Builds a vibronic progression from the Huang-Rhys displacement parameter, verifies the Franck-Condon factors&#x27; normalization (they must sum to 1 -- the required correctness check for any Franck-Condon calculation), and shows how a larger excited-state displacement shifts the most-intense vibronic peak to higher v&#x27;.">
+
+.. only:: html
+
+  .. image:: /api/gallery/spectro/electronic/images/thumb/sphx_glr_plot_01_franck_condon_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/spectro/electronic/plot_01_franck_condon`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Franck-Condon vibronic progressions in a UV-Vis absorption band</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Spectral lineshapes
+=====================
+
+The Gaussian, Lorentzian, and Voigt lineshapes, and the two physically
+distinct broadening mechanisms (Doppler/inhomogeneous vs.
+lifetime-collisional/homogeneous) that produce them.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Compares the three standard spectral lineshapes at matched FWHM: a Lorentzian (the shape a classically radiating damped oscillator, or a finite-lifetime quantum transition, produces -- &quot;homogeneous&quot; broadening, identical for every molecule in the sample), a Gaussian (the shape a Maxwell-Boltzmann spread of line-of-sight velocities produces via the Doppler effect -- &quot;inhomogeneous&quot; broadening, different molecules contributing different, momentarily Doppler-shifted, sub-lines), and their convolution, the Voigt profile, which is what a real spectrum typically shows once both mechanisms contribute together. The Lorentzian has visibly heavier tails than the Gaussian at the same FWHM -- the qualitative signature used to diagnose which mechanism dominates a real measured line.">
+
+.. only:: html
+
+  .. image:: /api/gallery/spectro/lineshapes/images/thumb/sphx_glr_plot_01_lineshapes_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/spectro/lineshapes/plot_01_lineshapes`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Gaussian, Lorentzian, and Voigt lineshapes: two broadening mechanisms and their convolution</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+NMR multiplets
+===============
+
+First-order NMR multiplet simulation: Pascal's-triangle n+1 splitting
+patterns, and independent multi-coupling patterns like a doublet of
+triplets.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Simulates ethanol&#x27;s classic -CH3 triplet and -CH2- quartet (each proton set split only by its 3-bond neighbor, the textbook first-order pattern), then a genuine doublet of triplets from two chemically distinct coupling partners with different J values.">
+
+.. only:: html
+
+  .. image:: /api/gallery/spectro/nmr/images/thumb/sphx_glr_plot_01_nmr_multiplets_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/spectro/nmr/plot_01_nmr_multiplets`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">First-order NMR multiplets: ethanol's triplet/quartet, and a doublet of triplets</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Rotational spectra
+===================
+
+Rigid-rotor rotational spectra built on ``chemistrykit.quantum``'s rigid
+rotor: transition wavenumbers, relative line intensities, and the H/D
+isotope shift.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Builds an HCl-like rigid rotor from chemistrykit.quantum, predicts its rotational-spectrum line positions and relative (Boltzmann-weighted) intensities, and shows how substituting deuterium for hydrogen shifts every line -- the standard way isotopic substitution is used to confirm a rotational-spectrum assignment.">
+
+.. only:: html
+
+  .. image:: /api/gallery/spectro/rotational/images/thumb/sphx_glr_plot_01_rotational_spectrum_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/spectro/rotational/plot_01_rotational_spectrum`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">HCl rotational spectrum, relative intensities, and the H->D isotope shift</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Vibrational spectra
+=====================
+
+Harmonic vs. Morse-potential IR band positions and anharmonicity
+constants, and a genuine Wilson GF-matrix normal-mode calculation for
+CO2 and H2O.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Predicts HCl&#x27;s fundamental IR absorption from a harmonic oscillator, compares it against the exact (anharmonic) Morse-potential fundamental and first overtone, then inverts the observed 0\to1/0\to2 band positions to recover the spectroscopic constants \omega_e/\omega_ex_e -- exactly the way real anharmonicity constants are measured from an observed overtone spectrum.">
+
+.. only:: html
+
+  .. image:: /api/gallery/spectro/vibrational/images/thumb/sphx_glr_plot_01_harmonic_vs_morse_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/spectro/vibrational/plot_01_harmonic_vs_morse`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Harmonic vs. Morse IR band positions, and recovering anharmonicity from overtones</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A genuine (not tabulated) normal-mode calculation for a linear (CO2) and a bent (H2O) triatomic, using TriatomicNormalModes: a numerically built Wilson B-matrix, mass-weighted G matrix, and simple diagonal valence-force-field F matrix are combined into a generalized eigenvalue problem and solved for the true normal-mode wavenumbers.">
+
+.. only:: html
+
+  .. image:: /api/gallery/spectro/vibrational/images/thumb/sphx_glr_plot_02_triatomic_normal_modes_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/spectro/vibrational/plot_02_triatomic_normal_modes`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Triatomic normal modes via the Wilson GF-matrix method: CO2 and H2O</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+   :includehidden:
+
+
+   /api/gallery/spectro/beer_lambert/index.rst
+   /api/gallery/spectro/electronic/index.rst
+   /api/gallery/spectro/lineshapes/index.rst
+   /api/gallery/spectro/nmr/index.rst
+   /api/gallery/spectro/rotational/index.rst
+   /api/gallery/spectro/vibrational/index.rst
+
+
+
+.. only:: html
+
+ .. rst-class:: sphx-glr-signature
+
+    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_

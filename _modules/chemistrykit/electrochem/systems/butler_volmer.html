@@ -1,0 +1,1145 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chemistrykit.electrochem.systems.butler_volmer &#8212; chemistrykit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../../../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/chemistrykit/electrochem/systems/butler_volmer';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">chemistrykit</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/chemistrykit/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/chemistrykit/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">chemistrykit.electrochem.systems.butler_volmer</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for chemistrykit.electrochem.systems.butler_volmer</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Butler-Volmer electrode kinetics, exchange current density, and Tafel-plot linearization.</span>
+
+<span class="sd">See Bard &amp; Faulkner, *Electrochemical Methods: Fundamentals and</span>
+<span class="sd">Applications*, 2nd ed., Ch. 3.3-3.4, throughout.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">FARADAY</span><span class="p">,</span> <span class="n">STANDARD_TEMPERATURE</span><span class="p">,</span> <span class="n">R</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.electrochem.utils.regression</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearFit</span><span class="p">,</span> <span class="n">linear_fit</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;butler_volmer_current_density&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;exchange_current_density&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;tafel_slope&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;tafel_overpotential&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TafelFit&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fit_tafel_plot&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="butler_volmer_current_density">
+<a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.butler_volmer_current_density">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">butler_volmer_current_density</span><span class="p">(</span><span class="n">i0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">eta</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">STANDARD_TEMPERATURE</span><span class="p">,</span> <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span><span class="p">,</span> <span class="n">F</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">FARADAY</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Butler-Volmer equation for net electrode current density.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        i = i_0\left[\exp\!\left(\frac{\alpha n F\eta}{RT}\right)</span>
+<span class="sd">                     -\exp\!\left(-\frac{(1-\alpha)nF\eta}{RT}\right)\right]</span>
+
+<span class="sd">    where :math:`\eta = E - E_{eq}` is the overpotential, :math:`i_0` the</span>
+<span class="sd">    exchange current density, and :math:`\alpha` the (cathodic) charge</span>
+<span class="sd">    transfer coefficient (Bard &amp; Faulkner, *Electrochemical Methods*,</span>
+<span class="sd">    2nd ed., Ch. 3.3, eq. 3.3.11). The first term is the anodic</span>
+<span class="sd">    (oxidation) partial current, the second the cathodic (reduction)</span>
+<span class="sd">    partial current; at :math:`\eta=0` they exactly cancel, so no net</span>
+<span class="sd">    current flows at equilibrium even though both partial reactions are</span>
+<span class="sd">    still occurring (a genuinely dynamic equilibrium, unlike a</span>
+<span class="sd">    thermodynamic &quot;nothing is happening&quot;).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    i0 : float</span>
+<span class="sd">        Exchange current density, in A/m^2 (or any consistent current-</span>
+<span class="sd">        density unit; the same unit is returned).</span>
+<span class="sd">    eta : float or array-like of float</span>
+<span class="sd">        Overpotential, in V.</span>
+<span class="sd">    alpha : float, default 0.5</span>
+<span class="sd">        Charge transfer (symmetry) coefficient, in :math:`(0, 1)`; 0.5 is</span>
+<span class="sd">        the common approximation for a simple, symmetric one-electron</span>
+<span class="sd">        step.</span>
+<span class="sd">    n : int, default 1</span>
+<span class="sd">        Number of electrons transferred in the rate-determining step.</span>
+<span class="sd">    T : float, default :data:`chemistrykit.constants.STANDARD_TEMPERATURE`</span>
+<span class="sd">        Absolute temperature, in K.</span>
+<span class="sd">    R_gas : float, default :data:`chemistrykit.constants.R`</span>
+<span class="sd">        Gas constant, in J mol^-1 K^-1.</span>
+<span class="sd">    F : float, default :data:`chemistrykit.constants.FARADAY`</span>
+<span class="sd">        Faraday constant, in C/mol.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float or ndarray</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    At zero overpotential the net current is exactly zero:</span>
+
+<span class="sd">    &gt;&gt;&gt; round(float(butler_volmer_current_density(i0=1e-6, eta=0.0)), 12)</span>
+<span class="sd">    0.0</span>
+
+<span class="sd">    A positive overpotential drives net anodic (positive) current:</span>
+
+<span class="sd">    &gt;&gt;&gt; bool(butler_volmer_current_density(1e-6, eta=0.1) &gt; 0)</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">eta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">eta</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">F</span> <span class="o">/</span> <span class="p">(</span><span class="n">R_gas</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">i0</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">f</span> <span class="o">*</span> <span class="n">eta</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">f</span> <span class="o">*</span> <span class="n">eta</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span></div>
+
+
+
+<div class="viewcode-block" id="exchange_current_density">
+<a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.exchange_current_density">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">exchange_current_density</span><span class="p">(</span><span class="n">k0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">C_ox</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">C_red</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">F</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">FARADAY</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Exchange current density from a standard heterogeneous rate constant and bulk concentrations.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        i_0 = nFk^0 C_{ox}^{1-\alpha}C_{red}^{\alpha}</span>
+
+<span class="sd">    (Bard &amp; Faulkner, *Electrochemical Methods*, 2nd ed., Ch. 3.4, eq.</span>
+<span class="sd">    3.4.6) -- the current density that flows equally in both directions</span>
+<span class="sd">    at equilibrium, before any net overpotential is applied.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    k0 : float</span>
+<span class="sd">        Standard heterogeneous electron-transfer rate constant, in m/s</span>
+<span class="sd">        (or a consistent length/time unit).</span>
+<span class="sd">    C_ox, C_red : float</span>
+<span class="sd">        Bulk concentrations of the oxidized and reduced forms, in</span>
+<span class="sd">        mol/m^3 (consistent with `k0`&#39;s length unit).</span>
+<span class="sd">    n : int, default 1</span>
+<span class="sd">        Electrons transferred.</span>
+<span class="sd">    alpha : float, default 0.5</span>
+<span class="sd">        Charge transfer coefficient.</span>
+<span class="sd">    F : float, default :data:`chemistrykit.constants.FARADAY`</span>
+<span class="sd">        Faraday constant, in C/mol.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Exchange current density, in A/m^2.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Symmetric concentrations and alpha=0.5 give a simple, order-1-free-of-composition result:</span>
+
+<span class="sd">    &gt;&gt;&gt; i0 = exchange_current_density(k0=1e-5, C_ox=1.0, C_red=1.0, n=1)</span>
+<span class="sd">    &gt;&gt;&gt; round(i0, 6)</span>
+<span class="sd">    0.964853</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">F</span> <span class="o">*</span> <span class="n">k0</span> <span class="o">*</span> <span class="n">C_ox</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">C_red</span><span class="o">**</span><span class="n">alpha</span></div>
+
+
+
+<div class="viewcode-block" id="tafel_slope">
+<a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.tafel_slope">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">tafel_slope</span><span class="p">(</span><span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">STANDARD_TEMPERATURE</span><span class="p">,</span> <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span><span class="p">,</span> <span class="n">F</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">FARADAY</span><span class="p">,</span> <span class="n">branch</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;anodic&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Tafel slope :math:`b`, in V per decade of current.</span>
+
+<span class="sd">    From linearizing the dominant (far-from-equilibrium) exponential</span>
+<span class="sd">    term of the Butler-Volmer equation and rewriting in terms of</span>
+<span class="sd">    :math:`\log_{10}i` (Bard &amp; Faulkner, *Electrochemical Methods*, 2nd</span>
+<span class="sd">    ed., Ch. 3.4, eq. 3.4.11-3.4.13):</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        b_{anodic} = \frac{2.303RT}{\alpha n F}, \qquad</span>
+<span class="sd">        b_{cathodic} = \frac{2.303RT}{(1-\alpha) n F}</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    alpha : float</span>
+<span class="sd">        Charge transfer coefficient.</span>
+<span class="sd">    n : int, default 1</span>
+<span class="sd">        Electrons transferred.</span>
+<span class="sd">    T : float, default :data:`chemistrykit.constants.STANDARD_TEMPERATURE`</span>
+<span class="sd">    R_gas : float, default :data:`chemistrykit.constants.R`</span>
+<span class="sd">    F : float, default :data:`chemistrykit.constants.FARADAY`</span>
+<span class="sd">    branch : {&quot;anodic&quot;, &quot;cathodic&quot;}</span>
+<span class="sd">        Which high-overpotential branch&#39;s slope to return.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Tafel slope, in V/decade (positive for the anodic branch,</span>
+<span class="sd">        negative for the cathodic one, matching the sign convention</span>
+<span class="sd">        that :math:`\eta` increases with :math:`\log_{10}i` on the</span>
+<span class="sd">        anodic branch and decreases with it on the cathodic one).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    With `alpha=0.5` and a one-electron step at 25 degC, the anodic and</span>
+<span class="sd">    cathodic slopes have equal magnitude (the symmetric-barrier case):</span>
+
+<span class="sd">    &gt;&gt;&gt; b_a = tafel_slope(alpha=0.5, n=1, branch=&quot;anodic&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; b_c = tafel_slope(alpha=0.5, n=1, branch=&quot;cathodic&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; round(b_a, 4), round(b_c, 4)</span>
+<span class="sd">    (0.1183, -0.1183)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">branch</span> <span class="o">==</span> <span class="s2">&quot;anodic&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">2.303</span> <span class="o">*</span> <span class="n">R_gas</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">F</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">branch</span> <span class="o">==</span> <span class="s2">&quot;cathodic&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mf">2.303</span> <span class="o">*</span> <span class="n">R_gas</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="p">((</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">F</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;branch must be &#39;anodic&#39; or &#39;cathodic&#39;&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="tafel_overpotential">
+<a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.tafel_overpotential">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">tafel_overpotential</span><span class="p">(</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">i0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">STANDARD_TEMPERATURE</span><span class="p">,</span> <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span><span class="p">,</span> <span class="n">F</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">FARADAY</span><span class="p">,</span> <span class="n">branch</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;anodic&quot;</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The linearized Tafel-equation overpotential at high :math:`|\eta|`.</span>
+
+<span class="sd">    :math:`\eta = b\log_{10}(i/i_0)`, dropping the Butler-Volmer</span>
+<span class="sd">    equation&#39;s back-reaction exponential term (valid once</span>
+<span class="sd">    :math:`|\eta|\gtrsim100/n` mV, where that term is negligible</span>
+<span class="sd">    compared to the dominant one -- Bard &amp; Faulkner, *Electrochemical</span>
+<span class="sd">    Methods*, 2nd ed., Ch. 3.4). **Approximation flagged**: this is the</span>
+<span class="sd">    high-overpotential limit of :func:`butler_volmer_current_density`,</span>
+<span class="sd">    not the exact equation -- it is inaccurate near :math:`\eta=0` where</span>
+<span class="sd">    both exponential terms matter (see the module examples gallery for a</span>
+<span class="sd">    numerical comparison across overpotential).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    i : float or array-like of float</span>
+<span class="sd">        Current density (same sign/branch as `branch`), in the same</span>
+<span class="sd">        units as `i0`.</span>
+<span class="sd">    i0 : float</span>
+<span class="sd">        Exchange current density.</span>
+<span class="sd">    alpha : float, default 0.5</span>
+<span class="sd">    n : int, default 1</span>
+<span class="sd">    T : float, default :data:`chemistrykit.constants.STANDARD_TEMPERATURE`</span>
+<span class="sd">    R_gas : float, default :data:`chemistrykit.constants.R`</span>
+<span class="sd">    F : float, default :data:`chemistrykit.constants.FARADAY`</span>
+<span class="sd">    branch : {&quot;anodic&quot;, &quot;cathodic&quot;}</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float or ndarray</span>
+<span class="sd">        Overpotential, in V.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    At high overpotential the Tafel approximation agrees closely with</span>
+<span class="sd">    the full Butler-Volmer equation (checked here to better than 0.5%</span>
+<span class="sd">    at 300 mV):</span>
+
+<span class="sd">    &gt;&gt;&gt; i0, alpha, n = 1e-6, 0.5, 1</span>
+<span class="sd">    &gt;&gt;&gt; eta_true = 0.30</span>
+<span class="sd">    &gt;&gt;&gt; i_full = butler_volmer_current_density(i0, eta_true, alpha=alpha, n=n)</span>
+<span class="sd">    &gt;&gt;&gt; eta_tafel = tafel_overpotential(i_full, i0, alpha=alpha, n=n, branch=&quot;anodic&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; bool(abs(eta_tafel - eta_true) / eta_true &lt; 0.005)</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">tafel_slope</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">R_gas</span><span class="o">=</span><span class="n">R_gas</span><span class="p">,</span> <span class="n">F</span><span class="o">=</span><span class="n">F</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="n">branch</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">b</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="n">i0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span></div>
+
+
+
+<div class="viewcode-block" id="TafelFit">
+<a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.TafelFit">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TafelFit</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Result of fitting :math:`\log_{10}|i|` vs. :math:`\eta` data to a Tafel line.</span>
+
+<span class="sd">    Since :math:`\eta = b\log_{10}i - b\log_{10}i_0`, a plot of `eta`</span>
+<span class="sd">    against :math:`\log_{10}|i|` is a straight line of slope `b` (the</span>
+<span class="sd">    Tafel slope) and intercept :math:`-b\log_{10}i_0`, from which the</span>
+<span class="sd">    exchange current density :math:`i_0=10^{-\text{intercept}/b}`</span>
+<span class="sd">    follows.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">tafel_slope</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Fitted Tafel slope `b`, in V/decade.&quot;&quot;&quot;</span>
+
+    <span class="n">exchange_current_density</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Fitted exchange current density :math:`i_0`.&quot;&quot;&quot;</span>
+
+    <span class="n">r_squared</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Coefficient of determination of the linear fit.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TafelFit.predict">
+<a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.TafelFit.predict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the fitted Tafel line&#39;s overpotential at current density(-ies) `i`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        i : float or array-like of float</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float or ndarray</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tafel_slope</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">exchange_current_density</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="fit_tafel_plot">
+<a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.fit_tafel_plot">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fit_tafel_plot</span><span class="p">(</span><span class="n">eta</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TafelFit</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fit high-overpotential (`eta`, `i`) data to a Tafel line and recover `b` and :math:`i_0`.</span>
+
+<span class="sd">    Linearizes :math:`\eta = b\log_{10}i - b\log_{10}i_0` and fits by</span>
+<span class="sd">    ordinary least squares against :math:`x=\log_{10}|i|` -- the</span>
+<span class="sd">    experimental Tafel-plot analysis (Bard &amp; Faulkner, *Electrochemical</span>
+<span class="sd">    Methods*, 2nd ed., Ch. 3.4), structurally identical to</span>
+<span class="sd">    :func:`chemistrykit.kinetics.systems.arrhenius.fit_arrhenius`&#39;s</span>
+<span class="sd">    Arrhenius plot.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    eta : array-like of float</span>
+<span class="sd">        Overpotentials, in V (should be restricted to the high-`|eta|`</span>
+<span class="sd">        Tafel regime for the linear approximation to hold).</span>
+<span class="sd">    i : array-like of float</span>
+<span class="sd">        Corresponding current densities.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    TafelFit</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Generate exact high-overpotential data from a known :math:`(b, i_0)`</span>
+<span class="sd">    and recover both:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; i0_true, alpha, n = 2e-6, 0.5, 1</span>
+<span class="sd">    &gt;&gt;&gt; eta = np.linspace(0.2, 0.4, 10)</span>
+<span class="sd">    &gt;&gt;&gt; i = butler_volmer_current_density(i0_true, eta, alpha=alpha, n=n)</span>
+<span class="sd">    &gt;&gt;&gt; fit = fit_tafel_plot(eta, i)</span>
+<span class="sd">    &gt;&gt;&gt; round(fit.exchange_current_density / i0_true, 2)</span>
+<span class="sd">    1.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">eta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">eta</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">fit</span><span class="p">:</span> <span class="n">LinearFit</span> <span class="o">=</span> <span class="n">linear_fit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">i</span><span class="p">)),</span> <span class="n">eta</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">slope</span>
+    <span class="n">i0</span> <span class="o">=</span> <span class="mf">10.0</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">fit</span><span class="o">.</span><span class="n">intercept</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">TafelFit</span><span class="p">(</span><span class="n">tafel_slope</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">exchange_current_density</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">i0</span><span class="p">),</span> <span class="n">r_squared</span><span class="o">=</span><span class="n">fit</span><span class="o">.</span><span class="n">r_squared</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, chemistrykit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1154 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chemistrykit.thermo.systems.equations_of_state &#8212; chemistrykit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../../../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/chemistrykit/thermo/systems/equations_of_state';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">chemistrykit</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/chemistrykit/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/chemistrykit/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">chemistrykit.thermo.systems.equations_of_state</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for chemistrykit.thermo.systems.equations_of_state</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Equations of state: ideal gas, van der Waals, and Redlich-Kwong.</span>
+
+<span class="sd">All three share the :class:`~chemistrykit.thermo.core.base_system.EquationOfState`</span>
+<span class="sd">interface (``pressure(Vm, T)``, ``molar_volume(P, T)``,</span>
+<span class="sd">``compressibility_factor(P, T)``) so they can be compared directly on the</span>
+<span class="sd">same P-V isotherm plot. See Atkins &amp; de Paula, *Physical Chemistry*, 11th</span>
+<span class="sd">ed., Ch. 1 for the ideal gas law and van der Waals equation, and O.</span>
+<span class="sd">Redlich &amp; J. N. S. Kwong, *Chem. Rev.* 44, 233 (1949) (also tabulated in</span>
+<span class="sd">Smith, Van Ness &amp; Abbott, *Introduction to Chemical Engineering</span>
+<span class="sd">Thermodynamics*, 7th ed., Ch. 3) for Redlich-Kwong.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">R</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.thermo.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">EquationOfState</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.thermo.utils.cubic_roots</span><span class="w"> </span><span class="kn">import</span> <span class="n">real_positive_roots</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;IdealGas&quot;</span><span class="p">,</span> <span class="s2">&quot;VanDerWaals&quot;</span><span class="p">,</span> <span class="s2">&quot;RedlichKwong&quot;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="IdealGas">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.IdealGas">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">IdealGas</span><span class="p">(</span><span class="n">EquationOfState</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The ideal (perfect) gas law: :math:`PV_m = RT`.</span>
+
+<span class="sd">    See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 1.1.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    The molar volume of an ideal gas at STP (1 atm-scale pressure of</span>
+<span class="sd">    101325 Pa, 0 degC) is the textbook 22.4 L/mol:</span>
+
+<span class="sd">    &gt;&gt;&gt; gas = IdealGas()</span>
+<span class="sd">    &gt;&gt;&gt; round(float(gas.molar_volume(P=101325.0, T=273.15)) * 1000.0, 1)</span>
+<span class="sd">    22.4</span>
+<span class="sd">    &gt;&gt;&gt; round(float(gas.compressibility_factor(P=101325.0, T=273.15)), 6)</span>
+<span class="sd">    1.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="IdealGas.pressure">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.IdealGas.pressure">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Vm</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+        <span class="n">Vm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Vm</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="n">Vm</span></div>
+
+
+<div class="viewcode-block" id="IdealGas.molar_volume">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.IdealGas.molar_volume">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">molar_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="n">P</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="VanDerWaals">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.VanDerWaals">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">VanDerWaals</span><span class="p">(</span><span class="n">EquationOfState</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The van der Waals equation of state.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        P = \frac{RT}{V_m - b} - \frac{a}{V_m^2}</span>
+
+<span class="sd">    where `a` corrects for intermolecular attraction and `b` for the</span>
+<span class="sd">    finite volume of the molecules themselves (J. D. van der Waals,</span>
+<span class="sd">    doctoral thesis, Leiden, 1873; Atkins &amp; de Paula, *Physical</span>
+<span class="sd">    Chemistry*, 11th ed., Ch. 1.3b).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : float</span>
+<span class="sd">        Attraction parameter, in Pa m^6 mol^-2.</span>
+<span class="sd">    b : float</span>
+<span class="sd">        Excluded-volume parameter, in m^3/mol.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    With ``a = b = 0`` van der Waals reduces exactly to the ideal gas law:</span>
+
+<span class="sd">    &gt;&gt;&gt; vdw = VanDerWaals(a=0.0, b=0.0)</span>
+<span class="sd">    &gt;&gt;&gt; ideal = IdealGas()</span>
+<span class="sd">    &gt;&gt;&gt; round(float(vdw.pressure(Vm=0.01, T=300.0)), 6) == round(float(ideal.pressure(Vm=0.01, T=300.0)), 6)</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;b must be non-negative&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+<div class="viewcode-block" id="VanDerWaals.pressure">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.VanDerWaals.pressure">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Vm</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+        <span class="n">Vm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Vm</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="n">Vm</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">/</span> <span class="n">Vm</span><span class="o">**</span><span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="VanDerWaals.molar_volume">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.VanDerWaals.molar_volume">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">molar_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">branch</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;vapor&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Solve the van der Waals cubic for `Vm` at pressure `P`, temperature `T`.</span>
+
+<span class="sd">        Rearranging :math:`P = RT/(V_m-b) - a/V_m^2` into a cubic in</span>
+<span class="sd">        :math:`V_m`:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            V_m^3 - \left(b + \frac{RT}{P}\right) V_m^2 + \frac{a}{P} V_m - \frac{ab}{P} = 0</span>
+
+<span class="sd">        Below the critical temperature this can have three real positive</span>
+<span class="sd">        roots (a metastable liquid branch, an unstable middle root, and a</span>
+<span class="sd">        vapor branch).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        P : float</span>
+<span class="sd">            Pressure, in Pa.</span>
+<span class="sd">        T : float</span>
+<span class="sd">            Absolute temperature, in K.</span>
+<span class="sd">        branch : {&quot;vapor&quot;, &quot;liquid&quot;}</span>
+<span class="sd">            Return the largest (&quot;vapor&quot;) or smallest (&quot;liquid&quot;) real</span>
+<span class="sd">            positive root.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        Solving for `Vm` and substituting back reproduces the original</span>
+<span class="sd">        pressure:</span>
+
+<span class="sd">        &gt;&gt;&gt; vdw = VanDerWaals(a=0.1448, b=3.913e-5)  # e.g. representative CO2-like values</span>
+<span class="sd">        &gt;&gt;&gt; Vm = vdw.molar_volume(P=1.0e5, T=300.0)</span>
+<span class="sd">        &gt;&gt;&gt; round(float(vdw.pressure(Vm, T=300.0)), 3)</span>
+<span class="sd">        100000.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="n">P</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">/</span> <span class="n">P</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">/</span> <span class="n">P</span><span class="p">]</span>
+        <span class="n">roots</span> <span class="o">=</span> <span class="n">real_positive_roots</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">roots</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;no physically admissible molar volume found for the given P, T&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">roots</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">branch</span> <span class="o">==</span> <span class="s2">&quot;vapor&quot;</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="n">roots</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="VanDerWaals.from_critical_constants">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.VanDerWaals.from_critical_constants">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_critical_constants</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">Tc</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Pc</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VanDerWaals</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Build a :class:`VanDerWaals` EOS from critical temperature and pressure.</span>
+
+<span class="sd">        At the critical point the van der Waals cubic has a triple root,</span>
+<span class="sd">        which fixes</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            a = \frac{27 R^2 T_c^2}{64 P_c}, \qquad b = \frac{R T_c}{8 P_c}</span>
+
+<span class="sd">        (Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 1.3c).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        Tc : float</span>
+<span class="sd">            Critical temperature, in K.</span>
+<span class="sd">        Pc : float</span>
+<span class="sd">            Critical pressure, in Pa.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        VanDerWaals</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        A structural consequence of these formulas -- independent of</span>
+<span class="sd">        which substance&#39;s (Tc, Pc) is used -- is that the van der Waals</span>
+<span class="sd">        critical molar volume is always :math:`V_c = 3b`, and hence the</span>
+<span class="sd">        critical compressibility factor is always exactly 3/8 (Atkins &amp;</span>
+<span class="sd">        de Paula, Table 1.6), unlike the true value for real gases</span>
+<span class="sd">        (typically 0.23-0.31). (Solving the cubic numerically exactly at</span>
+<span class="sd">        the critical point, where it has a triple root, is a</span>
+<span class="sd">        textbook-classic ill-conditioned root-finding problem, so this</span>
+<span class="sd">        checks the closed-form critical relation directly rather than</span>
+<span class="sd">        round-tripping through :meth:`molar_volume`.)</span>
+
+<span class="sd">        &gt;&gt;&gt; Tc, Pc = 304.13, 7.3773e6  # CO2</span>
+<span class="sd">        &gt;&gt;&gt; eos = VanDerWaals.from_critical_constants(Tc=Tc, Pc=Pc)</span>
+<span class="sd">        &gt;&gt;&gt; Vc = 3.0 * eos.b</span>
+<span class="sd">        &gt;&gt;&gt; round(Pc * Vc / (eos.R * Tc), 6)</span>
+<span class="sd">        0.375</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="mf">27.0</span> <span class="o">*</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Tc</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">64.0</span> <span class="o">*</span> <span class="n">Pc</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">R</span> <span class="o">*</span> <span class="n">Tc</span> <span class="o">/</span> <span class="p">(</span><span class="mf">8.0</span> <span class="o">*</span> <span class="n">Pc</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="RedlichKwong">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.RedlichKwong">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RedlichKwong</span><span class="p">(</span><span class="n">EquationOfState</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Redlich-Kwong equation of state.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        P = \frac{RT}{V_m - b} - \frac{a}{\sqrt{T}\,V_m(V_m+b)}</span>
+
+<span class="sd">    An improvement on van der Waals that gives the attractive term an</span>
+<span class="sd">    explicit temperature dependence (O. Redlich &amp; J. N. S. Kwong, *Chem.</span>
+<span class="sd">    Rev.* 44, 233 (1949)).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : float</span>
+<span class="sd">        Attraction parameter, in Pa m^6 K^0.5 mol^-2.</span>
+<span class="sd">    b : float</span>
+<span class="sd">        Excluded-volume parameter, in m^3/mol.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;b must be non-negative&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+<div class="viewcode-block" id="RedlichKwong.pressure">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.RedlichKwong.pressure">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Vm</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+        <span class="n">Vm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Vm</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="n">Vm</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">Vm</span> <span class="o">*</span> <span class="p">(</span><span class="n">Vm</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="RedlichKwong.molar_volume">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.RedlichKwong.molar_volume">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">molar_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">branch</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;vapor&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Solve the Redlich-Kwong cubic for `Vm` at pressure `P`, temperature `T`.</span>
+
+<span class="sd">        Multiplying :math:`P = RT/(V_m-b) - a/(\sqrt{T}V_m(V_m+b))`</span>
+<span class="sd">        through by :math:`\sqrt{T}V_m(V_m+b)(V_m-b)` and collecting terms</span>
+<span class="sd">        in :math:`V_m` gives</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            V_m^3 - \frac{RT}{P} V_m^2 + \left(\frac{a}{P\sqrt{T}} - b^2 - \frac{bRT}{P}\right) V_m - \frac{ab}{P\sqrt{T}} = 0</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        P : float</span>
+<span class="sd">            Pressure, in Pa.</span>
+<span class="sd">        T : float</span>
+<span class="sd">            Absolute temperature, in K.</span>
+<span class="sd">        branch : {&quot;vapor&quot;, &quot;liquid&quot;}</span>
+<span class="sd">            Return the largest (&quot;vapor&quot;) or smallest (&quot;liquid&quot;) real</span>
+<span class="sd">            positive root.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        Solving for `Vm` and substituting back reproduces the original</span>
+<span class="sd">        pressure:</span>
+
+<span class="sd">        &gt;&gt;&gt; rk = RedlichKwong(a=6.4239, b=2.7143e-5)  # e.g. representative CO2-like values</span>
+<span class="sd">        &gt;&gt;&gt; Vm = rk.molar_volume(P=1.0e5, T=300.0)</span>
+<span class="sd">        &gt;&gt;&gt; round(float(rk.pressure(Vm, T=300.0)), 3)</span>
+<span class="sd">        100000.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sqrtT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">coeffs</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="mf">1.0</span><span class="p">,</span>
+            <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="n">P</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">/</span> <span class="p">(</span><span class="n">P</span> <span class="o">*</span> <span class="n">sqrtT</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="n">P</span><span class="p">,</span>
+            <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">/</span> <span class="p">(</span><span class="n">P</span> <span class="o">*</span> <span class="n">sqrtT</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">roots</span> <span class="o">=</span> <span class="n">real_positive_roots</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">roots</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;no physically admissible molar volume found for the given P, T&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">roots</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">branch</span> <span class="o">==</span> <span class="s2">&quot;vapor&quot;</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="n">roots</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="RedlichKwong.from_critical_constants">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.RedlichKwong.from_critical_constants">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_critical_constants</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">Tc</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Pc</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RedlichKwong</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Build a :class:`RedlichKwong` EOS from critical temperature and pressure.</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            a = 0.42748\,\frac{R^2 T_c^{2.5}}{P_c}, \qquad b = 0.08664\,\frac{R T_c}{P_c}</span>
+
+<span class="sd">        (Redlich &amp; Kwong 1949; the numeric coefficients are tabulated</span>
+<span class="sd">        e.g. in Smith, Van Ness &amp; Abbott, *Introduction to Chemical</span>
+<span class="sd">        Engineering Thermodynamics*, 7th ed., Table 3.1).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        Tc : float</span>
+<span class="sd">            Critical temperature, in K.</span>
+<span class="sd">        Pc : float</span>
+<span class="sd">            Critical pressure, in Pa.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        RedlichKwong</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        As with van der Waals&#39;s 3/8, Redlich-Kwong&#39;s critical-point</span>
+<span class="sd">        construction fixes a universal critical molar volume :math:`V_c =</span>
+<span class="sd">        RT_c/(3P_c)` and hence a universal critical compressibility</span>
+<span class="sd">        factor, here exactly 1/3, again independent of which substance&#39;s</span>
+<span class="sd">        (Tc, Pc) is used. (As in :meth:`VanDerWaals.from_critical_constants`,</span>
+<span class="sd">        this checks the closed-form critical relation directly rather</span>
+<span class="sd">        than numerically solving the cubic exactly at its ill-conditioned</span>
+<span class="sd">        triple root.)</span>
+
+<span class="sd">        &gt;&gt;&gt; Tc, Pc = 304.13, 7.3773e6  # CO2</span>
+<span class="sd">        &gt;&gt;&gt; eos = RedlichKwong.from_critical_constants(Tc=Tc, Pc=Pc)</span>
+<span class="sd">        &gt;&gt;&gt; Vc = eos.R * Tc / (3.0 * Pc)</span>
+<span class="sd">        &gt;&gt;&gt; round(Pc * Vc / (eos.R * Tc), 6)</span>
+<span class="sd">        0.333333</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="mf">0.42748</span> <span class="o">*</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Tc</span><span class="o">**</span><span class="mf">2.5</span> <span class="o">/</span> <span class="n">Pc</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="mf">0.08664</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">Tc</span> <span class="o">/</span> <span class="n">Pc</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, chemistrykit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

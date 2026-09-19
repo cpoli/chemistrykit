@@ -1,0 +1,1314 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chemistrykit.md.systems.lj_fluid &#8212; chemistrykit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../../../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/chemistrykit/md/systems/lj_fluid';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">chemistrykit</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/chemistrykit/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/chemistrykit/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">chemistrykit.md.systems.lj_fluid</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for chemistrykit.md.systems.lj_fluid</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Lennard-Jones fluid in reduced units.</span>
+
+<span class="sd">The workhorse test system of molecular simulation: identical particles</span>
+<span class="sd">interacting through the 12-6 Lennard-Jones potential</span>
+<span class="sd">(:class:`LennardJones`), integrated in a cubic periodic box</span>
+<span class="sd">(:class:`LJFluid`). Following universal convention (Allen &amp; Tildesley,</span>
+<span class="sd">*Computer Simulation of Liquids*, 2nd ed., Ch. 1.4 and Appendix B; Frenkel</span>
+<span class="sd">&amp; Smit, *Understanding Molecular Simulation*, 2nd ed., Ch. 3), everything</span>
+<span class="sd">here is expressed in *reduced units*: lengths in units of :math:`\sigma`,</span>
+<span class="sd">energies in units of :math:`\epsilon`, masses in units of the particle</span>
+<span class="sd">mass `m`, and :math:`k_B=1` -- so temperature, pressure, and time are all</span>
+<span class="sd">dimensionless combinations of :math:`\epsilon,\sigma,m` too (e.g. time in</span>
+<span class="sd">units of :math:`\sigma\sqrt{m/\epsilon}`). A real substance&#39;s properties</span>
+<span class="sd">are recovered by multiplying back through its own :math:`\epsilon,\sigma,m`.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">njit</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.md.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">MolecularDynamicsSystem</span><span class="p">,</span> <span class="n">PairPotential</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.md.utils.neighbor_list</span><span class="w"> </span><span class="kn">import</span> <span class="n">VerletNeighborList</span><span class="p">,</span> <span class="n">build_neighbor_list</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.md.utils.pbc</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimum_image_displacement</span><span class="p">,</span> <span class="n">wrap_positions</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LennardJones&quot;</span><span class="p">,</span> <span class="s2">&quot;LJFluid&quot;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="LennardJones">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.LennardJones">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LennardJones</span><span class="p">(</span><span class="n">PairPotential</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The 12-6 Lennard-Jones pair potential.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        U(r) = 4\epsilon\left[\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^{6}\right]</span>
+
+<span class="sd">    The :math:`r^{-12}` term models short-range Pauli repulsion (steeply,</span>
+<span class="sd">    for computational convenience -- it has no deeper physical</span>
+<span class="sd">    justification), and the :math:`r^{-6}` term is the genuine</span>
+<span class="sd">    London-dispersion attraction (J. E. Lennard-Jones, *Proc. R. Soc. A*</span>
+<span class="sd">    106, 463 (1924); Allen &amp; Tildesley, *Computer Simulation of Liquids*,</span>
+<span class="sd">    2nd ed., Ch. 1.4).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    epsilon : float, default 1.0</span>
+<span class="sd">        Well depth.</span>
+<span class="sd">    sigma : float, default 1.0</span>
+<span class="sd">        Finite distance at which ``U(sigma) == 0``.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    The potential has its minimum exactly at :math:`r=2^{1/6}\sigma`</span>
+<span class="sd">    (:attr:`r_min`), where :math:`U=-\epsilon` and the force vanishes --</span>
+<span class="sd">    the mechanical-equilibrium separation of an isolated pair:</span>
+
+<span class="sd">    &gt;&gt;&gt; lj = LennardJones(epsilon=1.0, sigma=1.0)</span>
+<span class="sd">    &gt;&gt;&gt; round(float(lj.energy(lj.r_min)), 10)</span>
+<span class="sd">    -1.0</span>
+<span class="sd">    &gt;&gt;&gt; round(float(lj.force_scalar(lj.r_min)), 10)</span>
+<span class="sd">    -0.0</span>
+
+<span class="sd">    At ``r=sigma`` the potential is exactly zero by construction:</span>
+
+<span class="sd">    &gt;&gt;&gt; round(float(lj.energy(1.0)), 10)</span>
+<span class="sd">    0.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">epsilon</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">sigma</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;epsilon and sigma must be positive&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">epsilon</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
+
+<div class="viewcode-block" id="LennardJones.energy">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.LennardJones.energy">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">sr6</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">/</span> <span class="n">r</span><span class="p">)</span> <span class="o">**</span> <span class="mi">6</span>
+        <span class="k">return</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">*</span> <span class="p">(</span><span class="n">sr6</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">sr6</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LennardJones.force_scalar">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.LennardJones.force_scalar">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">force_scalar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">sr6</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">/</span> <span class="n">r</span><span class="p">)</span> <span class="o">**</span> <span class="mi">6</span>
+        <span class="k">return</span> <span class="mf">24.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">/</span> <span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">sr6</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">sr6</span><span class="p">)</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">r_min</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Separation at the potential minimum, :math:`2^{1/6}\sigma`.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mf">2.0</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mf">6.0</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_pack_neighbor_params</span><span class="p">(</span><span class="n">pairs_i</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">pairs_j</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pack a variable-length pair list into the fixed-signature ``params`` vector.</span>
+
+<span class="sd">    ``params = [n_pairs, i_0, i_1, ..., i_{n-1}, j_0, j_1, ..., j_{n-1}]``,</span>
+<span class="sd">    all stored as ``float64`` (indices are small enough to round-trip</span>
+<span class="sd">    exactly). Keeping the pair *count* variable while the njit</span>
+<span class="sd">    acceleration function&#39;s signature stays fixed is what lets</span>
+<span class="sd">    :meth:`LJFluid.step` rebuild the neighbor list every few steps</span>
+<span class="sd">    without forcing Numba to recompile a new dispatcher each time (see</span>
+<span class="sd">    :func:`_make_lj_accel_njit`).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pairs_i, pairs_j : ndarray of int</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray of float64, shape (2 * n_pairs + 1,)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_pairs</span> <span class="o">=</span> <span class="n">pairs_i</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">head</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">n_pairs</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">head</span><span class="p">,</span> <span class="n">pairs_i</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">pairs_j</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)])</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_make_lj_accel_njit</span><span class="p">(</span><span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">box_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a standalone ``@njit`` LJ acceleration function over a neighbor-pair list.</span>
+
+<span class="sd">    Factory that closes over the fluid&#39;s *fixed* scalar parameters</span>
+<span class="sd">    (``epsilon``, ``sigma``, ``mass``, ``box_length``, ``cutoff``) and</span>
+<span class="sd">    returns a genuine ``@njit`` dispatcher with the</span>
+<span class="sd">    :data:`chemistrykit.integrators.RHSFunc` signature</span>
+<span class="sd">    ``accel(positions, t, params) -&gt; acceleration``, usable as</span>
+<span class="sd">    :attr:`~chemistrykit.md.core.base_system.MolecularDynamicsSystem._accel_njit`</span>
+<span class="sd">    -- the same factory-closure pattern</span>
+<span class="sd">    :mod:`chemistrykit.kinetics.systems.networks` uses for its mass-action</span>
+<span class="sd">    right-hand side. The *variable-length* neighbor-pair list is instead</span>
+<span class="sd">    threaded through the ``params`` argument at call time (see</span>
+<span class="sd">    :func:`_pack_neighbor_params`), so rebuilding the neighbor list never</span>
+<span class="sd">    requires recompiling this closure.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    epsilon, sigma : float</span>
+<span class="sd">        Lennard-Jones parameters.</span>
+<span class="sd">    mass : float</span>
+<span class="sd">        Per-particle mass (uniform -- a monatomic fluid of identical</span>
+<span class="sd">        particles).</span>
+<span class="sd">    box_length : float</span>
+<span class="sd">        Cubic periodic box side length.</span>
+<span class="sd">    cutoff : float</span>
+<span class="sd">        Interaction cutoff.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    callable</span>
+<span class="sd">        ``@njit`` dispatcher ``accel(positions, t, params) -&gt; acceleration``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sigma2</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">sigma</span>
+    <span class="n">cutoff2</span> <span class="o">=</span> <span class="n">cutoff</span> <span class="o">*</span> <span class="n">cutoff</span>
+
+    <span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">accel</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">n_pairs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">positions</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">forces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_pairs</span><span class="p">):</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span> <span class="o">+</span> <span class="n">k</span><span class="p">])</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span> <span class="o">+</span> <span class="n">n_pairs</span> <span class="o">+</span> <span class="n">k</span><span class="p">])</span>
+            <span class="n">r2</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+                <span class="n">dm</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">m</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">m</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">box_length</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
+                    <span class="n">dm</span> <span class="o">-=</span> <span class="n">box_length</span> <span class="o">*</span> <span class="nb">round</span><span class="p">(</span><span class="n">dm</span> <span class="o">/</span> <span class="n">box_length</span><span class="p">)</span>
+                <span class="n">diff</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">dm</span>
+                <span class="n">r2</span> <span class="o">+=</span> <span class="n">dm</span> <span class="o">*</span> <span class="n">dm</span>
+            <span class="k">if</span> <span class="n">r2</span> <span class="o">&lt;</span> <span class="n">cutoff2</span><span class="p">:</span>
+                <span class="n">sr2</span> <span class="o">=</span> <span class="n">sigma2</span> <span class="o">/</span> <span class="n">r2</span>
+                <span class="n">sr6</span> <span class="o">=</span> <span class="n">sr2</span> <span class="o">*</span> <span class="n">sr2</span> <span class="o">*</span> <span class="n">sr2</span>
+                <span class="n">sr12</span> <span class="o">=</span> <span class="n">sr6</span> <span class="o">*</span> <span class="n">sr6</span>
+                <span class="n">f_over_r</span> <span class="o">=</span> <span class="mf">24.0</span> <span class="o">*</span> <span class="n">epsilon</span> <span class="o">*</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">sr12</span> <span class="o">-</span> <span class="n">sr6</span><span class="p">)</span> <span class="o">/</span> <span class="n">r2</span>
+                <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+                    <span class="n">fm</span> <span class="o">=</span> <span class="n">f_over_r</span> <span class="o">*</span> <span class="n">diff</span><span class="p">[</span><span class="n">m</span><span class="p">]</span>
+                    <span class="n">forces</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">m</span><span class="p">]</span> <span class="o">+=</span> <span class="n">fm</span>
+                    <span class="n">forces</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">m</span><span class="p">]</span> <span class="o">-=</span> <span class="n">fm</span>
+        <span class="k">return</span> <span class="n">forces</span> <span class="o">/</span> <span class="n">mass</span>
+
+    <span class="k">return</span> <span class="n">accel</span>
+
+
+<div class="viewcode-block" id="LJFluid">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.LJFluid">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LJFluid</span><span class="p">(</span><span class="n">MolecularDynamicsSystem</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A monatomic Lennard-Jones fluid in a cubic periodic box, in reduced units.</span>
+
+<span class="sd">    Positions evolve under :func:`chemistrykit.integrators.velocity_verlet_step`</span>
+<span class="sd">    driven by a ``@njit`` pairwise-force loop (:func:`_make_lj_accel_njit`)</span>
+<span class="sd">    that reads its interacting pairs from a periodically-rebuilt</span>
+<span class="sd">    :class:`~chemistrykit.md.utils.neighbor_list.VerletNeighborList`, under</span>
+<span class="sd">    the minimum-image convention</span>
+<span class="sd">    (:func:`chemistrykit.md.utils.pbc.minimum_image_displacement`). See the</span>
+<span class="sd">    module docstring for the reduced-units convention.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    positions : array-like, shape (N, 3)</span>
+<span class="sd">    velocities : array-like, shape (N, 3)</span>
+<span class="sd">    box_length : float</span>
+<span class="sd">        Cubic periodic box side length; must be at least ``2 * cutoff``</span>
+<span class="sd">        for the minimum-image convention to be unambiguous.</span>
+<span class="sd">    epsilon, sigma, mass : float, default 1.0</span>
+<span class="sd">        Lennard-Jones/particle parameters (all particles identical).</span>
+<span class="sd">    cutoff : float, default 2.5</span>
+<span class="sd">        Interaction cutoff, in units of `sigma` (2.5 is the conventional</span>
+<span class="sd">        standard truncation for a liquid-density LJ fluid; Allen &amp;</span>
+<span class="sd">        Tildesley, *Computer Simulation of Liquids*, 2nd ed., Ch. 1.4).</span>
+<span class="sd">    skin : float, default 0.3</span>
+<span class="sd">        Neighbor-list skin distance, see :class:`~chemistrykit.md.utils.neighbor_list.VerletNeighborList`.</span>
+<span class="sd">    rebuild_every : int, default 20</span>
+<span class="sd">        Rebuild the neighbor list after this many :meth:`step` calls.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">positions</span><span class="p">,</span>
+        <span class="n">velocities</span><span class="p">,</span>
+        <span class="n">box_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">cutoff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.5</span><span class="p">,</span>
+        <span class="n">skin</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span>
+        <span class="n">rebuild_every</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="n">box_length</span> <span class="o">&lt;=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">cutoff</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;box_length must be at least twice the cutoff for the minimum-image convention to be valid&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">epsilon</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">cutoff</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">box_length</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">box_length</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">masses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">mass</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_neighbor_list</span> <span class="o">=</span> <span class="n">VerletNeighborList</span><span class="p">(</span><span class="n">cutoff</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span><span class="p">,</span> <span class="n">skin</span><span class="o">=</span><span class="n">skin</span><span class="p">,</span> <span class="n">rebuild_every</span><span class="o">=</span><span class="n">rebuild_every</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_accel_njit</span> <span class="o">=</span> <span class="n">_make_lj_accel_njit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">mass</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">box_length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span><span class="p">)</span>
+        <span class="c1"># Truncated-and-shifted potential (Allen &amp; Tildesley Ch. 2.4): subtracting</span>
+        <span class="c1"># U(cutoff) makes the *reported* energy continuous at the cutoff, without</span>
+        <span class="c1"># changing the force (a constant shift has zero derivative). The force</span>
+        <span class="c1"># itself still has a small discontinuity at r=cutoff (this is the</span>
+        <span class="c1"># &quot;shifted potential&quot;, not the (stiffer) &quot;shifted force&quot; scheme), which is</span>
+        <span class="c1"># the standard, small source of energy drift in a plain truncated LJ MD run.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_u_shift</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">*</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span><span class="p">)</span> <span class="o">**</span> <span class="mi">12</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span><span class="p">)</span> <span class="o">**</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">velocities</span><span class="p">,</span> <span class="n">masses</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="n">wrap_positions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">box_length</span><span class="p">)</span>
+        <span class="n">pairs_i</span><span class="p">,</span> <span class="n">pairs_j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_neighbor_list</span><span class="o">.</span><span class="n">pairs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">box_length</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">_pack_neighbor_params</span><span class="p">(</span><span class="n">pairs_i</span><span class="p">,</span> <span class="n">pairs_j</span><span class="p">)</span>
+
+<div class="viewcode-block" id="LJFluid.step">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.LJFluid.step">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pairs_i</span><span class="p">,</span> <span class="n">pairs_j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_neighbor_list</span><span class="o">.</span><span class="n">pairs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">box_length</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">_pack_neighbor_params</span><span class="p">(</span><span class="n">pairs_i</span><span class="p">,</span> <span class="n">pairs_j</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="n">wrap_positions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">box_length</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LJFluid.forces_and_potential">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.LJFluid.forces_and_potential">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forces_and_potential</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">positions</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Exact (full, non-skin-list) forces, energy, and (cached) virial.</span>
+
+<span class="sd">        Unlike :meth:`step`&#39;s force evaluation (which reuses a</span>
+<span class="sd">        skin-enlarged neighbor list for performance), this always rebuilds</span>
+<span class="sd">        an exact-cutoff pair list from the given `positions`, so energy,</span>
+<span class="sd">        pressure, and g(r) queries are never affected by neighbor-list</span>
+<span class="sd">        staleness.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        positions : ndarray, shape (N, 3)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        forces : ndarray, shape (N, 3)</span>
+<span class="sd">        potential_energy : float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">forces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
+        <span class="n">pairs_i</span><span class="p">,</span> <span class="n">pairs_j</span> <span class="o">=</span> <span class="n">build_neighbor_list</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">box_length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pairs_i</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_last_virial</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="k">return</span> <span class="n">forces</span><span class="p">,</span> <span class="mf">0.0</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">minimum_image_displacement</span><span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="n">pairs_i</span><span class="p">],</span> <span class="n">positions</span><span class="p">[</span><span class="n">pairs_j</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">box_length</span><span class="p">)</span>
+        <span class="n">r2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">diff</span> <span class="o">*</span> <span class="n">diff</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">sr2</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">r2</span>
+        <span class="n">sr6</span> <span class="o">=</span> <span class="n">sr2</span><span class="o">**</span><span class="mi">3</span>
+        <span class="n">sr12</span> <span class="o">=</span> <span class="n">sr6</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">energies</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">*</span> <span class="p">(</span><span class="n">sr12</span> <span class="o">-</span> <span class="n">sr6</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u_shift</span>
+        <span class="n">f_over_r</span> <span class="o">=</span> <span class="mf">24.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">*</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">sr12</span> <span class="o">-</span> <span class="n">sr6</span><span class="p">)</span> <span class="o">/</span> <span class="n">r2</span>
+        <span class="n">contributions</span> <span class="o">=</span> <span class="n">f_over_r</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">diff</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">forces</span><span class="p">,</span> <span class="n">pairs_i</span><span class="p">,</span> <span class="n">contributions</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">forces</span><span class="p">,</span> <span class="n">pairs_j</span><span class="p">,</span> <span class="o">-</span><span class="n">contributions</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_virial</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f_over_r</span> <span class="o">*</span> <span class="n">r2</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">forces</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">energies</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="LJFluid.virial">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.LJFluid.virial">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">virial</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The virial sum :math:`W=\sum_{i&lt;j}\vec r_{ij}\cdot\vec F_{ij}` at the current configuration.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">forces_and_potential</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_virial</span></div>
+
+
+<div class="viewcode-block" id="LJFluid.pressure">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.LJFluid.pressure">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k_b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Instantaneous pressure via the virial theorem.</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            P = \frac{N k_B T}{V} + \frac{W}{dV}</span>
+
+<span class="sd">        (Allen &amp; Tildesley, *Computer Simulation of Liquids*, 2nd ed., eq.</span>
+<span class="sd">        2.60, generalized from :math:`d=3` to general dimension.)</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k_b : float, default 1.0</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        A very dilute LJ gas (large box, few particles) has pressure</span>
+<span class="sd">        close to the ideal-gas value :math:`P=\rho k_B T`, since the</span>
+<span class="sd">        virial correction from interactions vanishes as the density does:</span>
+
+<span class="sd">        &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">        &gt;&gt;&gt; rng = np.random.default_rng(0)</span>
+<span class="sd">        &gt;&gt;&gt; n, L = 20, 40.0</span>
+<span class="sd">        &gt;&gt;&gt; positions = rng.uniform(0.0, L, size=(n, 3))</span>
+<span class="sd">        &gt;&gt;&gt; velocities = rng.normal(0.0, 1.0, size=(n, 3))</span>
+<span class="sd">        &gt;&gt;&gt; velocities -= velocities.mean(axis=0)</span>
+<span class="sd">        &gt;&gt;&gt; fluid = LJFluid(positions, velocities, box_length=L, cutoff=2.5)</span>
+<span class="sd">        &gt;&gt;&gt; fluid.virial()  # no pairs within cutoff at this density</span>
+<span class="sd">        0.0</span>
+<span class="sd">        &gt;&gt;&gt; rho = n / L**3</span>
+<span class="sd">        &gt;&gt;&gt; ideal_pressure = rho * fluid.temperature()</span>
+<span class="sd">        &gt;&gt;&gt; bool(abs(fluid.pressure() - ideal_pressure) &lt; 1e-12)</span>
+<span class="sd">        True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">volume</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">box_length</span><span class="o">**</span><span class="n">d</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">virial</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">k_b</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span><span class="p">(</span><span class="n">k_b</span><span class="p">)</span> <span class="o">+</span> <span class="n">w</span> <span class="o">/</span> <span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="n">volume</span></div>
+
+
+<div class="viewcode-block" id="LJFluid.radial_distribution_function">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.LJFluid.radial_distribution_function">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">radial_distribution_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_max</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute the radial distribution function g(r) for a configuration.</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            g(r) = \frac{2\,\langle n_{\text{pairs}}(r, r+dr)\rangle}{N\,\rho\,4\pi r^2 dr}</span>
+
+<span class="sd">        the (3D) local density of particles at distance `r` from a</span>
+<span class="sd">        reference particle, relative to the bulk density :math:`\rho`</span>
+<span class="sd">        (Allen &amp; Tildesley, *Computer Simulation of Liquids*, 2nd ed., Ch.</span>
+<span class="sd">        2.6; Frenkel &amp; Smit, *Understanding Molecular Simulation*, 2nd</span>
+<span class="sd">        ed., Ch. 3.6). :math:`g(r) \to 1` for an ideal (non-interacting,</span>
+<span class="sd">        spatially uniform) gas, and develops structure (a first peak near</span>
+<span class="sd">        the LJ minimum, decaying oscillations beyond it) in a liquid or</span>
+<span class="sd">        solid.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        r_max : float, optional</span>
+<span class="sd">            Maximum separation to histogram; defaults to half the box</span>
+<span class="sd">            length (beyond which the minimum-image convention is</span>
+<span class="sd">            ambiguous).</span>
+<span class="sd">        n_bins : int, default 100</span>
+<span class="sd">        positions : ndarray, shape (N, 3), optional</span>
+<span class="sd">            Configuration to analyze; defaults to the system&#39;s current</span>
+<span class="sd">            ``self.positions``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        r : ndarray, shape (n_bins,)</span>
+<span class="sd">            Bin-center separations.</span>
+<span class="sd">        g : ndarray, shape (n_bins,)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">positions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">positions</span> <span class="k">if</span> <span class="n">positions</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">positions</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">box_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">box_length</span>
+        <span class="n">r_max</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">box_length</span> <span class="k">if</span> <span class="n">r_max</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">r_max</span>
+        <span class="n">pairs_i</span><span class="p">,</span> <span class="n">pairs_j</span> <span class="o">=</span> <span class="n">build_neighbor_list</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">box_length</span><span class="p">,</span> <span class="n">r_max</span><span class="p">)</span>
+        <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_bins</span><span class="p">)</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">n_bins</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pairs_i</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">minimum_image_displacement</span><span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="n">pairs_i</span><span class="p">],</span> <span class="n">positions</span><span class="p">[</span><span class="n">pairs_j</span><span class="p">],</span> <span class="n">box_length</span><span class="p">)</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">diff</span> <span class="o">*</span> <span class="n">diff</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+            <span class="n">counts</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">r_max</span><span class="p">))</span>
+        <span class="n">r_mid</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">edges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">volume</span> <span class="o">=</span> <span class="n">box_length</span><span class="o">**</span><span class="mi">3</span>
+        <span class="n">rho</span> <span class="o">=</span> <span class="n">n</span> <span class="o">/</span> <span class="n">volume</span>
+        <span class="n">shell_volume</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">r_mid</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">dr</span>
+        <span class="n">n_ideal</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">shell_volume</span>
+        <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">n_ideal</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">counts</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">n_ideal</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">r_mid</span><span class="p">,</span> <span class="n">g</span></div>
+
+
+<div class="viewcode-block" id="LJFluid.from_lattice">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.LJFluid.from_lattice">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_lattice</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">n_per_side</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">density</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">cutoff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.5</span><span class="p">,</span>
+        <span class="n">rng</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LJFluid</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Build an :class:`LJFluid` on a simple-cubic lattice with Maxwell-Boltzmann velocities.</span>
+
+<span class="sd">        A standard way to initialize an MD run: a regular lattice avoids</span>
+<span class="sd">        any risk of initial particle overlap (which would otherwise blow</span>
+<span class="sd">        up the steeply repulsive :math:`r^{-12}` term), and velocity</span>
+<span class="sd">        components drawn independently from a Gaussian with variance</span>
+<span class="sd">        :math:`k_BT/m` reproduce the Maxwell-Boltzmann distribution</span>
+<span class="sd">        exactly (see</span>
+<span class="sd">        :class:`chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution`);</span>
+<span class="sd">        the total momentum is then zeroed and the velocities rescaled so</span>
+<span class="sd">        the realized instantaneous temperature matches `temperature`</span>
+<span class="sd">        exactly, rather than only on average.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        n_per_side : int</span>
+<span class="sd">            Particles per lattice edge; total particle count is</span>
+<span class="sd">            ``n_per_side**3``.</span>
+<span class="sd">        density : float</span>
+<span class="sd">            Number density :math:`\rho=N/V`, in units of :math:`\sigma^{-3}`.</span>
+<span class="sd">        temperature : float</span>
+<span class="sd">            Target temperature, in units of :math:`\epsilon/k_B`.</span>
+<span class="sd">        epsilon, sigma, mass : float, default 1.0</span>
+<span class="sd">        cutoff : float, default 2.5</span>
+<span class="sd">        rng : int, numpy.random.Generator, or None</span>
+<span class="sd">            Seed or generator for the initial velocities.</span>
+<span class="sd">        **kwargs</span>
+<span class="sd">            Forwarded to the :class:`LJFluid` constructor (e.g. ``skin``,</span>
+<span class="sd">            ``rebuild_every``).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        LJFluid</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; fluid = LJFluid.from_lattice(n_per_side=4, density=0.5, temperature=1.0, rng=0)</span>
+<span class="sd">        &gt;&gt;&gt; fluid.positions.shape</span>
+<span class="sd">        (64, 3)</span>
+<span class="sd">        &gt;&gt;&gt; round(fluid.temperature(), 6)</span>
+<span class="sd">        1.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">n_per_side</span><span class="o">**</span><span class="mi">3</span>
+        <span class="n">volume</span> <span class="o">=</span> <span class="n">n</span> <span class="o">/</span> <span class="n">density</span>
+        <span class="n">box_length</span> <span class="o">=</span> <span class="n">volume</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">)</span>
+        <span class="n">spacing</span> <span class="o">=</span> <span class="n">box_length</span> <span class="o">/</span> <span class="n">n_per_side</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_per_side</span><span class="p">)</span>
+        <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s2">&quot;ij&quot;</span><span class="p">)</span>
+        <span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">zz</span><span class="o">.</span><span class="n">ravel</span><span class="p">()],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">*</span> <span class="n">spacing</span>
+        <span class="n">v_scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">temperature</span> <span class="o">/</span> <span class="n">mass</span><span class="p">)</span>
+        <span class="n">velocities</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">v_scale</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">velocities</span> <span class="o">-=</span> <span class="n">velocities</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">system</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">velocities</span><span class="p">,</span> <span class="n">box_length</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="n">epsilon</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">mass</span><span class="o">=</span><span class="n">mass</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="n">cutoff</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">current_temperature</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">temperature</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">current_temperature</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">system</span><span class="o">.</span><span class="n">velocities</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">temperature</span> <span class="o">/</span> <span class="n">current_temperature</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">system</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, chemistrykit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

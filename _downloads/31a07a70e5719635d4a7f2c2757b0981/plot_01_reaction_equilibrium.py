@@ -1,0 +1,76 @@
+r"""
+Gibbs-energy minimization and the van't Hoff equation
+=======================================================
+
+For :math:`N_2O_4 \rightleftharpoons 2NO_2`, this plots the total Gibbs
+energy of the reacting mixture as a function of the extent of reaction
+:math:`\xi` and shows that
+:func:`~chemistrykit.thermo.systems.equilibrium.solve_equilibrium_composition`'s
+answer sits exactly at the minimum -- the numerical method actually doing
+what its name says. It also shows a van't Hoff plot
+(:func:`~chemistrykit.thermo.systems.equilibrium.fit_van_t_hoff`)
+recovering a reaction's enthalpy from synthetic equilibrium-constant-vs-
+temperature data.
+"""
+
+# %%
+import matplotlib.pyplot as plt
+import numpy as np
+
+from chemistrykit.constants import R
+from chemistrykit.thermo.systems.equilibrium import (
+    fit_van_t_hoff,
+    gibbs_energy_of_mixture,
+    solve_equilibrium_composition,
+    van_t_hoff_equilibrium_constant,
+)
+
+T = 298.15
+K_target = 4.0
+delta_g_rxn = -R * T * np.log(K_target)
+gibbs_formation = [0.0, delta_g_rxn / 2.0]  # [N2O4, NO2], N2O4 as the zero reference
+
+result = solve_equilibrium_composition(
+    species=("N2O4", "NO2"),
+    stoich_matrix=[[-1.0], [2.0]],
+    n0=[1.0, 0.0],
+    gibbs_formation=gibbs_formation,
+    T=T,
+)
+print(f"Equilibrium extent of reaction: xi = {result.extents[0]:.4f}")
+print(f"n(N2O4) = {result.moles('N2O4'):.4f} mol, n(NO2) = {result.moles('NO2'):.4f} mol")
+
+# %%
+xi_range = np.linspace(0.001, 0.999, 300)
+G = np.array([gibbs_energy_of_mixture(np.array([1.0 - xi, 2.0 * xi]), gibbs_formation, T) for xi in xi_range])
+
+fig, ax = plt.subplots(figsize=(7, 5))
+ax.plot(xi_range, G / 1000.0, color="steelblue")
+ax.axvline(result.extents[0], color="crimson", linestyle="--", label=f"solver's xi = {result.extents[0]:.4f}")
+ax.set_xlabel(r"extent of reaction $\xi$")
+ax.set_ylabel("total Gibbs energy (kJ)")
+ax.set_title(r"$N_2O_4 \rightleftharpoons 2NO_2$: G($\xi$) is minimized where the solver converges")
+ax.legend()
+fig.tight_layout()
+
+# %%
+# A van't Hoff plot: generating synthetic ``K`` vs. ``T`` data from a
+# known reaction enthalpy and recovering it by linear regression on
+# ``ln K`` vs. ``1/T``.
+
+T_data = np.linspace(280.0, 360.0, 8)
+K_data = van_t_hoff_equilibrium_constant(T_data, T_ref=298.15, K_ref=K_target, delta_h=57_200.0)
+fit = fit_van_t_hoff(T_data, K_data)
+print(f"Fitted reaction enthalpy: {fit.delta_h / 1000.0:.2f} kJ/mol (true: 57.20 kJ/mol)")
+
+fig2, ax2 = plt.subplots(figsize=(6, 5))
+ax2.scatter(1.0 / T_data, np.log(K_data), label="synthetic data")
+T_line = np.linspace(T_data.min(), T_data.max(), 100)
+ax2.plot(1.0 / T_line, np.log(fit.predict(T_line)), color="crimson", label="van't Hoff fit")
+ax2.set_xlabel("1/T")
+ax2.set_ylabel("ln K")
+ax2.set_title("van't Hoff plot")
+ax2.legend()
+fig2.tight_layout()
+
+plt.show()

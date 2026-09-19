@@ -1,0 +1,1073 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chemistrykit.polymer.systems.chain_statistics &#8212; chemistrykit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../../../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/chemistrykit/polymer/systems/chain_statistics';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">chemistrykit</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/chemistrykit/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/chemistrykit/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">chemistrykit.polymer.systems.chain_statistics</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for chemistrykit.polymer.systems.chain_statistics</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">"""Ideal random-walk chain statistics, and the Flory exponent for real chains.</span>
+
+<span class="sd">See Rubinstein &amp; Colby, *Polymer Physics* (2003), Ch. 2 ("Ideal chains")</span>
+<span class="sd">and Ch. 3 ("Real chains"), and P. J. Flory, *Principles of Polymer</span>
+<span class="sd">Chemistry* (1953), Ch. X, for the original scaling argument.</span>
+
+<span class="sd">An **ideal chain** models a polymer as a simple random walk of :math:`n`</span>
+<span class="sd">freely-jointed segments (Kuhn segments) of length :math:`b`, ignoring</span>
+<span class="sd">excluded volume (the chain can pass through itself) -- exactly realized</span>
+<span class="sd">physically by a real chain at its *theta temperature*, where segment-</span>
+<span class="sd">segment and segment-solvent interactions happen to cancel. Its two</span>
+<span class="sd">headline results are exact consequences of the central-limit theorem</span>
+<span class="sd">applied to a sum of :math:`n` random steps:</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">    \langle R^2\rangle = nb^2, \qquad \langle R_g^2\rangle = \frac{nb^2}{6}</span>
+
+<span class="sd">A **real chain** additionally accounts for excluded volume, and its size</span>
+<span class="sd">scales instead as :math:`R \sim bn^\nu` with a solvent-quality-dependent</span>
+<span class="sd">Flory exponent :math:`\nu`:</span>
+
+<span class="sd">* **theta solvent** (:math:`\nu=1/2`): excluded-volume and solvent</span>
+<span class="sd">  interactions cancel; the chain behaves exactly as an ideal chain.</span>
+<span class="sd">* **good solvent** (:math:`\nu=3/5` by default): the solvent favors</span>
+<span class="sd">  chain-solvent contacts, swelling the chain relative to ideal. This is</span>
+<span class="sd">  Flory's original 1953 mean-field estimate; a more precise</span>
+<span class="sd">  renormalization-group value, :math:`\nu\approx0.588` (de Gennes,</span>
+<span class="sd">  1979), is available separately via</span>
+<span class="sd">  :meth:`RealChain.good_solvent_renormalization_group` for comparison --</span>
+<span class="sd">  the two differ by about 2%.</span>
+<span class="sd">* **poor solvent** (:math:`\nu=1/3`): the solvent favors chain-chain</span>
+<span class="sd">  contacts, collapsing the chain to a dense globule of essentially</span>
+<span class="sd">  constant *density* (: math:`R^3\sim n`, hence :math:`\nu=1/3`).</span>
+
+<span class="sd">**Approximation flagged explicitly**: for a *real* chain (any solvent</span>
+<span class="sd">other than theta), the radius-of-gyration-to-end-to-end-distance ratio</span>
+<span class="sd">used below (:math:`\langle R_g^2\rangle = \langle R^2\rangle/6`) is</span>
+<span class="sd">carried over from the exact ideal-chain result as a scaling-law estimate</span>
+<span class="sd">-- the true prefactor for a self-avoiding walk is solvent- and model-</span>
+<span class="sd">dependent and not exactly 1/6 (Rubinstein &amp; Colby, *op. cit.*, Ch. 3.2);</span>
+<span class="sd">only the ideal-chain (theta-solvent) value is exact.</span>
+<span class="sd">"""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.polymer.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">PolymerChainModel</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"FLORY_EXPONENTS"</span><span class="p">,</span>
+    <span class="s2">"FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP"</span><span class="p">,</span>
+    <span class="s2">"flory_exponent"</span><span class="p">,</span>
+    <span class="s2">"IdealChain"</span><span class="p">,</span>
+    <span class="s2">"RealChain"</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1">#: dict: Standard Flory exponents nu for R ~ b*n**nu, by solvent quality</span>
+<span class="c1">#: (Rubinstein &amp; Colby, *Polymer Physics*, 2003, Table 3.2). "good" is</span>
+<span class="c1">#: Flory's original 1953 mean-field estimate; see</span>
+<span class="c1">#: FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP for the more precise</span>
+<span class="c1">#: renormalization-group value.</span>
+<span class="n">FLORY_EXPONENTS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"theta"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="s2">"good"</span><span class="p">:</span> <span class="mf">3.0</span> <span class="o">/</span> <span class="mf">5.0</span><span class="p">,</span>
+    <span class="s2">"poor"</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1">#: float: The renormalization-group-refined Flory exponent for a good</span>
+<span class="c1">#: solvent in 3D, :math:`\nu\approx0.588` (P.-G. de Gennes, "Exponents</span>
+<span class="c1">#: for the Excluded Volume Problem as Derived by the Wilson Method,"</span>
+<span class="c1">#: Phys. Lett. A 38 (1972), 339-340; J. C. Le Guillou &amp; J. Zinn-Justin,</span>
+<span class="c1">#: Phys. Rev. Lett. 39 (1977), 95), refining Flory's original mean-field</span>
+<span class="c1">#: estimate of exactly 3/5 (FLORY_EXPONENTS["good"]) by less than 2%.</span>
+<span class="n">FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP</span> <span class="o">=</span> <span class="mf">0.588</span>
+
+
+<div class="viewcode-block" id="flory_exponent">
+<a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.flory_exponent">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">flory_exponent</span><span class="p">(</span><span class="n">solvent</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Return the standard Flory scaling exponent :math:`\nu` for a named solvent quality.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    solvent : {"theta", "good", "poor"}</span>
+<span class="sd">        Solvent quality (see the module docstring).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; flory_exponent("theta")</span>
+<span class="sd">    0.5</span>
+<span class="sd">    &gt;&gt;&gt; round(flory_exponent("good"), 3)</span>
+<span class="sd">    0.6</span>
+<span class="sd">    &gt;&gt;&gt; round(flory_exponent("poor"), 4)</span>
+<span class="sd">    0.3333</span>
+<span class="sd">    """</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">FLORY_EXPONENTS</span><span class="p">[</span><span class="n">solvent</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"unknown solvent quality </span><span class="si">{</span><span class="n">solvent</span><span class="si">!r}</span><span class="s2">; expected one of </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="IdealChain">
+<a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.IdealChain">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">IdealChain</span><span class="p">(</span><span class="n">PolymerChainModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""An ideal (theta-solvent) polymer chain: an exact random walk of `n` segments.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    The mean-square end-to-end distance is *exactly* :math:`nb^2`</span>
+<span class="sd">    (Rubinstein &amp; Colby, *Polymer Physics*, 2003, eq. 2.44):</span>
+
+<span class="sd">    &gt;&gt;&gt; chain = IdealChain()</span>
+<span class="sd">    &gt;&gt;&gt; chain.mean_square_end_to_end(n=100, b=0.5)</span>
+<span class="sd">    25.0</span>
+
+<span class="sd">    The radius of gyration is exactly :math:`R/\sqrt{6}`:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; n, b = 200, 0.6</span>
+<span class="sd">    &gt;&gt;&gt; ratio = chain.mean_square_end_to_end(n, b) / chain.mean_square_radius_of_gyration(n, b)</span>
+<span class="sd">    &gt;&gt;&gt; round(float(ratio), 6)</span>
+<span class="sd">    6.0</span>
+
+<span class="sd">    Doubling `n` exactly doubles :math:`\langle R^2\rangle` (linear</span>
+<span class="sd">    scaling, :math:`\nu=1/2` since :math:`R^2\sim n^{2\nu}=n`):</span>
+
+<span class="sd">    &gt;&gt;&gt; chain.mean_square_end_to_end(n=400, b=0.5) / chain.mean_square_end_to_end(n=200, b=0.5)</span>
+<span class="sd">    2.0</span>
+<span class="sd">    """</span>
+
+<div class="viewcode-block" id="IdealChain.mean_square_end_to_end">
+<a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.IdealChain.mean_square_end_to_end">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mean_square_end_to_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="IdealChain.mean_square_radius_of_gyration">
+<a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.IdealChain.mean_square_radius_of_gyration">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mean_square_radius_of_gyration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mf">6.0</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="RealChain">
+<a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RealChain</span><span class="p">(</span><span class="n">PolymerChainModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""A real (excluded-volume) polymer chain: :math:`R = bn^\nu` with Flory exponent `nu`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    nu : float</span>
+<span class="sd">        Flory scaling exponent. Use :meth:`theta_solvent`,</span>
+<span class="sd">        :meth:`good_solvent`, or :meth:`poor_solvent` for the standard</span>
+<span class="sd">        named values rather than passing `nu` directly, unless modeling a</span>
+<span class="sd">        nonstandard solvent quality.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    A real chain in a good solvent is more swollen (larger) than an</span>
+<span class="sd">    ideal chain of the same `n`:</span>
+
+<span class="sd">    &gt;&gt;&gt; ideal = IdealChain()</span>
+<span class="sd">    &gt;&gt;&gt; good = RealChain.good_solvent()</span>
+<span class="sd">    &gt;&gt;&gt; n, b = 1000, 0.5</span>
+<span class="sd">    &gt;&gt;&gt; bool(good.end_to_end_distance(n, b) &gt; ideal.end_to_end_distance(n, b))</span>
+<span class="sd">    True</span>
+
+<span class="sd">    A real chain in a poor solvent is more collapsed (smaller):</span>
+
+<span class="sd">    &gt;&gt;&gt; poor = RealChain.poor_solvent()</span>
+<span class="sd">    &gt;&gt;&gt; bool(poor.end_to_end_distance(n, b) &lt; ideal.end_to_end_distance(n, b))</span>
+<span class="sd">    True</span>
+
+<span class="sd">    At the theta point, :class:`RealChain` reduces exactly to the ideal</span>
+<span class="sd">    chain's end-to-end distance (though not, by construction here, to its</span>
+<span class="sd">    exact radius-of-gyration prefactor -- see the module docstring):</span>
+
+<span class="sd">    &gt;&gt;&gt; theta = RealChain.theta_solvent()</span>
+<span class="sd">    &gt;&gt;&gt; round(float(theta.end_to_end_distance(n, b)), 6) == round(float(ideal.end_to_end_distance(n, b)), 6)</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nu</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">0.0</span> <span class="o">&lt;</span> <span class="n">nu</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"nu must be in (0, 1)"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nu</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">nu</span><span class="p">)</span>
+
+<div class="viewcode-block" id="RealChain.theta_solvent">
+<a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain.theta_solvent">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">theta_solvent</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealChain</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Build a :class:`RealChain` with the theta-solvent Flory exponent (nu=1/2)."""</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">[</span><span class="s2">"theta"</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="RealChain.good_solvent">
+<a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain.good_solvent">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">good_solvent</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealChain</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Build a :class:`RealChain` with Flory's mean-field good-solvent exponent (nu=3/5).</span>
+
+<span class="sd">        See :meth:`good_solvent_renormalization_group` for the more</span>
+<span class="sd">        precise renormalization-group value.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">[</span><span class="s2">"good"</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="RealChain.good_solvent_renormalization_group">
+<a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain.good_solvent_renormalization_group">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">good_solvent_renormalization_group</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealChain</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Build a :class:`RealChain` with the renormalization-group good-solvent exponent (nu ~= 0.588).</span>
+
+<span class="sd">        This is de Gennes' (1979) more precise value, refining Flory's</span>
+<span class="sd">        original mean-field estimate (:meth:`good_solvent`, nu=3/5) by</span>
+<span class="sd">        about 2% -- see the module docstring.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; flory = RealChain.good_solvent()</span>
+<span class="sd">        &gt;&gt;&gt; de_gennes = RealChain.good_solvent_renormalization_group()</span>
+<span class="sd">        &gt;&gt;&gt; relative_difference = abs(flory.nu - de_gennes.nu) / flory.nu</span>
+<span class="sd">        &gt;&gt;&gt; round(float(relative_difference) * 100, 2)</span>
+<span class="sd">        2.0</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RealChain.poor_solvent">
+<a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain.poor_solvent">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">poor_solvent</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealChain</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Build a :class:`RealChain` with the poor-solvent Flory exponent (nu=1/3)."""</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">[</span><span class="s2">"poor"</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="RealChain.mean_square_end_to_end">
+<a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain.mean_square_end_to_end">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mean_square_end_to_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="n">n</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">nu</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="RealChain.mean_square_radius_of_gyration">
+<a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain.mean_square_radius_of_gyration">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mean_square_radius_of_gyration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""See the module docstring: the 1/6 prefactor is an ideal-chain approximation, not exact for real chains."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean_square_end_to_end</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mf">6.0</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, chemistrykit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

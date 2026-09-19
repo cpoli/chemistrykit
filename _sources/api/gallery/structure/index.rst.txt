@@ -1,0 +1,269 @@
+:orphan:
+
+Examples
+========
+
+This gallery walks through every public feature of
+``chemistrykit.structure``: VSEPR geometry prediction with real 3D
+coordinate generation; point-group determination from 3D coordinates
+(genuine symmetry-element detection, not a formula lookup) and character
+tables; bond order from the Pauling length correlation and from
+Huckel-theory MO coefficients; and formal-charge/oxidation-state
+assignment from a Lewis structure.
+
+Each script in this gallery is self-contained and can be run directly with
+``python examples/structure/<section>/<script>.py``. Every script also
+carries an RST module docstring as its title/description and uses ``# %%``
+markers to split narrative text from code, which is exactly what
+Sphinx-Gallery renders into the pages below -- the script *is* the source of
+truth for what you see, not a copy of it.
+
+Sections
+--------
+
+- **vsepr** -- steric number to idealized molecular shape, with real 3D
+  coordinates for methane, water, sulfur tetrafluoride, and xenon
+  tetrafluoride.
+- **point_group** -- symmetry-element detection and point-group
+  classification for water, ammonia, methane, and carbon dioxide.
+- **bonding** -- the Pauling bond-order/bond-length correlation, and the
+  Coulson pi bond order from Huckel molecular-orbital theory.
+- **lewis** -- formal charge and oxidation-state assignment for a handful
+  of classic Lewis-structure examples.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Bond order
+==========
+
+The Pauling bond-order/bond-length correlation, and the Coulson pi bond
+order from Huckel molecular-orbital theory.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Two independent routes to a (generally non-integer) bond order: Pauling&#x27;s empirical bond-length correlation applied to benzene&#x27;s intermediate C-C bond length, and the Coulson bond order computed directly from Huckel molecular-orbital coefficients for the same molecule -- the two independent methods agree that benzene&#x27;s C-C bond order sits between 1 and 2.">
+
+.. only:: html
+
+  .. image:: /api/gallery/structure/bonding/images/thumb/sphx_glr_plot_01_bond_order_correlation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/structure/bonding/plot_01_bond_order_correlation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Bond order: the Pauling length correlation, and the Huckel Coulson bond order</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Formal charge and oxidation state
+===================================
+
+Algorithmic formal-charge and oxidation-state assignment from a Lewis
+structure (connectivity, bond orders, lone pairs) and electronegativity.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Computes formal charges and oxidation states -- two different, both genuinely useful, electron-bookkeeping conventions -- for a handful of classic examples: water, the ammonium and hydronium cations, hydrogen peroxide, and carbon dioxide, using only connectivity, bond orders, lone pairs, and Pauling electronegativities (from chemistrykit.periodic_table).">
+
+.. only:: html
+
+  .. image:: /api/gallery/structure/lewis/images/thumb/sphx_glr_plot_01_formal_charge_oxidation_state_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/structure/lewis/plot_01_formal_charge_oxidation_state`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Formal charge and oxidation state from a Lewis structure</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Point-group determination
+==========================
+
+Genuine symmetry-element detection from 3D coordinates (rotation axes,
+mirror planes, an inversion center), combined into a point-group
+classification, and the corresponding character tables.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Builds each molecule&#x27;s actual 3D geometry, then runs determine_point_group -- which finds rotation axes, mirror planes, and an inversion center by direct geometric testing, not by recognizing the molecular formula -- to recover the textbook point-group assignments C2v, C3v, Td, and D_inf_h.">
+
+.. only:: html
+
+  .. image:: /api/gallery/structure/point_group/images/thumb/sphx_glr_plot_01_point_groups_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/structure/point_group/plot_01_point_groups`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Point-group determination for water, ammonia, methane, and carbon dioxide</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Alfred Werner&#x27;s 1893 coordination theory proposed that a six-coordinate metal complex&#x27;s ligands sit at the vertices of an octahedron around the central atom -- the structural model he supported entirely through painstaking isomer-counting arguments, decades before any direct structural technique existed to see it. Sulfur hexafluoride is a main-group molecule built on exactly that same six-coordinate octahedral skeleton, and its symmetry -- four independent three-fold (C3) body- diagonal axes on top of the three obvious four-fold (C4) axes along the S-F bonds -- makes it the standard worked example for the cubic Oh point group. This also exercises the specific candidate-axis machinery (~chemistrykit.structure.utils.symmetry_ops.candidate_axes&#x27;s three-way position-vector sums) needed to find those body-diagonal C3 axes at all: with the six ligands placed exactly on the cardinal axes, no pairwise combination of two ligand vectors can ever point along a body diagonal such as (1, 1, 1).">
+
+.. only:: html
+
+  .. image:: /api/gallery/structure/point_group/images/thumb/sphx_glr_plot_02_octahedral_symmetry_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/structure/point_group/plot_02_octahedral_symmetry`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Octahedral symmetry: SF6, Werner's six-coordinate complexes, and the Oh character table</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+VSEPR geometry prediction
+==========================
+
+Steric number and lone-pair count to idealized 3D molecular geometry,
+via real electron-domain coordinate generation -- not a shape-name
+lookup table.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Builds four molecules spanning the five idealized electron-domain polyhedra -- methane (AX4E0, tetrahedral), water (AX2E2, bent from a tetrahedral parent), sulfur tetrafluoride (AX4E1, seesaw from a trigonal bipyramidal parent), and xenon tetrafluoride (AX4E2, square planar from an octahedral parent) -- via build_vsepr_molecule, and verifies the exact idealized bond angles each shape predicts.">
+
+.. only:: html
+
+  .. image:: /api/gallery/structure/vsepr/images/thumb/sphx_glr_plot_01_vsepr_geometries_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/structure/vsepr/plot_01_vsepr_geometries`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">VSEPR geometry prediction: from steric number to real 3D coordinates</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Jacobus van&#x27;t Hoff and Joseph Le Bel independently proposed in 1874 that a carbon atom&#x27;s four bonds point toward the vertices of a regular tetrahedron -- and that a carbon bonded to four different substituents therefore has no internal mirror symmetry: its mirror image cannot be superimposed on itself by any rotation, giving two distinct, non- interconvertible molecules (enantiomers). This builds a genuinely tetrahedral AX4 center -- bromochlorofluoromethane, CHFClBr, the textbook minimal chiral carbon -- from domain_positions&#x27;s real 3D vertex coordinates, confirms the exact 109.47-degree bond angles van&#x27;t Hoff and Le Bel&#x27;s model predicts, and then demonstrates the chirality itself numerically: a scalar-triple-product handedness invariant flips sign under reflection but is exactly preserved under any proper rotation (built with rotation_matrix), so no rotation can ever turn the molecule into its own mirror image.">
+
+.. only:: html
+
+  .. image:: /api/gallery/structure/vsepr/images/thumb/sphx_glr_plot_02_tetrahedral_chirality_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/structure/vsepr/plot_02_tetrahedral_chirality`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Van't Hoff and Le Bel's tetrahedral carbon: chirality from real 3D coordinates</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+   :includehidden:
+
+
+   /api/gallery/structure/bonding/index.rst
+   /api/gallery/structure/lewis/index.rst
+   /api/gallery/structure/point_group/index.rst
+   /api/gallery/structure/vsepr/index.rst
+
+
+
+.. only:: html
+
+ .. rst-class:: sphx-glr-signature
+
+    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_

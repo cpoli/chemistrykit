@@ -1,0 +1,1284 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chemistrykit.thermo.systems.equilibrium &#8212; chemistrykit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../../../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/chemistrykit/thermo/systems/equilibrium';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">chemistrykit</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/chemistrykit/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/chemistrykit/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">chemistrykit.thermo.systems.equilibrium</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for chemistrykit.thermo.systems.equilibrium</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Chemical reaction equilibrium: Kp/Kc, Q, van&#39;t Hoff, and Gibbs-energy minimization.</span>
+
+<span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 6 (&quot;Chemical</span>
+<span class="sd">equilibrium&quot;) for the reaction quotient, :math:`K_p`/:math:`K_c`, and the</span>
+<span class="sd">van&#39;t Hoff equation, and Smith, Van Ness &amp; Abbott, *Introduction to</span>
+<span class="sd">Chemical Engineering Thermodynamics*, 7th ed., Ch. 13, for the</span>
+<span class="sd">Gibbs-energy-minimization approach to equilibrium composition used by</span>
+<span class="sd">:func:`solve_equilibrium_composition` below (the standard alternative to</span>
+<span class="sd">solving ``Q = K`` directly, and the one that generalizes cleanly to</span>
+<span class="sd">several simultaneous reaction equilibria).</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">STANDARD_PRESSURE</span><span class="p">,</span> <span class="n">R</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.thermo.utils.regression</span><span class="w"> </span><span class="kn">import</span> <span class="n">linear_fit</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;reaction_quotient&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;kp_from_kc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;kc_from_kp&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;van_t_hoff_equilibrium_constant&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VantHoffFit&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fit_van_t_hoff&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;EquilibriumComposition&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;gibbs_energy_of_mixture&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;solve_equilibrium_composition&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="reaction_quotient">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.reaction_quotient">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">reaction_quotient</span><span class="p">(</span><span class="n">activities</span><span class="p">,</span> <span class="n">stoich_coeffs</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The reaction quotient :math:`Q = \prod_i a_i^{\nu_i}`.</span>
+
+<span class="sd">    `stoich_coeffs` are *signed net* stoichiometric coefficients (positive</span>
+<span class="sd">    for products, negative for reactants), so a reactant with coefficient</span>
+<span class="sd">    :math:`-\nu` contributes :math:`a^{-\nu} = 1/a^{\nu}` to the product,</span>
+<span class="sd">    matching the usual &quot;products over reactants&quot; definition (Atkins &amp; de</span>
+<span class="sd">    Paula, *Physical Chemistry*, 11th ed., Ch. 6.1). `activities` may be</span>
+<span class="sd">    partial pressures relative to the standard pressure (dimensionless,</span>
+<span class="sd">    for :math:`Q_p`) or concentrations relative to a standard</span>
+<span class="sd">    concentration (for :math:`Q_c`); which one determines whether the</span>
+<span class="sd">    result should be compared against :math:`K_p` or :math:`K_c`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    activities : array-like of float</span>
+<span class="sd">        Activity (or activity-like relative pressure/concentration) of</span>
+<span class="sd">        each species.</span>
+<span class="sd">    stoich_coeffs : array-like of float</span>
+<span class="sd">        Signed net stoichiometric coefficient of each species, same</span>
+<span class="sd">        order as `activities`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    For :math:`N_2O_4 \rightleftharpoons 2NO_2`, at the equilibrium mole</span>
+<span class="sd">    fractions corresponding to :math:`Q = K = 4` (i.e. extent</span>
+<span class="sd">    :math:`\xi = \sqrt{K/(4+K)}`, as in</span>
+<span class="sd">    :func:`solve_equilibrium_composition`&#39;s worked example below):</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; xi = np.sqrt(4.0 / 8.0)</span>
+<span class="sd">    &gt;&gt;&gt; x_N2O4, x_NO2 = (1.0 - xi) / (1.0 + xi), 2.0 * xi / (1.0 + xi)</span>
+<span class="sd">    &gt;&gt;&gt; round(float(reaction_quotient([x_N2O4, x_NO2], [-1.0, 2.0])), 3)</span>
+<span class="sd">    4.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">activities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">activities</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">stoich_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">stoich_coeffs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">activities</span><span class="o">**</span><span class="n">stoich_coeffs</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="kp_from_kc">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.kp_from_kc">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">kp_from_kc</span><span class="p">(</span><span class="n">Kc</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">delta_n</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Convert :math:`K_c` to :math:`K_p` via :math:`K_p = K_c(RT)^{\Delta n}`.</span>
+
+<span class="sd">    Valid for reactions among ideal gases, where :math:`\Delta n` is the</span>
+<span class="sd">    change in moles of gas (products minus reactants) (Atkins &amp; de Paula,</span>
+<span class="sd">    *Physical Chemistry*, 11th ed., Ch. 6.2). `Kc` must be expressed in</span>
+<span class="sd">    concentration units consistent with `R_gas` (e.g. mol/m^3 with the SI</span>
+<span class="sd">    `R_gas`, or mol/L with ``R_gas = 0.0831446 L bar / (mol K)``).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Kc : float</span>
+<span class="sd">        Equilibrium constant in terms of concentration.</span>
+<span class="sd">    delta_n : float</span>
+<span class="sd">        Change in moles of gas, products minus reactants.</span>
+<span class="sd">    T : float</span>
+<span class="sd">        Absolute temperature, in K.</span>
+<span class="sd">    R_gas : float, default :data:`chemistrykit.constants.R`</span>
+<span class="sd">        Gas constant, consistent with the concentration units of `Kc`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    With ``delta_n = 0`` (no change in moles of gas), Kp = Kc:</span>
+
+<span class="sd">    &gt;&gt;&gt; round(kp_from_kc(Kc=2.5, delta_n=0.0, T=298.15), 6)</span>
+<span class="sd">    2.5</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">Kc</span> <span class="o">*</span> <span class="p">(</span><span class="n">R_gas</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">**</span> <span class="n">delta_n</span></div>
+
+
+
+<div class="viewcode-block" id="kc_from_kp">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.kc_from_kp">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">kc_from_kp</span><span class="p">(</span><span class="n">Kp</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">delta_n</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Convert :math:`K_p` to :math:`K_c` via :math:`K_c = K_p/(RT)^{\Delta n}` (inverse of :func:`kp_from_kc`).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Kp : float</span>
+<span class="sd">        Equilibrium constant in terms of pressure.</span>
+<span class="sd">    delta_n : float</span>
+<span class="sd">        Change in moles of gas, products minus reactants.</span>
+<span class="sd">    T : float</span>
+<span class="sd">        Absolute temperature, in K.</span>
+<span class="sd">    R_gas : float, default :data:`chemistrykit.constants.R`</span>
+<span class="sd">        Gas constant.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Round-trips with :func:`kp_from_kc`:</span>
+
+<span class="sd">    &gt;&gt;&gt; Kp = kp_from_kc(Kc=1.8, delta_n=1.0, T=350.0)</span>
+<span class="sd">    &gt;&gt;&gt; round(kc_from_kp(Kp, delta_n=1.0, T=350.0), 6)</span>
+<span class="sd">    1.8</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">Kp</span> <span class="o">/</span> <span class="p">(</span><span class="n">R_gas</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">**</span> <span class="n">delta_n</span></div>
+
+
+
+<div class="viewcode-block" id="van_t_hoff_equilibrium_constant">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.van_t_hoff_equilibrium_constant">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">van_t_hoff_equilibrium_constant</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">T_ref</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">K_ref</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">delta_h</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The (integrated) van&#39;t Hoff equation :math:`\ln(K/K_{ref}) = -\Delta H^\circ/R\,(1/T - 1/T_{ref})`.</span>
+
+<span class="sd">    Assumes the standard reaction enthalpy :math:`\Delta H^\circ` is</span>
+<span class="sd">    constant over the temperature range of interest (Atkins &amp; de Paula,</span>
+<span class="sd">    *Physical Chemistry*, 11th ed., Ch. 6.4) -- the same approximation, and</span>
+<span class="sd">    the same functional form, as :class:`chemistrykit.thermo.systems.phase_equilibria.ClausiusClapeyron`</span>
+<span class="sd">    (a coincidence of both following from :math:`d\ln(\cdot)/dT \propto</span>
+<span class="sd">    1/T^2`, one for a phase boundary, the other for an equilibrium</span>
+<span class="sd">    constant).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    T : float or array-like of float</span>
+<span class="sd">        Absolute temperature(s) at which to evaluate `K`, in K.</span>
+<span class="sd">    T_ref : float</span>
+<span class="sd">        Reference temperature at which `K_ref` is known, in K.</span>
+<span class="sd">    K_ref : float</span>
+<span class="sd">        Equilibrium constant at `T_ref`.</span>
+<span class="sd">    delta_h : float</span>
+<span class="sd">        Standard reaction enthalpy, in J/mol (positive for endothermic).</span>
+<span class="sd">    R_gas : float, default :data:`chemistrykit.constants.R`</span>
+<span class="sd">        Gas constant, in J mol^-1 K^-1.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float or ndarray</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    For an endothermic reaction, `K` increases with temperature (Le</span>
+<span class="sd">    Chatelier&#39;s principle):</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; T = np.array([280.0, 300.0, 320.0])</span>
+<span class="sd">    &gt;&gt;&gt; K = van_t_hoff_equilibrium_constant(T, T_ref=298.15, K_ref=1.0, delta_h=50e3)</span>
+<span class="sd">    &gt;&gt;&gt; bool(np.all(np.diff(K) &gt; 0))</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">K_ref</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">delta_h</span> <span class="o">/</span> <span class="n">R_gas</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">T</span> <span class="o">-</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">T_ref</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="VantHoffFit">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.VantHoffFit">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">VantHoffFit</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Result of fitting :math:`\ln K` vs. :math:`1/T` data to the van&#39;t Hoff equation.</span>
+
+<span class="sd">    Since :math:`\ln K = -\Delta H^\circ/(RT) + \Delta S^\circ/R` (Atkins &amp;</span>
+<span class="sd">    de Paula, *Physical Chemistry*, 11th ed., Ch. 6.4, eq. 6.16), the</span>
+<span class="sd">    slope of a plot of :math:`\ln K` against :math:`1/T` gives</span>
+<span class="sd">    :math:`-\Delta H^\circ/R` and the intercept gives</span>
+<span class="sd">    :math:`\Delta S^\circ/R`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">delta_h</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Fitted standard reaction enthalpy, in J/mol.&quot;&quot;&quot;</span>
+
+    <span class="n">delta_s</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Fitted standard reaction entropy, in J mol^-1 K^-1.&quot;&quot;&quot;</span>
+
+    <span class="n">r_squared</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Coefficient of determination of the linear (ln K vs 1/T) fit.&quot;&quot;&quot;</span>
+
+    <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Gas constant used in the fit, in J mol^-1 K^-1.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="VantHoffFit.predict">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.VantHoffFit.predict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the fitted van&#39;t Hoff equation at temperature(s) `T`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        T : float or array-like of float</span>
+<span class="sd">            Absolute temperature(s), in K.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float or ndarray</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">delta_h</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R_gas</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta_s</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">R_gas</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="fit_van_t_hoff">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.fit_van_t_hoff">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fit_van_t_hoff</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VantHoffFit</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fit equilibrium-constant vs. temperature data to the van&#39;t Hoff equation.</span>
+
+<span class="sd">    Linearizes :math:`\ln K = -\Delta H^\circ/R \cdot (1/T) + \Delta</span>
+<span class="sd">    S^\circ/R` and fits by ordinary least squares -- the &quot;van&#39;t Hoff plot&quot;</span>
+<span class="sd">    (Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 6.4),</span>
+<span class="sd">    structurally identical to</span>
+<span class="sd">    :func:`chemistrykit.kinetics.systems.arrhenius.fit_arrhenius`&#39;s</span>
+<span class="sd">    Arrhenius plot.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    T : array-like of float</span>
+<span class="sd">        Absolute temperatures, in K (at least 2 distinct values).</span>
+<span class="sd">    K : array-like of float</span>
+<span class="sd">        Equilibrium constants measured at each temperature in `T`.</span>
+<span class="sd">    R_gas : float, default :data:`chemistrykit.constants.R`</span>
+<span class="sd">        Gas constant, in J mol^-1 K^-1.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    VantHoffFit</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Generate exact data from a known (ΔH°, ΔS°) and recover ΔH°:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; T = np.array([280.0, 300.0, 320.0, 340.0, 360.0])</span>
+<span class="sd">    &gt;&gt;&gt; K_ref, delta_h = 1.0, 45_000.0</span>
+<span class="sd">    &gt;&gt;&gt; K = van_t_hoff_equilibrium_constant(T, T_ref=300.0, K_ref=K_ref, delta_h=delta_h)</span>
+<span class="sd">    &gt;&gt;&gt; fit = fit_van_t_hoff(T, K)</span>
+<span class="sd">    &gt;&gt;&gt; round(fit.delta_h, 2)</span>
+<span class="sd">    45000.0</span>
+<span class="sd">    &gt;&gt;&gt; round(fit.r_squared, 6)</span>
+<span class="sd">    1.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">fit</span> <span class="o">=</span> <span class="n">linear_fit</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">K</span><span class="p">))</span>
+    <span class="n">delta_h</span> <span class="o">=</span> <span class="o">-</span><span class="n">fit</span><span class="o">.</span><span class="n">slope</span> <span class="o">*</span> <span class="n">R_gas</span>
+    <span class="n">delta_s</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">intercept</span> <span class="o">*</span> <span class="n">R_gas</span>
+    <span class="k">return</span> <span class="n">VantHoffFit</span><span class="p">(</span><span class="n">delta_h</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">delta_h</span><span class="p">),</span> <span class="n">delta_s</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">delta_s</span><span class="p">),</span> <span class="n">r_squared</span><span class="o">=</span><span class="n">fit</span><span class="o">.</span><span class="n">r_squared</span><span class="p">,</span> <span class="n">R_gas</span><span class="o">=</span><span class="n">R_gas</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="EquilibriumComposition">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.EquilibriumComposition">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">EquilibriumComposition</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Result of a :func:`solve_equilibrium_composition` call.&quot;&quot;&quot;</span>
+
+    <span class="n">species</span><span class="p">:</span> <span class="nb">tuple</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;tuple of str: Species names, in the order used throughout.&quot;&quot;&quot;</span>
+
+    <span class="n">n</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n_species,): Equilibrium mole amounts.&quot;&quot;&quot;</span>
+
+    <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n_species,): Equilibrium mole fractions.&quot;&quot;&quot;</span>
+
+    <span class="n">extents</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n_reactions,): Equilibrium extent(s) of reaction :math:`\\xi_j`.&quot;&quot;&quot;</span>
+
+    <span class="n">converged</span><span class="p">:</span> <span class="nb">bool</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether the underlying optimizer reported success.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="EquilibriumComposition.moles">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.EquilibriumComposition.moles">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">moles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the equilibrium mole amount of a single named species.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">name</span><span class="p">)])</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="gibbs_energy_of_mixture">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.gibbs_energy_of_mixture">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">gibbs_energy_of_mixture</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">gibbs_formation</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">P</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">STANDARD_PRESSURE</span><span class="p">,</span> <span class="n">P_standard</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">STANDARD_PRESSURE</span><span class="p">,</span> <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Total Gibbs energy of an ideal-gas mixture, :math:`G = \sum_i n_i \mu_i`.</span>
+
+<span class="sd">    Using the ideal-gas chemical potential :math:`\mu_i = \Delta G_{f,i}^\circ</span>
+<span class="sd">    + RT\ln(x_i P/P^\circ)` (Smith, Van Ness &amp; Abbott, *Introduction to</span>
+<span class="sd">    Chemical Engineering Thermodynamics*, 7th ed., Ch. 13.2), where `x_i`</span>
+<span class="sd">    is species `i`&#39;s mole fraction. This is the objective function</span>
+<span class="sd">    minimized by :func:`solve_equilibrium_composition`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    n : array-like of float</span>
+<span class="sd">        Mole amount of each species (must sum to a positive total).</span>
+<span class="sd">    gibbs_formation : array-like of float</span>
+<span class="sd">        Standard Gibbs energy of formation of each species, in J/mol,</span>
+<span class="sd">        same order as `n`.</span>
+<span class="sd">    T : float</span>
+<span class="sd">        Absolute temperature, in K.</span>
+<span class="sd">    P : float, default :data:`chemistrykit.constants.STANDARD_PRESSURE`</span>
+<span class="sd">        Total pressure, in Pa.</span>
+<span class="sd">    P_standard : float, default :data:`chemistrykit.constants.STANDARD_PRESSURE`</span>
+<span class="sd">        Standard-state pressure, in Pa.</span>
+<span class="sd">    R_gas : float, default :data:`chemistrykit.constants.R`</span>
+<span class="sd">        Gas constant, in J mol^-1 K^-1.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Total Gibbs energy, in J.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">gibbs_formation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gibbs_formation</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mf">1e-300</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">/</span> <span class="n">total</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">gibbs_formation</span> <span class="o">+</span> <span class="n">R_gas</span> <span class="o">*</span> <span class="n">T</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">P</span> <span class="o">/</span> <span class="n">P_standard</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">mu</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="solve_equilibrium_composition">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.solve_equilibrium_composition">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">solve_equilibrium_composition</span><span class="p">(</span>
+    <span class="n">species</span><span class="p">,</span>
+    <span class="n">stoich_matrix</span><span class="p">,</span>
+    <span class="n">n0</span><span class="p">,</span>
+    <span class="n">gibbs_formation</span><span class="p">,</span>
+    <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">P</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">STANDARD_PRESSURE</span><span class="p">,</span>
+    <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EquilibriumComposition</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Solve for the equilibrium composition of a reacting ideal-gas mixture.</span>
+
+<span class="sd">    Rather than solving :math:`Q(\xi) = K` algebraically (which gets</span>
+<span class="sd">    unwieldy for several simultaneous reactions), this parameterizes the</span>
+<span class="sd">    feasible mole amounts by the extent(s) of reaction :math:`\xi_j`,</span>
+<span class="sd">    :math:`n_i(\xi) = n_{i,0} + \sum_j \nu_{ij}\xi_j` -- which</span>
+<span class="sd">    automatically satisfies atomic mass balance for any :math:`\xi` -- and</span>
+<span class="sd">    numerically minimizes the total Gibbs energy</span>
+<span class="sd">    :func:`gibbs_energy_of_mixture` over the feasible region</span>
+<span class="sd">    :math:`n_i(\xi) \geq 0`, via SLSQP (Smith, Van Ness &amp; Abbott,</span>
+<span class="sd">    *Introduction to Chemical Engineering Thermodynamics*, 7th ed., Ch.</span>
+<span class="sd">    13.7). At the unconstrained minimum, :math:`dG/d\xi_j = \sum_i</span>
+<span class="sd">    \nu_{ij}\mu_i = \Delta G_{rxn,j} = 0`, which is exactly the classical</span>
+<span class="sd">    :math:`Q_j = K_j` equilibrium condition for every reaction `j` --</span>
+<span class="sd">    Gibbs-energy minimization and root-finding on the equilibrium</span>
+<span class="sd">    constant are the same equilibrium condition, just reached by</span>
+<span class="sd">    different numerical routes.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    species : sequence of str</span>
+<span class="sd">        Ordered species names.</span>
+<span class="sd">    stoich_matrix : array-like, shape (n_species, n_reactions)</span>
+<span class="sd">        Net stoichiometric coefficient of each species in each reaction.</span>
+<span class="sd">    n0 : array-like, shape (n_species,)</span>
+<span class="sd">        Initial (pre-reaction) mole amounts.</span>
+<span class="sd">    gibbs_formation : array-like, shape (n_species,)</span>
+<span class="sd">        Standard Gibbs energy of formation of each species, in J/mol.</span>
+<span class="sd">    T : float</span>
+<span class="sd">        Absolute temperature, in K.</span>
+<span class="sd">    P : float, default :data:`chemistrykit.constants.STANDARD_PRESSURE`</span>
+<span class="sd">        Total pressure, in Pa.</span>
+<span class="sd">    R_gas : float, default :data:`chemistrykit.constants.R`</span>
+<span class="sd">        Gas constant, in J mol^-1 K^-1.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    EquilibriumComposition</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    :math:`N_2O_4 \rightleftharpoons 2NO_2`, choosing standard Gibbs</span>
+<span class="sd">    energies of formation so that :math:`K = \exp(-\Delta G^\circ_{rxn}/RT)</span>
+<span class="sd">    = 4` exactly at 298.15 K (with :math:`\Delta G_f^\circ(N_2O_4) = 0` as</span>
+<span class="sd">    the reference), starting from 1 mol of pure :math:`N_2O_4`. Since</span>
+<span class="sd">    :math:`Q(\xi) = x_{NO_2}^2/x_{N_2O_4} = 4\xi^2/(1-\xi^2)` at :math:`P</span>
+<span class="sd">    = P^\circ`, setting :math:`Q = K` gives the closed-form extent</span>
+<span class="sd">    :math:`\xi = \sqrt{K/(4+K)} = \sqrt{4/8} \approx 0.7071`, which the</span>
+<span class="sd">    Gibbs-minimization solver should reproduce:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; from chemistrykit.constants import R</span>
+<span class="sd">    &gt;&gt;&gt; T = 298.15</span>
+<span class="sd">    &gt;&gt;&gt; K_target = 4.0</span>
+<span class="sd">    &gt;&gt;&gt; delta_g_rxn = -R * T * np.log(K_target)</span>
+<span class="sd">    &gt;&gt;&gt; gibbs_formation = [0.0, delta_g_rxn / 2.0]  # [N2O4, NO2]</span>
+<span class="sd">    &gt;&gt;&gt; result = solve_equilibrium_composition(</span>
+<span class="sd">    ...     species=(&quot;N2O4&quot;, &quot;NO2&quot;),</span>
+<span class="sd">    ...     stoich_matrix=[[-1.0], [2.0]],</span>
+<span class="sd">    ...     n0=[1.0, 0.0],</span>
+<span class="sd">    ...     gibbs_formation=gibbs_formation,</span>
+<span class="sd">    ...     T=T,</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; round(float(result.extents[0]), 4)</span>
+<span class="sd">    0.7071</span>
+<span class="sd">    &gt;&gt;&gt; result.converged</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">stoich</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">stoich_matrix</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">n0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">n0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">gibbs_formation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gibbs_formation</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">n_reactions</span> <span class="o">=</span> <span class="n">stoich</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">n_of_xi</span><span class="p">(</span><span class="n">xi</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">n0</span> <span class="o">+</span> <span class="n">stoich</span> <span class="o">@</span> <span class="n">xi</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">objective</span><span class="p">(</span><span class="n">xi</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">gibbs_energy_of_mixture</span><span class="p">(</span><span class="n">n_of_xi</span><span class="p">(</span><span class="n">xi</span><span class="p">),</span> <span class="n">gibbs_formation</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="n">P</span><span class="p">,</span> <span class="n">R_gas</span><span class="o">=</span><span class="n">R_gas</span><span class="p">)</span>
+
+    <span class="n">constraints</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ineq&quot;</span><span class="p">,</span> <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">xi</span><span class="p">:</span> <span class="n">n_of_xi</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1e-12</span><span class="p">}]</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_reactions</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">constraints</span><span class="p">)</span>
+    <span class="n">n_eq</span> <span class="o">=</span> <span class="n">n_of_xi</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x_eq</span> <span class="o">=</span> <span class="n">n_eq</span> <span class="o">/</span> <span class="n">n_eq</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">EquilibriumComposition</span><span class="p">(</span><span class="n">species</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">species</span><span class="p">),</span> <span class="n">n</span><span class="o">=</span><span class="n">n_eq</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x_eq</span><span class="p">,</span> <span class="n">extents</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">converged</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">success</span><span class="p">))</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, chemistrykit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

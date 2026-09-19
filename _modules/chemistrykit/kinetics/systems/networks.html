@@ -1,0 +1,1204 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chemistrykit.kinetics.systems.networks &#8212; chemistrykit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../../../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/chemistrykit/kinetics/systems/networks';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">chemistrykit</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../api/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../examples/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/chemistrykit/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/kinetics.html">
+    chemistrykit.kinetics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/thermo.html">
+    chemistrykit.thermo
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/solutions.html">
+    chemistrykit.solutions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/md.html">
+    chemistrykit.md
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/statmech.html">
+    chemistrykit.statmech
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/quantum.html">
+    chemistrykit.quantum
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/spectro.html">
+    chemistrykit.spectro
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/structure.html">
+    chemistrykit.structure
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/electrochem.html">
+    chemistrykit.electrochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/photochem.html">
+    chemistrykit.photochem
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/surface.html">
+    chemistrykit.surface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/polymer.html">
+    chemistrykit.polymer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/crystal.html">
+    chemistrykit.crystal
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/analytical.html">
+    chemistrykit.analytical
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/chemistrykit/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">chemistrykit.kinetics.systems.networks</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for chemistrykit.kinetics.systems.networks</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;A general stoichiometry-matrix reaction-network engine.</span>
+
+<span class="sd">:class:`StoichiometricNetwork` models an arbitrary set of elementary</span>
+<span class="sd">mass-action reactions from a stoichiometry matrix and per-reaction rate</span>
+<span class="sd">constants, integrated forward in time via :mod:`chemistrykit.integrators`.</span>
+<span class="sd">For a network of ``R`` reactions among ``N`` species, reaction ``j``&#39;s</span>
+<span class="sd">rate is the mass-action law</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">    \\text{rate}_j = k_j \\prod_i [X_i]^{\\nu_{ij}^{react}}</span>
+
+<span class="sd">(product over each species&#39; *reactant*-side stoichiometric coefficient</span>
+<span class="sd">only) and the net rate of change of species `i` is</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">    \\frac{d[X_i]}{dt} = \\sum_j \\nu_{ij} \\, \\text{rate}_j</span>
+
+<span class="sd">where :math:`\\nu_{ij}` is the (signed, net) stoichiometric coefficient of</span>
+<span class="sd">species `i` in reaction `j` -- see Atkins &amp; de Paula, *Physical</span>
+<span class="sd">Chemistry*, 11th ed., Ch. 20 for the elementary-reaction rate laws this</span>
+<span class="sd">composes, or Espenson, *Chemical Kinetics and Reaction Mechanisms*, 2nd</span>
+<span class="sd">ed., Ch. 4-5 for parallel/consecutive/reversible mechanisms specifically.</span>
+
+<span class="sd">The classmethods below (:meth:`~StoichiometricNetwork.parallel`,</span>
+<span class="sd">:meth:`~StoichiometricNetwork.consecutive`,</span>
+<span class="sd">:meth:`~StoichiometricNetwork.reversible`) build the specific named</span>
+<span class="sd">topologies the mechanism has a closed-form solution for (see the</span>
+<span class="sd">``*_analytic`` functions), so numerical results can be checked against</span>
+<span class="sd">them; the general constructor accepts any stoichiometry matrix.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">njit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.kinetics.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReactionNetwork</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;StoichiometricNetwork&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;consecutive_analytic&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;reversible_analytic&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ssa_intermediate_concentration&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_make_mass_action_rhs</span><span class="p">(</span><span class="n">stoich_matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">rate_constants</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">reactant_orders</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a standalone ``@njit`` mass-action right-hand side.</span>
+
+<span class="sd">    Factory that closes over the network&#39;s structural arrays (its</span>
+<span class="sd">    stoichiometry matrix, rate constants, and reactant orders) and returns</span>
+<span class="sd">    a genuine ``@njit`` dispatcher usable as</span>
+<span class="sd">    :attr:`chemistrykit.kinetics.core.base_system.ReactionNetwork._rhs_njit`</span>
+<span class="sd">    -- the same factory-closure pattern physicskit uses for e.g.</span>
+<span class="sd">    ``physicskit.classical.systems.newtonian._make_force_njit``, needed</span>
+<span class="sd">    because Numba&#39;s nopython mode can only call another genuine njit</span>
+<span class="sd">    dispatcher from inside a compiled function, not a bound Python method.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    stoich_matrix : ndarray, shape (n_species, n_reactions)</span>
+<span class="sd">        Net stoichiometric coefficient of each species in each reaction.</span>
+<span class="sd">    rate_constants : ndarray, shape (n_reactions,)</span>
+<span class="sd">        Rate constant of each reaction.</span>
+<span class="sd">    reactant_orders : ndarray, shape (n_species, n_reactions)</span>
+<span class="sd">        Reactant-side order of each species in each reaction&#39;s mass-action</span>
+<span class="sd">        rate law (0 for a species that is not a reactant in that</span>
+<span class="sd">        reaction).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    callable</span>
+<span class="sd">        ``@njit`` dispatcher ``rhs(state, t, params) -&gt; dstate`` (the</span>
+<span class="sd">        ``params`` argument is accepted, per</span>
+<span class="sd">        :data:`chemistrykit.integrators.RHSFunc`, but unused: every</span>
+<span class="sd">        numeric parameter is already baked into this closure).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">stoich_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">stoich_matrix</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">rate_constants</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">rate_constants</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">reactant_orders</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">reactant_orders</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">n_species</span><span class="p">,</span> <span class="n">n_reactions</span> <span class="o">=</span> <span class="n">stoich_matrix</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">rates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n_reactions</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_reactions</span><span class="p">):</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">rate_constants</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_species</span><span class="p">):</span>
+                <span class="n">order</span> <span class="o">=</span> <span class="n">reactant_orders</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">order</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">:</span>
+                    <span class="n">r</span> <span class="o">*=</span> <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">**</span> <span class="n">order</span>
+            <span class="n">rates</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span>
+        <span class="n">dstate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_species</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_species</span><span class="p">):</span>
+            <span class="n">acc</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_reactions</span><span class="p">):</span>
+                <span class="n">acc</span> <span class="o">+=</span> <span class="n">stoich_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">rates</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">dstate</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">acc</span>
+        <span class="k">return</span> <span class="n">dstate</span>
+
+    <span class="k">return</span> <span class="n">rhs</span>
+
+
+<div class="viewcode-block" id="StoichiometricNetwork">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.StoichiometricNetwork">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">StoichiometricNetwork</span><span class="p">(</span><span class="n">ReactionNetwork</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A network of elementary mass-action reactions, integrated numerically.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    species : sequence of str</span>
+<span class="sd">        Ordered species names.</span>
+<span class="sd">    stoich_matrix : array-like, shape (n_species, n_reactions)</span>
+<span class="sd">        Net stoichiometric coefficient of each species in each reaction</span>
+<span class="sd">        (negative for a net-consumed species, positive for net-produced).</span>
+<span class="sd">    rate_constants : array-like, shape (n_reactions,)</span>
+<span class="sd">        Rate constant of each reaction.</span>
+<span class="sd">    reactant_orders : array-like, shape (n_species, n_reactions)</span>
+<span class="sd">        Reactant-side order of each species in each reaction&#39;s mass-action</span>
+<span class="sd">        rate law (0 for a species that is not a reactant in that</span>
+<span class="sd">        reaction; for an elementary reaction this equals the reactant&#39;s</span>
+<span class="sd">        stoichiometric coefficient, but is given independently so</span>
+<span class="sd">        non-elementary/pseudo-order rate laws can also be modeled).</span>
+<span class="sd">    state0 : array-like, shape (n_species,)</span>
+<span class="sd">        Initial concentrations, in `species` order.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">species</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">stoich_matrix</span><span class="p">,</span>
+        <span class="n">rate_constants</span><span class="p">,</span>
+        <span class="n">reactant_orders</span><span class="p">,</span>
+        <span class="n">state0</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">species</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stoich_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">stoich_matrix</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rate_constants</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rate_constants</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reactant_orders</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">reactant_orders</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rhs_njit</span> <span class="o">=</span> <span class="n">_make_mass_action_rhs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stoich_matrix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rate_constants</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reactant_orders</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">state0</span><span class="p">)</span>
+
+<div class="viewcode-block" id="StoichiometricNetwork.rhs">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.StoichiometricNetwork.rhs">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rhs_njit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="StoichiometricNetwork.parallel">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.StoichiometricNetwork.parallel">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parallel</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">k1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">A0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StoichiometricNetwork</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the parallel (competing) mechanism ``A -&gt; B`` (k1), ``A -&gt; C`` (k2).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k1, k2 : float</span>
+<span class="sd">            First-order rate constants of the two competing channels.</span>
+<span class="sd">        A0 : float</span>
+<span class="sd">            Initial concentration of A.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        StoichiometricNetwork</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        The product ratio [B]/[C] is exactly k1/k2 at every time, the</span>
+<span class="sd">        classic parallel-reaction result (Espenson, *Chemical Kinetics</span>
+<span class="sd">        and Reaction Mechanisms*, 2nd ed., Ch. 4):</span>
+
+<span class="sd">        &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">        &gt;&gt;&gt; net = StoichiometricNetwork.parallel(k1=2.0, k2=1.0, A0=1.0)</span>
+<span class="sd">        &gt;&gt;&gt; result = net.integrate((0.0, 5.0), dt=1e-3, method=&quot;rk4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; round(float(result.concentration(&quot;B&quot;)[-1] / result.concentration(&quot;C&quot;)[-1]), 4)</span>
+<span class="sd">        2.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">stoich</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]</span>
+        <span class="n">orders</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">((</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">),</span> <span class="n">stoich</span><span class="p">,</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">],</span> <span class="n">orders</span><span class="p">,</span> <span class="p">[</span><span class="n">A0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="StoichiometricNetwork.consecutive">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.StoichiometricNetwork.consecutive">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">consecutive</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">k1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">A0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StoichiometricNetwork</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the consecutive (chain) mechanism ``A -&gt; B`` (k1), ``B -&gt; C`` (k2).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k1, k2 : float</span>
+<span class="sd">            First-order rate constants of the two steps.</span>
+<span class="sd">        A0 : float</span>
+<span class="sd">            Initial concentration of A.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        StoichiometricNetwork</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; net = StoichiometricNetwork.consecutive(k1=1.0, k2=0.3, A0=1.0)</span>
+<span class="sd">        &gt;&gt;&gt; result = net.integrate((0.0, 20.0), dt=1e-3, method=&quot;rk4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; round(float(result.concentration(&quot;A&quot;)[-1] + result.concentration(&quot;B&quot;)[-1] + result.concentration(&quot;C&quot;)[-1]), 6)</span>
+<span class="sd">        1.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">stoich</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]</span>
+        <span class="n">orders</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">((</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">),</span> <span class="n">stoich</span><span class="p">,</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">],</span> <span class="n">orders</span><span class="p">,</span> <span class="p">[</span><span class="n">A0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="StoichiometricNetwork.reversible">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.StoichiometricNetwork.reversible">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reversible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">kf</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">kr</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">A0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">B0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StoichiometricNetwork</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the reversible mechanism ``A &lt;-&gt; B`` (forward kf, reverse kr).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        kf, kr : float</span>
+<span class="sd">            Forward and reverse first-order rate constants.</span>
+<span class="sd">        A0, B0 : float</span>
+<span class="sd">            Initial concentrations.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        StoichiometricNetwork</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; net = StoichiometricNetwork.reversible(kf=2.0, kr=1.0, A0=1.0)</span>
+<span class="sd">        &gt;&gt;&gt; result = net.integrate((0.0, 20.0), dt=1e-3, method=&quot;rk4&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; round(float(result.concentration(&quot;A&quot;)[-1]), 3)</span>
+<span class="sd">        0.333</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">stoich</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">]]</span>
+        <span class="n">orders</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">((</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">),</span> <span class="n">stoich</span><span class="p">,</span> <span class="p">[</span><span class="n">kf</span><span class="p">,</span> <span class="n">kr</span><span class="p">],</span> <span class="n">orders</span><span class="p">,</span> <span class="p">[</span><span class="n">A0</span><span class="p">,</span> <span class="n">B0</span><span class="p">])</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="consecutive_analytic">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.consecutive_analytic">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">consecutive_analytic</span><span class="p">(</span><span class="n">A0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Closed-form ``A -&gt; B -&gt; C`` concentrations (Bateman&#39;s equations).</span>
+
+<span class="sd">    See Espenson, *Chemical Kinetics and Reaction Mechanisms*, 2nd ed.,</span>
+<span class="sd">    Ch. 4.2, or the original: H. Bateman, *Proc. Cambridge Philos. Soc.*</span>
+<span class="sd">    15, 423 (1910) (radioactive decay chains have the identical</span>
+<span class="sd">    mathematical structure). The ``k1 != k2`` formula below has a</span>
+<span class="sd">    removable singularity at ``k1 == k2``; the degenerate limit</span>
+<span class="sd">    :math:`[B](t) = A_0 k_1 t\\,e^{-k_1 t}` is used automatically in that</span>
+<span class="sd">    case (obtained by L&#39;Hopital&#39;s rule / directly integrating</span>
+<span class="sd">    :math:`d[B]/dt = k_1[A] - k_1[B]` with equal rate constants).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A0 : float</span>
+<span class="sd">        Initial concentration of A.</span>
+<span class="sd">    k1, k2 : float</span>
+<span class="sd">        Rate constants of ``A -&gt; B`` and ``B -&gt; C`` respectively.</span>
+<span class="sd">    t : float or array-like of float</span>
+<span class="sd">        Time(s) at which to evaluate the concentrations.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A, B, C : float or ndarray</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Mass balance holds exactly at every time:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; A, B, C = consecutive_analytic(A0=1.0, k1=1.0, k2=0.3, t=np.array([0.0, 1.0, 5.0, 20.0]))</span>
+<span class="sd">    &gt;&gt;&gt; np.allclose(A + B + C, 1.0)</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">A0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">k1</span> <span class="o">==</span> <span class="n">k2</span><span class="p">:</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">A0</span> <span class="o">*</span> <span class="n">k1</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">A0</span> <span class="o">*</span> <span class="n">k1</span> <span class="o">/</span> <span class="p">(</span><span class="n">k2</span> <span class="o">-</span> <span class="n">k1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k2</span> <span class="o">*</span> <span class="n">t</span><span class="p">))</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">A0</span> <span class="o">-</span> <span class="n">A</span> <span class="o">-</span> <span class="n">B</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span></div>
+
+
+
+<div class="viewcode-block" id="ssa_intermediate_concentration">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.ssa_intermediate_concentration">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">ssa_intermediate_concentration</span><span class="p">(</span><span class="n">A0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Steady-state-approximation (SSA) estimate of the intermediate [B].</span>
+
+<span class="sd">    When the second step is much faster than the first (:math:`k_2 \gg</span>
+<span class="sd">    k_1`), the intermediate B is consumed almost as fast as it forms, so</span>
+<span class="sd">    :math:`d[B]/dt \approx 0` at all times after a brief induction period</span>
+<span class="sd">    -- the steady-state approximation (Espenson, *Chemical Kinetics and</span>
+<span class="sd">    Reaction Mechanisms*, 2nd ed., Ch. 5.1). Applying it to</span>
+<span class="sd">    :math:`d[B]/dt = k_1[A] - k_2[B] = 0` gives</span>
+<span class="sd">    :math:`[B]_{ssa} = (k_1/k_2)[A](t) = (k_1/k_2) A_0 e^{-k_1 t}`, which</span>
+<span class="sd">    should agree closely with :func:`consecutive_analytic`&#39;s exact</span>
+<span class="sd">    :math:`[B](t)` whenever :math:`k_2/k_1` is large.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A0 : float</span>
+<span class="sd">        Initial concentration of A.</span>
+<span class="sd">    k1, k2 : float</span>
+<span class="sd">        Rate constants of ``A -&gt; B`` and ``B -&gt; C`` respectively.</span>
+<span class="sd">    t : float or array-like of float</span>
+<span class="sd">        Time(s) at which to evaluate the approximation.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float or ndarray</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    The SSA error shrinks as k2/k1 grows:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; t = np.linspace(0.5, 10.0, 50)</span>
+<span class="sd">    &gt;&gt;&gt; errs = []</span>
+<span class="sd">    &gt;&gt;&gt; for k2 in (2.0, 10.0, 100.0):</span>
+<span class="sd">    ...     _, B_exact, _ = consecutive_analytic(A0=1.0, k1=1.0, k2=k2, t=t)</span>
+<span class="sd">    ...     B_ssa = ssa_intermediate_concentration(A0=1.0, k1=1.0, k2=k2, t=t)</span>
+<span class="sd">    ...     errs.append(np.max(np.abs(B_exact - B_ssa)))</span>
+<span class="sd">    &gt;&gt;&gt; bool(errs[0] &gt; errs[1] &gt; errs[2])</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">k1</span> <span class="o">/</span> <span class="n">k2</span><span class="p">)</span> <span class="o">*</span> <span class="n">A0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="reversible_analytic">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.reversible_analytic">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">reversible_analytic</span><span class="p">(</span><span class="n">A0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">kf</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">kr</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">B0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Closed-form ``A &lt;-&gt; B`` relaxation to equilibrium.</span>
+
+<span class="sd">    For :math:`d[A]/dt = -k_f[A] + k_r[B]` with :math:`[A]+[B] = A_0+B_0`</span>
+<span class="sd">    conserved, the solution relaxes exponentially to equilibrium with</span>
+<span class="sd">    relaxation rate :math:`k_f + k_r` (Atkins &amp; de Paula, *Physical</span>
+<span class="sd">    Chemistry*, 11th ed., Ch. 20.4):</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        [A](t) = [A]_{eq} + ([A]_0 - [A]_{eq}) e^{-(k_f+k_r)t}, \quad</span>
+<span class="sd">        [A]_{eq} = \frac{k_r ([A]_0+[B]_0)}{k_f+k_r}</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A0 : float</span>
+<span class="sd">        Initial concentration of A.</span>
+<span class="sd">    kf, kr : float</span>
+<span class="sd">        Forward and reverse rate constants.</span>
+<span class="sd">    t : float or array-like of float</span>
+<span class="sd">        Time(s) at which to evaluate the concentrations.</span>
+<span class="sd">    B0 : float</span>
+<span class="sd">        Initial concentration of B.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A, B : float or ndarray</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; A, B = reversible_analytic(A0=1.0, kf=2.0, kr=1.0, t=1e6)</span>
+<span class="sd">    &gt;&gt;&gt; round(float(A), 3), round(float(B), 3)</span>
+<span class="sd">    (0.333, 0.667)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">A0</span> <span class="o">+</span> <span class="n">B0</span>
+    <span class="n">A_eq</span> <span class="o">=</span> <span class="n">kr</span> <span class="o">*</span> <span class="n">total</span> <span class="o">/</span> <span class="p">(</span><span class="n">kf</span> <span class="o">+</span> <span class="n">kr</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">A_eq</span> <span class="o">+</span> <span class="p">(</span><span class="n">A0</span> <span class="o">-</span> <span class="n">A_eq</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">kf</span> <span class="o">+</span> <span class="n">kr</span><span class="p">)</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">total</span> <span class="o">-</span> <span class="n">A</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, chemistrykit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

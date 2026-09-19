@@ -1,0 +1,1758 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>chemistrykit.spectro &#8212; chemistrykit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/spectro';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="chemistrykit.statmech" href="statmech.html" />
+    <link rel="prev" title="chemistrykit.solutions" href="solutions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/chemistrykit_logo_transparent.png" class="logo__image only-light" alt="chemistrykit logo"/>
+    <img src="../_static/chemistrykit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="chemistrykit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="analytical.html">chemistrykit.analytical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crystal.html">chemistrykit.crystal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electrochem.html">chemistrykit.electrochem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinetics.html">chemistrykit.kinetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="md.html">chemistrykit.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photochem.html">chemistrykit.photochem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polymer.html">chemistrykit.polymer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quantum.html">chemistrykit.quantum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions.html">chemistrykit.solutions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">chemistrykit.spectro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmech.html">chemistrykit.statmech</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">chemistrykit.structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surface.html">chemistrykit.surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermo.html">chemistrykit.thermo</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">chemistrykit.spectro</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="chemistrykit-spectro">
+<h1>chemistrykit.spectro<a class="headerlink" href="#chemistrykit-spectro" title="Link to this heading">#</a></h1>
+<div class="subpkg-nav docutils container">
+<p><a class="reference internal" href="../_generated/subpackages/spectro.html"><span class="doc">chemistrykit.spectro hub</span></a> · <a class="reference internal" href="../history/spectro_breakthroughs.html"><span class="doc">History</span></a> · <a class="reference internal" href="gallery/spectro/index.html"><span class="doc">Examples</span></a> · <a class="reference internal" href="#"><span class="doc">API reference</span></a></p>
+</div>
+<p id="module-chemistrykit.spectro">chemistrykit.spectro: spectroscopy.</p>
+<p>The Beer-Lambert absorbance law and one well-characterized instrumental
+deviation from its linearity (stray light); rigid-rotor rotational
+spectra with <span class="math notranslate nohighlight">\(\Delta J=\pm1\)</span> selection rules and isotope shifts,
+built on <code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.quantum.systems.rigid_rotor</span></code>; harmonic vs.
+Morse (anharmonic) vibrational band positions, built on
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.quantum.systems.harmonic_oscillator</span></code>, plus a genuine
+triatomic normal-mode calculation via the Wilson GF-matrix method;
+Franck-Condon vibronic progressions for electronic (UV-Vis) spectra; a
+first-order NMR multiplet simulator (chemical shifts and J-coupling
+splitting patterns); and Lorentzian/Gaussian/Voigt lineshape utilities
+shared across all of the above.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.spectro.NormalModeResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">NormalModeResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavenumbers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal_coordinate_vectors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_linear</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/vibrational.html#NormalModeResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.NormalModeResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The output of <a class="reference internal" href="#chemistrykit.spectro.TriatomicNormalModes.solve" title="chemistrykit.spectro.TriatomicNormalModes.solve"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TriatomicNormalModes.solve()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wavenumbers</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>internal_coordinate_vectors</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>is_linear</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.spectro.NormalModeResult.internal_coordinate_vectors">
+<span class="sig-name descname"><span class="pre">internal_coordinate_vectors</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.spectro.NormalModeResult.internal_coordinate_vectors" title="Link to this definition">#</a></dt>
+<dd><p>Column <cite>k</cite> gives mode <cite>k</cite>’s displacement
+pattern in the (r1, r2, bend) internal-coordinate basis (see
+<a class="reference internal" href="#chemistrykit.spectro.TriatomicNormalModes" title="chemistrykit.spectro.TriatomicNormalModes"><code class="xref py py-class docutils literal notranslate"><span class="pre">TriatomicNormalModes</span></code></a>), useful for classifying a mode as
+(anti)symmetric stretch or bend by inspection of the relative signs
+and magnitudes of its <cite>r1</cite>/<cite>r2</cite> components.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (3, 3)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.spectro.NormalModeResult.is_linear">
+<span class="sig-name descname"><span class="pre">is_linear</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#chemistrykit.spectro.NormalModeResult.is_linear" title="Link to this definition">#</a></dt>
+<dd><p>Whether the equilibrium geometry is linear (in which case
+the computed bend mode is one member of a doubly degenerate pair –
+see <a class="reference internal" href="#chemistrykit.spectro.TriatomicNormalModes" title="chemistrykit.spectro.TriatomicNormalModes"><code class="xref py py-class docutils literal notranslate"><span class="pre">TriatomicNormalModes</span></code></a>’s docstring).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.spectro.NormalModeResult.wavenumbers">
+<span class="sig-name descname"><span class="pre">wavenumbers</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.spectro.NormalModeResult.wavenumbers" title="Link to this definition">#</a></dt>
+<dd><p>Normal-mode wavenumbers, in cm^-1, ascending.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (3,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.spectro.Spectrum">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">Spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">positions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/core/base_system.html#Spectrum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.Spectrum" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A discrete “stick” spectrum: peak positions and relative intensities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>positions</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Peak positions (e.g. wavenumber in cm^-1, or chemical shift in
+ppm – the unit is model-specific and documented by whichever
+function constructs the <cite>Spectrum</cite>).</p></li>
+<li><p><strong>intensities</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Relative intensity (peak area) of each position, same order as
+<cite>positions</cite>.</p></li>
+<li><p><strong>labels</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span>) – Human-readable label for each peak (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;J=0-&gt;1&quot;</span></code>).</p></li>
+<li><p><strong>extra</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – Free-form slot for additional diagnostics a model chooses to
+attach.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spectrum</span> <span class="o">=</span> <span class="n">Spectrum</span><span class="p">(</span><span class="n">positions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">200.0</span><span class="p">]),</span> <span class="n">intensities</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">3001</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">broadened</span> <span class="o">=</span> <span class="n">spectrum</span><span class="o">.</span><span class="n">broaden</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s2">"gaussian"</span><span class="p">,</span> <span class="n">fwhm</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">broadened</span><span class="p">,</span> <span class="n">x</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">1.5</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.spectro.Spectrum.broaden">
+<span class="sig-name descname"><span class="pre">broaden</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gaussian'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwhm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwhm_lorentzian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/core/base_system.html#Spectrum.broaden"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.Spectrum.broaden" title="Link to this definition">#</a></dt>
+<dd><p>Broaden every stick into a continuous spectrum via <code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.spectro.utils.lineshapes.broaden_stick_spectrum()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Grid to evaluate the broadened spectrum on.</p></li>
+<li><p><strong>shape</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>)</p></li>
+<li><p><strong>fwhm</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>fwhm_lorentzian</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Required for <cite>shape=”voigt”</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape matching <cite>x</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.spectro.Spectrum.extra">
+<span class="sig-name descname"><span class="pre">extra</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span><a class="headerlink" href="#chemistrykit.spectro.Spectrum.extra" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.spectro.Spectrum.intensities">
+<span class="sig-name descname"><span class="pre">intensities</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.spectro.Spectrum.intensities" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.spectro.Spectrum.labels">
+<span class="sig-name descname"><span class="pre">labels</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#chemistrykit.spectro.Spectrum.labels" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.spectro.Spectrum.normalized">
+<span class="sig-name descname"><span class="pre">normalized</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/core/base_system.html#Spectrum.normalized"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.Spectrum.normalized" title="Link to this definition">#</a></dt>
+<dd><p>Return a copy with intensities rescaled so the maximum is 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.spectro.Spectrum" title="chemistrykit.spectro.core.base_system.Spectrum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Spectrum</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Spectrum</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">spectrum</span> <span class="o">=</span> <span class="n">Spectrum</span><span class="p">(</span><span class="n">positions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]),</span> <span class="n">intensities</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spectrum</span><span class="o">.</span><span class="n">normalized</span><span class="p">()</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">[1.0, 0.5]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.spectro.Spectrum.positions">
+<span class="sig-name descname"><span class="pre">positions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.spectro.Spectrum.positions" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.spectro.TriatomicNormalModes">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">TriatomicNormalModes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">masses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equilibrium_coordinates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_r1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_r2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_theta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/vibrational.html#TriatomicNormalModes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.TriatomicNormalModes" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Normal-mode vibrational frequencies of an A-B-A triatomic, via the Wilson GF-matrix method.</p>
+<p>A genuine (not tabulated) normal-mode calculation: an internal-
+coordinate force field is combined with the molecule’s actual
+equilibrium geometry and atomic masses through Wilson’s <cite>G</cite> (kinetic
+energy) and <cite>F</cite> (force constant) matrices, and the resulting
+generalized eigenvalue problem is solved for the true normal-mode
+frequencies (Wilson, Decius &amp; Cross, <em>Molecular Vibrations</em>, 1955,
+Ch. 4). Three internal coordinates are used: the two bond stretches
+<span class="math notranslate nohighlight">\(r_1\)</span>, <span class="math notranslate nohighlight">\(r_2\)</span>, and the bond angle (or, for a linear
+equilibrium geometry, a linearized bend coordinate – see below).</p>
+<p><strong>The `G` matrix</strong> (mass-weighted, purely geometric) is built here
+<em>numerically</em>: the Wilson B-matrix,
+<span class="math notranslate nohighlight">\(B_{ki}=\partial S_k/\partial x_i\)</span> (internal coordinate <cite>k</cite>
+with respect to Cartesian displacement <cite>i</cite>), is obtained by central
+finite differences of the internal-coordinate functions, then
+<span class="math notranslate nohighlight">\(G=BM^{-1}B^T\)</span> with <cite>M</cite> the diagonal atomic-mass matrix – an
+exact numerical evaluation of the standard analytic B-matrix
+formulas, not an independent approximation.</p>
+<p><strong>The `F` matrix</strong> is a simple (diagonal) valence force field:
+<span class="math notranslate nohighlight">\(F=\mathrm{diag}(k_{r_1},k_{r_2},k_\theta)\)</span>, with <em>no</em>
+stretch-stretch or stretch-bend interaction constants. <strong>Flagged as
+an approximation</strong>: a full experimental force field for a real
+molecule (e.g. CO2, H2O) generally does include small off-diagonal
+interaction terms, fit to reproduce observed frequencies to high
+precision; the diagonal approximation used here still gives the
+correct qualitative mode pattern (symmetric stretch, antisymmetric
+stretch, bend) and the right order of magnitude for reasonable
+literature-typical <cite>k_r</cite>/<cite>k_theta</cite>, but not spectroscopic-accuracy
+absolute wavenumbers.</p>
+<p><strong>Linear equilibrium geometries</strong> (<cite>is_linear=True</cite>) need a bend
+coordinate that stays well-defined exactly at 180 degrees, where the
+ordinary <span class="math notranslate nohighlight">\(\theta=\arccos(\dots)\)</span> bond-angle formula’s
+derivative diverges. The standard fix (Wilson, Decius &amp; Cross, Ch.
+4) is used: the bend coordinate is instead the linearized transverse
+(in-plane) displacement combination
+<span class="math notranslate nohighlight">\(S_{\text{bend}}=(x_0-2x_1+x_2)/r_{eq}\)</span>, well-defined at
+exactly linear. A linear triatomic’s bend is genuinely doubly
+degenerate (in-plane and out-of-plane bending are equivalent by the
+molecule’s cylindrical symmetry); this module solves only the
+in-plane 3-internal-coordinate problem, so the reported bend
+wavenumber should be understood as representing <em>both</em> degenerate
+components (Herzberg, <em>Molecular Spectra and Molecular Structure
+II</em>, 1945, Ch. I.3).</p>
+<p>The resulting symmetric generalized eigenvalue problem, <cite>GFL=L\Lambda</cite>,
+is solved here as the equivalent symmetric form
+<span class="math notranslate nohighlight">\(Fc=\lambda G^{-1}c\)</span> via
+<code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.quantum.utils.secular_equation.solve_secular_equation()</span></code>
+(with <cite>F</cite> playing the role of the Hamiltonian and <span class="math notranslate nohighlight">\(G^{-1}\)</span> the
+role of the overlap matrix) – reusing the same shared-eigenvalue-
+solve machinery <a class="reference internal" href="quantum.html#module-chemistrykit.quantum" title="chemistrykit.quantum"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.quantum</span></code></a>’s variational models use,
+since both are literally the same kind of generalized symmetric
+eigenproblem, <span class="math notranslate nohighlight">\(\lambda=\omega^2\)</span> in SI units, converted to a
+wavenumber via <span class="math notranslate nohighlight">\(\tilde\nu=\omega/(2\pi c)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>masses</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>shape</em><em> (</em><em>3</em><em>,</em><em>)</em>) – Atomic masses (atom0, central atom1, atom2), in kg.</p></li>
+<li><p><strong>equilibrium_coordinates</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>shape</em><em> (</em><em>3</em><em>, </em><em>3</em><em>)</em>) – Cartesian equilibrium coordinates, in meters.</p></li>
+<li><p><strong>k_r1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Stretch force constants for bonds (atom0-atom1) and
+(atom2-atom1), in N/m.</p></li>
+<li><p><strong>k_r2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Stretch force constants for bonds (atom0-atom1) and
+(atom2-atom1), in N/m.</p></li>
+<li><p><strong>k_theta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Bend force constant, in J/rad^2 (equivalently N m/rad^2).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>See <a class="reference internal" href="#chemistrykit.spectro.TriatomicNormalModes.linear" title="chemistrykit.spectro.TriatomicNormalModes.linear"><code class="xref py py-meth docutils literal notranslate"><span class="pre">linear()</span></code></a> and <a class="reference internal" href="#chemistrykit.spectro.TriatomicNormalModes.bent" title="chemistrykit.spectro.TriatomicNormalModes.bent"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bent()</span></code></a> for the usual way to construct
+one; <a class="reference internal" href="#chemistrykit.spectro.TriatomicNormalModes.solve" title="chemistrykit.spectro.TriatomicNormalModes.solve"><code class="xref py py-meth docutils literal notranslate"><span class="pre">solve()</span></code></a> returns three positive wavenumbers for a stable
+equilibrium geometry.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.spectro.TriatomicNormalModes.bent">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">bent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass_terminal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass_central</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_angle_degrees</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_theta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/vibrational.html#TriatomicNormalModes.bent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.TriatomicNormalModes.bent" title="Link to this definition">#</a></dt>
+<dd><p>Build a symmetric bent A-B-A triatomic (e.g. H2O-like) in the <cite>xz</cite> plane.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mass_terminal</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Mass of each terminal atom (A), in kg.</p></li>
+<li><p><strong>mass_central</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Mass of the central atom (B), in kg.</p></li>
+<li><p><strong>bond_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Equilibrium A-B bond length, in meters.</p></li>
+<li><p><strong>bond_angle_degrees</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Equilibrium A-B-A bond angle, in degrees (&lt; 180).</p></li>
+<li><p><strong>k_r</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Shared stretch force constant for both bonds, in N/m.</p></li>
+<li><p><strong>k_theta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Bend force constant, in J/rad^2.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.spectro.TriatomicNormalModes" title="chemistrykit.spectro.systems.vibrational.TriatomicNormalModes"><code class="xref py py-class docutils literal notranslate"><span class="pre">TriatomicNormalModes</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>TriatomicNormalModes</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.spectro.TriatomicNormalModes.linear">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">linear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass_terminal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass_central</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_theta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/vibrational.html#TriatomicNormalModes.linear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.TriatomicNormalModes.linear" title="Link to this definition">#</a></dt>
+<dd><p>Build a symmetric linear A-B-A triatomic (e.g. CO2-like) along the <cite>z</cite> axis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mass_terminal</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Mass of each terminal atom (A), in kg.</p></li>
+<li><p><strong>mass_central</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Mass of the central atom (B), in kg.</p></li>
+<li><p><strong>bond_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Equilibrium A-B bond length, in meters.</p></li>
+<li><p><strong>k_r</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Shared stretch force constant for both bonds, in N/m.</p></li>
+<li><p><strong>k_theta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Bend force constant, in J/rad^2.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.spectro.TriatomicNormalModes" title="chemistrykit.spectro.systems.vibrational.TriatomicNormalModes"><code class="xref py py-class docutils literal notranslate"><span class="pre">TriatomicNormalModes</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>TriatomicNormalModes</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.spectro.TriatomicNormalModes.solve">
+<span class="sig-name descname"><span class="pre">solve</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/vibrational.html#TriatomicNormalModes.solve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.TriatomicNormalModes.solve" title="Link to this definition">#</a></dt>
+<dd><p>Diagonalize the GF-matrix eigenproblem and return the normal-mode wavenumbers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.spectro.NormalModeResult" title="chemistrykit.spectro.systems.vibrational.NormalModeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">NormalModeResult</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>NormalModeResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A bent triatomic (H2O-like) has 3 real, positive vibrational
+wavenumbers, with the bend lower in energy than either stretch –
+the correct qualitative ordering for a real bent AX2 molecule:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy.constants</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">TriatomicNormalModes</span><span class="o">.</span><span class="n">bent</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">mass_terminal</span><span class="o">=</span><span class="mf">1.008</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">atomic_mass</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">mass_central</span><span class="o">=</span><span class="mf">15.999</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">atomic_mass</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">bond_length</span><span class="o">=</span><span class="mf">95.8e-12</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">bond_angle_degrees</span><span class="o">=</span><span class="mf">104.5</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">k_r</span><span class="o">=</span><span class="mf">770.0</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">k_theta</span><span class="o">=</span><span class="mf">0.7e-18</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">water</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">wavenumbers</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">wavenumbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">result</span><span class="o">.</span><span class="n">wavenumbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">result</span><span class="o">.</span><span class="n">wavenumbers</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.absorbance">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">absorbance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">molar_absorptivity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concentration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_length</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/beer_lambert.html#absorbance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.absorbance" title="Link to this definition">#</a></dt>
+<dd><p>The Beer-Lambert law: <span class="math notranslate nohighlight">\(A=\varepsilon c l\)</span>.</p>
+<p>Linear in concentration by construction – the exact relationship
+assumed to hold for a dilute, non-interacting, monochromatic-light
+measurement (Skoog, Holler &amp; Crouch, <em>Principles of Instrumental
+Analysis</em>, 7th ed., Ch. 13.2). See
+<a class="reference internal" href="#chemistrykit.spectro.apparent_absorbance_with_stray_light" title="chemistrykit.spectro.apparent_absorbance_with_stray_light"><code class="xref py py-func docutils literal notranslate"><span class="pre">apparent_absorbance_with_stray_light()</span></code></a> for one well-known real
+instrumental effect that breaks this linearity at high absorbance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>molar_absorptivity</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Molar absorptivity <span class="math notranslate nohighlight">\(\varepsilon\)</span>, in L mol^-1 cm^-1.</p></li>
+<li><p><strong>concentration</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Concentration <cite>c</cite>, in mol/L.</p></li>
+<li><p><strong>path_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Path length <cite>l</cite>, in cm.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Absorbance (dimensionless).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">absorbance</span><span class="p">(</span><span class="n">molar_absorptivity</span><span class="o">=</span><span class="mf">5000.0</span><span class="p">,</span> <span class="n">concentration</span><span class="o">=</span><span class="mf">2.0e-5</span><span class="p">,</span> <span class="n">path_length</span><span class="o">=</span><span class="mf">1.0</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">absorbance</span><span class="p">(</span><span class="mf">5000.0</span><span class="p">,</span> <span class="mf">4.0e-5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">==</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">absorbance</span><span class="p">(</span><span class="mf">5000.0</span><span class="p">,</span> <span class="mf">2.0e-5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.anharmonicity_from_overtones">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">anharmonicity_from_overtones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavenumber_01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavenumber_02</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/vibrational.html#anharmonicity_from_overtones"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.anharmonicity_from_overtones" title="Link to this definition">#</a></dt>
+<dd><p>Recover the Morse parameters <span class="math notranslate nohighlight">\(\omega_e\)</span>, <span class="math notranslate nohighlight">\(\omega_ex_e\)</span> from two measured band positions.</p>
+<p>The Morse-oscillator term-value formula gives the fundamental and
+first-overtone wavenumbers as</p>
+<div class="math notranslate nohighlight">
+\[\tilde\nu_{0\to1} = \omega_e - 2\omega_ex_e, \qquad
+\tilde\nu_{0\to2} = 2\omega_e - 6\omega_ex_e\]</div>
+<p>(Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed., Ch. 12.4;
+Herzberg, <em>Molecular Spectra and Molecular Structure I</em>, 2nd ed., Ch.
+III), a linear system solved here exactly (no fitting) for the two
+spectroscopic constants <span class="math notranslate nohighlight">\(\omega_e\)</span> (the harmonic wavenumber)
+and <span class="math notranslate nohighlight">\(\omega_ex_e\)</span> (the anharmonicity constant) from two
+observed transitions – the standard way real vibrational
+anharmonicity constants are extracted from an observed overtone
+spectrum.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wavenumber_01</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Observed <span class="math notranslate nohighlight">\(0\to1\)</span> (fundamental) wavenumber, in cm^-1.</p></li>
+<li><p><strong>wavenumber_02</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Observed <span class="math notranslate nohighlight">\(0\to2\)</span> (first overtone) wavenumber, in cm^-1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>omega_e</strong> (<em>float</em>) – Harmonic wavenumber, in cm^-1.</p></li>
+<li><p><strong>omega_e_xe</strong> (<em>float</em>) – Anharmonicity constant, in cm^-1.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Round-trip against a <a class="reference internal" href="quantum.html#chemistrykit.quantum.MorseOscillator" title="chemistrykit.quantum.systems.harmonic_oscillator.MorseOscillator"><code class="xref py py-class docutils literal notranslate"><span class="pre">MorseOscillator</span></code></a>
+built from known <cite>omega_e</cite>/<cite>omega_e_xe</cite>-equivalent parameters
+recovers them from its own predicted band positions:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">morse</span> <span class="o">=</span> <span class="n">MorseOscillator</span><span class="p">(</span><span class="n">mass</span><span class="o">=</span><span class="mf">1.6e-27</span><span class="p">,</span> <span class="n">force_constant</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span> <span class="n">dissociation_energy</span><span class="o">=</span><span class="mf">7.0e-19</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nu01</span><span class="p">,</span> <span class="n">nu02</span> <span class="o">=</span> <span class="n">morse_transition_wavenumbers</span><span class="p">(</span><span class="n">morse</span><span class="p">,</span> <span class="n">v_max</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">omega_e</span><span class="p">,</span> <span class="n">omega_e_xe</span> <span class="o">=</span> <span class="n">anharmonicity_from_overtones</span><span class="p">(</span><span class="n">nu01</span><span class="p">,</span> <span class="n">nu02</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">omega_e</span> <span class="o">&gt;</span> <span class="n">nu01</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># the harmonic wavenumber exceeds the (red-shifted) observed fundamental</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">omega_e_xe</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.apparent_absorbance_with_stray_light">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">apparent_absorbance_with_stray_light</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">molar_absorptivity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concentration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stray_light_fraction</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/beer_lambert.html#apparent_absorbance_with_stray_light"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.apparent_absorbance_with_stray_light" title="Link to this definition">#</a></dt>
+<dd><p>The <em>apparent</em> absorbance measured in the presence of instrumental stray light.</p>
+<p><strong>Approximation flagged explicitly</strong>: real Beer-Lambert-law deviations
+at high concentration have several distinct physical origins (a
+concentration-dependent chemical equilibrium shifting the true
+absorbing species’ concentration, use of polychromatic rather than
+strictly monochromatic radiation, and instrumental stray light);
+this function models only the last of those, one specific,
+well-characterized, purely instrumental effect (Skoog, Holler &amp;
+Crouch, <em>Principles of Instrumental Analysis</em>, 7th ed., Ch. 13.4).</p>
+<p>A small fraction <span class="math notranslate nohighlight">\(p_s\)</span> of the light reaching the detector is
+“stray” radiation that never actually passed through the fully
+absorbing sample path (e.g. light scattered around the sample cell),
+so it is <em>not</em> attenuated by the sample the way the main beam is.
+The detector reads the combined transmitted-plus-stray intensity, so
+the apparent absorbance is</p>
+<div class="math notranslate nohighlight">
+\[A_{\text{apparent}} = -\log_{10}\!\left(10^{-A_{\text{true}}} + p_s\right)\]</div>
+<p>(normalized so that at <cite>stray_light_fraction=0</cite>, or in the dilute
+limit <span class="math notranslate nohighlight">\(A_{\text{true}}\to0\)</span>, this reduces exactly to the true
+Beer-Lambert absorbance). Because the stray-light term does not
+shrink as the sample absorbs more strongly, it dominates the
+detector reading at high true absorbance, causing the classic
+<em>negative</em> (sublinear, “rolling over”) deviation from Beer-Lambert
+linearity seen in real instruments at high concentration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>molar_absorptivity</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – In L mol^-1 cm^-1.</p></li>
+<li><p><strong>concentration</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – In mol/L.</p></li>
+<li><p><strong>path_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – In cm.</p></li>
+<li><p><strong>stray_light_fraction</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Fraction of incident intensity that reaches the detector as
+stray light, <span class="math notranslate nohighlight">\(p_s\in[0,1)\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – Apparent absorbance, always <span class="math notranslate nohighlight">\(\le A_{\text{true}}\)</span>.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <cite>stray_light_fraction</cite> is not in <span class="math notranslate nohighlight">\([0, 1)\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>With no stray light, the apparent absorbance is exactly the true one:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">apparent_absorbance_with_stray_light</span><span class="p">(</span><span class="mf">5000.0</span><span class="p">,</span> <span class="mf">2.0e-5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">stray_light_fraction</span><span class="o">=</span><span class="mf">0.0</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.1</span>
+</pre></div>
+</div>
+<p>At low concentration (low true absorbance) the deviation is
+negligible, but it grows sharply at high concentration – Beer-
+Lambert linearity breaks down exactly where the textbook warns it
+does:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">low</span> <span class="o">=</span> <span class="n">apparent_absorbance_with_stray_light</span><span class="p">(</span><span class="mf">5000.0</span><span class="p">,</span> <span class="mf">1.0e-6</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">stray_light_fraction</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">low_true</span> <span class="o">=</span> <span class="n">absorbance</span><span class="p">(</span><span class="mf">5000.0</span><span class="p">,</span> <span class="mf">1.0e-6</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">high</span> <span class="o">=</span> <span class="n">apparent_absorbance_with_stray_light</span><span class="p">(</span><span class="mf">5000.0</span><span class="p">,</span> <span class="mf">1.0e-3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">stray_light_fraction</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">high_true</span> <span class="o">=</span> <span class="n">absorbance</span><span class="p">(</span><span class="mf">5000.0</span><span class="p">,</span> <span class="mf">1.0e-3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">low</span> <span class="o">-</span> <span class="n">low_true</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">high</span> <span class="o">-</span> <span class="n">high_true</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.broaden_stick_spectrum">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">broaden_stick_spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">centers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gaussian'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwhm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwhm_lorentzian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/utils/lineshapes.html#broaden_stick_spectrum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.broaden_stick_spectrum" title="Link to this definition">#</a></dt>
+<dd><p>Sum a lineshape over every (center, intensity) stick to build a continuous spectrum.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>centers</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Peak positions.</p></li>
+<li><p><strong>intensities</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Relative intensity (area) of each peak, same length as <cite>centers</cite>.</p></li>
+<li><p><strong>x</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Grid to evaluate the broadened spectrum on.</p></li>
+<li><p><strong>shape</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Lineshape to use for every peak.</p></li>
+<li><p><strong>fwhm</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – FWHM (or the Gaussian-component FWHM, for <cite>shape=”voigt”</cite>).</p></li>
+<li><p><strong>fwhm_lorentzian</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Lorentzian-component FWHM, required (and only used) for
+<cite>shape=”voigt”</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>ndarray, shape matching <cite>x</cite></p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – For an unrecognized <cite>shape</cite>, or a missing <cite>fwhm_lorentzian</cite> when
+    <cite>shape=”voigt”</cite>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A single stick recovers the plain lineshape function, scaled by its
+intensity:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">501</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spectrum</span> <span class="o">=</span> <span class="n">broaden_stick_spectrum</span><span class="p">([</span><span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">],</span> <span class="n">x</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s2">"gaussian"</span><span class="p">,</span> <span class="n">fwhm</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">spectrum</span><span class="p">,</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.concentration_from_absorbance">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">concentration_from_absorbance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">absorbance_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molar_absorptivity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_length</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/beer_lambert.html#concentration_from_absorbance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.concentration_from_absorbance" title="Link to this definition">#</a></dt>
+<dd><p>Invert the Beer-Lambert law for concentration: <span class="math notranslate nohighlight">\(c=A/(\varepsilon l)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>absorbance_value</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>molar_absorptivity</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – In L mol^-1 cm^-1.</p></li>
+<li><p><strong>path_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – In cm.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Concentration, in mol/L.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">concentration_from_absorbance</span><span class="p">(</span><span class="n">absorbance_value</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">molar_absorptivity</span><span class="o">=</span><span class="mf">5000.0</span><span class="p">,</span> <span class="n">path_length</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="go">2e-05</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.energy_to_wavenumber">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">energy_to_wavenumber</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/rotational.html#energy_to_wavenumber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.energy_to_wavenumber" title="Link to this definition">#</a></dt>
+<dd><p>Convert an energy (in J) to a spectroscopic wavenumber <span class="math notranslate nohighlight">\(\tilde\nu=E/(hc)\)</span>, in cm^-1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>energy_j</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">energy_to_wavenumber</span><span class="p">(</span><span class="n">H</span> <span class="o">*</span> <span class="n">C</span> <span class="o">*</span> <span class="mf">100.0</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.first_order_multiplet">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">first_order_multiplet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chemical_shift_ppm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j_coupling_hz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_neighbors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spectrometer_frequency_mhz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/nmr.html#first_order_multiplet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.first_order_multiplet" title="Link to this definition">#</a></dt>
+<dd><p>Simulate a simple multiplet from coupling to one set of <cite>n</cite> equivalent neighbors.</p>
+<p>Line positions are evenly spaced by <span class="math notranslate nohighlight">\(J/\nu_0\)</span> in ppm (<cite>J</cite> in Hz
+converted to ppm by dividing by the spectrometer frequency in MHz,
+since 1 ppm on the chemical-shift scale corresponds to
+<span class="math notranslate nohighlight">\(\nu_0\,[\text{Hz}]/10^6\)</span> at operating frequency
+<span class="math notranslate nohighlight">\(\nu_0\)</span>), symmetric about <cite>chemical_shift_ppm</cite>, with the
+Pascal’s-triangle relative intensities from
+<a class="reference internal" href="#chemistrykit.spectro.pascals_triangle_intensities" title="chemistrykit.spectro.pascals_triangle_intensities"><code class="xref py py-func docutils literal notranslate"><span class="pre">pascals_triangle_intensities()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chemical_shift_ppm</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Unperturbed chemical shift, in ppm.</p></li>
+<li><p><strong>j_coupling_hz</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Coupling constant <cite>J</cite>, in Hz.</p></li>
+<li><p><strong>n_neighbors</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of equivalent coupled neighbors.</p></li>
+<li><p><strong>spectrometer_frequency_mhz</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Spectrometer (proton, or whichever nucleus) operating frequency,
+in MHz – needed to convert <cite>J</cite> from Hz to the ppm scale.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.spectro.Spectrum" title="chemistrykit.spectro.core.base_system.Spectrum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Spectrum</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Spectrum</em> – <cite>positions</cite> in ppm, <cite>intensities</cite> the relative (unnormalized)
+binomial line intensities.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A triplet, symmetric about the chemical shift, spaced by <cite>J</cite>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">spectrum</span> <span class="o">=</span> <span class="n">first_order_multiplet</span><span class="p">(</span><span class="n">chemical_shift_ppm</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">j_coupling_hz</span><span class="o">=</span><span class="mf">7.0</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">spectrometer_frequency_mhz</span><span class="o">=</span><span class="mf">400.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">spectrum</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">spectrum</span><span class="o">.</span><span class="n">positions</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spectrum</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">[1.0, 2.0, 1.0]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.franck_condon_factor">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">franck_condon_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/electronic.html#franck_condon_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.franck_condon_factor" title="Link to this definition">#</a></dt>
+<dd><p>The <span class="math notranslate nohighlight">\(0\to v\)</span> Franck-Condon factor for two displaced, equal-frequency harmonic oscillators.</p>
+<div class="math notranslate nohighlight">
+\[\text{FC}(0\to v) = \frac{e^{-S}S^v}{v!}\]</div>
+<p>(a Poisson distribution in <cite>v</cite> with mean <cite>S</cite>; see the module
+docstring for the underlying approximation).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Final-state vibrational quantum number, &gt;= 0.</p></li>
+<li><p><strong>S</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Huang-Rhys parameter, &gt;= 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – In <span class="math notranslate nohighlight">\([0, 1]\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Zero displacement (<cite>S=0</cite>) puts all intensity in the <cite>0-&gt;0</cite> transition
+(no vibronic structure at all):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">franck_condon_factor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="mf">0.0</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">franck_condon_factor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="mf">0.0</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.franck_condon_progression">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">franck_condon_progression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/electronic.html#franck_condon_progression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.franck_condon_progression" title="Link to this definition">#</a></dt>
+<dd><p>Tabulate the Franck-Condon factors for <span class="math notranslate nohighlight">\(v=0,1,\dots,v_{max}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v_max</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>S</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Huang-Rhys parameter.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (v_max + 1,)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>The Franck-Condon factors are (approximately) a complete probability
+distribution over the final vibrational level, so they sum to
+(approximately) 1 once <cite>v_max</cite> comfortably exceeds the Poisson
+distribution’s mean <cite>S</cite> – the required normalization check for any
+genuine Franck-Condon calculation:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">franck_condon_progression</span><span class="p">(</span><span class="n">v_max</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="mf">3.0</span><span class="p">))),</span> <span class="mi">9</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>The most probable (highest-intensity) vibronic transition lands near
+<span class="math notranslate nohighlight">\(v'\approx S\)</span> – the qualitative rule of thumb for reading off
+a vibronic progression’s displacement from its band shape:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">progression</span> <span class="o">=</span> <span class="n">franck_condon_progression</span><span class="p">(</span><span class="n">v_max</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">progression</span><span class="p">))</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.franck_condon_spectrum">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">franck_condon_spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin_wavenumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vibrational_wavenumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_max</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/electronic.html#franck_condon_spectrum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.franck_condon_spectrum" title="Link to this definition">#</a></dt>
+<dd><p>Build a vibronic-progression <a class="reference internal" href="#chemistrykit.spectro.Spectrum" title="chemistrykit.spectro.core.base_system.Spectrum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Spectrum</span></code></a>.</p>
+<p>Stick positions are the electronic origin (the <span class="math notranslate nohighlight">\(0\to0\)</span>
+transition) plus <cite>v’</cite> quanta of the <em>excited-state</em> vibrational
+wavenumber; stick intensities are the corresponding Franck-Condon
+factors (Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed., Ch.
+12.7(b)).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>origin_wavenumber</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – The <span class="math notranslate nohighlight">\(0\to0\)</span> (electronic origin) transition wavenumber, in
+cm^-1.</p></li>
+<li><p><strong>vibrational_wavenumber</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Excited-state vibrational spacing, in cm^-1.</p></li>
+<li><p><strong>S</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Huang-Rhys parameter.</p></li>
+<li><p><strong>v_max</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Highest excited-state vibrational level to include.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.spectro.Spectrum" title="chemistrykit.spectro.core.base_system.Spectrum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Spectrum</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Spectrum</em> – <cite>positions</cite> in cm^-1, <cite>intensities</cite> the Franck-Condon factors.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">spectrum</span> <span class="o">=</span> <span class="n">franck_condon_spectrum</span><span class="p">(</span><span class="n">origin_wavenumber</span><span class="o">=</span><span class="mf">25000.0</span><span class="p">,</span> <span class="n">vibrational_wavenumber</span><span class="o">=</span><span class="mf">1500.0</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">v_max</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">spectrum</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">25000.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">spectrum</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">spectrum</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">1500.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.gaussian">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">gaussian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwhm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/utils/lineshapes.html#gaussian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.gaussian" title="Link to this definition">#</a></dt>
+<dd><p>A normalized Gaussian lineshape.</p>
+<div class="math notranslate nohighlight">
+\[g(x) = \frac{2}{\text{FWHM}}\sqrt{\frac{\ln 2}{\pi}}
+       \exp\!\left[-4\ln 2\left(\frac{x-x_0}{\text{FWHM}}\right)^2\right]\]</div>
+<p>Normalized so <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty}g(x)\,dx=1\)</span> (Hollas,
+<em>Modern Spectroscopy</em>, 4th ed., Ch. 2.3).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Evaluation point(s).</p></li>
+<li><p><strong>x0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Peak center.</p></li>
+<li><p><strong>fwhm</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Full width at half maximum, same units as <cite>x</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>The peak height at <cite>x0</cite> and the normalization both follow the
+closed-form prefactor:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expected_peak</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">gaussian</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">fwhm</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">expected_peak</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">200001</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">gaussian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">fwhm</span><span class="o">=</span><span class="mf">2.0</span><span class="p">),</span> <span class="n">x</span><span class="p">)),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.harmonic_fundamental_wavenumber">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">harmonic_fundamental_wavenumber</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force_constant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduced_mass</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/vibrational.html#harmonic_fundamental_wavenumber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.harmonic_fundamental_wavenumber" title="Link to this definition">#</a></dt>
+<dd><p>The harmonic-oscillator fundamental (<span class="math notranslate nohighlight">\(v=0\to1\)</span>) IR band position.</p>
+<div class="math notranslate nohighlight">
+\[\tilde\nu = \frac{1}{2\pi c}\sqrt{\frac{k}{\mu}}\]</div>
+<p>Every harmonic-oscillator transition sits at exactly this same
+wavenumber (evenly spaced levels), unlike the Morse oscillator’s
+overtones (Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed., Ch.
+12.4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>force_constant</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Bond force constant <cite>k</cite>, in N/m.</p></li>
+<li><p><strong>reduced_mass</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Vibrational reduced mass, in kg.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – Wavenumber, in cm^-1.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy.constants</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mu</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.008</span> <span class="o">*</span> <span class="mf">34.97</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.008</span> <span class="o">+</span> <span class="mf">34.97</span><span class="p">)</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">atomic_mass</span>  <span class="c1"># HCl-like reduced mass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nu</span> <span class="o">=</span> <span class="n">harmonic_fundamental_wavenumber</span><span class="p">(</span><span class="n">force_constant</span><span class="o">=</span><span class="mf">480.0</span><span class="p">,</span> <span class="n">reduced_mass</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="mf">2500.0</span> <span class="o">&lt;</span> <span class="n">nu</span> <span class="o">&lt;</span> <span class="mf">3200.0</span><span class="p">)</span>  <span class="c1"># HCl's real fundamental is 2886 cm^-1</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.huang_rhys_factor">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">huang_rhys_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">displacement</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angular_frequency</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/electronic.html#huang_rhys_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.huang_rhys_factor" title="Link to this definition">#</a></dt>
+<dd><p>The dimensionless Huang-Rhys displacement parameter <span class="math notranslate nohighlight">\(S=\frac12\frac{m\omega}{\hbar}\Delta Q^2\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>displacement</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Excited-minus-ground-state equilibrium displacement along the
+normal coordinate, <span class="math notranslate nohighlight">\(\Delta Q\)</span>, in m (for a mass-weighted
+coordinate) or the natural length unit of the coordinate used.</p></li>
+<li><p><strong>mass</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Oscillator (reduced) mass, in kg.</p></li>
+<li><p><strong>angular_frequency</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Shared vibrational angular frequency <span class="math notranslate nohighlight">\(\omega\)</span>, in rad/s.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">huang_rhys_factor</span><span class="p">(</span><span class="n">displacement</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">mass</span><span class="o">=</span><span class="mf">1.6e-27</span><span class="p">,</span> <span class="n">angular_frequency</span><span class="o">=</span><span class="mf">5.0e13</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.isotope_shift_ratio">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">isotope_shift_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass1a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass1b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/rotational.html#isotope_shift_ratio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.isotope_shift_ratio" title="Link to this definition">#</a></dt>
+<dd><p>Ratio of rotational constants (and transition wavenumbers) between two isotopologues.</p>
+<p>Substituting atom 1 (e.g. H) for a heavier isotope (e.g. D) changes
+only the reduced mass <span class="math notranslate nohighlight">\(\mu=m_1m_2/(m_1+m_2)\)</span>, and the
+rotational constant <span class="math notranslate nohighlight">\(B\propto1/I=1/(\mu r^2)\)</span> scales inversely
+with it (bond length <cite>r</cite> is, to a very good approximation, unchanged
+by isotopic substitution, since it depends on the electronic
+structure, not the nuclear mass – the Born-Oppenheimer
+approximation). So</p>
+<div class="math notranslate nohighlight">
+\[\frac{B(\text{isotopologue }b)}{B(\text{isotopologue }a)}
+= \frac{\mu_a}{\mu_b}\]</div>
+<p>(Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed., Ch. 12.3). Every
+rotational transition wavenumber scales by this same ratio, since
+they are all proportional to <cite>B</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mass1a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Mass of the lighter isotope of the substituted atom (e.g. H), in
+any consistent unit.</p></li>
+<li><p><strong>mass2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Mass of the <em>other</em> (unsubstituted) atom, same units.</p></li>
+<li><p><strong>mass1b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Mass of the heavier isotope of the substituted atom (e.g. D),
+same units.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – <span class="math notranslate nohighlight">\(B_b/B_a\)</span> (and <span class="math notranslate nohighlight">\(\tilde\nu_b/\tilde\nu_a\)</span>), <cite>&lt; 1</cite>
+since substituting a heavier isotope increases the reduced mass
+and moment of inertia, lowering <cite>B</cite>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Substituting D for H in HCl roughly halves the rotational constant
+(deuterium is about twice as heavy as hydrogen, and Cl is much
+heavier than either, so the reduced mass roughly doubles):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy.constants</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ratio</span> <span class="o">=</span> <span class="n">isotope_shift_ratio</span><span class="p">(</span><span class="n">mass1a</span><span class="o">=</span><span class="mf">1.008</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">atomic_mass</span><span class="p">,</span> <span class="n">mass2</span><span class="o">=</span><span class="mf">34.97</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">atomic_mass</span><span class="p">,</span> <span class="n">mass1b</span><span class="o">=</span><span class="mf">2.014</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">atomic_mass</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="mf">0.45</span> <span class="o">&lt;</span> <span class="n">ratio</span> <span class="o">&lt;</span> <span class="mf">0.55</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Directly matches a from-scratch <a class="reference internal" href="quantum.html#chemistrykit.quantum.RigidRotor" title="chemistrykit.quantum.systems.rigid_rotor.RigidRotor"><code class="xref py py-class docutils literal notranslate"><span class="pre">RigidRotor</span></code></a>
+comparison:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="mf">127.5e-12</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rotor_hcl</span> <span class="o">=</span> <span class="n">RigidRotor</span><span class="o">.</span><span class="n">from_diatomic</span><span class="p">(</span><span class="mf">1.008</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">atomic_mass</span><span class="p">,</span> <span class="mf">34.97</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">atomic_mass</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rotor_dcl</span> <span class="o">=</span> <span class="n">RigidRotor</span><span class="o">.</span><span class="n">from_diatomic</span><span class="p">(</span><span class="mf">2.014</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">atomic_mass</span><span class="p">,</span> <span class="mf">34.97</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">atomic_mass</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ratio_direct</span> <span class="o">=</span> <span class="n">rotor_dcl</span><span class="o">.</span><span class="n">rotational_constant</span> <span class="o">/</span> <span class="n">rotor_hcl</span><span class="o">.</span><span class="n">rotational_constant</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">ratio_direct</span> <span class="o">-</span> <span class="n">ratio</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-9</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.lorentzian">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">lorentzian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwhm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/utils/lineshapes.html#lorentzian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.lorentzian" title="Link to this definition">#</a></dt>
+<dd><p>A normalized Lorentzian lineshape.</p>
+<div class="math notranslate nohighlight">
+\[L(x) = \frac{1}{\pi}\frac{\text{FWHM}/2}{(x-x_0)^2+(\text{FWHM}/2)^2}\]</div>
+<p>Normalized so <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty}L(x)\,dx=1\)</span> (Hollas,
+<em>Modern Spectroscopy</em>, 4th ed., Ch. 2.3).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>x0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Peak center.</p></li>
+<li><p><strong>fwhm</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Full width at half maximum, same units as <cite>x</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">4_000_001</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">lorentzian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">fwhm</span><span class="o">=</span><span class="mf">2.0</span><span class="p">),</span> <span class="n">x</span><span class="p">)),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>By definition, the value has dropped to half its peak at
+<span class="math notranslate nohighlight">\(x_0\pm\text{FWHM}/2\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">peak</span> <span class="o">=</span> <span class="n">lorentzian</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">fwhm</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">half_max_point</span> <span class="o">=</span> <span class="n">lorentzian</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">fwhm</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">half_max_point</span><span class="p">),</span> <span class="mi">9</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">peak</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.morse_transition_wavenumbers">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">morse_transition_wavenumbers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">morse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_max</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/vibrational.html#morse_transition_wavenumbers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.morse_transition_wavenumbers" title="Link to this definition">#</a></dt>
+<dd><p>Wavenumbers of the <span class="math notranslate nohighlight">\(0\to v\)</span> Morse-oscillator “overtone” transitions, <span class="math notranslate nohighlight">\(v=1,\dots,v_{max}\)</span>.</p>
+<p>Unlike the harmonic oscillator, successive Morse transitions
+(fundamental <span class="math notranslate nohighlight">\(0\to1\)</span>, first overtone <span class="math notranslate nohighlight">\(0\to2\)</span>, …) are
+<em>not</em> simple multiples of each other – the level spacing shrinks
+with <cite>v</cite> (Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed., Ch.
+12.4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>morse</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="quantum.html#chemistrykit.quantum.MorseOscillator" title="chemistrykit.quantum.systems.harmonic_oscillator.MorseOscillator"><code class="xref py py-class docutils literal notranslate"><span class="pre">MorseOscillator</span></code></a></span>)</p></li>
+<li><p><strong>v_max</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Highest final vibrational level to include.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (v_max,)</em> – Wavenumbers of the <span class="math notranslate nohighlight">\(0\to1,0\to2,\dots,0\to v_{max}\)</span>
+transitions, in cm^-1.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>The first overtone (<span class="math notranslate nohighlight">\(0\to2\)</span>) falls short of exactly twice the
+fundamental (<span class="math notranslate nohighlight">\(0\to1\)</span>) – the textbook anharmonicity signature:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">morse</span> <span class="o">=</span> <span class="n">MorseOscillator</span><span class="p">(</span><span class="n">mass</span><span class="o">=</span><span class="mf">1.6e-27</span><span class="p">,</span> <span class="n">force_constant</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span> <span class="n">dissociation_energy</span><span class="o">=</span><span class="mf">7.0e-19</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wavenumbers</span> <span class="o">=</span> <span class="n">morse_transition_wavenumbers</span><span class="p">(</span><span class="n">morse</span><span class="p">,</span> <span class="n">v_max</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">wavenumbers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">wavenumbers</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.multi_coupling_multiplet">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">multi_coupling_multiplet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chemical_shift_ppm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">couplings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spectrometer_frequency_mhz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/nmr.html#multi_coupling_multiplet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.multi_coupling_multiplet" title="Link to this definition">#</a></dt>
+<dd><p>Simulate a multiplet from independent first-order coupling to several <em>inequivalent</em> neighbor sets.</p>
+<p>Each coupling constant splits every line already present (the
+couplings act independently and multiplicatively), giving
+<span class="math notranslate nohighlight">\(\prod_k(n_k+1)\)</span> lines in the general case (fewer if some
+coincide) – e.g. a doublet of triplets (dt) from one neighbor with
+<span class="math notranslate nohighlight">\(J_1\)</span> and two equivalent neighbors with <span class="math notranslate nohighlight">\(J_2\ne J_1\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chemical_shift_ppm</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Unperturbed chemical shift, in ppm.</p></li>
+<li><p><strong>couplings</strong> (<em>sequence</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>)</em>) – <cite>(J_hz, n_equivalent_neighbors)</cite> for each independent coupling
+partner set.</p></li>
+<li><p><strong>spectrometer_frequency_mhz</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.spectro.Spectrum" title="chemistrykit.spectro.core.base_system.Spectrum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Spectrum</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Spectrum</em> – <cite>positions</cite> in ppm (sorted ascending), <cite>intensities</cite> the combined
+relative intensities (coincident positions within numerical
+tolerance are merged, summing their intensities).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A doublet of doublets (dd) with equal J’s degenerates into a triplet
+with 1:2:1 intensities (two different coupling partners with the
+same <cite>J</cite> are indistinguishable from one set of two equivalent
+partners):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">spectrum</span> <span class="o">=</span> <span class="n">multi_coupling_multiplet</span><span class="p">(</span><span class="n">chemical_shift_ppm</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">couplings</span><span class="o">=</span><span class="p">[(</span><span class="mf">7.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mf">7.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span> <span class="n">spectrometer_frequency_mhz</span><span class="o">=</span><span class="mf">400.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">spectrum</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spectrum</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">[1.0, 2.0, 1.0]</span>
+</pre></div>
+</div>
+<p>A genuine doublet of triplets (<span class="math notranslate nohighlight">\(J_1=12\)</span> Hz to one neighbor,
+<span class="math notranslate nohighlight">\(J_2=5\)</span> Hz to two equivalent neighbors) has 6 distinct lines:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">multi_coupling_multiplet</span><span class="p">(</span><span class="n">chemical_shift_ppm</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">couplings</span><span class="o">=</span><span class="p">[(</span><span class="mf">12.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span> <span class="n">spectrometer_frequency_mhz</span><span class="o">=</span><span class="mf">400.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">intensities</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">8.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.multiplicity">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">multiplicity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_equivalent_neighbors</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/nmr.html#multiplicity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.multiplicity" title="Link to this definition">#</a></dt>
+<dd><p>The n+1 rule: <cite>n</cite> equivalent spin-1/2 neighbors split a resonance into <cite>n+1</cite> lines.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n_equivalent_neighbors</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of magnetically equivalent, spin-1/2, first-order-coupled
+neighboring nuclei.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Ethanol’s -CH2- protons, coupled to the 3 equivalent -CH3- protons,
+form a quartet:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">multiplicity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.pascals_triangle_intensities">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">pascals_triangle_intensities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_equivalent_neighbors</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/nmr.html#pascals_triangle_intensities"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.pascals_triangle_intensities" title="Link to this definition">#</a></dt>
+<dd><p>Relative line intensities for <cite>n</cite> equivalent spin-1/2 neighbors: the binomial coefficients <span class="math notranslate nohighlight">\(\binom{n}{k}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n_equivalent_neighbors</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (n_equivalent_neighbors + 1,)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A quartet’s classic 1:3:3:1 intensity pattern (e.g. ethanol’s CH2,
+coupled to 3 equivalent CH3 protons):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pascals_triangle_intensities</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">array([1., 3., 3., 1.])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.rotational_line_wavenumbers">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">rotational_line_wavenumbers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rotor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J_max</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/rotational.html#rotational_line_wavenumbers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.rotational_line_wavenumbers" title="Link to this definition">#</a></dt>
+<dd><p>Wavenumbers of the <span class="math notranslate nohighlight">\(J\to J+1\)</span> rotational absorption lines, <span class="math notranslate nohighlight">\(J=0,\dots,J_{max}\)</span>.</p>
+<p>Each line sits at <span class="math notranslate nohighlight">\(\tilde\nu_J=2B(J+1)\)</span> (in wavenumber units),
+evenly spaced by <span class="math notranslate nohighlight">\(2B\)</span> – the defining signature of a rigid-
+rotor rotational spectrum (Atkins &amp; de Paula, <em>Physical Chemistry</em>,
+11th ed., Ch. 12.2).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rotor</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="quantum.html#chemistrykit.quantum.RigidRotor" title="chemistrykit.quantum.systems.rigid_rotor.RigidRotor"><code class="xref py py-class docutils literal notranslate"><span class="pre">RigidRotor</span></code></a></span>)</p></li>
+<li><p><strong>J_max</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Highest initial <cite>J</cite> to include.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (J_max + 1,)</em> – Wavenumbers, in cm^-1.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy.constants</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rotor</span> <span class="o">=</span> <span class="n">RigidRotor</span><span class="o">.</span><span class="n">from_diatomic</span><span class="p">(</span><span class="n">mass1</span><span class="o">=</span><span class="mf">1.008</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">atomic_mass</span><span class="p">,</span> <span class="n">mass2</span><span class="o">=</span><span class="mf">34.97</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">atomic_mass</span><span class="p">,</span> <span class="n">bond_length</span><span class="o">=</span><span class="mf">127.5e-12</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span> <span class="o">=</span> <span class="n">rotational_line_wavenumbers</span><span class="p">(</span><span class="n">rotor</span><span class="p">,</span> <span class="n">J_max</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spacings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">spacings</span><span class="p">,</span> <span class="n">spacings</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.rotational_spectrum">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">rotational_spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rotor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/rotational.html#rotational_spectrum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.rotational_spectrum" title="Link to this definition">#</a></dt>
+<dd><p>Build a rotational-spectrum <a class="reference internal" href="#chemistrykit.spectro.Spectrum" title="chemistrykit.spectro.core.base_system.Spectrum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Spectrum</span></code></a>, with relative intensities.</p>
+<p><strong>Approximation flagged explicitly</strong>: the relative intensity of the
+<span class="math notranslate nohighlight">\(J\to J+1\)</span> line is modeled here as proportional to the thermal
+(Boltzmann) population of the initial level <cite>J</cite>, weighted by its
+<span class="math notranslate nohighlight">\((2J+1)\)</span>-fold degeneracy, times a <span class="math notranslate nohighlight">\((J+1)\)</span> line-strength
+factor coming from the <span class="math notranslate nohighlight">\(\Delta J=\pm1\)</span> transition-dipole matrix
+element (Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed., Ch.
+12.2(b)):</p>
+<div class="math notranslate nohighlight">
+\[I_J \propto (J+1)(2J+1)\exp\!\left[-\frac{E_J}{k_BT}\right]\]</div>
+<p>This reproduces the qualitative textbook feature of a rotational
+spectrum – intensity rising from <cite>J=0</cite>, peaking at some intermediate
+<cite>J</cite>, then falling off – but is not a first-principles transition-
+dipole calculation for any particular real molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rotor</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="quantum.html#chemistrykit.quantum.RigidRotor" title="chemistrykit.quantum.systems.rigid_rotor.RigidRotor"><code class="xref py py-class docutils literal notranslate"><span class="pre">RigidRotor</span></code></a></span>)</p></li>
+<li><p><strong>J_max</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Highest initial <cite>J</cite> to include.</p></li>
+<li><p><strong>temperature</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Temperature, in K, for the Boltzmann population weighting.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.spectro.Spectrum" title="chemistrykit.spectro.core.base_system.Spectrum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Spectrum</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Spectrum</em> – <cite>positions</cite> in cm^-1; <cite>intensities</cite> relative (not normalized to
+any absolute scale).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>At a low enough temperature, only the lowest few <cite>J</cite> are
+significantly populated, so the peak intensity line has a small <cite>J</cite>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy.constants</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rotor</span> <span class="o">=</span> <span class="n">RigidRotor</span><span class="o">.</span><span class="n">from_diatomic</span><span class="p">(</span><span class="n">mass1</span><span class="o">=</span><span class="mf">1.008</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">atomic_mass</span><span class="p">,</span> <span class="n">mass2</span><span class="o">=</span><span class="mf">34.97</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">atomic_mass</span><span class="p">,</span> <span class="n">bond_length</span><span class="o">=</span><span class="mf">127.5e-12</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spectrum</span> <span class="o">=</span> <span class="n">rotational_spectrum</span><span class="p">(</span><span class="n">rotor</span><span class="p">,</span> <span class="n">J_max</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">300.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">peak_J</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">spectrum</span><span class="o">.</span><span class="n">intensities</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="mi">0</span> <span class="o">&lt;</span> <span class="n">peak_J</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.transmittance">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">transmittance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">absorbance_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/systems/beer_lambert.html#transmittance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.transmittance" title="Link to this definition">#</a></dt>
+<dd><p>Transmittance <span class="math notranslate nohighlight">\(T=10^{-A}\)</span>, the fraction of incident light transmitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>absorbance_value</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – In <span class="math notranslate nohighlight">\([0, 1]\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">transmittance</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">transmittance</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.spectro.voigt">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.spectro.</span></span><span class="sig-name descname"><span class="pre">voigt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwhm_gaussian</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwhm_lorentzian</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/spectro/utils/lineshapes.html#voigt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.spectro.voigt" title="Link to this definition">#</a></dt>
+<dd><p>A normalized Voigt profile: the convolution of a Gaussian and a Lorentzian.</p>
+<div class="math notranslate nohighlight">
+\[V(x) = \mathrm{Re}\!\left[\frac{w(z)}{\sigma\sqrt{2\pi}}\right],
+\qquad z=\frac{(x-x_0)+i\gamma}{\sigma\sqrt2}\]</div>
+<p>where <cite>w</cite> is the Faddeeva function (<code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.special.wofz()</span></code>),
+<span class="math notranslate nohighlight">\(\sigma=\text{FWHM}_G/(2\sqrt{2\ln2})\)</span> is the Gaussian standard
+deviation, and <span class="math notranslate nohighlight">\(\gamma=\text{FWHM}_L/2\)</span> is the Lorentzian
+half-width – the standard numerically stable evaluation of the Voigt
+profile (Hollas, <em>Modern Spectroscopy</em>, 4th ed., Ch. 2.3; J.
+Humlicek, <em>J. Quant. Spectrosc. Radiat. Transfer</em> 21, 309 (1979)).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>x0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Peak center.</p></li>
+<li><p><strong>fwhm_gaussian</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Gaussian-component FWHM.</p></li>
+<li><p><strong>fwhm_lorentzian</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Lorentzian-component FWHM.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Normalized, and reduces to a pure Gaussian/Lorentzian in the
+appropriate limit:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">200001</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">voigt</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">fwhm_gaussian</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">fwhm_lorentzian</span><span class="o">=</span><span class="mf">1.0</span><span class="p">),</span> <span class="n">x</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_narrow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">200001</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pure_lorentzian_limit</span> <span class="o">=</span> <span class="n">voigt</span><span class="p">(</span><span class="n">x_narrow</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">fwhm_gaussian</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">fwhm_lorentzian</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">pure_lorentzian_limit</span><span class="p">,</span> <span class="n">lorentzian</span><span class="p">(</span><span class="n">x_narrow</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">fwhm</span><span class="o">=</span><span class="mf">2.0</span><span class="p">),</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="solutions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">chemistrykit.solutions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="statmech.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">chemistrykit.statmech</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.NormalModeResult"><code class="docutils literal notranslate"><span class="pre">NormalModeResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.NormalModeResult.internal_coordinate_vectors"><code class="docutils literal notranslate"><span class="pre">NormalModeResult.internal_coordinate_vectors</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.NormalModeResult.is_linear"><code class="docutils literal notranslate"><span class="pre">NormalModeResult.is_linear</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.NormalModeResult.wavenumbers"><code class="docutils literal notranslate"><span class="pre">NormalModeResult.wavenumbers</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.Spectrum"><code class="docutils literal notranslate"><span class="pre">Spectrum</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.Spectrum.broaden"><code class="docutils literal notranslate"><span class="pre">Spectrum.broaden()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.Spectrum.extra"><code class="docutils literal notranslate"><span class="pre">Spectrum.extra</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.Spectrum.intensities"><code class="docutils literal notranslate"><span class="pre">Spectrum.intensities</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.Spectrum.labels"><code class="docutils literal notranslate"><span class="pre">Spectrum.labels</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.Spectrum.normalized"><code class="docutils literal notranslate"><span class="pre">Spectrum.normalized()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.Spectrum.positions"><code class="docutils literal notranslate"><span class="pre">Spectrum.positions</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.TriatomicNormalModes"><code class="docutils literal notranslate"><span class="pre">TriatomicNormalModes</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.TriatomicNormalModes.bent"><code class="docutils literal notranslate"><span class="pre">TriatomicNormalModes.bent()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.TriatomicNormalModes.linear"><code class="docutils literal notranslate"><span class="pre">TriatomicNormalModes.linear()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.TriatomicNormalModes.solve"><code class="docutils literal notranslate"><span class="pre">TriatomicNormalModes.solve()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.absorbance"><code class="docutils literal notranslate"><span class="pre">absorbance()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.anharmonicity_from_overtones"><code class="docutils literal notranslate"><span class="pre">anharmonicity_from_overtones()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.apparent_absorbance_with_stray_light"><code class="docutils literal notranslate"><span class="pre">apparent_absorbance_with_stray_light()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.broaden_stick_spectrum"><code class="docutils literal notranslate"><span class="pre">broaden_stick_spectrum()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.concentration_from_absorbance"><code class="docutils literal notranslate"><span class="pre">concentration_from_absorbance()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.energy_to_wavenumber"><code class="docutils literal notranslate"><span class="pre">energy_to_wavenumber()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.first_order_multiplet"><code class="docutils literal notranslate"><span class="pre">first_order_multiplet()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.franck_condon_factor"><code class="docutils literal notranslate"><span class="pre">franck_condon_factor()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.franck_condon_progression"><code class="docutils literal notranslate"><span class="pre">franck_condon_progression()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.franck_condon_spectrum"><code class="docutils literal notranslate"><span class="pre">franck_condon_spectrum()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.gaussian"><code class="docutils literal notranslate"><span class="pre">gaussian()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.harmonic_fundamental_wavenumber"><code class="docutils literal notranslate"><span class="pre">harmonic_fundamental_wavenumber()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.huang_rhys_factor"><code class="docutils literal notranslate"><span class="pre">huang_rhys_factor()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.isotope_shift_ratio"><code class="docutils literal notranslate"><span class="pre">isotope_shift_ratio()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.lorentzian"><code class="docutils literal notranslate"><span class="pre">lorentzian()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.morse_transition_wavenumbers"><code class="docutils literal notranslate"><span class="pre">morse_transition_wavenumbers()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.multi_coupling_multiplet"><code class="docutils literal notranslate"><span class="pre">multi_coupling_multiplet()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.multiplicity"><code class="docutils literal notranslate"><span class="pre">multiplicity()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.pascals_triangle_intensities"><code class="docutils literal notranslate"><span class="pre">pascals_triangle_intensities()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.rotational_line_wavenumbers"><code class="docutils literal notranslate"><span class="pre">rotational_line_wavenumbers()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.rotational_spectrum"><code class="docutils literal notranslate"><span class="pre">rotational_spectrum()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.transmittance"><code class="docutils literal notranslate"><span class="pre">transmittance()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.spectro.voigt"><code class="docutils literal notranslate"><span class="pre">voigt()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/api/spectro.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, chemistrykit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

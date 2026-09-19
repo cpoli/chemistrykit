@@ -1,0 +1,277 @@
+:orphan:
+
+Examples
+========
+
+This gallery walks through every public feature of
+``chemistrykit.polymer``: ideal random-walk chain statistics and the
+Flory exponent for real chains under different solvent conditions;
+molecular-weight-distribution statistics and the closed-form Flory-Schulz
+distribution; step-growth kinetics via the Carothers equation; and
+chain-growth/free-radical polymerization kinetics built on
+``chemistrykit.kinetics``'s reaction-network engine.
+
+Each script in this gallery is self-contained and can be run directly
+with ``python examples/polymer/<section>/<script>.py``. Every script
+also carries an RST module docstring as its title/description and uses
+``# %%`` markers to split narrative text from code, which is exactly what
+Sphinx-Gallery renders into the pages below -- the script *is* the source
+of truth for what you see, not a copy of it.
+
+Sections
+--------
+
+- **chain_statistics** -- ideal-chain end-to-end distance and radius of
+  gyration, and the Flory-exponent scaling of real chains under
+  theta/good/poor solvent conditions.
+- **molecular_weight_distribution** -- Mn/Mw/PDI, and the closed-form
+  Flory-Schulz (most-probable) chain-length distribution, cross-checked
+  by direct numerical summation.
+- **step_growth** -- the Carothers equation relating degree of
+  polymerization to extent of reaction, plain and with a stoichiometric
+  imbalance.
+- **chain_growth** -- free-radical initiation/propagation/termination
+  kinetics, integrated numerically and checked against the steady-state
+  approximation's closed form.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Chain-growth kinetics
+========================
+
+Free-radical initiation/propagation/termination kinetics, built on
+chemistrykit.kinetics's reaction-network engine and integrated
+numerically, checked against the closed-form steady-state
+approximation. Also combination vs. disproportionation termination, and
+the factor-of-two difference in degree of polymerization it produces for
+the same kinetic chain length.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="free_radical_network builds the lumped initiation/propagation/termination kinetics as a StoichiometricNetwork and integrates it numerically. Because termination is much faster than initiator decomposition, the radical concentration relaxes almost immediately to the steady-state approximation&#x27;s closed-form prediction (~chemistrykit.polymer.systems.chain_growth.steady_state_radical_concentration) -- verified here by comparing the two directly -- while monomer is consumed only slowly, at the classic square-root-of-initiator rate.">
+
+.. only:: html
+
+  .. image:: /api/gallery/polymer/chain_growth/images/thumb/sphx_glr_plot_01_free_radical_kinetics_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/polymer/chain_growth/plot_01_free_radical_kinetics`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Free-radical chain-growth polymerization kinetics</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="free_radical_network&#x27;s mode argument selects between the two ways two growing radical chains can terminate: combination (they fuse into a single dead chain) or disproportionation (one radical abstracts a hydrogen from the other, producing two separate dead chains). Bevington, Melville, and Taylor (&quot;The Termination Reaction in Radical Polymerizations,&quot; J. Polym. Sci. 12 (1954), 449-459) showed how to distinguish the two experimentally, by end-group analysis and by the resulting degree of polymerization&#x27;s relationship to the kinetic chain length (~chemistrykit.polymer.systems.chain_growth.kinetic_chain_length) nu: \bar X_n = 2\nu for combination (two radicals&#x27; worth of monomer per dead chain) but \bar X_n = \nu for disproportionation (one radical&#x27;s worth per dead chain) -- verified here directly against the numerically integrated network.">
+
+.. only:: html
+
+  .. image:: /api/gallery/polymer/chain_growth/images/thumb/sphx_glr_plot_02_combination_vs_disproportionation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/polymer/chain_growth/plot_02_combination_vs_disproportionation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Combination vs. disproportionation termination</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Chain statistics
+==================
+
+Ideal random-walk chain statistics (exact end-to-end distance and radius
+of gyration) and the Flory-exponent scaling of real chains under
+theta/good/poor solvent conditions.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="IdealChain gives the exact random-walk result \langle R^2\rangle=nb^2. RealChain scales instead as R\sim bn^\nu, with the Flory exponent \nu set by solvent quality: a good solvent swells the chain (\nu\approx0.6), a poor solvent collapses it (\nu=1/3), and the theta solvent reproduces the ideal chain exactly (\nu=1/2).">
+
+.. only:: html
+
+  .. image:: /api/gallery/polymer/chain_statistics/images/thumb/sphx_glr_plot_01_chain_scaling_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/polymer/chain_statistics/plot_01_chain_scaling`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Ideal vs. real chain-size scaling</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="good_solvent uses Flory&#x27;s original 1953 mean-field good-solvent exponent (\nu=3/5); good_solvent_renormalization_group uses de Gennes&#x27; 1979 renormalization-group-refined value (\nu\approx0.588). The two exponents differ by only about 2%, but because R\sim bn^\nu is a power law, that small an exponent difference compounds with chain length: the two chain-size curves are nearly indistinguishable on a log-log plot for short chains, yet the relative difference between the predicted R values grows steadily as n increases -- exactly why precise critical exponents matter most for long-chain, asymptotic behavior.">
+
+.. only:: html
+
+  .. image:: /api/gallery/polymer/chain_statistics/images/thumb/sphx_glr_plot_02_flory_vs_de_gennes_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/polymer/chain_statistics/plot_02_flory_vs_de_gennes`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Flory's mean-field exponent vs. the renormalization-group value</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Molecular-weight distribution
+================================
+
+Mn/Mw/PDI summary statistics, and the closed-form Flory-Schulz
+(most-probable) chain-length distribution for an ideal step-growth
+polymerization, with its PDI approaching exactly 2 at full conversion.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="For an ideal step-growth polymerization at extent of reaction p, the Flory-Schulz (most-probable) distribution gives the number and weight fraction of chains of each length in exact closed form. Its number-/weight-average degrees of polymerization, \bar X_n=1/(1-p) and \bar X_w=(1+p)/(1-p), are cross-checked here against direct numerical summation of the distribution, and the PDI =1+p is shown approaching exactly 2 as p approaches 1.">
+
+.. only:: html
+
+  .. image:: /api/gallery/polymer/molecular_weight_distribution/images/thumb/sphx_glr_plot_01_flory_schulz_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/polymer/molecular_weight_distribution/plot_01_flory_schulz`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Flory-Schulz molecular-weight distribution</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Step-growth kinetics
+=======================
+
+The Carothers equation relating the number-average degree of
+polymerization to the extent of reaction, and its generalization to a
+stoichiometric imbalance between functional groups.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Step-growth polymerization&#x27;s number-average degree of polymerization follows the Carothers equation \bar X_n=1/(1-p), which diverges as the extent of reaction p approaches 1 -- reaching a useful high molecular weight requires very high conversion. A stoichiometric imbalance between the two functional groups caps \bar X_n even at complete conversion of the limiting group.">
+
+.. only:: html
+
+  .. image:: /api/gallery/polymer/step_growth/images/thumb/sphx_glr_plot_01_carothers_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/polymer/step_growth/plot_01_carothers`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Carothers equation</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+   :includehidden:
+
+
+   /api/gallery/polymer/chain_growth/index.rst
+   /api/gallery/polymer/chain_statistics/index.rst
+   /api/gallery/polymer/molecular_weight_distribution/index.rst
+   /api/gallery/polymer/step_growth/index.rst
+
+
+
+.. only:: html
+
+ .. rst-class:: sphx-glr-signature
+
+    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_

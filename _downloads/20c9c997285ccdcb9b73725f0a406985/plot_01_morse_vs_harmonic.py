@@ -1,0 +1,68 @@
+r"""
+Morse vs. harmonic bond potentials, and diatomic bond vibration
+==================================================================
+
+The harmonic bond potential (:class:`~chemistrykit.md.systems.pair_potentials.HarmonicBond`)
+is the small-oscillation limit of the anharmonic
+:class:`~chemistrykit.md.systems.pair_potentials.Morse` potential -- they
+agree near the equilibrium separation but diverge away from it (Morse
+correctly flattens out toward a finite dissociation energy; harmonic
+does not). :class:`~chemistrykit.md.systems.pair_potentials.DiatomicOscillator`
+integrates the classical two-body bond-vibration problem via the shared
+velocity-Verlet integrator, for either potential.
+"""
+
+# %%
+import matplotlib.pyplot as plt
+import numpy as np
+
+from chemistrykit.md.systems.pair_potentials import DiatomicOscillator, HarmonicBond, Morse
+
+De, re = 4.0, 1.0
+harmonic_k = 2.0 * De * 1.8**2  # match harmonic force constant to Morse's curvature at re (a=1.8)
+morse = Morse(De=De, a=1.8, re=re)
+harmonic = HarmonicBond(k=harmonic_k, r0=re)
+
+r = np.linspace(0.7, 3.0, 400)
+
+fig, axes = plt.subplots(1, 2, figsize=(11, 4.5))
+axes[0].plot(r, morse.energy(r), label="Morse")
+axes[0].plot(r, harmonic.energy(r), label="harmonic")
+axes[0].axhline(-De, color="gray", linestyle=":", linewidth=0.8, label="dissociation limit (Morse)")
+axes[0].set_xlabel("r")
+axes[0].set_ylabel("U(r)")
+axes[0].set_ylim(-De * 1.2, De * 1.5)
+axes[0].set_title("Potential energy curves")
+axes[0].legend()
+
+# %%
+# Simulating the classical bond vibration for each potential, started
+# stretched away from equilibrium: the harmonic bond oscillates forever
+# with a fixed period; the (slightly softer, anharmonic) Morse bond
+# oscillates at very nearly the same period for this small a displacement,
+# since both potentials share the same curvature at re by construction.
+
+m1 = m2 = 1.0
+r0_displaced = 1.3
+dt = 0.002
+n_steps = 2000
+
+for potential, label in [(harmonic, "harmonic"), (morse, "Morse")]:
+    oscillator = DiatomicOscillator(potential, m1=m1, m2=m2, r0=r0_displaced)
+    lengths = [oscillator.bond_length()]
+    for _ in range(n_steps):
+        oscillator.step(dt)
+        lengths.append(oscillator.bond_length())
+    axes[1].plot(np.arange(n_steps + 1) * dt, lengths, label=label)
+
+period = DiatomicOscillator.harmonic_period(harmonic_k, m1, m2)
+axes[1].axvline(period, color="gray", linestyle=":", linewidth=0.8, label="harmonic period")
+axes[1].set_xlabel("t")
+axes[1].set_ylabel("bond length r(t)")
+axes[1].set_title("Classical bond-vibration trajectories")
+axes[1].legend()
+fig.tight_layout()
+
+print(f"Harmonic vibration period: {period:.4f}")
+
+plt.show()

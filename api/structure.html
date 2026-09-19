@@ -1,0 +1,1648 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>chemistrykit.structure &#8212; chemistrykit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/structure';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="chemistrykit.surface" href="surface.html" />
+    <link rel="prev" title="chemistrykit.statmech" href="statmech.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/chemistrykit_logo_transparent.png" class="logo__image only-light" alt="chemistrykit logo"/>
+    <img src="../_static/chemistrykit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="chemistrykit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="analytical.html">chemistrykit.analytical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crystal.html">chemistrykit.crystal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electrochem.html">chemistrykit.electrochem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinetics.html">chemistrykit.kinetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="md.html">chemistrykit.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photochem.html">chemistrykit.photochem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polymer.html">chemistrykit.polymer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quantum.html">chemistrykit.quantum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions.html">chemistrykit.solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spectro.html">chemistrykit.spectro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmech.html">chemistrykit.statmech</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">chemistrykit.structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surface.html">chemistrykit.surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermo.html">chemistrykit.thermo</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">chemistrykit.structure</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="chemistrykit-structure">
+<h1>chemistrykit.structure<a class="headerlink" href="#chemistrykit-structure" title="Link to this heading">#</a></h1>
+<div class="subpkg-nav docutils container">
+<p><a class="reference internal" href="../_generated/subpackages/structure.html"><span class="doc">chemistrykit.structure hub</span></a> · <a class="reference internal" href="../history/structure_breakthroughs.html"><span class="doc">History</span></a> · <a class="reference internal" href="gallery/structure/index.html"><span class="doc">Examples</span></a> · <a class="reference internal" href="#"><span class="doc">API reference</span></a></p>
+</div>
+<p id="module-chemistrykit.structure">chemistrykit.structure: molecular structure and bonding.</p>
+<p>A lightweight <a class="reference internal" href="#chemistrykit.structure.Molecule" title="chemistrykit.structure.core.base_system.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a>
+container (atoms + 3D coordinates + bond list, no external file-format
+parsing); VSEPR geometry prediction from steric number, generating real
+3D coordinates for the five idealized electron-domain polyhedra; point-
+group determination from 3D coordinates (genuine symmetry-element
+detection via distance/angle checks, not a formula lookup) plus
+character tables for the common point groups; bond order from the
+Pauling bond-length correlation and from Huckel-theory MO coefficients
+(the Coulson bond order); and formal-charge/oxidation-state assignment
+from a Lewis structure, using electronegativities from
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.periodic_table</span></code>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.structure.LewisStructure">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">LewisStructure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_orders</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lone_pairs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/lewis.html#LewisStructure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.LewisStructure" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A Lewis structure: element symbols, bond orders, and lone-pair counts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>symbols</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span>) – Element symbol of each atom (main-group elements only – see
+<code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.periodic_table.valence_electrons()</span></code>), 0-indexed.</p></li>
+<li><p><strong>bond_orders</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – Bond order for each bonded atom pair, e.g. <code class="docutils literal notranslate"><span class="pre">{(0,</span> <span class="pre">1):</span> <span class="pre">1,</span> <span class="pre">(0,</span> <span class="pre">2):</span> <span class="pre">2}</span></code>
+for one single and one double bond from atom 0. Each pair should
+appear once (order doesn’t matter, <cite>(i, j)</cite> and <cite>(j, i)</cite> are
+treated identically).</p></li>
+<li><p><strong>lone_pairs</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – Number of lone <em>pairs</em> (not electrons) on each atom, defaulting
+to 0 for any atom not given explicitly.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Water: O has 2 single bonds (to atoms 1, 2) and 2 lone pairs.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">LewisStructure</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"O"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">],</span> <span class="n">bond_orders</span><span class="o">=</span><span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="mi">1</span><span class="p">},</span> <span class="n">lone_pairs</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">water</span><span class="o">.</span><span class="n">formal_charges</span><span class="p">()</span>
+<span class="go">{0: 0.0, 1: 0.0, 2: 0.0}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">water</span><span class="o">.</span><span class="n">oxidation_states</span><span class="p">()</span>
+<span class="go">{0: -2.0, 1: 1.0, 2: 1.0}</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.LewisStructure.bond_orders">
+<span class="sig-name descname"><span class="pre">bond_orders</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span><a class="headerlink" href="#chemistrykit.structure.LewisStructure.bond_orders" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.structure.LewisStructure.formal_charges">
+<span class="sig-name descname"><span class="pre">formal_charges</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/lewis.html#LewisStructure.formal_charges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.LewisStructure.formal_charges" title="Link to this definition">#</a></dt>
+<dd><p>Compute the formal charge <span class="math notranslate nohighlight">\(FC=V-N-B/2\)</span> for every atom.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>dict of int to float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Ammonium, <span class="math notranslate nohighlight">\(NH_4^+\)</span>: nitrogen has 4 single bonds and no lone
+pairs, giving the textbook +1 formal charge:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nh4_plus</span> <span class="o">=</span> <span class="n">LewisStructure</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"N"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">],</span> <span class="n">bond_orders</span><span class="o">=</span><span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nh4_plus</span><span class="o">.</span><span class="n">formal_charges</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.LewisStructure.lone_pairs">
+<span class="sig-name descname"><span class="pre">lone_pairs</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span><a class="headerlink" href="#chemistrykit.structure.LewisStructure.lone_pairs" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.structure.LewisStructure.oxidation_states">
+<span class="sig-name descname"><span class="pre">oxidation_states</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/lewis.html#LewisStructure.oxidation_states"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.LewisStructure.oxidation_states" title="Link to this definition">#</a></dt>
+<dd><p>Compute the oxidation state of every atom via the electronegativity-based algorithm.</p>
+<p>For each bond, both bonding electrons (per unit of bond order)
+are assigned entirely to the more electronegative atom (split
+evenly for a homonuclear bond); nonbonding electrons always stay
+with their own atom. See the module docstring for the full
+formula.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>dict of int to float</em></p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#KeyError" title="(in Python v3.14)"><strong>KeyError</strong></a> – If any atom’s element has no tabulated Pauling
+    electronegativity (see
+    <code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.periodic_table.electronegativity()</span></code>).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Hydrogen peroxide, <span class="math notranslate nohighlight">\(H_2O_2\)</span> (H-O-O-H): the O-O bond is
+homonuclear (no net electron shift), each O keeps its lone pairs
+and wins its one O-H bond, giving the well-known -1 oxidation
+state (intermediate between water’s -2 and O2’s 0):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">h2o2</span> <span class="o">=</span> <span class="n">LewisStructure</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"H"</span><span class="p">,</span> <span class="s2">"O"</span><span class="p">,</span> <span class="s2">"O"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">],</span> <span class="n">bond_orders</span><span class="o">=</span><span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span> <span class="mi">1</span><span class="p">},</span> <span class="n">lone_pairs</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">h2o2</span><span class="o">.</span><span class="n">oxidation_states</span><span class="p">()</span>
+<span class="go">{0: 1.0, 1: -1.0, 2: -1.0, 3: 1.0}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.LewisStructure.symbols">
+<span class="sig-name descname"><span class="pre">symbols</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#chemistrykit.structure.LewisStructure.symbols" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.structure.LewisStructure.total_formal_charge">
+<span class="sig-name descname"><span class="pre">total_formal_charge</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/lewis.html#LewisStructure.total_formal_charge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.LewisStructure.total_formal_charge" title="Link to this definition">#</a></dt>
+<dd><p>Sum of all atoms’ formal charges – must equal the molecule’s net charge.</p>
+<p>A useful self-consistency check on a proposed Lewis structure: any
+valid structure’s formal charges must sum to the actual net
+charge of the species (0 for a neutral molecule).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.structure.Molecule">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">Molecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coordinates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bonds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/core/base_system.html#Molecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.Molecule" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A minimal molecular-geometry container: element symbols, 3D coordinates, and a bond list.</p>
+<p>No file-format parsing (PDB/XYZ/SMILES/…) is implemented or
+depended on anywhere in chemistrykit, per the package’s “no
+cheminformatics dependencies” scope decision – a <a class="reference internal" href="#chemistrykit.structure.Molecule" title="chemistrykit.structure.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> is
+built directly from plain Python/numpy data, e.g. by
+<code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.structure.systems.vsepr.build_vsepr_molecule()</span></code> or by
+hand for a worked example.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>symbols</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span>) – Element symbol of each atom, length <cite>n_atoms</cite>.</p></li>
+<li><p><strong>coordinates</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Cartesian coordinates, in angstrom (Å) by convention throughout
+this subpackage (chosen because bond lengths and van der Waals
+radii are most naturally tabulated in Å; nothing here depends on
+that unit beyond consistent internal use).</p></li>
+<li><p><strong>bonds</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span>) – 0-indexed atom-index pairs describing the bond connectivity
+(an adjacency/bond list, not a bond-order-aware structure –
+see <a class="reference internal" href="#chemistrykit.structure.LewisStructure" title="chemistrykit.structure.systems.lewis.LewisStructure"><code class="xref py py-class docutils literal notranslate"><span class="pre">chemistrykit.structure.systems.lewis.LewisStructure</span></code></a>
+for a representation that also carries bond orders and lone
+pairs).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A bent water molecule (experimental geometry: r(O-H) = 0.958 Å,
+angle(H-O-H) = 104.5 degrees):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mf">104.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="mf">0.958</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"O"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">coordinates</span><span class="o">=</span><span class="p">[</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="p">],</span>
+<span class="gp">... </span>    <span class="n">bonds</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">water</span><span class="o">.</span><span class="n">bond_length</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">0.958</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">water</span><span class="o">.</span><span class="n">bond_angle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">104.5</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.structure.Molecule.adjacency">
+<span class="sig-name descname"><span class="pre">adjacency</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/core/base_system.html#Molecule.adjacency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.Molecule.adjacency" title="Link to this definition">#</a></dt>
+<dd><p>Build a neighbor list from <cite>bonds</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>dict of int to list of int</em> – Maps each atom index with at least one bond to the sorted
+list of its bonded-neighbor indices.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.structure.Molecule.bond_angle">
+<span class="sig-name descname"><span class="pre">bond_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/core/base_system.html#Molecule.bond_angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.Molecule.bond_angle" title="Link to this definition">#</a></dt>
+<dd><p>Angle <span class="math notranslate nohighlight">\(\angle ijk\)</span> at vertex atom <cite>j</cite>, in degrees.</p>
+<div class="math notranslate nohighlight">
+\[\theta = \arccos\left(\frac{\vec{u}_{ji}\cdot\vec{u}_{jk}}{|\vec{u}_{ji}||\vec{u}_{jk}|}\right)\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – 0-indexed atom indices; <cite>j</cite> is the vertex (central atom).</p></li>
+<li><p><strong>j</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – 0-indexed atom indices; <cite>j</cite> is the vertex (central atom).</p></li>
+<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – 0-indexed atom indices; <cite>j</cite> is the vertex (central atom).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – Angle, in degrees, in <span class="math notranslate nohighlight">\([0, 180]\)</span>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.structure.Molecule.bond_length">
+<span class="sig-name descname"><span class="pre">bond_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/core/base_system.html#Molecule.bond_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.Molecule.bond_length" title="Link to this definition">#</a></dt>
+<dd><p>Distance between atoms <cite>i</cite> and <cite>j</cite>, in the same units as <cite>coordinates</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – 0-indexed atom indices (need not be an entry in <cite>bonds</cite>).</p></li>
+<li><p><strong>j</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – 0-indexed atom indices (need not be an entry in <cite>bonds</cite>).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.Molecule.bonds">
+<span class="sig-name descname"><span class="pre">bonds</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#chemistrykit.structure.Molecule.bonds" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.structure.Molecule.center_of_mass">
+<span class="sig-name descname"><span class="pre">center_of_mass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/core/base_system.html#Molecule.center_of_mass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.Molecule.center_of_mass" title="Link to this definition">#</a></dt>
+<dd><p>Mass-weighted centroid of the atoms, using standard atomic weights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray, shape (3,)</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.structure.Molecule.centered_coordinates">
+<span class="sig-name descname"><span class="pre">centered_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weighted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/core/base_system.html#Molecule.centered_coordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.Molecule.centered_coordinates" title="Link to this definition">#</a></dt>
+<dd><p>Coordinates translated so the centroid (or center of mass) sits at the origin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>weighted</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – If True, center on <a class="reference internal" href="#chemistrykit.structure.Molecule.center_of_mass" title="chemistrykit.structure.Molecule.center_of_mass"><code class="xref py py-meth docutils literal notranslate"><span class="pre">center_of_mass()</span></code></a>; otherwise on the
+unweighted <a class="reference internal" href="#chemistrykit.structure.Molecule.centroid" title="chemistrykit.structure.Molecule.centroid"><code class="xref py py-meth docutils literal notranslate"><span class="pre">centroid()</span></code></a>. For a molecule with genuine point-
+group symmetry, every symmetry element passes through both
+(equivalent atoms share a mass, so the two centers coincide;
+see <code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.structure.systems.point_group</span></code>), so
+either choice is valid for symmetry-element detection.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (n_atoms, 3)</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.structure.Molecule.centroid">
+<span class="sig-name descname"><span class="pre">centroid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/core/base_system.html#Molecule.centroid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.Molecule.centroid" title="Link to this definition">#</a></dt>
+<dd><p>Unweighted (geometric) centroid of the atoms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray, shape (3,)</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.Molecule.coordinates">
+<span class="sig-name descname"><span class="pre">coordinates</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.structure.Molecule.coordinates" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.structure.Molecule.is_linear">
+<span class="sig-name descname"><span class="pre">is_linear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/core/base_system.html#Molecule.is_linear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.Molecule.is_linear" title="Link to this definition">#</a></dt>
+<dd><p>Whether all atoms lie on a single straight line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Tolerance on the normalized cross product used to detect
+collinearity.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>bool</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">co2</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"O"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"O"</span><span class="p">],</span> <span class="n">coordinates</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.16</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.16</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">co2</span><span class="o">.</span><span class="n">is_linear</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chemistrykit.structure.Molecule.n_atoms">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">n_atoms</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#chemistrykit.structure.Molecule.n_atoms" title="Link to this definition">#</a></dt>
+<dd><p>Number of atoms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.Molecule.symbols">
+<span class="sig-name descname"><span class="pre">symbols</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#chemistrykit.structure.Molecule.symbols" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupCharacterTable">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">PointGroupCharacterTable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">irreps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">characters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/point_group.html#PointGroupCharacterTable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.PointGroupCharacterTable" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A finite point group’s character table: irreducible representations, operation classes, and characters.</p>
+<p>This is reference data – transcribed from the standard tables (Cotton,
+<em>Chemical Applications of Group Theory</em>, 3rd ed., Appendix A), in the
+same spirit as <code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.periodic_table</span></code> being plain data
+rather than a dependency – not something <a class="reference internal" href="#chemistrykit.structure.determine_point_group" title="chemistrykit.structure.determine_point_group"><code class="xref py py-func docutils literal notranslate"><span class="pre">determine_point_group()</span></code></a>
+derives computationally.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p></li>
+<li><p><strong>operations</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>)</p></li>
+<li><p><strong>irreps</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>)</p></li>
+<li><p><strong>characters</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupCharacterTable.character">
+<span class="sig-name descname"><span class="pre">character</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">irrep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/point_group.html#PointGroupCharacterTable.character"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.PointGroupCharacterTable.character" title="Link to this definition">#</a></dt>
+<dd><p>Look up a single character by irrep and operation-class label.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>irrep</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>)</p></li>
+<li><p><strong>operation</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">get_character_table</span><span class="p">(</span><span class="s2">"C2v"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">character</span><span class="p">(</span><span class="s2">"A1"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">)</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">character</span><span class="p">(</span><span class="s2">"B1"</span><span class="p">,</span> <span class="s2">"C2"</span><span class="p">)</span>
+<span class="go">-1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupCharacterTable.characters">
+<span class="sig-name descname"><span class="pre">characters</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#chemistrykit.structure.PointGroupCharacterTable.characters" title="Link to this definition">#</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">characters[i][j]</span></code> is the character of
+irrep <cite>i</cite> under operation class <cite>j</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a> of <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a> of <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupCharacterTable.irreps">
+<span class="sig-name descname"><span class="pre">irreps</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#chemistrykit.structure.PointGroupCharacterTable.irreps" title="Link to this definition">#</a></dt>
+<dd><p>Irreducible-representation (Mulliken) labels, e.g. <code class="docutils literal notranslate"><span class="pre">[&quot;A1&quot;,</span> <span class="pre">&quot;A2&quot;,</span> <span class="pre">&quot;B1&quot;,</span> <span class="pre">&quot;B2&quot;]</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a> of <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupCharacterTable.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#chemistrykit.structure.PointGroupCharacterTable.name" title="Link to this definition">#</a></dt>
+<dd><p>Point-group symbol (matches a <a class="reference internal" href="#chemistrykit.structure.determine_point_group" title="chemistrykit.structure.determine_point_group"><code class="xref py py-func docutils literal notranslate"><span class="pre">determine_point_group()</span></code></a> output where finite).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupCharacterTable.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#chemistrykit.structure.PointGroupCharacterTable.operations" title="Link to this definition">#</a></dt>
+<dd><p>Symmetry-operation class labels, e.g. <code class="docutils literal notranslate"><span class="pre">[&quot;E&quot;,</span> <span class="pre">&quot;C2&quot;,</span> <span class="pre">&quot;sigma_v(xz)&quot;,</span> <span class="pre">&quot;sigma_v'(yz)&quot;]</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a> of <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">PointGroupResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_linear</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">principal_axis_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_perpendicular_c2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_sigma_h</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_sigma_v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_inversion_center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_c3_axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_mirror_planes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/point_group.html#PointGroupResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.PointGroupResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The detected symmetry elements of a molecule, and the resulting point-group assignment.</p>
+<p>Returned by <a class="reference internal" href="#chemistrykit.structure.determine_point_group" title="chemistrykit.structure.determine_point_group"><code class="xref py py-func docutils literal notranslate"><span class="pre">determine_point_group()</span></code></a>; every boolean/count field
+reflects an element that was <em>actually found</em> by direct geometric
+testing against the input coordinates (see the module docstring), not
+inferred from the final <cite>group_name</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group_name</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p></li>
+<li><p><strong>is_linear</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>)</p></li>
+<li><p><strong>principal_axis_order</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>n_perpendicular_c2</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>has_sigma_h</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>)</p></li>
+<li><p><strong>has_sigma_v</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>)</p></li>
+<li><p><strong>has_inversion_center</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>)</p></li>
+<li><p><strong>n_c3_axes</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>n_mirror_planes</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>extra</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupResult.extra">
+<span class="sig-name descname"><span class="pre">extra</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span><a class="headerlink" href="#chemistrykit.structure.PointGroupResult.extra" title="Link to this definition">#</a></dt>
+<dd><p>Free-form slot for additional diagnostics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupResult.group_name">
+<span class="sig-name descname"><span class="pre">group_name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#chemistrykit.structure.PointGroupResult.group_name" title="Link to this definition">#</a></dt>
+<dd><p>The assigned point-group symbol (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;C2v&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Td&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;D_inf_h&quot;</span></code>
+– the infinity symbol is spelled out ASCII-style since it is not a
+valid Python/LaTeX-free identifier component).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupResult.has_inversion_center">
+<span class="sig-name descname"><span class="pre">has_inversion_center</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#chemistrykit.structure.PointGroupResult.has_inversion_center" title="Link to this definition">#</a></dt>
+<dd><p>Whether an inversion center was found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupResult.has_sigma_h">
+<span class="sig-name descname"><span class="pre">has_sigma_h</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#chemistrykit.structure.PointGroupResult.has_sigma_h" title="Link to this definition">#</a></dt>
+<dd><p>Whether a mirror plane perpendicular to the principal axis was found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupResult.has_sigma_v">
+<span class="sig-name descname"><span class="pre">has_sigma_v</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#chemistrykit.structure.PointGroupResult.has_sigma_v" title="Link to this definition">#</a></dt>
+<dd><p>Whether a mirror plane containing the principal axis was found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupResult.is_linear">
+<span class="sig-name descname"><span class="pre">is_linear</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#chemistrykit.structure.PointGroupResult.is_linear" title="Link to this definition">#</a></dt>
+<dd><p>Whether all atoms are collinear.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupResult.n_c3_axes">
+<span class="sig-name descname"><span class="pre">n_c3_axes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#chemistrykit.structure.PointGroupResult.n_c3_axes" title="Link to this definition">#</a></dt>
+<dd><p>Number of distinct <cite>C3</cite> axes found (&gt;= 4 triggers the cubic
+<cite>T</cite>/<cite>Td</cite>/<cite>Th</cite>/<cite>O</cite>/<cite>Oh</cite> branch of the decision tree).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupResult.n_mirror_planes">
+<span class="sig-name descname"><span class="pre">n_mirror_planes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#chemistrykit.structure.PointGroupResult.n_mirror_planes" title="Link to this definition">#</a></dt>
+<dd><p>Total number of distinct mirror planes found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupResult.n_perpendicular_c2">
+<span class="sig-name descname"><span class="pre">n_perpendicular_c2</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#chemistrykit.structure.PointGroupResult.n_perpendicular_c2" title="Link to this definition">#</a></dt>
+<dd><p>Number of <cite>C2</cite> axes found perpendicular to the principal axis
+(the condition for the <cite>D</cite> point-group families).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupResult.principal_axis_order">
+<span class="sig-name descname"><span class="pre">principal_axis_order</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#chemistrykit.structure.PointGroupResult.principal_axis_order" title="Link to this definition">#</a></dt>
+<dd><p>The highest-order proper rotation axis found, <cite>1</cite> if none
+(beyond the trivial identity) was detected. Not meaningful when
+<cite>is_linear</cite> is True (the true axis order is infinite).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.structure.VSEPRGeometry">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">VSEPRGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steric_number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lone_pairs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/vsepr.html#VSEPRGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.VSEPRGeometry" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The predicted shape for a given steric number and lone-pair count.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>steric_number</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of electron domains (sigma bonds + lone pairs).</p></li>
+<li><p><strong>lone_pairs</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of lone pairs on the central atom, <code class="docutils literal notranslate"><span class="pre">&lt;=</span> <span class="pre">steric_number</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">VSEPRGeometry</span><span class="p">(</span><span class="n">steric_number</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">lone_pairs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">shape_name</span>
+<span class="go">'bent'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VSEPRGeometry</span><span class="p">(</span><span class="n">steric_number</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">lone_pairs</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">shape_name</span>
+<span class="go">'tetrahedral'</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="chemistrykit.structure.VSEPRGeometry.bonding_positions">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">bonding_positions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.structure.VSEPRGeometry.bonding_positions" title="Link to this definition">#</a></dt>
+<dd><p>Unit-vector directions of just the bonded ligands.</p>
+<p>Lone pairs preferentially occupy the least sterically crowded
+domain positions (see <a class="reference internal" href="#chemistrykit.structure.domain_positions" title="chemistrykit.structure.domain_positions"><code class="xref py py-func docutils literal notranslate"><span class="pre">domain_positions()</span></code></a>), so these are the
+<em>remaining</em> positions after that assignment – e.g. for
+<cite>steric_number=5</cite>, <cite>lone_pairs=1</cite> (seesaw), one equatorial
+position is given up to the lone pair and the four bonding
+positions are the other two equatorial plus both axial sites.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="#chemistrykit.structure.VSEPRGeometry.n_bonding_domains" title="chemistrykit.structure.VSEPRGeometry.n_bonding_domains">n_bonding_domains</a>, 3)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chemistrykit.structure.VSEPRGeometry.electron_domain_positions">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">electron_domain_positions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.structure.VSEPRGeometry.electron_domain_positions" title="Link to this definition">#</a></dt>
+<dd><p>All domain unit-vector directions, bonds and lone pairs alike.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="#chemistrykit.structure.VSEPRGeometry.steric_number" title="chemistrykit.structure.VSEPRGeometry.steric_number">steric_number</a>, 3)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.VSEPRGeometry.lone_pairs">
+<span class="sig-name descname"><span class="pre">lone_pairs</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#chemistrykit.structure.VSEPRGeometry.lone_pairs" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chemistrykit.structure.VSEPRGeometry.n_bonding_domains">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">n_bonding_domains</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#chemistrykit.structure.VSEPRGeometry.n_bonding_domains" title="Link to this definition">#</a></dt>
+<dd><p>Number of sigma-bond (ligand) positions, <code class="docutils literal notranslate"><span class="pre">steric_number</span> <span class="pre">-</span> <span class="pre">lone_pairs</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chemistrykit.structure.VSEPRGeometry.shape_name">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">shape_name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#chemistrykit.structure.VSEPRGeometry.shape_name" title="Link to this definition">#</a></dt>
+<dd><p>The AXE-method molecular-shape name (Gillespie’s nomenclature).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.structure.VSEPRGeometry.steric_number">
+<span class="sig-name descname"><span class="pre">steric_number</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#chemistrykit.structure.VSEPRGeometry.steric_number" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.structure.angle_between">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">angle_between</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/core/base_system.html#angle_between"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.angle_between" title="Link to this definition">#</a></dt>
+<dd><p>Angle between two vectors, in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+<li><p><strong>v2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">angle_between</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">90.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.structure.bond_length_from_order">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">bond_length_from_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">single_bond_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.71</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/bonding.html#bond_length_from_order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.bond_length_from_order" title="Link to this definition">#</a></dt>
+<dd><p>Invert <a class="reference internal" href="#chemistrykit.structure.bond_order_from_length" title="chemistrykit.structure.bond_order_from_length"><code class="xref py py-func docutils literal notranslate"><span class="pre">bond_order_from_length()</span></code></a>: predict a bond length from a bond order.</p>
+<div class="math notranslate nohighlight">
+\[D(n) = D(1) - c\ln n\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>single_bond_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Reference single-bond length <span class="math notranslate nohighlight">\(D(1)\)</span>.</p></li>
+<li><p><strong>bond_order</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Bond order <cite>n</cite> (&gt; 0).</p></li>
+<li><p><strong>c</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – Predicted bond length, same units as <cite>single_bond_length</cite>.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <cite>bond_order</cite> is not positive.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A round trip through <a class="reference internal" href="#chemistrykit.structure.bond_order_from_length" title="chemistrykit.structure.bond_order_from_length"><code class="xref py py-func docutils literal notranslate"><span class="pre">bond_order_from_length()</span></code></a> recovers the
+original length exactly (the two functions are exact inverses):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">D1</span><span class="p">,</span> <span class="n">Dn</span> <span class="o">=</span> <span class="mf">1.54</span><span class="p">,</span> <span class="mf">1.34</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">bond_order_from_length</span><span class="p">(</span><span class="n">D1</span><span class="p">,</span> <span class="n">Dn</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">bond_length_from_order</span><span class="p">(</span><span class="n">D1</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="mi">9</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="n">Dn</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Higher bond order predicts a shorter bond – triple shorter than
+double shorter than single:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span><span class="n">bond_length_from_order</span><span class="p">(</span><span class="mf">1.54</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">lengths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">lengths</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">lengths</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.structure.bond_order_from_length">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">bond_order_from_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">single_bond_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observed_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.71</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/bonding.html#bond_order_from_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.bond_order_from_length" title="Link to this definition">#</a></dt>
+<dd><p>Estimate a bond order from an observed bond length, via Pauling’s empirical correlation.</p>
+<div class="math notranslate nohighlight">
+\[D(n) = D(1) - c\ln n \quad\Longrightarrow\quad n = \exp\!\left(\frac{D(1)-D(n)}{c}\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(D(1)\)</span> is the reference single-bond length and <cite>c</cite> is an
+empirical, bond-type-specific constant (L. Pauling, <em>J. Am. Chem.
+Soc.</em> 69, 542 (1947)). Shorter bonds correspond to a higher (order
+&gt; 1) bond order; this is an empirical correlation, not a first-
+principles bonding calculation – see the module docstring.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>single_bond_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Reference single-bond (<cite>n=1</cite>) length <span class="math notranslate nohighlight">\(D(1)\)</span>, in any
+consistent length unit (e.g. angstrom).</p></li>
+<li><p><strong>observed_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – The bond length whose order is being estimated, <span class="math notranslate nohighlight">\(D(n)\)</span>,
+same units as <cite>single_bond_length</cite>.</p></li>
+<li><p><strong>c</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – The empirical correlation constant; must be re-fit for bond types
+other than carbon-carbon.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – Estimated (generally non-integer) bond order.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Benzene’s C-C bond (1.397 Å) is intermediate between a single
+(1.54 Å) and double (1.34 Å) bond, giving an estimated order between
+1 and 2 (the classic evidence for delocalized aromatic bonding):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">bond_order_from_length</span><span class="p">(</span><span class="n">single_bond_length</span><span class="o">=</span><span class="mf">1.54</span><span class="p">,</span> <span class="n">observed_length</span><span class="o">=</span><span class="mf">1.397</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mf">2.0</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>A bond exactly at the reference single-bond length has order 1:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">bond_order_from_length</span><span class="p">(</span><span class="mf">1.54</span><span class="p">,</span> <span class="mf">1.54</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.structure.build_vsepr_molecule">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">build_vsepr_molecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steric_number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lone_pairs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">central_symbol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ligand_symbol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'H'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/vsepr.html#build_vsepr_molecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.build_vsepr_molecule" title="Link to this definition">#</a></dt>
+<dd><p>Build a <a class="reference internal" href="#chemistrykit.structure.Molecule" title="chemistrykit.structure.core.base_system.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a> from a VSEPR prediction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>steric_number</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of electron domains (sigma bonds + lone pairs).</p></li>
+<li><p><strong>lone_pairs</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of lone pairs on the central atom.</p></li>
+<li><p><strong>bond_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Central-atom-to-ligand distance, in angstrom.</p></li>
+<li><p><strong>central_symbol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Element symbol placed at the central atom.</p></li>
+<li><p><strong>ligand_symbol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Element symbol placed at every ligand position.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.structure.Molecule" title="chemistrykit.structure.core.base_system.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Molecule</em> – Central atom at the origin plus <cite>n_bonding_domains</cite> identical
+ligand atoms; lone pairs are not represented as atoms (they carry
+no nuclear position), only via their effect on which directions
+the ligands occupy.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Methane (AX4E0): a perfect tetrahedron, every H-C-H angle exactly
+109.47 degrees:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">methane</span> <span class="o">=</span> <span class="n">build_vsepr_molecule</span><span class="p">(</span><span class="n">steric_number</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">lone_pairs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bond_length</span><span class="o">=</span><span class="mf">1.09</span><span class="p">,</span> <span class="n">central_symbol</span><span class="o">=</span><span class="s2">"C"</span><span class="p">,</span> <span class="n">ligand_symbol</span><span class="o">=</span><span class="s2">"H"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">methane</span><span class="o">.</span><span class="n">bond_angle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">109.4712</span>
+</pre></div>
+</div>
+<p>Water (AX2E2): the idealized VSEPR angle is the parent tetrahedron’s
+109.47 degrees (see the module docstring for why this is an
+idealization – the real H-O-H angle is compressed to 104.5 degrees
+by extra lone-pair repulsion):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">build_vsepr_molecule</span><span class="p">(</span><span class="n">steric_number</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">lone_pairs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bond_length</span><span class="o">=</span><span class="mf">0.96</span><span class="p">,</span> <span class="n">central_symbol</span><span class="o">=</span><span class="s2">"O"</span><span class="p">,</span> <span class="n">ligand_symbol</span><span class="o">=</span><span class="s2">"H"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">water</span><span class="o">.</span><span class="n">bond_angle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">109.4712</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.structure.coulson_pi_bond_order">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">coulson_pi_bond_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coefficients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">occupations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/bonding.html#coulson_pi_bond_order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.coulson_pi_bond_order" title="Link to this definition">#</a></dt>
+<dd><p>The Coulson pi bond order between atoms <cite>i</cite> and <cite>j</cite> from Huckel molecular-orbital coefficients.</p>
+<div class="math notranslate nohighlight">
+\[p_{ij} = \sum_k n_k c_{ik} c_{jk}\]</div>
+<p>summed over molecular orbitals <cite>k</cite> with occupation number
+<span class="math notranslate nohighlight">\(n_k\in\{0,1,2\}\)</span> (C. A. Coulson, <em>Proc. R. Soc. Lond. A</em> 169,
+413 (1939); Streitwieser, <em>Molecular Orbital Theory for Organic
+Chemists</em>, Ch. 2). This measures the pi-bonding contribution only
+(Huckel theory does not model the sigma framework at all, per
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.quantum.systems.huckel</span></code>’s module docstring), so a
+formally “single” sigma-bonded pair with a fractional
+<span class="math notranslate nohighlight">\(p_{ij}\)</span> (e.g. benzene’s 2/3) has a <em>total</em> bond order of
+<span class="math notranslate nohighlight">\(1+p_{ij}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coefficients</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – MO coefficient matrix, columns are individual MOs – e.g.
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">chemistrykit.quantum.core.base_system.EigenstateResult.coefficients</span></code>
+from a <code class="xref py py-meth docutils literal notranslate"><span class="pre">chemistrykit.quantum.systems.huckel.HuckelSystem.solve()</span></code> call.</p></li>
+<li><p><strong>occupations</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>length n_mo</em>) – Occupation number of each MO (0, 1, or 2 electrons), same column
+order as <cite>coefficients</cite>.</p></li>
+<li><p><strong>i</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – 0-indexed atom (basis-function) indices.</p></li>
+<li><p><strong>j</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – 0-indexed atom (basis-function) indices.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Ethene: the single pi bond is fully formed, <span class="math notranslate nohighlight">\(p_{01}=1\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.quantum.systems.huckel</span><span class="w"> </span><span class="kn">import</span> <span class="n">HuckelSystem</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ethene</span> <span class="o">=</span> <span class="n">HuckelSystem</span><span class="p">(</span><span class="n">n_atoms</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bonds</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">ethene</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">energies</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">occ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">occ</span><span class="p">[</span><span class="n">order</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">coulson_pi_bond_order</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">coefficients</span><span class="p">,</span> <span class="n">occ</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>Benzene: the textbook Coulson bond order of 2/3 for every adjacent
+carbon pair (delocalization spreads the pi bonding evenly around the
+ring, weaker than a localized double bond):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">benzene</span> <span class="o">=</span> <span class="n">HuckelSystem</span><span class="o">.</span><span class="n">cyclic_polyene</span><span class="p">(</span><span class="n">n_atoms</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">benzene</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">energies</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">occ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">occ</span><span class="p">[</span><span class="n">order</span><span class="p">[:</span><span class="mi">3</span><span class="p">]]</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">coulson_pi_bond_order</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">coefficients</span><span class="p">,</span> <span class="n">occ</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.6667</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.structure.determine_point_group">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">determine_point_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">molecule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/point_group.html#determine_point_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.determine_point_group" title="Link to this definition">#</a></dt>
+<dd><p>Determine a molecule’s point group from its 3D coordinates.</p>
+<p>Implements the standard point-group decision tree (Cotton, <em>Chemical
+Applications of Group Theory</em>, 3rd ed., Ch. 4, flowchart Fig. 4.1) on
+top of symmetry elements found by direct geometric testing (module
+docstring):</p>
+<ol class="arabic simple">
+<li><p><strong>Linear</strong> molecules (all atoms collinear) are <span class="math notranslate nohighlight">\(D_{\infty h}\)</span>
+if they also have an inversion center, else <span class="math notranslate nohighlight">\(C_{\infty v}\)</span>
+(a finite rotation-order search cannot find the true <span class="math notranslate nohighlight">\(C_\infty\)</span>
+axis, so linearity is checked first and handled as a special case).</p></li>
+<li><p><strong>Cubic</strong> groups: four or more distinct <span class="math notranslate nohighlight">\(C_3\)</span> axes (the
+hallmark of a tetrahedral/octahedral arrangement) route to
+<span class="math notranslate nohighlight">\(O_h\)</span> (if an inversion center is also present) or <span class="math notranslate nohighlight">\(T_d\)</span>
+otherwise.</p></li>
+<li><p>Otherwise, the <strong>principal axis</strong> is the highest-order proper
+rotation axis found (if none, the group is <span class="math notranslate nohighlight">\(C_i\)</span>, <span class="math notranslate nohighlight">\(C_s\)</span>,
+or <span class="math notranslate nohighlight">\(C_1\)</span> depending on whether an inversion center or a single
+mirror plane was found). Given a principal <span class="math notranslate nohighlight">\(C_n\)</span> axis:
+finding <cite>n</cite> (or more) <span class="math notranslate nohighlight">\(C_2\)</span> axes perpendicular to it selects
+the <span class="math notranslate nohighlight">\(D_n\)</span> family (further split into <span class="math notranslate nohighlight">\(D_{nh}\)</span>/<span class="math notranslate nohighlight">\(D_{nd}\)</span>/<span class="math notranslate nohighlight">\(D_n\)</span>
+by <span class="math notranslate nohighlight">\(\sigma_h\)</span>/<span class="math notranslate nohighlight">\(\sigma_v\)</span>); otherwise the <span class="math notranslate nohighlight">\(C_n\)</span>
+family (split into <span class="math notranslate nohighlight">\(C_{nh}\)</span>/<span class="math notranslate nohighlight">\(C_{nv}\)</span>/<span class="math notranslate nohighlight">\(C_n\)</span>).</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>molecule</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.structure.Molecule" title="chemistrykit.structure.core.base_system.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a></span>)</p></li>
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Absolute distance tolerance (in the molecule’s coordinate units)
+for treating two atomic positions as coincident when testing a
+candidate symmetry operation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.structure.PointGroupResult" title="chemistrykit.structure.systems.point_group.PointGroupResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">PointGroupResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>PointGroupResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Water is <span class="math notranslate nohighlight">\(C_{2v}\)</span>, ammonia is <span class="math notranslate nohighlight">\(C_{3v}\)</span>, and methane is
+<span class="math notranslate nohighlight">\(T_d\)</span> – the three textbook reference cases this classifier is
+validated against:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mf">104.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="mf">0.958</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"O"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">coordinates</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)],</span> <span class="p">[</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)]],</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">determine_point_group</span><span class="p">(</span><span class="n">water</span><span class="p">)</span><span class="o">.</span><span class="n">group_name</span>
+<span class="go">'C2v'</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">verts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">verts</span> <span class="o">=</span> <span class="n">verts</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">verts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mf">1.09</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">methane</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"C"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">],</span> <span class="n">coordinates</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">verts</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">determine_point_group</span><span class="p">(</span><span class="n">methane</span><span class="p">)</span><span class="o">.</span><span class="n">group_name</span>
+<span class="go">'Td'</span>
+</pre></div>
+</div>
+<p>Carbon dioxide is linear and centrosymmetric, <span class="math notranslate nohighlight">\(D_{\infty h}\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">co2</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"O"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"O"</span><span class="p">],</span> <span class="n">coordinates</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.16</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.16</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">determine_point_group</span><span class="p">(</span><span class="n">co2</span><span class="p">)</span><span class="o">.</span><span class="n">group_name</span>
+<span class="go">'D_inf_h'</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.structure.domain_positions">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">domain_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steric_number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/vsepr.html#domain_positions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.domain_positions" title="Link to this definition">#</a></dt>
+<dd><p>Return unit-vector electron-domain positions for the ideal <cite>N</cite>-domain polyhedron.</p>
+<p>Real 3D coordinate generation (not a lookup table): each polyhedron’s
+vertices are placed from their defining symmetry, then normalized to
+the unit sphere.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>steric_number</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of electron domains (sigma bonds + lone pairs), 2 through 6.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (steric_number, 3)</em> – Unit vectors from the central atom, ordered so that – for a
+steric number with structurally inequivalent sites – the sites
+<em>least</em> favorable to a lone pair (see <a class="reference internal" href="#chemistrykit.structure.build_vsepr_molecule" title="chemistrykit.structure.build_vsepr_molecule"><code class="xref py py-func docutils literal notranslate"><span class="pre">build_vsepr_molecule()</span></code></a>)
+come <em>last</em>: equatorial-before-axial for <cite>steric_number=5</cite>
+(equatorial positions have only two 90-degree neighbors vs. an
+axial position’s three, so a lone pair placed equatorially incurs
+less strong lone-pair/bonding-pair repulsion – Gillespie &amp;
+Nyholm, <em>Q. Rev. Chem. Soc.</em> 11, 339 (1957)).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Every pair of tetrahedral vertices subtends exactly the tetrahedral
+angle, 109.47 degrees:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.structure.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">angle_between</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">verts</span> <span class="o">=</span> <span class="n">domain_positions</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">angles</span> <span class="o">=</span> <span class="p">[</span><span class="n">angle_between</span><span class="p">(</span><span class="n">verts</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">verts</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="mf">109.4712206</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.structure.get_character_table">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">get_character_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/point_group.html#get_character_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.get_character_table" title="Link to this definition">#</a></dt>
+<dd><p>Look up a built-in character table by point-group symbol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – E.g. <code class="docutils literal notranslate"><span class="pre">&quot;C2v&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Td&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;D_inf_h&quot;</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.structure.PointGroupCharacterTable" title="chemistrykit.structure.systems.point_group.PointGroupCharacterTable"><code class="xref py py-class docutils literal notranslate"><span class="pre">PointGroupCharacterTable</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>PointGroupCharacterTable</em></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#KeyError" title="(in Python v3.14)"><strong>KeyError</strong></a> – If <cite>name</cite> is not one of the point groups tabulated in
+    <code class="xref py py-data docutils literal notranslate"><span class="pre">CHARACTER_TABLES</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Every irrep’s character under the identity operation equals its
+dimension, and (for a real, unitary representation) the sum over all
+operations, weighted by class size, of the identity character times
+itself equals the group order – here just checking the totally
+symmetric irrep is trivially present:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">get_character_table</span><span class="p">(</span><span class="s2">"Td"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">character</span><span class="p">(</span><span class="s2">"A1"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">)</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">character</span><span class="p">(</span><span class="s2">"T2"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">)</span>
+<span class="go">3.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.structure.unit_vector">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">unit_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/core/base_system.html#unit_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.unit_vector" title="Link to this definition">#</a></dt>
+<dd><p>Normalize a vector to unit length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="statmech.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">chemistrykit.statmech</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="surface.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">chemistrykit.surface</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.LewisStructure"><code class="docutils literal notranslate"><span class="pre">LewisStructure</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.LewisStructure.bond_orders"><code class="docutils literal notranslate"><span class="pre">LewisStructure.bond_orders</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.LewisStructure.formal_charges"><code class="docutils literal notranslate"><span class="pre">LewisStructure.formal_charges()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.LewisStructure.lone_pairs"><code class="docutils literal notranslate"><span class="pre">LewisStructure.lone_pairs</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.LewisStructure.oxidation_states"><code class="docutils literal notranslate"><span class="pre">LewisStructure.oxidation_states()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.LewisStructure.symbols"><code class="docutils literal notranslate"><span class="pre">LewisStructure.symbols</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.LewisStructure.total_formal_charge"><code class="docutils literal notranslate"><span class="pre">LewisStructure.total_formal_charge()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.Molecule"><code class="docutils literal notranslate"><span class="pre">Molecule</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.Molecule.adjacency"><code class="docutils literal notranslate"><span class="pre">Molecule.adjacency()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.Molecule.bond_angle"><code class="docutils literal notranslate"><span class="pre">Molecule.bond_angle()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.Molecule.bond_length"><code class="docutils literal notranslate"><span class="pre">Molecule.bond_length()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.Molecule.bonds"><code class="docutils literal notranslate"><span class="pre">Molecule.bonds</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.Molecule.center_of_mass"><code class="docutils literal notranslate"><span class="pre">Molecule.center_of_mass()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.Molecule.centered_coordinates"><code class="docutils literal notranslate"><span class="pre">Molecule.centered_coordinates()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.Molecule.centroid"><code class="docutils literal notranslate"><span class="pre">Molecule.centroid()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.Molecule.coordinates"><code class="docutils literal notranslate"><span class="pre">Molecule.coordinates</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.Molecule.is_linear"><code class="docutils literal notranslate"><span class="pre">Molecule.is_linear()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.Molecule.n_atoms"><code class="docutils literal notranslate"><span class="pre">Molecule.n_atoms</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.Molecule.symbols"><code class="docutils literal notranslate"><span class="pre">Molecule.symbols</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupCharacterTable"><code class="docutils literal notranslate"><span class="pre">PointGroupCharacterTable</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupCharacterTable.character"><code class="docutils literal notranslate"><span class="pre">PointGroupCharacterTable.character()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupCharacterTable.characters"><code class="docutils literal notranslate"><span class="pre">PointGroupCharacterTable.characters</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupCharacterTable.irreps"><code class="docutils literal notranslate"><span class="pre">PointGroupCharacterTable.irreps</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupCharacterTable.name"><code class="docutils literal notranslate"><span class="pre">PointGroupCharacterTable.name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupCharacterTable.operations"><code class="docutils literal notranslate"><span class="pre">PointGroupCharacterTable.operations</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupResult"><code class="docutils literal notranslate"><span class="pre">PointGroupResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupResult.extra"><code class="docutils literal notranslate"><span class="pre">PointGroupResult.extra</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupResult.group_name"><code class="docutils literal notranslate"><span class="pre">PointGroupResult.group_name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupResult.has_inversion_center"><code class="docutils literal notranslate"><span class="pre">PointGroupResult.has_inversion_center</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupResult.has_sigma_h"><code class="docutils literal notranslate"><span class="pre">PointGroupResult.has_sigma_h</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupResult.has_sigma_v"><code class="docutils literal notranslate"><span class="pre">PointGroupResult.has_sigma_v</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupResult.is_linear"><code class="docutils literal notranslate"><span class="pre">PointGroupResult.is_linear</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupResult.n_c3_axes"><code class="docutils literal notranslate"><span class="pre">PointGroupResult.n_c3_axes</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupResult.n_mirror_planes"><code class="docutils literal notranslate"><span class="pre">PointGroupResult.n_mirror_planes</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupResult.n_perpendicular_c2"><code class="docutils literal notranslate"><span class="pre">PointGroupResult.n_perpendicular_c2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupResult.principal_axis_order"><code class="docutils literal notranslate"><span class="pre">PointGroupResult.principal_axis_order</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.VSEPRGeometry"><code class="docutils literal notranslate"><span class="pre">VSEPRGeometry</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.VSEPRGeometry.bonding_positions"><code class="docutils literal notranslate"><span class="pre">VSEPRGeometry.bonding_positions</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.VSEPRGeometry.electron_domain_positions"><code class="docutils literal notranslate"><span class="pre">VSEPRGeometry.electron_domain_positions</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.VSEPRGeometry.lone_pairs"><code class="docutils literal notranslate"><span class="pre">VSEPRGeometry.lone_pairs</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.VSEPRGeometry.n_bonding_domains"><code class="docutils literal notranslate"><span class="pre">VSEPRGeometry.n_bonding_domains</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.VSEPRGeometry.shape_name"><code class="docutils literal notranslate"><span class="pre">VSEPRGeometry.shape_name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.VSEPRGeometry.steric_number"><code class="docutils literal notranslate"><span class="pre">VSEPRGeometry.steric_number</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.angle_between"><code class="docutils literal notranslate"><span class="pre">angle_between()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.bond_length_from_order"><code class="docutils literal notranslate"><span class="pre">bond_length_from_order()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.bond_order_from_length"><code class="docutils literal notranslate"><span class="pre">bond_order_from_length()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.build_vsepr_molecule"><code class="docutils literal notranslate"><span class="pre">build_vsepr_molecule()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.coulson_pi_bond_order"><code class="docutils literal notranslate"><span class="pre">coulson_pi_bond_order()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.determine_point_group"><code class="docutils literal notranslate"><span class="pre">determine_point_group()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.domain_positions"><code class="docutils literal notranslate"><span class="pre">domain_positions()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.get_character_table"><code class="docutils literal notranslate"><span class="pre">get_character_table()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.unit_vector"><code class="docutils literal notranslate"><span class="pre">unit_vector()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/api/structure.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, chemistrykit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

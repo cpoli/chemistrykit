@@ -1,0 +1,264 @@
+:orphan:
+
+Examples
+========
+
+This gallery walks through every public feature of ``chemistrykit.md``:
+the Lennard-Jones fluid in reduced units (energy conservation, pressure,
+and the radial distribution function g(r)); Morse/Buckingham/harmonic
+bonded potentials and small bonded clusters; and velocity-rescaling and
+Nose-Hoover thermostats.
+
+Each script in this gallery is self-contained and can be run directly with
+``python examples/md/<section>/<script>.py``. Every script also carries an
+RST module docstring as its title/description and uses ``# %%`` markers to
+split narrative text from code, which is exactly what Sphinx-Gallery
+renders into the pages below -- the script *is* the source of truth for
+what you see, not a copy of it.
+
+Sections
+--------
+
+- **lj_fluid** -- an NVE Lennard-Jones fluid run: energy conservation,
+  the radial distribution function g(r), a cross-check of the
+  simulated speed distribution against
+  :mod:`chemistrykit.statmech`'s Maxwell-Boltzmann distribution, and a
+  purely repulsive (Weeks-Chandler-Andersen) fluid showing
+  packing-driven positional order at high density.
+- **pair_potentials** -- Morse vs. harmonic bond potentials, the
+  classical vibration of a two-body :class:`~chemistrykit.md.systems.pair_potentials.DiatomicOscillator`,
+  and a small bonded molecule vibrating under coupled harmonic
+  bond-stretch and angle-bend terms.
+- **thermostats** -- comparing an unthermostatted (NVE) run against
+  velocity-rescaling and Nose-Hoover temperature control.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Lennard-Jones fluid
+====================
+
+An equilibrated NVE Lennard-Jones fluid: energy conservation, the radial
+distribution function g(r), a cross-check of the simulated velocity
+ensemble against the Maxwell-Boltzmann speed distribution, and a purely
+repulsive (Weeks-Chandler-Andersen) fluid illustrating packing-driven
+positional order at high density.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A monatomic Lennard-Jones fluid (~chemistrykit.md.systems.lj_fluid.LJFluid) started on a simple-cubic lattice with Maxwell-Boltzmann velocities (~chemistrykit.md.systems.lj_fluid.LJFluid.from_lattice), integrated with no thermostat (a microcanonical, NVE run) via the shared velocity-Verlet integrator. Two standard checks: total energy should be constant to within integration error, and the radial distribution function g(r) should show liquid-like structure (a first peak near the Lennard-Jones minimum) rather than the flat g(r)=1 of an ideal gas.">
+
+.. only:: html
+
+  .. image:: /api/gallery/md/lj_fluid/images/thumb/sphx_glr_plot_01_lj_fluid_equilibration_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/md/lj_fluid/plot_01_lj_fluid_equilibration`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">An NVE Lennard-Jones fluid: energy conservation and g(r)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A direct link between chemistrykit.md and chemistrykit.statmech: molecular dynamics produces an actual ensemble of particle velocities, and statistical mechanics predicts what their distribution should look like at equilibrium. After a short equilibration run, an LJFluid&#x27;s particle speeds are histogrammed and compared against chemistrykit.statmech.MaxwellBoltzmannSpeedDistribution evaluated at the simulation&#x27;s own (instantaneous, measured) temperature -- no fitting involved.">
+
+.. only:: html
+
+  .. image:: /api/gallery/md/lj_fluid/images/thumb/sphx_glr_plot_02_maxwell_boltzmann_check_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/md/lj_fluid/plot_02_maxwell_boltzmann_check`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Cross-checking an MD trajectory against the Maxwell-Boltzmann distribution</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Truncating the Lennard-Jones potential at its own minimum, r=2^{1/6}\sigma (~chemistrykit.md.systems.lj_fluid.LennardJones.r_min), and shifting it to be continuous there removes the attractive tail entirely and leaves a purely repulsive potential -- the Weeks-Chandler-Andersen (WCA) reference system, and (in reduced units) a smoothed stand-in for a fluid of hard spheres. Comparing the radial distribution function g(r) of this purely repulsive LJFluid at low and high density shows that pronounced short-range positional order can appear from packing alone, with no attractive force anywhere in the potential -- the essential physics behind Alder and Wainwright&#x27;s 1957 discovery that hard spheres alone can freeze.">
+
+.. only:: html
+
+  .. image:: /api/gallery/md/lj_fluid/images/thumb/sphx_glr_plot_03_hard_sphere_freezing_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/md/lj_fluid/plot_03_hard_sphere_freezing`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Purely repulsive (WCA) particles: packing order without attraction</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Pair potentials
+================
+
+Morse vs. harmonic bond potentials, the classical vibration of a
+two-body diatomic oscillator, and a small bonded molecule vibrating
+under coupled harmonic bond-stretch and angle-bend terms.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The harmonic bond potential (~chemistrykit.md.systems.pair_potentials.HarmonicBond) is the small-oscillation limit of the anharmonic Morse potential -- they agree near the equilibrium separation but diverge away from it (Morse correctly flattens out toward a finite dissociation energy; harmonic does not). DiatomicOscillator integrates the classical two-body bond-vibration problem via the shared velocity-Verlet integrator, for either potential.">
+
+.. only:: html
+
+  .. image:: /api/gallery/md/pair_potentials/images/thumb/sphx_glr_plot_01_morse_vs_harmonic_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/md/pair_potentials/plot_01_morse_vs_harmonic`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Morse vs. harmonic bond potentials, and diatomic bond vibration</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="HarmonicMolecule builds a small molecular-mechanics &quot;force field&quot; out of nothing but harmonic bond (~chemistrykit.md.systems.pair_potentials.HarmonicBond) and harmonic angle-bend (~chemistrykit.md.systems.pair_potentials.HarmonicAngle) terms -- the classical, spring-and-hinge picture of molecular structure that founded molecular mechanics. A bent, water-like triatomic (one heavy vertex atom, two light outer atoms, equilibrium angle 104.5 degrees) is displaced away from its equilibrium geometry and left to vibrate under velocity-Verlet integration alone (no thermostat): both bond lengths and the bond angle oscillate indefinitely about their equilibrium values, and the total energy is conserved to within integration error.">
+
+.. only:: html
+
+  .. image:: /api/gallery/md/pair_potentials/images/thumb/sphx_glr_plot_02_harmonic_molecule_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/md/pair_potentials/plot_02_harmonic_molecule`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">A bent triatomic molecule: coupled bond-stretch and angle-bend vibrations</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The Buckingham (exp-6) potential replaces the Lennard-Jones r^{-12} repulsive wall with an exponential -- closer to the true quantum-mechanical electron-overlap repulsion -- while keeping the same r^{-6} dispersion attraction. Matched to a Lennard-Jones potential&#x27;s well depth, position, and long-range tail, the two agree closely everywhere near and beyond the minimum. But the exponential repulsion is eventually overwhelmed by the unbounded -C/r^6 attractive term at short enough range, so the Buckingham potential has a second, spurious turnover well inside the true minimum: past that point it falls back toward -\infty as r\to0 instead of diverging to +\infty the way Lennard-Jones&#x27;s pure r^{-12} repulsion does.">
+
+.. only:: html
+
+  .. image:: /api/gallery/md/pair_potentials/images/thumb/sphx_glr_plot_03_buckingham_vs_lj_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/md/pair_potentials/plot_03_buckingham_vs_lj`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Buckingham vs. Lennard-Jones: exponential repulsion and its inner turnover</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Thermostats
+============
+
+Comparing an unthermostatted (NVE) Lennard-Jones fluid run against
+velocity-rescaling and Nose-Hoover temperature control.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Starting the same Lennard-Jones fluid configuration well away from its target temperature, three runs compare how the instantaneous kinetic temperature evolves: an unthermostatted (NVE, microcanonical) run, where it simply stays wherever it started; the crude, deterministic VelocityRescalingThermostat, which snaps it back to the target at every rescaling; and the NoseHooverThermostat, which relaxes it smoothly toward the target via an extended-system friction variable.">
+
+.. only:: html
+
+  .. image:: /api/gallery/md/thermostats/images/thumb/sphx_glr_plot_01_thermostats_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/md/thermostats/plot_01_thermostats`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Thermostats: NVE vs. velocity-rescaling vs. Nose-Hoover</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+   :includehidden:
+
+
+   /api/gallery/md/lj_fluid/index.rst
+   /api/gallery/md/pair_potentials/index.rst
+   /api/gallery/md/thermostats/index.rst
+
+
+
+.. only:: html
+
+ .. rst-class:: sphx-glr-signature
+
+    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_

@@ -1,0 +1,1831 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>chemistrykit.kinetics &#8212; chemistrykit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/kinetics';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="chemistrykit.md" href="md.html" />
+    <link rel="prev" title="chemistrykit.electrochem" href="electrochem.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/chemistrykit_logo_transparent.png" class="logo__image only-light" alt="chemistrykit logo"/>
+    <img src="../_static/chemistrykit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="chemistrykit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="analytical.html">chemistrykit.analytical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crystal.html">chemistrykit.crystal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electrochem.html">chemistrykit.electrochem</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">chemistrykit.kinetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="md.html">chemistrykit.md</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photochem.html">chemistrykit.photochem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polymer.html">chemistrykit.polymer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quantum.html">chemistrykit.quantum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions.html">chemistrykit.solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spectro.html">chemistrykit.spectro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmech.html">chemistrykit.statmech</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">chemistrykit.structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surface.html">chemistrykit.surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermo.html">chemistrykit.thermo</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">chemistrykit.kinetics</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="chemistrykit-kinetics">
+<h1>chemistrykit.kinetics<a class="headerlink" href="#chemistrykit-kinetics" title="Link to this heading">#</a></h1>
+<div class="subpkg-nav docutils container">
+<p><a class="reference internal" href="../_generated/subpackages/kinetics.html"><span class="doc">chemistrykit.kinetics hub</span></a> · <a class="reference internal" href="../history/kinetics_breakthroughs.html"><span class="doc">History</span></a> · <a class="reference internal" href="gallery/kinetics/index.html"><span class="doc">Examples</span></a> · <a class="reference internal" href="#"><span class="doc">API reference</span></a></p>
+</div>
+<p id="module-chemistrykit.kinetics">chemistrykit.kinetics: reaction kinetics.</p>
+<p>Elementary integrated rate laws and half-lives, the Arrhenius equation and
+activation-energy fitting, Michaelis-Menten enzyme kinetics with
+Lineweaver-Burk linearization and inhibition, a general
+stoichiometry-matrix reaction-network engine (parallel, consecutive,
+reversible, and steady-state-approximation chain reactions) integrated
+via <code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.integrators</span></code>, and the Brusselator oscillating
+reaction network.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ArrheniusFit">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">ArrheniusFit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ea</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_squared</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.31446261815324</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/arrhenius.html#ArrheniusFit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ArrheniusFit" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Result of fitting rate-constant-vs-temperature data to the Arrhenius equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Ea</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>A</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>r_squared</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>R_gas</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ArrheniusFit.A">
+<span class="sig-name descname"><span class="pre">A</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.kinetics.ArrheniusFit.A" title="Link to this definition">#</a></dt>
+<dd><p>Fitted pre-exponential factor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ArrheniusFit.Ea">
+<span class="sig-name descname"><span class="pre">Ea</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.kinetics.ArrheniusFit.Ea" title="Link to this definition">#</a></dt>
+<dd><p>Fitted activation energy, in J/mol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ArrheniusFit.R_gas">
+<span class="sig-name descname"><span class="pre">R_gas</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8.31446261815324</span></span><a class="headerlink" href="#chemistrykit.kinetics.ArrheniusFit.R_gas" title="Link to this definition">#</a></dt>
+<dd><p>Gas constant used in the fit, in J mol^-1 K^-1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ArrheniusFit.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/arrhenius.html#ArrheniusFit.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ArrheniusFit.predict" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate the fitted Arrhenius equation at temperature(s) <cite>T</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperature(s), in K.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ArrheniusFit.r_squared">
+<span class="sig-name descname"><span class="pre">r_squared</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.kinetics.ArrheniusFit.r_squared" title="Link to this definition">#</a></dt>
+<dd><p>Coefficient of determination of the linear (ln k vs 1/T) fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.Brusselator">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">Brusselator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/oscillators.html#Brusselator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.Brusselator" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.kinetics.ReactionNetwork" title="chemistrykit.kinetics.core.base_system.ReactionNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReactionNetwork</span></code></a></p>
+<p>The Brusselator oscillating reaction network.</p>
+<p>Derived from four elementary steps (with B, D, E, and the source of
+X held as constant reservoirs; Prigogine &amp; Lefever 1968):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}A &amp;\to X \\
+2X + Y &amp;\to 3X \\
+B + X &amp;\to Y + D \\
+X &amp;\to E\end{split}\]</div>
+<p>which, in units where all four rate constants are 1, gives the net
+kinetics</p>
+<div class="math notranslate nohighlight">
+\[\frac{dX}{dt} = A - (B+1)X + X^2 Y, \qquad
+\frac{dY}{dt} = BX - X^2 Y\]</div>
+<p>The single fixed point <span class="math notranslate nohighlight">\((X^*, Y^*) = (A, B/A)\)</span> (see
+<a class="reference internal" href="#chemistrykit.kinetics.Brusselator.fixed_point" title="chemistrykit.kinetics.Brusselator.fixed_point"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fixed_point()</span></code></a>) undergoes a Hopf bifurcation at <span class="math notranslate nohighlight">\(B = 1 +
+A^2\)</span> (see <a class="reference internal" href="#chemistrykit.kinetics.Brusselator.is_above_hopf_threshold" title="chemistrykit.kinetics.Brusselator.is_above_hopf_threshold"><code class="xref py py-meth docutils literal notranslate"><span class="pre">is_above_hopf_threshold()</span></code></a>): below threshold the fixed
+point is a stable focus and concentrations relax to it; above
+threshold it is an unstable focus surrounded by a stable limit cycle,
+so concentrations settle into sustained oscillation instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial concentrations.</p></li>
+<li><p><strong>Y0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial concentrations.</p></li>
+<li><p><strong>A</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Brusselator parameters (both must be positive).</p></li>
+<li><p><strong>B</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Brusselator parameters (both must be positive).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.Brusselator.fixed_point">
+<span class="sig-name descname"><span class="pre">fixed_point</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/oscillators.html#Brusselator.fixed_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.Brusselator.fixed_point" title="Link to this definition">#</a></dt>
+<dd><p>Return the network’s single steady state <code class="docutils literal notranslate"><span class="pre">(X*,</span> <span class="pre">Y*)</span> <span class="pre">=</span> <span class="pre">(A,</span> <span class="pre">B/A)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray, shape (2,)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>The fixed point is exactly a zero of the vector field:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">system</span> <span class="o">=</span> <span class="n">Brusselator</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fp</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">fixed_point</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">system</span><span class="o">.</span><span class="n">rhs</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.Brusselator.is_above_hopf_threshold">
+<span class="sig-name descname"><span class="pre">is_above_hopf_threshold</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/oscillators.html#Brusselator.is_above_hopf_threshold"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.Brusselator.is_above_hopf_threshold" title="Link to this definition">#</a></dt>
+<dd><p>Whether <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">&gt;</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">A^2</span></code>, the Hopf-bifurcation onset of sustained oscillation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>bool</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Brusselator</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span><span class="o">.</span><span class="n">is_above_hopf_threshold</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Brusselator</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span><span class="o">.</span><span class="n">is_above_hopf_threshold</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.Brusselator.rhs">
+<span class="sig-name descname"><span class="pre">rhs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/oscillators.html#Brusselator.rhs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.Brusselator.rhs" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate <code class="docutils literal notranslate"><span class="pre">dC/dt</span></code> at <code class="docutils literal notranslate"><span class="pre">(state,</span> <span class="pre">t)</span></code>.</p>
+<p>A thin, plain-Python wrapper around <code class="docutils literal notranslate"><span class="pre">self._rhs_njit</span></code> (for
+interactive use / plotting outside a numba context).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>ndarray</em>) – Current concentration vector.</p></li>
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Current time.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.Brusselator.species">
+<span class="sig-name descname"><span class="pre">species</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><span class="pre">Sequence</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('X',</span> <span class="pre">'Y')</span></span><a class="headerlink" href="#chemistrykit.kinetics.Brusselator.species" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.FirstOrder">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">FirstOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/rate_laws.html#FirstOrder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.FirstOrder" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.kinetics.RateLaw" title="chemistrykit.kinetics.core.base_system.RateLaw"><code class="xref py py-class docutils literal notranslate"><span class="pre">RateLaw</span></code></a></p>
+<p>First-order kinetics: <code class="docutils literal notranslate"><span class="pre">d[A]/dt</span> <span class="pre">=</span> <span class="pre">-k[A]</span></code>.</p>
+<p>Integrated law: <span class="math notranslate nohighlight">\([A](t) = [A]_0 e^{-kt}\)</span>. The half-life
+<span class="math notranslate nohighlight">\(t_{1/2} = \ln(2)/k\)</span> is independent of the initial
+concentration – the defining signature of first-order kinetics
+(Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed., Ch. 20, Table
+20.3), used e.g. for radioactive decay and many unimolecular
+reactions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – First-order rate constant, in 1/time.</p></li>
+<li><p><strong>C0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial concentration <span class="math notranslate nohighlight">\([A]_0\)</span>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">law</span> <span class="o">=</span> <span class="n">FirstOrder</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">C0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">law</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">law</span><span class="o">.</span><span class="n">half_life</span><span class="p">(),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.FirstOrder.concentration">
+<span class="sig-name descname"><span class="pre">concentration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/rate_laws.html#FirstOrder.concentration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.FirstOrder.concentration" title="Link to this definition">#</a></dt>
+<dd><p>Return the reactant concentration at time(s) <cite>t</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.FirstOrder.half_life">
+<span class="sig-name descname"><span class="pre">half_life</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/rate_laws.html#FirstOrder.half_life"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.FirstOrder.half_life" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(t_{1/2} = \ln(2)/k\)</span>, independent of <span class="math notranslate nohighlight">\([A]_0\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.FirstOrder.rate">
+<span class="sig-name descname"><span class="pre">rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/rate_laws.html#FirstOrder.rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.FirstOrder.rate" title="Link to this definition">#</a></dt>
+<dd><p>Return the instantaneous rate <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">*</span> <span class="pre">[A](t)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Time at which to evaluate the rate; defaults to 0 (the
+initial rate <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">*</span> <span class="pre">C0</span></code>).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.KineticsResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">KineticsResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/core/base_system.html#KineticsResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.KineticsResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for the output of a <a class="reference internal" href="#chemistrykit.kinetics.ReactionNetwork.integrate" title="chemistrykit.kinetics.ReactionNetwork.integrate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ReactionNetwork.integrate()</span></code></a> call.</p>
+<p>Mirrors physicskit’s <code class="docutils literal notranslate"><span class="pre">SimulationResult</span></code> (a stable, dataclass return
+type consumed by visualizers), specialized to a named-species
+concentration trajectory instead of a phase-space one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>y</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>species</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><em>Sequence</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em>)</p></li>
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>)</p></li>
+<li><p><strong>extra</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.KineticsResult.concentration">
+<span class="sig-name descname"><span class="pre">concentration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/core/base_system.html#KineticsResult.concentration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.KineticsResult.concentration" title="Link to this definition">#</a></dt>
+<dd><p>Return the concentration trajectory of a single named species.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – A species name from <code class="docutils literal notranslate"><span class="pre">self.species</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (n_steps + 1,)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">KineticsResult</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]),</span> <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]]),</span> <span class="n">species</span><span class="o">=</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)</span>
+<span class="go">array([0. , 0.5])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.KineticsResult.extra">
+<span class="sig-name descname"><span class="pre">extra</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span><a class="headerlink" href="#chemistrykit.kinetics.KineticsResult.extra" title="Link to this definition">#</a></dt>
+<dd><p>Free-form slot for any additional diagnostics a system
+chooses to attach.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.KineticsResult.method">
+<span class="sig-name descname"><span class="pre">method</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></span><a class="headerlink" href="#chemistrykit.kinetics.KineticsResult.method" title="Link to this definition">#</a></dt>
+<dd><p>Name of the integrator used (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;rk4&quot;</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.KineticsResult.species">
+<span class="sig-name descname"><span class="pre">species</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><span class="pre">Sequence</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#chemistrykit.kinetics.KineticsResult.species" title="Link to this definition">#</a></dt>
+<dd><p>Species names, in column order matching <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a> of <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.KineticsResult.t">
+<span class="sig-name descname"><span class="pre">t</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.kinetics.KineticsResult.t" title="Link to this definition">#</a></dt>
+<dd><p>Time samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (n_steps + 1,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.KineticsResult.y">
+<span class="sig-name descname"><span class="pre">y</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.kinetics.KineticsResult.y" title="Link to this definition">#</a></dt>
+<dd><p>Concentration of every
+species (columns, in the order given by <code class="docutils literal notranslate"><span class="pre">species</span></code>) at each time
+sample (rows).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (n_steps + 1, n_species)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.MichaelisMentenFit">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">MichaelisMentenFit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Km</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_squared</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/enzyme.html#MichaelisMentenFit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.MichaelisMentenFit" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Result of a Lineweaver-Burk (double-reciprocal) linear fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Vmax</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>Km</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>r_squared</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.MichaelisMentenFit.Km">
+<span class="sig-name descname"><span class="pre">Km</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.kinetics.MichaelisMentenFit.Km" title="Link to this definition">#</a></dt>
+<dd><p>Fitted Michaelis constant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.MichaelisMentenFit.Vmax">
+<span class="sig-name descname"><span class="pre">Vmax</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.kinetics.MichaelisMentenFit.Vmax" title="Link to this definition">#</a></dt>
+<dd><p>Fitted maximum rate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.MichaelisMentenFit.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">S</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/enzyme.html#MichaelisMentenFit.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.MichaelisMentenFit.predict" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate the fitted Michaelis-Menten rate law at substrate concentration(s) <cite>S</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>S</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.MichaelisMentenFit.r_squared">
+<span class="sig-name descname"><span class="pre">r_squared</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.kinetics.MichaelisMentenFit.r_squared" title="Link to this definition">#</a></dt>
+<dd><p>Coefficient of determination of the linear (1/v vs 1/S) fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.MichaelisMentenProgress">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">MichaelisMentenProgress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">S0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Km</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/enzyme.html#MichaelisMentenProgress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.MichaelisMentenProgress" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.kinetics.ReactionNetwork" title="chemistrykit.kinetics.core.base_system.ReactionNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReactionNetwork</span></code></a></p>
+<p>Substrate-depletion progress curve under Michaelis-Menten kinetics.</p>
+<p>Integrates <code class="docutils literal notranslate"><span class="pre">d[S]/dt</span> <span class="pre">=</span> <span class="pre">-Vmax*[S]/(Km+[S])</span></code> forward in time via
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.integrators</span></code> – the “progress curve” an enzyme assay
+actually measures, as distinct from the <em>initial</em>-rate
+<a class="reference internal" href="#chemistrykit.kinetics.michaelis_menten_rate" title="chemistrykit.kinetics.michaelis_menten_rate"><code class="xref py py-func docutils literal notranslate"><span class="pre">michaelis_menten_rate()</span></code></a> used for a Lineweaver-Burk fit (Atkins &amp;
+de Paula, <em>Physical Chemistry</em>, 11th ed., Ch. 20.6). In the two
+asymptotic limits this reduces to the closed-form rate laws in
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.kinetics.systems.rate_laws</span></code>: zeroth order in <cite>S</cite>
+when <code class="docutils literal notranslate"><span class="pre">S0</span> <span class="pre">&gt;&gt;</span> <span class="pre">Km</span></code> (<a class="reference internal" href="#chemistrykit.kinetics.ZeroOrder" title="chemistrykit.kinetics.systems.rate_laws.ZeroOrder"><code class="xref py py-class docutils literal notranslate"><span class="pre">ZeroOrder</span></code></a>)
+and first order when <code class="docutils literal notranslate"><span class="pre">S0</span> <span class="pre">&lt;&lt;</span> <span class="pre">Km</span></code>
+(<a class="reference internal" href="#chemistrykit.kinetics.FirstOrder" title="chemistrykit.kinetics.systems.rate_laws.FirstOrder"><code class="xref py py-class docutils literal notranslate"><span class="pre">FirstOrder</span></code></a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>S0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial substrate concentration.</p></li>
+<li><p><strong>Vmax</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Michaelis-Menten parameters.</p></li>
+<li><p><strong>Km</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Michaelis-Menten parameters.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.MichaelisMentenProgress.rhs">
+<span class="sig-name descname"><span class="pre">rhs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/enzyme.html#MichaelisMentenProgress.rhs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.MichaelisMentenProgress.rhs" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate <code class="docutils literal notranslate"><span class="pre">dC/dt</span></code> at <code class="docutils literal notranslate"><span class="pre">(state,</span> <span class="pre">t)</span></code>.</p>
+<p>A thin, plain-Python wrapper around <code class="docutils literal notranslate"><span class="pre">self._rhs_njit</span></code> (for
+interactive use / plotting outside a numba context).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>ndarray</em>) – Current concentration vector.</p></li>
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Current time.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.MichaelisMentenProgress.species">
+<span class="sig-name descname"><span class="pre">species</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><span class="pre">Sequence</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('S',)</span></span><a class="headerlink" href="#chemistrykit.kinetics.MichaelisMentenProgress.species" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.RateLaw">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">RateLaw</span></span><a class="reference internal" href="../_modules/chemistrykit/kinetics/core/base_system.html#RateLaw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.RateLaw" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<p>Base class for a single elementary reaction’s integrated rate law.</p>
+<p>Subclasses implement the closed-form solution of <code class="docutils literal notranslate"><span class="pre">dC/dt</span> <span class="pre">=</span> <span class="pre">-rate(C)</span></code>
+(or, for zero order, <code class="docutils literal notranslate"><span class="pre">+rate</span></code> with a sign convention appropriate to
+that order) directly – there is nothing to numerically integrate for
+these textbook cases, unlike <a class="reference internal" href="#chemistrykit.kinetics.ReactionNetwork" title="chemistrykit.kinetics.ReactionNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReactionNetwork</span></code></a>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.RateLaw.concentration">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">concentration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/core/base_system.html#RateLaw.concentration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.RateLaw.concentration" title="Link to this definition">#</a></dt>
+<dd><p>Return the reactant concentration at time(s) <cite>t</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.RateLaw.half_life">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">half_life</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/core/base_system.html#RateLaw.half_life"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.RateLaw.half_life" title="Link to this definition">#</a></dt>
+<dd><p>Return the time for the concentration to fall to half its initial value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.RateLaw.rate">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/core/base_system.html#RateLaw.rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.RateLaw.rate" title="Link to this definition">#</a></dt>
+<dd><p>Return the instantaneous reaction rate at time(s) <cite>t</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Defaults to 0 (the initial rate) where the rate law does not
+need <cite>t</cite> explicitly.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ReactionNetwork">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">ReactionNetwork</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/core/base_system.html#ReactionNetwork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ReactionNetwork" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<p>Common base for a system of species evolving as <code class="docutils literal notranslate"><span class="pre">dC/dt</span> <span class="pre">=</span> <span class="pre">f(C,</span> <span class="pre">t)</span></code>.</p>
+<p>Concrete subclasses must set, in <code class="docutils literal notranslate"><span class="pre">__init__</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">self.species</span></code> : tuple of str – ordered species names.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self._rhs_njit</span></code> : an <code class="docutils literal notranslate"><span class="pre">&#64;njit</span></code> dispatcher with signature
+<code class="docutils literal notranslate"><span class="pre">(state,</span> <span class="pre">t,</span> <span class="pre">params)</span> <span class="pre">-&gt;</span> <span class="pre">dstate</span></code> (the
+<code class="xref py py-data docutils literal notranslate"><span class="pre">chemistrykit.integrators.RHSFunc</span></code> convention).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.params</span></code> : ndarray – the parameter vector read by
+<code class="docutils literal notranslate"><span class="pre">self._rhs_njit</span></code> (or <code class="docutils literal notranslate"><span class="pre">np.empty(0)</span></code> if every rate constant is
+instead baked into the njit closure itself, as
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.kinetics.systems.networks</span></code>’s mass-action engine
+does with its stoichiometry/rate-constant arrays).</p></li>
+</ul>
+<p>and call <code class="docutils literal notranslate"><span class="pre">super().__init__(state0)</span></code>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ReactionNetwork.integrate">
+<span class="sig-name descname"><span class="pre">integrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_span</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rk4'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/core/base_system.html#ReactionNetwork.integrate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ReactionNetwork.integrate" title="Link to this definition">#</a></dt>
+<dd><p>Integrate the reaction network forward in time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t_span</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – <code class="docutils literal notranslate"><span class="pre">(t0,</span> <span class="pre">t1)</span></code>, start and end time.</p></li>
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Fixed step size, required for <code class="docutils literal notranslate"><span class="pre">method=&quot;rk4&quot;</span></code>. For
+<code class="docutils literal notranslate"><span class="pre">method=&quot;dopri5&quot;</span></code> it is instead used as the <em>initial</em> step
+size attempt (defaulting to <code class="docutils literal notranslate"><span class="pre">(t1</span> <span class="pre">-</span> <span class="pre">t0)</span> <span class="pre">/</span> <span class="pre">1000</span></code>), since the
+adaptive integrator adjusts it automatically.</p></li>
+<li><p><strong>method</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Integrator to use. <code class="docutils literal notranslate"><span class="pre">&quot;dopri5&quot;</span></code> (adaptive Dormand-Prince) is
+recommended for stiff-ish networks with widely separated rate
+constants (e.g. a steady-state-approximation chain).</p></li>
+<li><p><strong>**kwargs</strong> – Forwarded to <code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.integrators.dopri5_integrate()</span></code>
+(e.g. <code class="docutils literal notranslate"><span class="pre">rtol</span></code>, <code class="docutils literal notranslate"><span class="pre">atol</span></code>) when <code class="docutils literal notranslate"><span class="pre">method=&quot;dopri5&quot;</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.kinetics.KineticsResult" title="chemistrykit.kinetics.core.base_system.KineticsResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">KineticsResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>KineticsResult</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ReactionNetwork.params">
+<span class="sig-name descname"><span class="pre">params</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">array([],</span> <span class="pre">dtype=float64)</span></span><a class="headerlink" href="#chemistrykit.kinetics.ReactionNetwork.params" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ReactionNetwork.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/core/base_system.html#ReactionNetwork.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ReactionNetwork.reset" title="Link to this definition">#</a></dt>
+<dd><p>Reset the system’s state and clock.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state0</strong> (<em>array-like</em><em>, </em><em>optional</em>) – New state; if omitted, the current state is kept.</p></li>
+<li><p><strong>t0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – New time.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray</em> – The (possibly updated) current state.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ReactionNetwork.rhs">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">rhs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/core/base_system.html#ReactionNetwork.rhs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ReactionNetwork.rhs" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate <code class="docutils literal notranslate"><span class="pre">dC/dt</span></code> at <code class="docutils literal notranslate"><span class="pre">(state,</span> <span class="pre">t)</span></code>.</p>
+<p>A thin, plain-Python wrapper around <code class="docutils literal notranslate"><span class="pre">self._rhs_njit</span></code> (for
+interactive use / plotting outside a numba context).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Current concentration vector.</p></li>
+<li><p><strong>t</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Current time.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ReactionNetwork.species">
+<span class="sig-name descname"><span class="pre">species</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><span class="pre">Sequence</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></span><a class="headerlink" href="#chemistrykit.kinetics.ReactionNetwork.species" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.SecondOrder">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">SecondOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/rate_laws.html#SecondOrder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.SecondOrder" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.kinetics.RateLaw" title="chemistrykit.kinetics.core.base_system.RateLaw"><code class="xref py py-class docutils literal notranslate"><span class="pre">RateLaw</span></code></a></p>
+<p>Second-order kinetics (single reactant): <code class="docutils literal notranslate"><span class="pre">d[A]/dt</span> <span class="pre">=</span> <span class="pre">-k[A]^2</span></code>.</p>
+<p>Integrated law: <span class="math notranslate nohighlight">\(1/[A](t) = 1/[A]_0 + kt\)</span>, i.e.
+<span class="math notranslate nohighlight">\([A](t) = [A]_0 / (1 + k[A]_0 t)\)</span>. Unlike first order, the
+half-life <span class="math notranslate nohighlight">\(t_{1/2} = 1/(k[A]_0)\)</span> <em>does</em> depend on the initial
+concentration (Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed.,
+Ch. 20, Table 20.3).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Second-order rate constant, in 1/(concentration*time).</p></li>
+<li><p><strong>C0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial concentration <span class="math notranslate nohighlight">\([A]_0\)</span>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">law</span> <span class="o">=</span> <span class="n">SecondOrder</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">C0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">law</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">law</span><span class="o">.</span><span class="n">half_life</span><span class="p">(),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.SecondOrder.concentration">
+<span class="sig-name descname"><span class="pre">concentration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/rate_laws.html#SecondOrder.concentration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.SecondOrder.concentration" title="Link to this definition">#</a></dt>
+<dd><p>Return the reactant concentration at time(s) <cite>t</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.SecondOrder.half_life">
+<span class="sig-name descname"><span class="pre">half_life</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/rate_laws.html#SecondOrder.half_life"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.SecondOrder.half_life" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(t_{1/2} = 1/(k[A]_0)\)</span>, unlike first order, depends on <span class="math notranslate nohighlight">\([A]_0\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.SecondOrder.rate">
+<span class="sig-name descname"><span class="pre">rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/rate_laws.html#SecondOrder.rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.SecondOrder.rate" title="Link to this definition">#</a></dt>
+<dd><p>Return the instantaneous rate <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">*</span> <span class="pre">[A](t)^2</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Time at which to evaluate the rate; defaults to 0 (the
+initial rate <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">*</span> <span class="pre">C0^2</span></code>).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.StoichiometricNetwork">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">StoichiometricNetwork</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">species</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stoich_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rate_constants</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reactant_orders</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/networks.html#StoichiometricNetwork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.StoichiometricNetwork" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.kinetics.ReactionNetwork" title="chemistrykit.kinetics.core.base_system.ReactionNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReactionNetwork</span></code></a></p>
+<p>A network of elementary mass-action reactions, integrated numerically.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>species</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – Ordered species names.</p></li>
+<li><p><strong>stoich_matrix</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_species</em><em>, </em><em>n_reactions</em><em>)</em>) – Net stoichiometric coefficient of each species in each reaction
+(negative for a net-consumed species, positive for net-produced).</p></li>
+<li><p><strong>rate_constants</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_reactions</em><em>,</em><em>)</em>) – Rate constant of each reaction.</p></li>
+<li><p><strong>reactant_orders</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_species</em><em>, </em><em>n_reactions</em><em>)</em>) – Reactant-side order of each species in each reaction’s mass-action
+rate law (0 for a species that is not a reactant in that
+reaction; for an elementary reaction this equals the reactant’s
+stoichiometric coefficient, but is given independently so
+non-elementary/pseudo-order rate laws can also be modeled).</p></li>
+<li><p><strong>state0</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_species</em><em>,</em><em>)</em>) – Initial concentrations, in <cite>species</cite> order.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.StoichiometricNetwork.consecutive">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">consecutive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/networks.html#StoichiometricNetwork.consecutive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.StoichiometricNetwork.consecutive" title="Link to this definition">#</a></dt>
+<dd><p>Build the consecutive (chain) mechanism <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">-&gt;</span> <span class="pre">B</span></code> (k1), <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">-&gt;</span> <span class="pre">C</span></code> (k2).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – First-order rate constants of the two steps.</p></li>
+<li><p><strong>k2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – First-order rate constants of the two steps.</p></li>
+<li><p><strong>A0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial concentration of A.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.kinetics.StoichiometricNetwork" title="chemistrykit.kinetics.systems.networks.StoichiometricNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">StoichiometricNetwork</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>StoichiometricNetwork</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">StoichiometricNetwork</span><span class="o">.</span><span class="n">consecutive</span><span class="p">(</span><span class="n">k1</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">A0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"C"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.StoichiometricNetwork.parallel">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">parallel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/networks.html#StoichiometricNetwork.parallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.StoichiometricNetwork.parallel" title="Link to this definition">#</a></dt>
+<dd><p>Build the parallel (competing) mechanism <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">-&gt;</span> <span class="pre">B</span></code> (k1), <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">-&gt;</span> <span class="pre">C</span></code> (k2).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – First-order rate constants of the two competing channels.</p></li>
+<li><p><strong>k2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – First-order rate constants of the two competing channels.</p></li>
+<li><p><strong>A0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial concentration of A.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.kinetics.StoichiometricNetwork" title="chemistrykit.kinetics.systems.networks.StoichiometricNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">StoichiometricNetwork</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>StoichiometricNetwork</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>The product ratio [B]/[C] is exactly k1/k2 at every time, the
+classic parallel-reaction result (Espenson, <em>Chemical Kinetics
+and Reaction Mechanisms</em>, 2nd ed., Ch. 4):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">StoichiometricNetwork</span><span class="o">.</span><span class="n">parallel</span><span class="p">(</span><span class="n">k1</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">A0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"C"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.StoichiometricNetwork.reversible">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">reversible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/networks.html#StoichiometricNetwork.reversible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.StoichiometricNetwork.reversible" title="Link to this definition">#</a></dt>
+<dd><p>Build the reversible mechanism <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&lt;-&gt;</span> <span class="pre">B</span></code> (forward kf, reverse kr).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kf</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Forward and reverse first-order rate constants.</p></li>
+<li><p><strong>kr</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Forward and reverse first-order rate constants.</p></li>
+<li><p><strong>A0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial concentrations.</p></li>
+<li><p><strong>B0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial concentrations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.kinetics.StoichiometricNetwork" title="chemistrykit.kinetics.systems.networks.StoichiometricNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">StoichiometricNetwork</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>StoichiometricNetwork</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">StoichiometricNetwork</span><span class="o">.</span><span class="n">reversible</span><span class="p">(</span><span class="n">kf</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">kr</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">A0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">0.333</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.StoichiometricNetwork.rhs">
+<span class="sig-name descname"><span class="pre">rhs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/networks.html#StoichiometricNetwork.rhs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.StoichiometricNetwork.rhs" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate <code class="docutils literal notranslate"><span class="pre">dC/dt</span></code> at <code class="docutils literal notranslate"><span class="pre">(state,</span> <span class="pre">t)</span></code>.</p>
+<p>A thin, plain-Python wrapper around <code class="docutils literal notranslate"><span class="pre">self._rhs_njit</span></code> (for
+interactive use / plotting outside a numba context).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>]</span>) – Current concentration vector.</p></li>
+<li><p><strong>t</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Current time.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.NDArray" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NDArray</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.double" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">double</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ZeroOrder">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">ZeroOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/rate_laws.html#ZeroOrder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ZeroOrder" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.kinetics.RateLaw" title="chemistrykit.kinetics.core.base_system.RateLaw"><code class="xref py py-class docutils literal notranslate"><span class="pre">RateLaw</span></code></a></p>
+<p>Zero-order kinetics: <code class="docutils literal notranslate"><span class="pre">d[A]/dt</span> <span class="pre">=</span> <span class="pre">-k</span></code>.</p>
+<p>Integrated law: <span class="math notranslate nohighlight">\([A](t) = [A]_0 - kt\)</span>, valid only while
+<span class="math notranslate nohighlight">\([A](t) \geq 0\)</span> – physically, the reaction stops (or crosses
+over to a different rate law) once the reactant is exhausted, at
+<span class="math notranslate nohighlight">\(t = [A]_0 / k\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Zero-order rate constant, in concentration/time.</p></li>
+<li><p><strong>C0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial concentration <span class="math notranslate nohighlight">\([A]_0\)</span>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">law</span> <span class="o">=</span> <span class="n">ZeroOrder</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">C0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">law</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">law</span><span class="o">.</span><span class="n">half_life</span><span class="p">(),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">5.0</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ZeroOrder.concentration">
+<span class="sig-name descname"><span class="pre">concentration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/rate_laws.html#ZeroOrder.concentration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ZeroOrder.concentration" title="Link to this definition">#</a></dt>
+<dd><p>Return the reactant concentration at time(s) <cite>t</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ZeroOrder.half_life">
+<span class="sig-name descname"><span class="pre">half_life</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/rate_laws.html#ZeroOrder.half_life"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ZeroOrder.half_life" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(t_{1/2} = [A]_0 / (2k)\)</span>, per Atkins &amp; de Paula Table 20.3.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ZeroOrder.rate">
+<span class="sig-name descname"><span class="pre">rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/rate_laws.html#ZeroOrder.rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ZeroOrder.rate" title="Link to this definition">#</a></dt>
+<dd><p>Return the (constant) rate <code class="docutils literal notranslate"><span class="pre">k</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Unused (the rate does not depend on time or concentration for
+a zero-order reaction); accepted for interface consistency
+with <a class="reference internal" href="#chemistrykit.kinetics.FirstOrder" title="chemistrykit.kinetics.FirstOrder"><code class="xref py py-class docutils literal notranslate"><span class="pre">FirstOrder</span></code></a>/<a class="reference internal" href="#chemistrykit.kinetics.SecondOrder" title="chemistrykit.kinetics.SecondOrder"><code class="xref py py-class docutils literal notranslate"><span class="pre">SecondOrder</span></code></a>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.arrhenius_rate_constant">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">arrhenius_rate_constant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ea</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.31446261815324</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/arrhenius.html#arrhenius_rate_constant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.arrhenius_rate_constant" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate the Arrhenius equation <span class="math notranslate nohighlight">\(k = A e^{-E_a/(RT)}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pre-exponential (“frequency”) factor, in the same units as <cite>k</cite>.</p></li>
+<li><p><strong>Ea</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Activation energy, in J/mol.</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperature(s), in K.</p></li>
+<li><p><strong>R_gas</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Gas constant, in J mol^-1 K^-1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Rate constant(s) <cite>k</cite>, in the same units as <cite>A</cite>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">arrhenius_rate_constant</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="mf">1e13</span><span class="p">,</span> <span class="n">Ea</span><span class="o">=</span><span class="mf">50e3</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">300.0</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">19696.84</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.competitive_inhibition_rate">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">competitive_inhibition_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">S</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">I</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Km</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ki</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/enzyme.html#competitive_inhibition_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.competitive_inhibition_rate" title="Link to this definition">#</a></dt>
+<dd><p>Competitive-inhibition Michaelis-Menten rate law.</p>
+<p>The inhibitor competes with substrate for the active site, which is
+equivalent to inflating the apparent <span class="math notranslate nohighlight">\(K_m\)</span> by a factor
+<span class="math notranslate nohighlight">\(\alpha = 1 + [I]/K_i\)</span> while leaving <span class="math notranslate nohighlight">\(V_{max}\)</span> unchanged
+(Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed., Ch. 20.6):</p>
+<div class="math notranslate nohighlight">
+\[v = \frac{V_{max}[S]}{K_m (1 + [I]/K_i) + [S]}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>S</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Substrate concentration(s).</p></li>
+<li><p><strong>I</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Inhibitor concentration.</p></li>
+<li><p><strong>Vmax</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Uninhibited Michaelis-Menten parameters.</p></li>
+<li><p><strong>Km</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Uninhibited Michaelis-Menten parameters.</p></li>
+<li><p><strong>Ki</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Inhibitor dissociation constant.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>With no inhibitor (<code class="docutils literal notranslate"><span class="pre">I=0</span></code>) this reduces exactly to the uninhibited
+rate law:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">competitive_inhibition_rate</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">Vmax</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">Km</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">Ki</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span>
+<span class="go">5.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.consecutive_analytic">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">consecutive_analytic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/networks.html#consecutive_analytic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.consecutive_analytic" title="Link to this definition">#</a></dt>
+<dd><p>Closed-form <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">-&gt;</span> <span class="pre">B</span> <span class="pre">-&gt;</span> <span class="pre">C</span></code> concentrations (Bateman’s equations).</p>
+<p>See Espenson, <em>Chemical Kinetics and Reaction Mechanisms</em>, 2nd ed.,
+Ch. 4.2, or the original: H. Bateman, <em>Proc. Cambridge Philos. Soc.</em>
+15, 423 (1910) (radioactive decay chains have the identical
+mathematical structure). The <code class="docutils literal notranslate"><span class="pre">k1</span> <span class="pre">!=</span> <span class="pre">k2</span></code> formula below has a
+removable singularity at <code class="docutils literal notranslate"><span class="pre">k1</span> <span class="pre">==</span> <span class="pre">k2</span></code>; the degenerate limit
+<span class="math notranslate nohighlight">\([B](t) = A_0 k_1 t\,e^{-k_1 t}\)</span> is used automatically in that
+case (obtained by L’Hopital’s rule / directly integrating
+<span class="math notranslate nohighlight">\(d[B]/dt = k_1[A] - k_1[B]\)</span> with equal rate constants).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial concentration of A.</p></li>
+<li><p><strong>k1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Rate constants of <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">-&gt;</span> <span class="pre">B</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">-&gt;</span> <span class="pre">C</span></code> respectively.</p></li>
+<li><p><strong>k2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Rate constants of <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">-&gt;</span> <span class="pre">B</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">-&gt;</span> <span class="pre">C</span></code> respectively.</p></li>
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Time(s) at which to evaluate the concentrations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>A, B, C</strong> (<em>float or ndarray</em>)</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Mass balance holds exactly at every time:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">consecutive_analytic</span><span class="p">(</span><span class="n">A0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k1</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">A</span> <span class="o">+</span> <span class="n">B</span> <span class="o">+</span> <span class="n">C</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.fit_arrhenius">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">fit_arrhenius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.31446261815324</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/arrhenius.html#fit_arrhenius"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.fit_arrhenius" title="Link to this definition">#</a></dt>
+<dd><p>Fit rate constant vs. temperature data to the Arrhenius equation.</p>
+<p>Linearizes <span class="math notranslate nohighlight">\(\ln k = \ln A - E_a/R \cdot (1/T)\)</span> and fits by
+ordinary least squares – the standard “Arrhenius plot” method (Atkins
+&amp; de Paula, <em>Physical Chemistry</em>, 11th ed., Ch. 20.3): plotting
+<span class="math notranslate nohighlight">\(\ln k\)</span> against <span class="math notranslate nohighlight">\(1/T\)</span> gives a straight line of slope
+<span class="math notranslate nohighlight">\(-E_a/R\)</span> and intercept <span class="math notranslate nohighlight">\(\ln A\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperatures, in K (at least 2 distinct values).</p></li>
+<li><p><strong>k</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Rate constants measured at each temperature in <cite>T</cite>, same units
+throughout.</p></li>
+<li><p><strong>R_gas</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Gas constant, in J mol^-1 K^-1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.kinetics.ArrheniusFit" title="chemistrykit.kinetics.systems.arrhenius.ArrheniusFit"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrheniusFit</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ArrheniusFit</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Generate exact data from a known (Ea, A) and recover them:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">280.0</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">,</span> <span class="mf">320.0</span><span class="p">,</span> <span class="mf">340.0</span><span class="p">,</span> <span class="mf">360.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span> <span class="o">=</span> <span class="n">arrhenius_rate_constant</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="mf">5e12</span><span class="p">,</span> <span class="n">Ea</span><span class="o">=</span><span class="mf">60e3</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fit</span> <span class="o">=</span> <span class="n">fit_arrhenius</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">Ea</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">60000.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">r_squared</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.fit_lineweaver_burk">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">fit_lineweaver_burk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">S</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/enzyme.html#fit_lineweaver_burk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.fit_lineweaver_burk" title="Link to this definition">#</a></dt>
+<dd><p>Fit substrate/rate data via the Lineweaver-Burk linearization.</p>
+<p>Inverting the Michaelis-Menten equation gives the “double-reciprocal”
+linear form (Lineweaver &amp; Burk, 1934; Atkins &amp; de Paula, <em>Physical
+Chemistry</em>, 11th ed., Ch. 20.6):</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{v} = \frac{K_m}{V_{max}} \cdot \frac{1}{[S]} + \frac{1}{V_{max}}\]</div>
+<p>so plotting <span class="math notranslate nohighlight">\(1/v\)</span> against <span class="math notranslate nohighlight">\(1/[S]\)</span> gives a straight line
+of slope <span class="math notranslate nohighlight">\(K_m/V_{max}\)</span> and intercept <span class="math notranslate nohighlight">\(1/V_{max}\)</span>, fit here
+by ordinary least squares.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>S</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Substrate concentrations (at least 2 distinct, positive values).</p></li>
+<li><p><strong>v</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Initial rates measured at each concentration in <cite>S</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.kinetics.MichaelisMentenFit" title="chemistrykit.kinetics.systems.enzyme.MichaelisMentenFit"><code class="xref py py-class docutils literal notranslate"><span class="pre">MichaelisMentenFit</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>MichaelisMentenFit</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Generate exact data from known (Vmax, Km) and recover them:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">michaelis_menten_rate</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">Vmax</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">Km</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fit</span> <span class="o">=</span> <span class="n">fit_lineweaver_burk</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">Vmax</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">8.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">Km</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.michaelis_menten_rate">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">michaelis_menten_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">S</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Km</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/enzyme.html#michaelis_menten_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.michaelis_menten_rate" title="Link to this definition">#</a></dt>
+<dd><p>Michaelis-Menten rate law <span class="math notranslate nohighlight">\(v = V_{max}[S] / (K_m + [S])\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>S</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Substrate concentration(s).</p></li>
+<li><p><strong>Vmax</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Maximum reaction rate (attained as <span class="math notranslate nohighlight">\([S] \to \infty\)</span>).</p></li>
+<li><p><strong>Km</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Michaelis constant: the substrate concentration at which
+<span class="math notranslate nohighlight">\(v = V_{max}/2\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>At <code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">Km</span></code> the rate is exactly half of <code class="docutils literal notranslate"><span class="pre">Vmax</span></code>, by construction:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">michaelis_menten_rate</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">Vmax</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">Km</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">5.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.noncompetitive_inhibition_rate">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">noncompetitive_inhibition_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">S</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">I</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Km</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ki</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/enzyme.html#noncompetitive_inhibition_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.noncompetitive_inhibition_rate" title="Link to this definition">#</a></dt>
+<dd><p>Noncompetitive-inhibition Michaelis-Menten rate law.</p>
+<p>The inhibitor binds a separate site with equal affinity for the free
+enzyme and the enzyme-substrate complex, which is equivalent to
+deflating the apparent <span class="math notranslate nohighlight">\(V_{max}\)</span> by <span class="math notranslate nohighlight">\(\alpha = 1 + [I]/K_i\)</span>
+while leaving <span class="math notranslate nohighlight">\(K_m\)</span> unchanged (Atkins &amp; de Paula, <em>Physical
+Chemistry</em>, 11th ed., Ch. 20.6):</p>
+<div class="math notranslate nohighlight">
+\[v = \frac{V_{max}[S]}{\alpha (K_m + [S])}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>S</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Substrate concentration(s).</p></li>
+<li><p><strong>I</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Inhibitor concentration.</p></li>
+<li><p><strong>Vmax</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Uninhibited Michaelis-Menten parameters.</p></li>
+<li><p><strong>Km</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Uninhibited Michaelis-Menten parameters.</p></li>
+<li><p><strong>Ki</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Inhibitor dissociation constant.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>With no inhibitor (<code class="docutils literal notranslate"><span class="pre">I=0</span></code>) this reduces exactly to the uninhibited
+rate law:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">noncompetitive_inhibition_rate</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">Vmax</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">Km</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">Ki</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span>
+<span class="go">5.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.reversible_analytic">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">reversible_analytic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/networks.html#reversible_analytic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.reversible_analytic" title="Link to this definition">#</a></dt>
+<dd><p>Closed-form <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&lt;-&gt;</span> <span class="pre">B</span></code> relaxation to equilibrium.</p>
+<p>For <span class="math notranslate nohighlight">\(d[A]/dt = -k_f[A] + k_r[B]\)</span> with <span class="math notranslate nohighlight">\([A]+[B] = A_0+B_0\)</span>
+conserved, the solution relaxes exponentially to equilibrium with
+relaxation rate <span class="math notranslate nohighlight">\(k_f + k_r\)</span> (Atkins &amp; de Paula, <em>Physical
+Chemistry</em>, 11th ed., Ch. 20.4):</p>
+<div class="math notranslate nohighlight">
+\[[A](t) = [A]_{eq} + ([A]_0 - [A]_{eq}) e^{-(k_f+k_r)t}, \quad
+[A]_{eq} = \frac{k_r ([A]_0+[B]_0)}{k_f+k_r}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial concentration of A.</p></li>
+<li><p><strong>kf</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Forward and reverse rate constants.</p></li>
+<li><p><strong>kr</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Forward and reverse rate constants.</p></li>
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Time(s) at which to evaluate the concentrations.</p></li>
+<li><p><strong>B0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial concentration of B.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>A, B</strong> (<em>float or ndarray</em>)</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">reversible_analytic</span><span class="p">(</span><span class="n">A0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">kf</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">kr</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mf">1e6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="mi">3</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">B</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">(0.333, 0.667)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ssa_intermediate_concentration">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">ssa_intermediate_concentration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/networks.html#ssa_intermediate_concentration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ssa_intermediate_concentration" title="Link to this definition">#</a></dt>
+<dd><p>Steady-state-approximation (SSA) estimate of the intermediate [B].</p>
+<p>When the second step is much faster than the first (<span class="math notranslate nohighlight">\(k_2 \gg
+k_1\)</span>), the intermediate B is consumed almost as fast as it forms, so
+<span class="math notranslate nohighlight">\(d[B]/dt \approx 0\)</span> at all times after a brief induction period
+– the steady-state approximation (Espenson, <em>Chemical Kinetics and
+Reaction Mechanisms</em>, 2nd ed., Ch. 5.1). Applying it to
+<span class="math notranslate nohighlight">\(d[B]/dt = k_1[A] - k_2[B] = 0\)</span> gives
+<span class="math notranslate nohighlight">\([B]_{ssa} = (k_1/k_2)[A](t) = (k_1/k_2) A_0 e^{-k_1 t}\)</span>, which
+should agree closely with <a class="reference internal" href="#chemistrykit.kinetics.consecutive_analytic" title="chemistrykit.kinetics.consecutive_analytic"><code class="xref py py-func docutils literal notranslate"><span class="pre">consecutive_analytic()</span></code></a>’s exact
+<span class="math notranslate nohighlight">\([B](t)\)</span> whenever <span class="math notranslate nohighlight">\(k_2/k_1\)</span> is large.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial concentration of A.</p></li>
+<li><p><strong>k1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Rate constants of <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">-&gt;</span> <span class="pre">B</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">-&gt;</span> <span class="pre">C</span></code> respectively.</p></li>
+<li><p><strong>k2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Rate constants of <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">-&gt;</span> <span class="pre">B</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">-&gt;</span> <span class="pre">C</span></code> respectively.</p></li>
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Time(s) at which to evaluate the approximation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>The SSA error shrinks as k2/k1 grows:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">errs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">k2</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">_</span><span class="p">,</span> <span class="n">B_exact</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">consecutive_analytic</span><span class="p">(</span><span class="n">A0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k1</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="n">k2</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">B_ssa</span> <span class="o">=</span> <span class="n">ssa_intermediate_concentration</span><span class="p">(</span><span class="n">A0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k1</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="n">k2</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">errs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">B_exact</span> <span class="o">-</span> <span class="n">B_ssa</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">errs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">errs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">errs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="electrochem.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">chemistrykit.electrochem</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="md.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">chemistrykit.md</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ArrheniusFit"><code class="docutils literal notranslate"><span class="pre">ArrheniusFit</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ArrheniusFit.A"><code class="docutils literal notranslate"><span class="pre">ArrheniusFit.A</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ArrheniusFit.Ea"><code class="docutils literal notranslate"><span class="pre">ArrheniusFit.Ea</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ArrheniusFit.R_gas"><code class="docutils literal notranslate"><span class="pre">ArrheniusFit.R_gas</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ArrheniusFit.predict"><code class="docutils literal notranslate"><span class="pre">ArrheniusFit.predict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ArrheniusFit.r_squared"><code class="docutils literal notranslate"><span class="pre">ArrheniusFit.r_squared</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.Brusselator"><code class="docutils literal notranslate"><span class="pre">Brusselator</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.Brusselator.fixed_point"><code class="docutils literal notranslate"><span class="pre">Brusselator.fixed_point()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.Brusselator.is_above_hopf_threshold"><code class="docutils literal notranslate"><span class="pre">Brusselator.is_above_hopf_threshold()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.Brusselator.rhs"><code class="docutils literal notranslate"><span class="pre">Brusselator.rhs()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.Brusselator.species"><code class="docutils literal notranslate"><span class="pre">Brusselator.species</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.FirstOrder"><code class="docutils literal notranslate"><span class="pre">FirstOrder</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.FirstOrder.concentration"><code class="docutils literal notranslate"><span class="pre">FirstOrder.concentration()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.FirstOrder.half_life"><code class="docutils literal notranslate"><span class="pre">FirstOrder.half_life()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.FirstOrder.rate"><code class="docutils literal notranslate"><span class="pre">FirstOrder.rate()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.KineticsResult"><code class="docutils literal notranslate"><span class="pre">KineticsResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.KineticsResult.concentration"><code class="docutils literal notranslate"><span class="pre">KineticsResult.concentration()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.KineticsResult.extra"><code class="docutils literal notranslate"><span class="pre">KineticsResult.extra</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.KineticsResult.method"><code class="docutils literal notranslate"><span class="pre">KineticsResult.method</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.KineticsResult.species"><code class="docutils literal notranslate"><span class="pre">KineticsResult.species</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.KineticsResult.t"><code class="docutils literal notranslate"><span class="pre">KineticsResult.t</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.KineticsResult.y"><code class="docutils literal notranslate"><span class="pre">KineticsResult.y</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.MichaelisMentenFit"><code class="docutils literal notranslate"><span class="pre">MichaelisMentenFit</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.MichaelisMentenFit.Km"><code class="docutils literal notranslate"><span class="pre">MichaelisMentenFit.Km</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.MichaelisMentenFit.Vmax"><code class="docutils literal notranslate"><span class="pre">MichaelisMentenFit.Vmax</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.MichaelisMentenFit.predict"><code class="docutils literal notranslate"><span class="pre">MichaelisMentenFit.predict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.MichaelisMentenFit.r_squared"><code class="docutils literal notranslate"><span class="pre">MichaelisMentenFit.r_squared</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.MichaelisMentenProgress"><code class="docutils literal notranslate"><span class="pre">MichaelisMentenProgress</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.MichaelisMentenProgress.rhs"><code class="docutils literal notranslate"><span class="pre">MichaelisMentenProgress.rhs()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.MichaelisMentenProgress.species"><code class="docutils literal notranslate"><span class="pre">MichaelisMentenProgress.species</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.RateLaw"><code class="docutils literal notranslate"><span class="pre">RateLaw</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.RateLaw.concentration"><code class="docutils literal notranslate"><span class="pre">RateLaw.concentration()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.RateLaw.half_life"><code class="docutils literal notranslate"><span class="pre">RateLaw.half_life()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.RateLaw.rate"><code class="docutils literal notranslate"><span class="pre">RateLaw.rate()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ReactionNetwork"><code class="docutils literal notranslate"><span class="pre">ReactionNetwork</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ReactionNetwork.integrate"><code class="docutils literal notranslate"><span class="pre">ReactionNetwork.integrate()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ReactionNetwork.params"><code class="docutils literal notranslate"><span class="pre">ReactionNetwork.params</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ReactionNetwork.reset"><code class="docutils literal notranslate"><span class="pre">ReactionNetwork.reset()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ReactionNetwork.rhs"><code class="docutils literal notranslate"><span class="pre">ReactionNetwork.rhs()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ReactionNetwork.species"><code class="docutils literal notranslate"><span class="pre">ReactionNetwork.species</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.SecondOrder"><code class="docutils literal notranslate"><span class="pre">SecondOrder</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.SecondOrder.concentration"><code class="docutils literal notranslate"><span class="pre">SecondOrder.concentration()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.SecondOrder.half_life"><code class="docutils literal notranslate"><span class="pre">SecondOrder.half_life()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.SecondOrder.rate"><code class="docutils literal notranslate"><span class="pre">SecondOrder.rate()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.StoichiometricNetwork"><code class="docutils literal notranslate"><span class="pre">StoichiometricNetwork</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.StoichiometricNetwork.consecutive"><code class="docutils literal notranslate"><span class="pre">StoichiometricNetwork.consecutive()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.StoichiometricNetwork.parallel"><code class="docutils literal notranslate"><span class="pre">StoichiometricNetwork.parallel()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.StoichiometricNetwork.reversible"><code class="docutils literal notranslate"><span class="pre">StoichiometricNetwork.reversible()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.StoichiometricNetwork.rhs"><code class="docutils literal notranslate"><span class="pre">StoichiometricNetwork.rhs()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ZeroOrder"><code class="docutils literal notranslate"><span class="pre">ZeroOrder</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ZeroOrder.concentration"><code class="docutils literal notranslate"><span class="pre">ZeroOrder.concentration()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ZeroOrder.half_life"><code class="docutils literal notranslate"><span class="pre">ZeroOrder.half_life()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ZeroOrder.rate"><code class="docutils literal notranslate"><span class="pre">ZeroOrder.rate()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.arrhenius_rate_constant"><code class="docutils literal notranslate"><span class="pre">arrhenius_rate_constant()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.competitive_inhibition_rate"><code class="docutils literal notranslate"><span class="pre">competitive_inhibition_rate()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.consecutive_analytic"><code class="docutils literal notranslate"><span class="pre">consecutive_analytic()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.fit_arrhenius"><code class="docutils literal notranslate"><span class="pre">fit_arrhenius()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.fit_lineweaver_burk"><code class="docutils literal notranslate"><span class="pre">fit_lineweaver_burk()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.michaelis_menten_rate"><code class="docutils literal notranslate"><span class="pre">michaelis_menten_rate()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.noncompetitive_inhibition_rate"><code class="docutils literal notranslate"><span class="pre">noncompetitive_inhibition_rate()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.reversible_analytic"><code class="docutils literal notranslate"><span class="pre">reversible_analytic()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ssa_intermediate_concentration"><code class="docutils literal notranslate"><span class="pre">ssa_intermediate_concentration()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/api/kinetics.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, chemistrykit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
