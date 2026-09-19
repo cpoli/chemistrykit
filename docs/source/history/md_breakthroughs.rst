@@ -1,6 +1,9 @@
 Breakthroughs in Molecular Dynamics
 ======================================
 
+
+.. include:: /_generated/nav/md.rst
+
 .. epigraph::
 
    "Everything that living things do can be understood in terms of the
@@ -73,8 +76,8 @@ The specific repulsive exponent of 12 is, by Lennard-Jones's own later
 account, chosen mainly for its convenient algebraic relationship to the
 :math:`r^{-6}` attractive term rather than derived from first-principles
 quantum theory -- the true short-range repulsion is closer to an
-exponential, as R. A. Buckingham's later (1938) alternative potential
-reflects -- but the resulting form fits noble-gas equations of state well
+exponential, as R. A. Buckingham's later (1938, below) alternative
+potential reflects -- but the resulting form fits noble-gas equations of state well
 enough, and is cheap enough to evaluate, that it has remained the default
 reference interaction of computational statistical mechanics for a full
 century since.
@@ -134,6 +137,53 @@ drives increasingly large-amplitude vibrations that pull them apart.
 Mechanics. II. Vibrational Levels," Phys. Rev. 34, 57-64 (1929).
 
 .. minigallery:: ../../examples/md/pair_potentials/plot_01_morse_vs_harmonic.py
+
+1938 -- Buckingham's Exponential-Repulsion Potential
+------------------------------------------------------------
+
+Richard Buckingham revisited the short-range repulsive wall Lennard-Jones
+had modeled, for algebraic convenience, as :math:`r^{-12}` and replaced
+it with a form closer to what quantum mechanics actually predicts for two
+electron clouds forced to overlap: an exponential, since the overlap of
+two exponentially decaying atomic wavefunctions falls off exponentially
+with separation, not as an inverse power of distance at all.
+
+.. math::
+
+   U(r) = Ae^{-Br} - \frac{C}{r^6}
+
+Pairing this exponential repulsion with the same :math:`r^{-6}`
+dispersion attraction Lennard-Jones used keeps the potential's
+long-range physics identical while fixing its short-range physics to be
+more defensible -- at the cost of a real practical flaw the pure `r^{-12}`
+form does not share: because the exponential term eventually loses to
+the unbounded :math:`-C/r^6` attraction as :math:`r\to0`, the Buckingham
+potential turns over and plunges to :math:`U\to-\infty` at zero
+separation instead of diverging to :math:`+\infty` like Lennard-Jones's.
+That unphysical inner turnover means a Buckingham-potential simulation
+can, in principle, let two particles collapse into each other if they
+ever stray inside it, a failure mode Lennard-Jones's purely repulsive
+core rules out by construction -- part of why Lennard-Jones's cruder but
+better-behaved form, rather than Buckingham's more physically motivated
+one, became computational chemistry's default. The exponential form
+nonetheless remains the standard choice wherever that inner-turnover risk
+is manageable and the extra physical realism is worth the added
+parameter and computational cost, most prominently for rare-gas
+potentials and the short-range repulsion between ions in a crystal
+lattice.
+
+*Implementation:* :class:`chemistrykit.md.systems.pair_potentials.Buckingham`
+implements exactly this exponential-plus-dispersion form, as an
+alternative to
+:class:`~chemistrykit.md.systems.lj_fluid.LennardJones`
+sharing the same :math:`r^{-6}` attractive tail but replacing its
+:math:`r^{-12}` repulsive term with Buckingham's exponential one.
+
+*References:* R. A. Buckingham, "The Classical Equation of State of
+Gaseous Helium, Neon and Argon," Proc. R. Soc. Lond. A 168, 264-283
+(1938).
+
+.. minigallery:: ../../examples/md/pair_potentials/plot_03_buckingham_vs_lj.py
 
 1946 -- Hill, Westheimer, and Mayer: The Founding of Molecular Mechanics
 -------------------------------------------------------------------------

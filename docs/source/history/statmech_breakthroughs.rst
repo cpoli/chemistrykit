@@ -1,6 +1,9 @@
 Breakthroughs in Molecular Statistical Mechanics
 =================================================
 
+
+.. include:: /_generated/nav/statmech.rst
+
 .. epigraph::
 
    "S = k . log W" -- inscription on Ludwig Boltzmann's tombstone, Vienna

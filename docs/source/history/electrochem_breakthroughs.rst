@@ -1,6 +1,9 @@
 Breakthroughs in Electrochemistry
 ====================================
 
+
+.. include:: /_generated/nav/electrochem.rst
+
 .. epigraph::
 
    "The apparatus of which I speak, and which will doubtless astonish

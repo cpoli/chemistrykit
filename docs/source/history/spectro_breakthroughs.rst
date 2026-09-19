@@ -1,6 +1,9 @@
 Breakthroughs in Spectroscopy
 ==============================
 
+
+.. include:: /_generated/nav/spectro.rst
+
 .. epigraph::
 
    "Spectroscopy is past, present, and future all at once: it tells us

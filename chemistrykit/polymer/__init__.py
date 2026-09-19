@@ -19,7 +19,13 @@ from chemistrykit.polymer.systems.chain_growth import (
     steady_state_radical_concentration,
     steady_state_rate_of_polymerization,
 )
-from chemistrykit.polymer.systems.chain_statistics import FLORY_EXPONENTS, IdealChain, RealChain, flory_exponent
+from chemistrykit.polymer.systems.chain_statistics import (
+    FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP,
+    FLORY_EXPONENTS,
+    IdealChain,
+    RealChain,
+    flory_exponent,
+)
 from chemistrykit.polymer.systems.molecular_weight_distribution import (
     MolecularWeightDistribution,
     flory_schulz_number_average_DP,
@@ -41,6 +47,7 @@ __all__ = [
     "__version__",
     "PolymerChainModel",
     "FLORY_EXPONENTS",
+    "FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP",
     "flory_exponent",
     "IdealChain",
     "RealChain",

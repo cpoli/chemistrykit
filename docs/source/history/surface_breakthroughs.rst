@@ -1,6 +1,9 @@
 Breakthroughs in Surface Chemistry and Catalysis
 ==================================================
 
+
+.. include:: /_generated/nav/surface.rst
+
 .. epigraph::
 
    "In ordinary chemical reactions we consider only the concentrations of
@@ -431,6 +434,13 @@ technique across catalysis and materials science, and remains so today
 -- most modern commercial surface-area analyzers still report a "BET
 surface area" as their headline number.
 
+Emmett's own career took an unrelated wartime turn five years later:
+during World War II he worked on the Manhattan Project under Harold Urey
+at Columbia University, developing barrier materials for the
+gaseous-diffusion separation of uranium-235 from uranium-238, before
+returning to civilian catalysis research at the Mellon Institute in late
+1944.
+
 *Implementation:* :func:`~chemistrykit.surface.bet_loading`
 and :class:`~chemistrykit.surface.systems.bet.BETIsotherm` implement
 exactly this multilayer isotherm;
@@ -451,7 +461,9 @@ Iron Synthetic Ammonia Catalysts," *J. Am. Chem. Soc.* 59 (1937),
 2682-2689 (exact page range as commonly cited in secondary literature;
 not independently re-verified); S. Brunauer, P. H. Emmett, and E.
 Teller, "Adsorption of Gases in Multimolecular Layers," *J. Am. Chem.
-Soc.* 60 (1938), 309-319.
+Soc.* 60 (1938), 309-319; W. S. Koski, "Paul Hugh Emmett," Biographical
+Memoirs (National Academy of Sciences) 67 (1995) (Manhattan Project
+service).
 
 .. minigallery:: ../../examples/surface/bet/plot_01_bet_isotherm.py
 

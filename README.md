@@ -1,18 +1,27 @@
 # chemistrykit
 
-[![CI](https://github.com/chemistrykit/chemistrykit/actions/workflows/ci.yml/badge.svg)](https://github.com/chemistrykit/chemistrykit/actions/workflows/ci.yml)
-[![Docs](https://readthedocs.org/projects/chemistrykit/badge/?version=latest)](https://chemistrykit.readthedocs.io)
-[![PyPI](https://img.shields.io/pypi/v/chemistrykit.svg)](https://pypi.org/project/chemistrykit/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Python](https://img.shields.io/pypi/pyversions/chemistrykit.svg)](pyproject.toml)
+| | |
+|:--|:-:|
+| Package | [![PyPI version](https://img.shields.io/pypi/v/chemistrykit)](https://pypi.org/project/chemistrykit/) [![Python versions](https://img.shields.io/pypi/pyversions/chemistrykit)](https://pypi.org/project/chemistrykit/) |
+| Quality | [![License](https://img.shields.io/github/license/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/blob/main/LICENSE) [![CI](https://github.com/cpoli/chemistrykit/actions/workflows/ci.yml/badge.svg)](https://github.com/cpoli/chemistrykit/actions/workflows/ci.yml) [![Coverage](https://img.shields.io/codecov/c/github/cpoli/chemistrykit)](https://codecov.io/gh/cpoli/chemistrykit) |
+| Documentation | [![Docs](https://readthedocs.org/projects/chemistrykit/badge/?version=latest)](https://chemistrykit.readthedocs.io) |
+| Code style | [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) |
+| Downloads | [![Downloads](https://static.pepy.tech/badge/chemistrykit)](https://pepy.tech/project/chemistrykit) [![Downloads/Month](https://static.pepy.tech/badge/chemistrykit/month)](https://pepy.tech/project/chemistrykit) |
+| Community | [![GitHub Stars](https://img.shields.io/github/stars/cpoli/chemistrykit?style=social)](https://github.com/cpoli/chemistrykit) [![GitHub Forks](https://img.shields.io/github/forks/cpoli/chemistrykit?style=social)](https://github.com/cpoli/chemistrykit) [![Contributors](https://img.shields.io/github/contributors/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/graphs/contributors) [![Last Commit](https://img.shields.io/github/last-commit/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/commits/main) |
 
-A unified numerical toolkit for computational chemistry: pure-numerical
-models across reaction kinetics, thermodynamics, quantum chemistry,
-electrochemistry, spectroscopy, and more -- no cheminformatics
-dependencies (no RDKit/ASE/PySCF/OpenMM), sharing common ODE integrators,
-chemical constants, and a consistent NumPy-based API. Conventionally
-imported as `ck`. chemistrykit clones the architecture and engineering
-conventions of the sibling project
+A unified numerical toolkit for computational chemistry, spanning the
+field end to end: Arrhenius kinetics and oscillating reaction networks,
+Huckel aromaticity and variational quantum chemistry, Nernst cells and
+Butler-Volmer electrochemistry, NMR multiplets and Franck-Condon
+spectra, crystal lattice energies and powder XRD, polymer chain
+statistics and photochemical quenching -- with each domain's docs
+tracing the field's own foundational breakthroughs in chronological,
+pedagogical order, every historical milestone linked directly to the
+runnable code that reproduces it. Pure-numerical throughout -- no
+cheminformatics dependencies (no RDKit/ASE/PySCF/OpenMM) -- sharing
+common ODE integrators, chemical constants, and a consistent NumPy-based
+API. Conventionally imported as `ck`. chemistrykit clones the
+architecture and engineering conventions of the sibling project
 [physicskit](https://github.com/physicskit/physicskit) (`pk`).
 
 All 14 domains from `chemistrykit-spec.md`'s build plan are implemented

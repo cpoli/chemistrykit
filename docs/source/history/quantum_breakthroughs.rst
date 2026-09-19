@@ -1,6 +1,9 @@
 Breakthroughs in Quantum Chemistry
 ===================================
 
+
+.. include:: /_generated/nav/quantum.rst
+
 .. epigraph::
 
    "The underlying physical laws necessary for the mathematical theory of
@@ -178,6 +181,56 @@ spectrum) rotational spectroscopy runs in practice.
 Hydrogen Molecule," Proc. R. Soc. Lond. A 115, 483-486 (1927).
 
 .. minigallery:: ../../examples/quantum/rigid_rotor/plot_01_rigid_rotor.py
+
+1927 -- Born and Oppenheimer's Separation of Nuclear and Electronic Motion
+-----------------------------------------------------------------------------
+
+Max Born and J. Robert Oppenheimer noticed that the full molecular
+Schrodinger equation -- nuclei and electrons together, every particle's
+kinetic and potential energy coupled to every other's -- is, in practice,
+far more tractable than it looks, because a proton is roughly 1,800 times
+heavier than an electron, so the nuclei move enormously more slowly. To
+the fast-moving electrons, the nuclei look essentially frozen in place at
+any given instant; to the slow-moving nuclei, the electrons' rapid motion
+averages out into a smooth, effective potential-energy surface that
+depends only on the nuclear positions. Formalizing this separation
+(rigorously, as an expansion in the fourth root of the electron-to-nuclear
+mass ratio) lets the intractable coupled problem be solved in two much
+smaller stages instead of one enormous one: first solve the electronic
+Schrodinger equation with the nuclei *clamped* at some fixed geometry, to
+get an electronic energy that is itself a function of that geometry; then
+solve a separate, purely nuclear Schrodinger equation -- vibration,
+rotation -- using that electronic energy curve as the potential the nuclei
+move in. This clamped-nuclei approximation is not a minor computational
+convenience but the conceptual foundation the entire rest of this
+package's electronic-structure and nuclear-motion machinery rests on:
+without it, "the" energy of a molecule at "a" bond length -- the single
+number every potential-energy curve, force constant, and equilibrium
+geometry in this subpackage is built from -- would not even be a
+well-defined quantity, since a fully coupled treatment has no
+notion of a fixed nuclear geometry to attach an electronic energy to in
+the first place.
+
+*Connection:* :class:`chemistrykit.quantum.systems.hartree_fock.H2PlusVariational`
+takes its two protons' separation as a fixed input parameter,
+``bond_length``, and solves only the electronic problem at that clamped
+geometry -- exactly the Born-Oppenheimer electronic step, with the second,
+nuclear-motion step left to the separate
+:class:`~chemistrykit.quantum.systems.rigid_rotor.RigidRotor` (above) and
+:class:`~chemistrykit.quantum.systems.harmonic_oscillator.MorseOscillator`
+(below) models, each of which likewise takes a fixed equilibrium bond
+length or force constant as given rather than solving for the nuclei and
+electrons together; the same clamped-nuclei logic underlies the isotope
+shift discussion in :doc:`/history/spectro_breakthroughs`, where a
+heavier nucleus changes a molecule's rotational constant while leaving
+its (electronically determined) bond length untouched.
+
+*References:* M. Born and R. Oppenheimer, "Zur Quantentheorie der
+Molekeln," Ann. Phys. 389, 457-484 (1927).
+
+.. minigallery::
+   ../../examples/quantum/hartree_fock/plot_01_h2_plus_variational.py
+   ../../examples/quantum/rigid_rotor/plot_01_rigid_rotor.py
 
 1927 -- Heitler and London's Quantum-Mechanical Treatment of H2
 ---------------------------------------------------------------------

@@ -1,6 +1,9 @@
 Breakthroughs in Photochemistry
 ==================================
 
+
+.. include:: /_generated/nav/photochem.rst
+
 .. epigraph::
 
    "Rays which are not absorbed produce no chemical action." -- attributed

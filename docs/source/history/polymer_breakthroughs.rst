@@ -1,6 +1,9 @@
 Breakthroughs in Polymer Chemistry
 ====================================
 
+
+.. include:: /_generated/nav/polymer.rst
+
 .. epigraph::
 
    "The most important result of this work... is the discovery that
@@ -354,6 +357,67 @@ Phys.* 15 (1944), 338-342.
 
 .. minigallery:: ../../examples/polymer/molecular_weight_distribution/plot_01_flory_schulz.py
 
+1953 -- 1963 -- Ziegler, Natta, and Coordination (Insertion) Polymerization
+-----------------------------------------------------------------------------
+
+Karl Ziegler, investigating why an aluminum-alkyl-catalyzed ethylene
+oligomerization kept unexpectedly stalling at short chain lengths in the
+presence of trace nickel contamination, traced the effect to specific
+transition-metal impurities and, by 1953, had turned that accidental
+observation into something far more consequential: a
+titanium-tetrachloride/aluminum-alkyl catalyst system that polymerizes
+ethylene at ordinary pressure and temperature into high-density, largely
+linear polyethylene -- a sharp departure from the high-pressure,
+free-radical process (branched, lower-density polyethylene) that was
+until then the only way to make the polymer industrially. Giulio Natta,
+learning of Ziegler's catalyst within the year, extended it to propylene
+and discovered something Ziegler's own ethylene chemistry had no way to
+reveal, since ethylene has no stereocenter to control: the catalyst could
+place each propylene monomer into the growing chain with the same
+spatial orientation every time, producing "isotactic" polypropylene --
+every methyl side-group on the same side of the extended chain -- a
+crystalline, mechanically useful stereoregular material, in sharp
+contrast to the irregular, low-melting atactic polypropylene a
+free-radical mechanism produces.
+
+Mechanistically, both results share a common thread entirely different
+from the free-radical chain-growth mechanism above: the growing chain end
+stays coordinated to the transition-metal catalyst throughout, and each
+new monomer first coordinates to the metal alongside it before
+*inserting* into the metal-carbon bond -- "coordination" or "insertion"
+polymerization -- so the catalyst's own geometry, not random radical
+collision, controls both the resulting polymer's regularity (linear
+versus branched) and, for a prochiral monomer like propylene, its
+stereochemistry. Ziegler and Natta shared the 1963 Nobel Prize in
+Chemistry "for their discoveries in the field of the chemistry and
+technology of high polymers."
+
+*Connection:* :mod:`chemistrykit.polymer` models the free-radical
+chain-growth mechanism only (see 1937, above) -- coordination/insertion
+polymerization's controlling chemistry is the catalyst's own coordination
+geometry rather than a bulk-solution rate law of the kind
+:func:`~chemistrykit.polymer.free_radical_network`
+integrates, so it has no direct counterpart here -- but the *result*
+Ziegler-Natta catalysis is famous for, a narrow, controllable
+molecular-weight distribution and a tunable microstructure, is exactly
+the qualitative contrast the free-radical polydispersity index
+:func:`~chemistrykit.polymer.flory_schulz_pdi`
+(see 1936, above) and its ceiling of 2 makes vivid: a coordination
+catalyst's single, well-defined active site is what later single-site
+catalysis (metallocenes, and Ziegler-Natta's own more modern descendants)
+exploits to push polydispersity well below what any random-termination
+free-radical mechanism can reach.
+
+*References:* K. Ziegler, E. Holzkamp, H. Breil, and H. Martin, "Das
+Mulheimer Normaldruck-Polyaethylen-Verfahren," *Angew. Chem.* 67 (1955),
+541-547; G. Natta, "Una nuova classe di polimeri di alfa-olefine aventi
+regolarita di struttura," *Chim. Ind.* (Milan) 37 (1955), 927-936; "The
+Nobel Prize in Chemistry 1963," NobelPrize.org.
+
+.. minigallery::
+   ../../examples/polymer/chain_growth/plot_01_free_radical_kinetics.py
+   ../../examples/polymer/molecular_weight_distribution/plot_01_flory_schulz.py
+
 1954 -- Bevington, Melville, and Taylor: Combination vs. Disproportionation
 --------------------------------------------------------------------------------
 
@@ -465,15 +529,22 @@ studying order phenomena in simple systems can be generalized to more
 complex forms of matter, in particular to liquid crystals and polymers."
 
 *Connection:*
-``chemistrykit.polymer.systems.chain_statistics.FLORY_EXPONENTS``
-implements Flory's original 1953 mean-field value, :math:`\nu=3/5`
-exactly, for the good-solvent case -- a deliberate choice of the classic,
-easily-derived value rather than the more precise
-renormalization-group estimate above, which this package does not
-implement; the two differ by less than 2%, small enough that
-``chemistrykit.polymer.systems.chain_statistics``'s qualitative
-point (a good solvent swells a chain measurably beyond the ideal,
-theta-solvent scaling) is unaffected by which value is used.
+:class:`~chemistrykit.polymer.systems.chain_statistics.RealChain`'s
+default good-solvent exponent
+(:meth:`~chemistrykit.polymer.RealChain.good_solvent`,
+:math:`\nu=3/5`, from ``FLORY_EXPONENTS``) is Flory's original classic
+value; the more precise renormalization-group estimate above is
+available separately via
+:meth:`~chemistrykit.polymer.RealChain.good_solvent_renormalization_group`
+(``FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP``,
+:math:`\nu\approx0.588`) for direct comparison. The two *exponents*
+differ by only about 2% -- small enough that
+``chemistrykit.polymer.systems.chain_statistics``'s qualitative point (a
+good solvent swells a chain measurably beyond the ideal, theta-solvent
+scaling) is unaffected by which value is used -- but because chain size
+is a power of `n`, that 2% exponent gap compounds with chain length: the
+two models' predicted sizes diverge further apart the longer the chain,
+as the gallery example below shows directly.
 
 *References:* P.-G. de Gennes, "Exponents for the Excluded Volume
 Problem as Derived by the Wilson Method," *Phys. Lett. A* 38 (1972),
@@ -481,7 +552,7 @@ Problem as Derived by the Wilson Method," *Phys. Lett. A* 38 (1972),
 NY: Cornell University Press, 1979); "The Nobel Prize in Physics 1991,"
 NobelPrize.org.
 
-.. minigallery:: ../../examples/polymer/chain_statistics/plot_01_chain_scaling.py
+.. minigallery:: ../../examples/polymer/chain_statistics/plot_02_flory_vs_de_gennes.py
 
 See Also
 --------

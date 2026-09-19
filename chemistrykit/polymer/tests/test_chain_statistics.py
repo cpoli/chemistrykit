@@ -3,7 +3,13 @@
 import numpy as np
 import pytest
 
-from chemistrykit.polymer.systems.chain_statistics import FLORY_EXPONENTS, IdealChain, RealChain, flory_exponent
+from chemistrykit.polymer.systems.chain_statistics import (
+    FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP,
+    FLORY_EXPONENTS,
+    IdealChain,
+    RealChain,
+    flory_exponent,
+)
 
 
 def test_ideal_chain_mean_square_end_to_end_is_exactly_n_times_b_squared():
@@ -73,3 +79,19 @@ def test_real_chain_rejects_out_of_range_nu():
         RealChain(nu=0.0)
     with pytest.raises(ValueError):
         RealChain(nu=1.0)
+
+
+def test_good_solvent_renormalization_group_matches_documented_constant():
+    de_gennes = RealChain.good_solvent_renormalization_group()
+    assert de_gennes.nu == pytest.approx(FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP)
+
+
+def test_good_solvent_renormalization_group_differs_from_flory_by_less_than_two_percent():
+    flory = RealChain.good_solvent()
+    de_gennes = RealChain.good_solvent_renormalization_group()
+    relative_difference = abs(flory.nu - de_gennes.nu) / flory.nu
+    assert relative_difference == pytest.approx(0.02, abs=1e-9)
+    # both are still "good solvent" -- more swollen than the ideal chain
+    ideal = IdealChain()
+    n, b = 1000, 0.5
+    assert de_gennes.end_to_end_distance(n, b) > ideal.end_to_end_distance(n, b)

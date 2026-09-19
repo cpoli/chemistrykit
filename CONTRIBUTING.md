@@ -77,6 +77,23 @@ a top-level `tests/` directory. A new model needs:
 - A visualizer needs only a smoke test (it returns the right type/shape,
   and — for animations — that `anim.save()` to a temp file succeeds).
 
+## History entries
+
+`docs/source/history/*_breakthroughs.rst` is a curated chronology per
+domain, not a general-purpose list of "interesting chemistry history."
+Each entry exists because it connects to something this package actually
+implements. Keep it that way:
+
+- A new entry must cite the concrete class/method it connects to
+  (`:meth:`.../:class:`...` cross-reference) and belongs in the same PR
+  as the implementation it describes, not added on its own.
+- One entry per PR. If you're adding several related pieces of
+  chemistry, open separate PRs (or ask first) rather than batching a set
+  of history entries together.
+- Changes to `docs/source/history/**` require a maintainer review
+  (enforced via `.github/CODEOWNERS`) even if the rest of the PR is
+  otherwise approved.
+
 ## Reporting bugs / requesting features
 
 Open a GitHub issue. For a chemistry bug specifically, include the formula

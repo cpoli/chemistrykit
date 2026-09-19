@@ -18,14 +18,17 @@ applied to a sum of :math:`n` random steps:
 
 A **real chain** additionally accounts for excluded volume, and its size
 scales instead as :math:`R \sim bn^\nu` with a solvent-quality-dependent
-Flory exponent :math:`\nu` (Flory's mean-field estimate, later refined by
-renormalization-group theory to :math:`\nu\approx0.588` for a good
-solvent in 3D -- the value used here, per Rubinstein & Colby Table 3.2):
+Flory exponent :math:`\nu`:
 
 * **theta solvent** (:math:`\nu=1/2`): excluded-volume and solvent
   interactions cancel; the chain behaves exactly as an ideal chain.
-* **good solvent** (:math:`\nu\approx3/5`): the solvent favors chain-
-  solvent contacts, swelling the chain relative to ideal.
+* **good solvent** (:math:`\nu=3/5` by default): the solvent favors
+  chain-solvent contacts, swelling the chain relative to ideal. This is
+  Flory's original 1953 mean-field estimate; a more precise
+  renormalization-group value, :math:`\nu\approx0.588` (de Gennes,
+  1979), is available separately via
+  :meth:`RealChain.good_solvent_renormalization_group` for comparison --
+  the two differ by about 2%.
 * **poor solvent** (:math:`\nu=1/3`): the solvent favors chain-chain
   contacts, collapsing the chain to a dense globule of essentially
   constant *density* (: math:`R^3\sim n`, hence :math:`\nu=1/3`).
@@ -43,15 +46,32 @@ from __future__ import annotations
 
 from chemistrykit.polymer.core.base_system import PolymerChainModel
 
-__all__ = ["FLORY_EXPONENTS", "flory_exponent", "IdealChain", "RealChain"]
+__all__ = [
+    "FLORY_EXPONENTS",
+    "FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP",
+    "flory_exponent",
+    "IdealChain",
+    "RealChain",
+]
 
 #: dict: Standard Flory exponents nu for R ~ b*n**nu, by solvent quality
-#: (Rubinstein & Colby, *Polymer Physics*, 2003, Table 3.2).
+#: (Rubinstein & Colby, *Polymer Physics*, 2003, Table 3.2). "good" is
+#: Flory's original 1953 mean-field estimate; see
+#: FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP for the more precise
+#: renormalization-group value.
 FLORY_EXPONENTS = {
     "theta": 0.5,
     "good": 3.0 / 5.0,
     "poor": 1.0 / 3.0,
 }
+
+#: float: The renormalization-group-refined Flory exponent for a good
+#: solvent in 3D, :math:`\nu\approx0.588` (P.-G. de Gennes, "Exponents
+#: for the Excluded Volume Problem as Derived by the Wilson Method,"
+#: Phys. Lett. A 38 (1972), 339-340; J. C. Le Guillou & J. Zinn-Justin,
+#: Phys. Rev. Lett. 39 (1977), 95), refining Flory's original mean-field
+#: estimate of exactly 3/5 (FLORY_EXPONENTS["good"]) by less than 2%.
+FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP = 0.588
 
 
 def flory_exponent(solvent: str) -> float:
@@ -164,8 +184,30 @@ class RealChain(PolymerChainModel):
 
     @classmethod
     def good_solvent(cls) -> RealChain:
-        """Build a :class:`RealChain` with the good-solvent Flory exponent (nu=3/5)."""
+        """Build a :class:`RealChain` with Flory's mean-field good-solvent exponent (nu=3/5).
+
+        See :meth:`good_solvent_renormalization_group` for the more
+        precise renormalization-group value.
+        """
         return cls(FLORY_EXPONENTS["good"])
+
+    @classmethod
+    def good_solvent_renormalization_group(cls) -> RealChain:
+        r"""Build a :class:`RealChain` with the renormalization-group good-solvent exponent (nu ~= 0.588).
+
+        This is de Gennes' (1979) more precise value, refining Flory's
+        original mean-field estimate (:meth:`good_solvent`, nu=3/5) by
+        about 2% -- see the module docstring.
+
+        Examples
+        --------
+        >>> flory = RealChain.good_solvent()
+        >>> de_gennes = RealChain.good_solvent_renormalization_group()
+        >>> relative_difference = abs(flory.nu - de_gennes.nu) / flory.nu
+        >>> round(float(relative_difference) * 100, 2)
+        2.0
+        """
+        return cls(FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP)
 
     @classmethod
     def poor_solvent(cls) -> RealChain:

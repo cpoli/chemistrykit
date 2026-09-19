@@ -1,6 +1,9 @@
 Breakthroughs in Chemical Thermodynamics
 =========================================
 
+
+.. include:: /_generated/nav/thermo.rst
+
 .. epigraph::
 
    "Die Energie der Welt ist constant. Die Entropie der Welt strebt
@@ -268,6 +271,57 @@ Substances," Trans. Conn. Acad. Arts Sci. 3, 108-248 (1876) and 343-524
 .. minigallery::
    ../../examples/thermo/phase_equilibria/plot_01_clausius_clapeyron.py
    ../../examples/thermo/equilibrium/plot_01_reaction_equilibrium.py
+
+1884 -- van't Hoff's Equation for the Temperature Dependence of K
+-----------------------------------------------------------------------
+
+Jacobus Henricus van't Hoff's *Études de Dynamique Chimique* -- the same
+1884 book that gave chemical kinetics its concept of reaction order (see
+:doc:`/history/kinetics_breakthroughs`) -- also supplied a companion
+result for chemical equilibrium: combining the equilibrium condition
+:math:`\Delta G^\circ=-RT\ln K` with the Gibbs-Helmholtz relation gives
+an equilibrium constant's exact temperature dependence, the van't Hoff
+isochore,
+
+.. math::
+
+   \frac{d\ln K}{dT} = \frac{\Delta H^\circ}{RT^2}
+
+the same exponential-in-:math:`1/T` form Svante Arrhenius would, five
+years later, put on a firmer molecular footing for *rate* constants
+specifically (see :doc:`/history/kinetics_breakthroughs`). Assuming the
+standard reaction enthalpy :math:`\Delta H^\circ` is constant over the
+temperature range of interest, the isochore integrates to the same
+two-point form already used above (1834-1850) for a phase boundary's
+vapor pressure:
+
+.. math::
+
+   \ln\frac{K(T)}{K_{ref}} = -\frac{\Delta H^\circ}{R}
+       \left(\frac{1}{T} - \frac{1}{T_{ref}}\right)
+
+and a plot of :math:`\ln K` against :math:`1/T` -- the "van't Hoff plot,"
+structurally identical to an Arrhenius plot -- linearizes the
+relationship, letting :math:`\Delta H^\circ` and :math:`\Delta S^\circ`
+be read off directly as its slope and intercept, exactly the strategy
+Lineweaver and Burk would later apply to enzyme kinetics (see
+:doc:`/history/kinetics_breakthroughs`).
+
+*Implementation:* :func:`~chemistrykit.thermo.van_t_hoff_equilibrium_constant`
+implements exactly the integrated two-point form -- used below to verify
+Le Chatelier's qualitative temperature prediction directly;
+:func:`~chemistrykit.thermo.fit_van_t_hoff`
+implements the van't Hoff-plot linear regression itself, recovering
+:math:`(\Delta H^\circ, \Delta S^\circ)` from synthetic noisy
+equilibrium-constant-vs-temperature data and returning a
+:class:`~chemistrykit.thermo.systems.equilibrium.VantHoffFit`, structurally
+identical to :func:`chemistrykit.kinetics.fit_arrhenius`'s Arrhenius-plot
+fit for rate constants (see :doc:`/history/kinetics_breakthroughs`).
+
+*References:* J. H. van't Hoff, *Études de Dynamique Chimique* (Amsterdam:
+Frederik Muller, 1884).
+
+.. minigallery:: ../../examples/thermo/equilibrium/plot_01_reaction_equilibrium.py
 
 1884 -- Le Chatelier's Principle
 ------------------------------------

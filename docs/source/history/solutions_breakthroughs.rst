@@ -1,6 +1,9 @@
 Breakthroughs in Solution Chemistry
 ====================================
 
+
+.. include:: /_generated/nav/solutions.rst
+
 .. epigraph::
 
    "We must trust to nothing but facts: these are presented to us by

@@ -109,4 +109,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   propagation-of-uncertainty formulas plus Dixon's Q-test outlier
   rejection with the Rorabacher (1991) critical-value table.
 
-[Unreleased]: https://github.com/chemistrykit/chemistrykit/compare/main...HEAD
+[Unreleased]: https://github.com/cpoli/chemistrykit/compare/main...HEAD

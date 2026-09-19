@@ -1,6 +1,9 @@
 Breakthroughs in Chemical Kinetics
 ==================================
 
+
+.. include:: /_generated/nav/kinetics.rst
+
 .. epigraph::
 
    "Panta rhei" ("everything flows") -- traditionally attributed to

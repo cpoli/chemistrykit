@@ -34,15 +34,9 @@ axes[0].set_ylabel("coverage (theta)")
 axes[0].set_title("Langmuir isotherms")
 axes[0].legend()
 
-# %%
-# Stronger binding shifts the isotherm to lower pressure (saturation is
-# reached "more easily" when adsorption is more favorable) -- exactly
-# what :meth:`~chemistrykit.statmech.LatticeGasAdsorption.p_half` predicts.
-#
-# Separately, the purely combinatorial entropy of arranging `N`
-# indistinguishable molecules on `M` sites is maximal at half filling
-# (N=M/2), where the number of distinguishable arrangements is largest:
-
+# The purely combinatorial entropy of arranging `N` indistinguishable
+# molecules on `M` sites is maximal at half filling (N=M/2), where the
+# number of distinguishable arrangements is largest:
 M = 500
 N_values = np.arange(0, M + 1, 5)
 S = np.array([LatticeGasAdsorption.canonical_entropy(N, M) for N in N_values])
@@ -55,3 +49,11 @@ axes[1].set_title(f"Canonical configurational entropy (M = {M})")
 fig.tight_layout()
 
 plt.show()
+
+# %%
+# Stronger binding shifts the isotherm to lower pressure (saturation is
+# reached "more easily" when adsorption is more favorable) -- exactly
+# what :meth:`~chemistrykit.statmech.LatticeGasAdsorption.p_half` predicts.
+# The configurational entropy panel above shows the complementary,
+# purely combinatorial result: filling is most disordered, and entropy
+# is maximal, at half occupancy (N=M/2).

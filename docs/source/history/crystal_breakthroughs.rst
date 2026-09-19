@@ -1,6 +1,9 @@
 Breakthroughs in Crystallography
 =================================
 
+
+.. include:: /_generated/nav/crystal.rst
+
 .. epigraph::
 
    "There must be some definite cause why, whenever snow begins to fall,

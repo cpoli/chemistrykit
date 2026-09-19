@@ -1,6 +1,9 @@
 Breakthroughs in Molecular Structure
 ======================================
 
+
+.. include:: /_generated/nav/structure.rst
+
 .. epigraph::
 
    "Chemists were long accustomed to picturing molecules as more or less

@@ -1,6 +1,9 @@
 Breakthroughs in Analytical Chemistry
 ========================================
 
+
+.. include:: /_generated/nav/analytical.rst
+
 .. epigraph::
 
    "It is a capital mistake to theorize before one has data. Insensibly
