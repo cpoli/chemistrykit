@@ -410,10 +410,10 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.polymer.systems.chain_statistics</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Ideal random-walk chain statistics, and the Flory exponent for real chains.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Ideal random-walk chain statistics, and the Flory exponent for real chains.</span>
 
-<span class="sd">See Rubinstein &amp; Colby, *Polymer Physics* (2003), Ch. 2 ("Ideal chains")</span>
-<span class="sd">and Ch. 3 ("Real chains"), and P. J. Flory, *Principles of Polymer</span>
+<span class="sd">See Rubinstein &amp; Colby, *Polymer Physics* (2003), Ch. 2 (&quot;Ideal chains&quot;)</span>
+<span class="sd">and Ch. 3 (&quot;Real chains&quot;), and P. J. Flory, *Principles of Polymer</span>
 <span class="sd">Chemistry* (1953), Ch. X, for the original scaling argument.</span>
 
 <span class="sd">An **ideal chain** models a polymer as a simple random walk of :math:`n`</span>
@@ -436,7 +436,7 @@
 <span class="sd">  interactions cancel; the chain behaves exactly as an ideal chain.</span>
 <span class="sd">* **good solvent** (:math:`\nu=3/5` by default): the solvent favors</span>
 <span class="sd">  chain-solvent contacts, swelling the chain relative to ideal. This is</span>
-<span class="sd">  Flory's original 1953 mean-field estimate; a more precise</span>
+<span class="sd">  Flory&#39;s original 1953 mean-field estimate; a more precise</span>
 <span class="sd">  renormalization-group value, :math:`\nu\approx0.588` (de Gennes,</span>
 <span class="sd">  1979), is available separately via</span>
 <span class="sd">  :meth:`RealChain.good_solvent_renormalization_group` for comparison --</span>
@@ -452,48 +452,48 @@
 <span class="sd">-- the true prefactor for a self-avoiding walk is solvent- and model-</span>
 <span class="sd">dependent and not exactly 1/6 (Rubinstein &amp; Colby, *op. cit.*, Ch. 3.2);</span>
 <span class="sd">only the ideal-chain (theta-solvent) value is exact.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.polymer.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">PolymerChainModel</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"FLORY_EXPONENTS"</span><span class="p">,</span>
-    <span class="s2">"FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP"</span><span class="p">,</span>
-    <span class="s2">"flory_exponent"</span><span class="p">,</span>
-    <span class="s2">"IdealChain"</span><span class="p">,</span>
-    <span class="s2">"RealChain"</span><span class="p">,</span>
+    <span class="s2">&quot;FLORY_EXPONENTS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;flory_exponent&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;IdealChain&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RealChain&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="c1">#: dict: Standard Flory exponents nu for R ~ b*n**nu, by solvent quality</span>
-<span class="c1">#: (Rubinstein &amp; Colby, *Polymer Physics*, 2003, Table 3.2). "good" is</span>
-<span class="c1">#: Flory's original 1953 mean-field estimate; see</span>
+<span class="c1">#: (Rubinstein &amp; Colby, *Polymer Physics*, 2003, Table 3.2). &quot;good&quot; is</span>
+<span class="c1">#: Flory&#39;s original 1953 mean-field estimate; see</span>
 <span class="c1">#: FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP for the more precise</span>
 <span class="c1">#: renormalization-group value.</span>
 <span class="n">FLORY_EXPONENTS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"theta"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
-    <span class="s2">"good"</span><span class="p">:</span> <span class="mf">3.0</span> <span class="o">/</span> <span class="mf">5.0</span><span class="p">,</span>
-    <span class="s2">"poor"</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">,</span>
+    <span class="s2">&quot;theta&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="s2">&quot;good&quot;</span><span class="p">:</span> <span class="mf">3.0</span> <span class="o">/</span> <span class="mf">5.0</span><span class="p">,</span>
+    <span class="s2">&quot;poor&quot;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="c1">#: float: The renormalization-group-refined Flory exponent for a good</span>
-<span class="c1">#: solvent in 3D, :math:`\nu\approx0.588` (P.-G. de Gennes, "Exponents</span>
-<span class="c1">#: for the Excluded Volume Problem as Derived by the Wilson Method,"</span>
+<span class="c1">#: solvent in 3D, :math:`\nu\approx0.588` (P.-G. de Gennes, &quot;Exponents</span>
+<span class="c1">#: for the Excluded Volume Problem as Derived by the Wilson Method,&quot;</span>
 <span class="c1">#: Phys. Lett. A 38 (1972), 339-340; J. C. Le Guillou &amp; J. Zinn-Justin,</span>
-<span class="c1">#: Phys. Rev. Lett. 39 (1977), 95), refining Flory's original mean-field</span>
-<span class="c1">#: estimate of exactly 3/5 (FLORY_EXPONENTS["good"]) by less than 2%.</span>
+<span class="c1">#: Phys. Rev. Lett. 39 (1977), 95), refining Flory&#39;s original mean-field</span>
+<span class="c1">#: estimate of exactly 3/5 (FLORY_EXPONENTS[&quot;good&quot;]) by less than 2%.</span>
 <span class="n">FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP</span> <span class="o">=</span> <span class="mf">0.588</span>
 
 
 <div class="viewcode-block" id="flory_exponent">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.flory_exponent">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">flory_exponent</span><span class="p">(</span><span class="n">solvent</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Return the standard Flory scaling exponent :math:`\nu` for a named solvent quality.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return the standard Flory scaling exponent :math:`\nu` for a named solvent quality.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    solvent : {"theta", "good", "poor"}</span>
+<span class="sd">    solvent : {&quot;theta&quot;, &quot;good&quot;, &quot;poor&quot;}</span>
 <span class="sd">        Solvent quality (see the module docstring).</span>
 
 <span class="sd">    Returns</span>
@@ -502,24 +502,24 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; flory_exponent("theta")</span>
+<span class="sd">    &gt;&gt;&gt; flory_exponent(&quot;theta&quot;)</span>
 <span class="sd">    0.5</span>
-<span class="sd">    &gt;&gt;&gt; round(flory_exponent("good"), 3)</span>
+<span class="sd">    &gt;&gt;&gt; round(flory_exponent(&quot;good&quot;), 3)</span>
 <span class="sd">    0.6</span>
-<span class="sd">    &gt;&gt;&gt; round(flory_exponent("poor"), 4)</span>
+<span class="sd">    &gt;&gt;&gt; round(flory_exponent(&quot;poor&quot;), 4)</span>
 <span class="sd">    0.3333</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">FLORY_EXPONENTS</span><span class="p">[</span><span class="n">solvent</span><span class="p">]</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"unknown solvent quality </span><span class="si">{</span><span class="n">solvent</span><span class="si">!r}</span><span class="s2">; expected one of </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unknown solvent quality </span><span class="si">{</span><span class="n">solvent</span><span class="si">!r}</span><span class="s2">; expected one of </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span></div>
 
 
 
 <div class="viewcode-block" id="IdealChain">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.IdealChain">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">IdealChain</span><span class="p">(</span><span class="n">PolymerChainModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""An ideal (theta-solvent) polymer chain: an exact random walk of `n` segments.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;An ideal (theta-solvent) polymer chain: an exact random walk of `n` segments.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -543,7 +543,7 @@
 
 <span class="sd">    &gt;&gt;&gt; chain.mean_square_end_to_end(n=400, b=0.5) / chain.mean_square_end_to_end(n=200, b=0.5)</span>
 <span class="sd">    2.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="IdealChain.mean_square_end_to_end">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.IdealChain.mean_square_end_to_end">[docs]</a>
@@ -562,7 +562,7 @@
 <div class="viewcode-block" id="RealChain">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RealChain</span><span class="p">(</span><span class="n">PolymerChainModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""A real (excluded-volume) polymer chain: :math:`R = bn^\nu` with Flory exponent `nu`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A real (excluded-volume) polymer chain: :math:`R = bn^\nu` with Flory exponent `nu`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -590,46 +590,46 @@
 <span class="sd">    True</span>
 
 <span class="sd">    At the theta point, :class:`RealChain` reduces exactly to the ideal</span>
-<span class="sd">    chain's end-to-end distance (though not, by construction here, to its</span>
+<span class="sd">    chain&#39;s end-to-end distance (though not, by construction here, to its</span>
 <span class="sd">    exact radius-of-gyration prefactor -- see the module docstring):</span>
 
 <span class="sd">    &gt;&gt;&gt; theta = RealChain.theta_solvent()</span>
 <span class="sd">    &gt;&gt;&gt; round(float(theta.end_to_end_distance(n, b)), 6) == round(float(ideal.end_to_end_distance(n, b)), 6)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nu</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">0.0</span> <span class="o">&lt;</span> <span class="n">nu</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"nu must be in (0, 1)"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;nu must be in (0, 1)&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nu</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">nu</span><span class="p">)</span>
 
 <div class="viewcode-block" id="RealChain.theta_solvent">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain.theta_solvent">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">theta_solvent</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealChain</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Build a :class:`RealChain` with the theta-solvent Flory exponent (nu=1/2)."""</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">[</span><span class="s2">"theta"</span><span class="p">])</span></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build a :class:`RealChain` with the theta-solvent Flory exponent (nu=1/2).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">[</span><span class="s2">&quot;theta&quot;</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="RealChain.good_solvent">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain.good_solvent">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">good_solvent</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealChain</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Build a :class:`RealChain` with Flory's mean-field good-solvent exponent (nu=3/5).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build a :class:`RealChain` with Flory&#39;s mean-field good-solvent exponent (nu=3/5).</span>
 
 <span class="sd">        See :meth:`good_solvent_renormalization_group` for the more</span>
 <span class="sd">        precise renormalization-group value.</span>
-<span class="sd">        """</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">[</span><span class="s2">"good"</span><span class="p">])</span></div>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">[</span><span class="s2">&quot;good&quot;</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="RealChain.good_solvent_renormalization_group">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain.good_solvent_renormalization_group">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">good_solvent_renormalization_group</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealChain</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Build a :class:`RealChain` with the renormalization-group good-solvent exponent (nu ~= 0.588).</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Build a :class:`RealChain` with the renormalization-group good-solvent exponent (nu ~= 0.588).</span>
 
-<span class="sd">        This is de Gennes' (1979) more precise value, refining Flory's</span>
+<span class="sd">        This is de Gennes&#39; (1979) more precise value, refining Flory&#39;s</span>
 <span class="sd">        original mean-field estimate (:meth:`good_solvent`, nu=3/5) by</span>
 <span class="sd">        about 2% -- see the module docstring.</span>
 
@@ -640,7 +640,7 @@
 <span class="sd">        &gt;&gt;&gt; relative_difference = abs(flory.nu - de_gennes.nu) / flory.nu</span>
 <span class="sd">        &gt;&gt;&gt; round(float(relative_difference) * 100, 2)</span>
 <span class="sd">        2.0</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP</span><span class="p">)</span></div>
 
 
@@ -648,8 +648,8 @@
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain.poor_solvent">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">poor_solvent</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealChain</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Build a :class:`RealChain` with the poor-solvent Flory exponent (nu=1/3)."""</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">[</span><span class="s2">"poor"</span><span class="p">])</span></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build a :class:`RealChain` with the poor-solvent Flory exponent (nu=1/3).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">[</span><span class="s2">&quot;poor&quot;</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="RealChain.mean_square_end_to_end">
@@ -661,7 +661,7 @@
 <div class="viewcode-block" id="RealChain.mean_square_radius_of_gyration">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain.mean_square_radius_of_gyration">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">mean_square_radius_of_gyration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""See the module docstring: the 1/6 prefactor is an ideal-chain approximation, not exact for real chains."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;See the module docstring: the 1/6 prefactor is an ideal-chain approximation, not exact for real chains.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean_square_end_to_end</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mf">6.0</span></div>
 </div>
 

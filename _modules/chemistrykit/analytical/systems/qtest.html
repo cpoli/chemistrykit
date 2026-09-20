@@ -410,14 +410,14 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.analytical.systems.qtest</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Dixon's Q-test for rejecting a single suspect outlier from a small data set.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Dixon&#39;s Q-test for rejecting a single suspect outlier from a small data set.</span>
 
 <span class="sd">See Harris, *Quantitative Chemical Analysis*, 9th ed., Ch. 4.6 and its</span>
 <span class="sd">Table 4.5 (reproduced below), and D. B. Rorabacher, *Anal. Chem.* 63, 139</span>
 <span class="sd">(1991) for the corrected/extended critical-value table this module uses</span>
-<span class="sd">(Rorabacher's values supersede the original, less precise Dean &amp; Dixon</span>
+<span class="sd">(Rorabacher&#39;s values supersede the original, less precise Dean &amp; Dixon</span>
 <span class="sd">(1951) table still seen in some older textbooks).</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -425,9 +425,9 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Q_CRITICAL_TABLE"</span><span class="p">,</span> <span class="s2">"QTestResult"</span><span class="p">,</span> <span class="s2">"dixon_q_test"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Q_CRITICAL_TABLE&quot;</span><span class="p">,</span> <span class="s2">&quot;QTestResult&quot;</span><span class="p">,</span> <span class="s2">&quot;dixon_q_test&quot;</span><span class="p">]</span>
 
-<span class="c1">#: dict: Dixon's Q-test critical values, :math:`Q_{crit}(n,\text{confidence})`,</span>
+<span class="c1">#: dict: Dixon&#39;s Q-test critical values, :math:`Q_{crit}(n,\text{confidence})`,</span>
 <span class="c1">#: for sample size `n` (keys 3-10) at 90%, 95%, and 99% confidence</span>
 <span class="c1">#: (Rorabacher, *Anal. Chem.* 63, 139 (1991), Table II).</span>
 <span class="n">Q_CRITICAL_TABLE</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
@@ -446,33 +446,33 @@
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.QTestResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">QTestResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Result of a :func:`dixon_q_test` call."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Result of a :func:`dixon_q_test` call.&quot;&quot;&quot;</span>
 
     <span class="n">suspect_value</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: The data point tested (the minimum or maximum of the set)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: The data point tested (the minimum or maximum of the set).&quot;&quot;&quot;</span>
 
     <span class="n">Q_statistic</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: The computed Q statistic, gap/range."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: The computed Q statistic, gap/range.&quot;&quot;&quot;</span>
 
     <span class="n">Q_critical</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: The critical value looked up from :data:`Q_CRITICAL_TABLE`."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: The critical value looked up from :data:`Q_CRITICAL_TABLE`.&quot;&quot;&quot;</span>
 
     <span class="n">reject</span><span class="p">:</span> <span class="nb">bool</span>
-<span class="w">    </span><span class="sd">"""bool: Whether the suspect value is rejected as an outlier (``Q_statistic &gt; Q_critical``)."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether the suspect value is rejected as an outlier (``Q_statistic &gt; Q_critical``).&quot;&quot;&quot;</span></div>
 
 
 
 <div class="viewcode-block" id="dixon_q_test">
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.dixon_q_test">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">dixon_q_test</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">confidence</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.95</span><span class="p">,</span> <span class="n">suspect</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"auto"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QTestResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Test whether the smallest or largest value in a small data set is an outlier.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dixon_q_test</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">confidence</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.95</span><span class="p">,</span> <span class="n">suspect</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QTestResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Test whether the smallest or largest value in a small data set is an outlier.</span>
 
 <span class="sd">    .. math::</span>
 
 <span class="sd">        Q = \frac{\text{gap}}{\text{range}}</span>
 
-<span class="sd">    where "gap" is the absolute difference between the suspect value and</span>
-<span class="sd">    its nearest neighbor, and "range" is the difference between the</span>
+<span class="sd">    where &quot;gap&quot; is the absolute difference between the suspect value and</span>
+<span class="sd">    its nearest neighbor, and &quot;range&quot; is the difference between the</span>
 <span class="sd">    largest and smallest values in the set (Harris, *Quantitative</span>
 <span class="sd">    Chemical Analysis*, 9th ed., Ch. 4.6). The suspect value is rejected</span>
 <span class="sd">    as an outlier if :math:`Q&gt;Q_{crit}` for the sample size and</span>
@@ -484,8 +484,8 @@
 <span class="sd">        The data set, 3 to 10 points.</span>
 <span class="sd">    confidence : {0.90, 0.95, 0.99}, default 0.95</span>
 <span class="sd">        Confidence level for the critical value.</span>
-<span class="sd">    suspect : {"auto", "min", "max"}, default "auto"</span>
-<span class="sd">        Which point to test. ``"auto"`` tests whichever of the minimum or</span>
+<span class="sd">    suspect : {&quot;auto&quot;, &quot;min&quot;, &quot;max&quot;}, default &quot;auto&quot;</span>
+<span class="sd">        Which point to test. ``&quot;auto&quot;`` tests whichever of the minimum or</span>
 <span class="sd">        maximum is farther (in absolute value) from the sample mean.</span>
 
 <span class="sd">    Returns</span>
@@ -514,11 +514,11 @@
 <span class="sd">    &gt;&gt;&gt; result = dixon_q_test([10.0, 10.1, 10.2, 10.3, 10.9], confidence=0.99)</span>
 <span class="sd">    &gt;&gt;&gt; result.reject</span>
 <span class="sd">    False</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">3</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Dixon's Q-test is tabulated here for 3-10 data points"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Dixon&#39;s Q-test is tabulated here for 3-10 data points&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">confidence</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Q_CRITICAL_TABLE</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"confidence must be one of </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">Q_CRITICAL_TABLE</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;confidence must be one of </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">Q_CRITICAL_TABLE</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -527,18 +527,18 @@
     <span class="n">gap_low</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">gap_high</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="n">suspect</span> <span class="o">==</span> <span class="s2">"min"</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">suspect</span> <span class="o">==</span> <span class="s2">&quot;min&quot;</span><span class="p">:</span>
         <span class="n">suspect_value</span><span class="p">,</span> <span class="n">gap</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">gap_low</span>
-    <span class="k">elif</span> <span class="n">suspect</span> <span class="o">==</span> <span class="s2">"max"</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">suspect</span> <span class="o">==</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span>
         <span class="n">suspect_value</span><span class="p">,</span> <span class="n">gap</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">gap_high</span>
-    <span class="k">elif</span> <span class="n">suspect</span> <span class="o">==</span> <span class="s2">"auto"</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">suspect</span> <span class="o">==</span> <span class="s2">&quot;auto&quot;</span><span class="p">:</span>
         <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">mean</span><span class="p">):</span>
             <span class="n">suspect_value</span><span class="p">,</span> <span class="n">gap</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">gap_low</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">suspect_value</span><span class="p">,</span> <span class="n">gap</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">gap_high</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'suspect must be "auto", "min", or "max"'</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;suspect must be &quot;auto&quot;, &quot;min&quot;, or &quot;max&quot;&#39;</span><span class="p">)</span>
 
     <span class="n">Q</span> <span class="o">=</span> <span class="n">gap</span> <span class="o">/</span> <span class="n">data_range</span> <span class="k">if</span> <span class="n">data_range</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">0.0</span>
     <span class="n">Q_crit</span> <span class="o">=</span> <span class="n">Q_CRITICAL_TABLE</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">confidence</span><span class="p">]</span>

@@ -410,10 +410,10 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.crystal.core.base_system</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Abstract base classes for crystal-structure models, and a note on why exactly these two ABCs (and no others).</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Abstract base classes for crystal-structure models, and a note on why exactly these two ABCs (and no others).</span>
 
-<span class="sd">This domain has two genuine "several interchangeable models of one</span>
-<span class="sd">physical quantity, compared side by side" shapes -- the same shape that</span>
+<span class="sd">This domain has two genuine &quot;several interchangeable models of one</span>
+<span class="sd">physical quantity, compared side by side&quot; shapes -- the same shape that</span>
 <span class="sd">:class:`chemistrykit.thermo.core.base_system.EquationOfState`,</span>
 <span class="sd">:class:`chemistrykit.surface.core.base_system.AdsorptionIsotherm`, and</span>
 <span class="sd">:class:`chemistrykit.polymer.core.base_system.PolymerChainModel` already</span>
@@ -423,9 +423,9 @@
 <span class="sd">  sphere lattice types (simple cubic, body-centered cubic, face-centered</span>
 <span class="sd">  cubic, hexagonal close-packed;</span>
 <span class="sd">  :mod:`chemistrykit.crystal.systems.packing`) each answer the same</span>
-<span class="sd">  question -- "given identical touching spheres on this lattice, what</span>
+<span class="sd">  question -- &quot;given identical touching spheres on this lattice, what</span>
 <span class="sd">  fraction of space do they fill, and how many nearest neighbors does</span>
-<span class="sd">  each have?" -- via a different atoms-per-cell count and</span>
+<span class="sd">  each have?&quot; -- via a different atoms-per-cell count and</span>
 <span class="sd">  radius-to-lattice-constant relation.</span>
 <span class="sd">* :class:`LatticeEnergyModel` -- the Born-Lande and Kapustinskii</span>
 <span class="sd">  equations (:mod:`chemistrykit.crystal.systems.lattice_energy`) are two</span>
@@ -436,7 +436,7 @@
 
 <span class="sd">Every other model in this domain is a self-contained closed-form</span>
 <span class="sd">relationship with no swappable sibling, so -- following</span>
-<span class="sd">``chemistrykit.electrochem``/``chemistrykit.photochem``/``chemistrykit.surface``'s</span>
+<span class="sd">``chemistrykit.electrochem``/``chemistrykit.photochem``/``chemistrykit.surface``&#39;s</span>
 <span class="sd">precedent of not forcing an ABC where none is warranted -- each stays a</span>
 <span class="sd">plain function (plus, where useful, a small result dataclass) in its own</span>
 <span class="sd">``systems/`` module:</span>
@@ -447,7 +447,7 @@
 <span class="sd">* The Madelung constant (:mod:`chemistrykit.crystal.systems.madelung`) is</span>
 <span class="sd">  a single numerical lattice summation, not several competing physical</span>
 <span class="sd">  models of the same thing.</span>
-<span class="sd">* Bragg's law and powder-XRD structure factors</span>
+<span class="sd">* Bragg&#39;s law and powder-XRD structure factors</span>
 <span class="sd">  (:mod:`chemistrykit.crystal.systems.xrd`) are exact geometric/</span>
 <span class="sd">  diffraction relationships.</span>
 <span class="sd">* Schottky/Frenkel defect equilibrium</span>
@@ -455,24 +455,24 @@
 <span class="sd">  *mechanisms* (vacancy pairs vs. vacancy-interstitial pairs) with</span>
 <span class="sd">  different formulas and different inputs (one vs. two site counts) --</span>
 <span class="sd">  not two competing estimates of the same quantity -- so, like</span>
-<span class="sd">  :mod:`chemistrykit.solutions.systems.solubility`'s Ksp/common-ion</span>
+<span class="sd">  :mod:`chemistrykit.solutions.systems.solubility`&#39;s Ksp/common-ion</span>
 <span class="sd">  functions, they stay as plain functions rather than being forced onto</span>
 <span class="sd">  a shared interface.</span>
 
 <span class="sd">**On overlap with** :mod:`chemistrykit.structure.systems.point_group`:</span>
-<span class="sd">that module detects a *molecule's* point-group symmetry by geometrically</span>
+<span class="sd">that module detects a *molecule&#39;s* point-group symmetry by geometrically</span>
 <span class="sd">testing candidate rotation/reflection operations against a finite set of</span>
 <span class="sd">atomic coordinates. Classifying a *crystal* into one of the 7 crystal</span>
 <span class="sd">systems, by contrast, is a lookup on the equalities/inequalities among</span>
 <span class="sd">the six lattice parameters :math:`(a,b,c,\alpha,\beta,\gamma)` -- there is</span>
-<span class="sd">no analogous "does this coordinate set map onto itself under this</span>
-<span class="sd">operation" test to share, and a space group (the crystallographic</span>
+<span class="sd">no analogous &quot;does this coordinate set map onto itself under this</span>
+<span class="sd">operation&quot; test to share, and a space group (the crystallographic</span>
 <span class="sd">analogue of a point group, combining point-symmetry operations with</span>
 <span class="sd">lattice translations) is a substantially larger object that this domain</span>
 <span class="sd">does not attempt to compute. The two modules are conceptually related</span>
 <span class="sd">(both ultimately classify structures by symmetry) but do not share</span>
 <span class="sd">reusable code.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -480,13 +480,13 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"LatticePacking"</span><span class="p">,</span> <span class="s2">"LatticeEnergyModel"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LatticePacking&quot;</span><span class="p">,</span> <span class="s2">&quot;LatticeEnergyModel&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="LatticePacking">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.LatticePacking">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LatticePacking</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Common interface for a hard-sphere packing model of a simple Bravais lattice.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common interface for a hard-sphere packing model of a simple Bravais lattice.</span>
 
 <span class="sd">    Concrete subclasses (:class:`chemistrykit.crystal.systems.packing.SimpleCubicPacking`,</span>
 <span class="sd">    :class:`~chemistrykit.crystal.systems.packing.BodyCenteredCubicPacking`,</span>
@@ -496,8 +496,8 @@
 <span class="sd">    and implement :meth:`unit_cell_volume` and :meth:`atomic_radius`;</span>
 <span class="sd">    :meth:`packing_fraction` is then available for every subclass for</span>
 <span class="sd">    free, exactly as :meth:`chemistrykit.surface.core.base_system.AdsorptionIsotherm.fractional_coverage`</span>
-<span class="sd">    is built once atop each concrete isotherm's ``loading``.</span>
-<span class="sd">    """</span>
+<span class="sd">    is built once atop each concrete isotherm&#39;s ``loading``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1">#: int: Number of nearest neighbors each sphere touches.</span>
     <span class="n">coordination_number</span><span class="p">:</span> <span class="nb">int</span>
@@ -509,7 +509,7 @@
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.LatticePacking.unit_cell_volume">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">unit_cell_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Return the (conventional) unit-cell volume for lattice constant `a`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the (conventional) unit-cell volume for lattice constant `a`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -519,14 +519,14 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
-<span class="sd">        """</span></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="LatticePacking.atomic_radius">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.LatticePacking.atomic_radius">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">atomic_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Return the touching-sphere radius implied by lattice constant `a`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the touching-sphere radius implied by lattice constant `a`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -535,13 +535,13 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
-<span class="sd">        """</span></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="LatticePacking.packing_fraction">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.LatticePacking.packing_fraction">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">packing_fraction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return the fraction of the unit cell's volume occupied by touching spheres.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return the fraction of the unit cell&#39;s volume occupied by touching spheres.</span>
 
 <span class="sd">        .. math::</span>
 
@@ -560,7 +560,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">atomic_radius</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
         <span class="n">sphere_volume</span> <span class="o">=</span> <span class="p">(</span><span class="mf">4.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">r</span><span class="o">**</span><span class="mi">3</span>
@@ -573,24 +573,24 @@
 <div class="viewcode-block" id="LatticeEnergyModel">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.LatticeEnergyModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LatticeEnergyModel</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Common interface for a model estimating an ionic crystal's lattice energy.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common interface for a model estimating an ionic crystal&#39;s lattice energy.</span>
 
 <span class="sd">    Concrete subclasses (:class:`chemistrykit.crystal.systems.lattice_energy.BornLandeLatticeEnergy`,</span>
 <span class="sd">    :class:`~chemistrykit.crystal.systems.lattice_energy.KapustinskiiLatticeEnergy`)</span>
 <span class="sd">    implement :meth:`lattice_energy`.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="LatticeEnergyModel.lattice_energy">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.LatticeEnergyModel.lattice_energy">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">lattice_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Return the (negative, exothermic-formation-convention) lattice energy.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the (negative, exothermic-formation-convention) lattice energy.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
 <span class="sd">            Lattice energy, in J/mol (negative for a stable ionic solid).</span>
-<span class="sd">        """</span></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 </div>
 
 </pre></div>

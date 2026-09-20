@@ -410,12 +410,12 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.crystal.systems.xrd</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Bragg's law, cubic d-spacings, and structure factors (with systematic absences) for powder XRD.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Bragg&#39;s law, cubic d-spacings, and structure factors (with systematic absences) for powder XRD.</span>
 
 <span class="sd">See West, *Solid State Chemistry and its Applications*, 2nd ed. (2014),</span>
 <span class="sd">Ch. 5, or Ashcroft &amp; Mermin, *Solid State Physics* (1976), Ch. 6, for</span>
 <span class="sd">Bragg diffraction and the kinematic structure factor.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -424,26 +424,26 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"bragg_angle"</span><span class="p">,</span>
-    <span class="s2">"d_spacing_cubic"</span><span class="p">,</span>
-    <span class="s2">"structure_factor"</span><span class="p">,</span>
-    <span class="s2">"XRDPeak"</span><span class="p">,</span>
-    <span class="s2">"powder_xrd_peaks"</span><span class="p">,</span>
+    <span class="s2">&quot;bragg_angle&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;d_spacing_cubic&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;structure_factor&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;XRDPeak&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;powder_xrd_peaks&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="c1">#: dict: Fractional atomic positions (basis) of the lattice point per</span>
 <span class="c1">#: conventional cubic unit cell, by Bravais lattice type.</span>
 <span class="n">_CUBIC_BASES</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"SC"</span><span class="p">:</span> <span class="p">[(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)],</span>
-    <span class="s2">"BCC"</span><span class="p">:</span> <span class="p">[(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)],</span>
-    <span class="s2">"FCC"</span><span class="p">:</span> <span class="p">[(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)],</span>
+    <span class="s2">&quot;SC&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)],</span>
+    <span class="s2">&quot;BCC&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)],</span>
+    <span class="s2">&quot;FCC&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)],</span>
 <span class="p">}</span>
 
 
 <div class="viewcode-block" id="bragg_angle">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.bragg_angle">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">bragg_angle</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Solve Bragg's law :math:`n\lambda=2d\sin\theta` for the diffraction angle :math:`\theta`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Solve Bragg&#39;s law :math:`n\lambda=2d\sin\theta` for the diffraction angle :math:`\theta`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -472,7 +472,7 @@
 <span class="sd">    14.89</span>
 <span class="sd">    &gt;&gt;&gt; bool(round(float(2.0 * 300.0 * np.sin(theta)), 4) == round(154.18, 4))</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">sin_theta</span> <span class="o">=</span> <span class="n">order</span> <span class="o">*</span> <span class="n">wavelength</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span>
     <span class="n">sin_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sin_theta</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">sin_theta</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
@@ -484,7 +484,7 @@
 <div class="viewcode-block" id="d_spacing_cubic">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.d_spacing_cubic">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">d_spacing_cubic</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">l</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Interplanar spacing for the :math:`(hkl)` plane of a cubic lattice, :math:`d=a/\sqrt{h^2+k^2+l^2}`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Interplanar spacing for the :math:`(hkl)` plane of a cubic lattice, :math:`d=a/\sqrt{h^2+k^2+l^2}`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -501,9 +501,9 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; round(float(d_spacing_cubic(a=4.0, h=1, k=1, l=1)), 6)</span>
 <span class="sd">    2.309401</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">h</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">l</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"(h, k, l) = (0, 0, 0) is not a diffracting plane"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;(h, k, l) = (0, 0, 0) is not a diffracting plane&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">h</span> <span class="o">*</span> <span class="n">h</span> <span class="o">+</span> <span class="n">k</span> <span class="o">*</span> <span class="n">k</span> <span class="o">+</span> <span class="n">l</span> <span class="o">*</span> <span class="n">l</span><span class="p">))</span></div>
 
 
@@ -511,13 +511,13 @@
 <div class="viewcode-block" id="structure_factor">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.structure_factor">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">structure_factor</span><span class="p">(</span><span class="n">hkl</span><span class="p">,</span> <span class="n">basis</span><span class="p">,</span> <span class="n">scattering_factors</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">complex</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""The kinematic structure factor :math:`F_{hkl}=\sum_j f_j\exp[2\pi i(hx_j+ky_j+lz_j)]`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The kinematic structure factor :math:`F_{hkl}=\sum_j f_j\exp[2\pi i(hx_j+ky_j+lz_j)]`.</span>
 
 <span class="sd">    Summed over the atoms in one unit cell at fractional coordinates</span>
-<span class="sd">    `basis`; :math:`|F_{hkl}|^2` is proportional to a reflection's</span>
+<span class="sd">    `basis`; :math:`|F_{hkl}|^2` is proportional to a reflection&#39;s</span>
 <span class="sd">    diffracted intensity, and :math:`F_{hkl}=0` identically for certain</span>
 <span class="sd">    :math:`(hkl)` combinations depending on the lattice centering --</span>
-<span class="sd">    "systematic absences" (West, *Solid State Chemistry and its</span>
+<span class="sd">    &quot;systematic absences&quot; (West, *Solid State Chemistry and its</span>
 <span class="sd">    Applications*, 2nd ed., Ch. 5.4).</span>
 
 <span class="sd">    Parameters</span>
@@ -550,7 +550,7 @@
 <span class="sd">    0.0</span>
 <span class="sd">    &gt;&gt;&gt; round(abs(structure_factor((1, 1, 0), bcc_basis)), 9)</span>
 <span class="sd">    2.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">h</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">hkl</span>
     <span class="n">basis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">basis</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">basis</span><span class="p">))</span> <span class="k">if</span> <span class="n">scattering_factors</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">scattering_factors</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
@@ -563,29 +563,29 @@
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.XRDPeak">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">XRDPeak</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""A single allowed powder-XRD reflection."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A single allowed powder-XRD reflection.&quot;&quot;&quot;</span>
 
     <span class="n">hkl</span><span class="p">:</span> <span class="nb">tuple</span>
-<span class="w">    </span><span class="sd">"""tuple of int: Miller indices :math:`(h,k,l)`."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;tuple of int: Miller indices :math:`(h,k,l)`.&quot;&quot;&quot;</span>
 
     <span class="n">d_spacing</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Interplanar spacing, same length unit as the input lattice constant."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Interplanar spacing, same length unit as the input lattice constant.&quot;&quot;&quot;</span>
 
     <span class="n">two_theta</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Diffraction angle :math:`2\\theta`, in degrees."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Diffraction angle :math:`2\\theta`, in degrees.&quot;&quot;&quot;</span>
 
     <span class="n">relative_intensity</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: :math:`|F_{hkl}|^2`, not multiplicity- or Lorentz-polarization-corrected."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: :math:`|F_{hkl}|^2`, not multiplicity- or Lorentz-polarization-corrected.&quot;&quot;&quot;</span></div>
 
 
 
 <div class="viewcode-block" id="powder_xrd_peaks">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.powder_xrd_peaks">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">powder_xrd_peaks</span><span class="p">(</span><span class="n">lattice_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">hkl_max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Enumerate the allowed powder-XRD peaks of a cubic Bravais lattice up to a Miller-index cutoff.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Enumerate the allowed powder-XRD peaks of a cubic Bravais lattice up to a Miller-index cutoff.</span>
 
 <span class="sd">    Iterates every :math:`(h,k,l)` with :math:`0\le h,k,l\le` `hkl_max`</span>
-<span class="sd">    (not all zero), computes each reflection's structure factor via</span>
+<span class="sd">    (not all zero), computes each reflection&#39;s structure factor via</span>
 <span class="sd">    :func:`structure_factor` (dropping systematically-absent</span>
 <span class="sd">    reflections, :math:`|F_{hkl}|^2&lt;10^{-9}`) and Bragg angle via</span>
 <span class="sd">    :func:`bragg_angle` (dropping reflections with no real solution),</span>
@@ -593,7 +593,7 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    lattice_type : {"SC", "BCC", "FCC"}</span>
+<span class="sd">    lattice_type : {&quot;SC&quot;, &quot;BCC&quot;, &quot;FCC&quot;}</span>
 <span class="sd">        Cubic Bravais lattice type (see :data:`_CUBIC_BASES`).</span>
 <span class="sd">    a : float</span>
 <span class="sd">        Cubic lattice constant, in the same length unit as `wavelength`.</span>
@@ -611,20 +611,20 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    BCC iron's first powder line is (110), not (100) -- (100) is</span>
+<span class="sd">    BCC iron&#39;s first powder line is (110), not (100) -- (100) is</span>
 <span class="sd">    systematically absent since :math:`1+0+0=1` is odd:</span>
 
-<span class="sd">    &gt;&gt;&gt; peaks = powder_xrd_peaks("BCC", a=286.65, wavelength=154.18, hkl_max=2)</span>
+<span class="sd">    &gt;&gt;&gt; peaks = powder_xrd_peaks(&quot;BCC&quot;, a=286.65, wavelength=154.18, hkl_max=2)</span>
 <span class="sd">    &gt;&gt;&gt; peaks[0].hkl</span>
 <span class="sd">    (1, 1, 0)</span>
 
-<span class="sd">    FCC's first line is (111) -- (100) and (110) are both absent (mixed</span>
+<span class="sd">    FCC&#39;s first line is (111) -- (100) and (110) are both absent (mixed</span>
 <span class="sd">    parity):</span>
 
-<span class="sd">    &gt;&gt;&gt; peaks = powder_xrd_peaks("FCC", a=408.6, wavelength=154.18, hkl_max=2)</span>
+<span class="sd">    &gt;&gt;&gt; peaks = powder_xrd_peaks(&quot;FCC&quot;, a=408.6, wavelength=154.18, hkl_max=2)</span>
 <span class="sd">    &gt;&gt;&gt; peaks[0].hkl</span>
 <span class="sd">    (1, 1, 1)</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">basis</span> <span class="o">=</span> <span class="n">_CUBIC_BASES</span><span class="p">[</span><span class="n">lattice_type</span><span class="p">]</span>
     <span class="n">peaks</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">hkl_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
@@ -641,7 +641,7 @@
                 <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
                     <span class="k">continue</span>
                 <span class="n">peaks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">XRDPeak</span><span class="p">(</span><span class="n">hkl</span><span class="o">=</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">),</span> <span class="n">d_spacing</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">two_theta</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">theta</span><span class="p">)),</span> <span class="n">relative_intensity</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">intensity</span><span class="p">)))</span>
-    <span class="c1"># Peaks that tie exactly on 2*theta (e.g. BCC's (110)/(101)/(011), all</span>
+    <span class="c1"># Peaks that tie exactly on 2*theta (e.g. BCC&#39;s (110)/(101)/(011), all</span>
     <span class="c1"># equivalent by cubic symmetry) are broken by a canonical</span>
     <span class="c1"># highest-index-first ordering, purely so results are deterministic.</span>
     <span class="n">peaks</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">two_theta</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="o">-</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">hkl</span><span class="p">)))</span>

@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.photochem.core.base_system</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""Result dataclasses for chemistrykit.photochem; a note on why no new ABC is added here.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Result dataclasses for chemistrykit.photochem; a note on why no new ABC is added here.</span>
 
 <span class="sd">Every model in :mod:`chemistrykit.photochem` reduces, in the end, to</span>
 <span class="sd">either a closed-form algebraic relationship (quantum yields, the</span>
@@ -427,45 +427,45 @@
 <span class="sd">instead of Arrhenius kinetics (see</span>
 <span class="sd">:mod:`chemistrykit.photochem.systems.photostationary_state`). Rather than</span>
 <span class="sd">introduce a second, parallel network ABC purely for photochemistry, this</span>
-<span class="sd">subpackage reuses ``chemistrykit.kinetics``'s directly -- following the</span>
+<span class="sd">subpackage reuses ``chemistrykit.kinetics``&#39;s directly -- following the</span>
 <span class="sd">precedent of :mod:`chemistrykit.spectro` reusing</span>
-<span class="sd">:mod:`chemistrykit.quantum`'s ``RigidRotor``/``QuantumHarmonicOscillator``</span>
+<span class="sd">:mod:`chemistrykit.quantum`&#39;s ``RigidRotor``/``QuantumHarmonicOscillator``</span>
 <span class="sd">models rather than reimplementing quantum mechanics for spectroscopy.</span>
 
 <span class="sd">The one genuinely new result type is</span>
 <span class="sd">:class:`PhotostationaryStateResult`, a small dataclass (mirroring</span>
 <span class="sd">:class:`chemistrykit.thermo.systems.equilibrium.EquilibriumComposition`)</span>
-<span class="sd">bundling a photostationary-state calculation's populations, ratio, and</span>
+<span class="sd">bundling a photostationary-state calculation&#39;s populations, ratio, and</span>
 <span class="sd">the rate constants that produced them.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"PhotostationaryStateResult"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;PhotostationaryStateResult&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="PhotostationaryStateResult">
 <a class="viewcode-back" href="../../../../api/photochem.html#chemistrykit.photochem.PhotostationaryStateResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">PhotostationaryStateResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Result of a :func:`chemistrykit.photochem.systems.photostationary_state.photostationary_state` call."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Result of a :func:`chemistrykit.photochem.systems.photostationary_state.photostationary_state` call.&quot;&quot;&quot;</span>
 
     <span class="n">A_pss</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Steady-state concentration (or population fraction) of species A."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Steady-state concentration (or population fraction) of species A.&quot;&quot;&quot;</span>
 
     <span class="n">B_pss</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Steady-state concentration (or population fraction) of species B."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Steady-state concentration (or population fraction) of species B.&quot;&quot;&quot;</span>
 
     <span class="n">ratio_B_over_A</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: :math:`[B]_{pss}/[A]_{pss} = k_{AB}/k_{BA}`."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: :math:`[B]_{pss}/[A]_{pss} = k_{AB}/k_{BA}`.&quot;&quot;&quot;</span>
 
     <span class="n">k_AB</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Forward (A -&gt; B) pseudo-first-order photolysis rate constant used."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Forward (A -&gt; B) pseudo-first-order photolysis rate constant used.&quot;&quot;&quot;</span>
 
     <span class="n">k_BA</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Reverse (B -&gt; A) pseudo-first-order photolysis rate constant used."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Reverse (B -&gt; A) pseudo-first-order photolysis rate constant used.&quot;&quot;&quot;</span></div>
 
 </pre></div>
 

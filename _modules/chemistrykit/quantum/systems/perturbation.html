@@ -410,16 +410,16 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.quantum.systems.perturbation</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Rayleigh-Schrodinger perturbation theory applied to the anharmonic oscillator.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Rayleigh-Schrodinger perturbation theory applied to the anharmonic oscillator.</span>
 
-<span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 8 ("The</span>
-<span class="sd">chemical bond") for anharmonicity, and Levine, *Quantum Chemistry*, 7th</span>
+<span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 8 (&quot;The</span>
+<span class="sd">chemical bond&quot;) for anharmonicity, and Levine, *Quantum Chemistry*, 7th</span>
 <span class="sd">ed., Ch. 9.1-9.3 for Rayleigh-Schrodinger perturbation theory generally</span>
 <span class="sd">(Griffiths, *Introduction to Quantum Mechanics*, 2nd ed., Ch. 6, works</span>
 <span class="sd">this exact cubic/quartic-oscillator example in detail).</span>
 
-<span class="sd">For :math:`\hat H=\hat H_0+\lambda\hat H'`, the first-order energy</span>
-<span class="sd">correction is :math:`E_n^{(1)}=\langle n|\hat H'|n\rangle`, evaluated</span>
+<span class="sd">For :math:`\hat H=\hat H_0+\lambda\hat H&#39;`, the first-order energy</span>
+<span class="sd">correction is :math:`E_n^{(1)}=\langle n|\hat H&#39;|n\rangle`, evaluated</span>
 <span class="sd">here in the unperturbed harmonic-oscillator eigenbasis using the ladder</span>
 <span class="sd">operators :math:`x=\sqrt{\hbar/(2m\omega)}(a+a^\dagger)` (:func:`position_operator_matrix`),</span>
 <span class="sd">represented as a truncated matrix so the same</span>
@@ -427,7 +427,7 @@
 <span class="sd">used by Huckel/Hartree-Fock also gives the *exact* (within the</span>
 <span class="sd">truncation) numerically diagonalized spectrum of the full anharmonic</span>
 <span class="sd">Hamiltonian, for comparison against the perturbative estimate.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -437,18 +437,18 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.quantum.utils.secular_equation</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_secular_equation</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"position_operator_matrix"</span><span class="p">,</span>
-    <span class="s2">"cubic_perturbation_first_order_correction"</span><span class="p">,</span>
-    <span class="s2">"quartic_perturbation_first_order_correction"</span><span class="p">,</span>
-    <span class="s2">"anharmonic_hamiltonian_matrix"</span><span class="p">,</span>
-    <span class="s2">"anharmonic_energy_levels"</span><span class="p">,</span>
+    <span class="s2">&quot;position_operator_matrix&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cubic_perturbation_first_order_correction&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;quartic_perturbation_first_order_correction&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;anharmonic_hamiltonian_matrix&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;anharmonic_energy_levels&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
 <div class="viewcode-block" id="position_operator_matrix">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.position_operator_matrix">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">position_operator_matrix</span><span class="p">(</span><span class="n">n_basis</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">omega</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Matrix of the position operator :math:`\hat x` in the truncated harmonic-oscillator number basis.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Matrix of the position operator :math:`\hat x` in the truncated harmonic-oscillator number basis.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -484,9 +484,9 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; bool(np.allclose(np.diag(X), 0.0))  # &lt;n|x|n&gt; = 0 for every n (parity)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n_basis</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n_basis must be &gt;= 2"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n_basis must be &gt;= 2&quot;</span><span class="p">)</span>
     <span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">HBAR</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">mass</span> <span class="o">*</span> <span class="n">omega</span><span class="p">))</span>
     <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_basis</span><span class="p">,</span> <span class="n">n_basis</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_basis</span><span class="p">):</span>
@@ -500,7 +500,7 @@
 <div class="viewcode-block" id="cubic_perturbation_first_order_correction">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.cubic_perturbation_first_order_correction">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">cubic_perturbation_first_order_correction</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""First-order energy correction from a cubic perturbation :math:`\hat H'=c\hat x^3`: always exactly zero.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;First-order energy correction from a cubic perturbation :math:`\hat H&#39;=c\hat x^3`: always exactly zero.</span>
 
 <span class="sd">    :math:`\langle n|\hat x^3|n\rangle=0` for every harmonic-oscillator</span>
 <span class="sd">    eigenstate `n`, by parity: :math:`\hat x^3` is an odd function of</span>
@@ -530,9 +530,9 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; cubic_perturbation_first_order_correction(5)</span>
 <span class="sd">    0.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n must be &gt;= 0"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n must be &gt;= 0&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="mf">0.0</span></div>
 
 
@@ -540,7 +540,7 @@
 <div class="viewcode-block" id="quartic_perturbation_first_order_correction">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.quartic_perturbation_first_order_correction">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">quartic_perturbation_first_order_correction</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">omega</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""First-order energy correction from a quartic perturbation :math:`\hat H'=b\hat x^4`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;First-order energy correction from a quartic perturbation :math:`\hat H&#39;=b\hat x^4`.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -550,9 +550,9 @@
 <span class="sd">    using :math:`\langle n|\hat x^4|n\rangle=3\left(\frac{\hbar}{2m\omega}\right)^2(2n^2+2n+1)`</span>
 <span class="sd">    (Griffiths, *Introduction to Quantum Mechanics*, 2nd ed., Ch. 6</span>
 <span class="sd">    problem on the quartic perturbation; at :math:`n=0` this reduces to</span>
-<span class="sd">    the Gaussian ground state's fourth moment :math:`\langle x^4\rangle=3\langle x^2\rangle^2`).</span>
+<span class="sd">    the Gaussian ground state&#39;s fourth moment :math:`\langle x^4\rangle=3\langle x^2\rangle^2`).</span>
 <span class="sd">    Unlike the cubic term, this survives at first order because</span>
-<span class="sd">    :math:`\hat x^4` is even, matching :math:`|n\rangle`'s squared</span>
+<span class="sd">    :math:`\hat x^4` is even, matching :math:`|n\rangle`&#39;s squared</span>
 <span class="sd">    (always-even) probability density.</span>
 
 <span class="sd">    Parameters</span>
@@ -574,15 +574,15 @@
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    The correction grows with `n` (higher states are more delocalized,</span>
-<span class="sd">    probing the quartic term's steep walls more):</span>
+<span class="sd">    probing the quartic term&#39;s steep walls more):</span>
 
 <span class="sd">    &gt;&gt;&gt; correction_0 = quartic_perturbation_first_order_correction(0, mass=1.6e-27, omega=1.0e14, b=1.0e18)</span>
 <span class="sd">    &gt;&gt;&gt; correction_5 = quartic_perturbation_first_order_correction(5, mass=1.6e-27, omega=1.0e14, b=1.0e18)</span>
 <span class="sd">    &gt;&gt;&gt; bool(correction_5 &gt; correction_0 &gt; 0)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n must be &gt;= 0"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n must be &gt;= 0&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">b</span> <span class="o">*</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="n">HBAR</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">4.0</span> <span class="o">*</span> <span class="n">mass</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">omega</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span></div>
 
 
@@ -590,7 +590,7 @@
 <div class="viewcode-block" id="anharmonic_hamiltonian_matrix">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.anharmonic_hamiltonian_matrix">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">anharmonic_hamiltonian_matrix</span><span class="p">(</span><span class="n">n_basis</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">omega</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Build the matrix of :math:`\hat H=\hat H_0+c\hat x^3+b\hat x^4` in the truncated harmonic-oscillator basis.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Build the matrix of :math:`\hat H=\hat H_0+c\hat x^3+b\hat x^4` in the truncated harmonic-oscillator basis.</span>
 
 <span class="sd">    :math:`\hat H_0` is diagonal (:math:`\hbar\omega(n+1/2)`); the</span>
 <span class="sd">    perturbation terms are built from powers of</span>
@@ -619,7 +619,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    ndarray, shape (n_basis, n_basis)</span>
 <span class="sd">        Symmetric, in J.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_basis</span><span class="p">)</span>
     <span class="n">H0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">HBAR</span> <span class="o">*</span> <span class="n">omega</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">))</span>
     <span class="n">X</span> <span class="o">=</span> <span class="n">position_operator_matrix</span><span class="p">(</span><span class="n">n_basis</span><span class="p">,</span> <span class="n">mass</span><span class="p">,</span> <span class="n">omega</span><span class="p">)</span>
@@ -632,14 +632,14 @@
 <div class="viewcode-block" id="anharmonic_energy_levels">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.anharmonic_energy_levels">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">anharmonic_energy_levels</span><span class="p">(</span><span class="n">n_basis</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">omega</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">n_levels</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Exact (within the truncated basis) anharmonic energy levels, by direct numerical diagonalization.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Exact (within the truncated basis) anharmonic energy levels, by direct numerical diagonalization.</span>
 
 <span class="sd">    Diagonalizes :func:`anharmonic_hamiltonian_matrix` via</span>
 <span class="sd">    :func:`chemistrykit.quantum.utils.secular_equation.solve_secular_equation`</span>
 <span class="sd">    (an ordinary eigenvalue problem -- the harmonic-oscillator basis is</span>
 <span class="sd">    orthonormal) and returns the lowest `n_levels` eigenvalues, the</span>
-<span class="sd">    numerically "exact" benchmark against which</span>
-<span class="sd">    :func:`quartic_perturbation_first_order_correction`'s perturbative</span>
+<span class="sd">    numerically &quot;exact&quot; benchmark against which</span>
+<span class="sd">    :func:`quartic_perturbation_first_order_correction`&#39;s perturbative</span>
 <span class="sd">    estimate is checked.</span>
 
 <span class="sd">    Parameters</span>
@@ -647,7 +647,7 @@
 <span class="sd">    n_basis : int</span>
 <span class="sd">        Truncated basis size; should be well above `n_levels` for the</span>
 <span class="sd">        returned levels to be trustworthy (see</span>
-<span class="sd">        :func:`anharmonic_hamiltonian_matrix`'s truncation caveat).</span>
+<span class="sd">        :func:`anharmonic_hamiltonian_matrix`&#39;s truncation caveat).</span>
 <span class="sd">    mass : float</span>
 <span class="sd">        Oscillator mass, in kg.</span>
 <span class="sd">    omega : float</span>
@@ -676,9 +676,9 @@
 <span class="sd">    &gt;&gt;&gt; relative_error = abs(exact[0] - E0_perturbative) / abs(E0_perturbative)</span>
 <span class="sd">    &gt;&gt;&gt; bool(relative_error &lt; 1.0e-3)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n_levels</span> <span class="o">&gt;</span> <span class="n">n_basis</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n_levels must be &lt;= n_basis"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n_levels must be &lt;= n_basis&quot;</span><span class="p">)</span>
     <span class="n">H</span> <span class="o">=</span> <span class="n">anharmonic_hamiltonian_matrix</span><span class="p">(</span><span class="n">n_basis</span><span class="p">,</span> <span class="n">mass</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
     <span class="n">energies</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">solve_secular_equation</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">energies</span><span class="p">)[:</span><span class="n">n_levels</span><span class="p">]</span></div>

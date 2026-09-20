@@ -410,26 +410,26 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.crystal.systems.defects</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Schottky and Frenkel point-defect equilibria: Boltzmann-factor defect concentration vs. temperature.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Schottky and Frenkel point-defect equilibria: Boltzmann-factor defect concentration vs. temperature.</span>
 
 <span class="sd">Point defects (vacancies, interstitials) are present in any ionic</span>
 <span class="sd">crystal in thermodynamic equilibrium at :math:`T&gt;0`, because although</span>
 <span class="sd">forming a defect costs enthalpy :math:`\Delta H`, it also increases the</span>
-<span class="sd">crystal's configurational entropy (there are many equivalent ways to</span>
+<span class="sd">crystal&#39;s configurational entropy (there are many equivalent ways to</span>
 <span class="sd">place a handful of defects among many lattice sites). Minimizing the</span>
 <span class="sd">Gibbs energy :math:`\Delta G=\Delta H-T\Delta S_{config}` with</span>
-<span class="sd">:math:`\Delta S_{config}=k_B\ln\binom{N}{n}` (Stirling's approximation,</span>
+<span class="sd">:math:`\Delta S_{config}=k_B\ln\binom{N}{n}` (Stirling&#39;s approximation,</span>
 <span class="sd">:math:`n\ll N`) over the number of defects `n` gives, in both cases</span>
 <span class="sd">below, a defect population governed by a Boltzmann factor in</span>
 <span class="sd">:math:`\Delta H/2` -- the factor of 2 arising because forming *one*</span>
 <span class="sd">Schottky or Frenkel defect actually requires two independent</span>
-<span class="sd">"choices" (which cation site is vacated, and independently which</span>
+<span class="sd">&quot;choices&quot; (which cation site is vacated, and independently which</span>
 <span class="sd">interstitial/anion site is involved), so the degeneracy (and hence the</span>
 <span class="sd">entropy, and hence the equilibrium condition) is effectively squared</span>
 <span class="sd">relative to a single-site defect. See West, *Solid State Chemistry and</span>
 <span class="sd">its Applications*, 2nd ed. (2014), Ch. 1.4, or Kittel, *Introduction to</span>
 <span class="sd">Solid State Physics*, 8th ed., Ch. 18, for the full derivation.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -437,13 +437,13 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">K_B</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"schottky_defect_concentration"</span><span class="p">,</span> <span class="s2">"frenkel_defect_concentration"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;schottky_defect_concentration&quot;</span><span class="p">,</span> <span class="s2">&quot;frenkel_defect_concentration&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="schottky_defect_concentration">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.schottky_defect_concentration">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">schottky_defect_concentration</span><span class="p">(</span><span class="n">N</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">delta_h</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Equilibrium number of Schottky defects (paired cation+anion vacancies).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Equilibrium number of Schottky defects (paired cation+anion vacancies).</span>
 
 <span class="sd">    .. math::</span>
 
@@ -482,7 +482,7 @@
 
 <span class="sd">    &gt;&gt;&gt; round(float(schottky_defect_concentration(N=1e20, delta_h=2.0e-19, T=1.0)), 6)</span>
 <span class="sd">    0.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">N</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">delta_h</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">K_B</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">n</span></div>
@@ -492,7 +492,7 @@
 <div class="viewcode-block" id="frenkel_defect_concentration">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.frenkel_defect_concentration">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">frenkel_defect_concentration</span><span class="p">(</span><span class="n">N</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">N_interstitial</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">delta_h</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Equilibrium number of Frenkel defects (a cation displaced to an interstitial site).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Equilibrium number of Frenkel defects (a cation displaced to an interstitial site).</span>
 
 <span class="sd">    .. math::</span>
 
@@ -527,7 +527,7 @@
 <span class="sd">    &gt;&gt;&gt; bool(np.all(np.diff(n) &gt; 0))</span>
 <span class="sd">    True</span>
 
-<span class="sd">    With equal site counts N=N_i, this reduces to the Schottky formula's</span>
+<span class="sd">    With equal site counts N=N_i, this reduces to the Schottky formula&#39;s</span>
 <span class="sd">    functional form (same exponential factor, prefactor N instead of</span>
 <span class="sd">    sqrt(N*N)=N -- they coincide):</span>
 
@@ -536,7 +536,7 @@
 <span class="sd">    &gt;&gt;&gt; n_schottky = schottky_defect_concentration(N=1e20, delta_h=2.5e-19, T=500.0)</span>
 <span class="sd">    &gt;&gt;&gt; bool(abs(n_frenkel - n_schottky) / n_schottky &lt; 1e-12)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span> <span class="o">*</span> <span class="n">N_interstitial</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">delta_h</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">K_B</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">n</span></div>

@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.spectro.systems.nmr</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""First-order NMR multiplet simulation: chemical shifts and J-coupling splitting patterns.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;First-order NMR multiplet simulation: chemical shifts and J-coupling splitting patterns.</span>
 
 <span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 13.7-13.8, or</span>
 <span class="sd">Silverstein, Webster &amp; Kiemle, *Spectrometric Identification of Organic</span>
@@ -421,14 +421,14 @@
 <span class="sd">the coupled nuclei (in Hz, i.e. after multiplying a ppm difference by the</span>
 <span class="sd">spectrometer frequency); under that approximation, `n` magnetically</span>
 <span class="sd">equivalent spin-1/2 neighbors split a resonance into `n+1` lines with</span>
-<span class="sd">relative intensities given by the binomial coefficients (Pascal's</span>
+<span class="sd">relative intensities given by the binomial coefficients (Pascal&#39;s</span>
 <span class="sd">triangle), symmetric about the unperturbed chemical shift (N. F. Ramsey</span>
 <span class="sd">&amp; E. M. Purcell, *Phys. Rev.* 85, 143 (1952), for the coupling</span>
-<span class="sd">mechanism; Pascal's triangle itself long predates NMR). Coupling to</span>
+<span class="sd">mechanism; Pascal&#39;s triangle itself long predates NMR). Coupling to</span>
 <span class="sd">several *inequivalent* sets of neighbors (different `J` values) splits</span>
 <span class="sd">the line independently and multiplicatively -- each new splitting acts</span>
 <span class="sd">on every line already present.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -437,13 +437,13 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.spectro.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">Spectrum</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"multiplicity"</span><span class="p">,</span> <span class="s2">"pascals_triangle_intensities"</span><span class="p">,</span> <span class="s2">"first_order_multiplet"</span><span class="p">,</span> <span class="s2">"multi_coupling_multiplet"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;multiplicity&quot;</span><span class="p">,</span> <span class="s2">&quot;pascals_triangle_intensities&quot;</span><span class="p">,</span> <span class="s2">&quot;first_order_multiplet&quot;</span><span class="p">,</span> <span class="s2">&quot;multi_coupling_multiplet&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="multiplicity">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.multiplicity">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">multiplicity</span><span class="p">(</span><span class="n">n_equivalent_neighbors</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""The n+1 rule: `n` equivalent spin-1/2 neighbors split a resonance into `n+1` lines.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The n+1 rule: `n` equivalent spin-1/2 neighbors split a resonance into `n+1` lines.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -457,14 +457,14 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    Ethanol's -CH2- protons, coupled to the 3 equivalent -CH3- protons,</span>
+<span class="sd">    Ethanol&#39;s -CH2- protons, coupled to the 3 equivalent -CH3- protons,</span>
 <span class="sd">    form a quartet:</span>
 
 <span class="sd">    &gt;&gt;&gt; multiplicity(3)</span>
 <span class="sd">    4</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n_equivalent_neighbors</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n_equivalent_neighbors must be &gt;= 0"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n_equivalent_neighbors must be &gt;= 0&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">n_equivalent_neighbors</span> <span class="o">+</span> <span class="mi">1</span></div>
 
 
@@ -472,7 +472,7 @@
 <div class="viewcode-block" id="pascals_triangle_intensities">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.pascals_triangle_intensities">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">pascals_triangle_intensities</span><span class="p">(</span><span class="n">n_equivalent_neighbors</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Relative line intensities for `n` equivalent spin-1/2 neighbors: the binomial coefficients :math:`\binom{n}{k}`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Relative line intensities for `n` equivalent spin-1/2 neighbors: the binomial coefficients :math:`\binom{n}{k}`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -484,12 +484,12 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    A quartet's classic 1:3:3:1 intensity pattern (e.g. ethanol's CH2,</span>
+<span class="sd">    A quartet&#39;s classic 1:3:3:1 intensity pattern (e.g. ethanol&#39;s CH2,</span>
 <span class="sd">    coupled to 3 equivalent CH3 protons):</span>
 
 <span class="sd">    &gt;&gt;&gt; pascals_triangle_intensities(3)</span>
 <span class="sd">    array([1., 3., 3., 1.])</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_equivalent_neighbors</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span></div>
 
@@ -498,14 +498,14 @@
 <div class="viewcode-block" id="first_order_multiplet">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.first_order_multiplet">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">first_order_multiplet</span><span class="p">(</span><span class="n">chemical_shift_ppm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">j_coupling_hz</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">spectrometer_frequency_mhz</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Spectrum</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Simulate a simple multiplet from coupling to one set of `n` equivalent neighbors.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Simulate a simple multiplet from coupling to one set of `n` equivalent neighbors.</span>
 
 <span class="sd">    Line positions are evenly spaced by :math:`J/\nu_0` in ppm (`J` in Hz</span>
 <span class="sd">    converted to ppm by dividing by the spectrometer frequency in MHz,</span>
 <span class="sd">    since 1 ppm on the chemical-shift scale corresponds to</span>
 <span class="sd">    :math:`\nu_0\,[\text{Hz}]/10^6` at operating frequency</span>
 <span class="sd">    :math:`\nu_0`), symmetric about `chemical_shift_ppm`, with the</span>
-<span class="sd">    Pascal's-triangle relative intensities from</span>
+<span class="sd">    Pascal&#39;s-triangle relative intensities from</span>
 <span class="sd">    :func:`pascals_triangle_intensities`.</span>
 
 <span class="sd">    Parameters</span>
@@ -537,7 +537,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; spectrum.intensities.tolist()</span>
 <span class="sd">    [1.0, 2.0, 1.0]</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">j_ppm</span> <span class="o">=</span> <span class="n">j_coupling_hz</span> <span class="o">/</span> <span class="n">spectrometer_frequency_mhz</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">multiplicity</span><span class="p">(</span><span class="n">n_neighbors</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">offsets</span> <span class="o">=</span> <span class="n">j_ppm</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">n</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
@@ -550,7 +550,7 @@
 <div class="viewcode-block" id="multi_coupling_multiplet">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.multi_coupling_multiplet">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">multi_coupling_multiplet</span><span class="p">(</span><span class="n">chemical_shift_ppm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">couplings</span><span class="p">,</span> <span class="n">spectrometer_frequency_mhz</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Spectrum</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Simulate a multiplet from independent first-order coupling to several *inequivalent* neighbor sets.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Simulate a multiplet from independent first-order coupling to several *inequivalent* neighbor sets.</span>
 
 <span class="sd">    Each coupling constant splits every line already present (the</span>
 <span class="sd">    couplings act independently and multiplicatively), giving</span>
@@ -576,7 +576,7 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    A doublet of doublets (dd) with equal J's degenerates into a triplet</span>
+<span class="sd">    A doublet of doublets (dd) with equal J&#39;s degenerates into a triplet</span>
 <span class="sd">    with 1:2:1 intensities (two different coupling partners with the</span>
 <span class="sd">    same `J` are indistinguishable from one set of two equivalent</span>
 <span class="sd">    partners):</span>
@@ -595,7 +595,7 @@
 <span class="sd">    6</span>
 <span class="sd">    &gt;&gt;&gt; round(float(np.sum(dt.intensities)), 6)</span>
 <span class="sd">    8.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">chemical_shift_ppm</span><span class="p">])</span>
     <span class="n">intensities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">])</span>
     <span class="k">for</span> <span class="n">j_hz</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">couplings</span><span class="p">:</span>

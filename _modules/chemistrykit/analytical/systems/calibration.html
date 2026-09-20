@@ -410,14 +410,14 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.analytical.systems.calibration</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Linear-regression calibration curves, and IUPAC-convention limits of detection/quantitation.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Linear-regression calibration curves, and IUPAC-convention limits of detection/quantitation.</span>
 
-<span class="sd">See Harris, *Quantitative Chemical Analysis*, 9th ed., Ch. 4.5 ("Method</span>
-<span class="sd">Validation") and Ch. 5, or the IUPAC recommendation (G. L. Long &amp; J. D.</span>
+<span class="sd">See Harris, *Quantitative Chemical Analysis*, 9th ed., Ch. 4.5 (&quot;Method</span>
+<span class="sd">Validation&quot;) and Ch. 5, or the IUPAC recommendation (G. L. Long &amp; J. D.</span>
 <span class="sd">Winefordner, *Anal. Chem.* 55, 712A (1983)), for the standard :math:`3.3</span>
 <span class="sd">\sigma/m` (LOD) and :math:`10\sigma/m` (LOQ) convention, with `sigma` the</span>
-<span class="sd">calibration curve's residual standard error and `m` its slope.</span>
-<span class="sd">"""</span>
+<span class="sd">calibration curve&#39;s residual standard error and `m` its slope.</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -427,7 +427,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.analytical.utils.regression</span><span class="w"> </span><span class="kn">import</span> <span class="n">linear_fit</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"LinearCalibration"</span><span class="p">,</span> <span class="s2">"fit_calibration"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LinearCalibration&quot;</span><span class="p">,</span> <span class="s2">&quot;fit_calibration&quot;</span><span class="p">]</span>
 
 <span class="c1">#: float: IUPAC LOD multiplier (Long &amp; Winefordner, 1983).</span>
 <span class="n">_LOD_MULTIPLIER</span> <span class="o">=</span> <span class="mf">3.3</span>
@@ -440,25 +440,25 @@
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.LinearCalibration">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">LinearCalibration</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""A fitted instrument-response-vs-concentration calibration curve, ``signal = slope*conc + intercept``."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A fitted instrument-response-vs-concentration calibration curve, ``signal = slope*conc + intercept``.&quot;&quot;&quot;</span>
 
     <span class="n">slope</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Sensitivity, signal units per concentration unit."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Sensitivity, signal units per concentration unit.&quot;&quot;&quot;</span>
 
     <span class="n">intercept</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Signal at zero concentration (ideally the blank signal)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Signal at zero concentration (ideally the blank signal).&quot;&quot;&quot;</span>
 
     <span class="n">r_squared</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Coefficient of determination of the fit."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Coefficient of determination of the fit.&quot;&quot;&quot;</span>
 
     <span class="n">residual_std_error</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: :math:`s_{y/x}`, the residual standard error about the fit</span>
-<span class="sd">    (Harris, *Quantitative Chemical Analysis*, 9th ed., Ch. 4.5)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: :math:`s_{y/x}`, the residual standard error about the fit</span>
+<span class="sd">    (Harris, *Quantitative Chemical Analysis*, 9th ed., Ch. 4.5).&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="LinearCalibration.predict_signal">
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.LinearCalibration.predict_signal">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">predict_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">concentration</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Predict the instrument signal at given concentration(s).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Predict the instrument signal at given concentration(s).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -467,7 +467,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">concentration</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">slope</span> <span class="o">*</span> <span class="n">c</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">intercept</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span></div>
@@ -476,7 +476,7 @@
 <div class="viewcode-block" id="LinearCalibration.predict_concentration">
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.LinearCalibration.predict_concentration">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">predict_concentration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signal</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Invert the calibration to estimate concentration from a measured signal.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Invert the calibration to estimate concentration from a measured signal.</span>
 
 <span class="sd">        .. math::</span>
 
@@ -489,7 +489,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">intercept</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">slope</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span></div>
@@ -498,24 +498,24 @@
 <div class="viewcode-block" id="LinearCalibration.lod">
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.LinearCalibration.lod">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">lod</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Limit of detection, :math:`\text{LOD}=3.3\,s_{y/x}/|m|` (IUPAC convention).</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Limit of detection, :math:`\text{LOD}=3.3\,s_{y/x}/|m|` (IUPAC convention).</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">_LOD_MULTIPLIER</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">residual_std_error</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slope</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="LinearCalibration.loq">
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.LinearCalibration.loq">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">loq</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Limit of quantitation, :math:`\text{LOQ}=10\,s_{y/x}/|m|` (IUPAC convention).</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Limit of quantitation, :math:`\text{LOQ}=10\,s_{y/x}/|m|` (IUPAC convention).</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">_LOQ_MULTIPLIER</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">residual_std_error</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slope</span><span class="p">)</span></div>
 </div>
 
@@ -524,7 +524,7 @@
 <div class="viewcode-block" id="fit_calibration">
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.fit_calibration">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">fit_calibration</span><span class="p">(</span><span class="n">concentration</span><span class="p">,</span> <span class="n">signal</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LinearCalibration</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Fit a linear calibration curve (signal vs. concentration) by ordinary least squares.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fit a linear calibration curve (signal vs. concentration) by ordinary least squares.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -555,7 +555,7 @@
 <span class="sd">    &gt;&gt;&gt; cal_perfect = fit_calibration([0.0, 1.0, 2.0, 3.0], [1.0, 3.0, 5.0, 7.0])</span>
 <span class="sd">    &gt;&gt;&gt; cal_perfect.lod() &lt; 1e-9</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">fit</span> <span class="o">=</span> <span class="n">linear_fit</span><span class="p">(</span><span class="n">concentration</span><span class="p">,</span> <span class="n">signal</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">LinearCalibration</span><span class="p">(</span><span class="n">slope</span><span class="o">=</span><span class="n">fit</span><span class="o">.</span><span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="o">=</span><span class="n">fit</span><span class="o">.</span><span class="n">intercept</span><span class="p">,</span> <span class="n">r_squared</span><span class="o">=</span><span class="n">fit</span><span class="o">.</span><span class="n">r_squared</span><span class="p">,</span> <span class="n">residual_std_error</span><span class="o">=</span><span class="n">fit</span><span class="o">.</span><span class="n">residual_std_error</span><span class="p">)</span></div>
 

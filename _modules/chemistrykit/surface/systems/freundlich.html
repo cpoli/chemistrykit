@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.surface.systems.freundlich</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""The Freundlich adsorption isotherm, and its standard linearization.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Freundlich adsorption isotherm, and its standard linearization.</span>
 
 <span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 22.1, and the</span>
 <span class="sd">original: H. Freundlich, *Z. Phys. Chem.* 57, 385 (1907). Unlike Langmuir</span>
@@ -420,7 +420,7 @@
 <span class="sd">distribution of site binding energies) over the pressure range it was</span>
 <span class="sd">fitted to, but should not be extrapolated to very high pressure, where</span>
 <span class="sd">real adsorption always saturates.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -431,13 +431,13 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.surface.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdsorptionIsotherm</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.surface.utils.regression</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearFit</span><span class="p">,</span> <span class="n">linear_fit</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"freundlich_loading"</span><span class="p">,</span> <span class="s2">"FreundlichIsotherm"</span><span class="p">,</span> <span class="s2">"FreundlichFit"</span><span class="p">,</span> <span class="s2">"fit_freundlich"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;freundlich_loading&quot;</span><span class="p">,</span> <span class="s2">&quot;FreundlichIsotherm&quot;</span><span class="p">,</span> <span class="s2">&quot;FreundlichFit&quot;</span><span class="p">,</span> <span class="s2">&quot;fit_freundlich&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="freundlich_loading">
 <a class="viewcode-back" href="../../../../api/surface.html#chemistrykit.surface.freundlich_loading">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">freundlich_loading</span><span class="p">(</span><span class="n">Kf</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""The Freundlich isotherm :math:`q = K_f P^{1/n}`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Freundlich isotherm :math:`q = K_f P^{1/n}`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -446,7 +446,7 @@
 <span class="sd">        pressure units used).</span>
 <span class="sd">    n : float</span>
 <span class="sd">        Freundlich heterogeneity exponent (:math:`n&gt;1` is the usual,</span>
-<span class="sd">        "favorable" case; :math:`n=1` recovers a linear (Henry's-law-like)</span>
+<span class="sd">        &quot;favorable&quot; case; :math:`n=1` recovers a linear (Henry&#39;s-law-like)</span>
 <span class="sd">        isotherm).</span>
 <span class="sd">    P : float or array-like of float</span>
 <span class="sd">        Equilibrium (partial) pressure of the adsorbate.</span>
@@ -469,7 +469,7 @@
 <span class="sd">    &gt;&gt;&gt; q = freundlich_loading(Kf=3.0, n=1.0, P=P)</span>
 <span class="sd">    &gt;&gt;&gt; bool(np.allclose(q, 3.0 * P))</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">Kf</span> <span class="o">*</span> <span class="n">P</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span></div>
@@ -479,7 +479,7 @@
 <div class="viewcode-block" id="FreundlichIsotherm">
 <a class="viewcode-back" href="../../../../api/surface.html#chemistrykit.surface.FreundlichIsotherm">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FreundlichIsotherm</span><span class="p">(</span><span class="n">AdsorptionIsotherm</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""The Freundlich adsorption isotherm :math:`q(P) = K_f P^{1/n}`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Freundlich adsorption isotherm :math:`q(P) = K_f P^{1/n}`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -500,13 +500,13 @@
 <span class="sd">    &gt;&gt;&gt; iso = FreundlichIsotherm(Kf=2.5, n=3.0)</span>
 <span class="sd">    &gt;&gt;&gt; round(float(iso.loading(P=1.0)), 6)</span>
 <span class="sd">    2.5</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Kf</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">Kf</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Kf must be positive"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Kf must be positive&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n must be positive"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n must be positive&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Kf</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">Kf</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
@@ -519,7 +519,7 @@
 <div class="viewcode-block" id="FreundlichIsotherm.fractional_coverage">
 <a class="viewcode-back" href="../../../../api/surface.html#chemistrykit.surface.FreundlichIsotherm.fractional_coverage">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">fractional_coverage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"the Freundlich isotherm has no saturation (monolayer) loading to normalize by"</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;the Freundlich isotherm has no saturation (monolayer) loading to normalize by&quot;</span><span class="p">)</span></div>
 </div>
 
 
@@ -528,28 +528,28 @@
 <a class="viewcode-back" href="../../../../api/surface.html#chemistrykit.surface.FreundlichFit">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">FreundlichFit</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Result of fitting loading-vs-pressure data to the Freundlich isotherm."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Result of fitting loading-vs-pressure data to the Freundlich isotherm.&quot;&quot;&quot;</span>
 
     <span class="n">Kf</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Fitted Freundlich capacity constant."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Fitted Freundlich capacity constant.&quot;&quot;&quot;</span>
 
     <span class="n">n</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Fitted Freundlich heterogeneity exponent."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Fitted Freundlich heterogeneity exponent.&quot;&quot;&quot;</span>
 
     <span class="n">r_squared</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Coefficient of determination of the linearized (``log q`` vs ``log P``) fit."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Coefficient of determination of the linearized (``log q`` vs ``log P``) fit.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="FreundlichFit.to_isotherm">
 <a class="viewcode-back" href="../../../../api/surface.html#chemistrykit.surface.FreundlichFit.to_isotherm">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_isotherm</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreundlichIsotherm</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Return a :class:`FreundlichIsotherm` built from the fitted parameters."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a :class:`FreundlichIsotherm` built from the fitted parameters.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">FreundlichIsotherm</span><span class="p">(</span><span class="n">Kf</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Kf</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="FreundlichFit.predict">
 <a class="viewcode-back" href="../../../../api/surface.html#chemistrykit.surface.FreundlichFit.predict">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Evaluate the fitted Freundlich isotherm at pressure(s) `P`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the fitted Freundlich isotherm at pressure(s) `P`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -558,7 +558,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_isotherm</span><span class="p">()</span><span class="o">.</span><span class="n">loading</span><span class="p">(</span><span class="n">P</span><span class="p">)</span></div>
 </div>
 
@@ -567,7 +567,7 @@
 <div class="viewcode-block" id="fit_freundlich">
 <a class="viewcode-back" href="../../../../api/surface.html#chemistrykit.surface.fit_freundlich">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">fit_freundlich</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FreundlichFit</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Fit loading-vs-pressure data to the Freundlich isotherm via its linearization.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fit loading-vs-pressure data to the Freundlich isotherm via its linearization.</span>
 
 <span class="sd">    Taking logarithms of :math:`q = K_f P^{1/n}` gives a straight line</span>
 <span class="sd">    (Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 22.1):</span>
@@ -601,7 +601,7 @@
 <span class="sd">    (4.0, 2.5)</span>
 <span class="sd">    &gt;&gt;&gt; round(fit.r_squared, 6)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">fit</span><span class="p">:</span> <span class="n">LinearFit</span> <span class="o">=</span> <span class="n">linear_fit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">P</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>

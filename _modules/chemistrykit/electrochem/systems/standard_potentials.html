@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.electrochem.systems.standard_potentials</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""A curated table of standard reduction potentials, and cell-potential combination.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A curated table of standard reduction potentials, and cell-potential combination.</span>
 
 <span class="sd">See Bard &amp; Faulkner, *Electrochemical Methods: Fundamentals and</span>
 <span class="sd">Applications*, 2nd ed., Appendix C.3, or Atkins &amp; de Paula, *Physical</span>
@@ -423,7 +423,7 @@
 <span class="sd">:mod:`chemistrykit.periodic_table` -- plain data, not a comprehensive</span>
 <span class="sd">electrochemical-series database. Values are standard (298.15 K, unit</span>
 <span class="sd">activity) reduction potentials in volts.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -431,12 +431,12 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"HalfReaction"</span><span class="p">,</span>
-    <span class="s2">"STANDARD_REDUCTION_POTENTIALS"</span><span class="p">,</span>
-    <span class="s2">"cell_potential"</span><span class="p">,</span>
-    <span class="s2">"standard_cell_potential"</span><span class="p">,</span>
-    <span class="s2">"balance_redox_reaction"</span><span class="p">,</span>
-    <span class="s2">"is_spontaneous"</span><span class="p">,</span>
+    <span class="s2">&quot;HalfReaction&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;STANDARD_REDUCTION_POTENTIALS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cell_potential&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;standard_cell_potential&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;balance_redox_reaction&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;is_spontaneous&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -444,18 +444,18 @@
 <a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.HalfReaction">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">HalfReaction</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""A single tabulated standard reduction half-reaction.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A single tabulated standard reduction half-reaction.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    name : str</span>
-<span class="sd">        Short label, e.g. ``"Cu2+/Cu"`` for :math:`Cu^{2+} + 2e^- \to Cu`.</span>
+<span class="sd">        Short label, e.g. ``&quot;Cu2+/Cu&quot;`` for :math:`Cu^{2+} + 2e^- \to Cu`.</span>
 <span class="sd">    n : int</span>
 <span class="sd">        Number of electrons transferred in the half-reaction as written</span>
 <span class="sd">        (in the reduction direction).</span>
 <span class="sd">    E_standard : float</span>
 <span class="sd">        Standard reduction potential, in V vs. SHE.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">n</span><span class="p">:</span> <span class="nb">int</span>
@@ -472,29 +472,29 @@
 <span class="n">STANDARD_REDUCTION_POTENTIALS</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">HalfReaction</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">entry</span>
     <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="p">(</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"Li+/Li"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.04</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"K+/K"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.93</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"Ca2+/Ca"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.87</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"Na+/Na"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.71</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"Mg2+/Mg"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.36</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"Al3+/Al"</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.66</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"Zn2+/Zn"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.76</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"Fe2+/Fe"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.44</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"Ni2+/Ni"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.26</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"Sn2+/Sn"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.14</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"Pb2+/Pb"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.13</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"H+/H2"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"Sn4+/Sn2+"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"Cu2+/Cu"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.34</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"I2/I-"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.54</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"Fe3+/Fe2+"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.77</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"Ag+/Ag"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.80</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"Br2/Br-"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.09</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"O2/H2O"</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">1.23</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"Cr2O7^2-/Cr3+"</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mf">1.33</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"Cl2/Cl-"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.36</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"MnO4-/Mn2+"</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.51</span><span class="p">),</span>
-        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">"F2/F-"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">2.87</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;Li+/Li&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.04</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;K+/K&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.93</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;Ca2+/Ca&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.87</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;Na+/Na&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.71</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;Mg2+/Mg&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.36</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;Al3+/Al&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.66</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;Zn2+/Zn&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.76</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;Fe2+/Fe&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.44</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;Ni2+/Ni&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.26</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;Sn2+/Sn&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.14</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;Pb2+/Pb&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.13</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;H+/H2&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;Sn4+/Sn2+&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;Cu2+/Cu&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.34</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;I2/I-&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.54</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;Fe3+/Fe2+&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.77</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;Ag+/Ag&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.80</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;Br2/Br-&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.09</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;O2/H2O&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">1.23</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;Cr2O7^2-/Cr3+&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mf">1.33</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;Cl2/Cl-&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.36</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;MnO4-/Mn2+&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.51</span><span class="p">),</span>
+        <span class="n">HalfReaction</span><span class="p">(</span><span class="s2">&quot;F2/F-&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">2.87</span><span class="p">),</span>
     <span class="p">)</span>
 <span class="p">}</span>
 
@@ -502,10 +502,10 @@
 <div class="viewcode-block" id="cell_potential">
 <a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.cell_potential">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">cell_potential</span><span class="p">(</span><span class="n">cathode</span><span class="p">:</span> <span class="n">HalfReaction</span><span class="p">,</span> <span class="n">anode</span><span class="p">:</span> <span class="n">HalfReaction</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Standard cell potential from two half-reactions: :math:`E^\circ_{cell} = E^\circ_{cathode} - E^\circ_{anode}`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Standard cell potential from two half-reactions: :math:`E^\circ_{cell} = E^\circ_{cathode} - E^\circ_{anode}`.</span>
 
 <span class="sd">    Both potentials are used exactly as tabulated *reduction* potentials</span>
-<span class="sd">    -- the anode's is not negated by hand and neither is scaled by the</span>
+<span class="sd">    -- the anode&#39;s is not negated by hand and neither is scaled by the</span>
 <span class="sd">    number of electrons it transfers, because electrode potential is an</span>
 <span class="sd">    intensive quantity (a per-electron driving force), unaffected by how</span>
 <span class="sd">    many electrons the balanced overall reaction happens to require</span>
@@ -532,9 +532,9 @@
 <span class="sd">    The classic Daniell cell, Cu cathode / Zn anode:</span>
 
 <span class="sd">    &gt;&gt;&gt; from chemistrykit.electrochem.systems.standard_potentials import STANDARD_REDUCTION_POTENTIALS as T</span>
-<span class="sd">    &gt;&gt;&gt; round(cell_potential(T["Cu2+/Cu"], T["Zn2+/Zn"]), 2)</span>
+<span class="sd">    &gt;&gt;&gt; round(cell_potential(T[&quot;Cu2+/Cu&quot;], T[&quot;Zn2+/Zn&quot;]), 2)</span>
 <span class="sd">    1.1</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">cathode</span><span class="o">.</span><span class="n">E_standard</span> <span class="o">-</span> <span class="n">anode</span><span class="o">.</span><span class="n">E_standard</span></div>
 
 
@@ -542,7 +542,7 @@
 <div class="viewcode-block" id="standard_cell_potential">
 <a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.standard_cell_potential">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">standard_cell_potential</span><span class="p">(</span><span class="n">cathode_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">anode_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Look up two half-reactions by name in :data:`STANDARD_REDUCTION_POTENTIALS` and combine them.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Look up two half-reactions by name in :data:`STANDARD_REDUCTION_POTENTIALS` and combine them.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -556,9 +556,9 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; round(standard_cell_potential("Cu2+/Cu", "Zn2+/Zn"), 2)</span>
+<span class="sd">    &gt;&gt;&gt; round(standard_cell_potential(&quot;Cu2+/Cu&quot;, &quot;Zn2+/Zn&quot;), 2)</span>
 <span class="sd">    1.1</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">cell_potential</span><span class="p">(</span><span class="n">STANDARD_REDUCTION_POTENTIALS</span><span class="p">[</span><span class="n">cathode_name</span><span class="p">],</span> <span class="n">STANDARD_REDUCTION_POTENTIALS</span><span class="p">[</span><span class="n">anode_name</span><span class="p">])</span></div>
 
 
@@ -566,12 +566,12 @@
 <div class="viewcode-block" id="balance_redox_reaction">
 <a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.balance_redox_reaction">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">balance_redox_reaction</span><span class="p">(</span><span class="n">cathode</span><span class="p">:</span> <span class="n">HalfReaction</span><span class="p">,</span> <span class="n">anode</span><span class="p">:</span> <span class="n">HalfReaction</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Electron-balancing multiples for combining two half-reactions into one overall redox reaction.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Electron-balancing multiples for combining two half-reactions into one overall redox reaction.</span>
 
 <span class="sd">    Half-reaction potentials combine as-is (see :func:`cell_potential`),</span>
 <span class="sd">    but *mass-balancing* the overall reaction -- and therefore computing</span>
 <span class="sd">    e.g. how much of each species is consumed per mole of overall</span>
-<span class="sd">    reaction via Faraday's laws</span>
+<span class="sd">    reaction via Faraday&#39;s laws</span>
 <span class="sd">    (:mod:`chemistrykit.electrochem.systems.electrolysis`) -- requires</span>
 <span class="sd">    each half-reaction to transfer the same number of electrons. The</span>
 <span class="sd">    standard recipe (Atkins &amp; de Paula, *Physical Chemistry*, 11th ed.,</span>
@@ -598,15 +598,15 @@
 <span class="sd">    transfer 2 electrons already):</span>
 
 <span class="sd">    &gt;&gt;&gt; from chemistrykit.electrochem.systems.standard_potentials import STANDARD_REDUCTION_POTENTIALS as T</span>
-<span class="sd">    &gt;&gt;&gt; balance_redox_reaction(T["Cu2+/Cu"], T["Zn2+/Zn"])</span>
+<span class="sd">    &gt;&gt;&gt; balance_redox_reaction(T[&quot;Cu2+/Cu&quot;], T[&quot;Zn2+/Zn&quot;])</span>
 <span class="sd">    (1, 1, 2)</span>
 
 <span class="sd">    :math:`MnO_4^- + 5Fe^{2+} \to \dots` needs Fe balanced 5-fold against</span>
-<span class="sd">    Mn's single 5-electron step:</span>
+<span class="sd">    Mn&#39;s single 5-electron step:</span>
 
-<span class="sd">    &gt;&gt;&gt; balance_redox_reaction(T["MnO4-/Mn2+"], T["Fe3+/Fe2+"])</span>
+<span class="sd">    &gt;&gt;&gt; balance_redox_reaction(T[&quot;MnO4-/Mn2+&quot;], T[&quot;Fe3+/Fe2+&quot;])</span>
 <span class="sd">    (1, 5, 5)</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">cathode</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="n">anode</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
     <span class="n">cathode_multiple</span> <span class="o">=</span> <span class="n">anode</span><span class="o">.</span><span class="n">n</span> <span class="o">//</span> <span class="n">g</span>
     <span class="n">anode_multiple</span> <span class="o">=</span> <span class="n">cathode</span><span class="o">.</span><span class="n">n</span> <span class="o">//</span> <span class="n">g</span>
@@ -618,7 +618,7 @@
 <div class="viewcode-block" id="is_spontaneous">
 <a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.is_spontaneous">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">is_spontaneous</span><span class="p">(</span><span class="n">E_cell</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Whether a cell reaction is spontaneous as written, from its cell potential.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Whether a cell reaction is spontaneous as written, from its cell potential.</span>
 
 <span class="sd">    :math:`E_{cell} &gt; 0 \iff \Delta G = -nFE_{cell} &lt; 0`, the spontaneity</span>
 <span class="sd">    criterion (Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch.</span>
@@ -643,7 +643,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; is_spontaneous(-0.76)</span>
 <span class="sd">    False</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">E_cell</span> <span class="o">&gt;</span> <span class="mf">0.0</span></div>
 
 </pre></div>

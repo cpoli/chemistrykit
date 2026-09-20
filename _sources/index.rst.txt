@@ -6,8 +6,11 @@ chemistrykit
 **chemistrykit** is a unified numerical toolkit for computational
 chemistry, spanning |num_subpackages| domains -- from reaction kinetics to
 crystallography -- sharing common ODE integrators and chemical constants
-under one NumPy-based API. All 14 domains from ``chemistrykit-spec.md``
-(in the repository root) are implemented, listed below.
+under one NumPy-based API. It's built for chemistry students working
+through a textbook problem, curious learners exploring a topic on their
+own, and educators building a demonstration. All 14 domains from
+``chemistrykit-spec.md`` (in the repository root) are implemented,
+listed below.
 
 Every subpackage is grounded in the chemistry it implements, not just
 coded against it: public functions carry runnable, CI-checked examples,

@@ -410,12 +410,12 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.quantum.systems.rigid_rotor</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""The rigid-rotor model of molecular rotation.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The rigid-rotor model of molecular rotation.</span>
 
 <span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 7.5 (rotational</span>
 <span class="sd">motion) and Ch. 12.2 (rotational spectroscopy), or Levine, *Quantum</span>
 <span class="sd">Chemistry*, 7th ed., Ch. 6.4.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -424,13 +424,13 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">HBAR</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.quantum.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumSystem</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"RigidRotor"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;RigidRotor&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="RigidRotor">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.RigidRotor">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RigidRotor</span><span class="p">(</span><span class="n">QuantumSystem</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""A linear rigid rotor of moment of inertia `I`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A linear rigid rotor of moment of inertia `I`.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -457,18 +457,18 @@
 <span class="sd">    1</span>
 <span class="sd">    &gt;&gt;&gt; rotor.degeneracy(2)</span>
 <span class="sd">    5</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">moment_of_inertia</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">moment_of_inertia</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"moment_of_inertia must be positive"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;moment_of_inertia must be positive&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">moment_of_inertia</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">moment_of_inertia</span><span class="p">)</span>
 
 <div class="viewcode-block" id="RigidRotor.from_diatomic">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.RigidRotor.from_diatomic">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_diatomic</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mass1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mass2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">bond_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RigidRotor</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Build a :class:`RigidRotor` from a diatomic's atomic masses and bond length.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Build a :class:`RigidRotor` from a diatomic&#39;s atomic masses and bond length.</span>
 
 <span class="sd">        Uses the reduced mass :math:`\mu=m_1m_2/(m_1+m_2)` and</span>
 <span class="sd">        :math:`I=\mu r^2` (Atkins &amp; de Paula, *Physical Chemistry*, 11th</span>
@@ -491,20 +491,20 @@
 <span class="sd">        &gt;&gt;&gt; rotor = RigidRotor.from_diatomic(mass1=1.008 * sc.atomic_mass, mass2=34.97 * sc.atomic_mass, bond_length=127.5e-12)  # HCl</span>
 <span class="sd">        &gt;&gt;&gt; bool(1.0e-47 &lt; rotor.moment_of_inertia &lt; 5.0e-47)</span>
 <span class="sd">        True</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">mu</span> <span class="o">=</span> <span class="n">mass1</span> <span class="o">*</span> <span class="n">mass2</span> <span class="o">/</span> <span class="p">(</span><span class="n">mass1</span> <span class="o">+</span> <span class="n">mass2</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">moment_of_inertia</span><span class="o">=</span><span class="n">mu</span> <span class="o">*</span> <span class="n">bond_length</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></div>
 
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">rotational_constant</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""float: The rotational constant :math:`B=\hbar^2/(2I)`, in J."""</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;float: The rotational constant :math:`B=\hbar^2/(2I)`, in J.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">HBAR</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">moment_of_inertia</span><span class="p">)</span>
 
 <div class="viewcode-block" id="RigidRotor.energy">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.RigidRotor.energy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">J</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`E_J=J(J+1)\hbar^2/(2I)`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`E_J=J(J+1)\hbar^2/(2I)`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -515,17 +515,17 @@
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
 <span class="sd">            Energy, in J.</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">J</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"J must be &gt;= 0"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;J must be &gt;= 0&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">J</span> <span class="o">*</span> <span class="p">(</span><span class="n">J</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotational_constant</span></div>
 
 
 <div class="viewcode-block" id="RigidRotor.degeneracy">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.RigidRotor.degeneracy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">degeneracy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">J</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Return the degeneracy :math:`g_J=2J+1` of level `J`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the degeneracy :math:`g_J=2J+1` of level `J`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -534,16 +534,16 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">J</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"J must be &gt;= 0"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;J must be &gt;= 0&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">J</span> <span class="o">+</span> <span class="mi">1</span></div>
 
 
 <div class="viewcode-block" id="RigidRotor.transition_energy">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.RigidRotor.transition_energy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">transition_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">J</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return the :math:`J\to J+1` absorption transition energy, :math:`2B(J+1)`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return the :math:`J\to J+1` absorption transition energy, :math:`2B(J+1)`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -565,9 +565,9 @@
 <span class="sd">        &gt;&gt;&gt; spacing2 = rotor.transition_energy(2) - rotor.transition_energy(1)</span>
 <span class="sd">        &gt;&gt;&gt; bool(abs(spacing1 - spacing2) &lt; 1e-30)</span>
 <span class="sd">        True</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">J</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"J must be &gt;= 0"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;J must be &gt;= 0&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">J</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">J</span><span class="p">))</span></div>
 </div>
 

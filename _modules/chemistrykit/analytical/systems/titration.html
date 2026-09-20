@@ -410,14 +410,14 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.analytical.systems.titration</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Redox and complexometric (EDTA) titration curves.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Redox and complexometric (EDTA) titration curves.</span>
 
 <span class="sd">Acid-base titration curves already exist in</span>
 <span class="sd">:mod:`chemistrykit.solutions.systems.titration`</span>
 <span class="sd">(:class:`~chemistrykit.solutions.systems.titration.StrongAcidStrongBaseTitration`,</span>
 <span class="sd">:class:`~chemistrykit.solutions.systems.titration.WeakAcidStrongBaseTitration`,</span>
 <span class="sd">:class:`~chemistrykit.solutions.systems.titration.WeakBaseStrongAcidTitration`)</span>
-<span class="sd">and are reused directly rather than duplicated here (see this domain's</span>
+<span class="sd">and are reused directly rather than duplicated here (see this domain&#39;s</span>
 <span class="sd">examples gallery, which exercises all three titration *types* -- acid-</span>
 <span class="sd">base, redox, complexometric -- side by side). This module adds the two</span>
 <span class="sd">that are new to analytical chemistry: potentiometric redox titrations and</span>
@@ -428,7 +428,7 @@
 <span class="sd">titrations) and Ch. 11-12 (EDTA titrations), or Skoog, West, Holler &amp;</span>
 <span class="sd">Crouch, *Fundamentals of Analytical Chemistry*, 9th ed., Ch. 16 and 17,</span>
 <span class="sd">throughout.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -437,17 +437,17 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.analytical.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">TitrationCurve</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">FARADAY</span><span class="p">,</span> <span class="n">R</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"RedoxTitration"</span><span class="p">,</span> <span class="s2">"EDTATitration"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;RedoxTitration&quot;</span><span class="p">,</span> <span class="s2">&quot;EDTATitration&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="RedoxTitration">
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.RedoxTitration">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RedoxTitration</span><span class="p">(</span><span class="n">TitrationCurve</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""A potentiometric redox titration: a reduced analyte titrated by an oxidizing titrant.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A potentiometric redox titration: a reduced analyte titrated by an oxidizing titrant.</span>
 
 <span class="sd">    Models the general reaction :math:`n_2\,\text{Red}_1 + n_1\,\text{Ox}_2</span>
 <span class="sd">    \rightarrow n_2\,\text{Ox}_1 + n_1\,\text{Red}_2` in the standard</span>
-<span class="sd">    large-equilibrium-constant ("quantitative reaction") approximation</span>
+<span class="sd">    large-equilibrium-constant (&quot;quantitative reaction&quot;) approximation</span>
 <span class="sd">    (Harris, *Quantitative Chemical Analysis*, 9th ed., Ch. 16), under</span>
 <span class="sd">    which electron-balance stoichiometry alone (not a numerical</span>
 <span class="sd">    equilibrium solve) fixes the composition at every titrant volume:</span>
@@ -509,7 +509,7 @@
 <span class="sd">    &gt;&gt;&gt; V_eq = titration.equivalence_volume()</span>
 <span class="sd">    &gt;&gt;&gt; round(float(titration.response_at(np.array([V_eq]))[0]), 4) == round((0.771 + 1.72) / 2.0, 4)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">E1_standard</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n1</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">E2_standard</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n2</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">C_analyte</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">V_analyte</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">C_titrant</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">298.15</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">E1_standard</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">E1_standard</span><span class="p">)</span>
@@ -524,12 +524,12 @@
 <div class="viewcode-block" id="RedoxTitration.equivalence_volume">
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.RedoxTitration.equivalence_volume">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">equivalence_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Return the exact (stoichiometric, electron-balance) equivalence volume.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the exact (stoichiometric, electron-balance) equivalence volume.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">n1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">C_analyte</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">V_analyte</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">C_titrant</span><span class="p">)</span></div>
 
 
@@ -568,26 +568,26 @@
 <div class="viewcode-block" id="EDTATitration">
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.EDTATitration">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">EDTATitration</span><span class="p">(</span><span class="n">TitrationCurve</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""A complexometric titration of a metal ion M by EDTA, via the conditional formation constant.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A complexometric titration of a metal ion M by EDTA, via the conditional formation constant.</span>
 
 <span class="sd">    Models the 1:1 complexation :math:`M+Y\rightleftharpoons MY` exactly</span>
 <span class="sd">    (no large-K approximation needed, unlike :class:`RedoxTitration`),</span>
-<span class="sd">    using the *conditional* formation constant :math:`K_f'` -- the</span>
+<span class="sd">    using the *conditional* formation constant :math:`K_f&#39;` -- the</span>
 <span class="sd">    effective (pH- and side-reaction-corrected) formation constant at the</span>
-<span class="sd">    titration's fixed pH (Harris, *Quantitative Chemical Analysis*, 9th</span>
+<span class="sd">    titration&#39;s fixed pH (Harris, *Quantitative Chemical Analysis*, 9th</span>
 <span class="sd">    ed., Ch. 12.2; folding pH-dependence into a single conditional</span>
-<span class="sd">    constant, rather than modeling EDTA's stepwise protonation</span>
+<span class="sd">    constant, rather than modeling EDTA&#39;s stepwise protonation</span>
 <span class="sd">    equilibria explicitly, is itself the standard simplification this</span>
 <span class="sd">    class makes, flagged here as an approximation).</span>
 
 <span class="sd">    Mass balance on total metal :math:`C_M` and total EDTA added</span>
 <span class="sd">    :math:`C_Y` (both diluted by the growing total volume), with</span>
 <span class="sd">    :math:`x=[MY]`, :math:`[M]=C_M-x`, :math:`[Y]=C_Y-x`, and</span>
-<span class="sd">    :math:`K_f'=x/[(C_M-x)(C_Y-x)]`, gives the exact quadratic</span>
+<span class="sd">    :math:`K_f&#39;=x/[(C_M-x)(C_Y-x)]`, gives the exact quadratic</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        K_f'x^2-\left[K_f'(C_M+C_Y)+1\right]x+K_f'C_MC_Y=0</span>
+<span class="sd">        K_f&#39;x^2-\left[K_f&#39;(C_M+C_Y)+1\right]x+K_f&#39;C_MC_Y=0</span>
 
 <span class="sd">    solved here in closed form for the physical root :math:`0\le x\le</span>
 <span class="sd">    \min(C_M,C_Y)`, then :math:`pM=-\log_{10}[M]`.</span>
@@ -599,17 +599,17 @@
 <span class="sd">    V_metal : float</span>
 <span class="sd">        Initial metal-ion solution volume, in L.</span>
 <span class="sd">    K_conditional : float</span>
-<span class="sd">        Conditional formation constant :math:`K_f'` at the titration pH.</span>
+<span class="sd">        Conditional formation constant :math:`K_f&#39;` at the titration pH.</span>
 <span class="sd">    C_edta : float</span>
 <span class="sd">        Titrant (EDTA) concentration, in mol/L.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    At the equivalence volume (:math:`C_M=C_Y`), `pM` approaches the</span>
-<span class="sd">    textbook large-:math:`K_f'` approximation :math:`pM\approx</span>
-<span class="sd">    \frac12\log_{10}(K_f'/C_{M,eq})`</span>
+<span class="sd">    textbook large-:math:`K_f&#39;` approximation :math:`pM\approx</span>
+<span class="sd">    \frac12\log_{10}(K_f&#39;/C_{M,eq})`</span>
 <span class="sd">    (Harris, *Quantitative Chemical Analysis*, 9th ed., eq. 12.2) as</span>
-<span class="sd">    :math:`K_f'` grows -- verified here rather than assumed, since the</span>
+<span class="sd">    :math:`K_f&#39;` grows -- verified here rather than assumed, since the</span>
 <span class="sd">    approximation formula is itself only a limit of the exact quadratic</span>
 <span class="sd">    solved above:</span>
 
@@ -621,7 +621,7 @@
 <span class="sd">    &gt;&gt;&gt; pM_approx = 0.5 * np.log10(1e12 / C_M_eq)</span>
 <span class="sd">    &gt;&gt;&gt; bool(abs(pM_exact - pM_approx) &lt; 0.01)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">C_metal</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">V_metal</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">K_conditional</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">C_edta</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">C_metal</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">C_metal</span><span class="p">)</span>
@@ -632,12 +632,12 @@
 <div class="viewcode-block" id="EDTATitration.equivalence_volume">
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.EDTATitration.equivalence_volume">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">equivalence_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Return the exact (stoichiometric, 1:1) equivalence volume.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the exact (stoichiometric, 1:1) equivalence volume.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">C_metal</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">V_metal</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">C_edta</span></div>
 
 
@@ -652,7 +652,7 @@
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="n">x_minus</span><span class="p">,</span> <span class="n">x_plus</span><span class="p">):</span>
             <span class="k">if</span> <span class="o">-</span><span class="mf">1e-15</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">x_max</span> <span class="o">+</span> <span class="mf">1e-15</span><span class="p">:</span>
                 <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">C_M</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="mf">1e-300</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"no physical root found for the M/Y mass-action quadratic"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;no physical root found for the M/Y mass-action quadratic&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="EDTATitration.response_at">
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.EDTATitration.response_at">[docs]</a>

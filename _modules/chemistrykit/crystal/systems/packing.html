@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.crystal.systems.packing</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Hard-sphere packing of the simple cubic, BCC, FCC, and (ideal) HCP lattices.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Hard-sphere packing of the simple cubic, BCC, FCC, and (ideal) HCP lattices.</span>
 
 <span class="sd">Each model below places identical touching spheres of radius `r` on a</span>
 <span class="sd">Bravais lattice of constant `a` and derives, from pure geometry, how many</span>
@@ -419,7 +419,7 @@
 <span class="sd">packing factor, APF). See Ashcroft &amp; Mermin, *Solid State Physics*</span>
 <span class="sd">(1976), Ch. 4, or West, *Solid State Chemistry and its Applications*, 2nd</span>
 <span class="sd">ed. (2014), Ch. 1.2, for the standard derivations reproduced here.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -428,17 +428,17 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.crystal.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">LatticePacking</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"SimpleCubicPacking"</span><span class="p">,</span>
-    <span class="s2">"BodyCenteredCubicPacking"</span><span class="p">,</span>
-    <span class="s2">"FaceCenteredCubicPacking"</span><span class="p">,</span>
-    <span class="s2">"HexagonalClosePacking"</span><span class="p">,</span>
+    <span class="s2">&quot;SimpleCubicPacking&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BodyCenteredCubicPacking&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FaceCenteredCubicPacking&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HexagonalClosePacking&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
 <div class="viewcode-block" id="SimpleCubicPacking">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.SimpleCubicPacking">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SimpleCubicPacking</span><span class="p">(</span><span class="n">LatticePacking</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Simple cubic (SC) packing: one lattice point per cell, spheres touching along the cell edge.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Simple cubic (SC) packing: one lattice point per cell, spheres touching along the cell edge.</span>
 
 <span class="sd">    Touching along the edge gives :math:`r = a/2`, one sphere per cell,</span>
 <span class="sd">    and 6 nearest neighbors (Ashcroft &amp; Mermin, Ch. 4).</span>
@@ -450,7 +450,7 @@
 
 <span class="sd">    &gt;&gt;&gt; bool(round(float(SimpleCubicPacking().packing_fraction()), 6) == round(np.pi / 6.0, 6))</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">coordination_number</span> <span class="o">=</span> <span class="mi">6</span>
     <span class="n">atoms_per_cell</span> <span class="o">=</span> <span class="mf">1.0</span>
@@ -473,7 +473,7 @@
 <div class="viewcode-block" id="BodyCenteredCubicPacking">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.BodyCenteredCubicPacking">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BodyCenteredCubicPacking</span><span class="p">(</span><span class="n">LatticePacking</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Body-centered cubic (BCC) packing: 2 lattice points per cell, spheres touching along the body diagonal.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Body-centered cubic (BCC) packing: 2 lattice points per cell, spheres touching along the body diagonal.</span>
 
 <span class="sd">    The body diagonal has length :math:`\sqrt3 a` and spans 4 sphere</span>
 <span class="sd">    radii (corner sphere - center sphere - opposite corner sphere), so</span>
@@ -486,7 +486,7 @@
 
 <span class="sd">    &gt;&gt;&gt; bool(round(float(BodyCenteredCubicPacking().packing_fraction()), 6) == round(float(np.sqrt(3.0) * np.pi / 8.0), 6))</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">coordination_number</span> <span class="o">=</span> <span class="mi">8</span>
     <span class="n">atoms_per_cell</span> <span class="o">=</span> <span class="mf">2.0</span>
@@ -509,7 +509,7 @@
 <div class="viewcode-block" id="FaceCenteredCubicPacking">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.FaceCenteredCubicPacking">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FaceCenteredCubicPacking</span><span class="p">(</span><span class="n">LatticePacking</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Face-centered cubic (FCC) packing: 4 lattice points per cell, spheres touching along a face diagonal.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Face-centered cubic (FCC) packing: 4 lattice points per cell, spheres touching along a face diagonal.</span>
 
 <span class="sd">    The face diagonal has length :math:`\sqrt2a` and spans 4 sphere</span>
 <span class="sd">    radii, so :math:`r=\sqrt2a/4`; 4 atoms per conventional cell (8</span>
@@ -524,7 +524,7 @@
 
 <span class="sd">    &gt;&gt;&gt; bool(round(float(FaceCenteredCubicPacking().packing_fraction()), 6) == round(float(np.pi / (3.0 * np.sqrt(2.0))), 6))</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">coordination_number</span> <span class="o">=</span> <span class="mi">12</span>
     <span class="n">atoms_per_cell</span> <span class="o">=</span> <span class="mf">4.0</span>
@@ -547,11 +547,11 @@
 <div class="viewcode-block" id="HexagonalClosePacking">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.HexagonalClosePacking">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">HexagonalClosePacking</span><span class="p">(</span><span class="n">LatticePacking</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Hexagonal close-packed (HCP) packing on the primitive hexagonal cell.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Hexagonal close-packed (HCP) packing on the primitive hexagonal cell.</span>
 
 <span class="sd">    The primitive hexagonal cell (basal rhombus of side `a`, height `c`)</span>
 <span class="sd">    has volume :math:`V=\frac{\sqrt3}{2}a^2c` and contains 2 lattice</span>
-<span class="sd">    points (the ABAB stacking's 2-atom basis); each sphere touches 12</span>
+<span class="sd">    points (the ABAB stacking&#39;s 2-atom basis); each sphere touches 12</span>
 <span class="sd">    nearest neighbors (6 in-plane, 3 in the layer above, 3 below), the</span>
 <span class="sd">    same coordination as FCC -- both are close-packed arrangements of</span>
 <span class="sd">    identical spheres, differing only in stacking sequence (ABAB... vs.</span>
@@ -565,7 +565,7 @@
 <span class="sd">        to the *ideal* close-packing value :math:`\sqrt{8/3}\approx1.633`</span>
 <span class="sd">        (Ashcroft &amp; Mermin, Ch. 4), derived purely from geometry (equal</span>
 <span class="sd">        touching spheres stacked ABAB); real HCP metals deviate from this</span>
-<span class="sd">        (e.g. Mg: 1.624, Zn: 1.856 -- Zn's anomalously large ratio means</span>
+<span class="sd">        (e.g. Mg: 1.624, Zn: 1.856 -- Zn&#39;s anomalously large ratio means</span>
 <span class="sd">        its actual packing fraction is *below* the ideal value below, an</span>
 <span class="sd">        approximation this model does not otherwise account for), so</span>
 <span class="sd">        passing the real `c_over_a` gives a more accurate, but no longer</span>
@@ -573,7 +573,7 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    At the ideal :math:`c/a`, the packing fraction exactly matches FCC's</span>
+<span class="sd">    At the ideal :math:`c/a`, the packing fraction exactly matches FCC&#39;s</span>
 <span class="sd">    :math:`\pi/(3\sqrt2)\approx0.7405` -- verified numerically here rather</span>
 <span class="sd">    than assumed, since it is not obvious by inspection that two</span>
 <span class="sd">    differently-stacked lattices share an atomic packing factor:</span>
@@ -584,13 +584,13 @@
 <span class="sd">    &gt;&gt;&gt; round(float(hcp_pf), 9) == round(float(fcc_pf), 9)</span>
 <span class="sd">    True</span>
 
-<span class="sd">    A non-ideal ``c_over_a`` (e.g. zinc's 1.856) gives a *lower* packing</span>
+<span class="sd">    A non-ideal ``c_over_a`` (e.g. zinc&#39;s 1.856) gives a *lower* packing</span>
 <span class="sd">    fraction, since the spheres no longer touch snugly in the stacking</span>
 <span class="sd">    direction:</span>
 
 <span class="sd">    &gt;&gt;&gt; HexagonalClosePacking(c_over_a=1.856).packing_fraction() &lt; HexagonalClosePacking().packing_fraction()</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">coordination_number</span> <span class="o">=</span> <span class="mi">12</span>
     <span class="n">atoms_per_cell</span> <span class="o">=</span> <span class="mf">2.0</span>

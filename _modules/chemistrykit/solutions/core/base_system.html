@@ -410,10 +410,10 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.solutions.core.base_system</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""Abstract base classes for solution-chemistry models, and result containers.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Abstract base classes for solution-chemistry models, and result containers.</span>
 
 <span class="sd">Two ABCs cover the two shapes of model in this subpackage, mirroring</span>
-<span class="sd">:mod:`chemistrykit.kinetics.core.base_system`'s ``RateLaw``/``ReactionNetwork``</span>
+<span class="sd">:mod:`chemistrykit.kinetics.core.base_system`&#39;s ``RateLaw``/``ReactionNetwork``</span>
 <span class="sd">split:</span>
 
 <span class="sd">* :class:`WeakElectrolyte` -- a single weak acid or weak base equilibrium</span>
@@ -429,11 +429,11 @@
 
 <span class="sd">Solubility equilibria (:mod:`chemistrykit.solutions.systems.solubility`)</span>
 <span class="sd">and activity-coefficient models</span>
-<span class="sd">(:mod:`chemistrykit.solutions.systems.activity`) don't share a common</span>
+<span class="sd">(:mod:`chemistrykit.solutions.systems.activity`) don&#39;t share a common</span>
 <span class="sd">polymorphic interface the way the two families above do, so (following</span>
-<span class="sd">``chemistrykit.kinetics.systems.arrhenius``/``enzyme``'s precedent) they</span>
+<span class="sd">``chemistrykit.kinetics.systems.arrhenius``/``enzyme``&#39;s precedent) they</span>
 <span class="sd">are implemented directly as functions in their own ``systems/`` modules.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -442,50 +442,50 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"WeakElectrolyte"</span><span class="p">,</span> <span class="s2">"TitrationResult"</span><span class="p">,</span> <span class="s2">"Titration"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;WeakElectrolyte&quot;</span><span class="p">,</span> <span class="s2">&quot;TitrationResult&quot;</span><span class="p">,</span> <span class="s2">&quot;Titration&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="WeakElectrolyte">
 <a class="viewcode-back" href="../../../../api/solutions.html#chemistrykit.solutions.WeakElectrolyte">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">WeakElectrolyte</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Common interface for a single weak acid or weak base dissociation equilibrium.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Common interface for a single weak acid or weak base dissociation equilibrium.</span>
 
 <span class="sd">    A concrete subclass represents *either* a weak acid (in which case</span>
 <span class="sd">    :meth:`_ion_concentration` returns :math:`[H^+]`) *or* a weak base</span>
 <span class="sd">    (returning :math:`[OH^-]`) -- never both -- so</span>
-<span class="sd">    :meth:`percent_dissociation`'s formula</span>
+<span class="sd">    :meth:`percent_dissociation`&#39;s formula</span>
 <span class="sd">    :math:`\alpha = ([\text{ion}] - K_w/[\text{ion}])/C` applies unchanged</span>
 <span class="sd">    to either case (for an acid, :math:`[\text{ion}] - K_w/[\text{ion}] =</span>
-<span class="sd">    [H^+] - [OH^-] = [A^-]`, the dissociated fraction's concentration; for</span>
+<span class="sd">    [H^+] - [OH^-] = [A^-]`, the dissociated fraction&#39;s concentration; for</span>
 <span class="sd">    a base, symmetrically, :math:`[OH^-] - [H^+] = [BH^+]`).</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">Kw</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0e-14</span>
-<span class="w">    </span><span class="sd">"""float: Water autoionization constant, default 1.0e-14 (25 degC)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Water autoionization constant, default 1.0e-14 (25 degC).&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">total_concentration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""float: Total (analytical) concentration of the weak electrolyte, in mol/L."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;float: Total (analytical) concentration of the weak electrolyte, in mol/L.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">equilibrium_constant</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""float: Ka (for a weak acid) or Kb (for a weak base)."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;float: Ka (for a weak acid) or Kb (for a weak base).&quot;&quot;&quot;</span>
 
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_ion_concentration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Return :math:`[H^+]` (weak acid) or :math:`[OH^-]` (weak base), in mol/L."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return :math:`[H^+]` (weak acid) or :math:`[OH^-]` (weak base), in mol/L.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="WeakElectrolyte.percent_dissociation">
 <a class="viewcode-back" href="../../../../api/solutions.html#chemistrykit.solutions.WeakElectrolyte.percent_dissociation">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">percent_dissociation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Percentage of the weak electrolyte that has dissociated, :math:`100\alpha`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Percentage of the weak electrolyte that has dissociated, :math:`100\alpha`.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ion_concentration</span><span class="p">()</span>
         <span class="n">alpha</span> <span class="o">=</span> <span class="p">(</span><span class="n">ion</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">Kw</span> <span class="o">/</span> <span class="n">ion</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_concentration</span>
         <span class="k">return</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="n">alpha</span></div>
@@ -497,33 +497,33 @@
 <a class="viewcode-back" href="../../../../api/solutions.html#chemistrykit.solutions.TitrationResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">TitrationResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for the output of a :meth:`Titration.curve` call."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for the output of a :meth:`Titration.curve` call.&quot;&quot;&quot;</span>
 
     <span class="n">Vb</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray: Volume(s) of titrant added, in L (or any consistent volume unit)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray: Volume(s) of titrant added, in L (or any consistent volume unit).&quot;&quot;&quot;</span>
 
     <span class="n">pH</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray: pH at each volume in `Vb`."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray: pH at each volume in `Vb`.&quot;&quot;&quot;</span></div>
 
 
 
 <div class="viewcode-block" id="Titration">
 <a class="viewcode-back" href="../../../../api/solutions.html#chemistrykit.solutions.Titration">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Titration</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Common base for a strong/weak acid-base titration-curve model.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common base for a strong/weak acid-base titration-curve model.</span>
 
 <span class="sd">    Concrete subclasses implement :meth:`pH_at`; :meth:`curve` and</span>
 <span class="sd">    :meth:`find_equivalence_point` are then available on every subclass</span>
 <span class="sd">    for free, mirroring how</span>
 <span class="sd">    :meth:`chemistrykit.kinetics.core.base_system.ReactionNetwork.integrate`</span>
-<span class="sd">    is shared machinery built once atop each subclass's ``rhs``.</span>
-<span class="sd">    """</span>
+<span class="sd">    is shared machinery built once atop each subclass&#39;s ``rhs``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Titration.pH_at">
 <a class="viewcode-back" href="../../../../api/solutions.html#chemistrykit.solutions.Titration.pH_at">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">pH_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Vb</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Return the pH at each titrant volume in `Vb`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the pH at each titrant volume in `Vb`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -533,13 +533,13 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ndarray</span>
-<span class="sd">        """</span></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="Titration.curve">
 <a class="viewcode-back" href="../../../../api/solutions.html#chemistrykit.solutions.Titration.curve">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">curve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Vb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TitrationResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Compute the full titration curve over a range of titrant volumes.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute the full titration curve over a range of titrant volumes.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -549,7 +549,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TitrationResult</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Vb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Vb</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
         <span class="n">pH</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pH_at</span><span class="p">(</span><span class="n">Vb</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">TitrationResult</span><span class="p">(</span><span class="n">Vb</span><span class="o">=</span><span class="n">Vb</span><span class="p">,</span> <span class="n">pH</span><span class="o">=</span><span class="n">pH</span><span class="p">)</span></div>
@@ -558,14 +558,14 @@
 <div class="viewcode-block" id="Titration.find_equivalence_point">
 <a class="viewcode-back" href="../../../../api/solutions.html#chemistrykit.solutions.Titration.find_equivalence_point">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">find_equivalence_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Vb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Numerically locate the equivalence point as the point of steepest pH ascent.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Numerically locate the equivalence point as the point of steepest pH ascent.</span>
 
 <span class="sd">        The equivalence point is where :math:`d(\text{pH})/dV_b` is</span>
 <span class="sd">        largest in magnitude -- the inflection point of the titration</span>
 <span class="sd">        curve (Harris, *Quantitative Chemical Analysis*, 9th ed., Ch.</span>
 <span class="sd">        11). This is a generic numerical detector shared by every</span>
 <span class="sd">        :class:`Titration` subclass; compare its result against a</span>
-<span class="sd">        subclass's closed-form equivalence volume (stoichiometric</span>
+<span class="sd">        subclass&#39;s closed-form equivalence volume (stoichiometric</span>
 <span class="sd">        ``Ca*Va/Cb``) as a correctness check.</span>
 
 <span class="sd">        Parameters</span>
@@ -578,7 +578,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
 <span class="sd">            The titrant volume of steepest ascent.</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">curve</span><span class="p">(</span><span class="n">Vb</span><span class="p">)</span>
         <span class="n">dpH_dV</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">pH</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">Vb</span><span class="p">)</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dpH_dV</span><span class="p">)))</span>

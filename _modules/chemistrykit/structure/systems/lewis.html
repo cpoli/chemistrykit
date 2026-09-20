@@ -410,19 +410,19 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.structure.systems.lewis</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Formal charge and oxidation-state assignment from a Lewis structure.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Formal charge and oxidation-state assignment from a Lewis structure.</span>
 
 <span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 9.1(a) and</span>
 <span class="sd">Ch. 2.9, or Housecroft &amp; Sharpe, *Inorganic Chemistry*, 5th ed., Ch. 2,</span>
 <span class="sd">throughout. Both quantities are computed *algorithmically* from a</span>
 <span class="sd">specified Lewis structure (connectivity + bond orders + lone-pair</span>
-<span class="sd">counts) and, for oxidation state, the atoms' electronegativities from</span>
+<span class="sd">counts) and, for oxidation state, the atoms&#39; electronegativities from</span>
 <span class="sd">:mod:`chemistrykit.periodic_table` -- never looked up by molecular</span>
 <span class="sd">formula.</span>
 
-<span class="sd">**Formal charge** answers "how would this atom's electron count compare</span>
+<span class="sd">**Formal charge** answers &quot;how would this atom&#39;s electron count compare</span>
 <span class="sd">to the free atom if every bonding pair were split evenly, regardless of</span>
-<span class="sd">which atom is more electronegative?" -- a bookkeeping device for</span>
+<span class="sd">which atom is more electronegative?&quot; -- a bookkeeping device for</span>
 <span class="sd">comparing alternative Lewis structures of the *same* molecule (G. N.</span>
 <span class="sd">Lewis, *J. Am. Chem. Soc.* 38, 762 (1916)):</span>
 
@@ -430,13 +430,13 @@
 
 <span class="sd">    FC = V - N - \frac{B}{2}</span>
 
-<span class="sd">where `V` is the free atom's valence-electron count, `N` its nonbonding</span>
+<span class="sd">where `V` is the free atom&#39;s valence-electron count, `N` its nonbonding</span>
 <span class="sd">(lone-pair) electrons in this structure, and `B` its total bonding</span>
 <span class="sd">electrons (twice the sum of bond orders at that atom).</span>
 
-<span class="sd">**Oxidation state** instead answers "how would this atom's electron</span>
+<span class="sd">**Oxidation state** instead answers &quot;how would this atom&#39;s electron</span>
 <span class="sd">count compare to the free atom in the fully ionic limit, where every</span>
-<span class="sd">bonding pair is assigned entirely to the more electronegative partner?"</span>
+<span class="sd">bonding pair is assigned entirely to the more electronegative partner?&quot;</span>
 <span class="sd">(a homonuclear bond, no electronegativity difference, splits its</span>
 <span class="sd">electrons evenly, contributing no net shift to either atom):</span>
 
@@ -447,7 +447,7 @@
 <span class="sd">where `w` is `1` if this atom is the more electronegative partner of</span>
 <span class="sd">that bond, `0` if the less electronegative, and `1/2` for a homonuclear</span>
 <span class="sd">bond.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -455,14 +455,14 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.periodic_table</span><span class="w"> </span><span class="kn">import</span> <span class="n">electronegativity</span><span class="p">,</span> <span class="n">valence_electrons</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"LewisStructure"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LewisStructure&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="LewisStructure">
 <a class="viewcode-back" href="../../../../api/structure.html#chemistrykit.structure.LewisStructure">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">LewisStructure</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""A Lewis structure: element symbols, bond orders, and lone-pair counts.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A Lewis structure: element symbols, bond orders, and lone-pair counts.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -472,7 +472,7 @@
 <span class="sd">    bond_orders : dict of tuple(int, int) to int</span>
 <span class="sd">        Bond order for each bonded atom pair, e.g. ``{(0, 1): 1, (0, 2): 2}``</span>
 <span class="sd">        for one single and one double bond from atom 0. Each pair should</span>
-<span class="sd">        appear once (order doesn't matter, `(i, j)` and `(j, i)` are</span>
+<span class="sd">        appear once (order doesn&#39;t matter, `(i, j)` and `(j, i)` are</span>
 <span class="sd">        treated identically).</span>
 <span class="sd">    lone_pairs : dict of int to int, optional</span>
 <span class="sd">        Number of lone *pairs* (not electrons) on each atom, defaulting</span>
@@ -482,12 +482,12 @@
 <span class="sd">    --------</span>
 <span class="sd">    Water: O has 2 single bonds (to atoms 1, 2) and 2 lone pairs.</span>
 
-<span class="sd">    &gt;&gt;&gt; water = LewisStructure(symbols=["O", "H", "H"], bond_orders={(0, 1): 1, (0, 2): 1}, lone_pairs={0: 2})</span>
+<span class="sd">    &gt;&gt;&gt; water = LewisStructure(symbols=[&quot;O&quot;, &quot;H&quot;, &quot;H&quot;], bond_orders={(0, 1): 1, (0, 2): 1}, lone_pairs={0: 2})</span>
 <span class="sd">    &gt;&gt;&gt; water.formal_charges()</span>
 <span class="sd">    {0: 0.0, 1: 0.0, 2: 0.0}</span>
 <span class="sd">    &gt;&gt;&gt; water.oxidation_states()</span>
 <span class="sd">    {0: -2.0, 1: 1.0, 2: 1.0}</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">symbols</span><span class="p">:</span> <span class="nb">list</span>
     <span class="n">bond_orders</span><span class="p">:</span> <span class="nb">dict</span>
@@ -499,10 +499,10 @@
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symbols</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bond_orders</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"bond (</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">) references an atom index out of range for </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> atoms"</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;bond (</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">) references an atom index out of range for </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> atoms&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lone_pairs</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"lone_pairs references atom index </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> out of range for </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> atoms"</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;lone_pairs references atom index </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> out of range for </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> atoms&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_bonds_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atom</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">order</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bond_orders</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -514,7 +514,7 @@
 <div class="viewcode-block" id="LewisStructure.formal_charges">
 <a class="viewcode-back" href="../../../../api/structure.html#chemistrykit.structure.LewisStructure.formal_charges">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">formal_charges</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Compute the formal charge :math:`FC=V-N-B/2` for every atom.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute the formal charge :math:`FC=V-N-B/2` for every atom.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -525,10 +525,10 @@
 <span class="sd">        Ammonium, :math:`NH_4^+`: nitrogen has 4 single bonds and no lone</span>
 <span class="sd">        pairs, giving the textbook +1 formal charge:</span>
 
-<span class="sd">        &gt;&gt;&gt; nh4_plus = LewisStructure(symbols=["N", "H", "H", "H", "H"], bond_orders={(0, k): 1 for k in (1, 2, 3, 4)})</span>
+<span class="sd">        &gt;&gt;&gt; nh4_plus = LewisStructure(symbols=[&quot;N&quot;, &quot;H&quot;, &quot;H&quot;, &quot;H&quot;, &quot;H&quot;], bond_orders={(0, k): 1 for k in (1, 2, 3, 4)})</span>
 <span class="sd">        &gt;&gt;&gt; nh4_plus.formal_charges()[0]</span>
 <span class="sd">        1.0</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">charges</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symbols</span><span class="p">):</span>
             <span class="n">V</span> <span class="o">=</span> <span class="n">valence_electrons</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span>
@@ -541,23 +541,23 @@
 <div class="viewcode-block" id="LewisStructure.total_formal_charge">
 <a class="viewcode-back" href="../../../../api/structure.html#chemistrykit.structure.LewisStructure.total_formal_charge">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">total_formal_charge</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Sum of all atoms' formal charges -- must equal the molecule's net charge.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sum of all atoms&#39; formal charges -- must equal the molecule&#39;s net charge.</span>
 
 <span class="sd">        A useful self-consistency check on a proposed Lewis structure: any</span>
-<span class="sd">        valid structure's formal charges must sum to the actual net</span>
+<span class="sd">        valid structure&#39;s formal charges must sum to the actual net</span>
 <span class="sd">        charge of the species (0 for a neutral molecule).</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">formal_charges</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
 
 
 <div class="viewcode-block" id="LewisStructure.oxidation_states">
 <a class="viewcode-back" href="../../../../api/structure.html#chemistrykit.structure.LewisStructure.oxidation_states">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">oxidation_states</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Compute the oxidation state of every atom via the electronegativity-based algorithm.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute the oxidation state of every atom via the electronegativity-based algorithm.</span>
 
 <span class="sd">        For each bond, both bonding electrons (per unit of bond order)</span>
 <span class="sd">        are assigned entirely to the more electronegative atom (split</span>
@@ -572,7 +572,7 @@
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
 <span class="sd">        KeyError</span>
-<span class="sd">            If any atom's element has no tabulated Pauling</span>
+<span class="sd">            If any atom&#39;s element has no tabulated Pauling</span>
 <span class="sd">            electronegativity (see</span>
 <span class="sd">            :func:`chemistrykit.periodic_table.electronegativity`).</span>
 
@@ -581,12 +581,12 @@
 <span class="sd">        Hydrogen peroxide, :math:`H_2O_2` (H-O-O-H): the O-O bond is</span>
 <span class="sd">        homonuclear (no net electron shift), each O keeps its lone pairs</span>
 <span class="sd">        and wins its one O-H bond, giving the well-known -1 oxidation</span>
-<span class="sd">        state (intermediate between water's -2 and O2's 0):</span>
+<span class="sd">        state (intermediate between water&#39;s -2 and O2&#39;s 0):</span>
 
-<span class="sd">        &gt;&gt;&gt; h2o2 = LewisStructure(symbols=["H", "O", "O", "H"], bond_orders={(0, 1): 1, (1, 2): 1, (2, 3): 1}, lone_pairs={1: 2, 2: 2})</span>
+<span class="sd">        &gt;&gt;&gt; h2o2 = LewisStructure(symbols=[&quot;H&quot;, &quot;O&quot;, &quot;O&quot;, &quot;H&quot;], bond_orders={(0, 1): 1, (1, 2): 1, (2, 3): 1}, lone_pairs={1: 2, 2: 2})</span>
 <span class="sd">        &gt;&gt;&gt; h2o2.oxidation_states()</span>
 <span class="sd">        {0: 1.0, 1: -1.0, 2: -1.0, 3: 1.0}</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">owned</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">lone_pairs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symbols</span><span class="p">))}</span>
         <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">order</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bond_orders</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">electrons</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">order</span>

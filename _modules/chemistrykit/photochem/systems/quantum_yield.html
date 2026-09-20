@@ -410,13 +410,13 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.photochem.systems.quantum_yield</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Fluorescence/phosphorescence quantum yields, and the photochemical quantum yield via Beer-Lambert.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fluorescence/phosphorescence quantum yields, and the photochemical quantum yield via Beer-Lambert.</span>
 
 <span class="sd">See Lakowicz, *Principles of Fluorescence Spectroscopy*, 3rd ed., Ch. 1,</span>
 <span class="sd">for the radiative/total-decay-rate quantum yields, and Turro, Ramamurthy</span>
 <span class="sd">&amp; Scaiano, *Modern Molecular Photochemistry of Organic Molecules* (2010),</span>
 <span class="sd">Ch. 7, for the photochemical (photon-in, product-out) quantum yield.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -425,18 +425,18 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.spectro.systems.beer_lambert</span><span class="w"> </span><span class="kn">import</span> <span class="n">transmittance</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"fluorescence_quantum_yield"</span><span class="p">,</span>
-    <span class="s2">"intersystem_crossing_yield"</span><span class="p">,</span>
-    <span class="s2">"phosphorescence_quantum_yield"</span><span class="p">,</span>
-    <span class="s2">"photons_absorbed"</span><span class="p">,</span>
-    <span class="s2">"photochemical_quantum_yield"</span><span class="p">,</span>
+    <span class="s2">&quot;fluorescence_quantum_yield&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;intersystem_crossing_yield&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;phosphorescence_quantum_yield&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;photons_absorbed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;photochemical_quantum_yield&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
 <div class="viewcode-block" id="fluorescence_quantum_yield">
 <a class="viewcode-back" href="../../../../api/photochem.html#chemistrykit.photochem.fluorescence_quantum_yield">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">fluorescence_quantum_yield</span><span class="p">(</span><span class="n">kf</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">kic</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">kisc</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Fluorescence quantum yield :math:`\Phi_f = k_f/(k_f+k_{ic}+k_{isc})`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fluorescence quantum yield :math:`\Phi_f = k_f/(k_f+k_{ic}+k_{isc})`.</span>
 
 <span class="sd">    The fraction of excited :math:`S_1` molecules that relax by emitting</span>
 <span class="sd">    a photon (fluorescence) rather than through either nonradiative decay</span>
@@ -474,7 +474,7 @@
 
 <span class="sd">    &gt;&gt;&gt; round(fluorescence_quantum_yield(kf=1.0, kic=1.0, kisc=0.0), 6)</span>
 <span class="sd">    0.5</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">kf</span> <span class="o">/</span> <span class="p">(</span><span class="n">kf</span> <span class="o">+</span> <span class="n">kic</span> <span class="o">+</span> <span class="n">kisc</span><span class="p">)</span></div>
 
 
@@ -482,7 +482,7 @@
 <div class="viewcode-block" id="intersystem_crossing_yield">
 <a class="viewcode-back" href="../../../../api/photochem.html#chemistrykit.photochem.intersystem_crossing_yield">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">intersystem_crossing_yield</span><span class="p">(</span><span class="n">kisc</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">kf</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">kic</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Intersystem-crossing yield :math:`\Phi_{isc} = k_{isc}/(k_f+k_{ic}+k_{isc})`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Intersystem-crossing yield :math:`\Phi_{isc} = k_{isc}/(k_f+k_{ic}+k_{isc})`.</span>
 
 <span class="sd">    The fraction of excited :math:`S_1` population that crosses to the</span>
 <span class="sd">    triplet manifold :math:`T_1` rather than returning directly to</span>
@@ -515,7 +515,7 @@
 <span class="sd">    &gt;&gt;&gt; phi_ic = kic / (kf + kic + kisc)</span>
 <span class="sd">    &gt;&gt;&gt; round(phi_f + phi_isc + phi_ic, 9)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">kisc</span> <span class="o">/</span> <span class="p">(</span><span class="n">kf</span> <span class="o">+</span> <span class="n">kic</span> <span class="o">+</span> <span class="n">kisc</span><span class="p">)</span></div>
 
 
@@ -523,7 +523,7 @@
 <div class="viewcode-block" id="phosphorescence_quantum_yield">
 <a class="viewcode-back" href="../../../../api/photochem.html#chemistrykit.photochem.phosphorescence_quantum_yield">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">phosphorescence_quantum_yield</span><span class="p">(</span><span class="n">kisc</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">kf</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">kic</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">kp</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">kic_T</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Phosphorescence quantum yield :math:`\Phi_p = \Phi_{isc}\cdot\frac{k_p}{k_p+k_{ic,T}}`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Phosphorescence quantum yield :math:`\Phi_p = \Phi_{isc}\cdot\frac{k_p}{k_p+k_{ic,T}}`.</span>
 
 <span class="sd">    Phosphorescence requires *two* successive branching events to</span>
 <span class="sd">    succeed: the molecule must first cross to the triplet manifold</span>
@@ -564,7 +564,7 @@
 
 <span class="sd">    &gt;&gt;&gt; round(phosphorescence_quantum_yield(kisc=1.0, kf=0.0, kic=0.0, kp=1.0, kic_T=0.0), 6)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">phi_isc</span> <span class="o">=</span> <span class="n">intersystem_crossing_yield</span><span class="p">(</span><span class="n">kisc</span><span class="p">,</span> <span class="n">kf</span><span class="p">,</span> <span class="n">kic</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">phi_isc</span> <span class="o">*</span> <span class="p">(</span><span class="n">kp</span> <span class="o">/</span> <span class="p">(</span><span class="n">kp</span> <span class="o">+</span> <span class="n">kic_T</span><span class="p">))</span></div>
 
@@ -573,7 +573,7 @@
 <div class="viewcode-block" id="photons_absorbed">
 <a class="viewcode-back" href="../../../../api/photochem.html#chemistrykit.photochem.photons_absorbed">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">photons_absorbed</span><span class="p">(</span><span class="n">photon_flux_incident</span><span class="p">,</span> <span class="n">absorbance</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Photon flux (or count) actually absorbed by a sample, from the Beer-Lambert absorbance.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Photon flux (or count) actually absorbed by a sample, from the Beer-Lambert absorbance.</span>
 
 <span class="sd">    :math:`I_{abs} = I_0(1-10^{-A}) = I_0(1-T)`, using</span>
 <span class="sd">    :func:`chemistrykit.spectro.systems.beer_lambert.transmittance` for</span>
@@ -608,7 +608,7 @@
 
 <span class="sd">    &gt;&gt;&gt; round(float(photons_absorbed(1.0, absorbance=10.0)), 6)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">photon_flux_incident</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">photon_flux_incident</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">photon_flux_incident</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">transmittance</span><span class="p">(</span><span class="n">absorbance</span><span class="p">))</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span></div>
@@ -618,7 +618,7 @@
 <div class="viewcode-block" id="photochemical_quantum_yield">
 <a class="viewcode-back" href="../../../../api/photochem.html#chemistrykit.photochem.photochemical_quantum_yield">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">photochemical_quantum_yield</span><span class="p">(</span><span class="n">moles_product_formed</span><span class="p">,</span> <span class="n">moles_photons_absorbed</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Photochemical quantum yield :math:`\Phi = \frac{\text{moles of product formed}}{\text{moles of photons absorbed}}`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Photochemical quantum yield :math:`\Phi = \frac{\text{moles of product formed}}{\text{moles of photons absorbed}}`.</span>
 
 <span class="sd">    The photochemistry analogue of the excited-state quantum yields</span>
 <span class="sd">    above: the efficiency of converting absorbed photons into chemical</span>
@@ -647,7 +647,7 @@
 
 <span class="sd">    &gt;&gt;&gt; round(float(photochemical_quantum_yield(1.0, 1.0)), 6)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">moles_product_formed</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">moles_photons_absorbed</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span></div>
 

@@ -410,13 +410,13 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.quantum.systems.harmonic_oscillator</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""The quantum harmonic oscillator, and its anharmonic (Morse) generalization.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The quantum harmonic oscillator, and its anharmonic (Morse) generalization.</span>
 
 <span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 7.4 for the</span>
 <span class="sd">harmonic-oscillator energy levels and Ch. 8.1 (real molecular vibrations)</span>
-<span class="sd">for the Morse potential's exact vibrational eigenvalues, or Levine,</span>
+<span class="sd">for the Morse potential&#39;s exact vibrational eigenvalues, or Levine,</span>
 <span class="sd">*Quantum Chemistry*, 7th ed., Ch. 2.5 and 4.3.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -426,13 +426,13 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">HBAR</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.quantum.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumSystem</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"QuantumHarmonicOscillator"</span><span class="p">,</span> <span class="s2">"MorseOscillator"</span><span class="p">,</span> <span class="s2">"compare_harmonic_vs_morse"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;QuantumHarmonicOscillator&quot;</span><span class="p">,</span> <span class="s2">&quot;MorseOscillator&quot;</span><span class="p">,</span> <span class="s2">&quot;compare_harmonic_vs_morse&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="QuantumHarmonicOscillator">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.QuantumHarmonicOscillator">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">QuantumHarmonicOscillator</span><span class="p">(</span><span class="n">QuantumSystem</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""A 1D quantum harmonic oscillator, potential :math:`V(x)=\frac12kx^2`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A 1D quantum harmonic oscillator, potential :math:`V(x)=\frac12kx^2`.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -440,7 +440,7 @@
 
 <span class="sd">    (Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., eq. 7.16-7.17.)</span>
 <span class="sd">    Energy levels are exactly evenly spaced by :math:`\hbar\omega` -- the</span>
-<span class="sd">    defining feature that :class:`MorseOscillator` below (a real bond's</span>
+<span class="sd">    defining feature that :class:`MorseOscillator` below (a real bond&#39;s</span>
 <span class="sd">    anharmonic potential) violates.</span>
 
 <span class="sd">    Parameters</span>
@@ -461,30 +461,30 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; round(float(spacing1 / (HBAR * ho.angular_frequency)), 9)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">force_constant</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">mass</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"mass must be positive"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mass must be positive&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">force_constant</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"force_constant must be positive"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;force_constant must be positive&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mass</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">force_constant</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">force_constant</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">angular_frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""float: The classical angular frequency :math:`\omega=\sqrt{k/m}`, in rad/s."""</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;float: The classical angular frequency :math:`\omega=\sqrt{k/m}`, in rad/s.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">force_constant</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">zero_point_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""float: The zero-point energy :math:`E_0=\frac12\hbar\omega`, in J."""</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;float: The zero-point energy :math:`E_0=\frac12\hbar\omega`, in J.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">HBAR</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">angular_frequency</span>
 
 <div class="viewcode-block" id="QuantumHarmonicOscillator.energy">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.QuantumHarmonicOscillator.energy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Return :math:`E_v=\\hbar\\omega(v+1/2)`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return :math:`E_v=\\hbar\\omega(v+1/2)`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -495,17 +495,17 @@
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
 <span class="sd">            Energy, in J.</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">v</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"v must be &gt;= 0"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;v must be &gt;= 0&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">HBAR</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">angular_frequency</span> <span class="o">*</span> <span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="QuantumHarmonicOscillator.wavefunction">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.QuantumHarmonicOscillator.wavefunction">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">wavefunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return the harmonic-oscillator eigenfunction :math:`\psi_v(x)`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return the harmonic-oscillator eigenfunction :math:`\psi_v(x)`.</span>
 
 <span class="sd">        .. math::</span>
 
@@ -513,7 +513,7 @@
 <span class="sd">                        \frac{1}{\sqrt{2^vv!}}H_v(\xi)e^{-\xi^2/2},</span>
 <span class="sd">                        \qquad \xi=x\sqrt{m\omega/\hbar}</span>
 
-<span class="sd">        where :math:`H_v` is the physicists' Hermite polynomial (Atkins &amp;</span>
+<span class="sd">        where :math:`H_v` is the physicists&#39; Hermite polynomial (Atkins &amp;</span>
 <span class="sd">        de Paula, *Physical Chemistry*, 11th ed., eq. 7.18; here evaluated</span>
 <span class="sd">        via :func:`scipy.special.hermite`).</span>
 
@@ -538,9 +538,9 @@
 <span class="sd">        &gt;&gt;&gt; psi0_away = ho.wavefunction(1.0e-11, v=0)</span>
 <span class="sd">        &gt;&gt;&gt; bool(psi0_at_0 &gt; psi0_away &gt; 0)</span>
 <span class="sd">        True</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"v must be &gt;= 0"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;v must be &gt;= 0&quot;</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">angular_frequency</span> <span class="o">/</span> <span class="n">HBAR</span><span class="p">)</span>
         <span class="n">xi</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">beta</span>
@@ -553,7 +553,7 @@
 <div class="viewcode-block" id="MorseOscillator">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.MorseOscillator">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MorseOscillator</span><span class="p">(</span><span class="n">QuantumSystem</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""A diatomic-like vibration in the Morse potential, the standard anharmonic model of a real chemical bond.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A diatomic-like vibration in the Morse potential, the standard anharmonic model of a real chemical bond.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -581,7 +581,7 @@
 <span class="sd">        Reduced mass, in kg.</span>
 <span class="sd">    force_constant : float</span>
 <span class="sd">        Force constant at the potential minimum, `k`, in N/m (fixes</span>
-<span class="sd">        :math:`\omega=\sqrt{k/m}`, identical to the harmonic oscillator's).</span>
+<span class="sd">        :math:`\omega=\sqrt{k/m}`, identical to the harmonic oscillator&#39;s).</span>
 <span class="sd">    dissociation_energy : float</span>
 <span class="sd">        Well depth :math:`D_e` (measured from the potential minimum, *not*</span>
 <span class="sd">        from the zero-point level), in J.</span>
@@ -589,51 +589,51 @@
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    Level spacing decreases monotonically with `v` (anharmonicity), unlike</span>
-<span class="sd">    the harmonic oscillator's perfectly even spacing:</span>
+<span class="sd">    the harmonic oscillator&#39;s perfectly even spacing:</span>
 
 <span class="sd">    &gt;&gt;&gt; morse = MorseOscillator(mass=1.6e-27, force_constant=500.0, dissociation_energy=7.0e-19)</span>
 <span class="sd">    &gt;&gt;&gt; spacing = [morse.energy(v + 1) - morse.energy(v) for v in range(4)]</span>
 <span class="sd">    &gt;&gt;&gt; bool(all(spacing[i] &gt; spacing[i + 1] for i in range(3)))</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">force_constant</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dissociation_energy</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">mass</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"mass must be positive"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mass must be positive&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">force_constant</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"force_constant must be positive"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;force_constant must be positive&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">dissociation_energy</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"dissociation_energy must be positive"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dissociation_energy must be positive&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mass</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">force_constant</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">force_constant</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dissociation_energy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dissociation_energy</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">angular_frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""float: :math:`\omega=\sqrt{k/m}`, in rad/s -- same formula as the harmonic oscillator."""</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;float: :math:`\omega=\sqrt{k/m}`, in rad/s -- same formula as the harmonic oscillator.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">force_constant</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">anharmonicity_constant</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""float: The dimensionless anharmonicity constant :math:`x_e=\hbar\omega/(4D_e)`."""</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;float: The dimensionless anharmonicity constant :math:`x_e=\hbar\omega/(4D_e)`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">HBAR</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">angular_frequency</span> <span class="o">/</span> <span class="p">(</span><span class="mf">4.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dissociation_energy</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">v_max</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""int: The highest bound vibrational quantum number.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;int: The highest bound vibrational quantum number.</span>
 
 <span class="sd">        Found from :math:`dE_v/dv=0` at :math:`v=v_{max}+\frac12`, i.e.</span>
 <span class="sd">        the last integer `v` before the Morse levels turn over and start</span>
 <span class="sd">        decreasing (an artifact of the quadratic-in-v formula beyond the</span>
 <span class="sd">        true dissociation limit; Atkins &amp; de Paula, *Physical Chemistry*,</span>
 <span class="sd">        11th ed., Ch. 8.1).</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">anharmonicity_constant</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">))</span>
 
 <div class="viewcode-block" id="MorseOscillator.energy">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.MorseOscillator.energy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return the exact Morse vibrational energy :math:`E_v`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return the exact Morse vibrational energy :math:`E_v`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -645,10 +645,10 @@
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
 <span class="sd">            Energy, in J, measured from the bottom of the well.</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">v</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"v must be &gt;= 0"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;v must be &gt;= 0&quot;</span><span class="p">)</span>
         <span class="n">hw</span> <span class="o">=</span> <span class="n">HBAR</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">angular_frequency</span>
         <span class="k">return</span> <span class="n">hw</span> <span class="o">*</span> <span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">-</span> <span class="n">hw</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">4.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dissociation_energy</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span></div>
 </div>
@@ -658,7 +658,7 @@
 <div class="viewcode-block" id="compare_harmonic_vs_morse">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.compare_harmonic_vs_morse">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compare_harmonic_vs_morse</span><span class="p">(</span><span class="n">mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">force_constant</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dissociation_energy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">v_max</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Tabulate harmonic-oscillator vs. Morse-potential vibrational energies at a shared force constant.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Tabulate harmonic-oscillator vs. Morse-potential vibrational energies at a shared force constant.</span>
 
 <span class="sd">    Both models share the same curvature at the well minimum (same</span>
 <span class="sd">    `mass`, `force_constant`, hence the same :math:`\omega`), so they</span>
@@ -668,7 +668,7 @@
 <span class="sd">    toward zero as :math:`v\to v_{max}` (approaching dissociation, where</span>
 <span class="sd">    the vibrational levels become a near-continuum), while the harmonic</span>
 <span class="sd">    spacing stays exactly :math:`\hbar\omega` at every `v` -- the harmonic</span>
-<span class="sd">    approximation's defining failure mode for a real bond (Atkins &amp; de</span>
+<span class="sd">    approximation&#39;s defining failure mode for a real bond (Atkins &amp; de</span>
 <span class="sd">    Paula, *Physical Chemistry*, 11th ed., Ch. 8.1).</span>
 
 <span class="sd">    Parameters</span>
@@ -681,7 +681,7 @@
 <span class="sd">        Morse well depth :math:`D_e`, in J.</span>
 <span class="sd">    v_max : int</span>
 <span class="sd">        Highest vibrational quantum number to tabulate (may safely exceed</span>
-<span class="sd">        the Morse oscillator's own bound-level cutoff for comparison</span>
+<span class="sd">        the Morse oscillator&#39;s own bound-level cutoff for comparison</span>
 <span class="sd">        purposes -- the *harmonic* levels stay well-defined at any `v`).</span>
 
 <span class="sd">    Returns</span>
@@ -703,7 +703,7 @@
 <span class="sd">    &gt;&gt;&gt; relative_diff_5 = abs(E_harmonic[5] - E_morse[5]) / E_harmonic[5]</span>
 <span class="sd">    &gt;&gt;&gt; bool(relative_diff_5 &gt; relative_diff_0)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">harmonic</span> <span class="o">=</span> <span class="n">QuantumHarmonicOscillator</span><span class="p">(</span><span class="n">mass</span><span class="p">,</span> <span class="n">force_constant</span><span class="p">)</span>
     <span class="n">morse</span> <span class="o">=</span> <span class="n">MorseOscillator</span><span class="p">(</span><span class="n">mass</span><span class="p">,</span> <span class="n">force_constant</span><span class="p">,</span> <span class="n">dissociation_energy</span><span class="p">)</span>
     <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">v_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>

@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.md.systems.lj_fluid</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""The Lennard-Jones fluid in reduced units.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Lennard-Jones fluid in reduced units.</span>
 
 <span class="sd">The workhorse test system of molecular simulation: identical particles</span>
 <span class="sd">interacting through the 12-6 Lennard-Jones potential</span>
@@ -422,9 +422,9 @@
 <span class="sd">energies in units of :math:`\epsilon`, masses in units of the particle</span>
 <span class="sd">mass `m`, and :math:`k_B=1` -- so temperature, pressure, and time are all</span>
 <span class="sd">dimensionless combinations of :math:`\epsilon,\sigma,m` too (e.g. time in</span>
-<span class="sd">units of :math:`\sigma\sqrt{m/\epsilon}`). A real substance's properties</span>
+<span class="sd">units of :math:`\sigma\sqrt{m/\epsilon}`). A real substance&#39;s properties</span>
 <span class="sd">are recovered by multiplying back through its own :math:`\epsilon,\sigma,m`.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -437,13 +437,13 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.md.utils.neighbor_list</span><span class="w"> </span><span class="kn">import</span> <span class="n">VerletNeighborList</span><span class="p">,</span> <span class="n">build_neighbor_list</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.md.utils.pbc</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimum_image_displacement</span><span class="p">,</span> <span class="n">wrap_positions</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"LennardJones"</span><span class="p">,</span> <span class="s2">"LJFluid"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LennardJones&quot;</span><span class="p">,</span> <span class="s2">&quot;LJFluid&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="LennardJones">
 <a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.LennardJones">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LennardJones</span><span class="p">(</span><span class="n">PairPotential</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""The 12-6 Lennard-Jones pair potential.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The 12-6 Lennard-Jones pair potential.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -479,11 +479,11 @@
 
 <span class="sd">    &gt;&gt;&gt; round(float(lj.energy(1.0)), 10)</span>
 <span class="sd">    0.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">epsilon</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">sigma</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"epsilon and sigma must be positive"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;epsilon and sigma must be positive&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">epsilon</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
 
@@ -505,18 +505,18 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">r_min</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Separation at the potential minimum, :math:`2^{1/6}\sigma`."""</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Separation at the potential minimum, :math:`2^{1/6}\sigma`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="mf">2.0</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mf">6.0</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span></div>
 
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_pack_neighbor_params</span><span class="p">(</span><span class="n">pairs_i</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">pairs_j</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Pack a variable-length pair list into the fixed-signature ``params`` vector.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pack a variable-length pair list into the fixed-signature ``params`` vector.</span>
 
 <span class="sd">    ``params = [n_pairs, i_0, i_1, ..., i_{n-1}, j_0, j_1, ..., j_{n-1}]``,</span>
 <span class="sd">    all stored as ``float64`` (indices are small enough to round-trip</span>
 <span class="sd">    exactly). Keeping the pair *count* variable while the njit</span>
-<span class="sd">    acceleration function's signature stays fixed is what lets</span>
+<span class="sd">    acceleration function&#39;s signature stays fixed is what lets</span>
 <span class="sd">    :meth:`LJFluid.step` rebuild the neighbor list every few steps</span>
 <span class="sd">    without forcing Numba to recompile a new dispatcher each time (see</span>
 <span class="sd">    :func:`_make_lj_accel_njit`).</span>
@@ -528,16 +528,16 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    ndarray of float64, shape (2 * n_pairs + 1,)</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n_pairs</span> <span class="o">=</span> <span class="n">pairs_i</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">head</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">n_pairs</span><span class="p">)])</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">head</span><span class="p">,</span> <span class="n">pairs_i</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">pairs_j</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)])</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_make_lj_accel_njit</span><span class="p">(</span><span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">box_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Build a standalone ``@njit`` LJ acceleration function over a neighbor-pair list.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a standalone ``@njit`` LJ acceleration function over a neighbor-pair list.</span>
 
-<span class="sd">    Factory that closes over the fluid's *fixed* scalar parameters</span>
+<span class="sd">    Factory that closes over the fluid&#39;s *fixed* scalar parameters</span>
 <span class="sd">    (``epsilon``, ``sigma``, ``mass``, ``box_length``, ``cutoff``) and</span>
 <span class="sd">    returns a genuine ``@njit`` dispatcher with the</span>
 <span class="sd">    :data:`chemistrykit.integrators.RHSFunc` signature</span>
@@ -566,7 +566,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    callable</span>
 <span class="sd">        ``@njit`` dispatcher ``accel(positions, t, params) -&gt; acceleration``.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sigma2</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">sigma</span>
     <span class="n">cutoff2</span> <span class="o">=</span> <span class="n">cutoff</span> <span class="o">*</span> <span class="n">cutoff</span>
 
@@ -603,7 +603,7 @@
 <div class="viewcode-block" id="LJFluid">
 <a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.LJFluid">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LJFluid</span><span class="p">(</span><span class="n">MolecularDynamicsSystem</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""A monatomic Lennard-Jones fluid in a cubic periodic box, in reduced units.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A monatomic Lennard-Jones fluid in a cubic periodic box, in reduced units.</span>
 
 <span class="sd">    Positions evolve under :func:`chemistrykit.integrators.velocity_verlet_step`</span>
 <span class="sd">    driven by a ``@njit`` pairwise-force loop (:func:`_make_lj_accel_njit`)</span>
@@ -630,7 +630,7 @@
 <span class="sd">        Neighbor-list skin distance, see :class:`~chemistrykit.md.utils.neighbor_list.VerletNeighborList`.</span>
 <span class="sd">    rebuild_every : int, default 20</span>
 <span class="sd">        Rebuild the neighbor list after this many :meth:`step` calls.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -645,7 +645,7 @@
         <span class="n">rebuild_every</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">if</span> <span class="n">box_length</span> <span class="o">&lt;=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">cutoff</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"box_length must be at least twice the cutoff for the minimum-image convention to be valid"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;box_length must be at least twice the cutoff for the minimum-image convention to be valid&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">epsilon</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">cutoff</span><span class="p">)</span>
@@ -658,7 +658,7 @@
         <span class="c1"># U(cutoff) makes the *reported* energy continuous at the cutoff, without</span>
         <span class="c1"># changing the force (a constant shift has zero derivative). The force</span>
         <span class="c1"># itself still has a small discontinuity at r=cutoff (this is the</span>
-        <span class="c1"># "shifted potential", not the (stiffer) "shifted force" scheme), which is</span>
+        <span class="c1"># &quot;shifted potential&quot;, not the (stiffer) &quot;shifted force&quot; scheme), which is</span>
         <span class="c1"># the standard, small source of energy drift in a plain truncated LJ MD run.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_u_shift</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">*</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span><span class="p">)</span> <span class="o">**</span> <span class="mi">12</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span><span class="p">)</span> <span class="o">**</span> <span class="mi">6</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">velocities</span><span class="p">,</span> <span class="n">masses</span><span class="p">)</span>
@@ -678,9 +678,9 @@
 <div class="viewcode-block" id="LJFluid.forces_and_potential">
 <a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.LJFluid.forces_and_potential">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">forces_and_potential</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">positions</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Exact (full, non-skin-list) forces, energy, and (cached) virial.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Exact (full, non-skin-list) forces, energy, and (cached) virial.</span>
 
-<span class="sd">        Unlike :meth:`step`'s force evaluation (which reuses a</span>
+<span class="sd">        Unlike :meth:`step`&#39;s force evaluation (which reuses a</span>
 <span class="sd">        skin-enlarged neighbor list for performance), this always rebuilds</span>
 <span class="sd">        an exact-cutoff pair list from the given `positions`, so energy,</span>
 <span class="sd">        pressure, and g(r) queries are never affected by neighbor-list</span>
@@ -694,7 +694,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        forces : ndarray, shape (N, 3)</span>
 <span class="sd">        potential_energy : float</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="n">forces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
         <span class="n">pairs_i</span><span class="p">,</span> <span class="n">pairs_j</span> <span class="o">=</span> <span class="n">build_neighbor_list</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">box_length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span><span class="p">)</span>
@@ -718,12 +718,12 @@
 <div class="viewcode-block" id="LJFluid.virial">
 <a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.LJFluid.virial">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">virial</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""The virial sum :math:`W=\sum_{i&lt;j}\vec r_{ij}\cdot\vec F_{ij}` at the current configuration.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The virial sum :math:`W=\sum_{i&lt;j}\vec r_{ij}\cdot\vec F_{ij}` at the current configuration.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">forces_and_potential</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_virial</span></div>
 
@@ -731,7 +731,7 @@
 <div class="viewcode-block" id="LJFluid.pressure">
 <a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.LJFluid.pressure">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k_b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Instantaneous pressure via the virial theorem.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Instantaneous pressure via the virial theorem.</span>
 
 <span class="sd">        .. math::</span>
 
@@ -767,7 +767,7 @@
 <span class="sd">        &gt;&gt;&gt; ideal_pressure = rho * fluid.temperature()</span>
 <span class="sd">        &gt;&gt;&gt; bool(abs(fluid.pressure() - ideal_pressure) &lt; 1e-12)</span>
 <span class="sd">        True</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">shape</span>
         <span class="n">volume</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">box_length</span><span class="o">**</span><span class="n">d</span>
         <span class="n">w</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">virial</span><span class="p">()</span>
@@ -777,7 +777,7 @@
 <div class="viewcode-block" id="LJFluid.radial_distribution_function">
 <a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.LJFluid.radial_distribution_function">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">radial_distribution_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_max</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Compute the radial distribution function g(r) for a configuration.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute the radial distribution function g(r) for a configuration.</span>
 
 <span class="sd">        .. math::</span>
 
@@ -800,7 +800,7 @@
 <span class="sd">            ambiguous).</span>
 <span class="sd">        n_bins : int, default 100</span>
 <span class="sd">        positions : ndarray, shape (N, 3), optional</span>
-<span class="sd">            Configuration to analyze; defaults to the system's current</span>
+<span class="sd">            Configuration to analyze; defaults to the system&#39;s current</span>
 <span class="sd">            ``self.positions``.</span>
 
 <span class="sd">        Returns</span>
@@ -808,7 +808,7 @@
 <span class="sd">        r : ndarray, shape (n_bins,)</span>
 <span class="sd">            Bin-center separations.</span>
 <span class="sd">        g : ndarray, shape (n_bins,)</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">positions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">positions</span> <span class="k">if</span> <span class="n">positions</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">positions</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">box_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">box_length</span>
@@ -826,7 +826,7 @@
         <span class="n">rho</span> <span class="o">=</span> <span class="n">n</span> <span class="o">/</span> <span class="n">volume</span>
         <span class="n">shell_volume</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">r_mid</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">dr</span>
         <span class="n">n_ideal</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">shell_volume</span>
-        <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">n_ideal</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">counts</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">n_ideal</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">r_mid</span><span class="p">,</span> <span class="n">g</span></div>
 
@@ -846,7 +846,7 @@
         <span class="n">rng</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LJFluid</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Build an :class:`LJFluid` on a simple-cubic lattice with Maxwell-Boltzmann velocities.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Build an :class:`LJFluid` on a simple-cubic lattice with Maxwell-Boltzmann velocities.</span>
 
 <span class="sd">        A standard way to initialize an MD run: a regular lattice avoids</span>
 <span class="sd">        any risk of initial particle overlap (which would otherwise blow</span>
@@ -887,14 +887,14 @@
 <span class="sd">        (64, 3)</span>
 <span class="sd">        &gt;&gt;&gt; round(fluid.temperature(), 6)</span>
 <span class="sd">        1.0</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">n_per_side</span><span class="o">**</span><span class="mi">3</span>
         <span class="n">volume</span> <span class="o">=</span> <span class="n">n</span> <span class="o">/</span> <span class="n">density</span>
         <span class="n">box_length</span> <span class="o">=</span> <span class="n">volume</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">)</span>
         <span class="n">spacing</span> <span class="o">=</span> <span class="n">box_length</span> <span class="o">/</span> <span class="n">n_per_side</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_per_side</span><span class="p">)</span>
-        <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s2">"ij"</span><span class="p">)</span>
+        <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s2">&quot;ij&quot;</span><span class="p">)</span>
         <span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">zz</span><span class="o">.</span><span class="n">ravel</span><span class="p">()],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">*</span> <span class="n">spacing</span>
         <span class="n">v_scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">temperature</span> <span class="o">/</span> <span class="n">mass</span><span class="p">)</span>
         <span class="n">velocities</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">v_scale</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>

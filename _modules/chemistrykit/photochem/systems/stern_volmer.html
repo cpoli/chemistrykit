@@ -410,12 +410,12 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.photochem.systems.stern_volmer</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Stern-Volmer fluorescence quenching, and distinguishing static from dynamic quenching.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Stern-Volmer fluorescence quenching, and distinguishing static from dynamic quenching.</span>
 
 <span class="sd">See Lakowicz, *Principles of Fluorescence Spectroscopy*, 3rd ed., Ch. 8,</span>
 <span class="sd">throughout. The original: O. Stern &amp; M. Volmer, *Phys. Z.* 20, 183</span>
 <span class="sd">(1919).</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -424,18 +424,18 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"stern_volmer_ratio"</span><span class="p">,</span>
-    <span class="s2">"dynamic_quenching_constant"</span><span class="p">,</span>
-    <span class="s2">"SternVolmerFit"</span><span class="p">,</span>
-    <span class="s2">"fit_stern_volmer"</span><span class="p">,</span>
-    <span class="s2">"classify_quenching_mechanism"</span><span class="p">,</span>
+    <span class="s2">&quot;stern_volmer_ratio&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dynamic_quenching_constant&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SternVolmerFit&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fit_stern_volmer&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;classify_quenching_mechanism&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
 <div class="viewcode-block" id="stern_volmer_ratio">
 <a class="viewcode-back" href="../../../../api/photochem.html#chemistrykit.photochem.stern_volmer_ratio">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">stern_volmer_ratio</span><span class="p">(</span><span class="n">Ksv</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Q</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""The Stern-Volmer equation: :math:`I_0/I = 1 + K_{sv}[Q]`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Stern-Volmer equation: :math:`I_0/I = 1 + K_{sv}[Q]`.</span>
 
 <span class="sd">    A plot of the fluorescence-intensity ratio :math:`I_0/I` (unquenched</span>
 <span class="sd">    over quenched intensity) against quencher concentration :math:`[Q]`</span>
@@ -446,14 +446,14 @@
 <span class="sd">    this same linear relationship also holds for the fluorescence</span>
 <span class="sd">    *lifetime* ratio :math:`\tau_0/\tau`; for *purely static* quenching</span>
 <span class="sd">    (ground-state complex formation) the intensity ratio is still linear</span>
-<span class="sd">    in :math:`[Q]` (with :math:`K_{sv}` reinterpreted as the complex's</span>
+<span class="sd">    in :math:`[Q]` (with :math:`K_{sv}` reinterpreted as the complex&#39;s</span>
 <span class="sd">    formation constant) but the lifetime ratio stays exactly 1 -- see</span>
 <span class="sd">    :func:`classify_quenching_mechanism`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Ksv : float</span>
-<span class="sd">        Stern-Volmer constant, in units inverse to `Q`'s (e.g. 1/M for</span>
+<span class="sd">        Stern-Volmer constant, in units inverse to `Q`&#39;s (e.g. 1/M for</span>
 <span class="sd">        `Q` in mol/L).</span>
 <span class="sd">    Q : float or array-like of float</span>
 <span class="sd">        Quencher concentration.</span>
@@ -477,7 +477,7 @@
 <span class="sd">    &gt;&gt;&gt; ratio = stern_volmer_ratio(Ksv=20.0, Q=Q)</span>
 <span class="sd">    &gt;&gt;&gt; bool(np.allclose(np.diff(ratio), 20.0 * np.diff(Q)))</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">Ksv</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span></div>
 
@@ -486,7 +486,7 @@
 <div class="viewcode-block" id="dynamic_quenching_constant">
 <a class="viewcode-back" href="../../../../api/photochem.html#chemistrykit.photochem.dynamic_quenching_constant">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">dynamic_quenching_constant</span><span class="p">(</span><span class="n">kq</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">tau0</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""The Stern-Volmer constant for purely dynamic (collisional) quenching: :math:`K_{sv} = k_q\tau_0`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Stern-Volmer constant for purely dynamic (collisional) quenching: :math:`K_{sv} = k_q\tau_0`.</span>
 
 <span class="sd">    :math:`k_q` is the bimolecular quenching rate constant (an</span>
 <span class="sd">    encounter/collision frequency, at most diffusion-controlled) and</span>
@@ -512,7 +512,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; round(dynamic_quenching_constant(kq=1.0e10, tau0=5.0e-9), 4)</span>
 <span class="sd">    50.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">kq</span> <span class="o">*</span> <span class="n">tau0</span></div>
 
 
@@ -521,18 +521,18 @@
 <a class="viewcode-back" href="../../../../api/photochem.html#chemistrykit.photochem.SternVolmerFit">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">SternVolmerFit</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Result of fitting intensity-ratio-vs-quencher-concentration data to the Stern-Volmer equation."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Result of fitting intensity-ratio-vs-quencher-concentration data to the Stern-Volmer equation.&quot;&quot;&quot;</span>
 
     <span class="n">Ksv</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Fitted Stern-Volmer constant."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Fitted Stern-Volmer constant.&quot;&quot;&quot;</span>
 
     <span class="n">r_squared</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: Coefficient of determination of the linear fit."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Coefficient of determination of the linear fit.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="SternVolmerFit.predict">
 <a class="viewcode-back" href="../../../../api/photochem.html#chemistrykit.photochem.SternVolmerFit.predict">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Q</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Evaluate the fitted Stern-Volmer line at quencher concentration(s) `Q`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the fitted Stern-Volmer line at quencher concentration(s) `Q`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -541,7 +541,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">stern_volmer_ratio</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Ksv</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span></div>
 </div>
 
@@ -550,13 +550,13 @@
 <div class="viewcode-block" id="fit_stern_volmer">
 <a class="viewcode-back" href="../../../../api/photochem.html#chemistrykit.photochem.fit_stern_volmer">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">fit_stern_volmer</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">intensity_ratio</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SternVolmerFit</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Fit :math:`I_0/I` (or :math:`\tau_0/\tau`) vs. :math:`[Q]` data to the Stern-Volmer equation.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fit :math:`I_0/I` (or :math:`\tau_0/\tau`) vs. :math:`[Q]` data to the Stern-Volmer equation.</span>
 
 <span class="sd">    Fits :math:`I_0/I = 1 + K_{sv}[Q]` by ordinary least squares,</span>
 <span class="sd">    constraining the intercept to 1 exactly (the physically required</span>
 <span class="sd">    value at :math:`[Q]=0`) by fitting the *shift* :math:`I_0/I - 1`</span>
 <span class="sd">    through the origin against `Q` -- structurally similar to</span>
-<span class="sd">    :func:`chemistrykit.kinetics.systems.arrhenius.fit_arrhenius`'s</span>
+<span class="sd">    :func:`chemistrykit.kinetics.systems.arrhenius.fit_arrhenius`&#39;s</span>
 <span class="sd">    linearized fit, but with a fixed rather than free intercept.</span>
 
 <span class="sd">    Parameters</span>
@@ -582,7 +582,7 @@
 <span class="sd">    35.0</span>
 <span class="sd">    &gt;&gt;&gt; round(fit.r_squared, 6)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">intensity_ratio</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">intensity_ratio</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">shift</span> <span class="o">=</span> <span class="n">intensity_ratio</span> <span class="o">-</span> <span class="mf">1.0</span>
@@ -598,10 +598,10 @@
 <div class="viewcode-block" id="classify_quenching_mechanism">
 <a class="viewcode-back" href="../../../../api/photochem.html#chemistrykit.photochem.classify_quenching_mechanism">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">classify_quenching_mechanism</span><span class="p">(</span><span class="n">intensity_ratio_slope</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lifetime_ratio_slope</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">rtol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Classify a quenching mechanism as dynamic, static, or mixed from the two Stern-Volmer slopes.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Classify a quenching mechanism as dynamic, static, or mixed from the two Stern-Volmer slopes.</span>
 
-<span class="sd">    Measuring *both* the steady-state intensity ratio's Stern-Volmer</span>
-<span class="sd">    slope and the excited-state lifetime ratio's is the standard</span>
+<span class="sd">    Measuring *both* the steady-state intensity ratio&#39;s Stern-Volmer</span>
+<span class="sd">    slope and the excited-state lifetime ratio&#39;s is the standard</span>
 <span class="sd">    diagnostic (Lakowicz, *Principles of Fluorescence Spectroscopy*, 3rd</span>
 <span class="sd">    ed., Ch. 8.2): pure dynamic (collisional) quenching reduces the</span>
 <span class="sd">    lifetime and the intensity by the same factor, so the two slopes</span>
@@ -620,37 +620,37 @@
 <span class="sd">    lifetime_ratio_slope : float</span>
 <span class="sd">        Fitted Stern-Volmer slope of :math:`\tau_0/\tau` vs. :math:`[Q]`.</span>
 <span class="sd">    rtol : float, default 0.1</span>
-<span class="sd">        Relative tolerance for judging the two slopes "equal" (dynamic)</span>
-<span class="sd">        vs. the lifetime slope "zero" (static).</span>
+<span class="sd">        Relative tolerance for judging the two slopes &quot;equal&quot; (dynamic)</span>
+<span class="sd">        vs. the lifetime slope &quot;zero&quot; (static).</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    str</span>
-<span class="sd">        One of ``"dynamic"``, ``"static"``, or ``"mixed"``.</span>
+<span class="sd">        One of ``&quot;dynamic&quot;``, ``&quot;static&quot;``, or ``&quot;mixed&quot;``.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    Equal slopes indicate purely dynamic quenching:</span>
 
 <span class="sd">    &gt;&gt;&gt; classify_quenching_mechanism(intensity_ratio_slope=40.0, lifetime_ratio_slope=40.0)</span>
-<span class="sd">    'dynamic'</span>
+<span class="sd">    &#39;dynamic&#39;</span>
 
 <span class="sd">    A vanishing lifetime slope with a nonzero intensity slope indicates</span>
 <span class="sd">    purely static quenching:</span>
 
 <span class="sd">    &gt;&gt;&gt; classify_quenching_mechanism(intensity_ratio_slope=40.0, lifetime_ratio_slope=0.0)</span>
-<span class="sd">    'static'</span>
+<span class="sd">    &#39;static&#39;</span>
 
 <span class="sd">    Something in between indicates a mixed mechanism:</span>
 
 <span class="sd">    &gt;&gt;&gt; classify_quenching_mechanism(intensity_ratio_slope=40.0, lifetime_ratio_slope=20.0)</span>
-<span class="sd">    'mixed'</span>
-<span class="sd">    """</span>
+<span class="sd">    &#39;mixed&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">lifetime_ratio_slope</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">rtol</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">intensity_ratio_slope</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">"static"</span>
+        <span class="k">return</span> <span class="s2">&quot;static&quot;</span>
     <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">intensity_ratio_slope</span> <span class="o">-</span> <span class="n">lifetime_ratio_slope</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">rtol</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">intensity_ratio_slope</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">"dynamic"</span>
-    <span class="k">return</span> <span class="s2">"mixed"</span></div>
+        <span class="k">return</span> <span class="s2">&quot;dynamic&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;mixed&quot;</span></div>
 
 </pre></div>
 

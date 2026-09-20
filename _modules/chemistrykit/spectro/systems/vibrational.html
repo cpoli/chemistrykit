@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.spectro.systems.vibrational</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Vibrational (IR) band positions: harmonic vs. Morse (anharmonic) fundamentals/overtones, and triatomic normal modes.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Vibrational (IR) band positions: harmonic vs. Morse (anharmonic) fundamentals/overtones, and triatomic normal modes.</span>
 
 <span class="sd">Builds on :class:`chemistrykit.quantum.systems.harmonic_oscillator.QuantumHarmonicOscillator`</span>
 <span class="sd">and :class:`~chemistrykit.quantum.systems.harmonic_oscillator.MorseOscillator`</span>
@@ -422,7 +422,7 @@
 <span class="sd">Cross, *Molecular Vibrations: The Theory of Infrared and Raman</span>
 <span class="sd">Vibrational Spectra* (1955), Ch. 4 (internal coordinates and the GF</span>
 <span class="sd">method) throughout.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -437,25 +437,25 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.spectro.systems.rotational</span><span class="w"> </span><span class="kn">import</span> <span class="n">energy_to_wavenumber</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"harmonic_fundamental_wavenumber"</span><span class="p">,</span>
-    <span class="s2">"morse_transition_wavenumbers"</span><span class="p">,</span>
-    <span class="s2">"anharmonicity_from_overtones"</span><span class="p">,</span>
-    <span class="s2">"TriatomicNormalModes"</span><span class="p">,</span>
-    <span class="s2">"NormalModeResult"</span><span class="p">,</span>
+    <span class="s2">&quot;harmonic_fundamental_wavenumber&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;morse_transition_wavenumbers&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;anharmonicity_from_overtones&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TriatomicNormalModes&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NormalModeResult&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
 <div class="viewcode-block" id="harmonic_fundamental_wavenumber">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.harmonic_fundamental_wavenumber">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">harmonic_fundamental_wavenumber</span><span class="p">(</span><span class="n">force_constant</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">reduced_mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""The harmonic-oscillator fundamental (:math:`v=0\to1`) IR band position.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The harmonic-oscillator fundamental (:math:`v=0\to1`) IR band position.</span>
 
 <span class="sd">    .. math::</span>
 
 <span class="sd">        \tilde\nu = \frac{1}{2\pi c}\sqrt{\frac{k}{\mu}}</span>
 
 <span class="sd">    Every harmonic-oscillator transition sits at exactly this same</span>
-<span class="sd">    wavenumber (evenly spaced levels), unlike the Morse oscillator's</span>
+<span class="sd">    wavenumber (evenly spaced levels), unlike the Morse oscillator&#39;s</span>
 <span class="sd">    overtones (Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch.</span>
 <span class="sd">    12.4).</span>
 
@@ -476,9 +476,9 @@
 <span class="sd">    &gt;&gt;&gt; import scipy.constants as sc</span>
 <span class="sd">    &gt;&gt;&gt; mu = (1.008 * 34.97) / (1.008 + 34.97) * sc.atomic_mass  # HCl-like reduced mass</span>
 <span class="sd">    &gt;&gt;&gt; nu = harmonic_fundamental_wavenumber(force_constant=480.0, reduced_mass=mu)</span>
-<span class="sd">    &gt;&gt;&gt; bool(2500.0 &lt; nu &lt; 3200.0)  # HCl's real fundamental is 2886 cm^-1</span>
+<span class="sd">    &gt;&gt;&gt; bool(2500.0 &lt; nu &lt; 3200.0)  # HCl&#39;s real fundamental is 2886 cm^-1</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ho</span> <span class="o">=</span> <span class="n">QuantumHarmonicOscillator</span><span class="p">(</span><span class="n">mass</span><span class="o">=</span><span class="n">reduced_mass</span><span class="p">,</span> <span class="n">force_constant</span><span class="o">=</span><span class="n">force_constant</span><span class="p">)</span>
     <span class="n">delta_e</span> <span class="o">=</span> <span class="n">ho</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">ho</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">energy_to_wavenumber</span><span class="p">(</span><span class="n">delta_e</span><span class="p">))</span></div>
@@ -488,7 +488,7 @@
 <div class="viewcode-block" id="morse_transition_wavenumbers">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.morse_transition_wavenumbers">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">morse_transition_wavenumbers</span><span class="p">(</span><span class="n">morse</span><span class="p">:</span> <span class="n">MorseOscillator</span><span class="p">,</span> <span class="n">v_max</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Wavenumbers of the :math:`0\to v` Morse-oscillator "overtone" transitions, :math:`v=1,\dots,v_{max}`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Wavenumbers of the :math:`0\to v` Morse-oscillator &quot;overtone&quot; transitions, :math:`v=1,\dots,v_{max}`.</span>
 
 <span class="sd">    Unlike the harmonic oscillator, successive Morse transitions</span>
 <span class="sd">    (fundamental :math:`0\to1`, first overtone :math:`0\to2`, ...) are</span>
@@ -517,7 +517,7 @@
 <span class="sd">    &gt;&gt;&gt; wavenumbers = morse_transition_wavenumbers(morse, v_max=2)</span>
 <span class="sd">    &gt;&gt;&gt; bool(wavenumbers[1] &lt; 2.0 * wavenumbers[0])</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">v_final</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">v_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">delta_e</span> <span class="o">=</span> <span class="n">morse</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">v_final</span><span class="p">)</span> <span class="o">-</span> <span class="n">morse</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">energy_to_wavenumber</span><span class="p">(</span><span class="n">delta_e</span><span class="p">)</span></div>
@@ -527,7 +527,7 @@
 <div class="viewcode-block" id="anharmonicity_from_overtones">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.anharmonicity_from_overtones">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">anharmonicity_from_overtones</span><span class="p">(</span><span class="n">wavenumber_01</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">wavenumber_02</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Recover the Morse parameters :math:`\omega_e`, :math:`\omega_ex_e` from two measured band positions.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Recover the Morse parameters :math:`\omega_e`, :math:`\omega_ex_e` from two measured band positions.</span>
 
 <span class="sd">    The Morse-oscillator term-value formula gives the fundamental and</span>
 <span class="sd">    first-overtone wavenumbers as</span>
@@ -573,7 +573,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; bool(omega_e_xe &gt; 0)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># [[1, -2], [2, -6]] @ [omega_e, omega_e_xe] = [nu01, nu02]</span>
     <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.0</span><span class="p">]])</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">wavenumber_01</span><span class="p">,</span> <span class="n">wavenumber_02</span><span class="p">])</span>
@@ -586,33 +586,33 @@
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.NormalModeResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">NormalModeResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""The output of :meth:`TriatomicNormalModes.solve`."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The output of :meth:`TriatomicNormalModes.solve`.&quot;&quot;&quot;</span>
 
     <span class="n">wavenumbers</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (3,): Normal-mode wavenumbers, in cm^-1, ascending."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (3,): Normal-mode wavenumbers, in cm^-1, ascending.&quot;&quot;&quot;</span>
 
     <span class="n">internal_coordinate_vectors</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray, shape (3, 3): Column `k` gives mode `k`'s displacement</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (3, 3): Column `k` gives mode `k`&#39;s displacement</span>
 <span class="sd">    pattern in the (r1, r2, bend) internal-coordinate basis (see</span>
 <span class="sd">    :class:`TriatomicNormalModes`), useful for classifying a mode as</span>
 <span class="sd">    (anti)symmetric stretch or bend by inspection of the relative signs</span>
-<span class="sd">    and magnitudes of its `r1`/`r2` components."""</span>
+<span class="sd">    and magnitudes of its `r1`/`r2` components.&quot;&quot;&quot;</span>
 
     <span class="n">is_linear</span><span class="p">:</span> <span class="nb">bool</span>
-<span class="w">    </span><span class="sd">"""bool: Whether the equilibrium geometry is linear (in which case</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether the equilibrium geometry is linear (in which case</span>
 <span class="sd">    the computed bend mode is one member of a doubly degenerate pair --</span>
-<span class="sd">    see :class:`TriatomicNormalModes`'s docstring)."""</span></div>
+<span class="sd">    see :class:`TriatomicNormalModes`&#39;s docstring).&quot;&quot;&quot;</span></div>
 
 
 
 <div class="viewcode-block" id="TriatomicNormalModes">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.TriatomicNormalModes">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TriatomicNormalModes</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Normal-mode vibrational frequencies of an A-B-A triatomic, via the Wilson GF-matrix method.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Normal-mode vibrational frequencies of an A-B-A triatomic, via the Wilson GF-matrix method.</span>
 
 <span class="sd">    A genuine (not tabulated) normal-mode calculation: an internal-</span>
-<span class="sd">    coordinate force field is combined with the molecule's actual</span>
-<span class="sd">    equilibrium geometry and atomic masses through Wilson's `G` (kinetic</span>
+<span class="sd">    coordinate force field is combined with the molecule&#39;s actual</span>
+<span class="sd">    equilibrium geometry and atomic masses through Wilson&#39;s `G` (kinetic</span>
 <span class="sd">    energy) and `F` (force constant) matrices, and the resulting</span>
 <span class="sd">    generalized eigenvalue problem is solved for the true normal-mode</span>
 <span class="sd">    frequencies (Wilson, Decius &amp; Cross, *Molecular Vibrations*, 1955,</span>
@@ -643,14 +643,14 @@
 
 <span class="sd">    **Linear equilibrium geometries** (`is_linear=True`) need a bend</span>
 <span class="sd">    coordinate that stays well-defined exactly at 180 degrees, where the</span>
-<span class="sd">    ordinary :math:`\theta=\arccos(\dots)` bond-angle formula's</span>
+<span class="sd">    ordinary :math:`\theta=\arccos(\dots)` bond-angle formula&#39;s</span>
 <span class="sd">    derivative diverges. The standard fix (Wilson, Decius &amp; Cross, Ch.</span>
 <span class="sd">    4) is used: the bend coordinate is instead the linearized transverse</span>
 <span class="sd">    (in-plane) displacement combination</span>
 <span class="sd">    :math:`S_{\text{bend}}=(x_0-2x_1+x_2)/r_{eq}`, well-defined at</span>
-<span class="sd">    exactly linear. A linear triatomic's bend is genuinely doubly</span>
+<span class="sd">    exactly linear. A linear triatomic&#39;s bend is genuinely doubly</span>
 <span class="sd">    degenerate (in-plane and out-of-plane bending are equivalent by the</span>
-<span class="sd">    molecule's cylindrical symmetry); this module solves only the</span>
+<span class="sd">    molecule&#39;s cylindrical symmetry); this module solves only the</span>
 <span class="sd">    in-plane 3-internal-coordinate problem, so the reported bend</span>
 <span class="sd">    wavenumber should be understood as representing *both* degenerate</span>
 <span class="sd">    components (Herzberg, *Molecular Spectra and Molecular Structure</span>
@@ -662,7 +662,7 @@
 <span class="sd">    :func:`chemistrykit.quantum.utils.secular_equation.solve_secular_equation`</span>
 <span class="sd">    (with `F` playing the role of the Hamiltonian and :math:`G^{-1}` the</span>
 <span class="sd">    role of the overlap matrix) -- reusing the same shared-eigenvalue-</span>
-<span class="sd">    solve machinery :mod:`chemistrykit.quantum`'s variational models use,</span>
+<span class="sd">    solve machinery :mod:`chemistrykit.quantum`&#39;s variational models use,</span>
 <span class="sd">    since both are literally the same kind of generalized symmetric</span>
 <span class="sd">    eigenproblem, :math:`\lambda=\omega^2` in SI units, converted to a</span>
 <span class="sd">    wavenumber via :math:`\tilde\nu=\omega/(2\pi c)`.</span>
@@ -684,17 +684,17 @@
 <span class="sd">    See :meth:`linear` and :meth:`bent` for the usual way to construct</span>
 <span class="sd">    one; :meth:`solve` returns three positive wavenumbers for a stable</span>
 <span class="sd">    equilibrium geometry.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">masses</span><span class="p">,</span> <span class="n">equilibrium_coordinates</span><span class="p">,</span> <span class="n">k_r1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k_r2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k_theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">masses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">masses</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">masses</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"masses must have shape (3,)"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;masses must have shape (3,)&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">equilibrium_coordinates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">equilibrium_coordinates</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">equilibrium_coordinates</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"equilibrium_coordinates must have shape (3, 3)"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;equilibrium_coordinates must have shape (3, 3)&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">k_r1</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">k_r2</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">k_theta</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"force constants must be positive"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;force constants must be positive&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">k_r1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">k_r1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">k_r2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">k_r2</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">k_theta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">k_theta</span><span class="p">)</span>
@@ -711,7 +711,7 @@
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.TriatomicNormalModes.linear">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">linear</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mass_terminal</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mass_central</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">bond_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k_r</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k_theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TriatomicNormalModes</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Build a symmetric linear A-B-A triatomic (e.g. CO2-like) along the `z` axis.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build a symmetric linear A-B-A triatomic (e.g. CO2-like) along the `z` axis.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -729,7 +729,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TriatomicNormalModes</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">coordinates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="n">bond_length</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">bond_length</span><span class="p">]])</span>
         <span class="n">masses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mass_terminal</span><span class="p">,</span> <span class="n">mass_central</span><span class="p">,</span> <span class="n">mass_terminal</span><span class="p">])</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">masses</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">,</span> <span class="n">k_r</span><span class="p">,</span> <span class="n">k_r</span><span class="p">,</span> <span class="n">k_theta</span><span class="p">)</span></div>
@@ -739,7 +739,7 @@
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.TriatomicNormalModes.bent">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">bent</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mass_terminal</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mass_central</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">bond_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">bond_angle_degrees</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k_r</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k_theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TriatomicNormalModes</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Build a symmetric bent A-B-A triatomic (e.g. H2O-like) in the `xz` plane.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build a symmetric bent A-B-A triatomic (e.g. H2O-like) in the `xz` plane.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -759,7 +759,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TriatomicNormalModes</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">half_angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">bond_angle_degrees</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
         <span class="n">coordinates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
             <span class="p">[</span>
@@ -808,7 +808,7 @@
 <div class="viewcode-block" id="TriatomicNormalModes.solve">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.TriatomicNormalModes.solve">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NormalModeResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Diagonalize the GF-matrix eigenproblem and return the normal-mode wavenumbers.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Diagonalize the GF-matrix eigenproblem and return the normal-mode wavenumbers.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -834,7 +834,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; bool(result.wavenumbers[0] &lt; result.wavenumbers[1] &lt; result.wavenumbers[2])</span>
 <span class="sd">        True</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_f_matrix</span><span class="p">()</span>
         <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_g_matrix</span><span class="p">()</span>
         <span class="n">G_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
@@ -842,8 +842,8 @@
             <span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">solve_secular_equation</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">G_inv</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="c1"># G_inv from a numerically imperfect linear geometry can pick</span>
-            <span class="c1"># up a tiny asymmetry that solve_secular_equation's strict</span>
-            <span class="c1"># symmetry check rejects; scipy's eigh tolerates it directly.</span>
+            <span class="c1"># up a tiny asymmetry that solve_secular_equation&#39;s strict</span>
+            <span class="c1"># symmetry check rejects; scipy&#39;s eigh tolerates it directly.</span>
             <span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">sla</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">G_inv</span><span class="p">)</span>
         <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">)</span>
         <span class="n">eigenvalues</span> <span class="o">=</span> <span class="n">eigenvalues</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>

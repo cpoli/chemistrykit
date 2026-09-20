@@ -410,16 +410,16 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.kinetics.systems.oscillators</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""The Brusselator: a minimal oscillating (limit-cycle) reaction network.</span>
+<span></span><span class="sd">&quot;&quot;&quot;The Brusselator: a minimal oscillating (limit-cycle) reaction network.</span>
 
 <span class="sd">The kinetics analogue of the nonlinear oscillators studied elsewhere in</span>
-<span class="sd">the *kit family (e.g. physicskit.chaos's continuous dynamical systems):</span>
+<span class="sd">the *kit family (e.g. physicskit.chaos&#39;s continuous dynamical systems):</span>
 <span class="sd">a chemical mechanism whose mass-action kinetics support a stable limit</span>
 <span class="sd">cycle via a Hopf bifurcation, rather than settling to a fixed</span>
 <span class="sd">concentration. Introduced by I. Prigogine &amp; R. Lefever, *J. Chem. Phys.*</span>
 <span class="sd">48, 1695 (1968); see also Nicolis &amp; Prigogine, *Self-Organization in</span>
 <span class="sd">Nonequilibrium Systems* (1977), Ch. 7.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -429,12 +429,12 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.kinetics.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReactionNetwork</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Brusselator"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Brusselator&quot;</span><span class="p">]</span>
 
 
 <span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_brusselator_rhs</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Brusselator vector field ``dX/dt, dY/dt = f(X, Y; A, B)``.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Brusselator vector field ``dX/dt, dY/dt = f(X, Y; A, B)``.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -448,7 +448,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    ndarray of float, shape (2,)</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -460,7 +460,7 @@
 <div class="viewcode-block" id="Brusselator">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.Brusselator">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Brusselator</span><span class="p">(</span><span class="n">ReactionNetwork</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""The Brusselator oscillating reaction network.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Brusselator oscillating reaction network.</span>
 
 <span class="sd">    Derived from four elementary steps (with B, D, E, and the source of</span>
 <span class="sd">    X held as constant reservoirs; Prigogine &amp; Lefever 1968):</span>
@@ -493,13 +493,13 @@
 <span class="sd">        Initial concentrations.</span>
 <span class="sd">    A, B : float</span>
 <span class="sd">        Brusselator parameters (both must be positive).</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">species</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"X"</span><span class="p">,</span> <span class="s2">"Y"</span><span class="p">)</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">Y0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">A</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">A</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">B</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"A and B must be positive"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A and B must be positive&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">])</span>
@@ -515,7 +515,7 @@
 <div class="viewcode-block" id="Brusselator.fixed_point">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.Brusselator.fixed_point">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">fixed_point</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Return the network's single steady state ``(X*, Y*) = (A, B/A)``.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the network&#39;s single steady state ``(X*, Y*) = (A, B/A)``.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -530,14 +530,14 @@
 <span class="sd">        &gt;&gt;&gt; fp = system.fixed_point()</span>
 <span class="sd">        &gt;&gt;&gt; np.allclose(system.rhs(fp, 0.0), 0.0)</span>
 <span class="sd">        True</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="Brusselator.is_above_hopf_threshold">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.Brusselator.is_above_hopf_threshold">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_above_hopf_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Whether ``B &gt; 1 + A^2``, the Hopf-bifurcation onset of sustained oscillation.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Whether ``B &gt; 1 + A^2``, the Hopf-bifurcation onset of sustained oscillation.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -549,7 +549,7 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; Brusselator(A=1.0, B=1.5).is_above_hopf_threshold()</span>
 <span class="sd">        False</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">&gt;</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="o">**</span><span class="mi">2</span></div>
 </div>
 

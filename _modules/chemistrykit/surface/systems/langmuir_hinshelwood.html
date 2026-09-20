@@ -410,10 +410,10 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.surface.systems.langmuir_hinshelwood</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Langmuir-Hinshelwood surface-reaction kinetics.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Langmuir-Hinshelwood surface-reaction kinetics.</span>
 
 <span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 22.5</span>
-<span class="sd">("Heterogeneous catalysis"); the mechanism is named for I. Langmuir and</span>
+<span class="sd">(&quot;Heterogeneous catalysis&quot;); the mechanism is named for I. Langmuir and</span>
 <span class="sd">C. N. Hinshelwood, who independently developed the kinetic picture of a</span>
 <span class="sd">reaction occurring between species adsorbed on the *same* catalytic</span>
 <span class="sd">surface. Both mechanisms below build directly on</span>
@@ -422,19 +422,19 @@
 <span class="sd">constant multiplied by the Langmuir fractional coverage(s) of the</span>
 <span class="sd">reacting adsorbate(s), so this module reuses that function rather than</span>
 <span class="sd">re-deriving the coverage expression.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"lh_rate_single_site"</span><span class="p">,</span> <span class="s2">"lh_rate_dual_site"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;lh_rate_single_site&quot;</span><span class="p">,</span> <span class="s2">&quot;lh_rate_dual_site&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="lh_rate_single_site">
 <a class="viewcode-back" href="../../../../api/surface.html#chemistrykit.surface.lh_rate_single_site">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">lh_rate_single_site</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">K_A</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">P_A</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Single-site Langmuir-Hinshelwood rate: a lone adsorbed species reacts unimolecularly.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Single-site Langmuir-Hinshelwood rate: a lone adsorbed species reacts unimolecularly.</span>
 
 <span class="sd">    A single reactant A adsorbs onto the catalytic surface (Langmuir</span>
 <span class="sd">    equilibrium, constant :math:`K_A`) and then reacts *on the surface*</span>
@@ -481,7 +481,7 @@
 <span class="sd">    &gt;&gt;&gt; rate = lh_rate_single_site(k, K_A, P_small)</span>
 <span class="sd">    &gt;&gt;&gt; bool(np.allclose(rate, k * K_A * P_small, rtol=1e-3))</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">P_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">P_A</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">K_A</span> <span class="o">*</span> <span class="n">P_A</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">K_A</span> <span class="o">*</span> <span class="n">P_A</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span></div>
@@ -491,14 +491,14 @@
 <div class="viewcode-block" id="lh_rate_dual_site">
 <a class="viewcode-back" href="../../../../api/surface.html#chemistrykit.surface.lh_rate_dual_site">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">lh_rate_dual_site</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">K_A</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">P_A</span><span class="p">,</span> <span class="n">K_B</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">P_B</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Dual-site (bimolecular) Langmuir-Hinshelwood rate: two species compete for the same sites.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Dual-site (bimolecular) Langmuir-Hinshelwood rate: two species compete for the same sites.</span>
 
 <span class="sd">    Two reactants A and B adsorb *competitively* onto the same pool of</span>
 <span class="sd">    surface sites, and react where an A and a B happen to sit on</span>
 <span class="sd">    neighboring sites -- the classic mechanism for, e.g., the catalytic</span>
 <span class="sd">    oxidation :math:`2CO+O_2 \to 2CO_2` on a metal surface (Atkins &amp; de</span>
 <span class="sd">    Paula, *Physical Chemistry*, 11th ed., Ch. 22.5). Competitive Langmuir</span>
-<span class="sd">    adsorption gives each species' coverage as</span>
+<span class="sd">    adsorption gives each species&#39; coverage as</span>
 
 <span class="sd">    .. math::</span>
 
@@ -552,7 +552,7 @@
 <span class="sd">    &gt;&gt;&gt; peak_index = int(np.argmax(rate_scan))</span>
 <span class="sd">    &gt;&gt;&gt; bool(0 &lt; peak_index &lt; len(P_A_scan) - 1)</span>
 <span class="sd">    True</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">P_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">P_A</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">P_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">P_B</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">denom</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">K_A</span> <span class="o">*</span> <span class="n">P_A</span> <span class="o">+</span> <span class="n">K_B</span> <span class="o">*</span> <span class="n">P_B</span>

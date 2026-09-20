@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.structure.systems.point_group</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Point-group determination from 3D coordinates, and character tables for common point groups.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Point-group determination from 3D coordinates, and character tables for common point groups.</span>
 
 <span class="sd">See Cotton, *Chemical Applications of Group Theory*, 3rd ed. (1990), Ch.</span>
 <span class="sd">3 (symmetry elements and operations) and the Appendix (character tables),</span>
@@ -419,9 +419,9 @@
 
 <span class="sd">Symmetry elements (proper rotation axes :math:`C_n`, mirror planes</span>
 <span class="sd">:math:`\sigma`, and an inversion center `i`) are found here by genuinely</span>
-<span class="sd">testing candidate geometric operations against the molecule's actual 3D</span>
+<span class="sd">testing candidate geometric operations against the molecule&#39;s actual 3D</span>
 <span class="sd">coordinates -- not by recognizing a molecular formula. A candidate axis</span>
-<span class="sd">or mirror-plane normal is tested by transforming every atom's position</span>
+<span class="sd">or mirror-plane normal is tested by transforming every atom&#39;s position</span>
 <span class="sd">under the corresponding rotation/reflection matrix and checking, by</span>
 <span class="sd">distance, whether the transformed geometry is an exact permutation of the</span>
 <span class="sd">original atoms of matching element</span>
@@ -435,11 +435,11 @@
 <span class="sd">geometric reasoning for every possible molecular shape), this module</span>
 <span class="sd">follows the practical approach used by automatic point-group codes and</span>
 <span class="sd">throws a broad, cheap-to-generate set of candidate directions at the</span>
-<span class="sd">symmetry test -- every non-central atom's position vector, every</span>
-<span class="sd">pairwise sum/difference/cross product of two atoms' position vectors,</span>
-<span class="sd">every three-way sum of three atoms' position vectors (needed to reach</span>
-<span class="sd">an octahedral geometry's body-diagonal `C3` axes -- see</span>
-<span class="sd">:func:`~chemistrykit.structure.utils.symmetry_ops.candidate_axes`'s</span>
+<span class="sd">symmetry test -- every non-central atom&#39;s position vector, every</span>
+<span class="sd">pairwise sum/difference/cross product of two atoms&#39; position vectors,</span>
+<span class="sd">every three-way sum of three atoms&#39; position vectors (needed to reach</span>
+<span class="sd">an octahedral geometry&#39;s body-diagonal `C3` axes -- see</span>
+<span class="sd">:func:`~chemistrykit.structure.utils.symmetry_ops.candidate_axes`&#39;s</span>
 <span class="sd">docstring), and the inertia-tensor eigenvectors -- relying on the fact</span>
 <span class="sd">that a true symmetry axis (or mirror normal) for any molecule small</span>
 <span class="sd">enough to be built by hand is essentially always expressible as one of</span>
@@ -450,7 +450,7 @@
 <span class="sd">axis of an unusual, unvalidated geometry, so :func:`determine_point_group`</span>
 <span class="sd">should be understood as a best-effort computational classifier, not a</span>
 <span class="sd">certified-complete symmetry solver.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -462,11 +462,11 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.structure.utils.symmetry_ops</span><span class="w"> </span><span class="kn">import</span> <span class="n">candidate_axes</span><span class="p">,</span> <span class="n">geometry_matches</span><span class="p">,</span> <span class="n">highest_rotation_order</span><span class="p">,</span> <span class="n">reflection_matrix</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"PointGroupResult"</span><span class="p">,</span>
-    <span class="s2">"determine_point_group"</span><span class="p">,</span>
-    <span class="s2">"PointGroupCharacterTable"</span><span class="p">,</span>
-    <span class="s2">"CHARACTER_TABLES"</span><span class="p">,</span>
-    <span class="s2">"get_character_table"</span><span class="p">,</span>
+    <span class="s2">&quot;PointGroupResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;determine_point_group&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PointGroupCharacterTable&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CHARACTER_TABLES&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get_character_table&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -474,56 +474,56 @@
 <a class="viewcode-back" href="../../../../api/structure.html#chemistrykit.structure.PointGroupResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">PointGroupResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""The detected symmetry elements of a molecule, and the resulting point-group assignment.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The detected symmetry elements of a molecule, and the resulting point-group assignment.</span>
 
 <span class="sd">    Returned by :func:`determine_point_group`; every boolean/count field</span>
 <span class="sd">    reflects an element that was *actually found* by direct geometric</span>
 <span class="sd">    testing against the input coordinates (see the module docstring), not</span>
 <span class="sd">    inferred from the final `group_name`.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">group_name</span><span class="p">:</span> <span class="nb">str</span>
-<span class="w">    </span><span class="sd">"""str: The assigned point-group symbol (e.g. ``"C2v"``, ``"Td"``, ``"D_inf_h"``</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: The assigned point-group symbol (e.g. ``&quot;C2v&quot;``, ``&quot;Td&quot;``, ``&quot;D_inf_h&quot;``</span>
 <span class="sd">    -- the infinity symbol is spelled out ASCII-style since it is not a</span>
-<span class="sd">    valid Python/LaTeX-free identifier component)."""</span>
+<span class="sd">    valid Python/LaTeX-free identifier component).&quot;&quot;&quot;</span>
 
     <span class="n">is_linear</span><span class="p">:</span> <span class="nb">bool</span>
-<span class="w">    </span><span class="sd">"""bool: Whether all atoms are collinear."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether all atoms are collinear.&quot;&quot;&quot;</span>
 
     <span class="n">principal_axis_order</span><span class="p">:</span> <span class="nb">int</span>
-<span class="w">    </span><span class="sd">"""int: The highest-order proper rotation axis found, `1` if none</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: The highest-order proper rotation axis found, `1` if none</span>
 <span class="sd">    (beyond the trivial identity) was detected. Not meaningful when</span>
-<span class="sd">    `is_linear` is True (the true axis order is infinite)."""</span>
+<span class="sd">    `is_linear` is True (the true axis order is infinite).&quot;&quot;&quot;</span>
 
     <span class="n">n_perpendicular_c2</span><span class="p">:</span> <span class="nb">int</span>
-<span class="w">    </span><span class="sd">"""int: Number of `C2` axes found perpendicular to the principal axis</span>
-<span class="sd">    (the condition for the `D` point-group families)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: Number of `C2` axes found perpendicular to the principal axis</span>
+<span class="sd">    (the condition for the `D` point-group families).&quot;&quot;&quot;</span>
 
     <span class="n">has_sigma_h</span><span class="p">:</span> <span class="nb">bool</span>
-<span class="w">    </span><span class="sd">"""bool: Whether a mirror plane perpendicular to the principal axis was found."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether a mirror plane perpendicular to the principal axis was found.&quot;&quot;&quot;</span>
 
     <span class="n">has_sigma_v</span><span class="p">:</span> <span class="nb">bool</span>
-<span class="w">    </span><span class="sd">"""bool: Whether a mirror plane containing the principal axis was found."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether a mirror plane containing the principal axis was found.&quot;&quot;&quot;</span>
 
     <span class="n">has_inversion_center</span><span class="p">:</span> <span class="nb">bool</span>
-<span class="w">    </span><span class="sd">"""bool: Whether an inversion center was found."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether an inversion center was found.&quot;&quot;&quot;</span>
 
     <span class="n">n_c3_axes</span><span class="p">:</span> <span class="nb">int</span>
-<span class="w">    </span><span class="sd">"""int: Number of distinct `C3` axes found (&gt;= 4 triggers the cubic</span>
-<span class="sd">    `T`/`Td`/`Th`/`O`/`Oh` branch of the decision tree)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: Number of distinct `C3` axes found (&gt;= 4 triggers the cubic</span>
+<span class="sd">    `T`/`Td`/`Th`/`O`/`Oh` branch of the decision tree).&quot;&quot;&quot;</span>
 
     <span class="n">n_mirror_planes</span><span class="p">:</span> <span class="nb">int</span>
-<span class="w">    </span><span class="sd">"""int: Total number of distinct mirror planes found."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;int: Total number of distinct mirror planes found.&quot;&quot;&quot;</span>
 
     <span class="n">extra</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-<span class="w">    </span><span class="sd">"""dict: Free-form slot for additional diagnostics."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;dict: Free-form slot for additional diagnostics.&quot;&quot;&quot;</span></div>
 
 
 
 <div class="viewcode-block" id="determine_point_group">
 <a class="viewcode-back" href="../../../../api/structure.html#chemistrykit.structure.determine_point_group">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">determine_point_group</span><span class="p">(</span><span class="n">molecule</span><span class="p">:</span> <span class="n">Molecule</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PointGroupResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Determine a molecule's point group from its 3D coordinates.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Determine a molecule&#39;s point group from its 3D coordinates.</span>
 
 <span class="sd">    Implements the standard point-group decision tree (Cotton, *Chemical</span>
 <span class="sd">    Applications of Group Theory*, 3rd ed., Ch. 4, flowchart Fig. 4.1) on</span>
@@ -551,7 +551,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    molecule : chemistrykit.structure.core.base_system.Molecule</span>
 <span class="sd">    tol : float, default 1e-3</span>
-<span class="sd">        Absolute distance tolerance (in the molecule's coordinate units)</span>
+<span class="sd">        Absolute distance tolerance (in the molecule&#39;s coordinate units)</span>
 <span class="sd">        for treating two atomic positions as coincident when testing a</span>
 <span class="sd">        candidate symmetry operation.</span>
 
@@ -569,30 +569,30 @@
 <span class="sd">    &gt;&gt;&gt; angle = np.radians(104.5)</span>
 <span class="sd">    &gt;&gt;&gt; r = 0.958</span>
 <span class="sd">    &gt;&gt;&gt; water = Molecule(</span>
-<span class="sd">    ...     symbols=["O", "H", "H"],</span>
+<span class="sd">    ...     symbols=[&quot;O&quot;, &quot;H&quot;, &quot;H&quot;],</span>
 <span class="sd">    ...     coordinates=[[0, 0, 0], [r * np.sin(angle / 2), 0, r * np.cos(angle / 2)], [-r * np.sin(angle / 2), 0, r * np.cos(angle / 2)]],</span>
 <span class="sd">    ... )</span>
 <span class="sd">    &gt;&gt;&gt; determine_point_group(water).group_name</span>
-<span class="sd">    'C2v'</span>
+<span class="sd">    &#39;C2v&#39;</span>
 
 <span class="sd">    &gt;&gt;&gt; verts = np.array([[1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1]], dtype=float)</span>
 <span class="sd">    &gt;&gt;&gt; verts = verts / np.linalg.norm(verts[0]) * 1.09</span>
-<span class="sd">    &gt;&gt;&gt; methane = Molecule(symbols=["C", "H", "H", "H", "H"], coordinates=np.vstack([[0, 0, 0], verts]))</span>
+<span class="sd">    &gt;&gt;&gt; methane = Molecule(symbols=[&quot;C&quot;, &quot;H&quot;, &quot;H&quot;, &quot;H&quot;, &quot;H&quot;], coordinates=np.vstack([[0, 0, 0], verts]))</span>
 <span class="sd">    &gt;&gt;&gt; determine_point_group(methane).group_name</span>
-<span class="sd">    'Td'</span>
+<span class="sd">    &#39;Td&#39;</span>
 
 <span class="sd">    Carbon dioxide is linear and centrosymmetric, :math:`D_{\infty h}`:</span>
 
-<span class="sd">    &gt;&gt;&gt; co2 = Molecule(symbols=["O", "C", "O"], coordinates=[[0, 0, -1.16], [0, 0, 0], [0, 0, 1.16]])</span>
+<span class="sd">    &gt;&gt;&gt; co2 = Molecule(symbols=[&quot;O&quot;, &quot;C&quot;, &quot;O&quot;], coordinates=[[0, 0, -1.16], [0, 0, 0], [0, 0, 1.16]])</span>
 <span class="sd">    &gt;&gt;&gt; determine_point_group(co2).group_name</span>
-<span class="sd">    'D_inf_h'</span>
-<span class="sd">    """</span>
+<span class="sd">    &#39;D_inf_h&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">coords</span> <span class="o">=</span> <span class="n">molecule</span><span class="o">.</span><span class="n">centered_coordinates</span><span class="p">()</span>
     <span class="n">symbols</span> <span class="o">=</span> <span class="n">molecule</span><span class="o">.</span><span class="n">symbols</span>
 
     <span class="k">if</span> <span class="n">molecule</span><span class="o">.</span><span class="n">is_linear</span><span class="p">():</span>
         <span class="n">has_inversion</span> <span class="o">=</span> <span class="n">geometry_matches</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="o">-</span><span class="n">coords</span><span class="p">,</span> <span class="n">tol</span><span class="p">)</span>
-        <span class="n">group_name</span> <span class="o">=</span> <span class="s2">"D_inf_h"</span> <span class="k">if</span> <span class="n">has_inversion</span> <span class="k">else</span> <span class="s2">"C_inf_v"</span>
+        <span class="n">group_name</span> <span class="o">=</span> <span class="s2">&quot;D_inf_h&quot;</span> <span class="k">if</span> <span class="n">has_inversion</span> <span class="k">else</span> <span class="s2">&quot;C_inf_v&quot;</span>
         <span class="k">return</span> <span class="n">PointGroupResult</span><span class="p">(</span>
             <span class="n">group_name</span><span class="o">=</span><span class="n">group_name</span><span class="p">,</span>
             <span class="n">is_linear</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -619,7 +619,7 @@
     <span class="n">mirror_normals</span> <span class="o">=</span> <span class="p">[</span><span class="n">axis</span> <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="n">candidates</span> <span class="k">if</span> <span class="n">geometry_matches</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">coords</span> <span class="o">@</span> <span class="n">reflection_matrix</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">tol</span><span class="p">)]</span>
 
     <span class="k">if</span> <span class="n">n_c3_axes</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
-        <span class="n">group_name</span> <span class="o">=</span> <span class="s2">"Oh"</span> <span class="k">if</span> <span class="n">has_inversion</span> <span class="k">else</span> <span class="s2">"Td"</span>
+        <span class="n">group_name</span> <span class="o">=</span> <span class="s2">&quot;Oh&quot;</span> <span class="k">if</span> <span class="n">has_inversion</span> <span class="k">else</span> <span class="s2">&quot;Td&quot;</span>
         <span class="k">return</span> <span class="n">PointGroupResult</span><span class="p">(</span>
             <span class="n">group_name</span><span class="o">=</span><span class="n">group_name</span><span class="p">,</span>
             <span class="n">is_linear</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -634,11 +634,11 @@
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">axis_orders</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">has_inversion</span><span class="p">:</span>
-            <span class="n">group_name</span> <span class="o">=</span> <span class="s2">"Ci"</span>
+            <span class="n">group_name</span> <span class="o">=</span> <span class="s2">&quot;Ci&quot;</span>
         <span class="k">elif</span> <span class="n">mirror_normals</span><span class="p">:</span>
-            <span class="n">group_name</span> <span class="o">=</span> <span class="s2">"Cs"</span>
+            <span class="n">group_name</span> <span class="o">=</span> <span class="s2">&quot;Cs&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">group_name</span> <span class="o">=</span> <span class="s2">"C1"</span>
+            <span class="n">group_name</span> <span class="o">=</span> <span class="s2">&quot;C1&quot;</span>
         <span class="k">return</span> <span class="n">PointGroupResult</span><span class="p">(</span>
             <span class="n">group_name</span><span class="o">=</span><span class="n">group_name</span><span class="p">,</span>
             <span class="n">is_linear</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -659,18 +659,18 @@
 
     <span class="k">if</span> <span class="n">n_perp_c2</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">has_sigma_h</span><span class="p">:</span>
-            <span class="n">group_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"D</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">h"</span>
+            <span class="n">group_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;D</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">h&quot;</span>
         <span class="k">elif</span> <span class="n">has_sigma_v</span><span class="p">:</span>
-            <span class="n">group_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"D</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">d"</span>
+            <span class="n">group_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;D</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">d&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">group_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"D</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span>
+            <span class="n">group_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;D</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">has_sigma_h</span><span class="p">:</span>
-            <span class="n">group_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"C</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">h"</span>
+            <span class="n">group_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;C</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">h&quot;</span>
         <span class="k">elif</span> <span class="n">has_sigma_v</span><span class="p">:</span>
-            <span class="n">group_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"C</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">v"</span>
+            <span class="n">group_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;C</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">v&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">group_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"C</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span>
+            <span class="n">group_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;C</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span>
 
     <span class="k">return</span> <span class="n">PointGroupResult</span><span class="p">(</span>
         <span class="n">group_name</span><span class="o">=</span><span class="n">group_name</span><span class="p">,</span>
@@ -690,32 +690,32 @@
 <a class="viewcode-back" href="../../../../api/structure.html#chemistrykit.structure.PointGroupCharacterTable">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">PointGroupCharacterTable</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""A finite point group's character table: irreducible representations, operation classes, and characters.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A finite point group&#39;s character table: irreducible representations, operation classes, and characters.</span>
 
 <span class="sd">    This is reference data -- transcribed from the standard tables (Cotton,</span>
 <span class="sd">    *Chemical Applications of Group Theory*, 3rd ed., Appendix A), in the</span>
 <span class="sd">    same spirit as :mod:`chemistrykit.periodic_table` being plain data</span>
 <span class="sd">    rather than a dependency -- not something :func:`determine_point_group`</span>
 <span class="sd">    derives computationally.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-<span class="w">    </span><span class="sd">"""str: Point-group symbol (matches a :func:`determine_point_group` output where finite)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: Point-group symbol (matches a :func:`determine_point_group` output where finite).&quot;&quot;&quot;</span>
 
     <span class="n">operations</span><span class="p">:</span> <span class="nb">list</span>
-<span class="w">    </span><span class="sd">"""list of str: Symmetry-operation class labels, e.g. ``["E", "C2", "sigma_v(xz)", "sigma_v'(yz)"]``."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;list of str: Symmetry-operation class labels, e.g. ``[&quot;E&quot;, &quot;C2&quot;, &quot;sigma_v(xz)&quot;, &quot;sigma_v&#39;(yz)&quot;]``.&quot;&quot;&quot;</span>
 
     <span class="n">irreps</span><span class="p">:</span> <span class="nb">list</span>
-<span class="w">    </span><span class="sd">"""list of str: Irreducible-representation (Mulliken) labels, e.g. ``["A1", "A2", "B1", "B2"]``."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;list of str: Irreducible-representation (Mulliken) labels, e.g. ``[&quot;A1&quot;, &quot;A2&quot;, &quot;B1&quot;, &quot;B2&quot;]``.&quot;&quot;&quot;</span>
 
     <span class="n">characters</span><span class="p">:</span> <span class="nb">list</span>
-<span class="w">    </span><span class="sd">"""list of list of float: ``characters[i][j]`` is the character of</span>
-<span class="sd">    irrep `i` under operation class `j`."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;list of list of float: ``characters[i][j]`` is the character of</span>
+<span class="sd">    irrep `i` under operation class `j`.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="PointGroupCharacterTable.character">
 <a class="viewcode-back" href="../../../../api/structure.html#chemistrykit.structure.PointGroupCharacterTable.character">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">character</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">irrep</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">operation</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Look up a single character by irrep and operation-class label.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Look up a single character by irrep and operation-class label.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -728,12 +728,12 @@
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; table = get_character_table("C2v")</span>
-<span class="sd">        &gt;&gt;&gt; table.character("A1", "E")</span>
+<span class="sd">        &gt;&gt;&gt; table = get_character_table(&quot;C2v&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; table.character(&quot;A1&quot;, &quot;E&quot;)</span>
 <span class="sd">        1.0</span>
-<span class="sd">        &gt;&gt;&gt; table.character("B1", "C2")</span>
+<span class="sd">        &gt;&gt;&gt; table.character(&quot;B1&quot;, &quot;C2&quot;)</span>
 <span class="sd">        -1.0</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">characters</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">irreps</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">irrep</span><span class="p">)][</span><span class="bp">self</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">operation</span><span class="p">)]</span></div>
 </div>
 
@@ -748,14 +748,14 @@
 <span class="c1">#: irrep, matching the dimension), since the general symbolic</span>
 <span class="c1">#: :math:`2\cos\phi` entry is reference notation rather than a single number.</span>
 <span class="n">CHARACTER_TABLES</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"C1"</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"C1"</span><span class="p">,</span> <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">"E"</span><span class="p">],</span> <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">"A"</span><span class="p">],</span> <span class="n">characters</span><span class="o">=</span><span class="p">[[</span><span class="mf">1.0</span><span class="p">]]),</span>
-    <span class="s2">"Cs"</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"Cs"</span><span class="p">,</span> <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">"E"</span><span class="p">,</span> <span class="s2">"sigma_h"</span><span class="p">],</span> <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">"A'"</span><span class="p">,</span> <span class="s2">"A''"</span><span class="p">],</span> <span class="n">characters</span><span class="o">=</span><span class="p">[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">]]),</span>
-    <span class="s2">"Ci"</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"Ci"</span><span class="p">,</span> <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">"E"</span><span class="p">,</span> <span class="s2">"i"</span><span class="p">],</span> <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">"Ag"</span><span class="p">,</span> <span class="s2">"Au"</span><span class="p">],</span> <span class="n">characters</span><span class="o">=</span><span class="p">[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">]]),</span>
-    <span class="s2">"C2"</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"C2"</span><span class="p">,</span> <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">"E"</span><span class="p">,</span> <span class="s2">"C2"</span><span class="p">],</span> <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">],</span> <span class="n">characters</span><span class="o">=</span><span class="p">[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">]]),</span>
-    <span class="s2">"C2v"</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">"C2v"</span><span class="p">,</span>
-        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">"E"</span><span class="p">,</span> <span class="s2">"C2"</span><span class="p">,</span> <span class="s2">"sigma_v(xz)"</span><span class="p">,</span> <span class="s2">"sigma_v'(yz)"</span><span class="p">],</span>
-        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">"A1"</span><span class="p">,</span> <span class="s2">"A2"</span><span class="p">,</span> <span class="s2">"B1"</span><span class="p">,</span> <span class="s2">"B2"</span><span class="p">],</span>
+    <span class="s2">&quot;C1&quot;</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">],</span> <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">],</span> <span class="n">characters</span><span class="o">=</span><span class="p">[[</span><span class="mf">1.0</span><span class="p">]]),</span>
+    <span class="s2">&quot;Cs&quot;</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Cs&quot;</span><span class="p">,</span> <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;sigma_h&quot;</span><span class="p">],</span> <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;A&#39;&#39;&quot;</span><span class="p">],</span> <span class="n">characters</span><span class="o">=</span><span class="p">[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">]]),</span>
+    <span class="s2">&quot;Ci&quot;</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Ci&quot;</span><span class="p">,</span> <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">],</span> <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Ag&quot;</span><span class="p">,</span> <span class="s2">&quot;Au&quot;</span><span class="p">],</span> <span class="n">characters</span><span class="o">=</span><span class="p">[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">]]),</span>
+    <span class="s2">&quot;C2&quot;</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">],</span> <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span> <span class="n">characters</span><span class="o">=</span><span class="p">[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">]]),</span>
+    <span class="s2">&quot;C2v&quot;</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;C2v&quot;</span><span class="p">,</span>
+        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;sigma_v(xz)&quot;</span><span class="p">,</span> <span class="s2">&quot;sigma_v&#39;(yz)&quot;</span><span class="p">],</span>
+        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;A2&quot;</span><span class="p">,</span> <span class="s2">&quot;B1&quot;</span><span class="p">,</span> <span class="s2">&quot;B2&quot;</span><span class="p">],</span>
         <span class="n">characters</span><span class="o">=</span><span class="p">[</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span>
@@ -763,10 +763,10 @@
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
         <span class="p">],</span>
     <span class="p">),</span>
-    <span class="s2">"C2h"</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">"C2h"</span><span class="p">,</span>
-        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">"E"</span><span class="p">,</span> <span class="s2">"C2"</span><span class="p">,</span> <span class="s2">"i"</span><span class="p">,</span> <span class="s2">"sigma_h"</span><span class="p">],</span>
-        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">"Ag"</span><span class="p">,</span> <span class="s2">"Bg"</span><span class="p">,</span> <span class="s2">"Au"</span><span class="p">,</span> <span class="s2">"Bu"</span><span class="p">],</span>
+    <span class="s2">&quot;C2h&quot;</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;C2h&quot;</span><span class="p">,</span>
+        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;sigma_h&quot;</span><span class="p">],</span>
+        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Ag&quot;</span><span class="p">,</span> <span class="s2">&quot;Bg&quot;</span><span class="p">,</span> <span class="s2">&quot;Au&quot;</span><span class="p">,</span> <span class="s2">&quot;Bu&quot;</span><span class="p">],</span>
         <span class="n">characters</span><span class="o">=</span><span class="p">[</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span>
@@ -774,20 +774,20 @@
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
         <span class="p">],</span>
     <span class="p">),</span>
-    <span class="s2">"C3v"</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">"C3v"</span><span class="p">,</span>
-        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">"E"</span><span class="p">,</span> <span class="s2">"2C3"</span><span class="p">,</span> <span class="s2">"3sigma_v"</span><span class="p">],</span>
-        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">"A1"</span><span class="p">,</span> <span class="s2">"A2"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">],</span>
+    <span class="s2">&quot;C3v&quot;</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;C3v&quot;</span><span class="p">,</span>
+        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;2C3&quot;</span><span class="p">,</span> <span class="s2">&quot;3sigma_v&quot;</span><span class="p">],</span>
+        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;A2&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">],</span>
         <span class="n">characters</span><span class="o">=</span><span class="p">[</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span>
             <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
         <span class="p">],</span>
     <span class="p">),</span>
-    <span class="s2">"D2h"</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">"D2h"</span><span class="p">,</span>
-        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">"E"</span><span class="p">,</span> <span class="s2">"C2(z)"</span><span class="p">,</span> <span class="s2">"C2(y)"</span><span class="p">,</span> <span class="s2">"C2(x)"</span><span class="p">,</span> <span class="s2">"i"</span><span class="p">,</span> <span class="s2">"sigma(xy)"</span><span class="p">,</span> <span class="s2">"sigma(xz)"</span><span class="p">,</span> <span class="s2">"sigma(yz)"</span><span class="p">],</span>
-        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">"Ag"</span><span class="p">,</span> <span class="s2">"B1g"</span><span class="p">,</span> <span class="s2">"B2g"</span><span class="p">,</span> <span class="s2">"B3g"</span><span class="p">,</span> <span class="s2">"Au"</span><span class="p">,</span> <span class="s2">"B1u"</span><span class="p">,</span> <span class="s2">"B2u"</span><span class="p">,</span> <span class="s2">"B3u"</span><span class="p">],</span>
+    <span class="s2">&quot;D2h&quot;</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;D2h&quot;</span><span class="p">,</span>
+        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;C2(z)&quot;</span><span class="p">,</span> <span class="s2">&quot;C2(y)&quot;</span><span class="p">,</span> <span class="s2">&quot;C2(x)&quot;</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;sigma(xy)&quot;</span><span class="p">,</span> <span class="s2">&quot;sigma(xz)&quot;</span><span class="p">,</span> <span class="s2">&quot;sigma(yz)&quot;</span><span class="p">],</span>
+        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Ag&quot;</span><span class="p">,</span> <span class="s2">&quot;B1g&quot;</span><span class="p">,</span> <span class="s2">&quot;B2g&quot;</span><span class="p">,</span> <span class="s2">&quot;B3g&quot;</span><span class="p">,</span> <span class="s2">&quot;Au&quot;</span><span class="p">,</span> <span class="s2">&quot;B1u&quot;</span><span class="p">,</span> <span class="s2">&quot;B2u&quot;</span><span class="p">,</span> <span class="s2">&quot;B3u&quot;</span><span class="p">],</span>
         <span class="n">characters</span><span class="o">=</span><span class="p">[</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span>
@@ -799,10 +799,10 @@
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span>
         <span class="p">],</span>
     <span class="p">),</span>
-    <span class="s2">"D3h"</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">"D3h"</span><span class="p">,</span>
-        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">"E"</span><span class="p">,</span> <span class="s2">"2C3"</span><span class="p">,</span> <span class="s2">"3C2"</span><span class="p">,</span> <span class="s2">"sigma_h"</span><span class="p">,</span> <span class="s2">"2S3"</span><span class="p">,</span> <span class="s2">"3sigma_v"</span><span class="p">],</span>
-        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">"A1'"</span><span class="p">,</span> <span class="s2">"A2'"</span><span class="p">,</span> <span class="s2">"E'"</span><span class="p">,</span> <span class="s2">"A1''"</span><span class="p">,</span> <span class="s2">"A2''"</span><span class="p">,</span> <span class="s2">"E''"</span><span class="p">],</span>
+    <span class="s2">&quot;D3h&quot;</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;D3h&quot;</span><span class="p">,</span>
+        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;2C3&quot;</span><span class="p">,</span> <span class="s2">&quot;3C2&quot;</span><span class="p">,</span> <span class="s2">&quot;sigma_h&quot;</span><span class="p">,</span> <span class="s2">&quot;2S3&quot;</span><span class="p">,</span> <span class="s2">&quot;3sigma_v&quot;</span><span class="p">],</span>
+        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A1&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;A2&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;E&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;A1&#39;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;A2&#39;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;E&#39;&#39;&quot;</span><span class="p">],</span>
         <span class="n">characters</span><span class="o">=</span><span class="p">[</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span>
@@ -812,10 +812,10 @@
             <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
         <span class="p">],</span>
     <span class="p">),</span>
-    <span class="s2">"D4h"</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">"D4h"</span><span class="p">,</span>
-        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">"E"</span><span class="p">,</span> <span class="s2">"2C4"</span><span class="p">,</span> <span class="s2">"C2"</span><span class="p">,</span> <span class="s2">"2C2'"</span><span class="p">,</span> <span class="s2">"2C2''"</span><span class="p">,</span> <span class="s2">"i"</span><span class="p">,</span> <span class="s2">"2S4"</span><span class="p">,</span> <span class="s2">"sigma_h"</span><span class="p">,</span> <span class="s2">"2sigma_v"</span><span class="p">,</span> <span class="s2">"2sigma_d"</span><span class="p">],</span>
-        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">"A1g"</span><span class="p">,</span> <span class="s2">"A2g"</span><span class="p">,</span> <span class="s2">"B1g"</span><span class="p">,</span> <span class="s2">"B2g"</span><span class="p">,</span> <span class="s2">"Eg"</span><span class="p">,</span> <span class="s2">"A1u"</span><span class="p">,</span> <span class="s2">"A2u"</span><span class="p">,</span> <span class="s2">"B1u"</span><span class="p">,</span> <span class="s2">"B2u"</span><span class="p">,</span> <span class="s2">"Eu"</span><span class="p">],</span>
+    <span class="s2">&quot;D4h&quot;</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;D4h&quot;</span><span class="p">,</span>
+        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;2C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;2C2&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;2C2&#39;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;2S4&quot;</span><span class="p">,</span> <span class="s2">&quot;sigma_h&quot;</span><span class="p">,</span> <span class="s2">&quot;2sigma_v&quot;</span><span class="p">,</span> <span class="s2">&quot;2sigma_d&quot;</span><span class="p">],</span>
+        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A1g&quot;</span><span class="p">,</span> <span class="s2">&quot;A2g&quot;</span><span class="p">,</span> <span class="s2">&quot;B1g&quot;</span><span class="p">,</span> <span class="s2">&quot;B2g&quot;</span><span class="p">,</span> <span class="s2">&quot;Eg&quot;</span><span class="p">,</span> <span class="s2">&quot;A1u&quot;</span><span class="p">,</span> <span class="s2">&quot;A2u&quot;</span><span class="p">,</span> <span class="s2">&quot;B1u&quot;</span><span class="p">,</span> <span class="s2">&quot;B2u&quot;</span><span class="p">,</span> <span class="s2">&quot;Eu&quot;</span><span class="p">],</span>
         <span class="n">characters</span><span class="o">=</span><span class="p">[</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span>
@@ -829,10 +829,10 @@
             <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
         <span class="p">],</span>
     <span class="p">),</span>
-    <span class="s2">"Td"</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">"Td"</span><span class="p">,</span>
-        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">"E"</span><span class="p">,</span> <span class="s2">"8C3"</span><span class="p">,</span> <span class="s2">"3C2"</span><span class="p">,</span> <span class="s2">"6S4"</span><span class="p">,</span> <span class="s2">"6sigma_d"</span><span class="p">],</span>
-        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">"A1"</span><span class="p">,</span> <span class="s2">"A2"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">,</span> <span class="s2">"T1"</span><span class="p">,</span> <span class="s2">"T2"</span><span class="p">],</span>
+    <span class="s2">&quot;Td&quot;</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Td&quot;</span><span class="p">,</span>
+        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;8C3&quot;</span><span class="p">,</span> <span class="s2">&quot;3C2&quot;</span><span class="p">,</span> <span class="s2">&quot;6S4&quot;</span><span class="p">,</span> <span class="s2">&quot;6sigma_d&quot;</span><span class="p">],</span>
+        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;A2&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;T1&quot;</span><span class="p">,</span> <span class="s2">&quot;T2&quot;</span><span class="p">],</span>
         <span class="n">characters</span><span class="o">=</span><span class="p">[</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span>
@@ -841,10 +841,10 @@
             <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
         <span class="p">],</span>
     <span class="p">),</span>
-    <span class="s2">"Oh"</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">"Oh"</span><span class="p">,</span>
-        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">"E"</span><span class="p">,</span> <span class="s2">"8C3"</span><span class="p">,</span> <span class="s2">"6C2"</span><span class="p">,</span> <span class="s2">"6C4"</span><span class="p">,</span> <span class="s2">"3C2(=C4^2)"</span><span class="p">,</span> <span class="s2">"i"</span><span class="p">,</span> <span class="s2">"6S4"</span><span class="p">,</span> <span class="s2">"8S6"</span><span class="p">,</span> <span class="s2">"3sigma_h"</span><span class="p">,</span> <span class="s2">"6sigma_d"</span><span class="p">],</span>
-        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">"A1g"</span><span class="p">,</span> <span class="s2">"A2g"</span><span class="p">,</span> <span class="s2">"Eg"</span><span class="p">,</span> <span class="s2">"T1g"</span><span class="p">,</span> <span class="s2">"T2g"</span><span class="p">,</span> <span class="s2">"A1u"</span><span class="p">,</span> <span class="s2">"A2u"</span><span class="p">,</span> <span class="s2">"Eu"</span><span class="p">,</span> <span class="s2">"T1u"</span><span class="p">,</span> <span class="s2">"T2u"</span><span class="p">],</span>
+    <span class="s2">&quot;Oh&quot;</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Oh&quot;</span><span class="p">,</span>
+        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;8C3&quot;</span><span class="p">,</span> <span class="s2">&quot;6C2&quot;</span><span class="p">,</span> <span class="s2">&quot;6C4&quot;</span><span class="p">,</span> <span class="s2">&quot;3C2(=C4^2)&quot;</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;6S4&quot;</span><span class="p">,</span> <span class="s2">&quot;8S6&quot;</span><span class="p">,</span> <span class="s2">&quot;3sigma_h&quot;</span><span class="p">,</span> <span class="s2">&quot;6sigma_d&quot;</span><span class="p">],</span>
+        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A1g&quot;</span><span class="p">,</span> <span class="s2">&quot;A2g&quot;</span><span class="p">,</span> <span class="s2">&quot;Eg&quot;</span><span class="p">,</span> <span class="s2">&quot;T1g&quot;</span><span class="p">,</span> <span class="s2">&quot;T2g&quot;</span><span class="p">,</span> <span class="s2">&quot;A1u&quot;</span><span class="p">,</span> <span class="s2">&quot;A2u&quot;</span><span class="p">,</span> <span class="s2">&quot;Eu&quot;</span><span class="p">,</span> <span class="s2">&quot;T1u&quot;</span><span class="p">,</span> <span class="s2">&quot;T2u&quot;</span><span class="p">],</span>
         <span class="n">characters</span><span class="o">=</span><span class="p">[</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span>
@@ -858,10 +858,10 @@
             <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span>
         <span class="p">],</span>
     <span class="p">),</span>
-    <span class="s2">"C_inf_v"</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">"C_inf_v"</span><span class="p">,</span>
-        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">"E"</span><span class="p">,</span> <span class="s2">"2C_inf^phi"</span><span class="p">,</span> <span class="s2">"inf sigma_v"</span><span class="p">],</span>
-        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">"Sigma+ (A1)"</span><span class="p">,</span> <span class="s2">"Sigma- (A2)"</span><span class="p">,</span> <span class="s2">"Pi (E1)"</span><span class="p">,</span> <span class="s2">"Delta (E2)"</span><span class="p">],</span>
+    <span class="s2">&quot;C_inf_v&quot;</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;C_inf_v&quot;</span><span class="p">,</span>
+        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;2C_inf^phi&quot;</span><span class="p">,</span> <span class="s2">&quot;inf sigma_v&quot;</span><span class="p">],</span>
+        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Sigma+ (A1)&quot;</span><span class="p">,</span> <span class="s2">&quot;Sigma- (A2)&quot;</span><span class="p">,</span> <span class="s2">&quot;Pi (E1)&quot;</span><span class="p">,</span> <span class="s2">&quot;Delta (E2)&quot;</span><span class="p">],</span>
         <span class="n">characters</span><span class="o">=</span><span class="p">[</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span>
@@ -869,10 +869,10 @@
             <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
         <span class="p">],</span>
     <span class="p">),</span>
-    <span class="s2">"D_inf_h"</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">"D_inf_h"</span><span class="p">,</span>
-        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">"E"</span><span class="p">,</span> <span class="s2">"2C_inf^phi"</span><span class="p">,</span> <span class="s2">"inf sigma_v"</span><span class="p">,</span> <span class="s2">"i"</span><span class="p">,</span> <span class="s2">"2S_inf^phi"</span><span class="p">,</span> <span class="s2">"inf C2"</span><span class="p">],</span>
-        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">"Sigma_g+ (A1g)"</span><span class="p">,</span> <span class="s2">"Sigma_g- (A2g)"</span><span class="p">,</span> <span class="s2">"Pi_g (E1g)"</span><span class="p">,</span> <span class="s2">"Delta_g (E2g)"</span><span class="p">,</span> <span class="s2">"Sigma_u+ (A1u)"</span><span class="p">,</span> <span class="s2">"Sigma_u- (A2u)"</span><span class="p">,</span> <span class="s2">"Pi_u (E1u)"</span><span class="p">,</span> <span class="s2">"Delta_u (E2u)"</span><span class="p">],</span>
+    <span class="s2">&quot;D_inf_h&quot;</span><span class="p">:</span> <span class="n">PointGroupCharacterTable</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;D_inf_h&quot;</span><span class="p">,</span>
+        <span class="n">operations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;2C_inf^phi&quot;</span><span class="p">,</span> <span class="s2">&quot;inf sigma_v&quot;</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;2S_inf^phi&quot;</span><span class="p">,</span> <span class="s2">&quot;inf C2&quot;</span><span class="p">],</span>
+        <span class="n">irreps</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Sigma_g+ (A1g)&quot;</span><span class="p">,</span> <span class="s2">&quot;Sigma_g- (A2g)&quot;</span><span class="p">,</span> <span class="s2">&quot;Pi_g (E1g)&quot;</span><span class="p">,</span> <span class="s2">&quot;Delta_g (E2g)&quot;</span><span class="p">,</span> <span class="s2">&quot;Sigma_u+ (A1u)&quot;</span><span class="p">,</span> <span class="s2">&quot;Sigma_u- (A2u)&quot;</span><span class="p">,</span> <span class="s2">&quot;Pi_u (E1u)&quot;</span><span class="p">,</span> <span class="s2">&quot;Delta_u (E2u)&quot;</span><span class="p">],</span>
         <span class="n">characters</span><span class="o">=</span><span class="p">[</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
             <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span>
@@ -890,12 +890,12 @@
 <div class="viewcode-block" id="get_character_table">
 <a class="viewcode-back" href="../../../../api/structure.html#chemistrykit.structure.get_character_table">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_character_table</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PointGroupCharacterTable</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Look up a built-in character table by point-group symbol.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Look up a built-in character table by point-group symbol.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    name : str</span>
-<span class="sd">        E.g. ``"C2v"``, ``"Td"``, ``"D_inf_h"``.</span>
+<span class="sd">        E.g. ``&quot;C2v&quot;``, ``&quot;Td&quot;``, ``&quot;D_inf_h&quot;``.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -909,18 +909,18 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    Every irrep's character under the identity operation equals its</span>
+<span class="sd">    Every irrep&#39;s character under the identity operation equals its</span>
 <span class="sd">    dimension, and (for a real, unitary representation) the sum over all</span>
 <span class="sd">    operations, weighted by class size, of the identity character times</span>
 <span class="sd">    itself equals the group order -- here just checking the totally</span>
 <span class="sd">    symmetric irrep is trivially present:</span>
 
-<span class="sd">    &gt;&gt;&gt; table = get_character_table("Td")</span>
-<span class="sd">    &gt;&gt;&gt; table.character("A1", "E")</span>
+<span class="sd">    &gt;&gt;&gt; table = get_character_table(&quot;Td&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; table.character(&quot;A1&quot;, &quot;E&quot;)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    &gt;&gt;&gt; table.character("T2", "E")</span>
+<span class="sd">    &gt;&gt;&gt; table.character(&quot;T2&quot;, &quot;E&quot;)</span>
 <span class="sd">    3.0</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">CHARACTER_TABLES</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
 
 </pre></div>

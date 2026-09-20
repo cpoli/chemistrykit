@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.statmech.systems.lattice_gas</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""A canonical-ensemble lattice-gas model of adsorption.</span>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A canonical-ensemble lattice-gas model of adsorption.</span>
 
 <span class="sd">The statistical-mechanical derivation of the Langmuir adsorption</span>
 <span class="sd">isotherm: `M` identical, independent, non-interacting lattice sites, each</span>
@@ -428,7 +428,7 @@
 <span class="sd">*from* statistical mechanics, and :meth:`LatticeGasAdsorption.canonical_entropy`</span>
 <span class="sd">is the purely combinatorial (fixed-`N`, canonical-ensemble) counting that</span>
 <span class="sd">sits underneath it.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -438,15 +438,15 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.statmech.utils.combinatorics</span><span class="w"> </span><span class="kn">import</span> <span class="n">ln_binomial</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.statmech.utils.thermal_wavelength</span><span class="w"> </span><span class="kn">import</span> <span class="n">thermal_de_broglie_wavelength</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"LatticeGasAdsorption"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LatticeGasAdsorption&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="LatticeGasAdsorption">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.LatticeGasAdsorption">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LatticeGasAdsorption</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""Non-interacting lattice-gas model of adsorption on `M` independent sites.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Non-interacting lattice-gas model of adsorption on `M` independent sites.</span>
 
-<span class="sd">    Each site's single-site grand partition function is</span>
+<span class="sd">    Each site&#39;s single-site grand partition function is</span>
 <span class="sd">    :math:`\xi=1+\lambda e^{\beta\epsilon}` (empty, or occupied with</span>
 <span class="sd">    Boltzmann factor :math:`e^{\beta\epsilon}` weighted by the gas-phase</span>
 <span class="sd">    fugacity :math:`\lambda=e^{\beta\mu}`); since the `M` sites are</span>
@@ -468,11 +468,11 @@
 <span class="sd">        Mass of the adsorbing gas molecule, in kg.</span>
 <span class="sd">    T : float</span>
 <span class="sd">        Absolute temperature, in K.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adsorption_energy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">mass</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">T</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"mass and T must be positive"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mass and T must be positive&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">adsorption_energy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">adsorption_energy</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mass</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
@@ -480,20 +480,20 @@
 <div class="viewcode-block" id="LatticeGasAdsorption.thermal_wavelength">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.LatticeGasAdsorption.thermal_wavelength">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">thermal_wavelength</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""The gas molecule's thermal de Broglie wavelength at `T`. See :func:`chemistrykit.statmech.utils.thermal_wavelength.thermal_de_broglie_wavelength`."""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The gas molecule&#39;s thermal de Broglie wavelength at `T`. See :func:`chemistrykit.statmech.utils.thermal_wavelength.thermal_de_broglie_wavelength`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">thermal_de_broglie_wavelength</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="LatticeGasAdsorption.p_half">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.LatticeGasAdsorption.p_half">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">p_half</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Pressure at half coverage, :math:`P_0=(k_BT/\Lambda^3)e^{-\epsilon/k_BT}`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Pressure at half coverage, :math:`P_0=(k_BT/\Lambda^3)e^{-\epsilon/k_BT}`.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
 <span class="sd">            Pressure, in Pa.</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">wavelength</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_wavelength</span><span class="p">()</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">K_B</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">/</span> <span class="n">wavelength</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">adsorption_energy</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_B</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">))</span></div>
 
@@ -501,7 +501,7 @@
 <div class="viewcode-block" id="LatticeGasAdsorption.coverage">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.LatticeGasAdsorption.coverage">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">coverage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Fractional coverage :math:`\theta(P) = P/(P+P_0)` -- the Langmuir isotherm.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fractional coverage :math:`\theta(P) = P/(P+P_0)` -- the Langmuir isotherm.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -525,7 +525,7 @@
 <span class="sd">        0.0</span>
 <span class="sd">        &gt;&gt;&gt; bool(model.coverage(1.0e15) &gt; 0.9999)</span>
 <span class="sd">        True</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="n">P0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_half</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">P</span> <span class="o">/</span> <span class="p">(</span><span class="n">P</span> <span class="o">+</span> <span class="n">P0</span><span class="p">)</span></div>
@@ -535,13 +535,13 @@
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.LatticeGasAdsorption.canonical_entropy">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">canonical_entropy</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Canonical (fixed-`N`) combinatorial entropy :math:`S=k_B\ln\binom{M}{N}`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Canonical (fixed-`N`) combinatorial entropy :math:`S=k_B\ln\binom{M}{N}`.</span>
 
 <span class="sd">        The exact configurational entropy of placing `N` indistinguishable</span>
 <span class="sd">        adsorbed molecules on `M` distinguishable sites with no</span>
 <span class="sd">        interactions, computed via the numerically exact</span>
 <span class="sd">        :func:`chemistrykit.statmech.utils.combinatorics.ln_binomial`</span>
-<span class="sd">        (rather than Stirling's approximation).</span>
+<span class="sd">        (rather than Stirling&#39;s approximation).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -572,7 +572,7 @@
 <span class="sd">        &gt;&gt;&gt; relative_error = abs(S_half - M * 1.380649e-23 * np.log(2)) / (M * 1.380649e-23 * np.log(2))</span>
 <span class="sd">        &gt;&gt;&gt; bool(relative_error &lt; 1e-4)</span>
 <span class="sd">        True</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">K_B</span> <span class="o">*</span> <span class="n">ln_binomial</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span></div>
 </div>
 

@@ -410,27 +410,27 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.electrochem.core.base_system</h1><div class="highlight"><pre>
-<span></span><span class="sd">"""Abstract base class for battery discharge models, and the result container.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Abstract base class for battery discharge models, and the result container.</span>
 
 <span class="sd">Most of :mod:`chemistrykit.electrochem` -- the Nernst equation, standard</span>
 <span class="sd">reduction potentials and cell-potential combination, Butler-Volmer</span>
-<span class="sd">kinetics, and Faraday's laws of electrolysis -- is a set of closed-form</span>
+<span class="sd">kinetics, and Faraday&#39;s laws of electrolysis -- is a set of closed-form</span>
 <span class="sd">algebraic relationships with no shared polymorphic behavior worth</span>
 <span class="sd">capturing in an ABC, so (following</span>
-<span class="sd">``chemistrykit.thermo.core.base_system``'s precedent for its reaction/</span>
+<span class="sd">``chemistrykit.thermo.core.base_system``&#39;s precedent for its reaction/</span>
 <span class="sd">phase-equilibrium functions, and ``chemistrykit.kinetics.systems.arrhenius``/</span>
-<span class="sd">``enzyme``'s before that) those live directly as functions and small</span>
+<span class="sd">``enzyme``&#39;s before that) those live directly as functions and small</span>
 <span class="sd">result dataclasses in their own ``systems/`` modules.</span>
 
-<span class="sd">:mod:`chemistrykit.electrochem.systems.battery`'s discharge/capacity</span>
-<span class="sd">models are the one genuine exception: a battery's terminal voltage and</span>
+<span class="sd">:mod:`chemistrykit.electrochem.systems.battery`&#39;s discharge/capacity</span>
+<span class="sd">models are the one genuine exception: a battery&#39;s terminal voltage and</span>
 <span class="sd">remaining state of charge are both functions of elapsed discharge time,</span>
 <span class="sd">:math:`t`, and more than one such model exists (an ideal constant-current</span>
-<span class="sd">model and a Peukert's-law rate-dependent one), so</span>
+<span class="sd">model and a Peukert&#39;s-law rate-dependent one), so</span>
 <span class="sd">:class:`BatteryDischargeModel` captures the one shared interface, the</span>
 <span class="sd">same way :class:`chemistrykit.thermo.core.base_system.EquationOfState`</span>
 <span class="sd">does for the three pure-substance equations of state.</span>
-<span class="sd">"""</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -439,43 +439,43 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"DischargeResult"</span><span class="p">,</span> <span class="s2">"BatteryDischargeModel"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DischargeResult&quot;</span><span class="p">,</span> <span class="s2">&quot;BatteryDischargeModel&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="DischargeResult">
 <a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.DischargeResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">DischargeResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Container for the output of a :meth:`BatteryDischargeModel.discharge_curve` call.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for the output of a :meth:`BatteryDischargeModel.discharge_curve` call.</span>
 
 <span class="sd">    Mirrors :class:`chemistrykit.solutions.core.base_system.TitrationResult`</span>
 <span class="sd">    (a stable, dataclass return type for a curve traced out over an</span>
 <span class="sd">    independent variable -- there, titrant volume; here, elapsed time).</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray: Elapsed discharge time, in the same time unit as the model's rate constants (h if `current` is in A and `capacity` in Ah)."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray: Elapsed discharge time, in the same time unit as the model&#39;s rate constants (h if `current` is in A and `capacity` in Ah).&quot;&quot;&quot;</span>
 
     <span class="n">voltage</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray: Terminal voltage at each time in `t`, in V."""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray: Terminal voltage at each time in `t`, in V.&quot;&quot;&quot;</span>
 
     <span class="n">state_of_charge</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">"""ndarray: Fraction of rated capacity remaining at each time in `t`, in [0, 1]."""</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray: Fraction of rated capacity remaining at each time in `t`, in [0, 1].&quot;&quot;&quot;</span></div>
 
 
 
 <div class="viewcode-block" id="BatteryDischargeModel">
 <a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.BatteryDischargeModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BatteryDischargeModel</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Common interface for a simplified constant-current battery discharge model.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common interface for a simplified constant-current battery discharge model.</span>
 
-<span class="sd">    **Simplified model, flagged explicitly**: a real battery's discharge</span>
+<span class="sd">    **Simplified model, flagged explicitly**: a real battery&#39;s discharge</span>
 <span class="sd">    behavior involves a nonlinear open-circuit-voltage-vs-state-of-charge</span>
 <span class="sd">    curve, temperature dependence, cycle aging, and relaxation effects</span>
 <span class="sd">    under load -- none of that is modeled here. This captures only the</span>
 <span class="sd">    two textbook-level effects usually taught alongside each other: a</span>
 <span class="sd">    constant ohmic (IR) voltage drop under load, and the empirical</span>
-<span class="sd">    Peukert's-law dependence of *effective* capacity on discharge rate</span>
+<span class="sd">    Peukert&#39;s-law dependence of *effective* capacity on discharge rate</span>
 <span class="sd">    (W. Peukert, *Elektrotechnische Zeitschrift* 20, 20 (1897); see</span>
 <span class="sd">    Linden &amp; Reddy, *Handbook of Batteries*, 3rd ed., Ch. 3.3).</span>
 
@@ -483,14 +483,14 @@
 <span class="sd">    :meth:`terminal_voltage`; :meth:`discharge_curve` is then available on</span>
 <span class="sd">    every subclass for free, mirroring how</span>
 <span class="sd">    :meth:`chemistrykit.solutions.core.base_system.Titration.curve` is</span>
-<span class="sd">    shared machinery built once atop each subclass's ``pH_at``.</span>
-<span class="sd">    """</span>
+<span class="sd">    shared machinery built once atop each subclass&#39;s ``pH_at``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="BatteryDischargeModel.state_of_charge">
 <a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.BatteryDischargeModel.state_of_charge">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">state_of_charge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Return the fraction of rated capacity remaining at time(s) `t`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the fraction of rated capacity remaining at time(s) `t`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -501,14 +501,14 @@
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
 <span class="sd">            In :math:`[0, 1]`.</span>
-<span class="sd">        """</span></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="BatteryDischargeModel.terminal_voltage">
 <a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.BatteryDischargeModel.terminal_voltage">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">terminal_voltage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Return the terminal voltage at time(s) `t`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the terminal voltage at time(s) `t`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -519,13 +519,13 @@
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
 <span class="sd">            Terminal voltage, in V (0 once the battery is exhausted).</span>
-<span class="sd">        """</span></div>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="BatteryDischargeModel.discharge_curve">
 <a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.BatteryDischargeModel.discharge_curve">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">discharge_curve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DischargeResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Compute the full discharge curve over a range of elapsed times.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute the full discharge curve over a range of elapsed times.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -535,7 +535,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        DischargeResult</span>
-<span class="sd">        """</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
         <span class="n">voltage</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">terminal_voltage</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="n">soc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state_of_charge</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
