@@ -59,6 +59,7 @@ Where subpackages share base classes, the common flow is: `core/base_system.py` 
 - Tests prefer closed-form/analytically-verifiable assertions (`pytest.approx` against a known formula, e.g. first-order kinetics matching the exponential-decay solution) over snapshot-testing plot output; a visualizer needs only a smoke test (right return type/shape; for animations, that `anim.save()` to a temp file succeeds).
 - `mypy` is configured but not yet fully clean and runs advisory/non-blocking in CI. New code should type-check where practical; fixing unrelated pre-existing errors is not required.
 - `docs/source/history/` documents each subpackage's foundational chemistry breakthroughs linked to the corresponding implementation — worth checking when adding a major new model to understand the expected historical framing.
+- Every breakthrough in `docs/source/history/` links to one or more gallery examples via `.. minigallery::`, and no example is linked from two breakthroughs. Each example's title and content must show that breakthrough's subject, so a reader can tell at a glance why it illustrates that entry. Split an example that covers several breakthroughs into focused ones, one per breakthrough, and delete the combined file. When the match is unclear, change the example, not the breakthrough's title or text.
 
 # Output Guidelines
 - **Be Concise:** Provide direct code and answers first. Omit setup text, fluff, and conversational responses.
