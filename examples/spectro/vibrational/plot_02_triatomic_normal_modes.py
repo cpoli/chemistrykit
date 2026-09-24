@@ -1,16 +1,21 @@
 r"""
-Triatomic normal modes via the Wilson GF-matrix method: CO2 and H2O
-======================================================================
+Wilson's GF-matrix method: CO2 and H2O normal-mode frequencies from the G and F matrices
+========================================================================================
 
-A genuine (not tabulated) normal-mode calculation for a linear (CO2) and
-a bent (H2O) triatomic, using
-:class:`~chemistrykit.spectro.systems.vibrational.TriatomicNormalModes`:
-a numerically built Wilson B-matrix, mass-weighted `G` matrix, and simple
-diagonal valence-force-field `F` matrix are combined into a generalized
-eigenvalue problem and solved for the true normal-mode wavenumbers.
+This example uses Wilson's GF-matrix method to calculate normal modes
+for a linear triatomic (CO2) and a bent one (H2O) with
+:class:`~chemistrykit.spectro.systems.vibrational.TriatomicNormalModes`.
+The molecule's geometry and masses give the kinetic-energy matrix
+:math:`G=BM^{-1}B^T`, where :math:`B` is the Wilson B-matrix. A diagonal
+valence force field gives the potential-energy matrix :math:`F`. Solving
+the eigenvalue problem :math:`GFL=L\Lambda`, with
+:math:`\lambda_k=(2\pi c\tilde\nu_k)^2`, gives the normal-mode
+wavenumbers. Changing only the bend entry of :math:`F` shifts the bend
+frequency, while the stretches barely move.
 """
 
 # %%
+import matplotlib.pyplot as plt
 import scipy.constants as sc
 
 from chemistrykit.spectro.systems.vibrational import TriatomicNormalModes
@@ -71,3 +76,22 @@ stiff_bend = TriatomicNormalModes.bent(
 print(f"\nBend wavenumber with soft k_theta: {soft_bend.wavenumbers[0]:.1f} cm^-1")
 print(f"Bend wavenumber with stiff k_theta: {stiff_bend.wavenumbers[0]:.1f} cm^-1")
 print(f"Stretch wavenumbers unchanged: {soft_bend.wavenumbers[1:]} vs {stiff_bend.wavenumbers[1:]}")
+
+# %%
+# Computed GF-matrix wavenumbers (solid) next to the experimental
+# fundamentals (dashed) for both molecules:
+
+fig, axes = plt.subplots(2, 1, figsize=(9, 5), sharex=True)
+for ax, name, computed, measured in (
+    (axes[0], "CO2", co2_result.wavenumbers, [667.0, 1388.0, 2349.0]),
+    (axes[1], "H2O", water_result.wavenumbers, [1595.0, 3657.0, 3756.0]),
+):
+    ax.vlines(computed, 0.0, 1.0, color="tab:blue", lw=2, label="GF-matrix (diagonal F)")
+    ax.vlines(measured, 0.0, 0.8, color="0.3", ls="--", label="experiment")
+    ax.set_yticks([])
+    ax.set_title(name)
+    ax.legend(loc="upper left")
+axes[1].set_xlabel(r"wavenumber (cm$^{-1}$)")
+fig.suptitle("Wilson GF-matrix normal modes")
+fig.tight_layout()
+plt.show()

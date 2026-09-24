@@ -9,13 +9,16 @@ Morse (anharmonic) vibrational band positions, built on
 triatomic normal-mode calculation via the Wilson GF-matrix method;
 Franck-Condon vibronic progressions for electronic (UV-Vis) spectra; a
 first-order NMR multiplet simulator (chemical shifts and J-coupling
-splitting patterns); and Lorentzian/Gaussian/Voigt lineshape utilities
+splitting patterns), Larmor frequencies, the Karplus relation, and
+Fourier-transform NMR (free-induction decay to spectrum); the
+Balmer-Rydberg formula for hydrogen-like atomic lines; and Lorentzian/Gaussian/Voigt lineshape utilities
 shared across all of the above.
 """
 
 __version__ = "0.1.0"
 
 from chemistrykit.spectro.core.base_system import Spectrum
+from chemistrykit.spectro.systems.atomic import rydberg_wavenumber
 from chemistrykit.spectro.systems.beer_lambert import (
     absorbance,
     apparent_absorbance_with_stray_light,
@@ -28,7 +31,17 @@ from chemistrykit.spectro.systems.electronic import (
     franck_condon_spectrum,
     huang_rhys_factor,
 )
-from chemistrykit.spectro.systems.nmr import first_order_multiplet, multi_coupling_multiplet, multiplicity, pascals_triangle_intensities
+from chemistrykit.spectro.systems.nmr import (
+    chemical_shift_ppm,
+    fid_to_spectrum,
+    first_order_multiplet,
+    free_induction_decay,
+    karplus_coupling,
+    larmor_frequency,
+    multi_coupling_multiplet,
+    multiplicity,
+    pascals_triangle_intensities,
+)
 from chemistrykit.spectro.systems.rotational import energy_to_wavenumber, isotope_shift_ratio, rotational_line_wavenumbers, rotational_spectrum
 from chemistrykit.spectro.systems.vibrational import (
     NormalModeResult,
@@ -63,6 +76,12 @@ __all__ = [
     "pascals_triangle_intensities",
     "first_order_multiplet",
     "multi_coupling_multiplet",
+    "larmor_frequency",
+    "chemical_shift_ppm",
+    "karplus_coupling",
+    "free_induction_decay",
+    "fid_to_spectrum",
+    "rydberg_wavenumber",
     "gaussian",
     "lorentzian",
     "voigt",

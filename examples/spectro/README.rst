@@ -6,7 +6,10 @@ the Beer-Lambert absorbance law and its stray-light deviation from
 linearity; rigid-rotor rotational spectra with isotope shifts; harmonic
 vs. Morse-potential vibrational band positions, plus a genuine triatomic
 normal-mode calculation; Franck-Condon vibronic progressions for
-electronic spectra; and a first-order NMR multiplet simulator.
+electronic spectra; NMR from Larmor frequencies and chemical shifts to
+J-coupling multiplets, the Karplus relation, and Fourier-transform NMR;
+atomic line spectra (Fraunhofer, Kirchhoff-Bunsen, Balmer-Rydberg); and
+spectral lineshapes.
 
 Each script in this gallery is self-contained and can be run directly with
 ``python examples/spectro/<section>/<script>.py``. Every script also
@@ -20,12 +23,16 @@ Sections
 
 - **beer_lambert** -- the Beer-Lambert absorbance law and its stray-light
   deviation from linearity at high concentration.
+- **atomic** -- Fraunhofer's dark solar lines, Kirchhoff and Bunsen's
+  flame emission/absorption spectra, and the hydrogen series from the
+  Balmer-Rydberg formula.
 - **rotational** -- rigid-rotor rotational spectra, relative line
-  intensities, and the H/D isotope shift.
+  intensities, and microwave isotope shifts.
 - **vibrational** -- harmonic vs. Morse IR band positions and
-  anharmonicity constants, and a Wilson GF-matrix normal-mode calculation
-  for CO2 and H2O.
+  anharmonicity constants, Wilson GF-matrix normal modes for CO2 and H2O,
+  Raman/IR mutual exclusion, and a linear molecule's degenerate bend.
 - **electronic** -- Franck-Condon vibronic progressions in a UV-Vis
   absorption band.
-- **nmr** -- first-order NMR multiplet simulation, from simple n+1
-  multiplets to a genuine doublet of triplets.
+- **nmr** -- Larmor frequencies and chemical shifts, first-order
+  J-coupling multiplets, the Karplus relation, and Fourier-transform NMR.
+- **lineshapes** -- Gaussian, Lorentzian, and Voigt line profiles.
