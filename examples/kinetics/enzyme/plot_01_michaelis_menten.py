@@ -1,12 +1,13 @@
 r"""
-Michaelis-Menten kinetics, Lineweaver-Burk, and inhibition
-==============================================================
+Michaelis and Menten's saturating enzyme rate law
+====================================================
 
-Three related views of the same enzyme: the saturating
-Michaelis-Menten rate-vs-substrate curve, its Lineweaver-Burk
-double-reciprocal linearization (used to extract :math:`V_{max}` and
-:math:`K_m` from noisy initial-rate data), and how competitive vs.
-noncompetitive inhibition distort that curve differently.
+Michaelis and Menten (1913) showed that an enzyme-catalyzed rate
+saturates with substrate, :math:`v = V_{max}[S]/(K_m + [S])`, reaching
+exactly half of :math:`V_{max}` at :math:`[S] = K_m`. This example draws
+that saturation curve with its two limiting regimes, integrates the
+substrate-depletion progress curve an assay actually records, and shows
+how competitive and noncompetitive inhibitors distort the curve.
 """
 
 # %%
@@ -14,43 +15,59 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from chemistrykit.kinetics.systems.enzyme import (
+    MichaelisMentenProgress,
     competitive_inhibition_rate,
-    fit_lineweaver_burk,
     michaelis_menten_rate,
     noncompetitive_inhibition_rate,
 )
-from chemistrykit.kinetics.visualizers.kinetics_plots import plot_lineweaver_burk
+from chemistrykit.kinetics.visualizers.kinetics_plots import plot_concentration_vs_time
 
 Vmax, Km = 10.0, 2.0
-S = np.linspace(0.1, 20.0, 200)
+S = np.linspace(0.0, 20.0, 400)
 
-fig, axes = plt.subplots(1, 2, figsize=(11, 4.5))
+fig, axes = plt.subplots(1, 3, figsize=(16, 4.5))
 
-axes[0].plot(S, michaelis_menten_rate(S, Vmax, Km), label="uninhibited", color="steelblue")
-axes[0].plot(S, competitive_inhibition_rate(S, I=3.0, Vmax=Vmax, Km=Km, Ki=1.0), label="competitive (I=3)", color="darkorange")
-axes[0].plot(S, noncompetitive_inhibition_rate(S, I=3.0, Vmax=Vmax, Km=Km, Ki=1.0), label="noncompetitive (I=3)", color="seagreen")
-axes[0].axhline(Vmax, color="gray", linestyle="--", linewidth=0.8)
+# %%
+# The saturation curve: first order in [S] well below :math:`K_m`
+# (:math:`v \approx (V_{max}/K_m)[S]`), zero order well above it
+# (:math:`v \approx V_{max}`), and exactly :math:`V_{max}/2` at :math:`K_m`.
+
+axes[0].plot(S, michaelis_menten_rate(S, Vmax, Km), color="steelblue", label="Michaelis-Menten")
+axes[0].plot(S[S < 4], Vmax / Km * S[S < 4], ":", color="gray", label=r"$(V_{max}/K_m)[S]$")
+axes[0].axhline(Vmax, color="gray", linestyle="--", linewidth=0.8, label=r"$V_{max}$")
+axes[0].plot([Km, Km, 0], [0, Vmax / 2, Vmax / 2], color="crimson", linewidth=0.8)
+axes[0].plot(Km, michaelis_menten_rate(Km, Vmax, Km), "o", color="crimson", label=r"$v(K_m) = V_{max}/2$")
 axes[0].set_xlabel("[S]")
 axes[0].set_ylabel("v")
-axes[0].set_title("Competitive vs. noncompetitive inhibition")
+axes[0].set_title("Saturation of the enzyme")
 axes[0].legend()
+print(f"v(Km) / Vmax = {michaelis_menten_rate(Km, Vmax, Km) / Vmax:.3f}")
 
 # %%
-# Competitive inhibition can be "out-competed" by enough substrate (all
-# three curves approach the same asymptote at high [S]); noncompetitive
-# inhibition permanently lowers the ceiling.
+# The progress curve: substrate first disappears at a nearly constant
+# rate (enzyme saturated), then decays exponentially once [S] falls
+# below :math:`K_m`.
+
+progress = MichaelisMentenProgress(S0=20.0, Vmax=Vmax, Km=Km)
+result = progress.integrate((0.0, 4.0), dt=1e-3, method="rk4")
+plot_concentration_vs_time(result, ax=axes[1])
+axes[1].axhline(Km, color="crimson", linestyle=":", linewidth=0.8, label="[S] = Km")
+axes[1].legend()
+axes[1].set_title("Substrate progress curve")
 
 # %%
-# Lineweaver-Burk: fit (Vmax, Km) back out from noisy discrete samples.
+# Inhibition: competitive inhibitors raise the apparent :math:`K_m` but
+# can be out-competed by enough substrate; noncompetitive inhibitors
+# lower :math:`V_{max}` itself.
 
-rng = np.random.default_rng(1)
-S_samples = np.array([0.5, 1.0, 2.0, 4.0, 8.0, 16.0])
-v_exact = michaelis_menten_rate(S_samples, Vmax, Km)
-v_noisy = v_exact * (1.0 + rng.normal(0.0, 0.03, size=S_samples.shape))
-fit = fit_lineweaver_burk(S_samples, v_noisy)
-print(f"true:   Vmax={Vmax}, Km={Km}")
-print(f"fitted: Vmax={fit.Vmax:.3f}, Km={fit.Km:.3f}, R^2={fit.r_squared:.5f}")
+axes[2].plot(S, michaelis_menten_rate(S, Vmax, Km), label="uninhibited", color="steelblue")
+axes[2].plot(S, competitive_inhibition_rate(S, I=3.0, Vmax=Vmax, Km=Km, Ki=1.0), label="competitive (I=3)", color="darkorange")
+axes[2].plot(S, noncompetitive_inhibition_rate(S, I=3.0, Vmax=Vmax, Km=Km, Ki=1.0), label="noncompetitive (I=3)", color="seagreen")
+axes[2].axhline(Vmax, color="gray", linestyle="--", linewidth=0.8)
+axes[2].set_xlabel("[S]")
+axes[2].set_ylabel("v")
+axes[2].set_title("Competitive vs. noncompetitive inhibition")
+axes[2].legend()
 
-plot_lineweaver_burk(S_samples, v_noisy, fit=fit, ax=axes[1])
 fig.tight_layout()
 plt.show()

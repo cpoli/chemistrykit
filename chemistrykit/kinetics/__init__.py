@@ -5,8 +5,10 @@ activation-energy fitting, Michaelis-Menten enzyme kinetics with
 Lineweaver-Burk linearization and inhibition, a general
 stoichiometry-matrix reaction-network engine (parallel, consecutive,
 reversible, and steady-state-approximation chain reactions) integrated
-via :mod:`chemistrykit.integrators`, and the Brusselator oscillating
-reaction network.
+via :mod:`chemistrykit.integrators`, the Brusselator oscillating
+reaction network and the Oregonator model of the Belousov-Zhabotinsky
+reaction, collision/diffusion/transition-state theories of the rate
+constant, and Gillespie's exact stochastic simulation algorithm.
 """
 
 __version__ = "0.1.0"
@@ -27,8 +29,18 @@ from chemistrykit.kinetics.systems.networks import (
     reversible_analytic,
     ssa_intermediate_concentration,
 )
-from chemistrykit.kinetics.systems.oscillators import Brusselator
+from chemistrykit.kinetics.systems.oscillators import Brusselator, Oregonator
 from chemistrykit.kinetics.systems.rate_laws import FirstOrder, SecondOrder, ZeroOrder
+from chemistrykit.kinetics.systems.rate_theory import (
+    EyringFit,
+    collision_theory_rate_constant,
+    diffusion_limited_rate_constant,
+    eyring_rate_constant,
+    fit_eyring,
+    smoluchowski_rate_constant,
+    smoluchowski_transient_rate_constant,
+)
+from chemistrykit.kinetics.systems.stochastic import StochasticTrajectory, gillespie_ssa
 
 __all__ = [
     "__version__",
@@ -52,4 +64,14 @@ __all__ = [
     "reversible_analytic",
     "ssa_intermediate_concentration",
     "Brusselator",
+    "Oregonator",
+    "collision_theory_rate_constant",
+    "smoluchowski_rate_constant",
+    "smoluchowski_transient_rate_constant",
+    "diffusion_limited_rate_constant",
+    "eyring_rate_constant",
+    "EyringFit",
+    "fit_eyring",
+    "StochasticTrajectory",
+    "gillespie_ssa",
 ]

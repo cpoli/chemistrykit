@@ -46,3 +46,23 @@ def test_concentrations_stay_non_negative_above_threshold():
     system = Brusselator(X0=0.1, Y0=0.1, A=1.0, B=3.0)
     result = system.integrate((0.0, 100.0), dt=1e-2, method="rk4")
     assert np.all(result.y >= -1e-6)
+
+
+def test_oregonator_fixed_point_is_zero_of_vector_field():
+    from chemistrykit.kinetics.systems.oscillators import Oregonator
+
+    for f in (0.5, 1.0, 3.0):
+        system = Oregonator(f=f)
+        np.testing.assert_allclose(system.rhs(system.fixed_point(), 0.0), 0.0, atol=1e-8)
+
+
+def test_oregonator_oscillates_for_f1_and_is_stable_for_f3():
+    from chemistrykit.kinetics.systems.oscillators import Oregonator
+
+    osc = Oregonator(f=1.0).integrate((0.0, 60.0), method="dopri5", max_steps=2_000_000)
+    x_late = osc.y[osc.t > 30.0, 0]
+    assert x_late.max() - x_late.min() > 0.5
+
+    stable = Oregonator(f=3.0)
+    result = stable.integrate((0.0, 60.0), method="dopri5", max_steps=2_000_000)
+    np.testing.assert_allclose(result.y[-1], stable.fixed_point(), rtol=1e-3)

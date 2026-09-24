@@ -17,7 +17,7 @@ from numpy.typing import NDArray
 
 from chemistrykit.kinetics.core.base_system import ReactionNetwork
 
-__all__ = ["Brusselator"]
+__all__ = ["Brusselator", "Oregonator"]
 
 
 @njit(cache=True)
@@ -129,3 +129,115 @@ class Brusselator(ReactionNetwork):
         False
         """
         return self.B > 1.0 + self.A**2
+
+
+@njit(cache=True)
+def _oregonator_rhs(state: NDArray[np.float64], t: float, params: NDArray[np.float64]) -> NDArray[np.float64]:
+    """Scaled three-variable Oregonator vector field.
+
+    Parameters
+    ----------
+    state : ndarray of float, shape (3,)
+        Scaled state ``(x, y, z)`` (HBrO2, Br-, oxidized catalyst).
+    t : float
+        Current time (unused; the system is autonomous).
+    params : ndarray of float, shape (4,)
+        Parameters ``(epsilon, epsilon_prime, q, f)``.
+
+    Returns
+    -------
+    ndarray of float, shape (3,)
+    """
+    eps, eps_p, q, f = params[0], params[1], params[2], params[3]
+    x, y, z = state[0], state[1], state[2]
+    out = np.empty(3)
+    out[0] = (q * y - x * y + x * (1.0 - x)) / eps
+    out[1] = (-q * y - x * y + f * z) / eps_p
+    out[2] = x - z
+    return out
+
+
+class Oregonator(ReactionNetwork):
+    r"""The Field-Noyes Oregonator model of the Belousov-Zhabotinsky reaction.
+
+    Field and Noyes (*J. Chem. Phys.* 60, 1877 (1974)) reduced the FKN
+    mechanism of the cerium-catalyzed bromate/malonic-acid (BZ) reaction
+    to five steps among three intermediates -- X = HBrO2, Y = Br-, and
+    Z = Ce(IV) -- with the bromate (A) and organic substrate (B) pools
+    held constant:
+
+    .. math::
+
+        A + Y &\to X + P, \qquad X + Y \to 2P, \qquad A + X \to 2X + 2Z, \\
+        2X &\to A + P, \qquad B + Z \to f\,Y
+
+    In the standard dimensionless scaling (Tyson, in R. J. Field and M.
+    Burger (eds.), *Oscillations and Traveling Waves in Chemical Systems*,
+    Wiley 1985, Ch. 3) the kinetics read
+
+    .. math::
+
+        \epsilon \frac{dx}{dt} = qy - xy + x(1-x), \quad
+        \epsilon' \frac{dy}{dt} = -qy - xy + fz, \quad
+        \frac{dz}{dt} = x - z
+
+    The system is stiff (:math:`\epsilon' \ll \epsilon \ll 1`), so
+    integrate with ``method="dopri5"``. For the default parameters it
+    relaxes onto a stable limit cycle (sustained BZ oscillation); for
+    large stoichiometric factor `f` (e.g. ``f=3``) its steady state is
+    stable instead.
+
+    Parameters
+    ----------
+    x0, y0, z0 : float
+        Initial scaled concentrations.
+    epsilon, epsilon_prime, q, f : float
+        Scaled Oregonator parameters (all positive).
+    """
+
+    species = ("X", "Y", "Z")
+
+    def __init__(
+        self,
+        x0: float = 0.5,
+        y0: float = 0.1,
+        z0: float = 0.1,
+        epsilon: float = 4e-2,
+        epsilon_prime: float = 4e-4,
+        q: float = 8e-4,
+        f: float = 1.0,
+    ):
+        if min(epsilon, epsilon_prime, q, f) <= 0:
+            raise ValueError("epsilon, epsilon_prime, q and f must be positive")
+        self.epsilon = float(epsilon)
+        self.epsilon_prime = float(epsilon_prime)
+        self.q = float(q)
+        self.f = float(f)
+        self.params = np.array([self.epsilon, self.epsilon_prime, self.q, self.f])
+        self._rhs_njit = _oregonator_rhs
+        super().__init__([x0, y0, z0])
+
+    def rhs(self, state, t):
+        return np.asarray(_oregonator_rhs(np.asarray(state, dtype=np.float64), t, self.params))
+
+    def fixed_point(self) -> np.ndarray:
+        r"""Return the positive steady state ``(x*, y*, z*)``.
+
+        Setting all three derivatives to zero gives :math:`z^* = x^*`,
+        :math:`y^* = f x^*/(q + x^*)`, and :math:`x^*` as the positive
+        root of :math:`x^2 - (1 - f - q)x - q(1 + f) = 0`.
+
+        Returns
+        -------
+        ndarray, shape (3,)
+
+        Examples
+        --------
+        >>> import numpy as np
+        >>> system = Oregonator(f=1.0)
+        >>> np.allclose(system.rhs(system.fixed_point(), 0.0), 0.0, atol=1e-9)
+        True
+        """
+        b = 1.0 - self.f - self.q
+        x = 0.5 * (b + np.sqrt(b * b + 4.0 * self.q * (1.0 + self.f)))
+        return np.array([x, self.f * x / (self.q + x), x])

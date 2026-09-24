@@ -1,6 +1,6 @@
 Enzyme kinetics
 ----------------
 
-Michaelis-Menten enzyme kinetics, the Lineweaver-Burk linearization,
-competitive/noncompetitive inhibition, and substrate-depletion progress
-curves.
+Michaelis-Menten enzyme kinetics (saturation, substrate-depletion progress
+curves, and competitive/noncompetitive inhibition) and the Lineweaver-Burk
+double-reciprocal linearization.
