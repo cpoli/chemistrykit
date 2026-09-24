@@ -5,9 +5,9 @@
 Enzyme kinetics
 ----------------
 
-Michaelis-Menten enzyme kinetics, the Lineweaver-Burk linearization,
-competitive/noncompetitive inhibition, and substrate-depletion progress
-curves.
+Michaelis-Menten enzyme kinetics (saturation, substrate-depletion progress
+curves, and competitive/noncompetitive inhibition) and the Lineweaver-Burk
+double-reciprocal linearization.
 
 
 .. raw:: html
@@ -23,7 +23,7 @@ curves.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Three related views of the same enzyme: the saturating Michaelis-Menten rate-vs-substrate curve, its Lineweaver-Burk double-reciprocal linearization (used to extract V_{max} and K_m from noisy initial-rate data), and how competitive vs. noncompetitive inhibition distort that curve differently.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Michaelis and Menten (1913) showed that an enzyme-catalyzed rate saturates with substrate, v = V_{max}[S]/(K_m + [S]), reaching exactly half of V_{max} at [S] = K_m. This example draws that saturation curve with its two limiting regimes, integrates the substrate-depletion progress curve an assay actually records, and shows how competitive and noncompetitive inhibitors distort the curve.">
 
 .. only:: html
 
@@ -34,7 +34,24 @@ curves.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Michaelis-Menten kinetics, Lineweaver-Burk, and inhibition</div>
+      <div class="sphx-glr-thumbnail-title">Michaelis and Menten's saturating enzyme rate law</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Lineweaver and Burk (1934) inverted the Michaelis-Menten equation into a straight line, 1/v = (K_m/V_{max})(1/[S]) + 1/V_{max}, so V_{max} and K_m could be read off the intercept and slope. fit_lineweaver_burk does exactly that fit on noisy initial-rate data. The second panel shows the method&#x27;s well-known weakness: the same small relative noise becomes a large scatter at the low-[S] (large 1/[S]) end, which dominates the fitted line.">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/enzyme/images/thumb/sphx_glr_plot_02_lineweaver_burk_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/enzyme/plot_02_lineweaver_burk`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Lineweaver and Burk's double-reciprocal plot</div>
     </div>
 
 
@@ -49,4 +66,5 @@ curves.
    :hidden:
 
    /api/gallery/kinetics/enzyme/plot_01_michaelis_menten
+   /api/gallery/kinetics/enzyme/plot_02_lineweaver_burk
 

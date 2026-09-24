@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.solutions.systems.titration</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Acid-base titration curves: strong/strong, weak-acid/strong-base, weak-base/strong-acid.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Acid-base titration curves: strong/strong, weak-acid/strong-base, weak-base/strong-acid.</span>
 
 <span class="sd">Every :class:`~chemistrykit.solutions.core.base_system.Titration`</span>
 <span class="sd">subclass here computes pH as a function of titrant volume `Vb` from an</span>
@@ -434,27 +434,28 @@
 <span class="sd">via :func:`chemistrykit.solutions.utils.rootfinding.find_positive_root`</span>
 <span class="sd">at each titrant volume. :class:`WeakBaseStrongAcidTitration` is the</span>
 <span class="sd">mirror image.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.solutions.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">Titration</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.solutions.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">GranPlotResult</span><span class="p">,</span> <span class="n">Titration</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.solutions.systems.acid_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">ph_from_h</span><span class="p">,</span> <span class="n">poh_from_oh</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.solutions.utils.rootfinding</span><span class="w"> </span><span class="kn">import</span> <span class="n">find_positive_root</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;StrongAcidStrongBaseTitration&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;WeakAcidStrongBaseTitration&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;WeakBaseStrongAcidTitration&quot;</span><span class="p">,</span>
+    <span class="s2">"StrongAcidStrongBaseTitration"</span><span class="p">,</span>
+    <span class="s2">"WeakAcidStrongBaseTitration"</span><span class="p">,</span>
+    <span class="s2">"WeakBaseStrongAcidTitration"</span><span class="p">,</span>
+    <span class="s2">"gran_plot"</span><span class="p">,</span>
 <span class="p">]</span>
 
 
 <div class="viewcode-block" id="StrongAcidStrongBaseTitration">
 <a class="viewcode-back" href="../../../../api/solutions.html#chemistrykit.solutions.StrongAcidStrongBaseTitration">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">StrongAcidStrongBaseTitration</span><span class="p">(</span><span class="n">Titration</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Titrating a strong acid (in the flask) with a strong base (the titrant).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Titrating a strong acid (in the flask) with a strong base (the titrant).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -482,7 +483,7 @@
 <span class="sd">    &gt;&gt;&gt; Vb_equiv_numeric = titration.find_equivalence_point(Vb)</span>
 <span class="sd">    &gt;&gt;&gt; abs(Vb_equiv_numeric - Vb_equiv_exact) &lt; 1e-3</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Ca</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Va</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Cb</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Kw</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0e-14</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Ca</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">Ca</span><span class="p">)</span>
@@ -493,12 +494,12 @@
 <div class="viewcode-block" id="StrongAcidStrongBaseTitration.equivalence_volume">
 <a class="viewcode-back" href="../../../../api/solutions.html#chemistrykit.solutions.StrongAcidStrongBaseTitration.equivalence_volume">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">equivalence_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the exact (stoichiometric) equivalence volume, ``Ca*Va/Cb``.</span>
+<span class="w">        </span><span class="sd">"""Return the exact (stoichiometric) equivalence volume, ``Ca*Va/Cb``.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ca</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">Va</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">Cb</span></div>
 
 
@@ -517,7 +518,7 @@
 <div class="viewcode-block" id="WeakAcidStrongBaseTitration">
 <a class="viewcode-back" href="../../../../api/solutions.html#chemistrykit.solutions.WeakAcidStrongBaseTitration">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">WeakAcidStrongBaseTitration</span><span class="p">(</span><span class="n">Titration</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Titrating a weak acid HA (in the flask) with a strong base (the titrant).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Titrating a weak acid HA (in the flask) with a strong base (the titrant).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -544,7 +545,7 @@
 <span class="sd">    &gt;&gt;&gt; pKa = float(-np.log10(1.8e-5))</span>
 <span class="sd">    &gt;&gt;&gt; bool(abs(float(titration.pH_at(np.array([Vb_half]))[0]) - pKa) &lt; 1e-3)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Ca</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Va</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Ka</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Cb</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Kw</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0e-14</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Ca</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">Ca</span><span class="p">)</span>
@@ -556,12 +557,12 @@
 <div class="viewcode-block" id="WeakAcidStrongBaseTitration.equivalence_volume">
 <a class="viewcode-back" href="../../../../api/solutions.html#chemistrykit.solutions.WeakAcidStrongBaseTitration.equivalence_volume">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">equivalence_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the exact (stoichiometric) equivalence volume, ``Ca*Va/Cb``.</span>
+<span class="w">        </span><span class="sd">"""Return the exact (stoichiometric) equivalence volume, ``Ca*Va/Cb``.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ca</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">Va</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">Cb</span></div>
 
 
@@ -587,7 +588,7 @@
 <div class="viewcode-block" id="WeakBaseStrongAcidTitration">
 <a class="viewcode-back" href="../../../../api/solutions.html#chemistrykit.solutions.WeakBaseStrongAcidTitration">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">WeakBaseStrongAcidTitration</span><span class="p">(</span><span class="n">Titration</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Titrating a weak base B (in the flask) with a strong acid (the titrant).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Titrating a weak base B (in the flask) with a strong acid (the titrant).</span>
 
 <span class="sd">    The mirror image of :class:`WeakAcidStrongBaseTitration` (swap</span>
 <span class="sd">    :math:`[H^+] \leftrightarrow [OH^-]`, :math:`K_a \leftrightarrow K_b`).</span>
@@ -617,7 +618,7 @@
 <span class="sd">    &gt;&gt;&gt; pOH_half = 14.0 - pH_half  # Kw = 1e-14 -&gt; pKw = 14</span>
 <span class="sd">    &gt;&gt;&gt; bool(abs(pOH_half - pKb) &lt; 1e-3)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Cb</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Vb0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Kb</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Ca</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Kw</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0e-14</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Cb</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">Cb</span><span class="p">)</span>
@@ -629,12 +630,12 @@
 <div class="viewcode-block" id="WeakBaseStrongAcidTitration.equivalence_volume">
 <a class="viewcode-back" href="../../../../api/solutions.html#chemistrykit.solutions.WeakBaseStrongAcidTitration.equivalence_volume">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">equivalence_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the exact (stoichiometric) equivalence volume, ``Cb*Vb0/Ca``.</span>
+<span class="w">        </span><span class="sd">"""Return the exact (stoichiometric) equivalence volume, ``Cb*Vb0/Ca``.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Cb</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">Vb0</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ca</span></div>
 
 
@@ -655,6 +656,62 @@
         <span class="n">pOH</span> <span class="o">=</span> <span class="n">poh_from_oh</span><span class="p">(</span><span class="n">oh_values</span><span class="p">)</span>
         <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Kw</span><span class="p">)</span> <span class="o">-</span> <span class="n">pOH</span></div>
 </div>
+
+
+
+<div class="viewcode-block" id="gran_plot">
+<a class="viewcode-back" href="../../../../api/solutions.html#chemistrykit.solutions.gran_plot">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">gran_plot</span><span class="p">(</span><span class="n">Vb</span><span class="p">,</span> <span class="n">pH</span><span class="p">,</span> <span class="n">Va</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GranPlotResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Gran's linearization of a strong-acid/strong-base titration curve.</span>
+
+<span class="sd">    Before the equivalence point of a strong acid (initial volume</span>
+<span class="sd">    :math:`V_a`) titrated with a strong base, the charge balance gives,</span>
+<span class="sd">    once :math:`[OH^-]` is negligible,</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        (V_a + V_b)\,10^{-\mathrm{pH}} = C_aV_a - C_bV_b,</span>
+
+<span class="sd">    a straight line in :math:`V_b` whose x-intercept is exactly the</span>
+<span class="sd">    equivalence volume :math:`V_e = C_aV_a/C_b` -- so :math:`V_e` can be</span>
+<span class="sd">    found by extrapolating pre-equivalence data, without having to</span>
+<span class="sd">    resolve the steep inflection itself (G. Gran, *Analyst* 77, 661</span>
+<span class="sd">    (1952); Harris, *Quantitative Chemical Analysis*, 9th ed., Ch. 11-5).</span>
+<span class="sd">    Neither :math:`C_a` nor :math:`C_b` needs to be known.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Vb : array-like of float</span>
+<span class="sd">        Titrant volumes, in L, all *before* the equivalence point</span>
+<span class="sd">        (conventionally the last 10-90% of the way to it).</span>
+<span class="sd">    pH : array-like of float</span>
+<span class="sd">        Measured pH at each volume in `Vb`.</span>
+<span class="sd">    Va : float</span>
+<span class="sd">        Initial volume of the acid being titrated, in L.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    GranPlotResult</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Recovering the 50.00 mL equivalence volume of 50.00 mL of 0.100 M HCl</span>
+<span class="sd">    titrated with 0.100 M NaOH from pre-equivalence points only:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; titration = StrongAcidStrongBaseTitration(Ca=0.100, Va=0.050, Cb=0.100)</span>
+<span class="sd">    &gt;&gt;&gt; Vb = np.linspace(0.030, 0.045, 10)</span>
+<span class="sd">    &gt;&gt;&gt; result = gran_plot(Vb, titration.pH_at(Vb), Va=0.050)</span>
+<span class="sd">    &gt;&gt;&gt; round(result.equivalence_volume * 1000.0, 4)</span>
+<span class="sd">    50.0</span>
+<span class="sd">    &gt;&gt;&gt; round(-result.slope, 6)  # slope is -Cb</span>
+<span class="sd">    0.1</span>
+<span class="sd">    """</span>
+    <span class="n">Vb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Vb</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
+    <span class="n">pH</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">pH</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="p">(</span><span class="n">Va</span> <span class="o">+</span> <span class="n">Vb</span><span class="p">)</span> <span class="o">*</span> <span class="mf">10.0</span><span class="o">**-</span><span class="n">pH</span>
+    <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">Vb</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">GranPlotResult</span><span class="p">(</span><span class="n">Vb</span><span class="o">=</span><span class="n">Vb</span><span class="p">,</span> <span class="n">G</span><span class="o">=</span><span class="n">G</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">slope</span><span class="p">),</span> <span class="n">intercept</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">intercept</span><span class="p">),</span> <span class="n">equivalence_volume</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="o">-</span><span class="n">intercept</span> <span class="o">/</span> <span class="n">slope</span><span class="p">))</span></div>
 
 </pre></div>
 

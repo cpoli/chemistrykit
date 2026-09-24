@@ -5,8 +5,9 @@
 Quantum yields
 ----------------
 
-Fluorescence/phosphorescence quantum yields, and the photochemical
-quantum yield via Beer-Lambert photon absorption.
+The Grotthuss-Draper and Stark-Einstein laws of photochemistry (absorbed
+photons and the photochemical quantum yield), and Vavilov's law for the
+fluorescence quantum yield.
 
 
 .. raw:: html
@@ -22,18 +23,52 @@ quantum yield via Beer-Lambert photon absorption.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="fluorescence_quantum_yield and phosphorescence_quantum_yield are simple branching-ratio calculations from Jablonski-diagram rate constants. photons_absorbed reuses chemistrykit.spectro.systems.beer_lambert&#x27;s transmittance to compute the photon flux actually absorbed by a sample, which feeds directly into photochemical_quantum_yield.">
+    <div class="sphx-glr-thumbcontainer" tooltip="The first law of photochemistry (Grotthuss 1817, Draper 1842) says that light the sample does not absorb produces no chemical change. The quantity that matters is therefore the absorbed photon flux, I_{abs}=I_0(1-10^{-A}), computed by photons_absorbed. Here two samples with the same incident flux but different absorbances form product in proportion to the light each one actually absorbs, not the light that falls on it.">
 
 .. only:: html
 
-  .. image:: /api/gallery/photochem/quantum_yield/images/thumb/sphx_glr_plot_01_quantum_yields_thumb.png
+  .. image:: /api/gallery/photochem/quantum_yield/images/thumb/sphx_glr_plot_01_grotthuss_draper_absorbed_light_thumb.png
     :alt:
 
-  :doc:`/api/gallery/photochem/quantum_yield/plot_01_quantum_yields`
+  :doc:`/api/gallery/photochem/quantum_yield/plot_01_grotthuss_draper_absorbed_light`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Fluorescence/phosphorescence quantum yields, and photon absorption via Beer-Lambert</div>
+      <div class="sphx-glr-thumbnail-title">Grotthuss-Draper law: only absorbed light drives photochemistry</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The law of photochemical equivalence (Stark 1908, Einstein 1912-1913) says each absorbed quantum activates exactly one molecule. The quantum yield \Phi (moles product / moles photons absorbed), computed by photochemical_quantum_yield, then equals 1 for an ideal one-photon, one-molecule reaction and is less than 1 when the excited molecule has other ways to lose its energy.">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/quantum_yield/images/thumb/sphx_glr_plot_02_stark_einstein_photochemical_equivalence_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/quantum_yield/plot_02_stark_einstein_photochemical_equivalence`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Stark-Einstein law: one absorbed photon, at most one reacting molecule</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Vavilov found (1922-1927) that a dye&#x27;s fluorescence quantum yield does not change when it is excited at shorter, more energetic wavelengths. The reason is that ultrafast internal conversion carries any higher excited state down to S_1 before emission, so the yield depends only on the S_1 rate constants, \Phi_f=k_f/(k_f+k_{ic}+k_{isc}) (~chemistrykit.photochem.fluorescence_quantum_yield). Below, a model dye with an S_0\to S_1 band near 480 nm and an S_0\to S_2 band near 330 nm is excited across its whole absorption spectrum; kasha_emission_yields gives the S_1 fluorescence yield for each state reached.">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/quantum_yield/images/thumb/sphx_glr_plot_03_vavilov_excitation_independence_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/quantum_yield/plot_03_vavilov_excitation_independence`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Vavilov's law: fluorescence quantum yield is independent of excitation wavelength</div>
     </div>
 
 
@@ -47,5 +82,7 @@ quantum yield via Beer-Lambert photon absorption.
 .. toctree::
    :hidden:
 
-   /api/gallery/photochem/quantum_yield/plot_01_quantum_yields
+   /api/gallery/photochem/quantum_yield/plot_01_grotthuss_draper_absorbed_light
+   /api/gallery/photochem/quantum_yield/plot_02_stark_einstein_photochemical_equivalence
+   /api/gallery/photochem/quantum_yield/plot_03_vavilov_excitation_independence
 

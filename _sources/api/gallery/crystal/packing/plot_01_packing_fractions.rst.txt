@@ -18,8 +18,13 @@
 .. _sphx_glr_api_gallery_crystal_packing_plot_01_packing_fractions.py:
 
 
-Packing efficiency of SC, BCC, FCC, and HCP
-==============================================
+Kepler's conjecture: packing efficiency of SC, BCC, FCC, and HCP
+==================================================================
+
+Kepler (1611) guessed that no stacking of equal spheres fills space more
+densely than the layered (face-centered cubic / hexagonal close)
+packing, with fraction :math:`\pi/\sqrt{18}\approx0.7405`. Comparing the
+four textbook lattices shows the close-packed pair at exactly that bound.
 
 The four lattices implemented here
 (:mod:`chemistrykit.crystal.systems.packing`) share the
@@ -29,11 +34,12 @@ spheres, atoms-per-cell, and a lattice-constant-to-radius relation).
 FCC and ideal HCP -- both close-packed, differing only in stacking
 sequence -- turn out to share the same maximum packing fraction.
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-36
+.. GENERATED FROM PYTHON SOURCE LINES 20-42
 
 .. code-block:: Python
 
     import matplotlib.pyplot as plt
+    import numpy as np
 
     from chemistrykit.crystal.systems.packing import (
         BodyCenteredCubicPacking,
@@ -70,13 +76,13 @@ sequence -- turn out to share the same maximum packing fraction.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 37-40
+.. GENERATED FROM PYTHON SOURCE LINES 43-46
 
 FCC and ideal HCP are both close-packed and share the same packing
 fraction, even though the underlying models (cubic vs. hexagonal cell,
 4 vs. 2 atoms per cell) look nothing alike:
 
-.. GENERATED FROM PYTHON SOURCE LINES 40-46
+.. GENERATED FROM PYTHON SOURCE LINES 46-54
 
 .. code-block:: Python
 
@@ -85,6 +91,8 @@ fraction, even though the underlying models (cubic vs. hexagonal cell,
     print(f"\nFCC packing fraction:  {fcc_pf:.9f}")
     print(f"HCP packing fraction:  {hcp_pf:.9f}")
     print(f"Match: {abs(fcc_pf - hcp_pf) < 1e-9}")
+    print(f"Kepler's bound pi/sqrt(18) = {np.pi / np.sqrt(18.0):.9f}")
+    assert abs(fcc_pf - np.pi / np.sqrt(18.0)) < 1e-12
 
 
 
@@ -98,16 +106,17 @@ fraction, even though the underlying models (cubic vs. hexagonal cell,
     FCC packing fraction:  0.740480490
     HCP packing fraction:  0.740480490
     Match: True
+    Kepler's bound pi/sqrt(18) = 0.740480490
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 47-49
+.. GENERATED FROM PYTHON SOURCE LINES 55-57
 
 A real HCP metal's actual c/a ratio deviates from the ideal value,
 which lowers its packing fraction below the FCC/ideal-HCP maximum:
 
-.. GENERATED FROM PYTHON SOURCE LINES 49-52
+.. GENERATED FROM PYTHON SOURCE LINES 57-60
 
 .. code-block:: Python
 
@@ -128,13 +137,15 @@ which lowers its packing fraction below the FCC/ideal-HCP maximum:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 53-58
+.. GENERATED FROM PYTHON SOURCE LINES 61-68
 
 .. code-block:: Python
 
     names = list(lattices.keys())
     fractions = [lattices[name].packing_fraction() for name in names]
     ax = plot_packing_fractions(names, fractions)
+    ax.axhline(np.pi / np.sqrt(18.0), color="k", ls="--", lw=1, label=r"Kepler bound $\pi/\sqrt{18}$")
+    ax.legend()
     plt.tight_layout()
     plt.show()
 
@@ -152,7 +163,7 @@ which lowers its packing fraction below the FCC/ideal-HCP maximum:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.025 seconds)
+   **Total running time of the script:** (0 minutes 0.031 seconds)
 
 
 .. _sphx_glr_download_api_gallery_crystal_packing_plot_01_packing_fractions.py:

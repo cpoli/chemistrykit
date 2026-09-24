@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.md.systems.thermostats</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Thermostats for canonical-ensemble (NVT) molecular dynamics.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Thermostats for canonical-ensemble (NVT) molecular dynamics.</span>
 
 <span class="sd">A :class:`~chemistrykit.md.core.base_system.MolecularDynamicsSystem`</span>
 <span class="sd">integrated by plain velocity-Verlet alone conserves total energy (an NVE,</span>
@@ -420,28 +420,33 @@
 <span class="sd">``apply(system, dt)``, called once by</span>
 <span class="sd">:meth:`chemistrykit.md.core.base_system.MolecularDynamicsSystem.run` after</span>
 <span class="sd">every velocity-Verlet step.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;VelocityRescalingThermostat&quot;</span><span class="p">,</span> <span class="s2">&quot;NoseHooverThermostat&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"VelocityRescalingThermostat"</span><span class="p">,</span>
+    <span class="s2">"NoseHooverThermostat"</span><span class="p">,</span>
+    <span class="s2">"BerendsenThermostat"</span><span class="p">,</span>
+    <span class="s2">"StochasticVelocityRescalingThermostat"</span><span class="p">,</span>
+<span class="p">]</span>
 
 
 <div class="viewcode-block" id="VelocityRescalingThermostat">
 <a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.VelocityRescalingThermostat">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">VelocityRescalingThermostat</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Simple (deterministic) velocity-rescaling thermostat.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Simple (deterministic) velocity-rescaling thermostat.</span>
 
-<span class="sd">    Rescales every particle&#39;s velocity by a common factor</span>
+<span class="sd">    Rescales every particle's velocity by a common factor</span>
 <span class="sd">    :math:`\lambda=\sqrt{T_{\text{target}}/T_{\text{current}}}` every</span>
 <span class="sd">    `interval` MD steps, so the instantaneous kinetic temperature matches</span>
 <span class="sd">    `target_temperature` exactly at each rescaling (Allen &amp; Tildesley,</span>
 <span class="sd">    *Computer Simulation of Liquids*, 2nd ed., Ch. 2.3; Frenkel &amp; Smit,</span>
 <span class="sd">    *Understanding Molecular Simulation*, 2nd ed., Ch. 6.1.1).</span>
 
-<span class="sd">    This is the crude, deterministic member of the &quot;velocity rescaling&quot;</span>
+<span class="sd">    This is the crude, deterministic member of the "velocity rescaling"</span>
 <span class="sd">    thermostat family: it does *not* itself sample the canonical (NVT)</span>
 <span class="sd">    ensemble correctly (the kinetic-energy fluctuations of a true</span>
 <span class="sd">    canonical ensemble are suppressed to zero at every rescaling step),</span>
@@ -449,7 +454,7 @@
 <span class="sd">    leading order, with a finite relaxation time) the Berendsen (1984)</span>
 <span class="sd">    weak-coupling thermostat. It is nonetheless the standard first</span>
 <span class="sd">    introduction to temperature control in MD and is exactly what is</span>
-<span class="sd">    meant by &quot;velocity rescaling&quot; here.</span>
+<span class="sd">    meant by "velocity rescaling" here.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -458,7 +463,7 @@
 <span class="sd">    interval : int, default 1</span>
 <span class="sd">        Rescale every this many calls to :meth:`apply` (i.e. MD steps).</span>
 <span class="sd">    k_b : float, default 1.0</span>
-<span class="sd">        Boltzmann constant in the system&#39;s unit system (``1.0`` for the</span>
+<span class="sd">        Boltzmann constant in the system's unit system (``1.0`` for the</span>
 <span class="sd">        reduced units used by :class:`~chemistrykit.md.systems.lj_fluid.LJFluid`).</span>
 
 <span class="sd">    Examples</span>
@@ -471,11 +476,11 @@
 <span class="sd">    &gt;&gt;&gt; result = fluid.run(dt=0.001, n_steps=50, thermostat=thermostat, sample_every=10)</span>
 <span class="sd">    &gt;&gt;&gt; bool(abs(result.temperature[-1] - 2.0) &lt; 0.5)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_temperature</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k_b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">target_temperature</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;target_temperature must be positive&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"target_temperature must be positive"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">target_temperature</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">k_b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">k_b</span><span class="p">)</span>
@@ -484,7 +489,7 @@
 <div class="viewcode-block" id="VelocityRescalingThermostat.apply">
 <a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.VelocityRescalingThermostat.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Rescale ``system.velocities`` in place if a rescaling is due.</span>
+<span class="w">        </span><span class="sd">"""Rescale ``system.velocities`` in place if a rescaling is due.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -492,7 +497,7 @@
 <span class="sd">        dt : float</span>
 <span class="sd">            Unused (present for interface symmetry with</span>
 <span class="sd">            :class:`NoseHooverThermostat`).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_calls</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calls</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span>
@@ -506,9 +511,9 @@
 <div class="viewcode-block" id="NoseHooverThermostat">
 <a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.NoseHooverThermostat">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NoseHooverThermostat</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Nose-Hoover extended-system thermostat.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The Nose-Hoover extended-system thermostat.</span>
 
-<span class="sd">    Couples the physical system to a fictitious &quot;friction&quot; degree of</span>
+<span class="sd">    Couples the physical system to a fictitious "friction" degree of</span>
 <span class="sd">    freedom :math:`\xi` whose equation of motion drives the</span>
 <span class="sd">    time-averaged kinetic temperature to `target_temperature` while</span>
 <span class="sd">    (in the exact, continuous-time extended Lagrangian) still generating</span>
@@ -529,8 +534,8 @@
 <span class="sd">        \vec v_i \mathrel{*}= e^{-\xi\,dt}</span>
 
 <span class="sd">    applied once after each ordinary velocity-Verlet step -- an</span>
-<span class="sd">    approximation to the reference operator-split (&quot;Trotter</span>
-<span class="sd">    factorization&quot;) integrator of Martyna, Tuckerman, Tobias &amp; Klein,</span>
+<span class="sd">    approximation to the reference operator-split ("Trotter</span>
+<span class="sd">    factorization") integrator of Martyna, Tuckerman, Tobias &amp; Klein,</span>
 <span class="sd">    *Mol. Phys.* 87, 1117 (1996) (see also Frenkel &amp; Smit, *Understanding</span>
 <span class="sd">    Molecular Simulation*, 2nd ed., Ch. 6.1.2, Algorithm 15), which</span>
 <span class="sd">    instead splits the thermostat update into two half-steps</span>
@@ -538,7 +543,7 @@
 <span class="sd">    improved (time-reversible) long-time behavior. The simplified,</span>
 <span class="sd">    single-step coupling used here still relaxes the time-averaged</span>
 <span class="sd">    kinetic temperature to `target_temperature`, but without that</span>
-<span class="sd">    scheme&#39;s more favorable long-time energy-conservation properties --</span>
+<span class="sd">    scheme's more favorable long-time energy-conservation properties --</span>
 <span class="sd">    flagged explicitly here as the approximation it is.</span>
 
 <span class="sd">    Parameters</span>
@@ -546,11 +551,11 @@
 <span class="sd">    target_temperature : float</span>
 <span class="sd">        Must be positive.</span>
 <span class="sd">    Q : float</span>
-<span class="sd">        Thermostat &quot;mass&quot; (coupling strength); a larger `Q` couples more</span>
+<span class="sd">        Thermostat "mass" (coupling strength); a larger `Q` couples more</span>
 <span class="sd">        weakly, giving a slower thermostat response. Must be positive.</span>
 <span class="sd">    dof : int, optional</span>
 <span class="sd">        Degrees of freedom used for the target kinetic energy</span>
-<span class="sd">        :math:`\text{dof}\cdot k_BT/2`; defaults to the system&#39;s own</span>
+<span class="sd">        :math:`\text{dof}\cdot k_BT/2`; defaults to the system's own</span>
 <span class="sd">        :meth:`~chemistrykit.md.core.base_system.MolecularDynamicsSystem.degrees_of_freedom`</span>
 <span class="sd">        at the first call to :meth:`apply`.</span>
 <span class="sd">    k_b : float, default 1.0</span>
@@ -565,11 +570,11 @@
 <span class="sd">    &gt;&gt;&gt; result = fluid.run(dt=0.001, n_steps=200, thermostat=thermostat, sample_every=20)</span>
 <span class="sd">    &gt;&gt;&gt; bool(abs(result.temperature[-1] - 2.0) &lt; abs(result.temperature[0] - 2.0))</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_temperature</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Q</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dof</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">k_b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">target_temperature</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">Q</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;target_temperature and Q must be positive&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"target_temperature and Q must be positive"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">target_temperature</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Q</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dof</span> <span class="o">=</span> <span class="n">dof</span>
@@ -579,19 +584,171 @@
 <div class="viewcode-block" id="NoseHooverThermostat.apply">
 <a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.NoseHooverThermostat.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Advance the friction coefficient and rescale ``system.velocities`` in place.</span>
+<span class="w">        </span><span class="sd">"""Advance the friction coefficient and rescale ``system.velocities`` in place.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        system : chemistrykit.md.core.base_system.MolecularDynamicsSystem</span>
 <span class="sd">        dt : float</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dof</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dof</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">degrees_of_freedom</span><span class="p">()</span>
         <span class="n">kinetic_energy</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">kinetic_energy</span><span class="p">()</span>
         <span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">kinetic_energy</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">dof</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_b</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">Q</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">xi</span> <span class="o">+=</span> <span class="n">g</span> <span class="o">*</span> <span class="n">dt</span>
         <span class="n">system</span><span class="o">.</span><span class="n">velocities</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">xi</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="BerendsenThermostat">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.BerendsenThermostat">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BerendsenThermostat</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The Berendsen weak-coupling thermostat.</span>
+
+<span class="sd">    Rescales every velocity by a common factor after each step so that the</span>
+<span class="sd">    instantaneous kinetic temperature relaxes exponentially toward</span>
+<span class="sd">    `target_temperature` with time constant :math:`\tau` -- H. J. C.</span>
+<span class="sd">    Berendsen, J. P. M. Postma, W. F. van Gunsteren, A. DiNola &amp; J. R. Haak,</span>
+<span class="sd">    *J. Chem. Phys.* 81, 3684 (1984), eq. 11:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \lambda^2 = 1 + \frac{\Delta t}{\tau}\left(\frac{T_0}{T} - 1\right),</span>
+<span class="sd">        \qquad \frac{dT}{dt} = \frac{T_0 - T}{\tau}.</span>
+
+<span class="sd">    For :math:`\tau = \Delta t` this reduces to the immediate, complete</span>
+<span class="sd">    rescaling of :class:`VelocityRescalingThermostat`. Like that scheme it</span>
+<span class="sd">    suppresses canonical kinetic-energy fluctuations, so it does not sample</span>
+<span class="sd">    the NVT ensemble exactly (see :class:`StochasticVelocityRescalingThermostat`).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    target_temperature : float</span>
+<span class="sd">        :math:`T_0`; must be positive.</span>
+<span class="sd">    tau : float</span>
+<span class="sd">        Coupling time constant; must be positive.</span>
+<span class="sd">    k_b : float, default 1.0</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    With no forces acting, each call moves the temperature a fraction</span>
+<span class="sd">    :math:`\Delta t/\tau` of the way to the target:</span>
+
+<span class="sd">    &gt;&gt;&gt; from chemistrykit.md.systems.lj_fluid import LJFluid</span>
+<span class="sd">    &gt;&gt;&gt; fluid = LJFluid.from_lattice(n_per_side=3, cutoff=1.5, density=0.6, temperature=2.0, rng=0)</span>
+<span class="sd">    &gt;&gt;&gt; thermostat = BerendsenThermostat(target_temperature=1.0, tau=0.1)</span>
+<span class="sd">    &gt;&gt;&gt; thermostat.apply(fluid, dt=0.01)</span>
+<span class="sd">    &gt;&gt;&gt; round(fluid.temperature(), 10)  # 2.0 + 0.1 * (1.0 - 2.0)</span>
+<span class="sd">    1.9</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_temperature</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">tau</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k_b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">target_temperature</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">tau</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"target_temperature and tau must be positive"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">target_temperature</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tau</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k_b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">k_b</span><span class="p">)</span>
+
+<div class="viewcode-block" id="BerendsenThermostat.apply">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.BerendsenThermostat.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Rescale ``system.velocities`` in place by the Berendsen factor.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        system : chemistrykit.md.core.base_system.MolecularDynamicsSystem</span>
+<span class="sd">        dt : float</span>
+<span class="sd">        """</span>
+        <span class="n">current_temperature</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">temperature</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k_b</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">current_temperature</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">lam2</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span> <span class="o">/</span> <span class="n">current_temperature</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">system</span><span class="o">.</span><span class="n">velocities</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">lam2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="StochasticVelocityRescalingThermostat">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.StochasticVelocityRescalingThermostat">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">StochasticVelocityRescalingThermostat</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The Bussi-Donadio-Parrinello stochastic velocity-rescaling thermostat.</span>
+
+<span class="sd">    Berendsen's exponential relaxation of the kinetic energy :math:`K`</span>
+<span class="sd">    plus a correctly scaled stochastic term, chosen so that the kinetic</span>
+<span class="sd">    energy samples its exact canonical distribution -- G. Bussi, D.</span>
+<span class="sd">    Donadio &amp; M. Parrinello, *J. Chem. Phys.* 126, 014101 (2007), eq. 7</span>
+<span class="sd">    and Appendix (eq. A7):</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \alpha^2 = c + (1-c)\frac{\bar K}{N_f K}\sum_{i=1}^{N_f} R_i^2</span>
+<span class="sd">        + 2 R_1 \sqrt{c(1-c)\frac{\bar K}{N_f K}},</span>
+<span class="sd">        \qquad c = e^{-\Delta t/\tau},</span>
+
+<span class="sd">    where :math:`\bar K = N_f k_B T_0/2`, the :math:`R_i` are independent</span>
+<span class="sd">    standard normal numbers (the sum over :math:`i \ge 2` is drawn as a</span>
+<span class="sd">    single :math:`\chi^2_{N_f-1}` variate), and every velocity is scaled</span>
+<span class="sd">    by :math:`\alpha`. The stationary distribution of :math:`K` is the</span>
+<span class="sd">    canonical gamma distribution with mean :math:`\bar K` and variance</span>
+<span class="sd">    :math:`2\bar K^2/N_f`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    target_temperature : float</span>
+<span class="sd">        :math:`T_0`; must be positive.</span>
+<span class="sd">    tau : float</span>
+<span class="sd">        Relaxation time; must be positive.</span>
+<span class="sd">    rng : int, numpy.random.Generator, or None</span>
+<span class="sd">    dof : int, optional</span>
+<span class="sd">        :math:`N_f`; defaults to the system's</span>
+<span class="sd">        :meth:`~chemistrykit.md.core.base_system.MolecularDynamicsSystem.degrees_of_freedom`.</span>
+<span class="sd">    k_b : float, default 1.0</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from chemistrykit.md.systems.lj_fluid import LJFluid</span>
+<span class="sd">    &gt;&gt;&gt; fluid = LJFluid.from_lattice(n_per_side=3, cutoff=1.5, density=0.6, temperature=3.0, rng=0)</span>
+<span class="sd">    &gt;&gt;&gt; thermostat = StochasticVelocityRescalingThermostat(target_temperature=1.0, tau=0.01, rng=0)</span>
+<span class="sd">    &gt;&gt;&gt; for _ in range(200):</span>
+<span class="sd">    ...     thermostat.apply(fluid, dt=0.01)</span>
+<span class="sd">    &gt;&gt;&gt; bool(0.5 &lt; fluid.temperature() &lt; 1.5)</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_temperature</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">tau</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dof</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">k_b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">target_temperature</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">tau</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"target_temperature and tau must be positive"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">target_temperature</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tau</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dof</span> <span class="o">=</span> <span class="n">dof</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k_b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">k_b</span><span class="p">)</span>
+
+<div class="viewcode-block" id="StochasticVelocityRescalingThermostat.apply">
+<a class="viewcode-back" href="../../../../api/md.html#chemistrykit.md.StochasticVelocityRescalingThermostat.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Rescale ``system.velocities`` in place by a stochastic factor.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        system : chemistrykit.md.core.base_system.MolecularDynamicsSystem</span>
+<span class="sd">        dt : float</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dof</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dof</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">degrees_of_freedom</span><span class="p">()</span>
+        <span class="n">nf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dof</span>
+        <span class="n">kinetic_energy</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">kinetic_energy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">kinetic_energy</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">k_target</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">nf</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_b</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">dt</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau</span><span class="p">)</span>
+        <span class="n">r1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">()</span>
+        <span class="n">sum_r2</span> <span class="o">=</span> <span class="n">r1</span> <span class="o">*</span> <span class="n">r1</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">chisquare</span><span class="p">(</span><span class="n">nf</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">nf</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="n">ratio</span> <span class="o">=</span> <span class="n">k_target</span> <span class="o">/</span> <span class="p">(</span><span class="n">nf</span> <span class="o">*</span> <span class="n">kinetic_energy</span><span class="p">)</span>
+        <span class="n">alpha2</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span> <span class="o">*</span> <span class="n">ratio</span> <span class="o">*</span> <span class="n">sum_r2</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">r1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span> <span class="o">*</span> <span class="n">ratio</span><span class="p">)</span>
+        <span class="n">sign</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="k">if</span> <span class="n">r1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c</span> <span class="o">/</span> <span class="p">((</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span> <span class="o">*</span> <span class="n">ratio</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mf">1.0</span>
+        <span class="n">system</span><span class="o">.</span><span class="n">velocities</span> <span class="o">*=</span> <span class="n">sign</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">alpha2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span></div>
 </div>
 
 </pre></div>

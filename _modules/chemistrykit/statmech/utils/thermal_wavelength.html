@@ -410,20 +410,20 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.statmech.utils.thermal_wavelength</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The thermal de Broglie wavelength.</span>
+<span></span><span class="sa">r</span><span class="sd">"""The thermal de Broglie wavelength.</span>
 
 <span class="sd">.. math::</span>
 
 <span class="sd">    \Lambda = \frac{h}{\sqrt{2\pi m k_BT}}</span>
 
-<span class="sd">Sets the length scale below which a particle&#39;s translational motion must</span>
-<span class="sd">be treated quantum-mechanically (its wave nature &quot;smears out&quot; a distance</span>
+<span class="sd">Sets the length scale below which a particle's translational motion must</span>
+<span class="sd">be treated quantum-mechanically (its wave nature "smears out" a distance</span>
 <span class="sd">comparable to Lambda); equivalently, twice the average thermal</span>
 <span class="sd">wavelength of a free particle of mass `m` at temperature `T` (McQuarrie,</span>
 <span class="sd">*Statistical Mechanics*, Ch. 4). Used by</span>
 <span class="sd">:class:`chemistrykit.statmech.systems.partition_functions.TranslationalPartitionFunction`</span>
 <span class="sd">and :class:`chemistrykit.statmech.systems.lattice_gas.LatticeGasAdsorption`.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -431,13 +431,13 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">K_B</span><span class="p">,</span> <span class="n">H</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;thermal_de_broglie_wavelength&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"thermal_de_broglie_wavelength"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="thermal_de_broglie_wavelength">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.thermal_de_broglie_wavelength">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">thermal_de_broglie_wavelength</span><span class="p">(</span><span class="n">mass</span><span class="p">,</span> <span class="n">temperature</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return the thermal de Broglie wavelength :math:`\Lambda=h/\sqrt{2\pi mk_BT}`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Return the thermal de Broglie wavelength :math:`\Lambda=h/\sqrt{2\pi mk_BT}`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -463,7 +463,7 @@
 <span class="sd">    &gt;&gt;&gt; wavelength = thermal_de_broglie_wavelength(mass=39.948 * sc.atomic_mass, temperature=298.15)</span>
 <span class="sd">    &gt;&gt;&gt; bool(wavelength &lt; 1e-10)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">H</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">mass</span> <span class="o">*</span> <span class="n">K_B</span> <span class="o">*</span> <span class="n">temperature</span><span class="p">)</span></div>
 
 </pre></div>

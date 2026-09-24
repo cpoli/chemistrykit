@@ -1,0 +1,58 @@
+r"""
+Savitzky-Golay smoothing and derivatives of a noisy spectrum
+===============================================================
+
+:func:`~chemistrykit.analytical.savitzky_golay` fits a low-order
+polynomial by least squares to each moving window and keeps its value
+(or derivative) at the center, which reduces to a fixed convolution with
+weights from :func:`~chemistrykit.analytical.savitzky_golay_coefficients`
+-- e.g. :math:`(-3,12,17,12,-3)/35` for 5 points and a quadratic. Unlike
+a plain moving average, it removes noise with little flattening of
+narrow peaks, and it also gives smooth derivatives.
+"""
+
+# %%
+import matplotlib.pyplot as plt
+import numpy as np
+
+from chemistrykit.analytical import savitzky_golay, savitzky_golay_coefficients
+
+print("5-point quadratic weights x 35:", np.round(savitzky_golay_coefficients(5, 2) * 35, 6))
+
+rng = np.random.default_rng(1964)
+x = np.linspace(0.0, 10.0, 501)
+dx = x[1] - x[0]
+clean = np.exp(-((x - 3.0) ** 2) / (2 * 0.15**2)) + 0.6 * np.exp(-((x - 6.5) ** 2) / (2 * 0.6**2))
+noisy = clean + rng.normal(scale=0.05, size=x.size)
+
+window = 21
+sg = savitzky_golay(noisy, window, 3)
+moving_avg = np.convolve(noisy, np.ones(window) / window, mode="same")
+d_sg = savitzky_golay(noisy, window, 3, deriv=1, delta=dx)
+d_clean = np.gradient(clean, dx)
+
+i_peak = np.argmin(abs(x - 3.0))
+print(f"Narrow-peak height: true {clean[i_peak]:.3f}, Savitzky-Golay {sg[i_peak]:.3f}, moving average {moving_avg[i_peak]:.3f}")
+print(f"RMS error: noisy {np.std(noisy - clean):.4f}, Savitzky-Golay {np.std(sg - clean):.4f}")
+
+# %%
+fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
+axes[0].plot(x, noisy, color="lightgray", label="noisy signal")
+axes[0].plot(x, moving_avg, color="darkorange", label=f"{window}-point moving average")
+axes[0].plot(x, sg, color="C0", label=f"Savitzky-Golay ({window} pts, cubic)")
+axes[0].plot(x, clean, "k--", linewidth=0.8, label="true signal")
+axes[0].set_xlabel("x")
+axes[0].set_ylabel("signal")
+axes[0].set_title("Smoothing")
+axes[0].legend(fontsize=8)
+
+axes[1].plot(x, np.gradient(noisy, dx), color="lightgray", label="finite difference of noisy data")
+axes[1].plot(x, d_sg, color="C0", label="Savitzky-Golay first derivative")
+axes[1].plot(x, d_clean, "k--", linewidth=0.8, label="true derivative")
+axes[1].set_ylim(-8, 8)
+axes[1].set_xlabel("x")
+axes[1].set_ylabel("d(signal)/dx")
+axes[1].set_title("Differentiation")
+axes[1].legend(fontsize=8)
+plt.tight_layout()
+plt.show()

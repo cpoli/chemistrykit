@@ -5,8 +5,9 @@
 Chromatography
 ----------------
 
-Theoretical plates, the van Deemter equation and its optimum flow
-velocity, and resolution/selectivity between two peaks.
+Tsvet's column separation, theoretical plates, the van Deemter and Golay
+plate-height equations, Kovats retention indices, and Purnell's
+resolution equation.
 
 
 .. raw:: html
@@ -22,18 +23,103 @@ velocity, and resolution/selectivity between two peaks.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="theoretical_plates converts a peak&#x27;s retention time and width into a plate count; van_deemter_H then predicts how plate height varies with flow velocity, with a minimum (the optimum operating velocity) at u_{opt}=\sqrt{B/C}.">
+    <div class="sphx-glr-thumbcontainer" tooltip="In Tsvet&#x27;s experiment a pigment extract moves down a chalk column, each pigment at its own speed u/(1+k) set by how strongly it is retained (retention factor k). Snapshots of the column show the mixture resolving into separate colored bands; at the column outlet a detector records the same separation as a chromatogram, rendered here by simulate_chromatogram.">
 
 .. only:: html
 
-  .. image:: /api/gallery/analytical/chromatography/images/thumb/sphx_glr_plot_01_van_deemter_thumb.png
+  .. image:: /api/gallery/analytical/chromatography/images/thumb/sphx_glr_plot_01_tsvet_column_chromatography_thumb.png
     :alt:
 
-  :doc:`/api/gallery/analytical/chromatography/plot_01_van_deemter`
+  :doc:`/api/gallery/analytical/chromatography/plot_01_tsvet_column_chromatography`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Plate theory and the van Deemter equation</div>
+      <div class="sphx-glr-thumbnail-title">Tsvet's column: separating leaf pigments into colored bands</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Treating a column as N equilibration stages (&quot;theoretical plates&quot;) predicts a Gaussian peak whose width grows as t_R/\sqrt N. theoretical_plates inverts that: N=16(t_R/w_{base})^2=5.545(t_R/w_{1/2})^2, and plate_height gives the plate height H=L/N. Here we measure the widths of simulated peaks and recover the plate count they were built from.">
+
+.. only:: html
+
+  .. image:: /api/gallery/analytical/chromatography/images/thumb/sphx_glr_plot_02_martin_synge_theoretical_plates_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/analytical/chromatography/plot_02_martin_synge_theoretical_plates`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Martin and Synge's theoretical plates from a peak's width</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="van_deemter_H evaluates H=A+B/u+Cu, the sum of eddy diffusion (`A`), longitudinal diffusion (`B/u`, dominant at low flow) and mass-transfer resistance (`Cu`, dominant at high flow). The competition between the last two gives a minimum plate height H_{min}=A+2\sqrt{BC} at u_{opt}=\sqrt{B/C} (~chemistrykit.analytical.minimum_plate_height, optimum_flow_velocity).">
+
+.. only:: html
+
+  .. image:: /api/gallery/analytical/chromatography/images/thumb/sphx_glr_plot_03_van_deemter_equation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/analytical/chromatography/plot_03_van_deemter_equation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The van Deemter equation and the optimum flow velocity</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="An open capillary has no packing, so Golay&#x27;s equation for it is the van Deemter equation with no eddy-diffusion term: H=B/u+Cu. Using van_deemter_H with A=0 for a capillary and A&gt;0 for a packed column shows the lower plate height, and hence the many more plates a long capillary delivers.">
+
+.. only:: html
+
+  .. image:: /api/gallery/analytical/chromatography/images/thumb/sphx_glr_plot_04_golay_open_tubular_column_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/analytical/chromatography/plot_04_golay_open_tubular_column`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Golay's open-tubular column: the van Deemter equation with A = 0</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Under isothermal gas chromatography, \log t&#x27; of the n-alkanes rises linearly with carbon number. Kováts placed every other compound on that ladder: kovats_retention_index interpolates \log t&#x27; between the bracketing alkanes, giving an index (n-octane = 800, n-nonane = 900, ...) that is far more transferable between instruments than a raw retention time.">
+
+.. only:: html
+
+  .. image:: /api/gallery/analytical/chromatography/images/thumb/sphx_glr_plot_05_kovats_retention_index_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/analytical/chromatography/plot_05_kovats_retention_index`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Kováts retention indices from an n-alkane ladder</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="purnell_resolution writes resolution as R_s=\frac{\sqrt N}{4}\,\frac{\alpha-1}{\alpha}\,\frac{k_2}{1+k_2}. We check it against the direct peak-width formula resolution on simulated chromatograms, then compare the three levers: doubling N only multiplies R_s by \sqrt2, whereas a small change in selectivity \alpha can do much more.">
+
+.. only:: html
+
+  .. image:: /api/gallery/analytical/chromatography/images/thumb/sphx_glr_plot_06_purnell_resolution_equation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/analytical/chromatography/plot_06_purnell_resolution_equation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Purnell's resolution equation: efficiency, selectivity, retention</div>
     </div>
 
 
@@ -47,5 +133,10 @@ velocity, and resolution/selectivity between two peaks.
 .. toctree::
    :hidden:
 
-   /api/gallery/analytical/chromatography/plot_01_van_deemter
+   /api/gallery/analytical/chromatography/plot_01_tsvet_column_chromatography
+   /api/gallery/analytical/chromatography/plot_02_martin_synge_theoretical_plates
+   /api/gallery/analytical/chromatography/plot_03_van_deemter_equation
+   /api/gallery/analytical/chromatography/plot_04_golay_open_tubular_column
+   /api/gallery/analytical/chromatography/plot_05_kovats_retention_index
+   /api/gallery/analytical/chromatography/plot_06_purnell_resolution_equation
 

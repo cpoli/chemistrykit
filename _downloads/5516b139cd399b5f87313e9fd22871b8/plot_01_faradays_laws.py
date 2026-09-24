@@ -1,55 +1,52 @@
 r"""
-Faraday's laws of electrolysis, and galvanic vs. electrolytic cells
-=======================================================================
+Faraday's laws of electrolysis
+================================
 
+Faraday's first law: the mass liberated at an electrode is proportional
+to the charge passed, :math:`m = QM/(nF)`. His second law: for a fixed
+charge, different substances are liberated in proportion to their
+equivalent weights :math:`M/n`. This example verifies both with
 :func:`~chemistrykit.electrochem.systems.electrolysis.faradays_law_mass`
-gives the mass of a species deposited or consumed by a constant current
-over time. This example verifies the linear proportionality to both
-current and time (Faraday's first law), computes the minimum applied
-voltage needed to force a non-spontaneous (electrolytic) reaction to
-run, and contrasts a spontaneous galvanic reaction against one that
-needs external electrolysis.
+and :func:`~chemistrykit.electrochem.systems.electrolysis.mass_from_charge`,
+recovering the single universal constant -- the Faraday -- that links
+charge to chemical change.
 """
 
 # %%
 import matplotlib.pyplot as plt
 import numpy as np
 
-from chemistrykit.electrochem.systems.electrolysis import faradays_law_mass, minimum_applied_voltage_electrolytic
-from chemistrykit.electrochem.systems.standard_potentials import (
-    STANDARD_REDUCTION_POTENTIALS,
-    cell_potential,
-    is_spontaneous,
-)
+from chemistrykit.constants import FARADAY
+from chemistrykit.electrochem.systems.electrolysis import faradays_law_mass, mass_from_charge
 
 # %%
-# Copper electrorefining: Cu2+ + 2e- -> Cu (M = 63.546 g/mol).
-molar_mass_Cu, n_Cu = 63.546, 2
+# First law: copper electrorefining, Cu2+ + 2e- -> Cu (M = 63.546 g/mol).
+# Mass deposited in one hour is a straight line through the origin in
+# the current.
 currents = np.linspace(1.0, 20.0, 8)
-time_s = 3600.0
-mass_deposited = faradays_law_mass(currents, time_s, molar_mass_Cu, n_Cu)
+mass_deposited = faradays_law_mass(currents, 3600.0, 63.546, n=2)
 
-fig, ax = plt.subplots()
-ax.plot(currents, mass_deposited, "o-")
-ax.set_xlabel("Current (A)")
-ax.set_ylabel("Mass Cu deposited in 1 h (g)")
-ax.set_title("Faraday's first law: mass proportional to current")
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
+ax1.plot(currents, mass_deposited, "o-")
+ax1.set_xlabel("Current (A)")
+ax1.set_ylabel("Mass Cu deposited in 1 h (g)")
+ax1.set_title("First law: m proportional to Q")
+
+# %%
+# Second law: the same charge (here one faraday) through several
+# electrolytes connected in series liberates each substance in proportion
+# to its equivalent weight M/n.
+species = {"H2": (2.016, 2), "O2": (31.998, 4), "Cu": (63.546, 2), "Ag": (107.868, 1), "Al": (26.982, 3)}
+masses = {name: mass_from_charge(FARADAY, M, n) for name, (M, n) in species.items()}
+equivalents = {name: M / n for name, (M, n) in species.items()}
+for name in species:
+    print(f"{name:3s}: mass per faraday = {masses[name]:7.3f} g, equivalent weight M/n = {equivalents[name]:7.3f} g/mol")
+
+ax2.scatter(list(equivalents.values()), list(masses.values()))
+for name in species:
+    ax2.annotate(name, (equivalents[name], masses[name]), textcoords="offset points", xytext=(5, -10))
+ax2.set_xlabel("Equivalent weight M/n (g/mol)")
+ax2.set_ylabel("Mass liberated by 1 F (g)")
+ax2.set_title("Second law: m proportional to M/n")
 fig.tight_layout()
-
-# %%
-# A galvanic (spontaneous) reaction: the Daniell cell.
-cu = STANDARD_REDUCTION_POTENTIALS["Cu2+/Cu"]
-zn = STANDARD_REDUCTION_POTENTIALS["Zn2+/Zn"]
-E_daniell = cell_potential(cu, zn)
-print(f"Daniell cell (Cu cathode / Zn anode): E = {E_daniell:.2f} V, spontaneous = {is_spontaneous(E_daniell)}")
-print("-> runs galvanically, delivering electrical work.")
-
-# %%
-# The *reverse* pairing (Zn cathode / Cu anode) is non-spontaneous and
-# needs to be driven electrolytically.
-E_reverse = cell_potential(zn, cu)
-V_min = minimum_applied_voltage_electrolytic(E_reverse)
-print(f"\nReversed pairing (Zn cathode / Cu anode): E = {E_reverse:.2f} V, spontaneous = {is_spontaneous(E_reverse)}")
-print(f"-> requires at least {V_min:.2f} V applied externally (electrolysis) to run.")
-
 plt.show()

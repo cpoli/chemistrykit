@@ -457,11 +457,91 @@
 <p>Translational/rotational/vibrational partition functions and the
 thermodynamic functions (U, S, Cv) derived from them (including the
 Sackur-Tetrode translational entropy); the Maxwell-Boltzmann speed
-distribution; and a canonical-ensemble lattice-gas adsorption model
-(a statistical-mechanical derivation of the Langmuir isotherm).</p>
+distribution; a canonical-ensemble lattice-gas adsorption model
+(a statistical-mechanical derivation of the Langmuir isotherm); the
+Debye heat capacity of a solid; exact Ising-model results (the 1D
+transfer matrix, Kramers-Wannier duality, Onsager’s 2D solution); and
+the second virial coefficient from a pair potential.</p>
 <p><a class="reference internal" href="md.html#module-chemistrykit.md" title="chemistrykit.md"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.md</span></code></a>’s trajectories are a natural cross-check for this
 domain’s distribution functions – see
 <code class="docutils literal notranslate"><span class="pre">examples/md/lj_fluid/plot_02_maxwell_boltzmann_check.py</span></code>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.statmech.DebyeSolid">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">DebyeSolid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">debye_temperature</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/debye_solid.html#DebyeSolid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.DebyeSolid" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Debye’s continuum model of a monatomic crystal’s lattice vibrations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>debye_temperature</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – The Debye temperature <span class="math notranslate nohighlight">\(\Theta_D=h\nu_D/k_B\)</span>, in K.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Far above <span class="math notranslate nohighlight">\(\Theta_D\)</span> the molar heat capacity approaches the
+Dulong-Petit value <span class="math notranslate nohighlight">\(3R\)</span>; far below, it follows Debye’s
+<span class="math notranslate nohighlight">\(T^3\)</span> law:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">copper</span> <span class="o">=</span> <span class="n">DebyeSolid</span><span class="p">(</span><span class="n">debye_temperature</span><span class="o">=</span><span class="mf">343.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">copper</span><span class="o">.</span><span class="n">heat_capacity_v</span><span class="p">(</span><span class="mf">5000.0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="mf">8.31446261815324</span><span class="p">)),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ratio</span> <span class="o">=</span> <span class="n">copper</span><span class="o">.</span><span class="n">heat_capacity_v</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">copper</span><span class="o">.</span><span class="n">low_temperature_heat_capacity</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">ratio</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.DebyeSolid.heat_capacity_v">
+<span class="sig-name descname"><span class="pre">heat_capacity_v</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/debye_solid.html#DebyeSolid.heat_capacity_v"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.DebyeSolid.heat_capacity_v" title="Link to this definition">#</a></dt>
+<dd><p>Return the constant-volume heat capacity of <cite>N</cite> atoms (default one mole).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array_like</em>) – Absolute temperature, in K (must be positive).</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Number of atoms.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or numpy.ndarray</em> – Heat capacity, in J/K.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.DebyeSolid.internal_energy">
+<span class="sig-name descname"><span class="pre">internal_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/debye_solid.html#DebyeSolid.internal_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.DebyeSolid.internal_energy" title="Link to this definition">#</a></dt>
+<dd><p>Return the thermal internal energy <span class="math notranslate nohighlight">\(U(T)-U(0)\)</span> of <cite>N</cite> atoms.</p>
+<p><span class="math notranslate nohighlight">\(U-U_0 = 9Nk_BT(T/\Theta_D)^3\int_0^{\Theta_D/T}x^3/(e^x-1)\,dx\)</span>,
+measured from the zero-point energy <span class="math notranslate nohighlight">\(U_0=\frac98Nk_B\Theta_D\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array_like</em>) – Absolute temperature, in K (must be positive).</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or numpy.ndarray</em> – Energy, in J.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.DebyeSolid.low_temperature_heat_capacity">
+<span class="sig-name descname"><span class="pre">low_temperature_heat_capacity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6.02214076e+23</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/debye_solid.html#DebyeSolid.low_temperature_heat_capacity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.DebyeSolid.low_temperature_heat_capacity" title="Link to this definition">#</a></dt>
+<dd><p>Return Debye’s <span class="math notranslate nohighlight">\(T^3\)</span> law, <span class="math notranslate nohighlight">\(C_V=\frac{12\pi^4}{5}Nk_B(T/\Theta_D)^3\)</span>, exact as <span class="math notranslate nohighlight">\(T\to0\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array_like</em>) – Absolute temperature, in K.</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or numpy.ndarray</em> – Heat capacity, in J/K.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.statmech.IdealGasMolecule">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">IdealGasMolecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moment_of_inertia</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symmetry_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vibrational_frequencies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/partition_functions.html#IdealGasMolecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.IdealGasMolecule" title="Link to this definition">#</a></dt>
@@ -549,6 +629,163 @@ equipartition heat capacity: <span class="math notranslate nohighlight">\(\frac3
 <dd class="field-odd"><p><em>chemistrykit.statmech.core.base_system.ThermodynamicFunctions</em></p>
 </dd>
 </dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.statmech.Ising1D">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">Ising1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coupling</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/ising.html#Ising1D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.Ising1D" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The one-dimensional Ising chain, solved exactly by the transfer matrix.</p>
+<p>With <span class="math notranslate nohighlight">\(K=J/k_BT\)</span> and <span class="math notranslate nohighlight">\(b=h/k_BT\)</span>, the transfer matrix
+<span class="math notranslate nohighlight">\(T_{ss'}=e^{Kss'+b(s+s')/2}\)</span> has eigenvalues
+<span class="math notranslate nohighlight">\(\lambda_\pm=e^K[\cosh b\pm\sqrt{\sinh^2b+e^{-4K}}]\)</span>, so a
+periodic chain of <cite>N</cite> spins has <span class="math notranslate nohighlight">\(Z_N=\lambda_+^N+\lambda_-^N\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coupling</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Exchange coupling <cite>J</cite>, in J (positive = ferromagnetic).</p></li>
+<li><p><strong>field</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – External field <cite>h</cite>, in J.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>In zero field the magnetization vanishes at every temperature – the
+one-dimensional chain never orders:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chain</span> <span class="o">=</span> <span class="n">Ising1D</span><span class="p">(</span><span class="n">coupling</span><span class="o">=</span><span class="mf">1.380649e-23</span> <span class="o">*</span> <span class="mf">100.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">magnetization</span><span class="p">(</span><span class="mf">50.0</span><span class="p">))</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<p>but the correlation length grows as <span class="math notranslate nohighlight">\(\xi\approx e^{2K}/2\)</span> on cooling:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">correlation_length</span><span class="p">(</span><span class="mf">50.0</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">27.3</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.Ising1D.correlation_length">
+<span class="sig-name descname"><span class="pre">correlation_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/ising.html#Ising1D.correlation_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.Ising1D.correlation_length" title="Link to this definition">#</a></dt>
+<dd><p>Return the zero-field correlation length in lattice spacings, <span class="math notranslate nohighlight">\(\xi=-1/\ln\tanh K\)</span>.</p>
+<p>Uses the zero-field ratio <span class="math notranslate nohighlight">\(\lambda_-/\lambda_+=\tanh K\)</span>
+(the stored <cite>field</cite> is ignored).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.Ising1D.free_energy_per_spin">
+<span class="sig-name descname"><span class="pre">free_energy_per_spin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/ising.html#Ising1D.free_energy_per_spin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.Ising1D.free_energy_per_spin" title="Link to this definition">#</a></dt>
+<dd><p>Return the thermodynamic-limit free energy per spin, <span class="math notranslate nohighlight">\(f=-k_BT\ln\lambda_+\)</span>, in J.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.Ising1D.heat_capacity_per_spin">
+<span class="sig-name descname"><span class="pre">heat_capacity_per_spin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/ising.html#Ising1D.heat_capacity_per_spin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.Ising1D.heat_capacity_per_spin" title="Link to this definition">#</a></dt>
+<dd><p>Return the zero-field heat capacity per spin, <span class="math notranslate nohighlight">\(c=k_BK^2\operatorname{sech}^2K\)</span>, in J/K.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.Ising1D.magnetization">
+<span class="sig-name descname"><span class="pre">magnetization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/ising.html#Ising1D.magnetization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.Ising1D.magnetization" title="Link to this definition">#</a></dt>
+<dd><p>Return the magnetization per spin, <span class="math notranslate nohighlight">\(m=\sinh b/\sqrt{\sinh^2b+e^{-4K}}\)</span>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.Ising1D.partition_function">
+<span class="sig-name descname"><span class="pre">partition_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/ising.html#Ising1D.partition_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.Ising1D.partition_function" title="Link to this definition">#</a></dt>
+<dd><p>Return <span class="math notranslate nohighlight">\(Z_N=\lambda_+^N+\lambda_-^N\)</span> for a periodic ring of <cite>N</cite> spins.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperature, in K.</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of spins.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.Ising1D.transfer_matrix_eigenvalues">
+<span class="sig-name descname"><span class="pre">transfer_matrix_eigenvalues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/ising.html#Ising1D.transfer_matrix_eigenvalues"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.Ising1D.transfer_matrix_eigenvalues" title="Link to this definition">#</a></dt>
+<dd><p>Return <span class="math notranslate nohighlight">\((\lambda_+,\lambda_-)\)</span> of the 2x2 transfer matrix at temperature <cite>T</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperature, in K.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>tuple of float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.statmech.Ising2DOnsager">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">Ising2DOnsager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coupling</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/ising.html#Ising2DOnsager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.Ising2DOnsager" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Onsager’s exact solution of the zero-field square-lattice Ising model.</p>
+<p>With <span class="math notranslate nohighlight">\(K=J/k_BT\)</span> and <span class="math notranslate nohighlight">\(\kappa=2\sinh2K/\cosh^22K\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[-\beta f = \ln(2\cosh2K)+\frac1\pi\int_0^{\pi/2}
+\ln\tfrac12\left(1+\sqrt{1-\kappa^2\sin^2\phi}\right)d\phi\]</div>
+<p>and, for <span class="math notranslate nohighlight">\(T&lt;T_c\)</span>, Yang’s spontaneous magnetization
+<span class="math notranslate nohighlight">\(m=[1-\sinh^{-4}2K]^{1/8}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>coupling</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Exchange coupling <cite>J</cite>, in J (positive).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">Ising2DOnsager</span><span class="p">(</span><span class="n">coupling</span><span class="o">=</span><span class="mf">1.380649e-23</span><span class="p">)</span>  <span class="c1"># J/k_B = 1 K</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">critical_temperature</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">2.2692</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">spontaneous_magnetization</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.9993</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">spontaneous_magnetization</span><span class="p">(</span><span class="mf">3.0</span><span class="p">))</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">internal_energy_per_spin</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">critical_temperature</span><span class="p">)</span> <span class="o">/</span> <span class="n">model</span><span class="o">.</span><span class="n">coupling</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">-1.414214</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="chemistrykit.statmech.Ising2DOnsager.critical_temperature">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">critical_temperature</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.statmech.Ising2DOnsager.critical_temperature" title="Link to this definition">#</a></dt>
+<dd><p>The exact critical temperature, in K. See <a class="reference internal" href="#chemistrykit.statmech.ising_2d_critical_temperature" title="chemistrykit.statmech.ising_2d_critical_temperature"><code class="xref py py-func docutils literal notranslate"><span class="pre">ising_2d_critical_temperature()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.Ising2DOnsager.free_energy_per_spin">
+<span class="sig-name descname"><span class="pre">free_energy_per_spin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/ising.html#Ising2DOnsager.free_energy_per_spin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.Ising2DOnsager.free_energy_per_spin" title="Link to this definition">#</a></dt>
+<dd><p>Return the free energy per spin, in J (Onsager’s single-integral form).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.Ising2DOnsager.heat_capacity_per_spin">
+<span class="sig-name descname"><span class="pre">heat_capacity_per_spin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/ising.html#Ising2DOnsager.heat_capacity_per_spin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.Ising2DOnsager.heat_capacity_per_spin" title="Link to this definition">#</a></dt>
+<dd><p>Return the heat capacity per spin, in J/K (diverges logarithmically at <span class="math notranslate nohighlight">\(T_c\)</span>).</p>
+<div class="math notranslate nohighlight">
+\[\frac{c}{k_B}=\frac2\pi(K\coth2K)^2\Big\{2K_1(\kappa)-2E_1(\kappa)
+-(1-\kappa')\big[\tfrac\pi2+\kappa'K_1(\kappa)\big]\Big\}\]</div>
+<p>with <span class="math notranslate nohighlight">\(\kappa'=2\tanh^22K-1\)</span> and <span class="math notranslate nohighlight">\(E_1\)</span> the complete
+elliptic integral of the second kind.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.Ising2DOnsager.internal_energy_per_spin">
+<span class="sig-name descname"><span class="pre">internal_energy_per_spin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/ising.html#Ising2DOnsager.internal_energy_per_spin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.Ising2DOnsager.internal_energy_per_spin" title="Link to this definition">#</a></dt>
+<dd><p>Return <span class="math notranslate nohighlight">\(u=-J\coth2K\,[1+\tfrac2\pi(2\tanh^22K-1)K_1(\kappa)]\)</span>, in J.</p>
+<p><span class="math notranslate nohighlight">\(K_1\)</span> is the complete elliptic integral of the first kind; its
+logarithmic divergence at <span class="math notranslate nohighlight">\(T_c\)</span> is multiplied by zero, so <cite>u</cite>
+is continuous there (<span class="math notranslate nohighlight">\(u(T_c)=-\sqrt2J\)</span>).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.statmech.Ising2DOnsager.spontaneous_magnetization">
+<span class="sig-name descname"><span class="pre">spontaneous_magnetization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/ising.html#Ising2DOnsager.spontaneous_magnetization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.Ising2DOnsager.spontaneous_magnetization" title="Link to this definition">#</a></dt>
+<dd><p>Return Yang’s spontaneous magnetization per spin, <span class="math notranslate nohighlight">\([1-\sinh^{-4}2K]^{1/8}\)</span> below <span class="math notranslate nohighlight">\(T_c\)</span>, else 0.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1341,6 +1578,57 @@ quadratic potential term):</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.statmech.ising_2d_critical_temperature">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">ising_2d_critical_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coupling</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/ising.html#ising_2d_critical_temperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.ising_2d_critical_temperature" title="Link to this definition">#</a></dt>
+<dd><p>Return the exact square-lattice critical temperature <span class="math notranslate nohighlight">\(T_c=2J/[k_B\ln(1+\sqrt2)]\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>coupling</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Exchange coupling <cite>J</cite>, in J.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – Critical temperature, in K.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>In units of <span class="math notranslate nohighlight">\(J/k_B\)</span>, <span class="math notranslate nohighlight">\(T_c\approx2.269\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">ising_2d_critical_temperature</span><span class="p">(</span><span class="mf">1.380649e-23</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">2.2692</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.statmech.kramers_wannier_dual_coupling">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">kramers_wannier_dual_coupling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">K</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/ising.html#kramers_wannier_dual_coupling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.kramers_wannier_dual_coupling" title="Link to this definition">#</a></dt>
+<dd><p>Return the Kramers-Wannier dual coupling <span class="math notranslate nohighlight">\(K^*=-\tfrac12\ln\tanh K\)</span>.</p>
+<p>The square-lattice Ising partition function at reduced coupling
+<span class="math notranslate nohighlight">\(K=J/k_BT\)</span> equals (up to an analytic prefactor) the one at
+<span class="math notranslate nohighlight">\(K^*\)</span>, equivalently <span class="math notranslate nohighlight">\(\sinh 2K\,\sinh 2K^*=1\)</span>: high
+temperature maps onto low temperature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>K</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array_like</em>) – Reduced coupling <span class="math notranslate nohighlight">\(J/k_BT\)</span> (positive).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or numpy.ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>The map is an involution, and its fixed point is the critical coupling
+<span class="math notranslate nohighlight">\(K_c=\tfrac12\ln(1+\sqrt2)\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kramers_wannier_dual_coupling</span><span class="p">(</span><span class="n">kramers_wannier_dual_coupling</span><span class="p">(</span><span class="mf">0.3</span><span class="p">))),</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">0.3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Kc</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">kramers_wannier_dual_coupling</span><span class="p">(</span><span class="n">Kc</span><span class="p">)</span> <span class="o">-</span> <span class="n">Kc</span><span class="p">),</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="chemistrykit.statmech.ln_binomial">
 <span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">ln_binomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/utils/combinatorics.html#ln_binomial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.ln_binomial" title="Link to this definition">#</a></dt>
 <dd><p>Return <span class="math notranslate nohighlight">\(\ln\binom{n}{k} = \ln n! - \ln k! - \ln(n-k)!\)</span>.</p>
@@ -1491,6 +1779,40 @@ Chemistry</em>, 11th ed., Table 13.1):</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.statmech.second_virial_coefficient">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">second_virial_coefficient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pair_potential</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">breakpoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/systems/virial.html#second_virial_coefficient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.second_virial_coefficient" title="Link to this definition">#</a></dt>
+<dd><p>Return the molar second virial coefficient <span class="math notranslate nohighlight">\(B_2(T)\)</span> of a spherical pair potential.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pair_potential</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – <code class="docutils literal notranslate"><span class="pre">u(r)</span></code> in J for a separation <cite>r</cite> in m; may return <code class="docutils literal notranslate"><span class="pre">numpy.inf</span></code>
+inside a hard core.</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Absolute temperature, in K.</p></li>
+<li><p><strong>length_scale</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – A characteristic molecular size (e.g. <span class="math notranslate nohighlight">\(\sigma\)</span>), in m, used to
+split the integration range.</p></li>
+<li><p><strong>breakpoints</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – Separations (m) where <cite>u</cite> is discontinuous (e.g. a square well’s
+edges), passed on to the quadrature.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – <span class="math notranslate nohighlight">\(B_2\)</span>, in m^3/mol (negative when attraction dominates).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Hard spheres give exactly <span class="math notranslate nohighlight">\(\frac{2\pi}{3}N_A\sigma^3\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sigma</span> <span class="o">=</span> <span class="mf">3.4e-10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hard_sphere</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span> <span class="k">if</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">sigma</span> <span class="k">else</span> <span class="mf">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B2</span> <span class="o">=</span> <span class="n">second_virial_coefficient</span><span class="p">(</span><span class="n">hard_sphere</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">breakpoints</span><span class="o">=</span><span class="p">[</span><span class="n">sigma</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">B2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">3</span> <span class="o">*</span> <span class="mf">6.02214076e23</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">3</span><span class="p">),</span> <span class="mi">8</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="chemistrykit.statmech.thermal_de_broglie_wavelength">
 <span class="sig-prename descclassname"><span class="pre">chemistrykit.statmech.</span></span><span class="sig-name descname"><span class="pre">thermal_de_broglie_wavelength</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/statmech/utils/thermal_wavelength.html#thermal_de_broglie_wavelength"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.statmech.thermal_de_broglie_wavelength" title="Link to this definition">#</a></dt>
 <dd><p>Return the thermal de Broglie wavelength <span class="math notranslate nohighlight">\(\Lambda=h/\sqrt{2\pi mk_BT}\)</span>.</p>
@@ -1568,11 +1890,34 @@ approximation there:</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.DebyeSolid"><code class="docutils literal notranslate"><span class="pre">DebyeSolid</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.DebyeSolid.heat_capacity_v"><code class="docutils literal notranslate"><span class="pre">DebyeSolid.heat_capacity_v()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.DebyeSolid.internal_energy"><code class="docutils literal notranslate"><span class="pre">DebyeSolid.internal_energy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.DebyeSolid.low_temperature_heat_capacity"><code class="docutils literal notranslate"><span class="pre">DebyeSolid.low_temperature_heat_capacity()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.IdealGasMolecule"><code class="docutils literal notranslate"><span class="pre">IdealGasMolecule</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.IdealGasMolecule.entropy"><code class="docutils literal notranslate"><span class="pre">IdealGasMolecule.entropy()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.IdealGasMolecule.heat_capacity_v"><code class="docutils literal notranslate"><span class="pre">IdealGasMolecule.heat_capacity_v()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.IdealGasMolecule.internal_energy"><code class="docutils literal notranslate"><span class="pre">IdealGasMolecule.internal_energy()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.IdealGasMolecule.thermodynamic_functions"><code class="docutils literal notranslate"><span class="pre">IdealGasMolecule.thermodynamic_functions()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.Ising1D"><code class="docutils literal notranslate"><span class="pre">Ising1D</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.Ising1D.correlation_length"><code class="docutils literal notranslate"><span class="pre">Ising1D.correlation_length()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.Ising1D.free_energy_per_spin"><code class="docutils literal notranslate"><span class="pre">Ising1D.free_energy_per_spin()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.Ising1D.heat_capacity_per_spin"><code class="docutils literal notranslate"><span class="pre">Ising1D.heat_capacity_per_spin()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.Ising1D.magnetization"><code class="docutils literal notranslate"><span class="pre">Ising1D.magnetization()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.Ising1D.partition_function"><code class="docutils literal notranslate"><span class="pre">Ising1D.partition_function()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.Ising1D.transfer_matrix_eigenvalues"><code class="docutils literal notranslate"><span class="pre">Ising1D.transfer_matrix_eigenvalues()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.Ising2DOnsager"><code class="docutils literal notranslate"><span class="pre">Ising2DOnsager</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.Ising2DOnsager.critical_temperature"><code class="docutils literal notranslate"><span class="pre">Ising2DOnsager.critical_temperature</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.Ising2DOnsager.free_energy_per_spin"><code class="docutils literal notranslate"><span class="pre">Ising2DOnsager.free_energy_per_spin()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.Ising2DOnsager.heat_capacity_per_spin"><code class="docutils literal notranslate"><span class="pre">Ising2DOnsager.heat_capacity_per_spin()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.Ising2DOnsager.internal_energy_per_spin"><code class="docutils literal notranslate"><span class="pre">Ising2DOnsager.internal_energy_per_spin()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.Ising2DOnsager.spontaneous_magnetization"><code class="docutils literal notranslate"><span class="pre">Ising2DOnsager.spontaneous_magnetization()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.LatticeGasAdsorption"><code class="docutils literal notranslate"><span class="pre">LatticeGasAdsorption</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
@@ -1632,12 +1977,15 @@ approximation there:</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.vibrational_temperature"><code class="docutils literal notranslate"><span class="pre">VibrationalPartitionFunctionHarmonic.vibrational_temperature</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.ising_2d_critical_temperature"><code class="docutils literal notranslate"><span class="pre">ising_2d_critical_temperature()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.kramers_wannier_dual_coupling"><code class="docutils literal notranslate"><span class="pre">kramers_wannier_dual_coupling()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.ln_binomial"><code class="docutils literal notranslate"><span class="pre">ln_binomial()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.ln_factorial"><code class="docutils literal notranslate"><span class="pre">ln_factorial()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.mean_speed"><code class="docutils literal notranslate"><span class="pre">mean_speed()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.most_probable_speed"><code class="docutils literal notranslate"><span class="pre">most_probable_speed()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.rms_speed"><code class="docutils literal notranslate"><span class="pre">rms_speed()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.sackur_tetrode_entropy"><code class="docutils literal notranslate"><span class="pre">sackur_tetrode_entropy()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.second_virial_coefficient"><code class="docutils literal notranslate"><span class="pre">second_virial_coefficient()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.statmech.thermal_de_broglie_wavelength"><code class="docutils literal notranslate"><span class="pre">thermal_de_broglie_wavelength()</span></code></a></li>
 </ul>
   </nav></div>

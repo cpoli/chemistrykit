@@ -5,8 +5,9 @@ Examples
 
 This gallery walks through every public feature of ``chemistrykit.kinetics``:
 closed-form integrated rate laws, the Arrhenius temperature dependence,
+collision, diffusion, and transition-state theories of the rate constant,
 Michaelis-Menten enzyme kinetics, a general stoichiometric reaction-network
-engine, and the Brusselator chemical oscillator.
+engine with exact stochastic simulation, and chemical oscillators.
 
 Each script in this gallery is self-contained and can be run directly with
 ``python examples/kinetics/<section>/<script>.py``. Every script also
@@ -19,19 +20,24 @@ Sections
 --------
 
 - **rate_laws** -- the textbook zero/first/second-order integrated rate
-  laws and their half-lives, compared side by side.
+  laws and their half-lives, reaction order from initial rates, and
+  Wilhelmy's first-order sucrose inversion.
 - **arrhenius** -- the Arrhenius temperature dependence of a rate constant,
   and recovering the activation energy from synthetic rate-vs-temperature
   data via an Arrhenius plot.
+- **rate_theory** -- rate constants from molecular properties: collision
+  theory, Smoluchowski's diffusion limit, and Eyring's transition-state
+  theory.
 - **enzyme** -- Michaelis-Menten enzyme kinetics, the Lineweaver-Burk
   linearization, competitive/noncompetitive inhibition, and the full
   substrate-depletion progress curve.
 - **networks** -- the general stoichiometric reaction-network engine:
-  parallel, consecutive (A->B->C), and reversible mechanisms, each checked
-  against its closed-form solution, plus the steady-state approximation
-  and a chain-branching explosion mechanism.
-- **oscillators** -- the Brusselator: a chemical mechanism whose kinetics
-  support a stable limit cycle rather than relaxing to equilibrium.
+  the steady-state approximation and Lindemann fall-off, chain-branching
+  explosions, Bateman's consecutive-reaction solution, Eigen's relaxation
+  kinetics, parallel reactions, and Gillespie's stochastic simulation.
+- **oscillators** -- the Brusselator limit cycle, Lotka's neutral
+  oscillations, and the Oregonator model of the Belousov-Zhabotinsky
+  reaction.
 
 
 .. raw:: html
@@ -95,9 +101,9 @@ energy from rate-vs-temperature data via an Arrhenius plot.
 Enzyme kinetics
 ----------------
 
-Michaelis-Menten enzyme kinetics, the Lineweaver-Burk linearization,
-competitive/noncompetitive inhibition, and substrate-depletion progress
-curves.
+Michaelis-Menten enzyme kinetics (saturation, substrate-depletion progress
+curves, and competitive/noncompetitive inhibition) and the Lineweaver-Burk
+double-reciprocal linearization.
 
 
 .. raw:: html
@@ -113,7 +119,7 @@ curves.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Three related views of the same enzyme: the saturating Michaelis-Menten rate-vs-substrate curve, its Lineweaver-Burk double-reciprocal linearization (used to extract V_{max} and K_m from noisy initial-rate data), and how competitive vs. noncompetitive inhibition distort that curve differently.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Michaelis and Menten (1913) showed that an enzyme-catalyzed rate saturates with substrate, v = V_{max}[S]/(K_m + [S]), reaching exactly half of V_{max} at [S] = K_m. This example draws that saturation curve with its two limiting regimes, integrates the substrate-depletion progress curve an assay actually records, and shows how competitive and noncompetitive inhibitors distort the curve.">
 
 .. only:: html
 
@@ -124,7 +130,24 @@ curves.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Michaelis-Menten kinetics, Lineweaver-Burk, and inhibition</div>
+      <div class="sphx-glr-thumbnail-title">Michaelis and Menten's saturating enzyme rate law</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Lineweaver and Burk (1934) inverted the Michaelis-Menten equation into a straight line, 1/v = (K_m/V_{max})(1/[S]) + 1/V_{max}, so V_{max} and K_m could be read off the intercept and slope. fit_lineweaver_burk does exactly that fit on noisy initial-rate data. The second panel shows the method&#x27;s well-known weakness: the same small relative noise becomes a large scatter at the low-[S] (large 1/[S]) end, which dominates the fitted line.">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/enzyme/images/thumb/sphx_glr_plot_02_lineweaver_burk_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/enzyme/plot_02_lineweaver_burk`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Lineweaver and Burk's double-reciprocal plot</div>
     </div>
 
 
@@ -137,10 +160,11 @@ curves.
 Reaction networks
 -------------------
 
-The general stoichiometric reaction-network engine: parallel, consecutive,
-and reversible mechanisms, and the steady-state approximation, plus a
-three-step chain-branching mechanism illustrating the Semenov/Hinshelwood
-explosion criterion.
+The general stoichiometric reaction-network engine: the steady-state
+approximation and Lindemann's unimolecular fall-off, a chain-branching
+explosion mechanism, Bateman's consecutive-reaction solution, Eigen's
+relaxation kinetics, parallel reactions, and Gillespie's exact stochastic
+simulation of the same networks.
 
 
 .. raw:: html
@@ -156,18 +180,18 @@ explosion criterion.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="StoichiometricNetwork integrates an arbitrary mass-action reaction network numerically via chemistrykit.integrators. Three classic mechanisms -- built from its named constructors -- are each checked here against a closed-form solution, and the steady-state approximation for the consecutive chain is shown converging as the second step is made much faster than the first.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Bodenstein (1913) set the net rate of change of a short-lived intermediate to zero; Lindemann (1922) used exactly that trick on the energized molecule A^* of the mechanism">
 
 .. only:: html
 
-  .. image:: /api/gallery/kinetics/networks/images/thumb/sphx_glr_plot_01_reaction_networks_thumb.png
+  .. image:: /api/gallery/kinetics/networks/images/thumb/sphx_glr_plot_01_steady_state_lindemann_thumb.png
     :alt:
 
-  :doc:`/api/gallery/kinetics/networks/plot_01_reaction_networks`
+  :doc:`/api/gallery/kinetics/networks/plot_01_steady_state_lindemann`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Parallel, consecutive, and reversible reaction networks</div>
+      <div class="sphx-glr-thumbnail-title">Bodenstein's steady-state approximation and Lindemann's unimolecular fall-off</div>
     </div>
 
 
@@ -188,6 +212,74 @@ explosion criterion.
     </div>
 
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Bateman (1910) solved the chain of first-order steps A \xrightarrow{k_1} B \xrightarrow{k_2} C (written for radioactive decay series, but identical for consecutive chemical reactions) in closed form:">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/networks/images/thumb/sphx_glr_plot_03_bateman_consecutive_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/networks/plot_03_bateman_consecutive`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Bateman's closed-form solution for consecutive reactions</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Eigen (1954) measured reactions far too fast to mix by perturbing an equilibrium mixture (a sudden temperature, pressure, or field jump) and timing its exponential return to the new equilibrium. For A \rightleftharpoons B the relaxation time is \tau = 1/(k_f + k_r), so combining \tau with the equilibrium constant K = k_f/k_r yields both rate constants. For the association A + B \rightleftharpoons C linearizing about equilibrium gives 1/\tau = k_f([A]_{eq} + [B]_{eq}) + k_r, the formula Eigen used to show that H^+ + OH^- recombination is diffusion-controlled.">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/networks/images/thumb/sphx_glr_plot_04_eigen_relaxation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/networks/plot_04_eigen_relaxation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Eigen's chemical relaxation: temperature jump and relaxation time</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="For two competing channels A \xrightarrow{k_1} B and A \xrightarrow{k_2} C, the reactant decays with the sum k_1 + k_2, while the product ratio [B]/[C] = k_1/k_2 is fixed at every instant -- the kinetic basis of product selectivity. Integrated with parallel.">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/networks/images/thumb/sphx_glr_plot_05_parallel_reactions_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/networks/plot_05_parallel_reactions`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Parallel (competing) first-order reactions</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Gillespie (1976-1977) showed how to sample exact trajectories of a reaction network treated as random, discrete molecular events: draw an exponential waiting time with rate equal to the total propensity, then pick which reaction fires in proportion to its propensity. gillespie_ssa implements this direct method. With thousands of molecules the trajectories hug the deterministic rate-equation solution; with a handful they are visibly noisy, and the average over many runs recovers the deterministic curve.">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/networks/images/thumb/sphx_glr_plot_06_gillespie_stochastic_simulation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/networks/plot_06_gillespie_stochastic_simulation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Gillespie's stochastic simulation of reaction kinetics</div>
+    </div>
+
+
 .. thumbnail-parent-div-close
 
 .. raw:: html
@@ -197,8 +289,10 @@ explosion criterion.
 Oscillating reactions
 -----------------------
 
-The Brusselator: a chemical reaction network whose kinetics support a
-sustained limit cycle rather than relaxing to a fixed concentration.
+Chemical mechanisms that oscillate instead of relaxing to equilibrium:
+the Brusselator limit cycle, Lotka's autocatalytic scheme with its
+neutral orbits, and the Oregonator model of the Belousov-Zhabotinsky
+reaction.
 
 
 .. raw:: html
@@ -225,7 +319,41 @@ sustained limit cycle rather than relaxing to a fixed concentration.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">The Brusselator limit cycle</div>
+      <div class="sphx-glr-thumbnail-title">Prigogine and Lefever's Brusselator limit cycle</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Lotka&#x27;s 1920 chemical scheme, with the reservoir A held constant,">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/oscillators/images/thumb/sphx_glr_plot_02_lotka_autocatalytic_oscillator_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/oscillators/plot_02_lotka_autocatalytic_oscillator`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Lotka's autocatalytic oscillator and its neutral orbits</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Field and Noyes (1974) boiled the FKN mechanism of the Belousov-Zhabotinsky (BZ) reaction -- cerium-catalyzed oxidation of malonic acid by bromate -- down to three intermediates: HBrO\ 2 (x), bromide (y), and the oxidized catalyst Ce(IV) (z). The resulting &quot;Oregonator&quot; (~chemistrykit.kinetics.systems.oscillators.Oregonator) produces the BZ reaction&#x27;s hallmark relaxation oscillations: long quiet stretches while bromide is slowly consumed, then an autocatalytic burst of HBrO\ 2 that oxidizes the catalyst (the colour flash seen by Belousov), which in turn regenerates bromide and shuts the burst off. Raising the stoichiometric factor f well above 2 stabilizes the steady state and the oscillation disappears.">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/oscillators/images/thumb/sphx_glr_plot_03_oregonator_bz_reaction_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/oscillators/plot_03_oregonator_bz_reaction`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Oregonator: oscillations of the Belousov-Zhabotinsky reaction</div>
     </div>
 
 
@@ -238,7 +366,9 @@ sustained limit cycle rather than relaxing to a fixed concentration.
 Rate laws
 ---------
 
-Zero-, first-, and second-order integrated rate laws and half-lives.
+Zero-, first-, and second-order integrated rate laws and half-lives,
+reaction order from initial rates, and Wilhelmy's first-order sucrose
+inversion.
 
 
 .. raw:: html
@@ -254,7 +384,7 @@ Zero-, first-, and second-order integrated rate laws and half-lives.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="The three textbook elementary rate laws -- ZeroOrder, FirstOrder, and SecondOrder -- all started from the same initial concentration and with rate constants chosen to give the same half-life, so the different curvature (linear, exponential, hyperbolic) is the only thing distinguishing them. First order is the only one whose half-life doesn&#x27;t depend on the starting concentration; the plot below marks all three half-lives to make that concrete.">
+    <div class="sphx-glr-thumbcontainer" tooltip="van&#x27;t Hoff (1884) classified reactions by the order n of their rate law -d[A]/dt = k[A]^n. The three textbook cases -- ZeroOrder, FirstOrder, and SecondOrder -- all started from the same initial concentration and with rate constants chosen to give the same half-life, so the different curvature (linear, exponential, hyperbolic) is the only thing distinguishing them. First order is the only one whose half-life doesn&#x27;t depend on the starting concentration; the plot below marks all three half-lives to make that concrete.">
 
 .. only:: html
 
@@ -265,7 +395,100 @@ Zero-, first-, and second-order integrated rate laws and half-lives.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Zero-, first-, and second-order integrated rate laws</div>
+      <div class="sphx-glr-thumbnail-title">van't Hoff's reaction orders: zero-, first-, and second-order rate laws</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Wilhelmy (1850) followed the acid-catalyzed inversion of cane sugar by polarimetry: the optical rotation \alpha(t) drifts from the dextrorotatory sucrose value towards the (levorotatory) value of the glucose + fructose mixture. Because \alpha is linear in the concentrations, \alpha(t) - \alpha_\infty is proportional to the sucrose still present, and a straight line of \ln[(\alpha - \alpha_\infty)/(\alpha_0 - \alpha_\infty)] against t identifies -d[\text{sugar}]/dt = k[\text{sugar}].">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/rate_laws/images/thumb/sphx_glr_plot_02_wilhelmy_sucrose_inversion_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/rate_laws/plot_02_wilhelmy_sucrose_inversion`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Wilhelmy's sucrose inversion: the first measured first-order rate law</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Rate theory
+-----------
+
+Predicting a rate constant from molecular properties: hard-sphere
+collision theory, Smoluchowski's diffusion-controlled encounter rate, and
+Eyring's transition-state theory.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Trautz (1916) and Lewis (1918) computed a gas-phase rate constant as the number of collisions per unit time times the Boltzmann fraction with enough energy,">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/rate_theory/images/thumb/sphx_glr_plot_01_collision_theory_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/rate_theory/plot_01_collision_theory`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Trautz-Lewis collision theory: rate constants from molecular collisions</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Smoluchowski (1917) asked how fast two species meet if they react on first contact, so that diffusion alone limits the rate. Solving the diffusion equation around one reactant gives">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/rate_theory/images/thumb/sphx_glr_plot_02_smoluchowski_diffusion_limit_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/rate_theory/plot_02_smoluchowski_diffusion_limit`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Smoluchowski's diffusion-limited reaction rate</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Transition-state theory (Eyring; Evans and Polanyi, 1935) writes a rate constant as a universal frequency times an equilibrium constant for forming the activated complex,">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/rate_theory/images/thumb/sphx_glr_plot_03_eyring_transition_state_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/rate_theory/plot_03_eyring_transition_state`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Eyring's transition-state theory: activation enthalpy and entropy</div>
     </div>
 
 
@@ -286,6 +509,7 @@ Zero-, first-, and second-order integrated rate laws and half-lives.
    /api/gallery/kinetics/networks/index.rst
    /api/gallery/kinetics/oscillators/index.rst
    /api/gallery/kinetics/rate_laws/index.rst
+   /api/gallery/kinetics/rate_theory/index.rst
 
 
 

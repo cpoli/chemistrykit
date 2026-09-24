@@ -410,16 +410,16 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.kinetics.systems.oscillators</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;The Brusselator: a minimal oscillating (limit-cycle) reaction network.</span>
+<span></span><span class="sd">"""The Brusselator: a minimal oscillating (limit-cycle) reaction network.</span>
 
 <span class="sd">The kinetics analogue of the nonlinear oscillators studied elsewhere in</span>
-<span class="sd">the *kit family (e.g. physicskit.chaos&#39;s continuous dynamical systems):</span>
+<span class="sd">the *kit family (e.g. physicskit.chaos's continuous dynamical systems):</span>
 <span class="sd">a chemical mechanism whose mass-action kinetics support a stable limit</span>
 <span class="sd">cycle via a Hopf bifurcation, rather than settling to a fixed</span>
 <span class="sd">concentration. Introduced by I. Prigogine &amp; R. Lefever, *J. Chem. Phys.*</span>
 <span class="sd">48, 1695 (1968); see also Nicolis &amp; Prigogine, *Self-Organization in</span>
 <span class="sd">Nonequilibrium Systems* (1977), Ch. 7.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -429,12 +429,12 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.kinetics.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReactionNetwork</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Brusselator&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Brusselator"</span><span class="p">,</span> <span class="s2">"Oregonator"</span><span class="p">]</span>
 
 
 <span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_brusselator_rhs</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Brusselator vector field ``dX/dt, dY/dt = f(X, Y; A, B)``.</span>
+<span class="w">    </span><span class="sd">"""Brusselator vector field ``dX/dt, dY/dt = f(X, Y; A, B)``.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -448,7 +448,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    ndarray of float, shape (2,)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -460,7 +460,7 @@
 <div class="viewcode-block" id="Brusselator">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.Brusselator">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Brusselator</span><span class="p">(</span><span class="n">ReactionNetwork</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Brusselator oscillating reaction network.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The Brusselator oscillating reaction network.</span>
 
 <span class="sd">    Derived from four elementary steps (with B, D, E, and the source of</span>
 <span class="sd">    X held as constant reservoirs; Prigogine &amp; Lefever 1968):</span>
@@ -493,13 +493,13 @@
 <span class="sd">        Initial concentrations.</span>
 <span class="sd">    A, B : float</span>
 <span class="sd">        Brusselator parameters (both must be positive).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">species</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"X"</span><span class="p">,</span> <span class="s2">"Y"</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">Y0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">A</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">A</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">B</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A and B must be positive&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"A and B must be positive"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">])</span>
@@ -515,7 +515,7 @@
 <div class="viewcode-block" id="Brusselator.fixed_point">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.Brusselator.fixed_point">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">fixed_point</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the network&#39;s single steady state ``(X*, Y*) = (A, B/A)``.</span>
+<span class="w">        </span><span class="sd">"""Return the network's single steady state ``(X*, Y*) = (A, B/A)``.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -530,14 +530,14 @@
 <span class="sd">        &gt;&gt;&gt; fp = system.fixed_point()</span>
 <span class="sd">        &gt;&gt;&gt; np.allclose(system.rhs(fp, 0.0), 0.0)</span>
 <span class="sd">        True</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="Brusselator.is_above_hopf_threshold">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.Brusselator.is_above_hopf_threshold">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_above_hopf_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Whether ``B &gt; 1 + A^2``, the Hopf-bifurcation onset of sustained oscillation.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Whether ``B &gt; 1 + A^2``, the Hopf-bifurcation onset of sustained oscillation.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -549,8 +549,129 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; Brusselator(A=1.0, B=1.5).is_above_hopf_threshold()</span>
 <span class="sd">        False</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">&gt;</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="o">**</span><span class="mi">2</span></div>
+</div>
+
+
+
+<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_oregonator_rhs</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Scaled three-variable Oregonator vector field.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    state : ndarray of float, shape (3,)</span>
+<span class="sd">        Scaled state ``(x, y, z)`` (HBrO2, Br-, oxidized catalyst).</span>
+<span class="sd">    t : float</span>
+<span class="sd">        Current time (unused; the system is autonomous).</span>
+<span class="sd">    params : ndarray of float, shape (4,)</span>
+<span class="sd">        Parameters ``(epsilon, epsilon_prime, q, f)``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray of float, shape (3,)</span>
+<span class="sd">    """</span>
+    <span class="n">eps</span><span class="p">,</span> <span class="n">eps_p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">q</span> <span class="o">*</span> <span class="n">y</span> <span class="o">-</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">eps</span>
+    <span class="n">out</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">q</span> <span class="o">*</span> <span class="n">y</span> <span class="o">-</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="n">f</span> <span class="o">*</span> <span class="n">z</span><span class="p">)</span> <span class="o">/</span> <span class="n">eps_p</span>
+    <span class="n">out</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">z</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+
+<div class="viewcode-block" id="Oregonator">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.Oregonator">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Oregonator</span><span class="p">(</span><span class="n">ReactionNetwork</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The Field-Noyes Oregonator model of the Belousov-Zhabotinsky reaction.</span>
+
+<span class="sd">    Field and Noyes (*J. Chem. Phys.* 60, 1877 (1974)) reduced the FKN</span>
+<span class="sd">    mechanism of the cerium-catalyzed bromate/malonic-acid (BZ) reaction</span>
+<span class="sd">    to five steps among three intermediates -- X = HBrO2, Y = Br-, and</span>
+<span class="sd">    Z = Ce(IV) -- with the bromate (A) and organic substrate (B) pools</span>
+<span class="sd">    held constant:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        A + Y &amp;\to X + P, \qquad X + Y \to 2P, \qquad A + X \to 2X + 2Z, \\</span>
+<span class="sd">        2X &amp;\to A + P, \qquad B + Z \to f\,Y</span>
+
+<span class="sd">    In the standard dimensionless scaling (Tyson, in R. J. Field and M.</span>
+<span class="sd">    Burger (eds.), *Oscillations and Traveling Waves in Chemical Systems*,</span>
+<span class="sd">    Wiley 1985, Ch. 3) the kinetics read</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \epsilon \frac{dx}{dt} = qy - xy + x(1-x), \quad</span>
+<span class="sd">        \epsilon' \frac{dy}{dt} = -qy - xy + fz, \quad</span>
+<span class="sd">        \frac{dz}{dt} = x - z</span>
+
+<span class="sd">    The system is stiff (:math:`\epsilon' \ll \epsilon \ll 1`), so</span>
+<span class="sd">    integrate with ``method="dopri5"``. For the default parameters it</span>
+<span class="sd">    relaxes onto a stable limit cycle (sustained BZ oscillation); for</span>
+<span class="sd">    large stoichiometric factor `f` (e.g. ``f=3``) its steady state is</span>
+<span class="sd">    stable instead.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x0, y0, z0 : float</span>
+<span class="sd">        Initial scaled concentrations.</span>
+<span class="sd">    epsilon, epsilon_prime, q, f : float</span>
+<span class="sd">        Scaled Oregonator parameters (all positive).</span>
+<span class="sd">    """</span>
+
+    <span class="n">species</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"X"</span><span class="p">,</span> <span class="s2">"Y"</span><span class="p">,</span> <span class="s2">"Z"</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">x0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">y0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">z0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">4e-2</span><span class="p">,</span>
+        <span class="n">epsilon_prime</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">4e-4</span><span class="p">,</span>
+        <span class="n">q</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">8e-4</span><span class="p">,</span>
+        <span class="n">f</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="n">epsilon</span><span class="p">,</span> <span class="n">epsilon_prime</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"epsilon, epsilon_prime, q and f must be positive"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">epsilon</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epsilon_prime</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">epsilon_prime</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">q</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon_prime</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rhs_njit</span> <span class="o">=</span> <span class="n">_oregonator_rhs</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">([</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">z0</span><span class="p">])</span>
+
+<div class="viewcode-block" id="Oregonator.rhs">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.Oregonator.rhs">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">_oregonator_rhs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="Oregonator.fixed_point">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.Oregonator.fixed_point">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fixed_point</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return the positive steady state ``(x*, y*, z*)``.</span>
+
+<span class="sd">        Setting all three derivatives to zero gives :math:`z^* = x^*`,</span>
+<span class="sd">        :math:`y^* = f x^*/(q + x^*)`, and :math:`x^*` as the positive</span>
+<span class="sd">        root of :math:`x^2 - (1 - f - q)x - q(1 + f) = 0`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ndarray, shape (3,)</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">        &gt;&gt;&gt; system = Oregonator(f=1.0)</span>
+<span class="sd">        &gt;&gt;&gt; np.allclose(system.rhs(system.fixed_point(), 0.0), 0.0, atol=1e-9)</span>
+<span class="sd">        True</span>
+<span class="sd">        """</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">q</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">b</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="n">b</span> <span class="o">+</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">q</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span> <span class="o">*</span> <span class="n">x</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">q</span> <span class="o">+</span> <span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">])</span></div>
 </div>
 
 </pre></div>

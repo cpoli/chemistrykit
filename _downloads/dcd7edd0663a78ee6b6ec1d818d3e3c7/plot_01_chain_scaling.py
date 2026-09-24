@@ -1,7 +1,9 @@
 r"""
-Ideal vs. real chain-size scaling
-====================================
+Flory's solvent-quality exponents: ideal vs. real chain scaling
+===================================================================
 
+Flory's mean-field argument (*Principles of Polymer Chemistry*, 1953)
+predicts how excluded volume changes a chain's size scaling.
 :class:`~chemistrykit.polymer.systems.chain_statistics.IdealChain` gives
 the *exact* random-walk result :math:`\langle R^2\rangle=nb^2`.
 :class:`~chemistrykit.polymer.systems.chain_statistics.RealChain` scales

@@ -410,18 +410,18 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.kinetics.core.base_system</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Abstract base classes for kinetics models, and the result container.</span>
+<span></span><span class="sd">"""Abstract base classes for kinetics models, and the result container.</span>
 
 <span class="sd">Reaction-network kinetics (mass-action rate laws integrated over time) is</span>
 <span class="sd">a first-order ODE system ``dC/dt = f(C, t)`` -- the same calling</span>
 <span class="sd">convention as :mod:`chemistrykit.integrators`, and with no notion of a</span>
-<span class="sd">conserved &quot;energy&quot; or &quot;momentum&quot; the way there is for</span>
-<span class="sd">``chemistrykit.classical``&#39;s (as-yet-unbuilt) Hamiltonian systems. The</span>
-<span class="sd">abstract interface below therefore mirrors physicskit&#39;s</span>
+<span class="sd">conserved "energy" or "momentum" the way there is for</span>
+<span class="sd">``chemistrykit.classical``'s (as-yet-unbuilt) Hamiltonian systems. The</span>
+<span class="sd">abstract interface below therefore mirrors physicskit's</span>
 <span class="sd">``physicskit.chaos.core.base_system.DynamicalSystem`` (a bare vector field</span>
 <span class="sd">driven by the shared RK4/adaptive integrators) rather than</span>
-<span class="sd">``physicskit.classical.core.base_system``&#39;s Hamiltonian/Lagrangian</span>
-<span class="sd">hierarchy, which doesn&#39;t apply here.</span>
+<span class="sd">``physicskit.classical.core.base_system``'s Hamiltonian/Lagrangian</span>
+<span class="sd">hierarchy, which doesn't apply here.</span>
 
 <span class="sd">Two ABCs cover the two shapes of model in this subpackage:</span>
 
@@ -439,10 +439,10 @@
 <span class="sd">Concrete :class:`ReactionNetwork` subclasses build a standalone</span>
 <span class="sd">module-level ``@njit`` right-hand-side function (conventionally stored as</span>
 <span class="sd">``self._rhs_njit``), following the first-class-function pattern documented</span>
-<span class="sd">in ``physicskit.classical.core.base_system``: Numba&#39;s nopython mode can</span>
+<span class="sd">in ``physicskit.classical.core.base_system``: Numba's nopython mode can</span>
 <span class="sd">only call a genuine njit dispatcher from inside another njit function, not</span>
 <span class="sd">a bound Python method.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -454,42 +454,42 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.integrators</span><span class="w"> </span><span class="kn">import</span> <span class="n">dopri5_integrate</span><span class="p">,</span> <span class="n">rk4_integrate</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;KineticsResult&quot;</span><span class="p">,</span> <span class="s2">&quot;RateLaw&quot;</span><span class="p">,</span> <span class="s2">&quot;ReactionNetwork&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"KineticsResult"</span><span class="p">,</span> <span class="s2">"RateLaw"</span><span class="p">,</span> <span class="s2">"ReactionNetwork"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="KineticsResult">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.KineticsResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">KineticsResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for the output of a :meth:`ReactionNetwork.integrate` call.</span>
+<span class="w">    </span><span class="sd">"""Container for the output of a :meth:`ReactionNetwork.integrate` call.</span>
 
-<span class="sd">    Mirrors physicskit&#39;s ``SimulationResult`` (a stable, dataclass return</span>
+<span class="sd">    Mirrors physicskit's ``SimulationResult`` (a stable, dataclass return</span>
 <span class="sd">    type consumed by visualizers), specialized to a named-species</span>
 <span class="sd">    concentration trajectory instead of a phase-space one.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n_steps + 1,): Time samples.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (n_steps + 1,): Time samples."""</span>
 
     <span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray, shape (n_steps + 1, n_species): Concentration of every</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (n_steps + 1, n_species): Concentration of every</span>
 <span class="sd">    species (columns, in the order given by ``species``) at each time</span>
-<span class="sd">    sample (rows).&quot;&quot;&quot;</span>
+<span class="sd">    sample (rows)."""</span>
 
     <span class="n">species</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">tuple</span><span class="p">)</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;tuple of str: Species names, in column order matching ``y``.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""tuple of str: Species names, in column order matching ``y``."""</span>
 
-    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: Name of the integrator used (e.g. ``&quot;rk4&quot;``).&quot;&quot;&quot;</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="w">    </span><span class="sd">"""str: Name of the integrator used (e.g. ``"rk4"``)."""</span>
 
     <span class="n">extra</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;dict: Free-form slot for any additional diagnostics a system</span>
-<span class="sd">    chooses to attach.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""dict: Free-form slot for any additional diagnostics a system</span>
+<span class="sd">    chooses to attach."""</span>
 
 <div class="viewcode-block" id="KineticsResult.concentration">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.KineticsResult.concentration">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">concentration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the concentration trajectory of a single named species.</span>
+<span class="w">        </span><span class="sd">"""Return the concentration trajectory of a single named species.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -503,10 +503,10 @@
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
 <span class="sd">        &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">        &gt;&gt;&gt; result = KineticsResult(t=np.array([0.0, 1.0]), y=np.array([[1.0, 0.0], [0.5, 0.5]]), species=(&quot;A&quot;, &quot;B&quot;))</span>
-<span class="sd">        &gt;&gt;&gt; result.concentration(&quot;B&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; result = KineticsResult(t=np.array([0.0, 1.0]), y=np.array([[1.0, 0.0], [0.5, 0.5]]), species=("A", "B"))</span>
+<span class="sd">        &gt;&gt;&gt; result.concentration("B")</span>
 <span class="sd">        array([0. , 0.5])</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">]</span></div>
 </div>
@@ -516,19 +516,19 @@
 <div class="viewcode-block" id="RateLaw">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.RateLaw">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RateLaw</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for a single elementary reaction&#39;s integrated rate law.</span>
+<span class="w">    </span><span class="sd">"""Base class for a single elementary reaction's integrated rate law.</span>
 
 <span class="sd">    Subclasses implement the closed-form solution of ``dC/dt = -rate(C)``</span>
 <span class="sd">    (or, for zero order, ``+rate`` with a sign convention appropriate to</span>
 <span class="sd">    that order) directly -- there is nothing to numerically integrate for</span>
 <span class="sd">    these textbook cases, unlike :class:`ReactionNetwork`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
 <div class="viewcode-block" id="RateLaw.concentration">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.RateLaw.concentration">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">concentration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the reactant concentration at time(s) `t`.</span>
+<span class="w">        </span><span class="sd">"""Return the reactant concentration at time(s) `t`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -537,14 +537,14 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="RateLaw.rate">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.RateLaw.rate">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the instantaneous reaction rate at time(s) `t`.</span>
+<span class="w">        </span><span class="sd">"""Return the instantaneous reaction rate at time(s) `t`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -555,19 +555,19 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="RateLaw.half_life">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.RateLaw.half_life">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">half_life</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the time for the concentration to fall to half its initial value.</span>
+<span class="w">        </span><span class="sd">"""Return the time for the concentration to fall to half its initial value.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 </div>
 
 
@@ -575,7 +575,7 @@
 <div class="viewcode-block" id="ReactionNetwork">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.ReactionNetwork">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ReactionNetwork</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common base for a system of species evolving as ``dC/dt = f(C, t)``.</span>
+<span class="w">    </span><span class="sd">"""Common base for a system of species evolving as ``dC/dt = f(C, t)``.</span>
 
 <span class="sd">    Concrete subclasses must set, in ``__init__``:</span>
 
@@ -586,11 +586,11 @@
 <span class="sd">    - ``self.params`` : ndarray -- the parameter vector read by</span>
 <span class="sd">      ``self._rhs_njit`` (or ``np.empty(0)`` if every rate constant is</span>
 <span class="sd">      instead baked into the njit closure itself, as</span>
-<span class="sd">      :mod:`chemistrykit.kinetics.systems.networks`&#39;s mass-action engine</span>
+<span class="sd">      :mod:`chemistrykit.kinetics.systems.networks`'s mass-action engine</span>
 <span class="sd">      does with its stoichiometry/rate-constant arrays).</span>
 
 <span class="sd">    and call ``super().__init__(state0)``.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">species</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">()</span>
     <span class="n">_rhs_njit</span> <span class="o">=</span> <span class="kc">None</span>
@@ -604,7 +604,7 @@
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.ReactionNetwork.rhs">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate ``dC/dt`` at ``(state, t)``.</span>
+<span class="w">        </span><span class="sd">"""Evaluate ``dC/dt`` at ``(state, t)``.</span>
 
 <span class="sd">        A thin, plain-Python wrapper around ``self._rhs_njit`` (for</span>
 <span class="sd">        interactive use / plotting outside a numba context).</span>
@@ -619,13 +619,13 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ndarray</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="ReactionNetwork.reset">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.ReactionNetwork.reset">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">t0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset the system&#39;s state and clock.</span>
+<span class="w">        </span><span class="sd">"""Reset the system's state and clock.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -638,7 +638,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        ndarray</span>
 <span class="sd">            The (possibly updated) current state.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">state0</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">state0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">t0</span>
@@ -647,41 +647,41 @@
 
 <div class="viewcode-block" id="ReactionNetwork.integrate">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.ReactionNetwork.integrate">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;rk4&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KineticsResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Integrate the reaction network forward in time.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"rk4"</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KineticsResult</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Integrate the reaction network forward in time.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        t_span : tuple of float</span>
 <span class="sd">            ``(t0, t1)``, start and end time.</span>
 <span class="sd">        dt : float, optional</span>
-<span class="sd">            Fixed step size, required for ``method=&quot;rk4&quot;``. For</span>
-<span class="sd">            ``method=&quot;dopri5&quot;`` it is instead used as the *initial* step</span>
+<span class="sd">            Fixed step size, required for ``method="rk4"``. For</span>
+<span class="sd">            ``method="dopri5"`` it is instead used as the *initial* step</span>
 <span class="sd">            size attempt (defaulting to ``(t1 - t0) / 1000``), since the</span>
 <span class="sd">            adaptive integrator adjusts it automatically.</span>
-<span class="sd">        method : {&quot;rk4&quot;, &quot;dopri5&quot;}</span>
-<span class="sd">            Integrator to use. ``&quot;dopri5&quot;`` (adaptive Dormand-Prince) is</span>
+<span class="sd">        method : {"rk4", "dopri5"}</span>
+<span class="sd">            Integrator to use. ``"dopri5"`` (adaptive Dormand-Prince) is</span>
 <span class="sd">            recommended for stiff-ish networks with widely separated rate</span>
 <span class="sd">            constants (e.g. a steady-state-approximation chain).</span>
 <span class="sd">        **kwargs</span>
 <span class="sd">            Forwarded to :func:`chemistrykit.integrators.dopri5_integrate`</span>
-<span class="sd">            (e.g. ``rtol``, ``atol``) when ``method=&quot;dopri5&quot;``.</span>
+<span class="sd">            (e.g. ``rtol``, ``atol``) when ``method="dopri5"``.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        KineticsResult</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">t0</span><span class="p">,</span> <span class="n">t1</span> <span class="o">=</span> <span class="n">t_span</span>
-        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;rk4&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">"rk4"</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">dt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dt is required for method=&#39;rk4&#39;&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"dt is required for method='rk4'"</span><span class="p">)</span>
             <span class="n">n_steps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">((</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="o">/</span> <span class="n">dt</span><span class="p">))</span>
             <span class="n">ts</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">rk4_integrate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rhs_njit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;dopri5&quot;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">"dopri5"</span><span class="p">:</span>
             <span class="n">dt0</span> <span class="o">=</span> <span class="n">dt</span> <span class="k">if</span> <span class="n">dt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.0</span>
             <span class="n">ts</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">dopri5_integrate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rhs_njit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">dt0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown method &#39;</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">&#39; for ReactionNetwork&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unknown method '</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">' for ReactionNetwork"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">ys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">ts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">KineticsResult</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">ys</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span></div>

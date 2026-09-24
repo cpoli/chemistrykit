@@ -5,9 +5,10 @@ Examples
 
 This gallery walks through every public feature of
 ``chemistrykit.solutions``: pH/pOH and weak acid/base equilibria with
-Henderson-Hasselbalch buffers; strong/weak acid-base titration curves;
-Ksp solubility equilibria and the common-ion effect; and Debye-Huckel
-activity-coefficient laws.
+Henderson-Hasselbalch buffers, buffer capacity, and polyprotic
+speciation; strong/weak acid-base titration curves and Gran plots; Ksp
+solubility equilibria and the common-ion effect; and Debye-Huckel and
+Davies activity-coefficient laws.
 
 Each script in this gallery is self-contained and can be run directly with
 ``python examples/solutions/<section>/<script>.py``. Every script also
@@ -19,14 +20,14 @@ truth for what you see, not a copy of it.
 Sections
 --------
 
-- **acid_base** -- exact weak acid/base equilibrium (the Ostwald dilution
-  law), and Henderson-Hasselbalch buffer design.
-- **titration** -- strong/strong, weak-acid/strong-base, and
-  weak-base/strong-acid titration curves, with numerically detected
-  equivalence points.
-- **solubility** -- Ksp, molar solubility, and the common-ion effect.
-- **activity** -- Debye-Huckel limiting and extended activity-coefficient
-  laws as a function of ionic strength.
+- **acid_base** -- mass action, Arrhenius dissociation, the Ostwald
+  dilution law, the pH scale, conjugate pairs, Henderson-Hasselbalch
+  buffers, buffer capacity, and polyprotic speciation.
+- **titration** -- titration curves with numerically detected
+  equivalence points, and Gran-plot extrapolation.
+- **solubility** -- the solubility product and the common-ion effect.
+- **activity** -- Debye-Huckel limiting, Guntelberg extended, and Davies
+  activity-coefficient laws as a function of ionic strength.
 
 
 .. raw:: html
@@ -49,8 +50,10 @@ Sections
 Acid-base equilibria
 --------------------
 
-Exact weak acid/base equilibrium (the Ostwald dilution law), and
-Henderson-Hasselbalch buffer design.
+The law of mass action, Arrhenius dissociation and Ostwald's dilution
+law, Sorensen's pH scale, Bronsted-Lowry conjugate pairs,
+Henderson-Hasselbalch buffer design, Van Slyke buffer capacity, and
+Bjerrum speciation diagrams for polyprotic acids.
 
 
 .. raw:: html
@@ -66,18 +69,137 @@ Henderson-Hasselbalch buffer design.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Dissolving less acid in more water increases the percentage of it that dissociates, even though the absolute [H^+] goes down -- the Ostwald dilution law, here from the exact cubic charge-balance solution in WeakAcid rather than the more commonly taught \sqrt{K_aC_a} approximation. Also: designing a buffer for a target pH with from_target_ph.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Dissolving less acid in more water increases the fraction of it that dissociates, even though the absolute [H^+] goes down -- the dilution law Wilhelm Ostwald derived in 1888 by applying the mass-action law to Arrhenius&#x27;s dissociation equilibrium,">
 
 .. only:: html
 
-  .. image:: /api/gallery/solutions/acid_base/images/thumb/sphx_glr_plot_01_weak_acid_base_thumb.png
+  .. image:: /api/gallery/solutions/acid_base/images/thumb/sphx_glr_plot_01_ostwald_dilution_law_thumb.png
     :alt:
 
-  :doc:`/api/gallery/solutions/acid_base/plot_01_weak_acid_base`
+  :doc:`/api/gallery/solutions/acid_base/plot_01_ostwald_dilution_law`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">The Ostwald dilution law and buffer design</div>
+      <div class="sphx-glr-thumbnail-title">Ostwald's dilution law: weak acids dissociate more when diluted</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The law of mass action says that at equilibrium the concentrations of products and reactants, each raised to its stoichiometric power, combine into a quotient that is fixed at a given temperature. For HA \rightleftharpoons H^+ + A^-:">
+
+.. only:: html
+
+  .. image:: /api/gallery/solutions/acid_base/images/thumb/sphx_glr_plot_02_law_of_mass_action_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/solutions/acid_base/plot_02_law_of_mass_action`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Guldberg and Waage's law of mass action: a constant equilibrium quotient</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Arrhenius proposed that an acid dissolved in water is split, at least in part, into free ions even with no current flowing, and that the degree of dissociation \alpha distinguishes a strong electrolyte (\alpha \approx 1) from a weak one (\alpha \ll 1). The number of dissolved particles per formula unit is then i = 1 + \alpha for a 1:1 electrolyte -- the van &#x27;t Hoff factor that explained anomalous colligative data.">
+
+.. only:: html
+
+  .. image:: /api/gallery/solutions/acid_base/images/thumb/sphx_glr_plot_03_arrhenius_electrolytic_dissociation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/solutions/acid_base/plot_03_arrhenius_electrolytic_dissociation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Arrhenius's electrolytic dissociation: how much of an electrolyte is ions?</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Hasselbalch&#x27;s logarithmic form of Henderson&#x27;s buffer relationship,">
+
+.. only:: html
+
+  .. image:: /api/gallery/solutions/acid_base/images/thumb/sphx_glr_plot_04_henderson_hasselbalch_buffer_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/solutions/acid_base/plot_04_henderson_hasselbalch_buffer`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Henderson-Hasselbalch equation and buffer design</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Sorensen&#x27;s 1909 definition \mathrm{pH} = -\log_{10}[H^+] (~chemistrykit.solutions.systems.acid_base.ph_from_h) turns hydrogen-ion concentrations spanning fourteen orders of magnitude into numbers between 0 and 14. Below, the pH of several everyday solutions is computed from their equilibrium [H^+] and placed on the scale, and the companion relation \mathrm{pH} + \mathrm{pOH} = pK_w = 14 is checked with poh_from_oh.">
+
+.. only:: html
+
+  .. image:: /api/gallery/solutions/acid_base/images/thumb/sphx_glr_plot_05_sorensen_ph_scale_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/solutions/acid_base/plot_05_sorensen_ph_scale`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Sorensen's pH scale: a logarithm for hydrogen-ion concentration</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Niels Bjerrum&#x27;s 1914 monograph on acid-base titrations introduced diagrams showing what fraction of a polyprotic acid is present in each protonation state as a function of pH -- today called Bjerrum plots or distribution diagrams. The fractions (~chemistrykit.solutions.systems.acid_base.polyprotic_fractions) depend only on pH and the stepwise K_a values, and adjacent species are equally abundant exactly where \mathrm{pH} = pK_j.">
+
+.. only:: html
+
+  .. image:: /api/gallery/solutions/acid_base/images/thumb/sphx_glr_plot_06_bjerrum_speciation_diagram_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/solutions/acid_base/plot_06_bjerrum_speciation_diagram`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Bjerrum's speciation diagrams for polyprotic acids</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Donald Van Slyke defined the buffer value \beta = dC_b/d\mathrm{pH}, the strong base per litre needed to raise the pH by one unit. For a weak acid/conjugate base pair of total concentration C (~chemistrykit.solutions.systems.acid_base.buffer_capacity):">
+
+.. only:: html
+
+  .. image:: /api/gallery/solutions/acid_base/images/thumb/sphx_glr_plot_07_van_slyke_buffer_capacity_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/solutions/acid_base/plot_07_van_slyke_buffer_capacity`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Van Slyke's buffer capacity: how strongly a solution resists pH change</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In the Bronsted-Lowry picture an acid is a proton donor and its deprotonated form is a conjugate base -- itself a genuine base that accepts a proton from water. For every pair, K_aK_b = K_w, so the stronger the acid, the weaker its conjugate base. Here the acetate ion is modelled as a base in its own right with WeakBase (K_b = K_w/K_a), alongside acetic acid as WeakAcid, and several conjugate pairs are placed on the line pK_a + pK_b = 14.">
+
+.. only:: html
+
+  .. image:: /api/gallery/solutions/acid_base/images/thumb/sphx_glr_plot_08_bronsted_lowry_conjugate_pairs_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/solutions/acid_base/plot_08_bronsted_lowry_conjugate_pairs`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Bronsted-Lowry conjugate acid-base pairs: pKa + pKb = pKw</div>
     </div>
 
 
@@ -90,8 +212,8 @@ Henderson-Hasselbalch buffer design.
 Activity coefficients
 ----------------------
 
-Debye-Huckel limiting and extended activity-coefficient laws as a
-function of ionic strength.
+The Debye-Huckel limiting law, Guntelberg's extended law, and the Davies
+equation for activity coefficients as a function of ionic strength.
 
 
 .. raw:: html
@@ -107,18 +229,52 @@ function of ionic strength.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Comparing the Debye-Huckel limiting law (~chemistrykit.solutions.systems.activity.activity_coefficient_debye_huckel_limiting) against the extended law (~chemistrykit.solutions.systems.activity.activity_coefficient_debye_huckel_extended) for ions of different charge, across a range of ionic strength. The two laws agree closely at low ionic strength but diverge above roughly 0.01 mol/L, where the limiting law over-corrects.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Debye and Huckel&#x27;s screening theory predicts that at low ionic strength">
 
 .. only:: html
 
-  .. image:: /api/gallery/solutions/activity/images/thumb/sphx_glr_plot_01_debye_huckel_thumb.png
+  .. image:: /api/gallery/solutions/activity/images/thumb/sphx_glr_plot_01_debye_huckel_limiting_law_thumb.png
     :alt:
 
-  :doc:`/api/gallery/solutions/activity/plot_01_debye_huckel`
+  :doc:`/api/gallery/solutions/activity/plot_01_debye_huckel_limiting_law`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Debye-Huckel limiting vs. extended activity-coefficient laws</div>
+      <div class="sphx-glr-thumbnail-title">The Debye-Huckel limiting law: log gamma is linear in the square root of I</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The limiting law treats ions as point charges and over-corrects above I \approx 0.01 mol/L. Guntelberg&#x27;s extended form adds a finite-size denominator with a single universal size parameter, Ba \approx 1,">
+
+.. only:: html
+
+  .. image:: /api/gallery/solutions/activity/images/thumb/sphx_glr_plot_02_guntelberg_extended_law_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/solutions/activity/plot_02_guntelberg_extended_law`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Guntelberg's extended law: correcting Debye-Huckel for finite ion size</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Measured activity coefficients fall with ionic strength, pass through a minimum, and rise again in concentrated solutions -- behaviour no pure screening law reproduces. Davies added an empirical term linear in I to Guntelberg&#x27;s form,">
+
+.. only:: html
+
+  .. image:: /api/gallery/solutions/activity/images/thumb/sphx_glr_plot_03_davies_equation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/solutions/activity/plot_03_davies_equation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Davies equation: activity coefficients that turn back up</div>
     </div>
 
 
@@ -131,7 +287,8 @@ function of ionic strength.
 Solubility equilibria
 ---------------------
 
-Ksp, molar solubility, and the common-ion effect.
+Nernst's solubility product for salts of any stoichiometry, and Le
+Chatelier's common-ion effect.
 
 
 .. raw:: html
@@ -147,18 +304,35 @@ Ksp, molar solubility, and the common-ion effect.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="AgCl&#x27;s molar solubility (~chemistrykit.solutions.systems.solubility.molar_solubility_from_ksp) drops sharply as increasing concentrations of a common ion (here, Cl- from added NaCl) are introduced -- Le Chatelier&#x27;s principle, quantified exactly by molar_solubility_with_common_ion.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Le Chatelier&#x27;s principle says an equilibrium disturbed by adding one of its participants shifts to consume it. Adding chloride to saturated AgCl drives \text{AgCl}(s) \rightleftharpoons \text{Ag}^+ + \text{Cl}^- back toward the solid, so AgCl&#x27;s molar solubility (~chemistrykit.solutions.systems.solubility.molar_solubility_from_ksp) drops sharply as increasing concentrations of a common ion (here, Cl- from added NaCl) are introduced -- the direction Le Chatelier predicts, and the size quantified exactly by molar_solubility_with_common_ion.">
 
 .. only:: html
 
-  .. image:: /api/gallery/solutions/solubility/images/thumb/sphx_glr_plot_01_solubility_equilibria_thumb.png
+  .. image:: /api/gallery/solutions/solubility/images/thumb/sphx_glr_plot_01_le_chatelier_common_ion_effect_thumb.png
     :alt:
 
-  :doc:`/api/gallery/solutions/solubility/plot_01_solubility_equilibria`
+  :doc:`/api/gallery/solutions/solubility/plot_01_le_chatelier_common_ion_effect`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">The common-ion effect on AgCl solubility</div>
+      <div class="sphx-glr-thumbnail-title">Le Chatelier's principle: the common-ion effect on AgCl solubility</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Nernst showed that for a sparingly soluble salt M_pX_q in equilibrium with its saturated solution, the product of the ion concentrations, each raised to its stoichiometric coefficient, is a constant:">
+
+.. only:: html
+
+  .. image:: /api/gallery/solutions/solubility/images/thumb/sphx_glr_plot_02_nernst_solubility_product_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/solutions/solubility/plot_02_nernst_solubility_product`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Nernst's solubility product: Ksp for salts of any stoichiometry</div>
     </div>
 
 
@@ -171,8 +345,9 @@ Ksp, molar solubility, and the common-ion effect.
 Titration curves
 ----------------
 
-Strong/strong, weak-acid/strong-base, and weak-base/strong-acid
-titration curves, with numerically detected equivalence points.
+Strong/strong and weak-acid/strong-base titration curves with
+numerically detected equivalence points, and Gran-plot extrapolation of
+the equivalence volume.
 
 
 .. raw:: html
@@ -188,7 +363,7 @@ titration curves, with numerically detected equivalence points.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Comparing a strong-acid/strong-base titration (~chemistrykit.solutions.systems.titration.StrongAcidStrongBaseTitration) against a weak-acid/strong-base titration (~chemistrykit.solutions.systems.titration.WeakAcidStrongBaseTitration) of the same concentrations: the weak-acid curve starts at a higher pH, has a buffer region around its half-equivalence point (where pH = pKa), and its equivalence point is basic rather than neutral -- all visible directly from the curve shapes.">
+    <div class="sphx-glr-thumbcontainer" tooltip="The volumetric analysis Gay-Lussac and Mohr systematized finds how much acid a sample contains from the burette volume at which it has been exactly neutralized -- the equivalence point, seen by eye as an indicator&#x27;s sudden colour change and here located numerically as the steepest point of the pH curve (~chemistrykit.solutions.core.base_system.Titration.find_equivalence_point). Comparing a strong-acid/strong-base titration (~chemistrykit.solutions.systems.titration.StrongAcidStrongBaseTitration) against a weak-acid/strong-base titration (~chemistrykit.solutions.systems.titration.WeakAcidStrongBaseTitration) of the same concentrations: the weak-acid curve starts at a higher pH, has a buffer region around its half-equivalence point (where pH = pKa), and its equivalence point is basic rather than neutral -- all visible directly from the curve shapes.">
 
 .. only:: html
 
@@ -199,7 +374,24 @@ titration curves, with numerically detected equivalence points.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Strong/strong and weak-acid/strong-base titration curves</div>
+      <div class="sphx-glr-thumbnail-title">Volumetric titration: locating the equivalence point</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Near the equivalence point a titration curve is steep and hard to sample. Gran observed that before the equivalence point of a strong acid titrated with a strong base,">
+
+.. only:: html
+
+  .. image:: /api/gallery/solutions/titration/images/thumb/sphx_glr_plot_02_gran_plot_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/solutions/titration/plot_02_gran_plot`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Gran's plot: finding the equivalence point by linear extrapolation</div>
     </div>
 
 

@@ -26,8 +26,8 @@ quantitative, and the lineshape machinery that turns a set of predicted
 transition energies into something that looks like a real recorded
 spectrum. This chronology traces the major breakthroughs behind it, from
 Bouguer's eighteenth-century observation that light dims exponentially
-through an absorbing medium to Bloch and Purcell's mid-twentieth-century
-discovery of nuclear magnetic resonance, with a pointer to the
+through an absorbing medium to Ernst and Anderson's 1966 Fourier-transform
+NMR, with a pointer to the
 corresponding implementation in this package at each stop.
 
 .. contents:: Timeline
@@ -120,7 +120,7 @@ Akademie der Wissenschaften zu München 5, 193-226 (1814/1815). A
 Denkschrift (memoir), not a journal article in the modern sense -- there
 is no DOI to cite.
 
-.. minigallery:: ../../examples/spectro/rotational/plot_01_rotational_spectrum.py
+.. minigallery:: ../../examples/spectro/atomic/plot_01_fraunhofer_dark_lines.py
 
 1859 -- 1861 -- Bunsen, Kirchhoff, and Flame Emission Spectroscopy
 ------------------------------------------------------------------
@@ -166,7 +166,202 @@ Bunsen, "Chemische Analyse durch Spectralbeobachtungen," Ann. Phys. Chem.
 186, 161-189 (1860) (the analytical method, and the discovery of
 caesium); Ann. Phys. Chem. 189, 337-381 (1861) (rubidium).
 
-.. minigallery:: ../../examples/spectro/rotational/plot_01_rotational_spectrum.py
+.. minigallery:: ../../examples/spectro/atomic/plot_02_kirchhoff_bunsen_flame_spectra.py
+
+1885 -- 1913 -- Balmer, Rydberg, Bohr, and the Hydrogen Spectrum
+----------------------------------------------------------------
+
+Johann Jakob Balmer, a Basel schoolteacher with no background in
+spectroscopy, noticed in 1885 that the wavelengths of the four visible
+hydrogen lines measured by Ångström fit a single simple formula,
+:math:`\lambda = B\,n^2/(n^2-4)` with :math:`n=3,4,5,6` and
+:math:`B\approx 364.56` nm. Further ultraviolet lines, already measured
+by William Huggins in the spectra of white stars, fit the same formula
+with :math:`n\ge7`. Johannes Rydberg
+rewrote the pattern in wavenumbers and extended it to other series and
+other elements (1890):
+
+.. math::
+
+   \tilde\nu = R\left(\frac{1}{n_1^2}-\frac{1}{n_2^2}\right),
+   \qquad n_2 > n_1 .
+
+This form suggested that every line is a *difference* of two terms.
+Niels Bohr explained why in 1913. The electron in hydrogen occupies
+quantized levels :math:`E_n=-hcR/n^2`, and each line is a jump between
+two of them. Bohr's model also gave :math:`R` in terms of fundamental
+constants, with a small reduced-mass correction
+:math:`R_M=R_\infty/(1+m_e/M)` that depends on the nucleus. The Lyman
+(:math:`n_1=1`, ultraviolet), Balmer (:math:`n_1=2`, visible) and
+Paschen (:math:`n_1=3`, infrared) series all converge on series limits
+that equal the ionization energies from those levels.
+
+*Implementation:* :func:`~chemistrykit.spectro.rydberg_wavenumber`
+evaluates the Rydberg formula for any hydrogen-like atom of nuclear
+charge :math:`Z`, optionally with the reduced-mass correction for a
+finite nuclear mass. It reproduces Balmer's formula exactly with
+:math:`B=4/R_H`.
+
+*References:* J. J. Balmer, "Notiz über die Spectrallinien des
+Wasserstoffs," Ann. Phys. Chem. 261, 80-87 (1885); J. R. Rydberg,
+"Recherches sur la constitution des spectres d'émission des éléments
+chimiques," Kongl. Svenska Vetenskaps-Akademiens Handlingar 23, No. 11
+(1890); N. Bohr, "On the Constitution of Atoms and Molecules," Phil.
+Mag. 26, 1-25 (1913).
+
+.. minigallery:: ../../examples/spectro/atomic/plot_03_balmer_rydberg_hydrogen_series.py
+
+1895 -- 1912 -- Michelson, Lorentz, and Voigt: the Physical Origins of Spectral Lineshapes
+------------------------------------------------------------------------------------------------
+
+A real spectral line is never an infinitely sharp mathematical stick; it
+has a finite, measurable width and shape, and two genuinely distinct
+physical mechanisms produce two genuinely distinct shapes. Albert
+Michelson, in "On the Broadening of Spectral Lines" (1895), showed that
+a gas's thermal (Maxwell-Boltzmann) distribution of line-of-sight
+velocities Doppler-shifts each individual emitting or absorbing
+molecule's contribution by a different, momentarily random amount,
+summing to a Gaussian line profile whose width grows with temperature --
+"inhomogeneous" broadening, since it comes from a distribution of
+slightly different sub-populations rather than any change to a single
+molecule's own emission. Hendrik Lorentz's classical electron theory of
+dispersion, presented in his 1906 Columbia University lectures and
+published as *The Theory of Electrons* (1909), treated an emitting atom
+as a damped, radiating classical oscillator, whose exponentially decaying
+amplitude Fourier-transforms to a Lorentzian frequency profile -- the
+shape of "homogeneous" broadening (a finite excited-state lifetime, or
+frequent collisions that interrupt the phase of the emission, acting
+identically on every molecule in the sample) rather than a distribution
+across different molecules. Woldemar Voigt, in 1912, worked out the
+lineshape produced when both mechanisms contribute together: the
+mathematical convolution of a Gaussian and a Lorentzian, a profile with a
+Gaussian-like core and Lorentzian-like tails that has to be evaluated via
+the complex error (Faddeeva) function rather than any elementary
+closed form. Comparing a measured line's shape against these three
+idealized profiles remains the standard first diagnostic for identifying
+which broadening mechanism -- or mixture of both -- dominates a given
+spectroscopic measurement.
+
+*Implementation:* :func:`~chemistrykit.spectro.gaussian`
+and :func:`~chemistrykit.spectro.lorentzian` implement
+exactly these two normalized profiles, and
+:func:`~chemistrykit.spectro.voigt` their convolution
+via the numerically stable Faddeeva-function evaluation
+(:obj:`scipy.special.wofz`);
+:func:`~chemistrykit.spectro.broaden_stick_spectrum`
+applies any of the three to an entire stick spectrum at once, and
+:meth:`~chemistrykit.spectro.Spectrum.broaden` exposes
+that broadening directly on every model's output spectrum.
+
+*References:* A. A. Michelson, "On the Broadening of Spectral Lines,"
+Astrophys. J. 2, 251-263 (1895); H. A. Lorentz, *The Theory of Electrons
+and Its Applications to the Phenomena of Light and Radiant Heat*
+(Teubner, Leipzig, 1909; based on his 1906 lectures at Columbia
+University); W. Voigt, "Das Gesetz der Intensitätsverteilung innerhalb
+der Linien eines Gasspektrums," Sitzungsberichte der Bayerischen
+Akademie der Wissenschaften, mathematisch-physikalische Klasse, 603-620
+(1912).
+
+.. minigallery:: ../../examples/spectro/lineshapes/plot_01_lineshapes.py
+
+1921 -- 1928 -- Raman's Discovery of Inelastic Light Scattering
+---------------------------------------------------------------
+
+C. V. Raman's interest in how light scatters from transparent media grew
+out of a 1921 sea voyage from England to India, during which he became
+dissatisfied with the standard explanation (simple reflection of the
+sky) for the deep blue color of the Mediterranean -- prompting the
+research into molecular light scattering that would occupy him for the
+rest of the decade. The discovery of the effect that now bears his name
+came later and elsewhere: on 28 February 1928, in his laboratory at the
+Indian Association for the Cultivation of Science in Calcutta, Raman and
+his student K. S. Krishnan observed that a small fraction of
+monochromatic light scattered by a liquid emerges shifted in frequency
+by amounts corresponding to the scattering molecules' own vibrational
+(or rotational) energy-level spacings -- inelastic scattering, in
+contrast to the much stronger, unshifted elastic (Rayleigh) scattering
+that dominates the same experiment. (The 1921-voyage anecdote is
+genuine, and genuinely the origin of Raman's interest in light
+scattering, but it is frequently -- and incorrectly -- retold as the
+occasion of the discovery itself; the effect was found seven years
+later, on land, in Calcutta.) Raman won the 1930 Nobel Prize in Physics
+for the discovery, the first Asian scientist to win a Nobel Prize in the
+sciences while working entirely in Asia. Because a Raman-active
+vibration and an infrared-active vibration obey selection rules governed
+by different symmetry requirements (a changing polarizability for Raman,
+a changing dipole moment for infrared), a centrosymmetric molecule's
+normal modes obey a mutual exclusion rule: no mode can be active in both
+spectra at once.
+
+*Connection:*
+:class:`chemistrykit.spectro.systems.vibrational.TriatomicNormalModes`'s
+linear-CO2 normal-mode calculation reproduces exactly this mutual
+exclusion rule in miniature: CO2's centrosymmetric symmetric stretch
+produces no change in dipole moment (it is infrared-silent, as the
+worked example in this package's gallery notes explicitly) precisely
+because it *does* modulate the molecule's polarizability -- the mode
+shows up in the Raman spectrum instead of the infrared one, the
+textbook demonstration of Raman and infrared activity being mutually
+exclusive for a centrosymmetric molecule.
+
+*References:* C. V. Raman and K. S. Krishnan, "A New Type of Secondary
+Radiation," Nature 121, 501-502 (1928); C. V. Raman, "A New Radiation,"
+Indian J. Phys. 2, 387-398 (1928).
+
+.. minigallery:: ../../examples/spectro/vibrational/plot_03_raman_ir_mutual_exclusion.py
+
+1925 -- 1950 -- Franck, Condon, and the Franck-Condon Principle
+-------------------------------------------------------------------
+
+James Franck argued qualitatively in 1925 that because electrons move so
+much faster than nuclei, an electronic transition happens essentially
+instantaneously on the timescale of nuclear vibration -- so the nuclei's
+positions and momenta are, to a very good approximation, unchanged by
+the transition itself, a "vertical" jump on a potential-energy-surface
+diagram rather than a curved path that follows the nuclei relaxing.
+Edward Condon supplied the quantitative machinery in 1926-1928, showing
+that the intensity of a :math:`v''=0\to v'` vibronic transition (ground
+vibrational level of the lower electronic state to level :math:`v'` of
+the upper one) is governed by the square of the overlap integral between
+the two states' vibrational wavefunctions -- the Franck-Condon factor.
+For two displaced harmonic oscillators of equal frequency, this reduces
+to a strikingly simple closed form,
+
+.. math::
+
+   \text{FC}(0\to v') = \frac{e^{-S}S^{v'}}{v'!}, \qquad
+   S=\frac12\frac{m\omega}{\hbar}\Delta Q^2,
+
+a Poisson distribution over the final vibrational level with mean equal
+to the dimensionless Huang-Rhys displacement parameter :math:`S` --
+itself named for Kun Huang and Alfred Rhys's 1950 extension of the same
+overlap-integral logic to non-radiative transitions in solid-state
+color centers, work that gave the parameter its now-standard name and
+notation across both molecular and solid-state spectroscopy. A vibronic
+progression's shape is a direct, readable measurement of how much a
+molecule's equilibrium geometry shifts upon electronic excitation: a
+small :math:`S` puts almost all the intensity in the :math:`0\to0`
+origin band, while a large :math:`S` spreads a long progression peaking
+near :math:`v'\approx S`.
+
+*Implementation:*
+:func:`~chemistrykit.spectro.huang_rhys_factor` computes
+exactly this :math:`S`;
+:func:`~chemistrykit.spectro.franck_condon_factor` and
+:func:`~chemistrykit.spectro.franck_condon_progression`
+implement the resulting Poisson-distributed Franck-Condon factors, and
+:func:`~chemistrykit.spectro.franck_condon_spectrum`
+assembles the full vibronic stick spectrum from them.
+
+*References:* J. Franck, "Elementary Processes of Photochemical
+Reactions," Trans. Faraday Soc. 21, 536-542 (1925); E. U. Condon, "A
+Theory of Intensity Distribution in Band Systems," Phys. Rev. 28,
+1182-1201 (1926), and "Nuclear Motions Associated with Electron
+Transitions in Diatomic Molecules," Phys. Rev. 32, 858-872 (1928); K.
+Huang and A. Rhys, "Theory of Light Absorption and Non-Radiative
+Transitions in F-Centres," Proc. R. Soc. Lond. A 204, 406-423 (1950).
+
+.. minigallery:: ../../examples/spectro/electronic/plot_01_franck_condon.py
 
 1926 -- Dennison and the Quantum Theory of the Rotating Molecule
 -------------------------------------------------------------------
@@ -187,8 +382,8 @@ in :math:`J`) level structure this equation predicts is the direct
 theoretical origin of the evenly-spaced *line* pattern -- lines spaced by
 exactly :math:`2B`, with :math:`B=\hbar/(4\pi c I)` the rotational
 constant -- that a real rotational absorption spectrum shows under the
-:math:`\Delta J=\pm1` selection rule, and it let Dennison additionally
-resolve a long-standing anomaly in hydrogen gas's low-temperature
+:math:`\Delta J=\pm1` selection rule. The same quantized levels let
+Dennison, the following year, resolve a long-standing anomaly in hydrogen gas's low-temperature
 specific heat by recognizing that ortho- and para-hydrogen (nuclear-spin
 isomers restricted to odd- and even-:math:`J` rotational states
 respectively) behave as two nearly non-interconverting gases with
@@ -205,7 +400,9 @@ adds the Boltzmann-population intensity pattern that determines which of
 those evenly-spaced lines is actually the strongest.
 
 *References:* D. M. Dennison, "The Rotation of Molecules," Phys. Rev. 28,
-318-333 (1926).
+318-333 (1926); D. M. Dennison, "A Note on the Specific Heat of the
+Hydrogen Molecule," Proc. R. Soc. Lond. A 115, 483-486 (1927) (the
+ortho/para-hydrogen explanation).
 
 .. minigallery:: ../../examples/spectro/rotational/plot_01_rotational_spectrum.py
 
@@ -293,106 +490,7 @@ Spectroscopy* (McGraw-Hill, New York, 1955). The 1955 reference is a
 textbook synthesizing roughly a decade of postwar work by many groups
 rather than a single discovery paper.
 
-.. minigallery:: ../../examples/spectro/rotational/plot_01_rotational_spectrum.py
-
-1925 -- 1950 -- Franck, Condon, and the Franck-Condon Principle
--------------------------------------------------------------------
-
-James Franck argued qualitatively in 1925 that because electrons move so
-much faster than nuclei, an electronic transition happens essentially
-instantaneously on the timescale of nuclear vibration -- so the nuclei's
-positions and momenta are, to a very good approximation, unchanged by
-the transition itself, a "vertical" jump on a potential-energy-surface
-diagram rather than a curved path that follows the nuclei relaxing.
-Edward Condon supplied the quantitative machinery in 1926-1928, showing
-that the intensity of a :math:`v''=0\to v'` vibronic transition (ground
-vibrational level of the lower electronic state to level :math:`v'` of
-the upper one) is governed by the square of the overlap integral between
-the two states' vibrational wavefunctions -- the Franck-Condon factor.
-For two displaced harmonic oscillators of equal frequency, this reduces
-to a strikingly simple closed form,
-
-.. math::
-
-   \text{FC}(0\to v') = \frac{e^{-S}S^{v'}}{v'!}, \qquad
-   S=\frac12\frac{m\omega}{\hbar}\Delta Q^2,
-
-a Poisson distribution over the final vibrational level with mean equal
-to the dimensionless Huang-Rhys displacement parameter :math:`S` --
-itself named for Kun Huang and Alfred Rhys's 1950 extension of the same
-overlap-integral logic to non-radiative transitions in solid-state
-color centers, work that gave the parameter its now-standard name and
-notation across both molecular and solid-state spectroscopy. A vibronic
-progression's shape is a direct, readable measurement of how much a
-molecule's equilibrium geometry shifts upon electronic excitation: a
-small :math:`S` puts almost all the intensity in the :math:`0\to0`
-origin band, while a large :math:`S` spreads a long progression peaking
-near :math:`v'\approx S`.
-
-*Implementation:*
-:func:`~chemistrykit.spectro.huang_rhys_factor` computes
-exactly this :math:`S`;
-:func:`~chemistrykit.spectro.franck_condon_factor` and
-:func:`~chemistrykit.spectro.franck_condon_progression`
-implement the resulting Poisson-distributed Franck-Condon factors, and
-:func:`~chemistrykit.spectro.franck_condon_spectrum`
-assembles the full vibronic stick spectrum from them.
-
-*References:* J. Franck, "Elementary Processes of Photochemical
-Reactions," Trans. Faraday Soc. 21, 536-542 (1925); E. U. Condon, "A
-Theory of Intensity Distribution in Band Systems," Phys. Rev. 28,
-1182-1201 (1926), and "Nuclear Motions Associated with Electron
-Transitions in Diatomic Molecules," Phys. Rev. 32, 858-872 (1928); K.
-Huang and A. Rhys, "Theory of Light Absorption and Non-Radiative
-Transitions in F-Centres," Proc. R. Soc. Lond. A 204, 406-423 (1950).
-
-.. minigallery:: ../../examples/spectro/electronic/plot_01_franck_condon.py
-
-1921 -- 1928 -- Raman's Discovery of Inelastic Light Scattering
----------------------------------------------------------------
-
-C. V. Raman's interest in how light scatters from transparent media grew
-out of a 1921 sea voyage from England to India, during which he became
-dissatisfied with the standard explanation (simple reflection of the
-sky) for the deep blue color of the Mediterranean -- prompting the
-research into molecular light scattering that would occupy him for the
-rest of the decade. The discovery of the effect that now bears his name
-came later and elsewhere: on 28 February 1928, in his laboratory at the
-Indian Association for the Cultivation of Science in Calcutta, Raman and
-his student K. S. Krishnan observed that a small fraction of
-monochromatic light scattered by a liquid emerges shifted in frequency
-by amounts corresponding to the scattering molecules' own vibrational
-(or rotational) energy-level spacings -- inelastic scattering, in
-contrast to the much stronger, unshifted elastic (Rayleigh) scattering
-that dominates the same experiment. (The 1921-voyage anecdote is
-genuine, and genuinely the origin of Raman's interest in light
-scattering, but it is frequently -- and incorrectly -- retold as the
-occasion of the discovery itself; the effect was found seven years
-later, on land, in Calcutta.) Raman won the 1930 Nobel Prize in Physics
-for the discovery, the first Asian scientist to win a Nobel Prize in the
-sciences while working entirely in Asia. Because a Raman-active
-vibration and an infrared-active vibration obey selection rules governed
-by different symmetry requirements (a changing polarizability for Raman,
-a changing dipole moment for infrared), a centrosymmetric molecule's
-normal modes obey a mutual exclusion rule: no mode can be active in both
-spectra at once.
-
-*Connection:*
-:class:`chemistrykit.spectro.systems.vibrational.TriatomicNormalModes`'s
-linear-CO2 normal-mode calculation reproduces exactly this mutual
-exclusion rule in miniature: CO2's centrosymmetric symmetric stretch
-produces no change in dipole moment (it is infrared-silent, as the
-worked example in this package's gallery notes explicitly) precisely
-because it *does* modulate the molecule's polarizability -- the mode
-shows up in the Raman spectrum instead of the infrared one, the
-textbook demonstration of Raman and infrared activity being mutually
-exclusive for a centrosymmetric molecule.
-
-*References:* C. V. Raman and K. S. Krishnan, "A New Type of Secondary
-Radiation," Nature 121, 501-502 (1928); C. V. Raman, "A New Radiation,"
-Indian J. Phys. 2, 387-398 (1928).
-
-.. minigallery:: ../../examples/spectro/vibrational/plot_02_triatomic_normal_modes.py
+.. minigallery:: ../../examples/spectro/rotational/plot_02_microwave_isotope_shift.py
 
 1939 -- 1955 -- Wilson's GF-Matrix Method for Molecular Vibrations
 --------------------------------------------------------------------
@@ -469,7 +567,7 @@ Spectra of Diatomic Molecules*, 2nd ed. (Van Nostrand, New York, 1950);
 *Molecular Spectra and Molecular Structure II. Infrared and Raman
 Spectra of Polyatomic Molecules* (Van Nostrand, New York, 1945).
 
-.. minigallery:: ../../examples/spectro/vibrational/plot_02_triatomic_normal_modes.py
+.. minigallery:: ../../examples/spectro/vibrational/plot_04_linear_bend_degeneracy.py
 
 1946 -- Bloch, Purcell, and the Discovery of Nuclear Magnetic Resonance
 ---------------------------------------------------------------------------
@@ -490,22 +588,20 @@ its local chemical (electronic) environment -- the chemical shift -- so
 that a molecule's NMR spectrum reports directly on its chemical structure
 rather than being a single line per isotope.
 
-*Implementation:* every quantity
-``chemistrykit.spectro.systems.nmr`` operates on -- a
-``chemical_shift_ppm``, positioned relative to a reference compound --
-presupposes exactly this chemical-shift phenomenon Bloch and Purcell's
-discovery made observable;
-:func:`~chemistrykit.spectro.first_order_multiplet` and
-:func:`~chemistrykit.spectro.multi_coupling_multiplet` build
-the resulting NMR :class:`~chemistrykit.spectro.core.base_system.Spectrum`
-directly from a chemical shift plus its coupling pattern.
+*Implementation:* :func:`~chemistrykit.spectro.larmor_frequency`
+gives the resonance frequency :math:`\nu_0=\gamma B_0/(2\pi)` that Bloch
+and Purcell detected, and :func:`~chemistrykit.spectro.chemical_shift_ppm`
+converts a resonance frequency to the field-independent chemical-shift
+scale, :math:`\delta=10^6(\nu-\nu_\text{ref})/\nu_\text{ref}`. Every
+other function in ``chemistrykit.spectro.systems.nmr`` takes its input on
+that ppm scale.
 
 *References:* F. Bloch, W. W. Hansen, and M. Packard, "Nuclear
 Induction," Phys. Rev. 69, 127 (1946); E. M. Purcell, H. C. Torrey, and
 R. V. Pound, "Resonance Absorption by Nuclear Magnetic Moments in a
 Solid," Phys. Rev. 69, 37-38 (1946).
 
-.. minigallery:: ../../examples/spectro/nmr/plot_01_nmr_multiplets.py
+.. minigallery:: ../../examples/spectro/nmr/plot_02_nmr_resonance_chemical_shift.py
 
 1952 -- 1953 -- Ramsey, Purcell, and the Theory of Spin-Spin Coupling
 --------------------------------------------------------------------------
@@ -549,58 +645,79 @@ Phys. Rev. 91, 303-307 (1953).
 
 .. minigallery:: ../../examples/spectro/nmr/plot_01_nmr_multiplets.py
 
-1895 -- 1912 -- Michelson, Lorentz, and Voigt: the Physical Origins of Spectral Lineshapes
-------------------------------------------------------------------------------------------------
+1959 -- 1963 -- Karplus and the Dihedral-Angle Dependence of Vicinal Coupling
+-----------------------------------------------------------------------------
 
-A real spectral line is never an infinitely sharp mathematical stick; it
-has a finite, measurable width and shape, and two genuinely distinct
-physical mechanisms produce two genuinely distinct shapes. Albert
-Michelson, in "On the Broadening of Spectral Lines" (1895), showed that
-a gas's thermal (Maxwell-Boltzmann) distribution of line-of-sight
-velocities Doppler-shifts each individual emitting or absorbing
-molecule's contribution by a different, momentarily random amount,
-summing to a Gaussian line profile whose width grows with temperature --
-"inhomogeneous" broadening, since it comes from a distribution of
-slightly different sub-populations rather than any change to a single
-molecule's own emission. Hendrik Lorentz's classical electron theory of
-dispersion, presented in his 1906 Columbia University lectures and
-published as *The Theory of Electrons* (1909), treated an emitting atom
-as a damped, radiating classical oscillator, whose exponentially decaying
-amplitude Fourier-transforms to a Lorentzian frequency profile -- the
-shape of "homogeneous" broadening (a finite excited-state lifetime, or
-frequent collisions that interrupt the phase of the emission, acting
-identically on every molecule in the sample) rather than a distribution
-across different molecules. Woldemar Voigt, in 1912, worked out the
-lineshape produced when both mechanisms contribute together: the
-mathematical convolution of a Gaussian and a Lorentzian, a profile with a
-Gaussian-like core and Lorentzian-like tails that has to be evaluated via
-the complex error (Faddeeva) function rather than any elementary
-closed form. Comparing a measured line's shape against these three
-idealized profiles remains the standard first diagnostic for identifying
-which broadening mechanism -- or mixture of both -- dominates a given
-spectroscopic measurement.
+Once spin-spin coupling was understood as an electron-mediated effect,
+the next question was what sets its size. Martin Karplus, using a
+valence-bond calculation of the Fermi-contact mechanism for ethane-like
+fragments, found in 1959 that the three-bond (vicinal) H-C-C-H coupling
+depends strongly on the dihedral angle :math:`\phi` between the two C-H
+bonds:
 
-*Implementation:* :func:`~chemistrykit.spectro.gaussian`
-and :func:`~chemistrykit.spectro.lorentzian` implement
-exactly these two normalized profiles, and
-:func:`~chemistrykit.spectro.voigt` their convolution
-via the numerically stable Faddeeva-function evaluation
-(:obj:`scipy.special.wofz`);
-:func:`~chemistrykit.spectro.broaden_stick_spectrum`
-applies any of the three to an entire stick spectrum at once, and
-:meth:`~chemistrykit.spectro.Spectrum.broaden` exposes
-that broadening directly on every model's output spectrum.
+.. math::
 
-*References:* A. A. Michelson, "On the Broadening of Spectral Lines,"
-Astrophys. J. 2, 251-263 (1895); H. A. Lorentz, *The Theory of Electrons
-and Its Applications to the Phenomena of Light and Radiant Heat*
-(Teubner, Leipzig, 1909; based on his 1906 lectures at Columbia
-University); W. Voigt, "Das Gesetz der Intensitätsverteilung innerhalb
-der Linien eines Gasspektrums," Sitzungsberichte der Bayerischen
-Akademie der Wissenschaften, mathematisch-physikalische Klasse, 603-620
-(1912).
+   ^3J(\phi) \approx
+   \begin{cases}
+   8.5\cos^2\phi - 0.28 \ \text{Hz}, & 0^\circ\le\phi\le90^\circ \\
+   9.5\cos^2\phi - 0.28 \ \text{Hz}, & 90^\circ<\phi\le180^\circ
+   \end{cases}
 
-.. minigallery:: ../../examples/spectro/lineshapes/plot_01_lineshapes.py
+The coupling is large for eclipsed and anti protons and close to zero
+near :math:`90^\circ`. In 1963 Karplus restated the relation in the
+general form :math:`^3J=A\cos^2\phi+B\cos\phi+C` and warned that its
+coefficients depend on substituents, bond lengths and angles. It became
+one of the most widely used tools for working out conformations from
+NMR data, for example to tell axial from equatorial protons in
+cyclohexane rings and sugars, or to estimate backbone angles in
+peptides.
+
+*Implementation:* :func:`~chemistrykit.spectro.karplus_coupling`
+evaluates Karplus's original 1959 curve by default. It also evaluates
+the general three-term form when given coefficients ``(A, B, C)``.
+
+*References:* M. Karplus, "Contact Electron-Spin Coupling of Nuclear
+Magnetic Moments," J. Chem. Phys. 30, 11-15 (1959); M. Karplus,
+"Vicinal Proton Coupling in Nuclear Magnetic Resonance," J. Am. Chem.
+Soc. 85, 2870-2871 (1963).
+
+.. minigallery:: ../../examples/spectro/nmr/plot_03_karplus_vicinal_coupling.py
+
+1966 -- Ernst, Anderson, and Fourier-Transform NMR
+--------------------------------------------------
+
+Early NMR spectrometers were continuous-wave instruments. They swept the
+field or frequency slowly through each resonance, one frequency at a
+time, so most of each scan was spent recording empty baseline. Richard
+Ernst and Weston Anderson at Varian showed in 1966 that a short, intense
+radio-frequency pulse excites every resonance at once. The resulting
+free-induction decay (FID),
+
+.. math::
+
+   s(t)=\sum_k a_k\,e^{2\pi i\,\Delta\nu_k t}\,e^{-t/T_2},
+
+holds the whole spectrum, and a Fourier transform recovers it. Each
+line becomes a Lorentzian of width :math:`1/(\pi T_2)`. Since one FID
+takes about as long to record as one line in a slow sweep, many FIDs can
+be averaged in the time of a single continuous-wave scan, and
+signal-to-noise grows as the square root of the number of scans. This
+large gain in sensitivity made routine :math:`^{13}\mathrm{C}` NMR
+practical. The pulse-and-transform approach also led to two-dimensional
+and multidimensional NMR. Ernst received the 1991 Nobel Prize in
+Chemistry for these developments.
+
+*Implementation:* :func:`~chemistrykit.spectro.free_induction_decay`
+synthesizes the FID for a set of resonance offsets, amplitudes and a
+:math:`T_2`, and :func:`~chemistrykit.spectro.fid_to_spectrum`
+Fourier-transforms it into an absorption-mode spectrum on a
+frequency axis in Hz.
+
+*References:* R. R. Ernst and W. A. Anderson, "Application of Fourier
+Transform Spectroscopy to Magnetic Resonance," Rev. Sci. Instrum. 37,
+93-102 (1966).
+
+.. minigallery:: ../../examples/spectro/nmr/plot_04_fourier_transform_nmr.py
 
 See Also
 --------

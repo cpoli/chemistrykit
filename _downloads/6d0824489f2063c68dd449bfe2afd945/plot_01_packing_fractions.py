@@ -1,6 +1,11 @@
 r"""
-Packing efficiency of SC, BCC, FCC, and HCP
-==============================================
+Kepler's conjecture: packing efficiency of SC, BCC, FCC, and HCP
+==================================================================
+
+Kepler (1611) guessed that no stacking of equal spheres fills space more
+densely than the layered (face-centered cubic / hexagonal close)
+packing, with fraction :math:`\pi/\sqrt{18}\approx0.7405`. Comparing the
+four textbook lattices shows the close-packed pair at exactly that bound.
 
 The four lattices implemented here
 (:mod:`chemistrykit.crystal.systems.packing`) share the
@@ -13,6 +18,7 @@ sequence -- turn out to share the same maximum packing fraction.
 
 # %%
 import matplotlib.pyplot as plt
+import numpy as np
 
 from chemistrykit.crystal.systems.packing import (
     BodyCenteredCubicPacking,
@@ -42,6 +48,8 @@ hcp_pf = lattices["HCP (ideal)"].packing_fraction()
 print(f"\nFCC packing fraction:  {fcc_pf:.9f}")
 print(f"HCP packing fraction:  {hcp_pf:.9f}")
 print(f"Match: {abs(fcc_pf - hcp_pf) < 1e-9}")
+print(f"Kepler's bound pi/sqrt(18) = {np.pi / np.sqrt(18.0):.9f}")
+assert abs(fcc_pf - np.pi / np.sqrt(18.0)) < 1e-12
 
 # %%
 # A real HCP metal's actual c/a ratio deviates from the ideal value,
@@ -53,5 +61,7 @@ print(f"\nZinc-like HCP (c/a=1.856) packing fraction: {zinc_hcp.packing_fraction
 names = list(lattices.keys())
 fractions = [lattices[name].packing_fraction() for name in names]
 ax = plot_packing_fractions(names, fractions)
+ax.axhline(np.pi / np.sqrt(18.0), color="k", ls="--", lw=1, label=r"Kepler bound $\pi/\sqrt{18}$")
+ax.legend()
 plt.tight_layout()
 plt.show()

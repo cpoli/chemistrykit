@@ -63,6 +63,45 @@ und der Wahrscheinlichkeitsrechnung," Wiener Berichte 76, 373-435 (1877).
 
 .. minigallery:: ../../examples/md/lj_fluid/plot_02_maxwell_boltzmann_check.py
 
+1905 -- Einstein: Diffusion as a Random Walk
+------------------------------------------------
+
+Albert Einstein, in the same year as his papers on special relativity
+and the photoelectric effect, gave the first quantitative molecular
+theory of Brownian motion -- the ceaseless jittering of pollen-sized
+particles suspended in a liquid. He argued that each particle is kicked
+at random by the surrounding molecules, so that its displacement is a
+random walk: it does not travel a distance proportional to the elapsed
+time, as a particle in free flight would, but wanders off so that its
+*mean-squared* displacement grows linearly with time, with the diffusion
+coefficient :math:`D` as the constant of proportionality,
+
+.. math::
+
+   \langle |\vec r(t) - \vec r(0)|^2 \rangle = 2dDt
+
+in :math:`d` dimensions. Jean Perrin's measurements of this spreading
+(1908-1909) gave one of the decisive determinations of Avogadro's number
+and helped settle the reality of atoms. The same relation became, half
+a century later, the standard way of extracting a diffusion coefficient
+from a molecular dynamics trajectory: every atom in a simulated liquid
+performs exactly the random walk Einstein described, and :math:`D` is
+simply read off the long-time slope of its mean-squared displacement.
+
+*Implementation:*
+:func:`~chemistrykit.md.systems.transport.unwrap_trajectory` undoes the
+periodic wrapping of a sampled trajectory,
+:func:`~chemistrykit.md.systems.transport.mean_squared_displacement`
+computes the time-origin-averaged mean-squared displacement, and
+:func:`~chemistrykit.md.systems.transport.einstein_diffusion_coefficient`
+fits Einstein's straight line to it and returns :math:`D`.
+
+*References:* A. Einstein, "Über die von der molekularkinetischen
+Theorie der Wärme geforderte Bewegung von in ruhenden Flüssigkeiten
+suspendierten Teilchen," Annalen der Physik 17, 549-560 (1905).
+
+.. minigallery:: ../../examples/md/lj_fluid/plot_07_einstein_mean_squared_displacement.py
+
 1924 -- Lennard-Jones and the Intermolecular Potential
 ------------------------------------------------------------
 
@@ -100,7 +139,7 @@ Fields," Proc. R. Soc. Lond. A 106, 463-477 (1924); J. E. Lennard-Jones,
 "On the Determination of Molecular Fields. II," Proc. R. Soc. Lond. A
 106, 709-718 (1924).
 
-.. minigallery:: ../../examples/md/lj_fluid/plot_01_lj_fluid_equilibration.py
+.. minigallery:: ../../examples/md/pair_potentials/plot_04_lennard_jones_potential.py
 
 1929 -- Morse and the Anharmonic Diatomic Potential
 ----------------------------------------------------------
@@ -155,7 +194,7 @@ with separation, not as an inverse power of distance at all.
 Pairing this exponential repulsion with the same :math:`r^{-6}`
 dispersion attraction Lennard-Jones used keeps the potential's
 long-range physics identical while fixing its short-range physics to be
-more defensible -- at the cost of a real practical flaw the pure `r^{-12}`
+more defensible -- at the cost of a real practical flaw the pure :math:`r^{-12}`
 form does not share: because the exponential term eventually loses to
 the unbounded :math:`-C/r^6` attraction as :math:`r\to0`, the Buckingham
 potential turns over and plunges to :math:`U\to-\infty` at zero
@@ -257,7 +296,48 @@ calculation is evaluated under the minimum-image convention via
 Teller, and E. Teller, "Equation of State Calculations by Fast Computing
 Machines," J. Chem. Phys. 21, 1087-1092 (1953).
 
-.. minigallery:: ../../examples/md/lj_fluid/plot_01_lj_fluid_equilibration.py
+.. minigallery:: ../../examples/md/periodic_boundaries/plot_01_minimum_image_convention.py
+
+1954 -- 1957 -- Green, Kubo, and Transport from Time Correlations
+----------------------------------------------------------------------
+
+Einstein's relation extracts a diffusion coefficient from how far
+particles wander; Melville Green (1954) and Ryogo Kubo (1957) found a
+second, far more general route. Working independently, they showed that
+every linear transport coefficient -- diffusion, viscosity, thermal
+conductivity, electrical conductivity -- is the time integral of an
+*equilibrium* time-correlation function of the corresponding
+microscopic flux. The fluctuations a system undergoes spontaneously at
+rest already encode how it will respond when pushed out of equilibrium.
+For self-diffusion the flux is simply a particle's velocity, and the
+Green-Kubo relation reads
+
+.. math::
+
+   D = \frac{1}{d}\int_0^\infty \langle \vec v(0)\cdot\vec v(t)\rangle\,dt ,
+
+exactly equivalent to Einstein's mean-squared-displacement formula but
+built from how long a particle "remembers" its velocity. Molecular
+dynamics made these correlation functions directly computable: Rahman's
+1964 argon simulation (below) found that the velocity autocorrelation
+of a dense liquid dips below zero, as an atom rebounds off the cage of
+its neighbors, a feature no simple kinetic theory had predicted.
+
+*Implementation:*
+:func:`~chemistrykit.md.systems.transport.velocity_autocorrelation`
+computes the time-origin-averaged velocity autocorrelation function of
+a sampled trajectory, and
+:func:`~chemistrykit.md.systems.transport.green_kubo_diffusion_coefficient`
+integrates it to give :math:`D`.
+
+*References:* M. S. Green, "Markoff Random Processes and the Statistical
+Mechanics of Time-Dependent Phenomena. II. Irreversible Processes in
+Fluids," J. Chem. Phys. 22, 398-413 (1954); R. Kubo,
+"Statistical-Mechanical Theory of Irreversible Processes. I. General
+Theory and Simple Applications to Magnetic and Conduction Problems,"
+J. Phys. Soc. Jpn. 12, 570-586 (1957).
+
+.. minigallery:: ../../examples/md/lj_fluid/plot_08_green_kubo_velocity_autocorrelation.py
 
 1957 -- Alder and Wainwright: The First Molecular Dynamics Simulation
 -------------------------------------------------------------------------
@@ -328,15 +408,13 @@ liquid-argon-like reduced density and temperature, together with
 :meth:`~chemistrykit.md.LJFluid.radial_distribution_function`,
 reproduce exactly the kind of calculation -- a Lennard-Jones model
 liquid's structure, computed from an integrated trajectory rather than
-assumed -- that Rahman's paper pioneered; the energy-conservation check
-alongside it is the standard confirmation that the underlying
-velocity-Verlet integration (1967, below) is behaving correctly over the
-whole run.
+assumed -- that Rahman's paper pioneered; the example below runs it at
+Rahman's own argon state point and converts g(r) back to ångströms.
 
 *References:* A. Rahman, "Correlations in the Motion of Atoms in Liquid
 Argon," Phys. Rev. 136, A405-A411 (1964).
 
-.. minigallery:: ../../examples/md/lj_fluid/plot_01_lj_fluid_equilibration.py
+.. minigallery:: ../../examples/md/lj_fluid/plot_01_rahman_liquid_argon.py
 
 1967 -- Verlet: The Integration Algorithm, the Neighbor List, and g(r)
 -------------------------------------------------------------------------
@@ -383,17 +461,20 @@ of Swope et al. (1982) -- and
 Verlet's own skin-list optimization directly, rebuilding only every
 ``rebuild_every`` calls rather than at every step.
 :meth:`~chemistrykit.md.LJFluid.radial_distribution_function`
-computes the same g(r) diagnostic Verlet used to characterize the
-Lennard-Jones fluid's structure.
+computes the same g(r) diagnostic Verlet used, in the second paper of
+the series (1968), to characterize the Lennard-Jones fluid's structure.
 
 *References:* L. Verlet, "Computer 'Experiments' on Classical Fluids. I.
 Thermodynamical Properties of Lennard-Jones Molecules," Phys. Rev. 159,
-98-103 (1967); W. C. Swope, H. C. Andersen, P. H. Berens, and K. R.
+98-103 (1967); L. Verlet, "Computer 'Experiments' on Classical Fluids.
+II. Equilibrium Correlation Functions," Phys. Rev. 165, 201-214 (1968);
+W. C. Swope, H. C. Andersen, P. H. Berens, and K. R.
 Wilson, "A computer simulation method for the calculation of equilibrium
 constants for the formation of physical clusters of molecules,"
 J. Chem. Phys. 76, 637-649 (1982).
 
-.. minigallery:: ../../examples/md/lj_fluid/plot_01_lj_fluid_equilibration.py
+.. minigallery:: ../../examples/md/lj_fluid/plot_05_verlet_integrator.py
+   ../../examples/md/lj_fluid/plot_06_verlet_neighbor_list.py
 
 1971 -- Weeks, Chandler, and Andersen: The Repulsive-Force Decomposition
 --------------------------------------------------------------------------
@@ -428,15 +509,52 @@ to its own minimum, so truncating there removes the attractive tail
 entirely while leaving the potential continuous, courtesy of the
 truncated-and-shifted construction already built into
 :class:`~chemistrykit.md.systems.lj_fluid.LJFluid`. The example below
-uses exactly this purely repulsive fluid, at low and high density, to
-isolate the packing-driven structural ordering WCA's decomposition
-identifies as dominant.
+simulates this purely repulsive fluid alongside the full Lennard-Jones
+fluid at the same dense liquid state point and compares their radial
+distribution functions, the comparison at the heart of WCA's argument.
 
 *References:* J. D. Weeks, D. Chandler, and H. C. Andersen, "Role of
 Repulsive Forces in Determining the Equilibrium Structure of Simple
 Liquids," J. Chem. Phys. 54, 5237-5247 (1971).
 
-.. minigallery:: ../../examples/md/lj_fluid/plot_03_hard_sphere_freezing.py
+.. minigallery:: ../../examples/md/lj_fluid/plot_04_wca_repulsive_reference.py
+
+1977 -- Ryckaert, Ciccotti, and Berendsen: SHAKE and Rigid Bonds
+-----------------------------------------------------------------------
+
+The time step of a molecular dynamics run is limited by the fastest
+motion in the system, and in a molecule that is almost always the
+stretching of bonds to hydrogen atoms -- vibrations roughly ten
+femtoseconds long, far faster than the torsions, bends, and diffusive
+motions a simulation is usually run to study. Jean-Paul Ryckaert,
+Giovanni Ciccotti, and Herman Berendsen removed that bottleneck by
+treating such bonds as rigid: each bond length :math:`d_{ij}` becomes a
+holonomic constraint :math:`|\vec r_i - \vec r_j| = d_{ij}`, held
+exactly by constraint forces directed along the bonds. Their SHAKE
+algorithm makes an ordinary, unconstrained Verlet position update and
+then corrects it, cycling through the constraints and moving each
+bonded pair along its previous bond vector, in inverse proportion to the
+atoms' masses, until every bond length is restored to within a
+tolerance. Applied first to liquid *n*-alkanes, it let the time step be
+set by the slower motions that remain, and constrained bonds (via SHAKE
+and its velocity-level companion RATTLE, introduced by Hans Andersen in
+1983) became standard in biomolecular simulation.
+
+*Implementation:* :func:`chemistrykit.md.systems.constraints.shake`
+implements the SHAKE iteration, and
+:class:`~chemistrykit.md.systems.constraints.ShakeMolecule` extends
+:class:`~chemistrykit.md.systems.pair_potentials.HarmonicMolecule` with
+rigid bonds, applying SHAKE within each velocity-Verlet step followed by
+RATTLE's velocity correction.
+
+*References:* J.-P. Ryckaert, G. Ciccotti, and H. J. C. Berendsen,
+"Numerical integration of the cartesian equations of motion of a system
+with constraints: molecular dynamics of n-alkanes," J. Comput. Phys. 23,
+327-341 (1977); H. C. Andersen, "Rattle: A 'velocity' version of the
+Shake algorithm for molecular dynamics calculations," J. Comput. Phys.
+52, 24-34 (1983).
+
+.. minigallery:: ../../examples/md/constraints/plot_01_shake_rigid_bonds.py
 
 1980 -- 1985 -- Andersen, Nose, and Hoover: Extended-Lagrangian Thermostats
 -------------------------------------------------------------------------------
@@ -488,7 +606,7 @@ molecular dynamics methods," J. Chem. Phys. 81, 511-519 (1984); W. G.
 Hoover, "Canonical dynamics: Equilibrium phase-space distributions,"
 Phys. Rev. A 31, 1695-1697 (1985).
 
-.. minigallery:: ../../examples/md/thermostats/plot_01_thermostats.py
+.. minigallery:: ../../examples/md/thermostats/plot_01_nose_hoover_thermostat.py
 
 1984 -- Berendsen's Weak-Coupling Thermostat
 ------------------------------------------------
@@ -510,24 +628,58 @@ fluctuations at all -- an issue not fully appreciated (and given the name
 funneling a system's kinetic energy into overall translation) until well
 over a decade after the method's original introduction.
 
-*Connection:*
-:class:`chemistrykit.md.systems.thermostats.VelocityRescalingThermostat`
-implements a simplified, deterministic member of the same
-velocity-rescaling thermostat family Berendsen's method belongs to --
-rescaling every particle's velocity by a common factor at fixed intervals
-to hold the instantaneous temperature exactly at its target -- but, as
-its own docstring is explicit about, it is not a literal implementation
-of Berendsen's exponential-relaxation scheme (there is no :math:`\tau`
-time constant here; the rescaling is immediate and complete at every
-interval, an even cruder approximation than Berendsen's own), and it does
-not correctly sample canonical-ensemble fluctuations either, for
-essentially the same underlying reason.
+*Implementation:*
+:class:`chemistrykit.md.systems.thermostats.BerendsenThermostat`
+implements Berendsen's scheme directly, rescaling every velocity after
+each step by :math:`\lambda=\sqrt{1+(\Delta t/\tau)(T_0/T-1)}` so that
+the temperature relaxes toward :math:`T_0` with time constant
+:math:`\tau`. Its :math:`\tau=\Delta t` limit is the immediate, complete
+rescaling of
+:class:`~chemistrykit.md.systems.thermostats.VelocityRescalingThermostat`,
+the crudest member of the same family.
 
 *References:* H. J. C. Berendsen, J. P. M. Postma, W. F. van Gunsteren,
 A. DiNola, and J. R. Haak, "Molecular dynamics with coupling to an
 external bath," J. Chem. Phys. 81, 3684-3690 (1984).
 
-.. minigallery:: ../../examples/md/thermostats/plot_01_thermostats.py
+.. minigallery:: ../../examples/md/thermostats/plot_02_berendsen_weak_coupling.py
+
+2007 -- Bussi, Donadio, and Parrinello: Stochastic Velocity Rescaling
+--------------------------------------------------------------------------
+
+Giovanni Bussi, Davide Donadio, and Michele Parrinello repaired the
+flaw in Berendsen's thermostat while keeping what made it popular. In a
+canonical ensemble the total kinetic energy :math:`K` of :math:`N_f`
+degrees of freedom is not fixed but fluctuates, following a gamma
+distribution with mean :math:`\bar K = N_f k_BT_0/2` and relative width
+:math:`\sqrt{2/N_f}`. Berendsen's rule relaxes :math:`K` toward its
+mean and in doing so squeezes those fluctuations away. Bussi and
+coworkers instead let :math:`K` itself obey a stochastic differential
+equation: Berendsen's deterministic relaxation plus a random term whose
+size is fixed by requiring that the canonical distribution be stationary,
+
+.. math::
+
+   dK = (\bar K - K)\frac{dt}{\tau} + 2\sqrt{\frac{K\bar K}{N_f\tau}}\,dW ,
+
+and then rescale all velocities by a common factor to reach the new
+:math:`K`. The equation can be integrated exactly over a time step, the
+coupling time :math:`\tau` keeps its intuitive meaning, and since only
+a single global factor is applied the dynamics are disturbed very
+little. The result samples the canonical ensemble correctly, and it has
+since become a standard thermostat in production codes (it is GROMACS's
+``v-rescale``).
+
+*Implementation:*
+:class:`chemistrykit.md.systems.thermostats.StochasticVelocityRescalingThermostat`
+applies the exact finite-step update of Bussi, Donadio, and Parrinello's
+appendix, drawing one Gaussian and one :math:`\chi^2_{N_f-1}` random
+number per step.
+
+*References:* G. Bussi, D. Donadio, and M. Parrinello, "Canonical
+sampling through velocity rescaling," J. Chem. Phys. 126, 014101 (2007).
+
+.. minigallery:: ../../examples/md/thermostats/plot_03_stochastic_velocity_rescaling.py
 
 See Also
 --------

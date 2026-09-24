@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.spectro.systems.electronic</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Electronic (UV-Vis) spectra: Franck-Condon vibronic progressions.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Electronic (UV-Vis) spectra: Franck-Condon vibronic progressions.</span>
 
 <span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 12.7(b), or</span>
 <span class="sd">Hollas, *Modern Spectroscopy*, 4th ed., Ch. 6.1(c), throughout.</span>
@@ -418,29 +418,29 @@
 <span class="sd">The Franck-Condon principle says an electronic transition is so much</span>
 <span class="sd">faster than nuclear motion that the nuclei are effectively frozen during</span>
 <span class="sd">it (J. Franck, *Trans. Faraday Soc.* 21, 536 (1925); E. U. Condon, *Phys.</span>
-<span class="sd">Rev.* 32, 858 (1928)), so the intensity of the :math:`v&#39;&#39;=0\to v&#39;`</span>
+<span class="sd">Rev.* 32, 858 (1928)), so the intensity of the :math:`v''=0\to v'`</span>
 <span class="sd">vibronic transition (ground vibrational level of the lower electronic</span>
-<span class="sd">state to level :math:`v&#39;` of the upper one) is governed by the overlap</span>
-<span class="sd">of the two states&#39; vibrational wavefunctions, the Franck-Condon factor</span>
-<span class="sd">:math:`|\langle\chi_{v&#39;}|\chi_{v&#39;&#39;=0}\rangle|^2`. For two *displaced</span>
+<span class="sd">state to level :math:`v'` of the upper one) is governed by the overlap</span>
+<span class="sd">of the two states' vibrational wavefunctions, the Franck-Condon factor</span>
+<span class="sd">:math:`|\langle\chi_{v'}|\chi_{v''=0}\rangle|^2`. For two *displaced</span>
 <span class="sd">harmonic oscillators of equal frequency* (the standard first</span>
 <span class="sd">approximation -- the excited-state potential has the same curvature as</span>
-<span class="sd">the ground state&#39;s, just shifted by :math:`\Delta Q` along the normal</span>
+<span class="sd">the ground state's, just shifted by :math:`\Delta Q` along the normal</span>
 <span class="sd">coordinate), this overlap integral has the closed-form Poisson</span>
 <span class="sd">distribution</span>
 
 <span class="sd">.. math::</span>
 
-<span class="sd">    \text{FC}(0\to v&#39;) = \frac{e^{-S}S^{v&#39;}}{v&#39;!}</span>
+<span class="sd">    \text{FC}(0\to v') = \frac{e^{-S}S^{v'}}{v'!}</span>
 
 <span class="sd">where :math:`S=\frac12\frac{m\omega}{\hbar}\Delta Q^2` is the</span>
 <span class="sd">dimensionless Huang-Rhys displacement parameter (K. Huang &amp; A. Rhys,</span>
 <span class="sd">*Proc. R. Soc. Lond. A* 204, 406 (1950)) -- flagged explicitly as an</span>
 <span class="sd">approximation: unequal ground/excited-state frequencies (a real</span>
-<span class="sd">excited-state potential is rarely exactly as &quot;stiff&quot; as the ground</span>
-<span class="sd">state&#39;s) require the more general Duschinsky-rotation treatment, not</span>
+<span class="sd">excited-state potential is rarely exactly as "stiff" as the ground</span>
+<span class="sd">state's) require the more general Duschinsky-rotation treatment, not</span>
 <span class="sd">implemented here.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -450,13 +450,13 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">HBAR</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.spectro.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">Spectrum</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;huang_rhys_factor&quot;</span><span class="p">,</span> <span class="s2">&quot;franck_condon_factor&quot;</span><span class="p">,</span> <span class="s2">&quot;franck_condon_progression&quot;</span><span class="p">,</span> <span class="s2">&quot;franck_condon_spectrum&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"huang_rhys_factor"</span><span class="p">,</span> <span class="s2">"franck_condon_factor"</span><span class="p">,</span> <span class="s2">"franck_condon_progression"</span><span class="p">,</span> <span class="s2">"franck_condon_spectrum"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="huang_rhys_factor">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.huang_rhys_factor">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">huang_rhys_factor</span><span class="p">(</span><span class="n">displacement</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">angular_frequency</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The dimensionless Huang-Rhys displacement parameter :math:`S=\frac12\frac{m\omega}{\hbar}\Delta Q^2`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The dimensionless Huang-Rhys displacement parameter :math:`S=\frac12\frac{m\omega}{\hbar}\Delta Q^2`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -477,7 +477,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; round(huang_rhys_factor(displacement=0.0, mass=1.6e-27, angular_frequency=5.0e13), 6)</span>
 <span class="sd">    0.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">mass</span> <span class="o">*</span> <span class="n">angular_frequency</span> <span class="o">/</span> <span class="n">HBAR</span> <span class="o">*</span> <span class="n">displacement</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></div>
 
 
@@ -485,7 +485,7 @@
 <div class="viewcode-block" id="franck_condon_factor">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.franck_condon_factor">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">franck_condon_factor</span><span class="p">(</span><span class="n">v</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">S</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The :math:`0\to v` Franck-Condon factor for two displaced, equal-frequency harmonic oscillators.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The :math:`0\to v` Franck-Condon factor for two displaced, equal-frequency harmonic oscillators.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -515,11 +515,11 @@
 <span class="sd">    1.0</span>
 <span class="sd">    &gt;&gt;&gt; round(franck_condon_factor(1, S=0.0), 6)</span>
 <span class="sd">    0.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;v must be &gt;= 0&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"v must be &gt;= 0"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">S</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;S must be &gt;= 0&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"S must be &gt;= 0"</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">S</span><span class="p">)</span> <span class="o">*</span> <span class="n">S</span><span class="o">**</span><span class="n">v</span> <span class="o">/</span> <span class="n">factorial</span><span class="p">(</span><span class="n">v</span><span class="p">))</span></div>
 
 
@@ -527,7 +527,7 @@
 <div class="viewcode-block" id="franck_condon_progression">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.franck_condon_progression">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">franck_condon_progression</span><span class="p">(</span><span class="n">v_max</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">S</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Tabulate the Franck-Condon factors for :math:`v=0,1,\dots,v_{max}`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Tabulate the Franck-Condon factors for :math:`v=0,1,\dots,v_{max}`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -544,20 +544,20 @@
 <span class="sd">    The Franck-Condon factors are (approximately) a complete probability</span>
 <span class="sd">    distribution over the final vibrational level, so they sum to</span>
 <span class="sd">    (approximately) 1 once `v_max` comfortably exceeds the Poisson</span>
-<span class="sd">    distribution&#39;s mean `S` -- the required normalization check for any</span>
+<span class="sd">    distribution's mean `S` -- the required normalization check for any</span>
 <span class="sd">    genuine Franck-Condon calculation:</span>
 
 <span class="sd">    &gt;&gt;&gt; round(float(np.sum(franck_condon_progression(v_max=40, S=3.0))), 9)</span>
 <span class="sd">    1.0</span>
 
 <span class="sd">    The most probable (highest-intensity) vibronic transition lands near</span>
-<span class="sd">    :math:`v&#39;\approx S` -- the qualitative rule of thumb for reading off</span>
-<span class="sd">    a vibronic progression&#39;s displacement from its band shape:</span>
+<span class="sd">    :math:`v'\approx S` -- the qualitative rule of thumb for reading off</span>
+<span class="sd">    a vibronic progression's displacement from its band shape:</span>
 
 <span class="sd">    &gt;&gt;&gt; progression = franck_condon_progression(v_max=20, S=5.0)</span>
 <span class="sd">    &gt;&gt;&gt; bool(abs(int(np.argmax(progression)) - 5) &lt;= 1)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">v_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">v_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">franck_condon_factor</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">S</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">v_values</span><span class="p">])</span></div>
 
@@ -566,10 +566,10 @@
 <div class="viewcode-block" id="franck_condon_spectrum">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.franck_condon_spectrum">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">franck_condon_spectrum</span><span class="p">(</span><span class="n">origin_wavenumber</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">vibrational_wavenumber</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">S</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">v_max</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Spectrum</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Build a vibronic-progression :class:`~chemistrykit.spectro.core.base_system.Spectrum`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Build a vibronic-progression :class:`~chemistrykit.spectro.core.base_system.Spectrum`.</span>
 
 <span class="sd">    Stick positions are the electronic origin (the :math:`0\to0`</span>
-<span class="sd">    transition) plus `v&#39;` quanta of the *excited-state* vibrational</span>
+<span class="sd">    transition) plus `v'` quanta of the *excited-state* vibrational</span>
 <span class="sd">    wavenumber; stick intensities are the corresponding Franck-Condon</span>
 <span class="sd">    factors (Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch.</span>
 <span class="sd">    12.7(b)).</span>
@@ -598,11 +598,11 @@
 <span class="sd">    25000.0</span>
 <span class="sd">    &gt;&gt;&gt; round(float(spectrum.positions[2] - spectrum.positions[1]), 1)</span>
 <span class="sd">    1500.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">v_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">v_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">positions</span> <span class="o">=</span> <span class="n">origin_wavenumber</span> <span class="o">+</span> <span class="n">v_values</span> <span class="o">*</span> <span class="n">vibrational_wavenumber</span>
     <span class="n">intensities</span> <span class="o">=</span> <span class="n">franck_condon_progression</span><span class="p">(</span><span class="n">v_max</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
-    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;0-&gt;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">v_values</span><span class="p">]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"0-&gt;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">v_values</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">Spectrum</span><span class="p">(</span><span class="n">positions</span><span class="o">=</span><span class="n">positions</span><span class="p">,</span> <span class="n">intensities</span><span class="o">=</span><span class="n">intensities</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span></div>
 
 </pre></div>

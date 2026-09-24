@@ -1,6 +1,6 @@
 r"""
-The Brusselator limit cycle
-==============================
+Prigogine and Lefever's Brusselator limit cycle
+==================================================
 
 Below the Hopf-bifurcation threshold (:math:`B < 1 + A^2`) the
 Brusselator's single fixed point is a stable focus and any initial

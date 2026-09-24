@@ -410,13 +410,13 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.spectro.utils.lineshapes</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lorentzian, Gaussian, and Voigt lineshape functions, and a stick-spectrum broadener.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Lorentzian, Gaussian, and Voigt lineshape functions, and a stick-spectrum broadener.</span>
 
 <span class="sd">Shared machinery for every spectroscopic model in this subpackage</span>
 <span class="sd">(:mod:`chemistrykit.spectro.systems.rotational`,</span>
 <span class="sd">:mod:`chemistrykit.spectro.systems.vibrational`,</span>
 <span class="sd">:mod:`chemistrykit.spectro.systems.electronic`) -- each produces a</span>
-<span class="sd">discrete &quot;stick spectrum&quot; (peak positions and intensities), and this</span>
+<span class="sd">discrete "stick spectrum" (peak positions and intensities), and this</span>
 <span class="sd">module turns that into the continuous, broadened spectrum an actual</span>
 <span class="sd">instrument would record. See Hollas, *Modern Spectroscopy*, 4th ed.</span>
 <span class="sd">(2004), Ch. 2.3, or Demtroder, *Laser Spectroscopy*, 5th ed., Ch. 3, for</span>
@@ -424,20 +424,20 @@
 <span class="sd">(lifetime/collisional) broadening, a Gaussian from inhomogeneous</span>
 <span class="sd">(Doppler/instrumental) broadening, and a Voigt profile -- their</span>
 <span class="sd">convolution -- when both mechanisms contribute together.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">wofz</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;gaussian&quot;</span><span class="p">,</span> <span class="s2">&quot;lorentzian&quot;</span><span class="p">,</span> <span class="s2">&quot;voigt&quot;</span><span class="p">,</span> <span class="s2">&quot;broaden_stick_spectrum&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"gaussian"</span><span class="p">,</span> <span class="s2">"lorentzian"</span><span class="p">,</span> <span class="s2">"voigt"</span><span class="p">,</span> <span class="s2">"broaden_stick_spectrum"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="gaussian">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.gaussian">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">gaussian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">fwhm</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A normalized Gaussian lineshape.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""A normalized Gaussian lineshape.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -472,7 +472,7 @@
 <span class="sd">    &gt;&gt;&gt; x = np.linspace(-20, 20, 200001)</span>
 <span class="sd">    &gt;&gt;&gt; round(float(np.trapezoid(gaussian(x, 0.0, fwhm=2.0), x)), 3)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">prefactor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">/</span> <span class="n">fwhm</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">prefactor</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">4.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span> <span class="o">/</span> <span class="n">fwhm</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span></div>
@@ -482,7 +482,7 @@
 <div class="viewcode-block" id="lorentzian">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.lorentzian">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">lorentzian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">fwhm</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A normalized Lorentzian lineshape.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""A normalized Lorentzian lineshape.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -517,7 +517,7 @@
 <span class="sd">    &gt;&gt;&gt; half_max_point = lorentzian(1.0, 0.0, fwhm=2.0)</span>
 <span class="sd">    &gt;&gt;&gt; round(float(half_max_point), 9) == round(float(peak) / 2.0, 9)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">half_width</span> <span class="o">=</span> <span class="n">fwhm</span> <span class="o">/</span> <span class="mf">2.0</span>
     <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">half_width</span> <span class="o">/</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">half_width</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></div>
@@ -527,7 +527,7 @@
 <div class="viewcode-block" id="voigt">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.voigt">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">voigt</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">fwhm_gaussian</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">fwhm_lorentzian</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A normalized Voigt profile: the convolution of a Gaussian and a Lorentzian.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""A normalized Voigt profile: the convolution of a Gaussian and a Lorentzian.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -568,7 +568,7 @@
 <span class="sd">    &gt;&gt;&gt; pure_lorentzian_limit = voigt(x_narrow, 0.0, fwhm_gaussian=1e-8, fwhm_lorentzian=2.0)</span>
 <span class="sd">    &gt;&gt;&gt; bool(np.allclose(pure_lorentzian_limit, lorentzian(x_narrow, 0.0, fwhm=2.0), atol=1e-3))</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">sigma</span> <span class="o">=</span> <span class="n">fwhm_gaussian</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)))</span>
     <span class="n">gamma</span> <span class="o">=</span> <span class="n">fwhm_lorentzian</span> <span class="o">/</span> <span class="mf">2.0</span>
@@ -579,8 +579,8 @@
 
 <div class="viewcode-block" id="broaden_stick_spectrum">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.broaden_stick_spectrum">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">broaden_stick_spectrum</span><span class="p">(</span><span class="n">centers</span><span class="p">,</span> <span class="n">intensities</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">,</span> <span class="n">fwhm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">fwhm_lorentzian</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sum a lineshape over every (center, intensity) stick to build a continuous spectrum.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">broaden_stick_spectrum</span><span class="p">(</span><span class="n">centers</span><span class="p">,</span> <span class="n">intensities</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"gaussian"</span><span class="p">,</span> <span class="n">fwhm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">fwhm_lorentzian</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Sum a lineshape over every (center, intensity) stick to build a continuous spectrum.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -590,13 +590,13 @@
 <span class="sd">        Relative intensity (area) of each peak, same length as `centers`.</span>
 <span class="sd">    x : array-like of float</span>
 <span class="sd">        Grid to evaluate the broadened spectrum on.</span>
-<span class="sd">    shape : {&quot;gaussian&quot;, &quot;lorentzian&quot;, &quot;voigt&quot;}, default &quot;gaussian&quot;</span>
+<span class="sd">    shape : {"gaussian", "lorentzian", "voigt"}, default "gaussian"</span>
 <span class="sd">        Lineshape to use for every peak.</span>
 <span class="sd">    fwhm : float, default 1.0</span>
-<span class="sd">        FWHM (or the Gaussian-component FWHM, for `shape=&quot;voigt&quot;`).</span>
+<span class="sd">        FWHM (or the Gaussian-component FWHM, for `shape="voigt"`).</span>
 <span class="sd">    fwhm_lorentzian : float, optional</span>
 <span class="sd">        Lorentzian-component FWHM, required (and only used) for</span>
-<span class="sd">        `shape=&quot;voigt&quot;`.</span>
+<span class="sd">        `shape="voigt"`.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -606,7 +606,7 @@
 <span class="sd">    ------</span>
 <span class="sd">    ValueError</span>
 <span class="sd">        For an unrecognized `shape`, or a missing `fwhm_lorentzian` when</span>
-<span class="sd">        `shape=&quot;voigt&quot;`.</span>
+<span class="sd">        `shape="voigt"`.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -615,25 +615,25 @@
 
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; x = np.linspace(-10, 10, 501)</span>
-<span class="sd">    &gt;&gt;&gt; spectrum = broaden_stick_spectrum([0.0], [2.0], x, shape=&quot;gaussian&quot;, fwhm=1.0)</span>
+<span class="sd">    &gt;&gt;&gt; spectrum = broaden_stick_spectrum([0.0], [2.0], x, shape="gaussian", fwhm=1.0)</span>
 <span class="sd">    &gt;&gt;&gt; bool(np.allclose(spectrum, 2.0 * gaussian(x, 0.0, 1.0)))</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">centers</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">intensities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">intensities</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">spectrum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">center</span><span class="p">,</span> <span class="n">intensity</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">centers</span><span class="p">,</span> <span class="n">intensities</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">shape</span> <span class="o">==</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">shape</span> <span class="o">==</span> <span class="s2">"gaussian"</span><span class="p">:</span>
             <span class="n">spectrum</span> <span class="o">+=</span> <span class="n">intensity</span> <span class="o">*</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">fwhm</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">shape</span> <span class="o">==</span> <span class="s2">&quot;lorentzian&quot;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">shape</span> <span class="o">==</span> <span class="s2">"lorentzian"</span><span class="p">:</span>
             <span class="n">spectrum</span> <span class="o">+=</span> <span class="n">intensity</span> <span class="o">*</span> <span class="n">lorentzian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">fwhm</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">shape</span> <span class="o">==</span> <span class="s2">&quot;voigt&quot;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">shape</span> <span class="o">==</span> <span class="s2">"voigt"</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">fwhm_lorentzian</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;fwhm_lorentzian is required for shape=&quot;voigt&quot;&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'fwhm_lorentzian is required for shape="voigt"'</span><span class="p">)</span>
             <span class="n">spectrum</span> <span class="o">+=</span> <span class="n">intensity</span> <span class="o">*</span> <span class="n">voigt</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">fwhm</span><span class="p">,</span> <span class="n">fwhm_lorentzian</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;shape must be &quot;gaussian&quot;, &quot;lorentzian&quot;, or &quot;voigt&quot;, got </span><span class="si">{</span><span class="n">shape</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'shape must be "gaussian", "lorentzian", or "voigt", got </span><span class="si">{</span><span class="n">shape</span><span class="si">!r}</span><span class="s1">'</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">spectrum</span></div>
 
 </pre></div>

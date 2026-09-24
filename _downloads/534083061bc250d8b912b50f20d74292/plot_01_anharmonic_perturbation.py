@@ -1,7 +1,9 @@
 r"""
-Perturbation theory vs. exact diagonalization for the quartic oscillator
-============================================================================
+Rayleigh-Schrodinger perturbation theory vs. exact diagonalization for the quartic oscillator
+=================================================================================================
 
+Schrodinger's third 1926 paper introduced his perturbation theory; here it
+is applied to a harmonic oscillator with an added quartic term.
 Checks :func:`~chemistrykit.quantum.systems.perturbation.quartic_perturbation_first_order_correction`'s
 first-order Rayleigh-Schrodinger estimate against exact numerical
 diagonalization of the full anharmonic Hamiltonian

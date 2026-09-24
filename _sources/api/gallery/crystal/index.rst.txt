@@ -9,8 +9,11 @@ volume; hard-sphere packing (packing fraction, coordination number) for
 the SC/BCC/FCC/HCP lattices; ionic-crystal lattice energy via the
 Born-Lande and Kapustinskii equations, backed by a genuinely converging
 (Evjen-method) numerical Madelung constant; Bragg's law and powder-XRD
-peak positions with structure factors and systematic absences; and
-Schottky/Frenkel point-defect equilibrium.
+peak positions with structure factors and systematic absences, Laue
+interference, and Scherrer crystallite sizes; Schottky/Frenkel
+point-defect equilibrium; Miller indices, interfacial angles, and the 14
+Bravais lattices; and Pauling's radius-ratio rule and Goldschmidt's
+perovskite tolerance factor.
 
 Each script in this gallery is self-contained and can be run directly
 with ``python examples/crystal/<section>/<script>.py``. Every script
@@ -23,18 +26,24 @@ Sections
 --------
 
 - **crystal_systems** -- classifying a unit cell into one of the 7
-  crystal systems, and the general lattice-parameter volume formula.
+  crystal systems, the general lattice-parameter volume formula, Steno's
+  interfacial angles, Miller indices from face intercepts, and the 14
+  Bravais lattices.
 - **packing** -- atomic packing factor, coordination number, and atoms
   per cell for SC, BCC, FCC, and ideal HCP.
-- **lattice_energy** -- the Born-Lande and Kapustinskii equations for
-  NaCl, compared side by side.
-- **madelung** -- the NaCl Madelung constant from a genuinely converging
+- **lattice_energy** -- the Born-Lande and Kapustinskii equations, and
+  Shannon's effective ionic radii.
+- **madelung** -- Madelung's lattice sum shell by shell, and the NaCl
+  Madelung constant from a genuinely converging
   (Evjen-method) lattice summation, contrasted with a naive truncated sum
   that does not converge.
 - **xrd** -- Bragg's law, cubic d-spacings, and simulated powder-XRD
-  patterns with systematic absences for SC/BCC/FCC.
-- **defects** -- Schottky and Frenkel point-defect concentration vs.
+  patterns with systematic absences for SC/BCC/FCC, Laue interference,
+  and Scherrer crystallite sizes.
+- **defects** -- Frenkel and Schottky point-defect concentration vs.
   temperature.
+- **crystal_chemistry** -- Pauling's radius-ratio rule and Goldschmidt's
+  perovskite tolerance factor.
 
 
 .. raw:: html
@@ -54,12 +63,11 @@ Sections
 
     </div>
 
-Crystal systems
------------------
+Crystal chemistry
+-------------------
 
-Classifying a unit cell into one of the 7 crystal systems from its
-lattice parameters, and the general lattice-parameter unit-cell-volume
-formula.
+Rules of thumb from ionic radii: Pauling's radius-ratio rule for
+coordination numbers and Goldschmidt's tolerance factor for perovskites.
 
 
 .. raw:: html
@@ -75,7 +83,67 @@ formula.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="classify_crystal_system classifies a unit cell purely from the equalities/inequalities among its six lattice parameters (a,b,c,\alpha,\beta,\gamma), and unit_cell_volume gives the general-cell volume formula that reduces to familiar shortcuts (abc, \frac{\sqrt3}{2}a^2c) in special cases.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Pauling&#x27;s first rule (1929): each cation is surrounded by a polyhedron of anions whose size is fixed by the radius ratio r_+/r_-. A polyhedron is stable only while the anions still touch the cation, which sets the limits \sqrt2-1=0.414 (octahedral), \sqrt3-1=0.732 (cubic), and so on. radius_ratio_coordination applies the rule; here it is tested against observed structures.">
+
+.. only:: html
+
+  .. image:: /api/gallery/crystal/crystal_chemistry/images/thumb/sphx_glr_plot_01_pauling_radius_ratio_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/crystal/crystal_chemistry/plot_01_pauling_radius_ratio`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Pauling's radius-ratio rule: predicting coordination numbers</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Goldschmidt (1926) noted that in an ideal cubic ABX_3 perovskite the A-X distance equals \sqrt2 times the B-X distance, so hard spheres fit exactly when t=(r_A+r_X)/[\sqrt2(r_B+r_X)]=1 (~chemistrykit.crystal.systems.crystal_chemistry.goldschmidt_tolerance_factor). Titanates with A-cations of different sizes span the range from tilted to cubic to ferroelectrically distorted.">
+
+.. only:: html
+
+  .. image:: /api/gallery/crystal/crystal_chemistry/images/thumb/sphx_glr_plot_02_goldschmidt_tolerance_factor_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/crystal/crystal_chemistry/plot_02_goldschmidt_tolerance_factor`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Goldschmidt's tolerance factor: which perovskites are cubic</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Crystal systems
+-----------------
+
+Classifying a unit cell into one of the 7 crystal systems from its
+lattice parameters and the general unit-cell-volume formula; Steno's
+constant interfacial angles; Miller indices from Hauy's rational face
+intercepts; and the 14 Bravais lattices.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Christian Samuel Weiss (1815) sorted crystals into systems by the lengths of, and angles between, their crystallographic axes -- the idea that survives as today&#x27;s 7 crystal systems. classify_crystal_system classifies a unit cell purely from the equalities/inequalities among its six lattice parameters (a,b,c,\alpha,\beta,\gamma), and unit_cell_volume gives the general-cell volume formula that reduces to familiar shortcuts (abc, \frac{\sqrt3}{2}a^2c) in special cases.">
 
 .. only:: html
 
@@ -86,7 +154,58 @@ formula.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Classifying the 7 crystal systems</div>
+      <div class="sphx-glr-thumbnail-title">Weiss's crystal systems: classifying a unit cell by its axes</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Nicolas Steno (1669) found that quartz crystals, however unevenly grown, always meet at the same angles between corresponding faces. The angle between two faces depends only on their Miller indices -- not on how big the faces are -- which interplanar_angle_cubic computes for a cubic crystal from the face normals.">
+
+.. only:: html
+
+  .. image:: /api/gallery/crystal/crystal_systems/images/thumb/sphx_glr_plot_02_steno_interfacial_angles_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/crystal/crystal_systems/plot_02_steno_interfacial_angles`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Steno's law: constancy of interfacial angles</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Hauy (1784-1801) argued that every natural crystal face cuts the three axes at intercepts in small whole-number ratios. miller_indices_from_intercepts turns those rational intercepts into the integer Miller indices (hkl) by taking reciprocals and clearing fractions; the (hkl) triple then fixes each face&#x27;s interplanar spacing.">
+
+.. only:: html
+
+  .. image:: /api/gallery/crystal/crystal_systems/images/thumb/sphx_glr_plot_03_hauy_rational_indices_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/crystal/crystal_systems/plot_03_hauy_rational_indices`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Hauy's law of rational indices: Miller indices from face intercepts</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Bravais (1848) showed there are exactly 14 distinct three-dimensional lattices: the 7 crystal systems combined with the centerings each allows (~chemistrykit.crystal.systems.crystal_systems.BRAVAIS_LATTICES). The cubic system has three -- primitive (P), body-centered (I), and face-centered (F) -- drawn here with cubic_lattice_points.">
+
+.. only:: html
+
+  .. image:: /api/gallery/crystal/crystal_systems/images/thumb/sphx_glr_plot_04_bravais_cubic_lattices_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/crystal/crystal_systems/plot_04_bravais_cubic_lattices`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Bravais lattices: the 14 lattices and the three cubic centerings</div>
     </div>
 
 
@@ -99,7 +218,7 @@ formula.
 Point defects
 ---------------
 
-Schottky and Frenkel point-defect concentration vs. temperature, from
+Frenkel and Schottky point-defect concentrations vs. temperature, from
 Boltzmann-factor equilibrium.
 
 
@@ -116,18 +235,35 @@ Boltzmann-factor equilibrium.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="schottky_defect_concentration and frenkel_defect_concentration both give a Boltzmann-factor defect population, n\propto\exp(-\Delta H/2k_BT) -- more defects at higher temperature, and fewer for a larger formation enthalpy.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Frenkel (1926) argued that at any T&gt;0 some ions leave their sites for interstitial gaps, because the configurational entropy gained outweighs the enthalpy cost at low concentration. The equilibrium number is n_F=\sqrt{NN_i}\exp(-\Delta H_F/2k_BT) (~chemistrykit.crystal.systems.defects.frenkel_defect_concentration). AgCl, where small Ag+ ions readily occupy interstitial sites, is the textbook Frenkel-dominated solid (\Delta H_F\approx1.4 eV).">
 
 .. only:: html
 
-  .. image:: /api/gallery/crystal/defects/images/thumb/sphx_glr_plot_01_defect_equilibrium_thumb.png
+  .. image:: /api/gallery/crystal/defects/images/thumb/sphx_glr_plot_01_frenkel_defects_thumb.png
     :alt:
 
-  :doc:`/api/gallery/crystal/defects/plot_01_defect_equilibrium`
+  :doc:`/api/gallery/crystal/defects/plot_01_frenkel_defects`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Schottky and Frenkel defect equilibrium</div>
+      <div class="sphx-glr-thumbnail-title">Frenkel defects: vacancy-interstitial pairs in silver chloride</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Wagner and Schottky (1930) identified the second point-defect mechanism of ionic crystals: a cation and an anion leave the bulk together, keeping the crystal neutral and leaving a vacancy pair behind. The equilibrium number is n_S=N\exp(-\Delta H_S/2k_BT) (~chemistrykit.crystal.systems.defects.schottky_defect_concentration). In NaCl, the classic Schottky-dominated solid, \Delta H_S\approx2.3 eV.">
+
+.. only:: html
+
+  .. image:: /api/gallery/crystal/defects/images/thumb/sphx_glr_plot_02_schottky_defects_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/crystal/defects/plot_02_schottky_defects`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Schottky defects: paired cation and anion vacancies in rock salt</div>
     </div>
 
 
@@ -141,7 +277,7 @@ Lattice energy
 ----------------
 
 The Born-Lande and Kapustinskii equations for ionic-crystal lattice
-energy, compared side by side on NaCl.
+energy, and the Shannon ionic radii the Kapustinskii equation uses.
 
 
 .. raw:: html
@@ -157,18 +293,52 @@ energy, compared side by side on NaCl.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="BornLandeLatticeEnergy and KapustinskiiLatticeEnergy are two independently-derived estimates of the same physical quantity, sharing the LatticeEnergyModel interface: Born-Lande needs a Madelung constant and Born exponent (crystal- structure-specific inputs), while Kapustinskii needs only ionic radii and charges.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Born and Lande (1918) balanced the Madelung attraction -A/r against a short-range repulsion B/r^n; setting dU/dr=0 at the observed spacing r_0 gives U=-\frac{N_AM|z_+z_-|e^2}{4\pi\varepsilon_0r_0}(1-\frac{1}{n}), which BornLandeLatticeEnergy evaluates. This example shows the energy curve for NaCl and compares the equation with Born-Haber values for six rock-salt halides.">
 
 .. only:: html
 
-  .. image:: /api/gallery/crystal/lattice_energy/images/thumb/sphx_glr_plot_01_lattice_energy_thumb.png
+  .. image:: /api/gallery/crystal/lattice_energy/images/thumb/sphx_glr_plot_01_born_lande_thumb.png
     :alt:
 
-  :doc:`/api/gallery/crystal/lattice_energy/plot_01_lattice_energy`
+  :doc:`/api/gallery/crystal/lattice_energy/plot_01_born_lande`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Born-Lande vs. Kapustinskii lattice energy</div>
+      <div class="sphx-glr-thumbnail-title">Born-Lande equation: lattice energies of the alkali halides</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Kapustinskii (1956) replaced the structure-specific Madelung constant with a near-universal constant per ion, so KapustinskiiLatticeEnergy needs only the number of ions per formula unit, the charges, and the ionic radii. On rock-salt halides it tracks the structure-based Born-Lande value; it also handles salts of other structures (fluorite CaF2) where no Madelung constant is supplied at all.">
+
+.. only:: html
+
+  .. image:: /api/gallery/crystal/lattice_energy/images/thumb/sphx_glr_plot_02_kapustinskii_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/crystal/lattice_energy/plot_02_kapustinskii`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Kapustinskii equation: lattice energy without a crystal structure</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Shannon (1976) fitted one self-consistent radius per ion (for a given coordination number) so that cation-anion distances in thousands of crystals are reproduced by simple sums r_++r_-. SHANNON_IONIC_RADII_PM holds the 6-coordinate values; here their sums are checked against measured rock-salt nearest-neighbor distances, and their periodic trends are plotted.">
+
+.. only:: html
+
+  .. image:: /api/gallery/crystal/lattice_energy/images/thumb/sphx_glr_plot_03_shannon_ionic_radii_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/crystal/lattice_energy/plot_03_shannon_ionic_radii`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Shannon's effective ionic radii: additivity and periodic trends</div>
     </div>
 
 
@@ -181,9 +351,9 @@ energy, compared side by side on NaCl.
 Madelung constant
 -------------------
 
-The NaCl Madelung constant from a genuinely converging (Evjen-method)
-lattice summation, contrasted with a naive truncated sum that does not
-converge.
+Madelung's electrostatic lattice sum for NaCl, shell by shell, and
+Evjen's genuinely converging summation of it, contrasted with a naive
+truncated sum that does not converge.
 
 
 .. raw:: html
@@ -210,7 +380,24 @@ converge.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Converging the NaCl Madelung constant</div>
+      <div class="sphx-glr-thumbnail-title">Evjen's method: converging the NaCl Madelung constant</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Madelung (1918) asked for the electrostatic energy of one ion in the field of every other ion of an infinite crystal. For rock salt it is U=-Me^2/(4\pi\varepsilon_0r_0) per ion pair, with the Madelung constant M=\sum_j \pm r_0/r_j summed shell by shell: 6 opposite charges at r_0, 12 like charges at \sqrt2r_0, 8 opposite charges at \sqrt3r_0, and so on. madelung_constant_nacl returns the converged value.">
+
+.. only:: html
+
+  .. image:: /api/gallery/crystal/madelung/images/thumb/sphx_glr_plot_02_madelung_lattice_sum_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/crystal/madelung/plot_02_madelung_lattice_sum`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Madelung's lattice sum: the electrostatic energy of rock salt</div>
     </div>
 
 
@@ -241,7 +428,7 @@ hexagonal close-packed lattices.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="The four lattices implemented here (chemistrykit.crystal.systems.packing) share the LatticePacking interface: each derives its atomic packing factor from pure geometry (touching spheres, atoms-per-cell, and a lattice-constant-to-radius relation). FCC and ideal HCP -- both close-packed, differing only in stacking sequence -- turn out to share the same maximum packing fraction.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Kepler (1611) guessed that no stacking of equal spheres fills space more densely than the layered (face-centered cubic / hexagonal close) packing, with fraction \pi/\sqrt{18}\approx0.7405. Comparing the four textbook lattices shows the close-packed pair at exactly that bound.">
 
 .. only:: html
 
@@ -252,7 +439,7 @@ hexagonal close-packed lattices.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Packing efficiency of SC, BCC, FCC, and HCP</div>
+      <div class="sphx-glr-thumbnail-title">Kepler's conjecture: packing efficiency of SC, BCC, FCC, and HCP</div>
     </div>
 
 
@@ -265,8 +452,9 @@ hexagonal close-packed lattices.
 Powder XRD
 ------------
 
-Bragg's law, cubic d-spacings, and simulated powder-XRD patterns with
-structure factors and systematic absences for SC, BCC, and FCC.
+Laue interference from a periodic array, Bragg's law and simulated
+powder-XRD patterns with structure factors and systematic absences for
+SC, BCC, and FCC, and Scherrer crystallite sizes from line broadening.
 
 
 .. raw:: html
@@ -282,7 +470,7 @@ structure factors and systematic absences for SC, BCC, and FCC.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="powder_xrd_peaks computes each reflection&#x27;s structure factor (~chemistrykit.crystal.systems.xrd.structure_factor) directly from atomic positions and Miller indices, so BCC&#x27;s and FCC&#x27;s systematic absences (reflections with zero intensity by symmetry) fall out automatically rather than being hardcoded as a rule.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Each line of a diffraction pattern is a family of (hkl) planes that satisfies Bragg&#x27;s law n\lambda=2d\sin\theta. powder_xrd_peaks computes each reflection&#x27;s structure factor (~chemistrykit.crystal.systems.xrd.structure_factor) directly from atomic positions and Miller indices, so BCC&#x27;s and FCC&#x27;s systematic absences (reflections with zero intensity by symmetry) fall out automatically rather than being hardcoded as a rule.">
 
 .. only:: html
 
@@ -293,7 +481,41 @@ structure factors and systematic absences for SC, BCC, and FCC.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Powder XRD: Bragg's law and systematic absences</div>
+      <div class="sphx-glr-thumbnail-title">Bragg's law: indexing powder XRD peaks</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Von Laue (1912) predicted that a crystal, as a periodic array of scatterers, should diffract X-rays like a grating, and Friedrich and Knipping saw the discrete spots. Summing the waves from N periodically spaced scatterers with structure_factor gives the Laue interference function: intensity N^2 at integer h (the Laue condition) and almost nothing in between, ever sharper as N grows.">
+
+.. only:: html
+
+  .. image:: /api/gallery/crystal/xrd/images/thumb/sphx_glr_plot_02_laue_interference_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/crystal/xrd/plot_02_laue_interference`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Laue's interference: sharp diffraction spots from a periodic array</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Scherrer (1918) showed that tiny crystallites give broadened powder lines, with width \beta=K\lambda/(\tau\cos\theta) for crystallite size \tau. scherrer_crystallite_size inverts this: here, copper powder patterns are broadened for three crystallite sizes, and each size is recovered from the measured width of the (111) line.">
+
+.. only:: html
+
+  .. image:: /api/gallery/crystal/xrd/images/thumb/sphx_glr_plot_03_scherrer_crystallite_size_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/crystal/xrd/plot_03_scherrer_crystallite_size`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Scherrer equation: crystallite size from peak broadening</div>
     </div>
 
 
@@ -309,6 +531,7 @@ structure factors and systematic absences for SC, BCC, and FCC.
    :includehidden:
 
 
+   /api/gallery/crystal/crystal_chemistry/index.rst
    /api/gallery/crystal/crystal_systems/index.rst
    /api/gallery/crystal/defects/index.rst
    /api/gallery/crystal/lattice_energy/index.rst

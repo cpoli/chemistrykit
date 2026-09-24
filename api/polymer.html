@@ -461,7 +461,12 @@ the Flory-Schulz (most-probable) distribution derived from step-growth
 polymerization statistics; the Carothers equation for step-growth
 kinetics; and chain-growth/free-radical polymerization kinetics built on
 <a class="reference internal" href="kinetics.html#module-chemistrykit.kinetics" title="chemistrykit.kinetics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.kinetics</span></code></a>’s reaction-network engine, with its
-steady-state-approximation closed form as a cross-check.</p>
+steady-state-approximation closed form as a cross-check. Also Kuhn’s
+freely jointed chain and the Kratky-Porod worm-like chain; Flory-Huggins
+solution thermodynamics; Staudinger/Mark-Houwink solution viscosity;
+Debye light scattering vs. osmometry; Flory-Stockmayer gelation; the
+Mayo-Lewis copolymer equation; Poisson (living) chain-length
+distributions; and Bernoullian tacticity statistics.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.polymer.IdealChain">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">IdealChain</span></span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/chain_statistics.html#IdealChain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.IdealChain" title="Link to this definition">#</a></dt>
@@ -803,6 +808,150 @@ about 2% – see the module docstring.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.azeotropic_feed_composition">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">azeotropic_feed_composition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/copolymerization.html#azeotropic_feed_composition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.azeotropic_feed_composition" title="Link to this definition">#</a></dt>
+<dd><p>Azeotropic feed <span class="math notranslate nohighlight">\(f_1^*=(1-r_2)/(2-r_1-r_2)\)</span> at which <span class="math notranslate nohighlight">\(F_1=f_1\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Reactivity ratios (both &lt; 1 or both &gt; 1).</p></li>
+<li><p><strong>r2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Reactivity ratios (both &lt; 1 or both &gt; 1).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Styrene (1) / methyl methacrylate (2), <span class="math notranslate nohighlight">\(r_1\approx0.52\)</span>,
+<span class="math notranslate nohighlight">\(r_2\approx0.46\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fstar</span> <span class="o">=</span> <span class="n">azeotropic_feed_composition</span><span class="p">(</span><span class="mf">0.52</span><span class="p">,</span> <span class="mf">0.46</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">fstar</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.5294</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">mayo_lewis_copolymer_composition</span><span class="p">(</span><span class="n">fstar</span><span class="p">,</span> <span class="mf">0.52</span><span class="p">,</span> <span class="mf">0.46</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.5294</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.bernoullian_triad_fractions">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">bernoullian_triad_fractions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Pm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/tacticity.html#bernoullian_triad_fractions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.bernoullian_triad_fractions" title="Link to this definition">#</a></dt>
+<dd><p>Triad fractions <span class="math notranslate nohighlight">\(([mm],[mr],[rr])\)</span> for Bernoullian placement with meso probability <cite>Pm</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Pm</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Probability of a meso placement.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mm, mr, rr</strong> (<em>float or ndarray</em>) – They sum to 1.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Atactic (<span class="math notranslate nohighlight">\(P_m=1/2\)</span>) gives the 1:2:1 ratio:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">tuple</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">bernoullian_triad_fractions</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="go">(0.25, 0.5, 0.25)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.branching_number_average_DP">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">branching_number_average_DP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/gelation.html#branching_number_average_DP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.branching_number_average_DP" title="Link to this definition">#</a></dt>
+<dd><p>Number-average degree of polymerization of <span class="math notranslate nohighlight">\(A_f\)</span> self-condensation, <span class="math notranslate nohighlight">\(1/(1-fp/2)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Extent of reaction (fraction of groups reacted), below the gel point.</p></li>
+<li><p><strong>f</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Functionality.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Finite at the Flory-Stockmayer gel point, <span class="math notranslate nohighlight">\(2(f-1)/(f-2)\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">branching_number_average_DP</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="mi">3</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">4.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.branching_weight_average_DP">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">branching_weight_average_DP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/gelation.html#branching_weight_average_DP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.branching_weight_average_DP" title="Link to this definition">#</a></dt>
+<dd><p>Weight-average degree of polymerization of <span class="math notranslate nohighlight">\(A_f\)</span> self-condensation, <span class="math notranslate nohighlight">\((1+p)/(1-(f-1)p)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Extent of reaction, <span class="math notranslate nohighlight">\(p&lt;p_c\)</span>.</p></li>
+<li><p><strong>f</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Functionality.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">f=2</span></code> this is the Flory-Schulz <span class="math notranslate nohighlight">\((1+p)/(1-p)\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">branching_weight_average_DP</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="mi">2</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">19.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.carothers_gel_point">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">carothers_gel_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f_avg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/gelation.html#carothers_gel_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.carothers_gel_point" title="Link to this definition">#</a></dt>
+<dd><p>Carothers gel point, <span class="math notranslate nohighlight">\(p_c=2/f_\text{avg}\)</span> (where <span class="math notranslate nohighlight">\(\bar X_n\to\infty\)</span>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f_avg</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Average monomer functionality.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">carothers_gel_point</span><span class="p">(</span><span class="mf">3.0</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.666667</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.debye_Kc_over_R">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">debye_Kc_over_R</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Mw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/light_scattering.html#debye_Kc_over_R"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.debye_Kc_over_R" title="Link to this definition">#</a></dt>
+<dd><p>Debye relation <span class="math notranslate nohighlight">\(Kc/R_0=1/M_w+2A_2c\)</span> (zero scattering angle).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>c</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Total polymer mass concentration.</p></li>
+<li><p><strong>Mw</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Weight-average molar mass.</p></li>
+<li><p><strong>A2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Second virial coefficient.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">debye_Kc_over_R</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">Mw</span><span class="o">=</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">A2</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">))</span>
+<span class="go">1e-05</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="chemistrykit.polymer.degree_of_polymerization">
 <span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">degree_of_polymerization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/step_growth.html#degree_of_polymerization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.degree_of_polymerization" title="Link to this definition">#</a></dt>
 <dd><p>The Carothers equation: <span class="math notranslate nohighlight">\(\bar{X}_n=1/(1-p)\)</span>.</p>
@@ -905,6 +1054,33 @@ polymerization even at complete conversion of the limiting group
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.fit_mark_houwink">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">fit_mark_houwink</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/solution_viscosity.html#fit_mark_houwink"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.fit_mark_houwink" title="Link to this definition">#</a></dt>
+<dd><p>Fit <span class="math notranslate nohighlight">\([\eta]=KM^a\)</span> by least squares on <span class="math notranslate nohighlight">\(\log[\eta]\)</span> vs <span class="math notranslate nohighlight">\(\log M\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Molar masses and measured intrinsic viscosities.</p></li>
+<li><p><strong>eta</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Molar masses and measured intrinsic viscosities.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>K, a</strong> (<em>float</em>)</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1e4</span><span class="p">,</span> <span class="mf">1e5</span><span class="p">,</span> <span class="mf">1e6</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">K</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">fit_mark_houwink</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mf">0.02</span> <span class="o">*</span> <span class="n">M</span><span class="o">**</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">(0.02, 0.7)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="chemistrykit.polymer.flory_exponent">
 <span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">flory_exponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solvent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/chain_statistics.html#flory_exponent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.flory_exponent" title="Link to this definition">#</a></dt>
 <dd><p>Return the standard Flory scaling exponent <span class="math notranslate nohighlight">\(\nu\)</span> for a named solvent quality.</p>
@@ -920,12 +1096,89 @@ polymerization even at complete conversion of the limiting group
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">flory_exponent</span><span class="p">(</span><span class="s2">&quot;theta&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">flory_exponent</span><span class="p">(</span><span class="s2">"theta"</span><span class="p">)</span>
 <span class="go">0.5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">flory_exponent</span><span class="p">(</span><span class="s2">&quot;good&quot;</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">flory_exponent</span><span class="p">(</span><span class="s2">"good"</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
 <span class="go">0.6</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">flory_exponent</span><span class="p">(</span><span class="s2">&quot;poor&quot;</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">flory_exponent</span><span class="p">(</span><span class="s2">"poor"</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
 <span class="go">0.3333</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.flory_huggins_critical_point">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">flory_huggins_critical_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/flory_huggins.html#flory_huggins_critical_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.flory_huggins_critical_point" title="Link to this definition">#</a></dt>
+<dd><p>Critical point <span class="math notranslate nohighlight">\((\phi_c,\chi_c)\)</span> of a polymer solution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Degree of polymerization.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>phi_c, chi_c</strong> (<em>float</em>) – <span class="math notranslate nohighlight">\(\phi_c=1/(1+\sqrt N)\)</span> and <span class="math notranslate nohighlight">\(\chi_c=\tfrac12(1+1/\sqrt N)^2\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">phi_c</span><span class="p">,</span> <span class="n">chi_c</span> <span class="o">=</span> <span class="n">flory_huggins_critical_point</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">phi_c</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">chi_c</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">(0.090909, 0.605)</span>
+</pre></div>
+</div>
+<p>For very long chains <span class="math notranslate nohighlight">\(\chi_c\)</span> approaches the theta value 1/2:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">flory_huggins_critical_point</span><span class="p">(</span><span class="mf">1e12</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.flory_huggins_free_energy">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">flory_huggins_free_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chi</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/flory_huggins.html#flory_huggins_free_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.flory_huggins_free_energy" title="Link to this definition">#</a></dt>
+<dd><p>Flory-Huggins free energy of mixing per lattice site, in units of <span class="math notranslate nohighlight">\(k_BT\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phi</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Polymer volume fraction, <span class="math notranslate nohighlight">\(0&lt;\phi&lt;1\)</span>.</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Degree of polymerization (lattice sites per chain).</p></li>
+<li><p><strong>chi</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Flory-Huggins interaction parameter.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">N=1</span></code> and <code class="docutils literal notranslate"><span class="pre">chi=0</span></code> this is the ideal mixing entropy of a
+symmetric binary mixture, <span class="math notranslate nohighlight">\(\ln\frac12\)</span> at <span class="math notranslate nohighlight">\(\phi=1/2\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">flory_huggins_free_energy</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">chi</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">-0.693147</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.flory_huggins_spinodal_chi">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">flory_huggins_spinodal_chi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/flory_huggins.html#flory_huggins_spinodal_chi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.flory_huggins_spinodal_chi" title="Link to this definition">#</a></dt>
+<dd><p>Interaction parameter on the spinodal, <span class="math notranslate nohighlight">\(\chi_s=\frac12[1/(N\phi)+1/(1-\phi)]\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phi</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Polymer volume fraction.</p></li>
+<li><p><strong>N</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Degree of polymerization.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>For a symmetric blend (<code class="docutils literal notranslate"><span class="pre">N=1</span></code>) the spinodal at <span class="math notranslate nohighlight">\(\phi=1/2\)</span> is
+<span class="math notranslate nohighlight">\(\chi=2\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">flory_huggins_spinodal_chi</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">2.0</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1062,6 +1315,28 @@ polydispersity of 2, however far the reaction is driven:</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.flory_stockmayer_gel_point">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">flory_stockmayer_gel_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/gelation.html#flory_stockmayer_gel_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.flory_stockmayer_gel_point" title="Link to this definition">#</a></dt>
+<dd><p>Flory-Stockmayer gel point for <span class="math notranslate nohighlight">\(A_f\)</span> self-condensation, <span class="math notranslate nohighlight">\(p_c=1/(f-1)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Monomer functionality (&gt; 2 for gelation at <span class="math notranslate nohighlight">\(p&lt;1\)</span>).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">flory_stockmayer_gel_point</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="chemistrykit.polymer.free_radical_network">
 <span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">free_radical_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">I0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'combination'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/chain_growth.html#free_radical_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.free_radical_network" title="Link to this definition">#</a></dt>
 <dd><p>Build the lumped initiation/propagation/termination free-radical polymerization network.</p>
@@ -1108,11 +1383,56 @@ monomer are consumed only slowly on that timescale:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">kd</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">kt</span> <span class="o">=</span> <span class="mf">1.0e-5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0e3</span><span class="p">,</span> <span class="mf">1.0e7</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">I0</span><span class="p">,</span> <span class="n">M0</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">5.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">free_radical_network</span><span class="p">(</span><span class="n">kd</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">kt</span><span class="p">,</span> <span class="n">I0</span><span class="p">,</span> <span class="n">M0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;rk4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">R_ss</span> <span class="o">=</span> <span class="n">steady_state_radical_concentration</span><span class="p">(</span><span class="n">kd</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">I0</span><span class="p">,</span> <span class="n">kt</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">R_ss</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.05</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"R"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">R_ss</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">0.05</span><span class="p">))</span>
 <span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">&quot;I&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.99</span> <span class="o">*</span> <span class="n">I0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"I"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.99</span> <span class="o">*</span> <span class="n">I0</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.freely_jointed_chain">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">freely_jointed_chain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_chains</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/chain_statistics.html#freely_jointed_chain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.freely_jointed_chain" title="Link to this definition">#</a></dt>
+<dd><p>Sample 3D conformations of Kuhn’s freely jointed chain: <cite>n</cite> bonds of length <cite>b</cite> in uniformly random directions.</p>
+<p>Each bond vector is drawn independently and isotropically on the
+sphere of radius <cite>b</cite> (W. Kuhn, <em>Kolloid-Z.</em> 68, 2 (1934)); the chain
+starts at the origin. Averaged over many samples, the squared
+end-to-end distance converges to the exact ideal-chain result
+<span class="math notranslate nohighlight">\(\langle R^2\rangle=nb^2\)</span> (<a class="reference internal" href="#chemistrykit.polymer.IdealChain" title="chemistrykit.polymer.IdealChain"><code class="xref py py-class docutils literal notranslate"><span class="pre">IdealChain</span></code></a>), since the
+cross terms <span class="math notranslate nohighlight">\(\langle\mathbf{b}_i\cdot\mathbf{b}_j\rangle\)</span>
+vanish for independent bonds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of bonds (Kuhn segments).</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Bond (Kuhn) length.</p></li>
+<li><p><strong>n_chains</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of independent conformations to sample.</p></li>
+<li><p><strong>rng</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" title="(in NumPy v2.5)"><em>numpy.random.Generator</em></a><em>, or </em><em>None</em><em>, </em><em>optional</em>) – Seed or generator for reproducibility.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (n_chains, n + 1, 3)</em> – Bead positions of every sampled chain.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Every bond has exactly length <cite>b</cite>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">freely_jointed_chain</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n_chains</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3, 51, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>The sample mean of <span class="math notranslate nohighlight">\(R^2\)</span> approaches <span class="math notranslate nohighlight">\(nb^2=100\cdot1^2\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">freely_jointed_chain</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">n_chains</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">R2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">R2</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">/</span> <span class="mf">100.0</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.03</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
 </div>
@@ -1160,6 +1480,106 @@ fuse into one dead chain) – see Odian, <em>Principles of Polymerization</em>,
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.mark_houwink_exponent_from_flory">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">mark_houwink_exponent_from_flory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nu</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/solution_viscosity.html#mark_houwink_exponent_from_flory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.mark_houwink_exponent_from_flory" title="Link to this definition">#</a></dt>
+<dd><p>Mark-Houwink exponent implied by a Flory exponent via Flory-Fox, <span class="math notranslate nohighlight">\(a=3\nu-1\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nu</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Flory exponent (<span class="math notranslate nohighlight">\(R\propto M^\nu\)</span>).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mark_houwink_exponent_from_flory</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="go">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">mark_houwink_exponent_from_flory</span><span class="p">(</span><span class="mf">0.6</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.8</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.mark_houwink_intrinsic_viscosity">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">mark_houwink_intrinsic_viscosity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/solution_viscosity.html#mark_houwink_intrinsic_viscosity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.mark_houwink_intrinsic_viscosity" title="Link to this definition">#</a></dt>
+<dd><p>Mark-Houwink equation, <span class="math notranslate nohighlight">\([\eta]=KM^a\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Molar mass.</p></li>
+<li><p><strong>K</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Mark-Houwink constants for a given polymer/solvent/temperature.</p></li>
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Mark-Houwink constants for a given polymer/solvent/temperature.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">mark_houwink_intrinsic_viscosity</span><span class="p">(</span><span class="mf">1e4</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.mayo_lewis_copolymer_composition">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">mayo_lewis_copolymer_composition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/copolymerization.html#mayo_lewis_copolymer_composition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.mayo_lewis_copolymer_composition" title="Link to this definition">#</a></dt>
+<dd><p>Instantaneous copolymer composition <span class="math notranslate nohighlight">\(F_1\)</span> from the Mayo-Lewis equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f1</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Mole fraction of monomer 1 in the feed.</p></li>
+<li><p><strong>r1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Reactivity ratios.</p></li>
+<li><p><strong>r2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Reactivity ratios.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>An ideal random copolymerization (<span class="math notranslate nohighlight">\(r_1=r_2=1\)</span>) has
+<span class="math notranslate nohighlight">\(F_1=f_1\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">mayo_lewis_copolymer_composition</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+<span class="go">0.3</span>
+</pre></div>
+</div>
+<p>A perfectly alternating system (<span class="math notranslate nohighlight">\(r_1=r_2=0\)</span>) gives
+<span class="math notranslate nohighlight">\(F_1=1/2\)</span> at any feed:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">mayo_lewis_copolymer_composition</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.mean_isotactic_run_length">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">mean_isotactic_run_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Pm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/tacticity.html#mean_isotactic_run_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.mean_isotactic_run_length" title="Link to this definition">#</a></dt>
+<dd><p>Mean length of a run of consecutive meso dyads, <span class="math notranslate nohighlight">\(1/(1-P_m)\)</span> (Bernoullian).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Pm</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Meso placement probability, <span class="math notranslate nohighlight">\(&lt;1\)</span>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">mean_isotactic_run_length</span><span class="p">(</span><span class="mf">0.99</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">100.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="chemistrykit.polymer.number_average_molar_mass">
 <span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">number_average_molar_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M_i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/molecular_weight_distribution.html#number_average_molar_mass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.number_average_molar_mass" title="Link to this definition">#</a></dt>
 <dd><p>Number-average molar mass <span class="math notranslate nohighlight">\(M_n=\sum N_iM_i/\sum N_i\)</span>.</p>
@@ -1185,6 +1605,124 @@ fuse into one dead chain) – see Odian, <em>Principles of Polymerization</em>,
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.osmotic_pressure_dilute_mixture">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">osmotic_pressure_dilute_mixture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.314462618</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/light_scattering.html#osmotic_pressure_dilute_mixture"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.osmotic_pressure_dilute_mixture" title="Link to this definition">#</a></dt>
+<dd><p>Van ‘t Hoff osmotic pressure of an ideal dilute mixture, <span class="math notranslate nohighlight">\(\Pi=RT\sum c_i/M_i\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>c_i</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Mass concentrations (kg m^-3).</p></li>
+<li><p><strong>M_i</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Molar masses (kg mol^-1).</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Temperature (K).</p></li>
+<li><p><strong>R</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Gas constant.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – Osmotic pressure (Pa).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>The apparent molar mass <span class="math notranslate nohighlight">\(RTc/\Pi\)</span> is the number average:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Pi</span> <span class="o">=</span> <span class="n">osmotic_pressure_dilute_mixture</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">],</span> <span class="n">T</span><span class="o">=</span><span class="mf">300.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="mf">8.314462618</span> <span class="o">*</span> <span class="mf">300.0</span> <span class="o">*</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="n">Pi</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">18.181818</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.poisson_number_average_DP">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">poisson_number_average_DP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nu</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/living_polymerization.html#poisson_number_average_DP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.poisson_number_average_DP" title="Link to this definition">#</a></dt>
+<dd><p>Number-average degree of polymerization, <span class="math notranslate nohighlight">\(1+\nu\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nu</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">poisson_number_average_DP</span><span class="p">(</span><span class="mf">99.0</span><span class="p">)</span>
+<span class="go">100.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.poisson_number_fraction">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">poisson_number_fraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/living_polymerization.html#poisson_number_fraction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.poisson_number_fraction" title="Link to this definition">#</a></dt>
+<dd><p>Poisson number fraction <span class="math notranslate nohighlight">\(N_x=e^{-\nu}\nu^{x-1}/(x-1)!\)</span> of chains with <cite>x</cite> units.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Chain length (<span class="math notranslate nohighlight">\(\ge1\)</span>).</p></li>
+<li><p><strong>nu</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Mean number of monomers added per chain.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">poisson_number_fraction</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">400</span><span class="p">),</span> <span class="mf">50.0</span><span class="p">))),</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.poisson_pdi">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">poisson_pdi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nu</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/living_polymerization.html#poisson_pdi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.poisson_pdi" title="Link to this definition">#</a></dt>
+<dd><p>Polydispersity index of the Poisson distribution, <span class="math notranslate nohighlight">\(1+\nu/(1+\nu)^2\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nu</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">poisson_pdi</span><span class="p">(</span><span class="mf">99.0</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0099</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.poisson_weight_average_DP">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">poisson_weight_average_DP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nu</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/living_polymerization.html#poisson_weight_average_DP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.poisson_weight_average_DP" title="Link to this definition">#</a></dt>
+<dd><p>Weight-average degree of polymerization, <span class="math notranslate nohighlight">\((\nu^2+3\nu+1)/(\nu+1)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>nu</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">poisson_weight_average_DP</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">2.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="chemistrykit.polymer.polydispersity_index">
 <span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">polydispersity_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Mn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Mw</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/molecular_weight_distribution.html#polydispersity_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.polydispersity_index" title="Link to this definition">#</a></dt>
 <dd><p>Polydispersity index <span class="math notranslate nohighlight">\(\text{\dj} = M_w/M_n\)</span>.</p>
@@ -1205,6 +1743,116 @@ fuse into one dead chain) – see Odian, <em>Principles of Polymerization</em>,
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">polydispersity_index</span><span class="p">(</span><span class="n">Mn</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">Mw</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">)</span>
 <span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.rayleigh_ratio_dilute_mixture">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">rayleigh_ratio_dilute_mixture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/light_scattering.html#rayleigh_ratio_dilute_mixture"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.rayleigh_ratio_dilute_mixture" title="Link to this definition">#</a></dt>
+<dd><p>Zero-angle excess Rayleigh ratio of an ideal dilute mixture, <span class="math notranslate nohighlight">\(R_0=K\sum c_iM_i\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>c_i</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Mass concentration of each species.</p></li>
+<li><p><strong>M_i</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Molar mass of each species.</p></li>
+<li><p><strong>K</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Optical constant.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>The apparent molar mass <span class="math notranslate nohighlight">\(R_0/(Kc)\)</span> is the weight average:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">rayleigh_ratio_dilute_mixture</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1e4</span><span class="p">,</span> <span class="mf">1e5</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">55000.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.sample_dyad_sequence">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">sample_dyad_sequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_dyads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/tacticity.html#sample_dyad_sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.sample_dyad_sequence" title="Link to this definition">#</a></dt>
+<dd><p>Sample a Bernoullian dyad sequence: <code class="docutils literal notranslate"><span class="pre">True</span></code> for meso, <code class="docutils literal notranslate"><span class="pre">False</span></code> for racemo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_dyads</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>Pm</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Meso placement probability.</p></li>
+<li><p><strong>rng</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" title="(in NumPy v2.5)"><em>numpy.random.Generator</em></a><em>, or </em><em>None</em><em>, </em><em>optional</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray of bool, shape (n_dyads,)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">sample_dyad_sequence</span><span class="p">(</span><span class="mi">100000</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="mf">0.9</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.simulate_living_polymerization">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">simulate_living_polymerization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_chains</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_monomers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/living_polymerization.html#simulate_living_polymerization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.simulate_living_polymerization" title="Link to this definition">#</a></dt>
+<dd><p>Stochastically grow <cite>n_chains</cite> living chains by adding <cite>n_monomers</cite> one at a time to random chains.</p>
+<p>Each monomer attaches to a uniformly chosen active chain (equal
+reactivity, no termination), so chain lengths follow a multinomial
+distribution that tends to the Poisson distribution
+(<a class="reference internal" href="#chemistrykit.polymer.poisson_number_fraction" title="chemistrykit.polymer.poisson_number_fraction"><code class="xref py py-func docutils literal notranslate"><span class="pre">poisson_number_fraction()</span></code></a>) with <span class="math notranslate nohighlight">\(\nu=\)</span> <cite>n_monomers</cite> /
+<cite>n_chains</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_chains</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of initiated chains (each starts with one unit).</p></li>
+<li><p><strong>n_monomers</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of monomers added in total.</p></li>
+<li><p><strong>rng</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" title="(in NumPy v2.5)"><em>numpy.random.Generator</em></a><em>, or </em><em>None</em><em>, </em><em>optional</em>) – Seed or generator.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray of int, shape (n_chains,)</em> – Final chain lengths <span class="math notranslate nohighlight">\(x\)</span> (units per chain, including the first).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">simulate_living_polymerization</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">50000</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="go">51000</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.staudinger_specific_viscosity">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">staudinger_specific_viscosity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Km</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/solution_viscosity.html#staudinger_specific_viscosity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.staudinger_specific_viscosity" title="Link to this definition">#</a></dt>
+<dd><p>Staudinger’s viscosity rule, <span class="math notranslate nohighlight">\(\eta_\text{sp}=K_mcM\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>c</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Polymer concentration.</p></li>
+<li><p><strong>M</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Molar mass (or degree of polymerization).</p></li>
+<li><p><strong>Km</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Staudinger constant.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Doubling the chain length doubles the specific viscosity:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">staudinger_specific_viscosity</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">2e5</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">)</span> <span class="o">/</span> <span class="n">staudinger_specific_viscosity</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">1e5</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">))</span>
+<span class="go">2.0</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1312,6 +1960,44 @@ monodisperse sample:</p>
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.polymer.worm_like_chain_mean_square_end_to_end">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.polymer.</span></span><span class="sig-name descname"><span class="pre">worm_like_chain_mean_square_end_to_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/polymer/systems/chain_statistics.html#worm_like_chain_mean_square_end_to_end"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.polymer.worm_like_chain_mean_square_end_to_end" title="Link to this definition">#</a></dt>
+<dd><p>Kratky-Porod worm-like chain mean-square end-to-end distance.</p>
+<p>For a semiflexible chain of contour length <span class="math notranslate nohighlight">\(L\)</span> whose tangent
+correlations decay as <span class="math notranslate nohighlight">\(e^{-s/P}\)</span> along the contour (persistence
+length <span class="math notranslate nohighlight">\(P\)</span>), Kratky and Porod (<em>Recl. Trav. Chim. Pays-Bas</em> 68,
+1106 (1949)) obtained</p>
+<div class="math notranslate nohighlight">
+\[\langle R^2\rangle = 2PL\left[1-\frac{P}{L}\left(1-e^{-L/P}\right)\right]\]</div>
+<p>which interpolates between a rigid rod, <span class="math notranslate nohighlight">\(\langle R^2\rangle\to
+L^2\)</span> for <span class="math notranslate nohighlight">\(L\ll P\)</span>, and an ideal random coil,
+<span class="math notranslate nohighlight">\(\langle R^2\rangle\to2PL\)</span> for <span class="math notranslate nohighlight">\(L\gg P\)</span> – i.e. a
+freely jointed chain with Kuhn length <span class="math notranslate nohighlight">\(b=2P\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Contour length (&gt; 0).</p></li>
+<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Persistence length (&gt; 0).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A very short chain is a rigid rod, <span class="math notranslate nohighlight">\(R^2\approx L^2\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">worm_like_chain_mean_square_end_to_end</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1e-6</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>A very long chain is an ideal coil with Kuhn length <span class="math notranslate nohighlight">\(2P\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">worm_like_chain_mean_square_end_to_end</span><span class="p">(</span><span class="mf">1e6</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mf">50.0</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
 
@@ -1389,22 +2075,48 @@ monodisperse sample:</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.RealChain.theta_solvent"><code class="docutils literal notranslate"><span class="pre">RealChain.theta_solvent()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.azeotropic_feed_composition"><code class="docutils literal notranslate"><span class="pre">azeotropic_feed_composition()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.bernoullian_triad_fractions"><code class="docutils literal notranslate"><span class="pre">bernoullian_triad_fractions()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.branching_number_average_DP"><code class="docutils literal notranslate"><span class="pre">branching_number_average_DP()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.branching_weight_average_DP"><code class="docutils literal notranslate"><span class="pre">branching_weight_average_DP()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.carothers_gel_point"><code class="docutils literal notranslate"><span class="pre">carothers_gel_point()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.debye_Kc_over_R"><code class="docutils literal notranslate"><span class="pre">debye_Kc_over_R()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.degree_of_polymerization"><code class="docutils literal notranslate"><span class="pre">degree_of_polymerization()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.degree_of_polymerization_stoichiometric_imbalance"><code class="docutils literal notranslate"><span class="pre">degree_of_polymerization_stoichiometric_imbalance()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.extent_of_reaction_for_DP"><code class="docutils literal notranslate"><span class="pre">extent_of_reaction_for_DP()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.fit_mark_houwink"><code class="docutils literal notranslate"><span class="pre">fit_mark_houwink()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.flory_exponent"><code class="docutils literal notranslate"><span class="pre">flory_exponent()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.flory_huggins_critical_point"><code class="docutils literal notranslate"><span class="pre">flory_huggins_critical_point()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.flory_huggins_free_energy"><code class="docutils literal notranslate"><span class="pre">flory_huggins_free_energy()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.flory_huggins_spinodal_chi"><code class="docutils literal notranslate"><span class="pre">flory_huggins_spinodal_chi()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.flory_schulz_number_average_DP"><code class="docutils literal notranslate"><span class="pre">flory_schulz_number_average_DP()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.flory_schulz_number_fraction"><code class="docutils literal notranslate"><span class="pre">flory_schulz_number_fraction()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.flory_schulz_pdi"><code class="docutils literal notranslate"><span class="pre">flory_schulz_pdi()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.flory_schulz_weight_average_DP"><code class="docutils literal notranslate"><span class="pre">flory_schulz_weight_average_DP()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.flory_schulz_weight_fraction"><code class="docutils literal notranslate"><span class="pre">flory_schulz_weight_fraction()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.flory_stockmayer_gel_point"><code class="docutils literal notranslate"><span class="pre">flory_stockmayer_gel_point()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.free_radical_network"><code class="docutils literal notranslate"><span class="pre">free_radical_network()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.freely_jointed_chain"><code class="docutils literal notranslate"><span class="pre">freely_jointed_chain()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.kinetic_chain_length"><code class="docutils literal notranslate"><span class="pre">kinetic_chain_length()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.mark_houwink_exponent_from_flory"><code class="docutils literal notranslate"><span class="pre">mark_houwink_exponent_from_flory()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.mark_houwink_intrinsic_viscosity"><code class="docutils literal notranslate"><span class="pre">mark_houwink_intrinsic_viscosity()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.mayo_lewis_copolymer_composition"><code class="docutils literal notranslate"><span class="pre">mayo_lewis_copolymer_composition()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.mean_isotactic_run_length"><code class="docutils literal notranslate"><span class="pre">mean_isotactic_run_length()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.number_average_molar_mass"><code class="docutils literal notranslate"><span class="pre">number_average_molar_mass()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.osmotic_pressure_dilute_mixture"><code class="docutils literal notranslate"><span class="pre">osmotic_pressure_dilute_mixture()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.poisson_number_average_DP"><code class="docutils literal notranslate"><span class="pre">poisson_number_average_DP()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.poisson_number_fraction"><code class="docutils literal notranslate"><span class="pre">poisson_number_fraction()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.poisson_pdi"><code class="docutils literal notranslate"><span class="pre">poisson_pdi()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.poisson_weight_average_DP"><code class="docutils literal notranslate"><span class="pre">poisson_weight_average_DP()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.polydispersity_index"><code class="docutils literal notranslate"><span class="pre">polydispersity_index()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.rayleigh_ratio_dilute_mixture"><code class="docutils literal notranslate"><span class="pre">rayleigh_ratio_dilute_mixture()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.sample_dyad_sequence"><code class="docutils literal notranslate"><span class="pre">sample_dyad_sequence()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.simulate_living_polymerization"><code class="docutils literal notranslate"><span class="pre">simulate_living_polymerization()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.staudinger_specific_viscosity"><code class="docutils literal notranslate"><span class="pre">staudinger_specific_viscosity()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.steady_state_radical_concentration"><code class="docutils literal notranslate"><span class="pre">steady_state_radical_concentration()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.steady_state_rate_of_polymerization"><code class="docutils literal notranslate"><span class="pre">steady_state_rate_of_polymerization()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.weight_average_molar_mass"><code class="docutils literal notranslate"><span class="pre">weight_average_molar_mass()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.polymer.worm_like_chain_mean_square_end_to_end"><code class="docutils literal notranslate"><span class="pre">worm_like_chain_mean_square_end_to_end()</span></code></a></li>
 </ul>
   </nav></div>
 

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Point-group determination for water, ammonia, methane, and carbon dioxide &#8212; chemistrykit 0.1.0 documentation</title>
+    <title>Schoenflies point-group symbols for water, ammonia, methane, and carbon dioxide &#8212; chemistrykit 0.1.0 documentation</title>
   
   
   
@@ -48,11 +48,12 @@
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/gallery/structure/point_group/plot_01_point_groups';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Octahedral symmetry: SF6, Werner’s six-coordinate complexes, and the Oh character table" href="plot_02_octahedral_symmetry.html" />
+    <link rel="next" title="Werner’s coordination theory: counting isomers to prove the octahedron" href="plot_02_octahedral_symmetry.html" />
     <link rel="prev" title="Point-group determination" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -376,12 +377,15 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../analytical/index.html">chemistrykit.analytical</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../analytical/calibration/index.html">Calibration curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../analytical/chromatography/index.html">Chromatography</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../analytical/qtest/index.html">Q-test outlier rejection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../analytical/qtest/index.html">Outlier rejection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../analytical/smoothing/index.html">Signal smoothing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../analytical/statistics/index.html">Statistics of replicate measurements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../analytical/titration/index.html">Titration curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../analytical/uncertainty/index.html">Propagation of uncertainty</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../crystal/index.html">chemistrykit.crystal</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../crystal/crystal_chemistry/index.html">Crystal chemistry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../crystal/crystal_systems/index.html">Crystal systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../crystal/defects/index.html">Point defects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../crystal/lattice_energy/index.html">Lattice energy</a></li>
@@ -393,9 +397,12 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../electrochem/index.html">chemistrykit.electrochem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/battery/index.html">Battery discharge</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/butler_volmer/index.html">Butler-Volmer kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../electrochem/conductivity/index.html">Electrolytic conductivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/electrolysis/index.html">Electrolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../electrochem/fuel_cell/index.html">Fuel cells</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/nernst/index.html">The Nernst equation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/standard_potentials/index.html">Standard reduction potentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../electrochem/voltammetry/index.html">Electroanalytical currents</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../kinetics/index.html">chemistrykit.kinetics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -404,15 +411,23 @@
 <li class="toctree-l2"><a class="reference internal" href="../../kinetics/networks/index.html">Reaction networks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../kinetics/oscillators/index.html">Oscillating reactions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../kinetics/rate_laws/index.html">Rate laws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../kinetics/rate_theory/index.html">Rate theory</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../md/index.html">chemistrykit.md</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../md/constraints/index.html">Constraints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../md/lj_fluid/index.html">Lennard-Jones fluid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../md/pair_potentials/index.html">Pair potentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../md/periodic_boundaries/index.html">Periodic boundaries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../md/thermostats/index.html">Thermostats</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../photochem/index.html">chemistrykit.photochem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/actinometry/index.html">Chemical actinometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/chain_reaction/index.html">Photochemical chain reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/electron_transfer/index.html">Photoinduced electron transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/energy_transfer/index.html">Energy transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/fluorescence/index.html">Fluorescence observables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../photochem/jablonski/index.html">Jablonski-diagram kinetics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../photochem/photostationary_state/index.html">Photostationary state</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../photochem/quantum_yield/index.html">Quantum yields</a></li>
@@ -423,12 +438,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../polymer/chain_growth/index.html">Chain-growth kinetics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../polymer/chain_statistics/index.html">Chain statistics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../polymer/molecular_weight_distribution/index.html">Molecular-weight distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../polymer/solution_properties/index.html">Solution properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../polymer/step_growth/index.html">Step-growth kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../polymer/stereochemistry/index.html">Stereochemistry</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../quantum/index.html">chemistrykit.quantum</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../quantum/harmonic_oscillator/index.html">Harmonic oscillator vs. Morse potential</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../quantum/hartree_fock/index.html">Minimal variational H2+</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quantum/hartree_fock/index.html">Minimal variational H2+ and the LCAO method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quantum/helium/index.html">Variational helium atom</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../quantum/huckel/index.html">Huckel molecular-orbital theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../quantum/hydrogenlike/index.html">Hydrogen-like atoms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../quantum/particle_in_box/index.html">Particle in a box</a></li>
@@ -444,42 +462,54 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../spectro/index.html">chemistrykit.spectro</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../spectro/atomic/index.html">Atomic line spectra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../spectro/beer_lambert/index.html">Beer-Lambert law</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../spectro/electronic/index.html">Electronic spectra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../spectro/lineshapes/index.html">Spectral lineshapes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../spectro/nmr/index.html">NMR multiplets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../spectro/nmr/index.html">NMR spectroscopy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../spectro/rotational/index.html">Rotational spectra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../spectro/vibrational/index.html">Vibrational spectra</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statmech/index.html">chemistrykit.statmech</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statmech/ising/index.html">Ising model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statmech/lattice_gas/index.html">Lattice-gas adsorption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statmech/maxwell_boltzmann/index.html">Maxwell-Boltzmann speed distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statmech/partition_functions/index.html">Partition functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statmech/quantum_statistics/index.html">Quantum statistics and the classical limit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statmech/solids/index.html">Heat capacity of solids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statmech/virial/index.html">Virial coefficients</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">chemistrykit.structure</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../bonding/index.html">Bond order</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../lewis/index.html">Formal charge and oxidation state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dipole/index.html">Dipole moments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kekule/index.html">Kekulé structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lewis/index.html">Lewis structures, oxidation states, and electronegativity</a></li>
 <li class="toctree-l2 current active"><a class="reference internal" href="index.html">Point-group determination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ring_strain/index.html">Ring strain</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vsepr/index.html">VSEPR geometry prediction</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../surface/index.html">chemistrykit.surface</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/bet/index.html">BET isotherm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/catalysis/index.html">Catalysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/dubinin/index.html">Polanyi potential and Dubinin-Radushkevich</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/eley_rideal/index.html">Eley-Rideal kinetics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/freundlich/index.html">Freundlich isotherm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/gibbs_adsorption/index.html">Gibbs adsorption equation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/langmuir/index.html">Langmuir isotherm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/langmuir_hinshelwood/index.html">Langmuir-Hinshelwood kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/temkin/index.html">Temkin isotherm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/tpd/index.html">Temperature-programmed desorption</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../thermo/index.html">chemistrykit.thermo</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../thermo/equations_of_state/index.html">Equations of state</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../thermo/equilibrium/index.html">Reaction equilibrium</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../thermo/mixtures/index.html">Mixtures and colligative properties</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../thermo/phase_equilibria/index.html">Phase equilibria</a></li>
-</ul>
-</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thermo/index.html">Sections</a></li>
+
+
+
+
+
 </ul>
 </div>
 </nav></div>
@@ -529,7 +559,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Point-group determination</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Point-group determination for water, ammonia, methane, and carbon dioxide</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Schoenflies point-group symbols for water, ammonia, methane, and carbon dioxide</span></li>
   </ul>
 </nav>
 </div>
@@ -551,25 +581,30 @@
 <p><a class="reference internal" href="#sphx-glr-download-api-gallery-structure-point-group-plot-01-point-groups-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code.</p>
 </div>
-<section class="sphx-glr-example-title" id="point-group-determination-for-water-ammonia-methane-and-carbon-dioxide">
-<span id="sphx-glr-api-gallery-structure-point-group-plot-01-point-groups-py"></span><h1>Point-group determination for water, ammonia, methane, and carbon dioxide<a class="headerlink" href="#point-group-determination-for-water-ammonia-methane-and-carbon-dioxide" title="Link to this heading">#</a></h1>
-<p>Builds each molecule’s actual 3D geometry, then runs
+<section class="sphx-glr-example-title" id="schoenflies-point-group-symbols-for-water-ammonia-methane-and-carbon-dioxide">
+<span id="sphx-glr-api-gallery-structure-point-group-plot-01-point-groups-py"></span><h1>Schoenflies point-group symbols for water, ammonia, methane, and carbon dioxide<a class="headerlink" href="#schoenflies-point-group-symbols-for-water-ammonia-methane-and-carbon-dioxide" title="Link to this heading">#</a></h1>
+<p>Arthur Schoenflies named every point group after the symmetry elements that
+generate it: a principal axis <span class="math notranslate nohighlight">\(C_n\)</span>, extra <span class="math notranslate nohighlight">\(C_2\)</span> axes
+(<span class="math notranslate nohighlight">\(D_n\)</span>), mirror planes <span class="math notranslate nohighlight">\(\sigma_v\)</span> or <span class="math notranslate nohighlight">\(\sigma_h\)</span>, an
+inversion centre <span class="math notranslate nohighlight">\(i\)</span>, and the special cubic groups <span class="math notranslate nohighlight">\(T_d\)</span> and
+<span class="math notranslate nohighlight">\(O_h\)</span>. This example builds four molecules from their real 3D
+geometry, lets
 <code class="xref py py-func docutils literal notranslate"><span class="pre">determine_point_group()</span></code>
-– which finds rotation axes, mirror planes, and an inversion center by
-direct geometric testing, not by recognizing the molecular formula – to
-recover the textbook point-group assignments C2v, C3v, Td, and D_inf_h.</p>
+find the symmetry elements by testing the coordinates directly, and shows
+how the elements it finds spell out each Schoenflies symbol: <span class="math notranslate nohighlight">\(C_{2v}\)</span>,
+<span class="math notranslate nohighlight">\(C_{3v}\)</span>, <span class="math notranslate nohighlight">\(T_d\)</span> and <span class="math notranslate nohighlight">\(D_{\infty h}\)</span>.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.structure.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">Molecule</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.structure.systems.point_group</span><span class="w"> </span><span class="kn">import</span> <span class="n">determine_point_group</span><span class="p">,</span> <span class="n">get_character_table</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.structure.systems.point_group</span><span class="w"> </span><span class="kn">import</span> <span class="n">determine_point_group</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.structure.visualizers.structure_plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_molecule_3d</span>
 
-<span class="c1"># Water: experimental geometry, r(O-H) = 0.958 A, angle(H-O-H) = 104.5 deg.</span>
+<span class="c1"># Water: r(O-H) = 0.958 A, angle(H-O-H) = 104.5 deg.</span>
 <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">angle</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">radians</span></a><span class="p">(</span><span class="mf">104.5</span><span class="p">)</span>
 <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">r</span></a> <span class="o">=</span> <span class="mf">0.958</span>
 <span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
-    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
+    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"O"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">],</span>
     <span class="n">coordinates</span><span class="o">=</span><span class="p">[</span>
         <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
         <span class="p">[</span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">r</span></a> <span class="o">*</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">sin</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">angle</span></a> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">r</span></a> <span class="o">*</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">cos</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">angle</span></a> <span class="o">/</span> <span class="mi">2</span><span class="p">)],</span>
@@ -578,57 +613,63 @@ recover the textbook point-group assignments C2v, C3v, Td, and D_inf_h.</p>
     <span class="n">bonds</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span>
 <span class="p">)</span>
 
-<span class="c1"># Methane: perfect tetrahedron, r(C-H) = 1.09 A.</span>
+<span class="c1"># Ammonia: trigonal pyramid, r(N-H) = 1.012 A, the three H atoms 0.38 A</span>
+<span class="c1"># below the nitrogen.</span>
+<a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">r_nh</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">drop</span></a> <span class="o">=</span> <span class="mf">1.012</span><span class="p">,</span> <span class="mf">0.38</span>
+<a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">rho</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">r_nh</span></a><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">drop</span></a><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">phis</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">radians</span></a><span class="p">([</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">210.0</span><span class="p">,</span> <span class="mf">330.0</span><span class="p">])</span>
+<span class="n">ammonia</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
+    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"N"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">],</span>
+    <span class="n">coordinates</span><span class="o">=</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.vstack.html#numpy.vstack" title="numpy.vstack" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">vstack</span></a><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.column_stack.html#numpy.column_stack" title="numpy.column_stack" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">column_stack</span></a><span class="p">([</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">rho</span></a> <span class="o">*</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">cos</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">phis</span></a><span class="p">),</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">rho</span></a> <span class="o">*</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">sin</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">phis</span></a><span class="p">),</span> <span class="o">-</span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">drop</span></a> <span class="o">*</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ones.html#numpy.ones" title="numpy.ones" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">ones</span></a><span class="p">(</span><span class="mi">3</span><span class="p">)])]),</span>
+    <span class="n">bonds</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span>
+<span class="p">)</span>
+
+<span class="c1"># Methane: regular tetrahedron, r(C-H) = 1.09 A.</span>
 <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">verts</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="numpy.array" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span>
 <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">verts</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">verts</span></a> <span class="o">/</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html#numpy.linalg.norm" title="numpy.linalg.norm" class="sphx-glr-backref-module-numpy-linalg sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">verts</span></a><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mf">1.09</span>
-<span class="n">methane</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span> <span class="n">coordinates</span><span class="o">=</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.vstack.html#numpy.vstack" title="numpy.vstack" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">vstack</span></a><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">verts</span></a><span class="p">]))</span>
+<span class="n">methane</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"C"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">],</span> <span class="n">coordinates</span><span class="o">=</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.vstack.html#numpy.vstack" title="numpy.vstack" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">vstack</span></a><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">verts</span></a><span class="p">]),</span> <span class="n">bonds</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)])</span>
 
 <span class="c1"># Carbon dioxide: linear, r(C=O) = 1.16 A.</span>
-<span class="n">co2</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;O&quot;</span><span class="p">],</span> <span class="n">coordinates</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.16</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.16</span><span class="p">]],</span> <span class="n">bonds</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>
+<span class="n">co2</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"O"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"O"</span><span class="p">],</span> <span class="n">coordinates</span><span class="o">=</span><span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.16</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.16</span><span class="p">]],</span> <span class="n">bonds</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>
 
-<a href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">molecules</span></a> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;water&quot;</span><span class="p">:</span> <span class="n">water</span><span class="p">,</span> <span class="s2">&quot;methane&quot;</span><span class="p">:</span> <span class="n">methane</span><span class="p">,</span> <span class="s2">&quot;carbon dioxide&quot;</span><span class="p">:</span> <span class="n">co2</span><span class="p">}</span>
-
+<a href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">molecules</span></a> <span class="o">=</span> <span class="p">{</span><span class="s2">"water"</span><span class="p">:</span> <span class="n">water</span><span class="p">,</span> <span class="s2">"ammonia"</span><span class="p">:</span> <span class="n">ammonia</span><span class="p">,</span> <span class="s2">"methane"</span><span class="p">:</span> <span class="n">methane</span><span class="p">,</span> <span class="s2">"carbon dioxide"</span><span class="p">:</span> <span class="n">co2</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Read the Schoenflies symbol off the elements that were found. The
+subscript number is the order of the principal axis, <code class="docutils literal notranslate"><span class="pre">v</span></code> means mirror
+planes that contain that axis, and <code class="docutils literal notranslate"><span class="pre">d</span></code> / <code class="docutils literal notranslate"><span class="pre">h</span></code> mark the diagonal and
+horizontal planes of the higher groups:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">results</span></a> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">name</span></a><span class="p">,</span> <span class="n">molecule</span> <span class="ow">in</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">molecules</span></a><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">determine_point_group</span><span class="p">(</span><span class="n">molecule</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">determine_point_group</span><span class="p">(</span><span class="n">molecule</span><span class="p">)</span>
+    <a href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">results</span></a><span class="p">[</span><a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">name</span></a><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
     <span class="nb">print</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">name</span></a><span class="si">}</span><span class="s2">: </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">result</span><span class="o">.</span><span class="n">group_name</span></a><span class="si">}</span><span class="s2">  &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;(principal axis order=</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">result</span><span class="o">.</span><span class="n">principal_axis_order</span></a><span class="si">}</span><span class="s2">, &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;sigma_v=</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">result</span><span class="o">.</span><span class="n">has_sigma_v</span></a><span class="si">}</span><span class="s2">, sigma_h=</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">result</span><span class="o">.</span><span class="n">has_sigma_h</span></a><span class="si">}</span><span class="s2">, &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;i=</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">result</span><span class="o">.</span><span class="n">has_inversion_center</span></a><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">name</span></a><span class="si">:</span><span class="s2">15s</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">res</span><span class="o">.</span><span class="n">group_name</span></a><span class="si">:</span><span class="s2">8s</span><span class="si">}</span><span class="s2"> principal C_n: n=</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">res</span><span class="o">.</span><span class="n">principal_axis_order</span></a><span class="si">}</span><span class="s2">, "</span>
+        <span class="sa">f</span><span class="s2">"mirror planes: </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">res</span><span class="o">.</span><span class="n">n_mirror_planes</span></a><span class="si">}</span><span class="s2">, sigma_v: </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">res</span><span class="o">.</span><span class="n">has_sigma_v</span></a><span class="si">}</span><span class="s2">, "</span>
+        <span class="sa">f</span><span class="s2">"sigma_h: </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">res</span><span class="o">.</span><span class="n">has_sigma_h</span></a><span class="si">}</span><span class="s2">, inversion centre: </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#bool" title="builtins.bool" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">res</span><span class="o">.</span><span class="n">has_inversion_center</span></a><span class="si">}</span><span class="s2">, C3 axes: </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">res</span><span class="o">.</span><span class="n">n_c3_axes</span></a><span class="si">}</span><span class="s2">"</span>
     <span class="p">)</span>
+
+<span class="k">assert</span> <span class="p">[</span><a href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">results</span></a><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">group_name</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">molecules</span></a><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="s2">"C2v"</span><span class="p">,</span> <span class="s2">"C3v"</span><span class="p">,</span> <span class="s2">"Td"</span><span class="p">,</span> <span class="s2">"D_inf_h"</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>water: C2v  (principal axis order=2, sigma_v=True, sigma_h=False, i=False)
-methane: Td  (principal axis order=3, sigma_v=True, sigma_h=False, i=False)
-carbon dioxide: D_inf_h  (principal axis order=0, sigma_v=False, sigma_h=True, i=True)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>water           -&gt; C2v      principal C_n: n=2, mirror planes: 2, sigma_v: True, sigma_h: False, inversion centre: False, C3 axes: 0
+ammonia         -&gt; C3v      principal C_n: n=3, mirror planes: 3, sigma_v: True, sigma_h: False, inversion centre: False, C3 axes: 1
+methane         -&gt; Td       principal C_n: n=3, mirror planes: 6, sigma_v: True, sigma_h: False, inversion centre: False, C3 axes: 4
+carbon dioxide  -&gt; D_inf_h  principal C_n: n=0, mirror planes: 0, sigma_v: False, sigma_h: True, inversion centre: True, C3 axes: 0
 </pre></div>
 </div>
-<p>The C2v character table – 4 one-dimensional irreducible
-representations, since C2v is abelian:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">c2v</span> <span class="o">=</span> <span class="n">get_character_table</span><span class="p">(</span><span class="s2">&quot;C2v&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">C2v operations: </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">c2v</span><span class="o">.</span><span class="n">operations</span></a><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">for</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">irrep</span></a> <span class="ow">in</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">c2v</span><span class="o">.</span><span class="n">irreps</span></a><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">irrep</span></a><span class="si">}</span><span class="s2">: </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">c2v</span><span class="o">.</span><span class="n">characters</span></a><span class="p">[</span><a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">c2v</span><span class="o">.</span><span class="n">irreps</span></a><span class="o">.</span><span class="n">index</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">irrep</span></a><span class="p">)]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>C2v operations: [&#39;E&#39;, &#39;C2&#39;, &#39;sigma_v(xz)&#39;, &quot;sigma_v&#39;(yz)&quot;]
-  A1: [1.0, 1.0, 1.0, 1.0]
-  A2: [1.0, 1.0, -1.0, -1.0]
-  B1: [1.0, -1.0, 1.0, -1.0]
-  B2: [1.0, -1.0, -1.0, 1.0]
-</pre></div>
-</div>
-<p>Plot each molecule:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<p>Plot each molecule with the symbol <code class="xref py py-func docutils literal notranslate"><span class="pre">determine_point_group()</span></code> assigned:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="k">for</span> <a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">,</span> <span class="p">(</span><a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">name</span></a><span class="p">,</span> <span class="n">molecule</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">molecules</span></a><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">"3d"</span><span class="p">)</span>
     <span class="n">plot_molecule_3d</span><span class="p">(</span><span class="n">molecule</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">name</span></a><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">determine_point_group</span><span class="p">(</span><span class="n">molecule</span><span class="p">)</span><span class="o">.</span><span class="n">group_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">name</span></a><span class="si">}</span><span class="s2">: </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">results</span></a><span class="p">[</span><a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">name</span></a><span class="p">]</span><span class="o">.</span><span class="n">group_name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">"Schoenflies symbols found from the geometry"</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../../../_images/sphx_glr_plot_01_point_groups_001.png" srcset="../../../../_images/sphx_glr_plot_01_point_groups_001.png" alt="water: C2v, methane: Td, carbon dioxide: D_inf_h" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.109 seconds)</p>
+<img src="../../../../_images/sphx_glr_plot_01_point_groups_001.png" srcset="../../../../_images/sphx_glr_plot_01_point_groups_001.png" alt="Schoenflies symbols found from the geometry, water: C2v, ammonia: C3v, methane: Td, carbon dioxide: D_inf_h" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.145 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-api-gallery-structure-point-group-plot-01-point-groups-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../../../_downloads/53db917331d5fe0549dc7a708014848b/plot_01_point_groups.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_01_point_groups.ipynb</span></code></a></p>
@@ -667,7 +708,7 @@ representations, since C2v is abelian:</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Octahedral symmetry: SF6, Werner’s six-coordinate complexes, and the Oh character table</p>
+        <p class="prev-next-title">Werner’s coordination theory: counting isomers to prove the octahedron</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

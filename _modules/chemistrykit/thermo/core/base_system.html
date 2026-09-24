@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.thermo.core.base_system</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Abstract base class for equation-of-state (EOS) models.</span>
+<span></span><span class="sd">"""Abstract base class for equation-of-state (EOS) models.</span>
 
 <span class="sd">An equation of state relates pressure, molar volume, and temperature for</span>
 <span class="sd">a pure substance -- ``P = P(Vm, T)`` or, inverted, ``Vm = Vm(P, T)``.</span>
@@ -421,12 +421,12 @@
 <span class="sd">mirroring the role</span>
 <span class="sd">:class:`chemistrykit.kinetics.core.base_system.RateLaw` plays for the</span>
 <span class="sd">integrated rate laws -- a small ABC capturing the one shape of model this</span>
-<span class="sd">domain&#39;s ``systems/equations_of_state`` module has, the same way</span>
+<span class="sd">domain's ``systems/equations_of_state`` module has, the same way</span>
 <span class="sd">``chemistrykit.kinetics`` has two ABCs (``RateLaw``, ``ReactionNetwork``)</span>
 <span class="sd">for its two shapes of model. Reaction/phase equilibrium and mixture</span>
-<span class="sd">properties elsewhere in :mod:`chemistrykit.thermo` don&#39;t share a common</span>
+<span class="sd">properties elsewhere in :mod:`chemistrykit.thermo` don't share a common</span>
 <span class="sd">polymorphic interface the way the three EOS models do, so (following</span>
-<span class="sd">``chemistrykit.kinetics.systems.arrhenius``/``enzyme``&#39;s precedent) they</span>
+<span class="sd">``chemistrykit.kinetics.systems.arrhenius``/``enzyme``'s precedent) they</span>
 <span class="sd">are implemented directly as functions and small result dataclasses in</span>
 <span class="sd">their own ``systems/`` modules rather than forced into an ABC here.</span>
 
@@ -434,10 +434,10 @@
 <span class="sd">requires finding roots of a cubic polynomial in :math:`V_m`; below the</span>
 <span class="sd">critical temperature there can be up to three real positive roots</span>
 <span class="sd">(liquid, unstable, and vapor branches) -- see the ``branch`` parameter on</span>
-<span class="sd">each concrete class&#39;s ``molar_volume``, and</span>
+<span class="sd">each concrete class's ``molar_volume``, and</span>
 <span class="sd">:func:`chemistrykit.thermo.utils.cubic_roots.real_positive_roots` for the</span>
 <span class="sd">shared root-selection numerics.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -445,19 +445,19 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">R</span> <span class="k">as</span> <span class="n">_R</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;EquationOfState&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"EquationOfState"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="EquationOfState">
 <a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.EquationOfState">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">EquationOfState</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common interface for a pure-substance PVT equation of state.</span>
+<span class="w">    </span><span class="sd">"""Common interface for a pure-substance PVT equation of state.</span>
 
 <span class="sd">    Concrete subclasses implement :meth:`pressure` (an explicit formula)</span>
 <span class="sd">    and :meth:`molar_volume` (generally a root-find, for any EOS cubic or</span>
 <span class="sd">    higher in :math:`V_m`); :meth:`compressibility_factor` then follows</span>
 <span class="sd">    for every subclass for free.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">R</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">_R</span>
 
@@ -465,7 +465,7 @@
 <a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.EquationOfState.pressure">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Vm</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the pressure at molar volume `Vm` and temperature `T`.</span>
+<span class="w">        </span><span class="sd">"""Return the pressure at molar volume `Vm` and temperature `T`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -478,14 +478,14 @@
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
 <span class="sd">            Pressure, in Pa.</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="EquationOfState.molar_volume">
 <a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.EquationOfState.molar_volume">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">molar_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the molar volume at pressure `P` and temperature `T`.</span>
+<span class="w">        </span><span class="sd">"""Return the molar volume at pressure `P` and temperature `T`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -498,13 +498,13 @@
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
 <span class="sd">            Molar volume, in m^3/mol.</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="EquationOfState.compressibility_factor">
 <a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.EquationOfState.compressibility_factor">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compressibility_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return the compressibility factor :math:`Z = PV_m/(RT)`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return the compressibility factor :math:`Z = PV_m/(RT)`.</span>
 
 <span class="sd">        :math:`Z = 1` exactly for an ideal gas; deviations from 1</span>
 <span class="sd">        quantify real-gas non-ideality (Atkins &amp; de Paula, *Physical</span>
@@ -523,7 +523,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">Vm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">molar_volume</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">P</span> <span class="o">*</span> <span class="n">Vm</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span></div>
 </div>

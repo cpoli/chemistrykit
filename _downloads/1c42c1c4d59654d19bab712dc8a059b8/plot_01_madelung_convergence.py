@@ -1,6 +1,6 @@
 r"""
-Converging the NaCl Madelung constant
-========================================
+Evjen's method: converging the NaCl Madelung constant
+=======================================================
 
 The NaCl Madelung-constant lattice sum is only conditionally convergent:
 a naive truncated sum over a growing cube of ions does not settle down as

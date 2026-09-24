@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>First-order NMR multiplets: ethanol’s triplet/quartet, and a doublet of triplets &#8212; chemistrykit 0.1.0 documentation</title>
+    <title>Spin-spin (J) coupling and the n+1 rule: ethanol’s triplet/quartet and a doublet of triplets &#8212; chemistrykit 0.1.0 documentation</title>
   
   
   
@@ -48,12 +48,13 @@
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/gallery/spectro/nmr/plot_01_nmr_multiplets';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Rotational spectra" href="../rotational/index.html" />
-    <link rel="prev" title="NMR multiplets" href="index.html" />
+    <link rel="next" title="Nuclear magnetic resonance: Larmor frequencies and the field-independent chemical shift" href="plot_02_nmr_resonance_chemical_shift.html" />
+    <link rel="prev" title="NMR spectroscopy" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -376,12 +377,15 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../analytical/index.html">chemistrykit.analytical</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../analytical/calibration/index.html">Calibration curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../analytical/chromatography/index.html">Chromatography</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../analytical/qtest/index.html">Q-test outlier rejection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../analytical/qtest/index.html">Outlier rejection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../analytical/smoothing/index.html">Signal smoothing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../analytical/statistics/index.html">Statistics of replicate measurements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../analytical/titration/index.html">Titration curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../analytical/uncertainty/index.html">Propagation of uncertainty</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../crystal/index.html">chemistrykit.crystal</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../crystal/crystal_chemistry/index.html">Crystal chemistry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../crystal/crystal_systems/index.html">Crystal systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../crystal/defects/index.html">Point defects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../crystal/lattice_energy/index.html">Lattice energy</a></li>
@@ -393,9 +397,12 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../electrochem/index.html">chemistrykit.electrochem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/battery/index.html">Battery discharge</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/butler_volmer/index.html">Butler-Volmer kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../electrochem/conductivity/index.html">Electrolytic conductivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/electrolysis/index.html">Electrolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../electrochem/fuel_cell/index.html">Fuel cells</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/nernst/index.html">The Nernst equation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/standard_potentials/index.html">Standard reduction potentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../electrochem/voltammetry/index.html">Electroanalytical currents</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../kinetics/index.html">chemistrykit.kinetics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -404,15 +411,23 @@
 <li class="toctree-l2"><a class="reference internal" href="../../kinetics/networks/index.html">Reaction networks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../kinetics/oscillators/index.html">Oscillating reactions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../kinetics/rate_laws/index.html">Rate laws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../kinetics/rate_theory/index.html">Rate theory</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../md/index.html">chemistrykit.md</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../md/constraints/index.html">Constraints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../md/lj_fluid/index.html">Lennard-Jones fluid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../md/pair_potentials/index.html">Pair potentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../md/periodic_boundaries/index.html">Periodic boundaries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../md/thermostats/index.html">Thermostats</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../photochem/index.html">chemistrykit.photochem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/actinometry/index.html">Chemical actinometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/chain_reaction/index.html">Photochemical chain reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/electron_transfer/index.html">Photoinduced electron transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/energy_transfer/index.html">Energy transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/fluorescence/index.html">Fluorescence observables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../photochem/jablonski/index.html">Jablonski-diagram kinetics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../photochem/photostationary_state/index.html">Photostationary state</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../photochem/quantum_yield/index.html">Quantum yields</a></li>
@@ -423,12 +438,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../polymer/chain_growth/index.html">Chain-growth kinetics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../polymer/chain_statistics/index.html">Chain statistics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../polymer/molecular_weight_distribution/index.html">Molecular-weight distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../polymer/solution_properties/index.html">Solution properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../polymer/step_growth/index.html">Step-growth kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../polymer/stereochemistry/index.html">Stereochemistry</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../quantum/index.html">chemistrykit.quantum</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../quantum/harmonic_oscillator/index.html">Harmonic oscillator vs. Morse potential</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../quantum/hartree_fock/index.html">Minimal variational H2+</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quantum/hartree_fock/index.html">Minimal variational H2+ and the LCAO method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quantum/helium/index.html">Variational helium atom</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../quantum/huckel/index.html">Huckel molecular-orbital theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../quantum/hydrogenlike/index.html">Hydrogen-like atoms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../quantum/particle_in_box/index.html">Particle in a box</a></li>
@@ -444,42 +462,54 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">chemistrykit.spectro</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../atomic/index.html">Atomic line spectra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../beer_lambert/index.html">Beer-Lambert law</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../electronic/index.html">Electronic spectra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../lineshapes/index.html">Spectral lineshapes</a></li>
-<li class="toctree-l2 current active"><a class="reference internal" href="index.html">NMR multiplets</a></li>
+<li class="toctree-l2 current active"><a class="reference internal" href="index.html">NMR spectroscopy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rotational/index.html">Rotational spectra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vibrational/index.html">Vibrational spectra</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statmech/index.html">chemistrykit.statmech</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statmech/ising/index.html">Ising model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statmech/lattice_gas/index.html">Lattice-gas adsorption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statmech/maxwell_boltzmann/index.html">Maxwell-Boltzmann speed distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statmech/partition_functions/index.html">Partition functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statmech/quantum_statistics/index.html">Quantum statistics and the classical limit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statmech/solids/index.html">Heat capacity of solids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statmech/virial/index.html">Virial coefficients</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../structure/index.html">chemistrykit.structure</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../structure/bonding/index.html">Bond order</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../structure/lewis/index.html">Formal charge and oxidation state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../structure/dipole/index.html">Dipole moments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../structure/kekule/index.html">Kekulé structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../structure/lewis/index.html">Lewis structures, oxidation states, and electronegativity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../structure/point_group/index.html">Point-group determination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../structure/ring_strain/index.html">Ring strain</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../structure/vsepr/index.html">VSEPR geometry prediction</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../surface/index.html">chemistrykit.surface</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/bet/index.html">BET isotherm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/catalysis/index.html">Catalysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/dubinin/index.html">Polanyi potential and Dubinin-Radushkevich</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/eley_rideal/index.html">Eley-Rideal kinetics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/freundlich/index.html">Freundlich isotherm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/gibbs_adsorption/index.html">Gibbs adsorption equation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/langmuir/index.html">Langmuir isotherm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/langmuir_hinshelwood/index.html">Langmuir-Hinshelwood kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/temkin/index.html">Temkin isotherm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/tpd/index.html">Temperature-programmed desorption</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../thermo/index.html">chemistrykit.thermo</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../thermo/equations_of_state/index.html">Equations of state</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../thermo/equilibrium/index.html">Reaction equilibrium</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../thermo/mixtures/index.html">Mixtures and colligative properties</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../thermo/phase_equilibria/index.html">Phase equilibria</a></li>
-</ul>
-</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thermo/index.html">Sections</a></li>
+
+
+
+
+
 </ul>
 </div>
 </nav></div>
@@ -527,9 +557,9 @@
     <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Examples</a></li>
     
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">NMR multiplets</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">NMR spectroscopy</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">First-order NMR multiplets: ethanol’s triplet/quartet, and a doublet of triplets</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Spin-spin (J) coupling and the n+1 rule: ethanol’s triplet/quartet and a doublet of triplets</span></li>
   </ul>
 </nav>
 </div>
@@ -551,12 +581,16 @@
 <p><a class="reference internal" href="#sphx-glr-download-api-gallery-spectro-nmr-plot-01-nmr-multiplets-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code.</p>
 </div>
-<section class="sphx-glr-example-title" id="first-order-nmr-multiplets-ethanol-s-triplet-quartet-and-a-doublet-of-triplets">
-<span id="sphx-glr-api-gallery-spectro-nmr-plot-01-nmr-multiplets-py"></span><h1>First-order NMR multiplets: ethanol’s triplet/quartet, and a doublet of triplets<a class="headerlink" href="#first-order-nmr-multiplets-ethanol-s-triplet-quartet-and-a-doublet-of-triplets" title="Link to this heading">#</a></h1>
-<p>Simulates ethanol’s classic -CH3 triplet and -CH2- quartet (each proton
-set split only by its 3-bond neighbor, the textbook first-order pattern),
-then a genuine doublet of triplets from two chemically distinct coupling
-partners with different <cite>J</cite> values.</p>
+<section class="sphx-glr-example-title" id="spin-spin-j-coupling-and-the-n-1-rule-ethanol-s-triplet-quartet-and-a-doublet-of-triplets">
+<span id="sphx-glr-api-gallery-spectro-nmr-plot-01-nmr-multiplets-py"></span><h1>Spin-spin (J) coupling and the n+1 rule: ethanol’s triplet/quartet and a doublet of triplets<a class="headerlink" href="#spin-spin-j-coupling-and-the-n-1-rule-ethanol-s-triplet-quartet-and-a-doublet-of-triplets" title="Link to this heading">#</a></h1>
+<p>Indirect spin-spin coupling carried through the bonding electrons
+(Ramsey and Purcell, 1952) splits an NMR resonance into a multiplet. The
+splitting is <span class="math notranslate nohighlight">\(J\)</span> Hz regardless of field strength. In the
+first-order limit, <span class="math notranslate nohighlight">\(n\)</span> equivalent spin-1/2 neighbours give
+<span class="math notranslate nohighlight">\(n+1\)</span> lines with Pascal’s-triangle intensities. This example
+simulates ethanol’s -CH3 triplet and -CH2- quartet, then a doublet of
+triplets from two inequivalent coupling partners with different
+<span class="math notranslate nohighlight">\(J\)</span> values.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
@@ -564,11 +598,11 @@ partners with different <cite>J</cite> values.</p>
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.spectro.visualizers.spectro_plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_broadened_spectrum</span><span class="p">,</span> <span class="n">plot_stick_spectrum</span>
 
 <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">freq_mhz</span></a> <span class="o">=</span> <span class="mf">400.0</span>
-<span class="n">ch3</span> <span class="o">=</span> <span class="n">first_order_multiplet</span><span class="p">(</span><span class="n">chemical_shift_ppm</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">j_coupling_hz</span><span class="o">=</span><span class="mf">7.0</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">spectrometer_frequency_mhz</span><span class="o">=</span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">freq_mhz</span></a><span class="p">)</span>  <span class="c1"># split by CH2&#39;s 2 H&#39;s -&gt; triplet</span>
-<span class="n">ch2</span> <span class="o">=</span> <span class="n">first_order_multiplet</span><span class="p">(</span><span class="n">chemical_shift_ppm</span><span class="o">=</span><span class="mf">3.7</span><span class="p">,</span> <span class="n">j_coupling_hz</span><span class="o">=</span><span class="mf">7.0</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">spectrometer_frequency_mhz</span><span class="o">=</span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">freq_mhz</span></a><span class="p">)</span>  <span class="c1"># split by CH3&#39;s 3 H&#39;s -&gt; quartet</span>
+<span class="n">ch3</span> <span class="o">=</span> <span class="n">first_order_multiplet</span><span class="p">(</span><span class="n">chemical_shift_ppm</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">j_coupling_hz</span><span class="o">=</span><span class="mf">7.0</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">spectrometer_frequency_mhz</span><span class="o">=</span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">freq_mhz</span></a><span class="p">)</span>  <span class="c1"># split by CH2's 2 H's -&gt; triplet</span>
+<span class="n">ch2</span> <span class="o">=</span> <span class="n">first_order_multiplet</span><span class="p">(</span><span class="n">chemical_shift_ppm</span><span class="o">=</span><span class="mf">3.7</span><span class="p">,</span> <span class="n">j_coupling_hz</span><span class="o">=</span><span class="mf">7.0</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">spectrometer_frequency_mhz</span><span class="o">=</span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">freq_mhz</span></a><span class="p">)</span>  <span class="c1"># split by CH3's 3 H's -&gt; quartet</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CH3 triplet positions (ppm): </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.round.html#numpy.round" title="numpy.round" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">round</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ch3</span><span class="o">.</span><span class="n">positions</span></a><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">, intensities: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ch3</span><span class="o">.</span><span class="n">intensities</span></a><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CH2 quartet positions (ppm): </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.round.html#numpy.round" title="numpy.round" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">round</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ch2</span><span class="o">.</span><span class="n">positions</span></a><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">, intensities: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ch2</span><span class="o">.</span><span class="n">intensities</span></a><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"CH3 triplet positions (ppm): </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.round.html#numpy.round" title="numpy.round" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">round</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ch3</span><span class="o">.</span><span class="n">positions</span></a><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">, intensities: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ch3</span><span class="o">.</span><span class="n">intensities</span></a><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"CH2 quartet positions (ppm): </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.round.html#numpy.round" title="numpy.round" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">round</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ch2</span><span class="o">.</span><span class="n">positions</span></a><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">, intensities: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ch2</span><span class="o">.</span><span class="n">intensities</span></a><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>CH3 triplet positions (ppm): [1.1825 1.2    1.2175], intensities: [1. 2. 1.]
@@ -576,12 +610,12 @@ CH2 quartet positions (ppm): [3.6738 3.6912 3.7088 3.7262], intensities: [1. 3. 
 </pre></div>
 </div>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">axes</span></a> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plot_stick_spectrum</span><span class="p">(</span><span class="n">ch3</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">axes</span></a><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;steelblue&quot;</span><span class="p">)</span>
-<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">axes</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Ethanol -CH3 (triplet)&quot;</span><span class="p">)</span>
-<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">axes</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;chemical shift (ppm)&quot;</span><span class="p">)</span>
-<span class="n">plot_stick_spectrum</span><span class="p">(</span><span class="n">ch2</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">axes</span></a><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;crimson&quot;</span><span class="p">)</span>
-<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">axes</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Ethanol -CH2- (quartet)&quot;</span><span class="p">)</span>
-<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">axes</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;chemical shift (ppm)&quot;</span><span class="p">)</span>
+<span class="n">plot_stick_spectrum</span><span class="p">(</span><span class="n">ch3</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">axes</span></a><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">"steelblue"</span><span class="p">)</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">axes</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Ethanol -CH3 (triplet)"</span><span class="p">)</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">axes</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"chemical shift (ppm)"</span><span class="p">)</span>
+<span class="n">plot_stick_spectrum</span><span class="p">(</span><span class="n">ch2</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">axes</span></a><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">"crimson"</span><span class="p">)</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">axes</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Ethanol -CH2- (quartet)"</span><span class="p">)</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">axes</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"chemical shift (ppm)"</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -589,15 +623,15 @@ CH2 quartet positions (ppm): [3.6738 3.6912 3.7088 3.7262], intensities: [1. 3. 
 equivalent neighbors with J2=5 Hz – 6 distinct lines, total relative
 intensity conserved at (1+1)*(1+2+1)=8:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="n">multi_coupling_multiplet</span><span class="p">(</span><span class="n">chemical_shift_ppm</span><span class="o">=</span><span class="mf">5.5</span><span class="p">,</span> <span class="n">couplings</span><span class="o">=</span><span class="p">[(</span><span class="mf">12.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span> <span class="n">spectrometer_frequency_mhz</span><span class="o">=</span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">freq_mhz</span></a><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Doublet-of-triplets: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dt</span><span class="o">.</span><span class="n">positions</span></a><span class="p">)</span><span class="si">}</span><span class="s2"> lines, total intensity </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.sum.html#numpy.sum" title="numpy.sum" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dt</span><span class="o">.</span><span class="n">intensities</span></a><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Positions (ppm): </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.round.html#numpy.round" title="numpy.round" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">round</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dt</span><span class="o">.</span><span class="n">positions</span></a><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intensities: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dt</span><span class="o">.</span><span class="n">intensities</span></a><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Doublet-of-triplets: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dt</span><span class="o">.</span><span class="n">positions</span></a><span class="p">)</span><span class="si">}</span><span class="s2"> lines, total intensity </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.sum.html#numpy.sum" title="numpy.sum" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">sum</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dt</span><span class="o">.</span><span class="n">intensities</span></a><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Positions (ppm): </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.round.html#numpy.round" title="numpy.round" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">round</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dt</span><span class="o">.</span><span class="n">positions</span></a><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Intensities: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dt</span><span class="o">.</span><span class="n">intensities</span></a><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="n">fig2</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dt</span><span class="o">.</span><span class="n">positions</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.02</span><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dt</span><span class="o">.</span><span class="n">positions</span></a><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
-<span class="n">plot_broadened_spectrum</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x</span></a><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s2">&quot;lorentzian&quot;</span><span class="p">,</span> <span class="n">fwhm</span><span class="o">=</span><span class="mf">0.002</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkgreen&quot;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;chemical shift (ppm)&quot;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Doublet of triplets (J1=12 Hz, J2=5 Hz)&quot;</span><span class="p">)</span>
+<span class="n">plot_broadened_spectrum</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x</span></a><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s2">"lorentzian"</span><span class="p">,</span> <span class="n">fwhm</span><span class="o">=</span><span class="mf">0.002</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"darkgreen"</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"chemical shift (ppm)"</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Doublet of triplets (J1=12 Hz, J2=5 Hz)"</span><span class="p">)</span>
 <span class="n">fig2</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -607,7 +641,7 @@ Positions (ppm): [5.4725 5.485  5.4975 5.5025 5.515  5.5275]
 Intensities: [1. 2. 1. 1. 2. 1.]
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.089 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.096 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-api-gallery-spectro-nmr-plot-01-nmr-multiplets-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../../../_downloads/d06ed3770bb7ad07befdaa30feee52c0/plot_01_nmr_multiplets.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_01_nmr_multiplets.ipynb</span></code></a></p>
@@ -638,15 +672,15 @@ Intensities: [1. 2. 1. 1. 2. 1.]
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">NMR multiplets</p>
+        <p class="prev-next-title">NMR spectroscopy</p>
       </div>
     </a>
     <a class="right-next"
-       href="../rotational/index.html"
+       href="plot_02_nmr_resonance_chemical_shift.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Rotational spectra</p>
+        <p class="prev-next-title">Nuclear magnetic resonance: Larmor frequencies and the field-independent chemical shift</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

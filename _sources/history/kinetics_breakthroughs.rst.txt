@@ -19,7 +19,8 @@ messy, composite behavior actually observed at the bench. The systems in
 :mod:`chemistrykit.kinetics` retrace that project from its first
 quantitative measurement -- a chemist timing how fast sugar turns sour in
 acid -- through the discovery that some reactions never settle down at
-all, oscillating indefinitely instead. This chronology traces the major
+all, oscillating indefinitely instead, and on to the exact stochastic
+simulation of reactions among only a handful of molecules. This chronology traces the major
 conceptual breakthroughs behind the package, with a pointer to the
 corresponding implementation at each stop.
 
@@ -56,9 +57,10 @@ recognized as the field's true starting point.
 *Implementation:* :class:`chemistrykit.kinetics.systems.rate_laws.FirstOrder`
 implements exactly this exponential decay law and its concentration-
 independent half-life, :math:`t_{1/2} = \ln(2)/k` -- the same
-mathematical object Wilhelmy extracted from polarimeter readings, applied
-here (as in the example below) to a generic first-order decay rather than
-sucrose specifically.
+mathematical object Wilhelmy extracted from polarimeter readings; the
+example below fits it to synthetic polarimeter readings of a sucrose
+inversion exactly as Wilhelmy did, via the straight line of
+:math:`\ln[(\alpha-\alpha_\infty)/(\alpha_0-\alpha_\infty)]` against time.
 
 *References:* L. F. Wilhelmy, "Über das Gesetz, nach welchem die
 Einwirkung der Säuren auf den Rohrzucker stattfindet," Poggendorffs
@@ -67,7 +69,7 @@ are as commonly cited in secondary kinetics literature (e.g. Laidler,
 *Chemical Kinetics*, 3rd ed., Ch. 1); the original has not been
 independently re-verified here.
 
-.. minigallery:: ../../examples/kinetics/rate_laws/plot_01_integrated_rate_laws.py
+.. minigallery:: ../../examples/kinetics/rate_laws/plot_02_wilhelmy_sucrose_inversion.py
 
 1884 -- van't Hoff's Etudes de Dynamique Chimique and Reaction Order
 ------------------------------------------------------------------------
@@ -101,7 +103,8 @@ himself had data for.
 exactly the :math:`n=0,1,2` cases of van't Hoff's general power-law
 classification, each with its own distinct half-life formula (only the
 first-order half-life is independent of the starting concentration,
-which the example below marks directly); the general
+which the example below marks directly, alongside van't Hoff's
+initial-rate method of reading the order off a log-log plot); the general
 :class:`~chemistrykit.kinetics.systems.networks.StoichiometricNetwork`
 engine's ``reactant_orders`` array (see 1922, below) extends the same
 classification to networks of coupled elementary steps of arbitrary
@@ -110,9 +113,7 @@ order.
 *References:* J. H. van't Hoff, *Etudes de Dynamique Chimique*
 (Amsterdam: Frederik Muller, 1884).
 
-.. minigallery::
-   ../../examples/kinetics/rate_laws/plot_01_integrated_rate_laws.py
-   ../../examples/kinetics/networks/plot_01_reaction_networks.py
+.. minigallery:: ../../examples/kinetics/rate_laws/plot_01_integrated_rate_laws.py
 
 1889 -- Arrhenius and the Temperature Dependence of Reaction Rates
 ------------------------------------------------------------------------
@@ -153,48 +154,6 @@ draws the plot itself.
 Inversion von Rohrzucker durch Säuren," Z. Phys. Chem. 4, 226-248 (1889).
 
 .. minigallery:: ../../examples/kinetics/arrhenius/plot_01_arrhenius_fit.py
-
-1910 -- 1920 -- Lotka's Autocatalytic Oscillating Reactions
----------------------------------------------------------------
-
-Alfred J. Lotka asked a question that, at the time, sounded almost
-paradoxical: could a purely chemical mechanism -- no biology, no external
-clock -- make a concentration rise and fall periodically forever, rather
-than settling monotonically toward equilibrium the way every reaction
-studied since Wilhelmy did? His 1910 scheme, an autocatalytic sequence in
-which an intermediate `X` catalyzes its own production from a reservoir
-`A` and is in turn consumed by a second autocatalytic step producing `Y`,
-showed damped oscillations relaxing into the system's stable equilibrium
--- rhythmic, but not sustained. His better-known 1920 model, a simplified
-two-variable version of the same idea, does support genuinely periodic
-solutions, but of a fragile kind: the orbits are *neutrally* stable,
-forming a continuous family of closed curves nested around the fixed
-point, rather than a single, structurally robust limit cycle that
-neighboring trajectories are drawn onto. Perturb a Lotka-type system even
-slightly and it can drift onto a different one of these neutral orbits
-forever; nothing pulls it back to a preferred amplitude. That distinction
--- oscillation that merely exists, versus oscillation that is dynamically
-*stable* -- is exactly what the Brusselator (1968, below) would later
-supply, and is why Lotka's chemical scheme is remembered today mostly
-through its later, structurally identical reincarnation as the
-Lotka-Volterra predator-prey equations in ecology, rather than as a
-chemistry result in its own right.
-
-*Connection:* chemistrykit.kinetics has no standalone implementation of
-Lotka's original two- or three-species chemical scheme, but
-:meth:`~chemistrykit.kinetics.Brusselator.is_above_hopf_threshold`
-draws exactly the distinction Lotka's model lacks: below its threshold
-the Brusselator's fixed point is a stable focus, and above it, a genuine
-attracting limit cycle -- structurally stable to small perturbations,
-unlike the neutral orbits of Lotka's 1920 model -- surrounds an unstable
-focus.
-
-*References:* A. J. Lotka, "Contribution to the Theory of Periodic
-Reactions," J. Phys. Chem. 14, 271-274 (1910); A. J. Lotka, "Analytical
-Note on Certain Rhythmic Relations in Organic Systems," Proc. Natl. Acad.
-Sci. USA 6, 410-415 (1920).
-
-.. minigallery:: ../../examples/kinetics/oscillators/plot_01_brusselator.py
 
 1903 -- 1913 -- Michaelis and Menten's Enzyme Kinetics
 ------------------------------------------------------------
@@ -239,6 +198,91 @@ Invertinwirkung," Biochem. Z. 49, 333-369 (1913); V. Henri, *Lois
 Generales de l'Action des Diastases* (Paris: Hermann, 1903).
 
 .. minigallery:: ../../examples/kinetics/enzyme/plot_01_michaelis_menten.py
+
+1910 -- Bateman's Solution for Consecutive Reactions
+------------------------------------------------------
+
+Chemists had studied reactions that proceed through an intermediate --
+:math:`A \to B \to C` -- since Harcourt and Esson's work on permanganate
+oxidations in the 1860s, but the general closed-form solution for a chain
+of first-order steps came from an unexpected direction: radioactivity.
+Rutherford's decay series (radium to radon to its short-lived daughters)
+posed exactly the same mathematical problem, and Harry Bateman, a
+Cambridge-trained mathematician, solved it for a chain of any length in
+1910. For the two-step case,
+
+.. math::
+
+   [B](t) = \frac{k_1[A]_0}{k_2 - k_1}\left(e^{-k_1 t} - e^{-k_2 t}\right),
+   \qquad t_{max} = \frac{\ln(k_2/k_1)}{k_2 - k_1}
+
+so the intermediate rises, peaks at :math:`t_{max}`, and then decays, and
+the final product :math:`C` appears only after an induction period.
+The same equations govern any consecutive first-order mechanism -- a
+pharmacokinetic absorption/elimination model, or the build-up and decay
+of a reactive intermediate -- and they are the exact benchmark against
+which approximations such as the steady-state approximation (1913, below)
+are judged.
+
+*Implementation:* :func:`~chemistrykit.kinetics.consecutive_analytic`
+evaluates Bateman's two-step solution (including the degenerate
+:math:`k_1 = k_2` limit), and
+:meth:`~chemistrykit.kinetics.StoichiometricNetwork.consecutive` builds
+the same mechanism for numerical integration; the example below checks
+one against the other and traces the intermediate's peak as the ratio
+:math:`k_2/k_1` varies.
+
+*References:* H. Bateman, "The Solution of a System of Differential
+Equations Occurring in the Theory of Radioactive Transformations," Proc.
+Cambridge Philos. Soc. 15, 423-427 (1910).
+
+.. minigallery:: ../../examples/kinetics/networks/plot_03_bateman_consecutive.py
+
+1910 -- 1920 -- Lotka's Autocatalytic Oscillating Reactions
+---------------------------------------------------------------
+
+Alfred J. Lotka asked a question that, at the time, sounded almost
+paradoxical: could a purely chemical mechanism -- no biology, no external
+clock -- make a concentration rise and fall periodically forever, rather
+than settling monotonically toward equilibrium the way every reaction
+studied since Wilhelmy did? His 1910 scheme, an autocatalytic sequence in
+which an intermediate `X` catalyzes its own production from a reservoir
+`A` and is in turn consumed by a second autocatalytic step producing `Y`,
+showed damped oscillations relaxing into the system's stable equilibrium
+-- rhythmic, but not sustained. His better-known 1920 model, a simplified
+two-variable version of the same idea, does support genuinely periodic
+solutions, but of a fragile kind: the orbits are *neutrally* stable,
+forming a continuous family of closed curves nested around the fixed
+point, rather than a single, structurally robust limit cycle that
+neighboring trajectories are drawn onto. Perturb a Lotka-type system even
+slightly and it can drift onto a different one of these neutral orbits
+forever; nothing pulls it back to a preferred amplitude. That distinction
+-- oscillation that merely exists, versus oscillation that is dynamically
+*stable* -- is exactly what the Brusselator (1968, below) would later
+supply, and is why Lotka's chemical scheme is remembered today mostly
+through its later, structurally identical reincarnation as the
+Lotka-Volterra predator-prey equations in ecology, rather than as a
+chemistry result in its own right.
+
+*Connection:* chemistrykit.kinetics has no standalone implementation of
+Lotka's original two- or three-species chemical scheme -- the example
+below builds the 1920 scheme directly from the general
+:class:`~chemistrykit.kinetics.systems.networks.StoichiometricNetwork`
+mass-action engine and shows its nested family of neutral orbits and the
+conserved quantity that keeps them from converging -- while
+:meth:`~chemistrykit.kinetics.Brusselator.is_above_hopf_threshold`
+draws exactly the distinction Lotka's model lacks: below its threshold
+the Brusselator's fixed point is a stable focus, and above it, a genuine
+attracting limit cycle -- structurally stable to small perturbations,
+unlike the neutral orbits of Lotka's 1920 model -- surrounds an unstable
+focus.
+
+*References:* A. J. Lotka, "Contribution to the Theory of Periodic
+Reactions," J. Phys. Chem. 14, 271-274 (1910); A. J. Lotka, "Analytical
+Note on Certain Rhythmic Relations in Organic Systems," Proc. Natl. Acad.
+Sci. USA 6, 410-415 (1920).
+
+.. minigallery:: ../../examples/kinetics/oscillators/plot_02_lotka_autocatalytic_oscillator.py
 
 1913 -- 1922 -- Bodenstein and Lindemann: the Steady-State Approximation and Unimolecular Reactions
 --------------------------------------------------------------------------------------------------------
@@ -285,14 +329,99 @@ exact intermediate concentration -- via
 and the closed-form :func:`~chemistrykit.kinetics.consecutive_analytic`
 (Bateman) solution -- as the second step is made increasingly fast
 relative to the first, precisely the separation-of-timescales condition
-the approximation requires.
+the approximation requires. The same example then builds Lindemann's
+activation/deactivation/decomposition mechanism itself from the general
+:class:`~chemistrykit.kinetics.systems.networks.StoichiometricNetwork`
+engine and recovers his pressure fall-off curve, first order at high
+bath-gas concentration and second order at low.
 
 *References:* M. Bodenstein, "Eine Theorie der photochemischen
 Reaktionsgeschwindigkeiten," Z. Phys. Chem. 85, 329-397 (1913); F. A.
 Lindemann, discussion remark in "Discussion on the Radiation Theory of
 Chemical Action," Trans. Faraday Soc. 17, 598-606 (1922).
 
-.. minigallery:: ../../examples/kinetics/networks/plot_01_reaction_networks.py
+.. minigallery:: ../../examples/kinetics/networks/plot_01_steady_state_lindemann.py
+
+1916 -- 1918 -- Trautz, Lewis, and the Collision Theory of Reaction Rates
+----------------------------------------------------------------------------
+
+Arrhenius's equation described how a rate constant depends on
+temperature but said nothing about the size of the pre-exponential
+factor `A`. Max Trautz in Germany (1916) and William Cudmore McCullagh
+Lewis in Britain (1918), working independently, supplied the first
+molecular estimate by combining it with the kinetic theory of gases: a
+bimolecular reaction can go no faster than its reactants collide, and
+only collisions energetic enough to cross the barrier count,
+
+.. math::
+
+   k = P\,\sigma\sqrt{\frac{8k_BT}{\pi\mu}}\,N_A\,e^{-E_a/RT}
+
+with :math:`\sigma` the collision cross-section, :math:`\mu` the reduced
+mass, and :math:`P` a steric factor (equal to 1 for ideal hard spheres).
+Lewis applied the formula to the thermal decomposition of hydrogen iodide
+and obtained a rate constant close to the measured one -- a striking
+confirmation that reaction rates could be computed from molecular sizes
+and masses. For most reactions of more complex molecules, however,
+observed rates came out well below the collision estimate, and the
+empirical factor :math:`P` needed to fix the discrepancy was one of the
+puzzles transition-state theory (1935, below) would later resolve. The
+theory also predicts that an Arrhenius plot of collision-theory rate
+constants gives an apparent activation energy of :math:`E_a + RT/2`,
+because the collision frequency itself grows as :math:`\sqrt{T}`.
+
+*Implementation:* :func:`~chemistrykit.kinetics.collision_theory_rate_constant`
+evaluates the hard-sphere collision-theory rate constant; the example
+below separates its collision-frequency and Boltzmann-factor parts and
+recovers the :math:`E_a + RT/2` apparent activation energy with
+:func:`~chemistrykit.kinetics.fit_arrhenius`.
+
+*References:* M. Trautz, "Das Gesetz der Reaktionsgeschwindigkeit und der
+Gleichgewichte in Gasen," Z. Anorg. Allg. Chem. 96, 1-28 (1916); W. C.
+McC. Lewis, "Studies in Catalysis. Part IX. The Calculation in Absolute
+Measure of Velocity Constants and Equilibrium Constants in Gaseous
+Systems," J. Chem. Soc., Trans. 113, 471-492 (1918).
+
+.. minigallery:: ../../examples/kinetics/rate_theory/plot_01_collision_theory.py
+
+1917 -- Smoluchowski and Diffusion-Controlled Reactions
+---------------------------------------------------------
+
+In solution, reactants do not fly freely between collisions; they
+diffuse. Marian von Smoluchowski, developing a theory of how colloidal
+particles coagulate, asked how quickly two diffusing particles that
+stick on first contact can find each other. Solving the diffusion
+equation around one particle, with the other species absorbed at the
+contact distance :math:`R^*`, gave a steady-state encounter rate constant
+and a transient correction for the moments just after mixing:
+
+.. math::
+
+   k_D = 4\pi D R^* N_A, \qquad
+   k(t) = k_D\left(1 + \frac{R^*}{\sqrt{\pi D t}}\right)
+
+where :math:`D` is the sum of the two diffusion coefficients. Combined
+with the Stokes-Einstein relation the molecular radius cancels, leaving
+:math:`k_D = 8RT/3\eta`: about :math:`10^{10}` L mol\ :sup:`-1` s\ :sup:`-1`
+in water at room temperature. This is the ceiling on any bimolecular
+rate constant in solution, and a measured rate constant close to it --
+as Eigen later found for the recombination of :math:`\text{H}^+` and
+:math:`\text{OH}^-` (1954, below) -- is the signature of a reaction that
+occurs on essentially every encounter.
+
+*Implementation:* :func:`~chemistrykit.kinetics.smoluchowski_rate_constant`
+and :func:`~chemistrykit.kinetics.smoluchowski_transient_rate_constant`
+evaluate the steady and time-dependent Smoluchowski rate constants, and
+:func:`~chemistrykit.kinetics.diffusion_limited_rate_constant` the
+Stokes-Einstein form :math:`8RT/3\eta`; the example below plots the
+transient and compares the diffusion limit across solvents of very
+different viscosity.
+
+*References:* M. v. Smoluchowski, "Versuch einer mathematischen Theorie
+der Koagulationskinetik kolloider Lösungen," Z. Phys. Chem. 92, 129-168
+(1917).
+
+.. minigallery:: ../../examples/kinetics/rate_theory/plot_02_smoluchowski_diffusion_limit.py
 
 1928 -- 1956 -- Semenov, Hinshelwood, and Chain-Branching Explosions
 --------------------------------------------------------------------------
@@ -374,13 +503,13 @@ mode), rather than as a fitting method to be trusted quantitatively.
 implements exactly this double-reciprocal ordinary-least-squares fit,
 returning a :class:`~chemistrykit.kinetics.systems.enzyme.MichaelisMentenFit`,
 and ``chemistrykit.kinetics.visualizers.kinetics_plots.plot_lineweaver_burk()``
-draws the plot -- reused in the same example as the underlying
-Michaelis-Menten rate law it linearizes.
+draws the plot; the example below also shows how the reciprocal
+transformation turns uniform relative noise into very unequal error bars.
 
 *References:* H. Lineweaver and D. Burk, "The Determination of Enzyme
 Dissociation Constants," J. Am. Chem. Soc. 56, 658-666 (1934).
 
-.. minigallery:: ../../examples/kinetics/enzyme/plot_01_michaelis_menten.py
+.. minigallery:: ../../examples/kinetics/enzyme/plot_02_lineweaver_burk.py
 
 1935 -- Eyring, Evans, Polanyi, and Transition-State Theory
 ------------------------------------------------------------------
@@ -407,14 +536,21 @@ fitted curve -- and gave the Arrhenius equation's `A` and :math:`E_a` a
 theoretical home, respectively in the transition state's entropy and
 enthalpy of activation.
 
-*Connection:* chemistrykit.kinetics does not implement a
+*Implementation:* chemistrykit.kinetics does not implement a
 partition-function-based transition-state rate calculation, but
-:class:`chemistrykit.kinetics.systems.arrhenius.ArrheniusFit`'s empirical
-`A` and `Ea` are exactly the two quantities transition-state theory set
-out to explain from first principles rather than merely measure --
-:func:`~chemistrykit.kinetics.fit_arrhenius` recovers
-them from data the same way a real kinetics lab would, without needing
-any transition-state calculation to do so.
+:func:`~chemistrykit.kinetics.eyring_rate_constant` evaluates the
+thermodynamic form of the Eyring equation above from
+:math:`\Delta H^{\ddagger}` and :math:`\Delta S^{\ddagger}`, and
+:func:`~chemistrykit.kinetics.fit_eyring` recovers both from
+rate-vs-temperature data via an Eyring plot (:math:`\ln(k/T)` against
+:math:`1/T`), returning an
+:class:`~chemistrykit.kinetics.systems.rate_theory.EyringFit`. The
+example below fits the same data with
+:func:`~chemistrykit.kinetics.fit_arrhenius` too, showing that the
+empirical :math:`E_a` and `A` are exactly
+:math:`\Delta H^{\ddagger} + RT` and
+:math:`e\,(k_BT/h)\,e^{\Delta S^{\ddagger}/R}` -- the two quantities
+transition-state theory set out to explain rather than merely measure.
 
 *References:* H. Eyring, "The Activated Complex in Chemical Reactions,"
 J. Chem. Phys. 3, 107-115 (1935); M. G. Evans and M. Polanyi, "Some
@@ -422,7 +558,7 @@ Applications of the Transition State Method to the Calculation of
 Reaction Velocities, Especially in Solution," Trans. Faraday Soc. 31,
 875-894 (1935).
 
-.. minigallery:: ../../examples/kinetics/arrhenius/plot_01_arrhenius_fit.py
+.. minigallery:: ../../examples/kinetics/rate_theory/plot_03_eyring_transition_state.py
 
 1951 -- 1974 -- Belousov, Zhabotinsky, and the Oregonator
 -----------------------------------------------------------
@@ -453,9 +589,14 @@ Brusselator below: an autocatalytic step driving a Hopf bifurcation to a
 stable limit cycle, but built to match one specific, real oscillating
 reaction's chemistry rather than serving as an abstract minimal example.
 
-*Connection:* chemistrykit.kinetics does not implement the
-Belousov-Zhabotinsky mechanism or the Oregonator specifically, but
-:meth:`~chemistrykit.kinetics.Brusselator.is_above_hopf_threshold`
+*Implementation:* chemistrykit.kinetics does not implement the full
+FKN mechanism, but :class:`chemistrykit.kinetics.systems.oscillators.Oregonator`
+integrates Field and Noyes's three-variable Oregonator in its standard
+dimensionless form, with
+:meth:`~chemistrykit.kinetics.Oregonator.fixed_point` giving its
+steady state in closed form; the example below shows its relaxation
+oscillations (and their disappearance at large stoichiometric factor
+:math:`f`). :meth:`~chemistrykit.kinetics.Brusselator.is_above_hopf_threshold`
 and the limit-cycle behavior it distinguishes are exactly the
 mathematical mechanism -- a chemical Hopf bifurcation to sustained,
 structurally stable oscillation -- that both the Oregonator and the
@@ -473,7 +614,55 @@ J. Am. Chem. Soc. 94, 8649-8664 (1972); R. J. Field and R. M. Noyes,
 "Oscillations in Chemical Systems IV. Limit Cycle Behavior in a Model of
 a Real Chemical Reaction," J. Chem. Phys. 60, 1877-1884 (1974).
 
-.. minigallery:: ../../examples/kinetics/oscillators/plot_01_brusselator.py
+.. minigallery:: ../../examples/kinetics/oscillators/plot_03_oregonator_bz_reaction.py
+
+1954 -- Eigen's Relaxation Methods for Very Fast Reactions
+------------------------------------------------------------
+
+Every kinetic technique up to the 1950s had to mix the reactants first,
+and mixing takes at least a millisecond, so reactions faster than that
+were simply "immeasurably fast." Manfred Eigen avoided mixing
+altogether. He started from a solution already at equilibrium and
+disturbed it suddenly -- with a temperature jump, a pressure jump, or an
+electric field pulse -- that shifts the equilibrium constant. The
+mixture then relaxes exponentially to the new equilibrium, and for
+:math:`A \rightleftharpoons B` the relaxation time is
+
+.. math::
+
+   \frac{1}{\tau} = k_f + k_r
+
+so :math:`\tau` together with the equilibrium constant
+:math:`K = k_f/k_r` gives both rate constants. For an association
+:math:`A + B \rightleftharpoons C`, linearizing about equilibrium gives
+:math:`1/\tau = k_f([A]_{eq} + [B]_{eq}) + k_r`, which depends on
+concentration. With these methods Eigen and Leo De Maeyer measured
+the neutralization :math:`\text{H}^+ + \text{OH}^- \to \text{H}_2\text{O}`
+at about :math:`1.4\times10^{11}` L mol\ :sup:`-1` s\ :sup:`-1`,
+among the fastest bimolecular reactions known in solution and at the
+diffusion limit of Smoluchowski's theory (1917, above). Eigen shared the
+1967 Nobel Prize in Chemistry with Ronald Norrish and George Porter "for
+their studies of extremely fast chemical reactions, effected by
+disturbing the equilibrium by means of very short pulses of energy."
+
+*Implementation:* :meth:`~chemistrykit.kinetics.StoichiometricNetwork.reversible`
+and :func:`~chemistrykit.kinetics.reversible_analytic` give the
+relaxation of :math:`A \rightleftharpoons B` after the rate constants
+change, with rate :math:`k_f + k_r`; the example below carries out a
+simulated temperature jump, measures :math:`\tau`, recovers :math:`k_f`
+and :math:`k_r` from :math:`\tau` and :math:`K`, and checks the
+concentration-dependent :math:`1/\tau` of an association reaction built
+with the general
+:class:`~chemistrykit.kinetics.systems.networks.StoichiometricNetwork`
+engine.
+
+*References:* M. Eigen, "Methods for Investigation of Ionic Reactions in
+Aqueous Solutions with Half-Times as Short as :math:`10^{-9}` sec,"
+Discuss. Faraday Soc. 17, 194-205 (1954); M. Eigen and L. De Maeyer,
+"Untersuchungen über die Kinetik der Neutralisation. I," Z. Elektrochem.
+59, 986-993 (1955).
+
+.. minigallery:: ../../examples/kinetics/networks/plot_04_eigen_relaxation.py
 
 1968 -- Prigogine and Lefever's Brusselator
 -----------------------------------------------
@@ -523,6 +712,52 @@ Instabilities in Dissipative Systems. II," J. Chem. Phys. 48, 1695-1700
 Nonequilibrium Systems* (New York: Wiley, 1977), Ch. 7.
 
 .. minigallery:: ../../examples/kinetics/oscillators/plot_01_brusselator.py
+
+1976 -- 1977 -- Gillespie's Stochastic Simulation Algorithm
+---------------------------------------------------------------
+
+Rate equations treat concentrations as smooth, continuous quantities.
+That works for a beaker holding :math:`10^{20}` molecules, but not for
+the few copies of a transcription factor or an mRNA inside a single
+cell, where each reaction event visibly changes the count and chance
+fluctuations dominate. Daniel Gillespie showed how to simulate such a
+system *exactly*, treating it as a continuous-time Markov jump process
+on integer molecule counts. With propensities
+:math:`a_j(\mathbf{n})` (probability per unit time that reaction
+:math:`j` fires next) and :math:`a_0 = \sum_j a_j`, the waiting time to
+the next event is exponentially distributed with rate :math:`a_0`, and
+reaction :math:`j` is chosen with probability :math:`a_j/a_0`:
+
+.. math::
+
+   \tau = \frac{1}{a_0}\ln\frac{1}{r_1}, \qquad
+   \sum_{j' < j} a_{j'} < r_2\,a_0 \le \sum_{j' \le j} a_{j'}
+
+with :math:`r_1, r_2` independent uniform random numbers. Each run
+samples one exact trajectory of the chemical master equation, which is
+usually impossible to solve directly. For large molecule numbers the
+average over many runs reproduces the deterministic rate equations, and
+for small numbers the method shows fluctuations the rate equations
+cannot describe. Largely neglected for two decades, the "Gillespie
+algorithm" became a standard tool of systems biology from the late
+1990s, once stochastic gene expression became measurable in single
+cells.
+
+*Implementation:* :func:`~chemistrykit.kinetics.gillespie_ssa`
+implements Gillespie's direct method for any mass-action network given
+by a stoichiometry matrix, returning a
+:class:`~chemistrykit.kinetics.systems.stochastic.StochasticTrajectory`;
+the example below runs the consecutive chain :math:`A \to B \to C` with
+20 and with 2000 molecules and compares the stochastic trajectories and
+their ensemble average with the deterministic Bateman solution.
+
+*References:* D. T. Gillespie, "A General Method for Numerically
+Simulating the Stochastic Time Evolution of Coupled Chemical Reactions,"
+J. Comput. Phys. 22, 403-434 (1976); D. T. Gillespie, "Exact Stochastic
+Simulation of Coupled Chemical Reactions," J. Phys. Chem. 81, 2340-2361
+(1977).
+
+.. minigallery:: ../../examples/kinetics/networks/plot_06_gillespie_stochastic_simulation.py
 
 See Also
 --------

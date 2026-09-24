@@ -5,10 +5,11 @@
 Reaction networks
 -------------------
 
-The general stoichiometric reaction-network engine: parallel, consecutive,
-and reversible mechanisms, and the steady-state approximation, plus a
-three-step chain-branching mechanism illustrating the Semenov/Hinshelwood
-explosion criterion.
+The general stoichiometric reaction-network engine: the steady-state
+approximation and Lindemann's unimolecular fall-off, a chain-branching
+explosion mechanism, Bateman's consecutive-reaction solution, Eigen's
+relaxation kinetics, parallel reactions, and Gillespie's exact stochastic
+simulation of the same networks.
 
 
 .. raw:: html
@@ -24,18 +25,18 @@ explosion criterion.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="StoichiometricNetwork integrates an arbitrary mass-action reaction network numerically via chemistrykit.integrators. Three classic mechanisms -- built from its named constructors -- are each checked here against a closed-form solution, and the steady-state approximation for the consecutive chain is shown converging as the second step is made much faster than the first.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Bodenstein (1913) set the net rate of change of a short-lived intermediate to zero; Lindemann (1922) used exactly that trick on the energized molecule A^* of the mechanism">
 
 .. only:: html
 
-  .. image:: /api/gallery/kinetics/networks/images/thumb/sphx_glr_plot_01_reaction_networks_thumb.png
+  .. image:: /api/gallery/kinetics/networks/images/thumb/sphx_glr_plot_01_steady_state_lindemann_thumb.png
     :alt:
 
-  :doc:`/api/gallery/kinetics/networks/plot_01_reaction_networks`
+  :doc:`/api/gallery/kinetics/networks/plot_01_steady_state_lindemann`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Parallel, consecutive, and reversible reaction networks</div>
+      <div class="sphx-glr-thumbnail-title">Bodenstein's steady-state approximation and Lindemann's unimolecular fall-off</div>
     </div>
 
 
@@ -56,6 +57,74 @@ explosion criterion.
     </div>
 
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Bateman (1910) solved the chain of first-order steps A \xrightarrow{k_1} B \xrightarrow{k_2} C (written for radioactive decay series, but identical for consecutive chemical reactions) in closed form:">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/networks/images/thumb/sphx_glr_plot_03_bateman_consecutive_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/networks/plot_03_bateman_consecutive`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Bateman's closed-form solution for consecutive reactions</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Eigen (1954) measured reactions far too fast to mix by perturbing an equilibrium mixture (a sudden temperature, pressure, or field jump) and timing its exponential return to the new equilibrium. For A \rightleftharpoons B the relaxation time is \tau = 1/(k_f + k_r), so combining \tau with the equilibrium constant K = k_f/k_r yields both rate constants. For the association A + B \rightleftharpoons C linearizing about equilibrium gives 1/\tau = k_f([A]_{eq} + [B]_{eq}) + k_r, the formula Eigen used to show that H^+ + OH^- recombination is diffusion-controlled.">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/networks/images/thumb/sphx_glr_plot_04_eigen_relaxation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/networks/plot_04_eigen_relaxation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Eigen's chemical relaxation: temperature jump and relaxation time</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="For two competing channels A \xrightarrow{k_1} B and A \xrightarrow{k_2} C, the reactant decays with the sum k_1 + k_2, while the product ratio [B]/[C] = k_1/k_2 is fixed at every instant -- the kinetic basis of product selectivity. Integrated with parallel.">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/networks/images/thumb/sphx_glr_plot_05_parallel_reactions_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/networks/plot_05_parallel_reactions`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Parallel (competing) first-order reactions</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Gillespie (1976-1977) showed how to sample exact trajectories of a reaction network treated as random, discrete molecular events: draw an exponential waiting time with rate equal to the total propensity, then pick which reaction fires in proportion to its propensity. gillespie_ssa implements this direct method. With thousands of molecules the trajectories hug the deterministic rate-equation solution; with a handful they are visibly noisy, and the average over many runs recovers the deterministic curve.">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/networks/images/thumb/sphx_glr_plot_06_gillespie_stochastic_simulation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/networks/plot_06_gillespie_stochastic_simulation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Gillespie's stochastic simulation of reaction kinetics</div>
+    </div>
+
+
 .. thumbnail-parent-div-close
 
 .. raw:: html
@@ -66,6 +135,10 @@ explosion criterion.
 .. toctree::
    :hidden:
 
-   /api/gallery/kinetics/networks/plot_01_reaction_networks
+   /api/gallery/kinetics/networks/plot_01_steady_state_lindemann
    /api/gallery/kinetics/networks/plot_02_chain_branching
+   /api/gallery/kinetics/networks/plot_03_bateman_consecutive
+   /api/gallery/kinetics/networks/plot_04_eigen_relaxation
+   /api/gallery/kinetics/networks/plot_05_parallel_reactions
+   /api/gallery/kinetics/networks/plot_06_gillespie_stochastic_simulation
 

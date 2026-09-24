@@ -464,7 +464,9 @@ character tables for the common point groups; bond order from the
 Pauling bond-length correlation and from Huckel-theory MO coefficients
 (the Coulson bond order); and formal-charge/oxidation-state assignment
 from a Lewis structure, using electronegativities from
-<code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.periodic_table</span></code>.</p>
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.periodic_table</span></code>; Kekule-structure enumeration,
+Baeyer ring angle strain, and dipole moments from point charges or bond
+dipoles.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.structure.LewisStructure">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">LewisStructure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_orders</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lone_pairs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/lewis.html#LewisStructure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.LewisStructure" title="Link to this definition">#</a></dt>
@@ -486,7 +488,7 @@ to 0 for any atom not given explicitly.</p></li>
 </dl>
 <p class="rubric">Examples</p>
 <p>Water: O has 2 single bonds (to atoms 1, 2) and 2 lone pairs.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">LewisStructure</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span> <span class="n">bond_orders</span><span class="o">=</span><span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="mi">1</span><span class="p">},</span> <span class="n">lone_pairs</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">LewisStructure</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"O"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">],</span> <span class="n">bond_orders</span><span class="o">=</span><span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="mi">1</span><span class="p">},</span> <span class="n">lone_pairs</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">water</span><span class="o">.</span><span class="n">formal_charges</span><span class="p">()</span>
 <span class="go">{0: 0.0, 1: 0.0, 2: 0.0}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">water</span><span class="o">.</span><span class="n">oxidation_states</span><span class="p">()</span>
@@ -513,7 +515,7 @@ to 0 for any atom not given explicitly.</p></li>
 <p class="rubric">Examples</p>
 <p>Ammonium, <span class="math notranslate nohighlight">\(NH_4^+\)</span>: nitrogen has 4 single bonds and no lone
 pairs, giving the textbook +1 formal charge:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nh4_plus</span> <span class="o">=</span> <span class="n">LewisStructure</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span> <span class="n">bond_orders</span><span class="o">=</span><span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)})</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nh4_plus</span> <span class="o">=</span> <span class="n">LewisStructure</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"N"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">],</span> <span class="n">bond_orders</span><span class="o">=</span><span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nh4_plus</span><span class="o">.</span><span class="n">formal_charges</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
 <span class="go">1.0</span>
 </pre></div>
@@ -552,7 +554,7 @@ formula.</p>
 homonuclear (no net electron shift), each O keeps its lone pairs
 and wins its one O-H bond, giving the well-known -1 oxidation
 state (intermediate between water’s -2 and O2’s 0):</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">h2o2</span> <span class="o">=</span> <span class="n">LewisStructure</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span> <span class="n">bond_orders</span><span class="o">=</span><span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span> <span class="mi">1</span><span class="p">},</span> <span class="n">lone_pairs</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">h2o2</span> <span class="o">=</span> <span class="n">LewisStructure</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"H"</span><span class="p">,</span> <span class="s2">"O"</span><span class="p">,</span> <span class="s2">"O"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">],</span> <span class="n">bond_orders</span><span class="o">=</span><span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span> <span class="mi">1</span><span class="p">},</span> <span class="n">lone_pairs</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">h2o2</span><span class="o">.</span><span class="n">oxidation_states</span><span class="p">()</span>
 <span class="go">{0: 1.0, 1: -1.0, 2: -1.0, 3: 1.0}</span>
 </pre></div>
@@ -617,7 +619,7 @@ angle(H-O-H) = 104.5 degrees):</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mf">104.5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="mf">0.958</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"O"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="n">coordinates</span><span class="o">=</span><span class="p">[</span>
 <span class="gp">... </span>        <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
 <span class="gp">... </span>        <span class="p">[</span><span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)],</span>
@@ -766,7 +768,7 @@ collinearity.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">co2</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;O&quot;</span><span class="p">],</span> <span class="n">coordinates</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.16</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.16</span><span class="p">]])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">co2</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"O"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"O"</span><span class="p">],</span> <span class="n">coordinates</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.16</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.16</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">co2</span><span class="o">.</span><span class="n">is_linear</span><span class="p">()</span>
 <span class="go">True</span>
 </pre></div>
@@ -830,10 +832,10 @@ derives computationally.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">get_character_table</span><span class="p">(</span><span class="s2">&quot;C2v&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">character</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">get_character_table</span><span class="p">(</span><span class="s2">"C2v"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">character</span><span class="p">(</span><span class="s2">"A1"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">)</span>
 <span class="go">1.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">character</span><span class="p">(</span><span class="s2">&quot;B1&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">character</span><span class="p">(</span><span class="s2">"B1"</span><span class="p">,</span> <span class="s2">"C2"</span><span class="p">)</span>
 <span class="go">-1.0</span>
 </pre></div>
 </div>
@@ -847,6 +849,20 @@ irrep <cite>i</cite> under operation class <cite>j</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a> of <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a> of <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupCharacterTable.class_sizes">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">class_sizes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#chemistrykit.structure.PointGroupCharacterTable.class_sizes" title="Link to this definition">#</a></dt>
+<dd><p>Number of operations in each class, read from the leading count of each label.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;8C3&quot;</span></code> is a class of 8 operations, <code class="docutils literal notranslate"><span class="pre">&quot;E&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;sigma_v(xz)&quot;</span></code> a
+class of 1. Raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> for the infinite groups
+(<code class="docutils literal notranslate"><span class="pre">C_inf_v</span></code>, <code class="docutils literal notranslate"><span class="pre">D_inf_h</span></code>), whose classes are continuous.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a> of <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -882,6 +898,57 @@ irrep <cite>i</cite> under operation class <cite>j</cite>.</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a> of <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupCharacterTable.order">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">order</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#chemistrykit.structure.PointGroupCharacterTable.order" title="Link to this definition">#</a></dt>
+<dd><p>The group order h (total number of symmetry operations).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.structure.PointGroupCharacterTable.reduce">
+<span class="sig-name descname"><span class="pre">reduce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reducible_characters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/point_group.html#PointGroupCharacterTable.reduce"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.PointGroupCharacterTable.reduce" title="Link to this definition">#</a></dt>
+<dd><p>Decompose a reducible representation into irreducible ones.</p>
+<p>Uses the reduction formula (the “great orthogonality theorem”
+applied to characters; Cotton, <em>Chemical Applications of Group
+Theory</em>, 3rd ed., Ch. 4.3):</p>
+<div class="math notranslate nohighlight">
+\[a_i = \frac{1}{h}\sum_{R} g_R\,\chi(R)\,\chi_i(R)\]</div>
+<p>where the sum runs over operation classes of size <span class="math notranslate nohighlight">\(g_R\)</span> and
+<span class="math notranslate nohighlight">\(h\)</span> is the group order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reducible_characters</strong> (<em>sequence</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Characters of the reducible representation, one per operation
+class, in the order of <a class="reference internal" href="#chemistrykit.structure.PointGroupCharacterTable.operations" title="chemistrykit.structure.PointGroupCharacterTable.operations"><code class="xref py py-attr docutils literal notranslate"><span class="pre">operations</span></code></a>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>dict of str to int</em> – Multiplicity of each irrep that occurs (irreps with zero
+multiplicity are left out).</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If the input length does not match the number of classes, or
+    the multiplicities are not integers (the characters do not form
+    a representation of this group).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>The five d orbitals in an octahedral field (Bethe, 1929) split into
+a doubly degenerate <span class="math notranslate nohighlight">\(e_g\)</span> and a triply degenerate
+<span class="math notranslate nohighlight">\(t_{2g}\)</span> set:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oh</span> <span class="o">=</span> <span class="n">get_character_table</span><span class="p">(</span><span class="s2">"Oh"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oh</span><span class="o">.</span><span class="n">reduce</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">{'Eg': 1, 'T2g': 1}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -1044,9 +1111,9 @@ valid Python/LaTeX-free identifier component).</p>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">VSEPRGeometry</span><span class="p">(</span><span class="n">steric_number</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">lone_pairs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">shape_name</span>
-<span class="go">&#39;bent&#39;</span>
+<span class="go">'bent'</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">VSEPRGeometry</span><span class="p">(</span><span class="n">steric_number</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">lone_pairs</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">shape_name</span>
-<span class="go">&#39;tetrahedral&#39;</span>
+<span class="go">'tetrahedral'</span>
 </pre></div>
 </div>
 <dl class="py property">
@@ -1137,11 +1204,69 @@ positions are the other two equatorial plus both axial sites.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.structure.baeyer_angle_strain">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">baeyer_angle_strain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ring_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/ring_strain.html#baeyer_angle_strain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.baeyer_angle_strain" title="Link to this definition">#</a></dt>
+<dd><p>Baeyer’s angle strain per bond for a planar ring, in degrees.</p>
+<div class="math notranslate nohighlight">
+\[\delta(n) = \tfrac{1}{2}\left[109.47^\circ - \frac{180^\circ\,(n-2)}{n}\right]\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ring_size</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of ring atoms, at least 3.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – Positive when the ring angle is squeezed below tetrahedral,
+negative when a planar ring would force it wider.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Baeyer’s own values: 24 deg 44 min for cyclopropane, 9 deg 44 min for
+cyclobutane and only 0 deg 44 min for cyclopentane:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">baeyer_angle_strain</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
+<span class="go">[24.74, 9.74, 0.74, -5.26]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.structure.bond_dipole_sum">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">bond_dipole_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bond_vectors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_moments</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/dipole.html#bond_dipole_sum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.bond_dipole_sum" title="Link to this definition">#</a></dt>
+<dd><p>Molecular dipole as the vector sum of bond dipoles.</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol\mu = \sum_b \mu_b\,\hat{\mathbf u}_b\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bond_vectors</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_bonds</em><em>, </em><em>3</em><em>)</em>) – Direction of each bond dipole (any length; normalized here).</p></li>
+<li><p><strong>bond_moments</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_bonds</em><em>,</em><em>)</em>) – Magnitude of each bond dipole, in debye.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (3,)</em> – Molecular dipole vector, in debye.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Two O-H bond dipoles of 1.51 D at water’s 104.5 degree angle give
+<span class="math notranslate nohighlight">\(2\mu_{OH}\cos(\theta/2) \approx 1.85\)</span> D, the measured value:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">half</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mf">104.5</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">half</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">half</span><span class="p">)],</span> <span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">half</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">half</span><span class="p">)]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">bond_dipole_sum</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.51</span><span class="p">,</span> <span class="mf">1.51</span><span class="p">]))),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">1.85</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="chemistrykit.structure.bond_length_from_order">
 <span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">bond_length_from_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">single_bond_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.71</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/bonding.html#bond_length_from_order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.bond_length_from_order" title="Link to this definition">#</a></dt>
 <dd><p>Invert <a class="reference internal" href="#chemistrykit.structure.bond_order_from_length" title="chemistrykit.structure.bond_order_from_length"><code class="xref py py-func docutils literal notranslate"><span class="pre">bond_order_from_length()</span></code></a>: predict a bond length from a bond order.</p>
 <div class="math notranslate nohighlight">
-\[D(n) = D(1) - c\ln n\]</div>
+\[D(n) = D(1) - c\log_{10} n\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1183,7 +1308,7 @@ double shorter than single:</p>
 <span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">bond_order_from_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">single_bond_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observed_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.71</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/bonding.html#bond_order_from_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.bond_order_from_length" title="Link to this definition">#</a></dt>
 <dd><p>Estimate a bond order from an observed bond length, via Pauling’s empirical correlation.</p>
 <div class="math notranslate nohighlight">
-\[D(n) = D(1) - c\ln n \quad\Longrightarrow\quad n = \exp\!\left(\frac{D(1)-D(n)}{c}\right)\]</div>
+\[D(n) = D(1) - c\log_{10} n \quad\Longrightarrow\quad n = 10^{(D(1)-D(n))/c}\]</div>
 <p>where <span class="math notranslate nohighlight">\(D(1)\)</span> is the reference single-bond length and <cite>c</cite> is an
 empirical, bond-type-specific constant (L. Pauling, <em>J. Am. Chem.
 Soc.</em> 69, 542 (1947)). Shorter bonds correspond to a higher (order
@@ -1221,6 +1346,12 @@ other than carbon-carbon.</p></li>
 <span class="go">1.0</span>
 </pre></div>
 </div>
+<p>With Pauling’s C-C constant (0.71 Å per decade of bond order),
+ethylene’s 1.33 Å double bond comes out very close to order 2:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">bond_order_from_length</span><span class="p">(</span><span class="mf">1.54</span><span class="p">,</span> <span class="mf">1.33</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">1.98</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -1250,7 +1381,7 @@ the ligands occupy.</p>
 <p class="rubric">Examples</p>
 <p>Methane (AX4E0): a perfect tetrahedron, every H-C-H angle exactly
 109.47 degrees:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">methane</span> <span class="o">=</span> <span class="n">build_vsepr_molecule</span><span class="p">(</span><span class="n">steric_number</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">lone_pairs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bond_length</span><span class="o">=</span><span class="mf">1.09</span><span class="p">,</span> <span class="n">central_symbol</span><span class="o">=</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="n">ligand_symbol</span><span class="o">=</span><span class="s2">&quot;H&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">methane</span> <span class="o">=</span> <span class="n">build_vsepr_molecule</span><span class="p">(</span><span class="n">steric_number</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">lone_pairs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bond_length</span><span class="o">=</span><span class="mf">1.09</span><span class="p">,</span> <span class="n">central_symbol</span><span class="o">=</span><span class="s2">"C"</span><span class="p">,</span> <span class="n">ligand_symbol</span><span class="o">=</span><span class="s2">"H"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">methane</span><span class="o">.</span><span class="n">bond_angle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
 <span class="go">109.4712</span>
 </pre></div>
@@ -1259,8 +1390,40 @@ the ligands occupy.</p>
 109.47 degrees (see the module docstring for why this is an
 idealization – the real H-O-H angle is compressed to 104.5 degrees
 by extra lone-pair repulsion):</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">build_vsepr_molecule</span><span class="p">(</span><span class="n">steric_number</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">lone_pairs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bond_length</span><span class="o">=</span><span class="mf">0.96</span><span class="p">,</span> <span class="n">central_symbol</span><span class="o">=</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="n">ligand_symbol</span><span class="o">=</span><span class="s2">&quot;H&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">build_vsepr_molecule</span><span class="p">(</span><span class="n">steric_number</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">lone_pairs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bond_length</span><span class="o">=</span><span class="mf">0.96</span><span class="p">,</span> <span class="n">central_symbol</span><span class="o">=</span><span class="s2">"O"</span><span class="p">,</span> <span class="n">ligand_symbol</span><span class="o">=</span><span class="s2">"H"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">water</span><span class="o">.</span><span class="n">bond_angle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">109.4712</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.structure.chair_cyclohexane_coordinates">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">chair_cyclohexane_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bond_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.54</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/ring_strain.html#chair_cyclohexane_coordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.chair_cyclohexane_coordinates" title="Link to this definition">#</a></dt>
+<dd><p>Carbon coordinates of an ideal chair cyclohexane with exactly tetrahedral C-C-C angles.</p>
+<p>The six carbons sit alternately at heights <span class="math notranslate nohighlight">\(\pm z\)</span> on a circle
+of radius <span class="math notranslate nohighlight">\(\rho\)</span>, 60 degrees apart. Requiring bond length <cite>d</cite>
+and bond angle <span class="math notranslate nohighlight">\(\theta_T\)</span> fixes <span class="math notranslate nohighlight">\(\rho^2 = 2d^2(1-\cos\theta_T)/3\)</span>
+(the 1-3 distance is <span class="math notranslate nohighlight">\(\rho\sqrt3\)</span>) and then
+<span class="math notranslate nohighlight">\(4z^2 = d^2 - \rho^2\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bond_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – C-C bond length, in angstrom.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (6, 3)</em> – Ring atoms in order around the ring.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Every C-C-C angle of the puckered chair is tetrahedral, so Baeyer’s
+predicted strain for a six-membered ring vanishes once the ring is not
+forced to be planar:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.structure.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">angle_between</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">chair_cyclohexane_coordinates</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">angle_between</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">4</span><span class="p">)</span>
 <span class="go">109.4712</span>
 </pre></div>
 </div>
@@ -1327,6 +1490,34 @@ ring, weaker than a localized double bond):</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.structure.count_kekule_structures">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">count_kekule_structures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_atoms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bonds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/kekule.html#count_kekule_structures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.count_kekule_structures" title="Link to this definition">#</a></dt>
+<dd><p>Number of Kekulé structures <span class="math notranslate nohighlight">\(K\)</span> of a conjugated skeleton.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_atoms</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>bonds</strong> (<em>sequence</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>)</em>) – See <a class="reference internal" href="#chemistrykit.structure.kekule_structures" title="chemistrykit.structure.kekule_structures"><code class="xref py py-func docutils literal notranslate"><span class="pre">kekule_structures()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Naphthalene (two fused six-membered rings, 10 carbons) has three:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">naphthalene</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="gp">... </span>               <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count_kekule_structures</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">naphthalene</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="chemistrykit.structure.determine_point_group">
 <span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">determine_point_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">molecule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/point_group.html#determine_point_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.determine_point_group" title="Link to this definition">#</a></dt>
 <dd><p>Determine a molecule’s point group from its 3D coordinates.</p>
@@ -1376,24 +1567,61 @@ validated against:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mf">104.5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="mf">0.958</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"O"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="n">coordinates</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)],</span> <span class="p">[</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)]],</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">determine_point_group</span><span class="p">(</span><span class="n">water</span><span class="p">)</span><span class="o">.</span><span class="n">group_name</span>
-<span class="go">&#39;C2v&#39;</span>
+<span class="go">'C2v'</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">verts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">verts</span> <span class="o">=</span> <span class="n">verts</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">verts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mf">1.09</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">methane</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span> <span class="n">coordinates</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">verts</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">methane</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"C"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">],</span> <span class="n">coordinates</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">verts</span><span class="p">]))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">determine_point_group</span><span class="p">(</span><span class="n">methane</span><span class="p">)</span><span class="o">.</span><span class="n">group_name</span>
-<span class="go">&#39;Td&#39;</span>
+<span class="go">'Td'</span>
 </pre></div>
 </div>
 <p>Carbon dioxide is linear and centrosymmetric, <span class="math notranslate nohighlight">\(D_{\infty h}\)</span>:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">co2</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;O&quot;</span><span class="p">],</span> <span class="n">coordinates</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.16</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.16</span><span class="p">]])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">co2</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">"O"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"O"</span><span class="p">],</span> <span class="n">coordinates</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.16</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.16</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">determine_point_group</span><span class="p">(</span><span class="n">co2</span><span class="p">)</span><span class="o">.</span><span class="n">group_name</span>
-<span class="go">&#39;D_inf_h&#39;</span>
+<span class="go">'D_inf_h'</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.structure.dipole_moment">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">dipole_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordinates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">charges</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/dipole.html#dipole_moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.dipole_moment" title="Link to this definition">#</a></dt>
+<dd><p>Dipole-moment vector of a set of point charges, in debye.</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol\mu = \sum_i q_i\,\mathbf r_i\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coordinates</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="analytical.html#chemistrykit.analytical.ConfidenceIntervalResult.n" title="chemistrykit.analytical.ConfidenceIntervalResult.n"><em>n</em></a><em>, </em><em>3</em><em>)</em>) – Positions in angstrom (e.g. <code class="xref py py-attr docutils literal notranslate"><span class="pre">Molecule.coordinates</span></code>).</p></li>
+<li><p><strong>charges</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="analytical.html#chemistrykit.analytical.ConfidenceIntervalResult.n" title="chemistrykit.analytical.ConfidenceIntervalResult.n"><em>n</em></a><em>,</em><em>)</em>) – Partial charges in units of the elementary charge. If they do not
+sum to zero the result depends on the origin.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (3,)</em> – Dipole vector in debye (pointing from negative to positive charge,
+the physics convention).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Charges of +e and -e one angstrom apart make a dipole of 4.803 D:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mu</span> <span class="o">=</span> <span class="n">dipole_moment</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">mu</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">4.803</span>
+</pre></div>
+</div>
+<p>Linear CO2 with partial charges has no net dipole:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mu</span> <span class="o">=</span> <span class="n">dipole_moment</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.16</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.16</span><span class="p">]],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">mu</span><span class="p">))</span>
+<span class="go">0.0</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1461,11 +1689,110 @@ dimension, and (for a real, unitary representation) the sum over all
 operations, weighted by class size, of the identity character times
 itself equals the group order – here just checking the totally
 symmetric irrep is trivially present:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">get_character_table</span><span class="p">(</span><span class="s2">&quot;Td&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">character</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">get_character_table</span><span class="p">(</span><span class="s2">"Td"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">character</span><span class="p">(</span><span class="s2">"A1"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">)</span>
 <span class="go">1.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">character</span><span class="p">(</span><span class="s2">&quot;T2&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">character</span><span class="p">(</span><span class="s2">"T2"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">)</span>
 <span class="go">3.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.structure.kekule_structures">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">kekule_structures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_atoms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bonds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/kekule.html#kekule_structures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.kekule_structures" title="Link to this definition">#</a></dt>
+<dd><p>Enumerate every Kekulé structure (perfect matching) of a conjugated skeleton.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_atoms</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of conjugated atoms (e.g. the carbons of a benzenoid
+hydrocarbon), labelled <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">..</span> <span class="pre">n_atoms</span> <span class="pre">-</span> <span class="pre">1</span></code>.</p></li>
+<li><p><strong>bonds</strong> (<em>sequence</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>)</em>) – The sigma-bond connectivity of the skeleton.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>list of list of tuple(int, int)</em> – Each entry is one Kekulé structure: the sorted list of bonds that
+are double bonds in it. Every atom appears in exactly one of them.
+An odd-membered or otherwise unmatchable skeleton returns <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Benzene has exactly Kekulé’s two structures:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ring</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">kekule_structures</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">ring</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">[(0, 1), (2, 3), (4, 5)]</span>
+<span class="go">[(0, 5), (1, 2), (3, 4)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.structure.pauling_electronegativity_difference">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">pauling_electronegativity_difference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_ab</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_aa</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_bb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/bonding.html#pauling_electronegativity_difference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.pauling_electronegativity_difference" title="Link to this definition">#</a></dt>
+<dd><p>Pauling’s electronegativity difference from bond dissociation energies.</p>
+<p>Pauling (1932) noticed that a heteronuclear bond A-B is stronger than
+the arithmetic mean of the homonuclear bonds A-A and B-B. He assigned
+this “extra ionic energy”</p>
+<div class="math notranslate nohighlight">
+\[\Delta = D(\mathrm{A{-}B}) - \tfrac{1}{2}\left[D(\mathrm{A{-}A}) + D(\mathrm{B{-}B})\right]\]</div>
+<p>to the bond’s partial ionic character and defined the electronegativity
+difference through <span class="math notranslate nohighlight">\(|\chi_A - \chi_B| = \sqrt{\Delta/\mathrm{eV}}\)</span>
+(L. Pauling, <em>J. Am. Chem. Soc.</em> 54, 3570 (1932)). With energies in
+kJ/mol this becomes <span class="math notranslate nohighlight">\(|\chi_A-\chi_B| = 0.102\sqrt{\Delta}\)</span>, since
+1 eV is 96.485 kJ/mol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d_ab</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Bond dissociation energies of A-B, A-A and B-B, in kJ/mol.</p></li>
+<li><p><strong>d_aa</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Bond dissociation energies of A-B, A-A and B-B, in kJ/mol.</p></li>
+<li><p><strong>d_bb</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Bond dissociation energies of A-B, A-A and B-B, in kJ/mol.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – <span class="math notranslate nohighlight">\(|\chi_A - \chi_B|\)</span> on the Pauling scale (0 if the extra
+ionic energy is negative).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>H-Cl (432 kJ/mol) against H-H (436) and Cl-Cl (242): the extra ionic
+energy of 93 kJ/mol gives a difference of about 0.98, close to the
+tabulated Pauling values 3.16 - 2.20 = 0.96:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">pauling_electronegativity_difference</span><span class="p">(</span><span class="mf">432.0</span><span class="p">,</span> <span class="mf">436.0</span><span class="p">,</span> <span class="mf">242.0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">0.98</span>
+</pre></div>
+</div>
+<p>Equal bond energies mean no ionic contribution:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pauling_electronegativity_difference</span><span class="p">(</span><span class="mf">200.0</span><span class="p">,</span> <span class="mf">200.0</span><span class="p">,</span> <span class="mf">200.0</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.structure.planar_ring_angle">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.structure.</span></span><span class="sig-name descname"><span class="pre">planar_ring_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ring_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/structure/systems/ring_strain.html#planar_ring_angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.structure.planar_ring_angle" title="Link to this definition">#</a></dt>
+<dd><p>Interior angle of a regular planar polygon with <cite>ring_size</cite> vertices, in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ring_size</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of ring atoms, at least 3.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">planar_ring_angle</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">planar_ring_angle</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="go">(60.0, 120.0)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1562,9 +1889,12 @@ symmetric irrep is trivially present:</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupCharacterTable"><code class="docutils literal notranslate"><span class="pre">PointGroupCharacterTable</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupCharacterTable.character"><code class="docutils literal notranslate"><span class="pre">PointGroupCharacterTable.character()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupCharacterTable.characters"><code class="docutils literal notranslate"><span class="pre">PointGroupCharacterTable.characters</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupCharacterTable.class_sizes"><code class="docutils literal notranslate"><span class="pre">PointGroupCharacterTable.class_sizes</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupCharacterTable.irreps"><code class="docutils literal notranslate"><span class="pre">PointGroupCharacterTable.irreps</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupCharacterTable.name"><code class="docutils literal notranslate"><span class="pre">PointGroupCharacterTable.name</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupCharacterTable.operations"><code class="docutils literal notranslate"><span class="pre">PointGroupCharacterTable.operations</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupCharacterTable.order"><code class="docutils literal notranslate"><span class="pre">PointGroupCharacterTable.order</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupCharacterTable.reduce"><code class="docutils literal notranslate"><span class="pre">PointGroupCharacterTable.reduce()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.PointGroupResult"><code class="docutils literal notranslate"><span class="pre">PointGroupResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
@@ -1590,13 +1920,21 @@ symmetric irrep is trivially present:</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.angle_between"><code class="docutils literal notranslate"><span class="pre">angle_between()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.baeyer_angle_strain"><code class="docutils literal notranslate"><span class="pre">baeyer_angle_strain()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.bond_dipole_sum"><code class="docutils literal notranslate"><span class="pre">bond_dipole_sum()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.bond_length_from_order"><code class="docutils literal notranslate"><span class="pre">bond_length_from_order()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.bond_order_from_length"><code class="docutils literal notranslate"><span class="pre">bond_order_from_length()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.build_vsepr_molecule"><code class="docutils literal notranslate"><span class="pre">build_vsepr_molecule()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.chair_cyclohexane_coordinates"><code class="docutils literal notranslate"><span class="pre">chair_cyclohexane_coordinates()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.coulson_pi_bond_order"><code class="docutils literal notranslate"><span class="pre">coulson_pi_bond_order()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.count_kekule_structures"><code class="docutils literal notranslate"><span class="pre">count_kekule_structures()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.determine_point_group"><code class="docutils literal notranslate"><span class="pre">determine_point_group()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.dipole_moment"><code class="docutils literal notranslate"><span class="pre">dipole_moment()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.domain_positions"><code class="docutils literal notranslate"><span class="pre">domain_positions()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.get_character_table"><code class="docutils literal notranslate"><span class="pre">get_character_table()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.kekule_structures"><code class="docutils literal notranslate"><span class="pre">kekule_structures()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.pauling_electronegativity_difference"><code class="docutils literal notranslate"><span class="pre">pauling_electronegativity_difference()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.planar_ring_angle"><code class="docutils literal notranslate"><span class="pre">planar_ring_angle()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.structure.unit_vector"><code class="docutils literal notranslate"><span class="pre">unit_vector()</span></code></a></li>
 </ul>
   </nav></div>

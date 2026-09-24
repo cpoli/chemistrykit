@@ -8,8 +8,11 @@ This gallery walks through every public feature of
 (reusing ``chemistrykit.kinetics``'s reaction-network engine),
 fluorescence/phosphorescence quantum yields and the photochemical
 quantum yield via Beer-Lambert, Stern-Volmer quenching with a
-static-vs-dynamic diagnostic, and photostationary-state kinetics for a
-two-state photoswitch.
+static-vs-dynamic diagnostic, photostationary-state kinetics for a
+two-state photoswitch, the H2/Cl2 photochemical chain reaction,
+fluorescence observables (Stokes shift, Perrin anisotropy), Förster and
+Dexter energy transfer, ferrioxalate actinometry, and Rehm-Weller
+electron-transfer quenching.
 
 Each script in this gallery is self-contained and can be run directly
 with ``python examples/photochem/<section>/<script>.py``. Every script
@@ -22,14 +25,24 @@ Sections
 --------
 
 - **jablonski** -- the 3-state Jablonski excited-state decay network,
-  checked against its closed-form population solution.
-- **quantum_yield** -- fluorescence/phosphorescence quantum yields, and
-  the photochemical quantum yield via Beer-Lambert photon absorption.
+  checked against its closed-form population solution; triplet
+  phosphorescence, flash photolysis of a transient triplet, and Kasha's
+  rule.
+- **quantum_yield** -- the Grotthuss-Draper and Stark-Einstein laws of
+  photochemistry, and Vavilov's excitation-independent fluorescence
+  quantum yield.
+- **chain_reaction** -- the H2/Cl2 photochemical chain and its
+  super-unity quantum yield.
 - **stern_volmer** -- Stern-Volmer quenching, fitting a quenching
   constant, and distinguishing static from dynamic quenching.
 - **photostationary_state** -- the photostationary state of a two-state
   photoswitch under simultaneous forward/reverse photolysis, checked
   against long-time numerical integration.
+- **fluorescence** -- the Stokes shift and the Perrin anisotropy equation.
+- **energy_transfer** -- Förster (FRET) and Dexter exchange energy transfer.
+- **actinometry** -- photon-flux measurement with the ferrioxalate
+  actinometer.
+- **electron_transfer** -- Rehm-Weller electron-transfer quenching.
 
 
 .. raw:: html
@@ -49,11 +62,251 @@ Sections
 
     </div>
 
+Chemical actinometry
+----------------------
+
+Measuring a light source's photon flux with the potassium ferrioxalate
+chemical actinometer.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Every quantum yield needs the number of photons absorbed. Hatchard and Parker (1956) introduced potassium ferrioxalate as a sensitive chemical photon counter: light reduces Fe(III) to Fe(II) with a known quantum yield (about 1.21 at 365 nm), and the Fe(II) is measured by the red phenanthroline complex at 510 nm (~chemistrykit.photochem.ferrioxalate_fe2_moles). Dividing by the quantum yield and the irradiation time gives the lamp&#x27;s photon flux (~chemistrykit.photochem.ferrioxalate_photon_flux). Here synthetic readings from a series of irradiation times are converted back into the flux of a lamp of known output.">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/actinometry/images/thumb/sphx_glr_plot_01_hatchard_parker_ferrioxalate_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/actinometry/plot_01_hatchard_parker_ferrioxalate`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Hatchard and Parker's ferrioxalate actinometer: counting photons chemically</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Photochemical chain reactions
+--------------------------------
+
+The H2/Cl2 photochemical chain reaction, whose quantum yield far exceeds
+the one-photon-one-molecule limit.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Bodenstein (1913) measured that one absorbed photon forms up to 10^5-10^6 HCl molecules in an illuminated H2/Cl2 mixture, apparently violating photochemical equivalence. Nernst (1918) explained it: the photon only splits one Cl2 into two Cl atoms, which then start a chain (Cl + H2 -&gt; HCl + H, H + Cl2 -&gt; HCl + Cl) that runs until two atoms recombine. hydrogen_chlorine_chain_network integrates this mechanism, and chain_quantum_yield gives the steady-state yield \Phi=2k_2[\mathrm{H_2}]/\sqrt{k_t I_{abs}}. Rate constants are in arbitrary consistent units.">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/chain_reaction/images/thumb/sphx_glr_plot_01_bodenstein_nernst_hcl_chain_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/chain_reaction/plot_01_bodenstein_nernst_hcl_chain`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Bodenstein and Nernst: the H2 + Cl2 photochemical chain reaction</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Photoinduced electron transfer
+--------------------------------
+
+Fluorescence quenching by electron transfer, and the Rehm-Weller relation
+between quenching rate and electron-transfer free energy.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Rehm and Weller (1970) measured how fast many donor-acceptor pairs quench fluorescence by electron transfer in acetonitrile and found that the quenching rate constant depends on a single quantity, the electron-transfer free energy \Delta G_{ET}=E_{ox}(D)-E_{red}(A)-E_{00}+w (~chemistrykit.photochem.rehm_weller_free_energy). Their empirical curve (~chemistrykit.photochem.rehm_weller_quenching_rate) is diffusion-limited for exergonic transfer and falls off exponentially for endergonic transfer; it does not show the Marcus inverted region at very negative \Delta G_{ET}.">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/electron_transfer/images/thumb/sphx_glr_plot_01_rehm_weller_quenching_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/electron_transfer/plot_01_rehm_weller_quenching`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Rehm-Weller equation: electron-transfer quenching vs. driving force</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Energy transfer
+-----------------
+
+Excitation energy transfer between a donor and an acceptor: Förster
+dipole-dipole transfer and Dexter exchange transfer.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Förster (1948) showed that an excited donor can hand its energy to a nearby acceptor through dipole-dipole coupling at a rate k_T=\tau_D^{-1}(R_0/r)^6, so the transfer efficiency E=1/(1+(r/R_0)^6) falls from nearly 1 to nearly 0 over a narrow range around the Förster distance R_0 (~chemistrykit.photochem.forster_radius, forster_efficiency). That steepness is why FRET works as a &quot;spectroscopic ruler&quot; for distances of 1-10 nm.">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/energy_transfer/images/thumb/sphx_glr_plot_01_forster_fret_efficiency_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/energy_transfer/plot_01_forster_fret_efficiency`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Förster resonance energy transfer: the inverse-sixth-power distance law</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Dexter (1953) described a second energy-transfer mechanism in which the donor and acceptor swap electrons, which needs their orbitals to overlap. Its rate, k_{ET}=KJ\exp(-2r/L) (~chemistrykit.photochem.dexter_rate), therefore dies off exponentially within a few Å of contact, and because electron exchange conserves total spin it can move triplet energy (triplet sensitization), which dipole-dipole Förster coupling cannot. The log-scale plot shows the straight line of an exponential law, with the slope set by L.">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/energy_transfer/images/thumb/sphx_glr_plot_02_dexter_exchange_transfer_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/energy_transfer/plot_02_dexter_exchange_transfer`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Dexter exchange energy transfer: exponential fall-off with distance</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Fluorescence observables
+--------------------------
+
+Steady-state fluorescence measurements: the Stokes shift between
+absorption and emission, and the Perrin fluorescence-anisotropy equation.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Stokes (1852) found that quinine solution absorbs invisible ultraviolet light and re-emits it as blue light -- always at longer wavelength than the exciting light. The excited molecule relaxes vibrationally (and its solvent reorganizes) before emitting, so emission starts from a lower energy than absorption ended at. stokes_shift gives the gap in wavenumbers. The bands below are model Gaussian spectra with maxima near those of quinine sulfate in dilute acid (about 350 nm and 450 nm).">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/fluorescence/images/thumb/sphx_glr_plot_01_stokes_shift_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/fluorescence/plot_01_stokes_shift`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Stokes shift: fluorescence is emitted at longer wavelength than it is absorbed</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Perrin (1926) related the polarization of fluorescence to how far a molecule rotates during its excited-state lifetime \tau: r=r_0/(1+\tau/\theta), with rotational correlation time \theta=\eta V/k_BT (~chemistrykit.photochem.perrin_anisotropy, rotational_correlation_time). A small dye depolarizes almost completely in water but stays polarized in viscous glycerol, and a &quot;Perrin plot&quot; of 1/r against T/\eta is a straight line whose intercept gives r_0 and whose slope gives the molecular volume.">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/fluorescence/images/thumb/sphx_glr_plot_02_perrin_anisotropy_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/fluorescence/plot_02_perrin_anisotropy`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Perrin equation: fluorescence anisotropy and molecular rotation</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
 Jablonski-diagram kinetics
 ----------------------------
 
 The 3-state (S1, T1, S0) Jablonski excited-state decay network, checked
-against its closed-form population solution.
+against its closed-form population solution, plus triplet
+phosphorescence, flash photolysis of the triplet, and Kasha's rule.
 
 
 .. raw:: html
@@ -81,6 +334,57 @@ against its closed-form population solution.
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Jablonski-diagram excited-state kinetics</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Lewis and Kasha (1944) showed that phosphorescence comes from a triplet state T_1, whose spin-forbidden return to the singlet ground state makes it far slower than fluorescence. Using realistic rate constants (nanosecond fluorescence, millisecond phosphorescence), jablonski_populations_analytic shows the two emissions separated by six orders of magnitude in time, and phosphorescence_quantum_yield gives the fraction of absorbed photons re-emitted from the triplet.">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/jablonski/images/thumb/sphx_glr_plot_02_lewis_kasha_triplet_phosphorescence_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/jablonski/plot_02_lewis_kasha_triplet_phosphorescence`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Lewis and Kasha: phosphorescence as slow emission from the triplet state</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Flash photolysis (Norrish and Porter, 1949) excites a sample with an intense, short flash and then records its absorption at a series of delays with a second probe flash, so a short-lived intermediate is seen appearing and disappearing in real time. Here the intermediate is the triplet state of the Jablonski model (~chemistrykit.photochem.jablonski_populations_analytic): the probe measures the triplet-triplet absorbance \Delta A(t)=\varepsilon_T\ell[T_1](t), and fitting the late-time decay of noisy &quot;measured&quot; points recovers the triplet lifetime.">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/jablonski/images/thumb/sphx_glr_plot_03_norrish_porter_flash_photolysis_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/jablonski/plot_03_norrish_porter_flash_photolysis`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Norrish and Porter's flash photolysis: watching a transient triplet decay</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Kasha (1950) stated that emission comes almost entirely from the lowest excited state of a given multiplicity (S_1 for fluorescence), because internal conversion from higher states such as S_2 takes picoseconds or less, much faster than emission. With kasha_emission_yields, a molecule excited to S_2 sends only a tiny fraction of its emission from S_2; the exception is a molecule like azulene, whose large S_2-S_1 gap slows internal conversion enough for S_2 emission to compete.">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/jablonski/images/thumb/sphx_glr_plot_04_kasha_rule_emission_from_s1_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/jablonski/plot_04_kasha_rule_emission_from_s1`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Kasha's rule: emission comes from the lowest excited state</div>
     </div>
 
 
@@ -135,8 +439,9 @@ numerical integration.
 Quantum yields
 ----------------
 
-Fluorescence/phosphorescence quantum yields, and the photochemical
-quantum yield via Beer-Lambert photon absorption.
+The Grotthuss-Draper and Stark-Einstein laws of photochemistry (absorbed
+photons and the photochemical quantum yield), and Vavilov's law for the
+fluorescence quantum yield.
 
 
 .. raw:: html
@@ -152,18 +457,52 @@ quantum yield via Beer-Lambert photon absorption.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="fluorescence_quantum_yield and phosphorescence_quantum_yield are simple branching-ratio calculations from Jablonski-diagram rate constants. photons_absorbed reuses chemistrykit.spectro.systems.beer_lambert&#x27;s transmittance to compute the photon flux actually absorbed by a sample, which feeds directly into photochemical_quantum_yield.">
+    <div class="sphx-glr-thumbcontainer" tooltip="The first law of photochemistry (Grotthuss 1817, Draper 1842) says that light the sample does not absorb produces no chemical change. The quantity that matters is therefore the absorbed photon flux, I_{abs}=I_0(1-10^{-A}), computed by photons_absorbed. Here two samples with the same incident flux but different absorbances form product in proportion to the light each one actually absorbs, not the light that falls on it.">
 
 .. only:: html
 
-  .. image:: /api/gallery/photochem/quantum_yield/images/thumb/sphx_glr_plot_01_quantum_yields_thumb.png
+  .. image:: /api/gallery/photochem/quantum_yield/images/thumb/sphx_glr_plot_01_grotthuss_draper_absorbed_light_thumb.png
     :alt:
 
-  :doc:`/api/gallery/photochem/quantum_yield/plot_01_quantum_yields`
+  :doc:`/api/gallery/photochem/quantum_yield/plot_01_grotthuss_draper_absorbed_light`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Fluorescence/phosphorescence quantum yields, and photon absorption via Beer-Lambert</div>
+      <div class="sphx-glr-thumbnail-title">Grotthuss-Draper law: only absorbed light drives photochemistry</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The law of photochemical equivalence (Stark 1908, Einstein 1912-1913) says each absorbed quantum activates exactly one molecule. The quantum yield \Phi (moles product / moles photons absorbed), computed by photochemical_quantum_yield, then equals 1 for an ideal one-photon, one-molecule reaction and is less than 1 when the excited molecule has other ways to lose its energy.">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/quantum_yield/images/thumb/sphx_glr_plot_02_stark_einstein_photochemical_equivalence_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/quantum_yield/plot_02_stark_einstein_photochemical_equivalence`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Stark-Einstein law: one absorbed photon, at most one reacting molecule</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Vavilov found (1922-1927) that a dye&#x27;s fluorescence quantum yield does not change when it is excited at shorter, more energetic wavelengths. The reason is that ultrafast internal conversion carries any higher excited state down to S_1 before emission, so the yield depends only on the S_1 rate constants, \Phi_f=k_f/(k_f+k_{ic}+k_{isc}) (~chemistrykit.photochem.fluorescence_quantum_yield). Below, a model dye with an S_0\to S_1 band near 480 nm and an S_0\to S_2 band near 330 nm is excited across its whole absorption spectrum; kasha_emission_yields gives the S_1 fluorescence yield for each state reached.">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/quantum_yield/images/thumb/sphx_glr_plot_03_vavilov_excitation_independence_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/quantum_yield/plot_03_vavilov_excitation_independence`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Vavilov's law: fluorescence quantum yield is independent of excitation wavelength</div>
     </div>
 
 
@@ -220,6 +559,11 @@ static from dynamic quenching.
    :includehidden:
 
 
+   /api/gallery/photochem/actinometry/index.rst
+   /api/gallery/photochem/chain_reaction/index.rst
+   /api/gallery/photochem/electron_transfer/index.rst
+   /api/gallery/photochem/energy_transfer/index.rst
+   /api/gallery/photochem/fluorescence/index.rst
    /api/gallery/photochem/jablonski/index.rst
    /api/gallery/photochem/photostationary_state/index.rst
    /api/gallery/photochem/quantum_yield/index.rst

@@ -410,11 +410,11 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.statmech.core.base_system</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Abstract base class for a molecular partition function, and its thermodynamic-functions container.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Abstract base class for a molecular partition function, and its thermodynamic-functions container.</span>
 
 <span class="sd">A molecular partition function :math:`q(T)` (translational, rotational,</span>
 <span class="sd">vibrational, ...; :mod:`chemistrykit.statmech.systems.partition_functions`)</span>
-<span class="sd">is the single object every one of statistical thermodynamics&#39;</span>
+<span class="sd">is the single object every one of statistical thermodynamics'</span>
 <span class="sd">macroscopic quantities is built from (McQuarrie, *Statistical</span>
 <span class="sd">Mechanics*, Ch. 3-6; Atkins &amp; de Paula, *Physical Chemistry*, 11th ed.,</span>
 <span class="sd">Ch. 13-14):</span>
@@ -436,7 +436,7 @@
 <span class="sd">:class:`chemistrykit.md.core.base_system.PairPotential`, the derived</span>
 <span class="sd">thermodynamic functions are declared abstract here rather than derived</span>
 <span class="sd">generically by numerical differentiation).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -445,27 +445,27 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">NA</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;PartitionFunction&quot;</span><span class="p">,</span> <span class="s2">&quot;ThermodynamicFunctions&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"PartitionFunction"</span><span class="p">,</span> <span class="s2">"ThermodynamicFunctions"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="PartitionFunction">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.PartitionFunction">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PartitionFunction</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common interface for a single-mode molecular partition function.</span>
+<span class="w">    </span><span class="sd">"""Common interface for a single-mode molecular partition function.</span>
 
 <span class="sd">    Every method accepts `N`, the number of independent, non-interacting</span>
 <span class="sd">    copies of this mode contributing to an extensive thermodynamic</span>
-<span class="sd">    quantity -- `N` moles&#39; worth of molecules if `N` is left at its</span>
-<span class="sd">    default of Avogadro&#39;s number (giving molar quantities directly), a</span>
-<span class="sd">    single molecule&#39;s contribution if ``N=1``, or any other ensemble</span>
+<span class="sd">    quantity -- `N` moles' worth of molecules if `N` is left at its</span>
+<span class="sd">    default of Avogadro's number (giving molar quantities directly), a</span>
+<span class="sd">    single molecule's contribution if ``N=1``, or any other ensemble</span>
 <span class="sd">    size.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
 <div class="viewcode-block" id="PartitionFunction.value">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.PartitionFunction.value">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the partition function q(T) for a single molecule/mode.</span>
+<span class="w">        </span><span class="sd">"""Return the partition function q(T) for a single molecule/mode.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -475,14 +475,14 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="PartitionFunction.internal_energy">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.PartitionFunction.internal_energy">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">internal_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">NA</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`U(T)-U(0) = Nk_BT^2(\partial\ln q/\partial T)_V`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`U(T)-U(0) = Nk_BT^2(\partial\ln q/\partial T)_V`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -494,15 +494,15 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">            Energy, in J (relative to this mode&#39;s own ground state).</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">            Energy, in J (relative to this mode's own ground state).</span>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="PartitionFunction.entropy">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.PartitionFunction.entropy">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">entropy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">NA</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the entropy S(T) contributed by this mode.</span>
+<span class="w">        </span><span class="sd">"""Return the entropy S(T) contributed by this mode.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -513,14 +513,14 @@
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
 <span class="sd">            Entropy, in J/K.</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="PartitionFunction.heat_capacity_v">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.PartitionFunction.heat_capacity_v">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">heat_capacity_v</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">NA</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the constant-volume heat capacity Cv(T) contributed by this mode.</span>
+<span class="w">        </span><span class="sd">"""Return the constant-volume heat capacity Cv(T) contributed by this mode.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -531,13 +531,13 @@
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
 <span class="sd">            Heat capacity, in J/K.</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="PartitionFunction.helmholtz_free_energy">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.PartitionFunction.helmholtz_free_energy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">helmholtz_free_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">NA</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`A=U-TS` for this mode, from :meth:`internal_energy` and :meth:`entropy`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`A=U-TS` for this mode, from :meth:`internal_energy` and :meth:`entropy`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -548,7 +548,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
 <span class="sd">            Helmholtz free energy, in J.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_energy</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="o">-</span> <span class="n">T</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">entropy</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span></div>
 </div>
 
@@ -558,29 +558,29 @@
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.ThermodynamicFunctions">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ThermodynamicFunctions</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A snapshot of one mode&#39;s (or a combined molecule&#39;s) thermodynamic functions at a given T.</span>
+<span class="w">    </span><span class="sd">"""A snapshot of one mode's (or a combined molecule's) thermodynamic functions at a given T.</span>
 
 <span class="sd">    Returned by</span>
 <span class="sd">    :meth:`chemistrykit.statmech.systems.partition_functions.IdealGasMolecule.thermodynamic_functions`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">T</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Temperature, in K.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""float: Temperature, in K."""</span>
 
     <span class="n">q</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: The (combined) partition function value at `T`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""float: The (combined) partition function value at `T`."""</span>
 
     <span class="n">U</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Internal energy (relative to the ground state), in J.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""float: Internal energy (relative to the ground state), in J."""</span>
 
     <span class="n">S</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Entropy, in J/K.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""float: Entropy, in J/K."""</span>
 
     <span class="n">Cv</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Constant-volume heat capacity, in J/K.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""float: Constant-volume heat capacity, in J/K."""</span>
 
     <span class="n">A</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Helmholtz free energy, ``U - T*S``, in J.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">"""float: Helmholtz free energy, ``U - T*S``, in J."""</span></div>
 
 </pre></div>
 

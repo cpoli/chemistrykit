@@ -1,7 +1,9 @@
 r"""
-Powder XRD: Bragg's law and systematic absences
-===================================================
+Bragg's law: indexing powder XRD peaks
+========================================
 
+Each line of a diffraction pattern is a family of :math:`(hkl)` planes
+that satisfies Bragg's law :math:`n\lambda=2d\sin\theta`.
 :func:`~chemistrykit.crystal.systems.xrd.powder_xrd_peaks` computes each
 reflection's structure factor
 (:func:`~chemistrykit.crystal.systems.xrd.structure_factor`) directly
@@ -12,6 +14,7 @@ automatically rather than being hardcoded as a rule.
 
 # %%
 import matplotlib.pyplot as plt
+import numpy as np
 
 from chemistrykit.crystal.systems.xrd import powder_xrd_peaks
 from chemistrykit.crystal.visualizers.crystal_plots import plot_xrd_pattern
@@ -44,6 +47,19 @@ print(f"\n(100) present for BCC? {(1, 0, 0) in bcc_hkls}")
 print(f"(110) present for BCC? {(1, 1, 0) in bcc_hkls}")
 print(f"(100) present for FCC? {(1, 0, 0) in fcc_hkls}")
 print(f"(111) present for FCC? {(1, 1, 1) in fcc_hkls}")
+
+# %%
+# Every listed peak obeys Bragg's law exactly -- recover the wavelength
+# from each peak's d-spacing and angle, and the NaCl-style inverse problem
+# (lattice constant from a measured angle) that the Braggs solved:
+
+for peak in copper_fcc:
+    lam = 2.0 * peak.d_spacing * np.sin(np.radians(peak.two_theta / 2.0))
+    assert abs(lam - wavelength) < 1e-9
+first = copper_fcc[0]
+h, k, l = first.hkl
+a_recovered = wavelength / (2.0 * np.sin(np.radians(first.two_theta / 2.0))) * np.sqrt(h * h + k * k + l * l)
+print(f"\nCu lattice constant recovered from the (111) angle via Bragg's law: {a_recovered:.2f} pm")
 
 # %%
 fig, axes = plt.subplots(3, 1, figsize=(8, 8), sharex=True)

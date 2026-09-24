@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Particle-in-a-box wavefunctions, cubic-box degeneracy, and dye color &#8212; chemistrykit 0.1.0 documentation</title>
+    <title>Solving Schrodinger’s equation for a particle in a box &#8212; chemistrykit 0.1.0 documentation</title>
   
   
   
@@ -48,11 +48,12 @@
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/gallery/quantum/particle_in_box/plot_01_particle_in_box';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Rayleigh-Schrodinger perturbation theory" href="../perturbation/index.html" />
+    <link rel="next" title="Kuhn’s free-electron model of conjugated dye color" href="plot_02_kuhn_free_electron_dye.html" />
     <link rel="prev" title="Particle in a box" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -376,12 +377,15 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../analytical/index.html">chemistrykit.analytical</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../analytical/calibration/index.html">Calibration curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../analytical/chromatography/index.html">Chromatography</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../analytical/qtest/index.html">Q-test outlier rejection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../analytical/qtest/index.html">Outlier rejection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../analytical/smoothing/index.html">Signal smoothing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../analytical/statistics/index.html">Statistics of replicate measurements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../analytical/titration/index.html">Titration curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../analytical/uncertainty/index.html">Propagation of uncertainty</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../crystal/index.html">chemistrykit.crystal</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../crystal/crystal_chemistry/index.html">Crystal chemistry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../crystal/crystal_systems/index.html">Crystal systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../crystal/defects/index.html">Point defects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../crystal/lattice_energy/index.html">Lattice energy</a></li>
@@ -393,9 +397,12 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../electrochem/index.html">chemistrykit.electrochem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/battery/index.html">Battery discharge</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/butler_volmer/index.html">Butler-Volmer kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../electrochem/conductivity/index.html">Electrolytic conductivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/electrolysis/index.html">Electrolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../electrochem/fuel_cell/index.html">Fuel cells</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/nernst/index.html">The Nernst equation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/standard_potentials/index.html">Standard reduction potentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../electrochem/voltammetry/index.html">Electroanalytical currents</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../kinetics/index.html">chemistrykit.kinetics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -404,15 +411,23 @@
 <li class="toctree-l2"><a class="reference internal" href="../../kinetics/networks/index.html">Reaction networks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../kinetics/oscillators/index.html">Oscillating reactions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../kinetics/rate_laws/index.html">Rate laws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../kinetics/rate_theory/index.html">Rate theory</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../md/index.html">chemistrykit.md</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../md/constraints/index.html">Constraints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../md/lj_fluid/index.html">Lennard-Jones fluid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../md/pair_potentials/index.html">Pair potentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../md/periodic_boundaries/index.html">Periodic boundaries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../md/thermostats/index.html">Thermostats</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../photochem/index.html">chemistrykit.photochem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/actinometry/index.html">Chemical actinometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/chain_reaction/index.html">Photochemical chain reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/electron_transfer/index.html">Photoinduced electron transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/energy_transfer/index.html">Energy transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/fluorescence/index.html">Fluorescence observables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../photochem/jablonski/index.html">Jablonski-diagram kinetics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../photochem/photostationary_state/index.html">Photostationary state</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../photochem/quantum_yield/index.html">Quantum yields</a></li>
@@ -423,12 +438,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../polymer/chain_growth/index.html">Chain-growth kinetics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../polymer/chain_statistics/index.html">Chain statistics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../polymer/molecular_weight_distribution/index.html">Molecular-weight distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../polymer/solution_properties/index.html">Solution properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../polymer/step_growth/index.html">Step-growth kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../polymer/stereochemistry/index.html">Stereochemistry</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">chemistrykit.quantum</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../harmonic_oscillator/index.html">Harmonic oscillator vs. Morse potential</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hartree_fock/index.html">Minimal variational H2+</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hartree_fock/index.html">Minimal variational H2+ and the LCAO method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helium/index.html">Variational helium atom</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../huckel/index.html">Huckel molecular-orbital theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../hydrogenlike/index.html">Hydrogen-like atoms</a></li>
 <li class="toctree-l2 current active"><a class="reference internal" href="index.html">Particle in a box</a></li>
@@ -444,42 +462,54 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../spectro/index.html">chemistrykit.spectro</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../spectro/atomic/index.html">Atomic line spectra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../spectro/beer_lambert/index.html">Beer-Lambert law</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../spectro/electronic/index.html">Electronic spectra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../spectro/lineshapes/index.html">Spectral lineshapes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../spectro/nmr/index.html">NMR multiplets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../spectro/nmr/index.html">NMR spectroscopy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../spectro/rotational/index.html">Rotational spectra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../spectro/vibrational/index.html">Vibrational spectra</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statmech/index.html">chemistrykit.statmech</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statmech/ising/index.html">Ising model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statmech/lattice_gas/index.html">Lattice-gas adsorption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statmech/maxwell_boltzmann/index.html">Maxwell-Boltzmann speed distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statmech/partition_functions/index.html">Partition functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statmech/quantum_statistics/index.html">Quantum statistics and the classical limit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statmech/solids/index.html">Heat capacity of solids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statmech/virial/index.html">Virial coefficients</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../structure/index.html">chemistrykit.structure</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../structure/bonding/index.html">Bond order</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../structure/lewis/index.html">Formal charge and oxidation state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../structure/dipole/index.html">Dipole moments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../structure/kekule/index.html">Kekulé structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../structure/lewis/index.html">Lewis structures, oxidation states, and electronegativity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../structure/point_group/index.html">Point-group determination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../structure/ring_strain/index.html">Ring strain</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../structure/vsepr/index.html">VSEPR geometry prediction</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../surface/index.html">chemistrykit.surface</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/bet/index.html">BET isotherm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/catalysis/index.html">Catalysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/dubinin/index.html">Polanyi potential and Dubinin-Radushkevich</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/eley_rideal/index.html">Eley-Rideal kinetics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/freundlich/index.html">Freundlich isotherm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/gibbs_adsorption/index.html">Gibbs adsorption equation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/langmuir/index.html">Langmuir isotherm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/langmuir_hinshelwood/index.html">Langmuir-Hinshelwood kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/temkin/index.html">Temkin isotherm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/tpd/index.html">Temperature-programmed desorption</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../thermo/index.html">chemistrykit.thermo</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../thermo/equations_of_state/index.html">Equations of state</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../thermo/equilibrium/index.html">Reaction equilibrium</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../thermo/mixtures/index.html">Mixtures and colligative properties</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../thermo/phase_equilibria/index.html">Phase equilibria</a></li>
-</ul>
-</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thermo/index.html">Sections</a></li>
+
+
+
+
+
 </ul>
 </div>
 </nav></div>
@@ -529,7 +559,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Particle in a box</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Particle-in-a-box wavefunctions, cubic-box degeneracy, and dye color</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Solving Schrodinger’s equation for a particle in a box</span></li>
   </ul>
 </nav>
 </div>
@@ -551,37 +581,37 @@
 <p><a class="reference internal" href="#sphx-glr-download-api-gallery-quantum-particle-in-box-plot-01-particle-in-box-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code.</p>
 </div>
-<section class="sphx-glr-example-title" id="particle-in-a-box-wavefunctions-cubic-box-degeneracy-and-dye-color">
-<span id="sphx-glr-api-gallery-quantum-particle-in-box-plot-01-particle-in-box-py"></span><h1>Particle-in-a-box wavefunctions, cubic-box degeneracy, and dye color<a class="headerlink" href="#particle-in-a-box-wavefunctions-cubic-box-degeneracy-and-dye-color" title="Link to this heading">#</a></h1>
+<section class="sphx-glr-example-title" id="solving-schrodinger-s-equation-for-a-particle-in-a-box">
+<span id="sphx-glr-api-gallery-quantum-particle-in-box-plot-01-particle-in-box-py"></span><h1>Solving Schrodinger’s equation for a particle in a box<a class="headerlink" href="#solving-schrodinger-s-equation-for-a-particle-in-a-box" title="Link to this heading">#</a></h1>
 <p>Plots the first few 1D particle-in-a-box wavefunctions
 (<a class="reference internal" href="../../../quantum.html#chemistrykit.quantum.ParticleInBox1D" title="chemistrykit.quantum.systems.particle_in_box.ParticleInBox1D"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParticleInBox1D</span></code></a>),
 each offset by its own energy level, then checks the textbook 3D
 cubic-box degeneracy pattern
-(<a class="reference internal" href="../../../quantum.html#chemistrykit.quantum.ParticleInBox3D" title="chemistrykit.quantum.systems.particle_in_box.ParticleInBox3D"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParticleInBox3D</span></code></a>),
-and finally applies Kuhn’s free-electron model
-(<code class="xref py py-func docutils literal notranslate"><span class="pre">conjugated_dye_absorption_wavelength()</span></code>)
-to predict how a cyanine dye’s absorption color shifts with conjugation
-length.</p>
+(<a class="reference internal" href="../../../quantum.html#chemistrykit.quantum.ParticleInBox3D" title="chemistrykit.quantum.systems.particle_in_box.ParticleInBox3D"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParticleInBox3D</span></code></a>).
+These are the simplest exact solutions of Schrodinger’s 1926
+time-independent equation <span class="math notranslate nohighlight">\(-\frac{\hbar^2}{2m}\nabla^2\psi=E\psi\)</span>
+inside hard walls: quantized energies <span class="math notranslate nohighlight">\(E_n=n^2h^2/8mL^2\)</span> appear
+from the boundary conditions alone, with no quantization postulate.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.quantum.systems.particle_in_box</span><span class="w"> </span><span class="kn">import</span> <a href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" class="sphx-glr-backref-module-abc sphx-glr-backref-type-py-class"><span class="n">ParticleInBox1D</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" class="sphx-glr-backref-module-abc sphx-glr-backref-type-py-class"><span class="n">ParticleInBox3D</span></a><span class="p">,</span> <span class="n">conjugated_dye_absorption_wavelength</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.quantum.systems.particle_in_box</span><span class="w"> </span><span class="kn">import</span> <a href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" class="sphx-glr-backref-module-abc sphx-glr-backref-type-py-class"><span class="n">ParticleInBox1D</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" class="sphx-glr-backref-module-abc sphx-glr-backref-type-py-class"><span class="n">ParticleInBox3D</span></a>
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.quantum.visualizers.quantum_plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_particle_in_box_wavefunctions</span>
 
 <span class="n">box</span> <span class="o">=</span> <a href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" class="sphx-glr-backref-module-abc sphx-glr-backref-type-py-class"><span class="n">ParticleInBox1D</span></a><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mf">1.0e-9</span><span class="p">)</span>
 <span class="k">for</span> <a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;E_</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">box</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1.602176634e-19</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> eV&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"E_</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">box</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1.602176634e-19</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> eV, E_</span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="si">}</span><span class="s2">/E_1 = </span><span class="si">{</span><span class="n">box</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">box</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (n^2 = </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="o">**</span><span class="mi">2</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">plot_particle_in_box_wavefunctions</span><span class="p">(</span><span class="n">box</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.0e-20</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;1D particle-in-a-box wavefunctions (1 nm box)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"1D particle-in-a-box wavefunctions (1 nm box)"</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../../../_images/sphx_glr_plot_01_particle_in_box_001.png" srcset="../../../../_images/sphx_glr_plot_01_particle_in_box_001.png" alt="1D particle-in-a-box wavefunctions (1 nm box)" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>E_1 = 0.3760 eV
-E_2 = 1.5041 eV
-E_3 = 3.3843 eV
-E_4 = 6.0165 eV
+<img src="../../../../_images/sphx_glr_plot_01_particle_in_box_001.png" srcset="../../../../_images/sphx_glr_plot_01_particle_in_box_001.png" alt="1D particle-in-a-box wavefunctions (1 nm box)" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>E_1 = 0.3760 eV, E_1/E_1 = 1.0000 (n^2 = 1)
+E_2 = 1.5041 eV, E_2/E_1 = 4.0000 (n^2 = 4)
+E_3 = 3.3843 eV, E_3/E_1 = 9.0000 (n^2 = 9)
+E_4 = 6.0165 eV, E_4/E_1 = 16.0000 (n^2 = 16)
 </pre></div>
 </div>
 <p>A cubic 3D box shows genuine degeneracy from symmetry alone: the three
@@ -590,55 +620,25 @@ permutations of (2, 1, 1) share exactly the same energy.</p>
 <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">e211</span></a> <span class="o">=</span> <span class="n">cubic_box</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">e121</span></a> <span class="o">=</span> <span class="n">cubic_box</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">e112</span></a> <span class="o">=</span> <span class="n">cubic_box</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;E(2,1,1) = E(1,2,1) = E(1,1,2)? </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.allclose.html#numpy.allclose" title="numpy.allclose" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">allclose</span></a><span class="p">([</span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">e211</span></a><span class="p">,</span><span class="w"> </span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">e121</span></a><span class="p">,</span><span class="w"> </span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">e112</span></a><span class="p">],</span><span class="w"> </span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">e211</span></a><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"E(2,1,1) = E(1,2,1) = E(1,1,2)? </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.allclose.html#numpy.allclose" title="numpy.allclose" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">allclose</span></a><span class="p">([</span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">e211</span></a><span class="p">,</span><span class="w"> </span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">e121</span></a><span class="p">,</span><span class="w"> </span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">e112</span></a><span class="p">],</span><span class="w"> </span><a href="https://docs.python.org/3/builtins/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">e211</span></a><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <a href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">degeneracies</span></a> <span class="o">=</span> <span class="n">cubic_box</span><span class="o">.</span><span class="n">degeneracy</span><span class="p">(</span><span class="n">n_max</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">fig2</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">energies_ev</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.array.html#numpy.array" title="numpy.array" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">array</span></a><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">degeneracies</span></a><span class="o">.</span><span class="n">keys</span><span class="p">()))</span> <span class="o">/</span> <span class="mf">1.602176634e-19</span>
 <a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">counts</span></a> <span class="o">=</span> <span class="p">[</span><a href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">degeneracies</span></a><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">degeneracies</span></a><span class="o">.</span><span class="n">keys</span><span class="p">())]</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">energies_ev</span></a><span class="p">)),</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">counts</span></a><span class="p">,</span> <span class="n">tick_label</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">energies_ev</span></a><span class="p">])</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;energy (eV)&quot;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;degeneracy&quot;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Cubic-box level degeneracies&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">energies_ev</span></a><span class="p">)),</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">counts</span></a><span class="p">,</span> <span class="n">tick_label</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">e</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">energies_ev</span></a><span class="p">])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"energy (eV)"</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"degeneracy"</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Cubic-box level degeneracies"</span><span class="p">)</span>
 <span class="n">fig2</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <img src="../../../../_images/sphx_glr_plot_01_particle_in_box_002.png" srcset="../../../../_images/sphx_glr_plot_01_particle_in_box_002.png" alt="Cubic-box level degeneracies" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>E(2,1,1) = E(1,2,1) = E(1,1,2)? True
 </pre></div>
 </div>
-<p>Kuhn’s free-electron model: treating a linear conjugated dye’s pi
-electrons as particles in a 1D box predicts that longer conjugation
-(more pi electrons, longer effective box) red-shifts the absorption
-– the qualitative basis of cyanine-dye color tuning.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">chain_lengths_nm</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
-<a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">electron_counts</span></a> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
-<a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wavelengths_nm</span></a> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">conjugated_dye_absorption_wavelength</span><span class="p">(</span><span class="n">box_length</span><span class="o">=</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">L</span></a> <span class="o">*</span> <span class="mf">1.0e-9</span><span class="p">,</span> <span class="n">n_pi_electrons</span><span class="o">=</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">)</span> <span class="o">*</span> <span class="mf">1.0e9</span> <span class="k">for</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">L</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">chain_lengths_nm</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">electron_counts</span></a><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="p">]</span>
-<span class="k">for</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">L</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">wl</span></a> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">chain_lengths_nm</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">electron_counts</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wavelengths_nm</span></a><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;L = </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">L</span></a><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> nm, </span><span class="si">{</span><a href="https://docs.python.org/3/builtins/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="si">}</span><span class="s2"> pi electrons -&gt; lambda = </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" title="numpy.float64" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">wl</span></a><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> nm&quot;</span><span class="p">)</span>
-
-<span class="n">fig3</span><span class="p">,</span> <span class="n">ax3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">electron_counts</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wavelengths_nm</span></a><span class="p">,</span> <span class="s2">&quot;o-&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkorange&quot;</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;number of pi electrons&quot;</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;predicted absorption wavelength (nm)&quot;</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Kuhn free-electron model: longer conjugation red-shifts absorption&quot;</span><span class="p">)</span>
-<span class="n">fig3</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-<img src="../../../../_images/sphx_glr_plot_01_particle_in_box_003.png" srcset="../../../../_images/sphx_glr_plot_01_particle_in_box_003.png" alt="Kuhn free-electron model: longer conjugation red-shifts absorption" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>L = 0.60 nm, 6 pi electrons -&gt; lambda = 170 nm
-L = 0.80 nm, 8 pi electrons -&gt; lambda = 234 nm
-L = 1.00 nm, 10 pi electrons -&gt; lambda = 300 nm
-L = 1.20 nm, 12 pi electrons -&gt; lambda = 365 nm
-L = 1.40 nm, 14 pi electrons -&gt; lambda = 431 nm
-L = 1.60 nm, 16 pi electrons -&gt; lambda = 497 nm
-L = 1.80 nm, 18 pi electrons -&gt; lambda = 562 nm
-L = 2.00 nm, 20 pi electrons -&gt; lambda = 628 nm
-</pre></div>
-</div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.098 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.070 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-api-gallery-quantum-particle-in-box-plot-01-particle-in-box-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../../../_downloads/b62d6f892081d747bd496485ea744882/plot_01_particle_in_box.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_01_particle_in_box.ipynb</span></code></a></p>
@@ -673,11 +673,11 @@ L = 2.00 nm, 20 pi electrons -&gt; lambda = 628 nm
       </div>
     </a>
     <a class="right-next"
-       href="../perturbation/index.html"
+       href="plot_02_kuhn_free_electron_dye.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Rayleigh-Schrodinger perturbation theory</p>
+        <p class="prev-next-title">Kuhn’s free-electron model of conjugated dye color</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -410,37 +410,40 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.structure.systems.bonding</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Bond order: the Pauling bond-order/bond-length correlation, and Huckel-theory pi bond order.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Bond order: the Pauling bond-order/bond-length correlation, and Huckel-theory pi bond order.</span>
 
 <span class="sd">Two independent routes to a bond order are implemented, matching two</span>
 <span class="sd">independent chemistry traditions:</span>
 
 <span class="sd">* :func:`bond_order_from_length` / :func:`bond_length_from_order` --</span>
-<span class="sd">  Pauling&#39;s empirical correlation between an experimentally measured</span>
+<span class="sd">  Pauling's empirical correlation between an experimentally measured</span>
 <span class="sd">  bond length and the (otherwise not directly observable) bond order,</span>
 <span class="sd">  calibrated against known-integer-bond-order reference bonds (L.</span>
 <span class="sd">  Pauling, *J. Am. Chem. Soc.* 69, 542 (1947); *The Nature of the</span>
 <span class="sd">  Chemical Bond*, 3rd ed. (1960), Ch. 7). **Flagged as an approximation**:</span>
 <span class="sd">  the correlation constant `c` is empirical and bond-type-specific (this</span>
-<span class="sd">  module&#39;s default, 0.71 Å, is Pauling&#39;s own value for carbon-carbon</span>
+<span class="sd">  module's default, 0.71 Å, is Pauling's own value for carbon-carbon</span>
 <span class="sd">  bonds specifically); a different bond type (C-N, C-O, N-N, ...) needs</span>
 <span class="sd">  its own fitted `c`, which this module does not tabulate.</span>
 <span class="sd">* :func:`coulson_pi_bond_order` -- the Coulson bond order from Huckel</span>
 <span class="sd">  molecular-orbital theory (C. A. Coulson, *Proc. R. Soc. Lond. A* 169,</span>
 <span class="sd">  413 (1939)), computed *from the MO coefficients* of a</span>
 <span class="sd">  :class:`chemistrykit.quantum.systems.huckel.HuckelSystem` solve, not</span>
-<span class="sd">  from bond length -- reusing chemistrykit.quantum&#39;s Huckel machinery</span>
-<span class="sd">  rather than re-deriving it, per the spec&#39;s explicit guidance.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  from bond length -- reusing chemistrykit.quantum's Huckel machinery</span>
+<span class="sd">  rather than re-deriving it, per the spec's explicit guidance.</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;bond_order_from_length&quot;</span><span class="p">,</span> <span class="s2">&quot;bond_length_from_order&quot;</span><span class="p">,</span> <span class="s2">&quot;coulson_pi_bond_order&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"bond_order_from_length"</span><span class="p">,</span> <span class="s2">"bond_length_from_order"</span><span class="p">,</span> <span class="s2">"coulson_pi_bond_order"</span><span class="p">,</span> <span class="s2">"pauling_electronegativity_difference"</span><span class="p">]</span>
 
-<span class="c1">#: Pauling&#39;s original carbon-carbon bond-order/length correlation</span>
-<span class="c1">#: constant, in angstrom (L. Pauling, *J. Am. Chem. Soc.* 69, 542 (1947)).</span>
+<span class="c1">#: Pauling's original carbon-carbon bond-order/length correlation</span>
+<span class="c1">#: constant, in angstrom per decade of bond order (the relation uses a</span>
+<span class="c1">#: base-10 logarithm, :math:`D(n) = D(1) - 0.71\log_{10} n`; L. Pauling,</span>
+<span class="c1">#: *J. Am. Chem. Soc.* 69, 542 (1947)). With it, n = 2 and n = 3 give</span>
+<span class="c1">#: 1.33 Å and 1.20 Å, the C=C and C#C lengths.</span>
 <span class="c1">#: The default for `c` in :func:`bond_order_from_length` /</span>
 <span class="c1">#: :func:`bond_length_from_order`; pass a different value for other bond</span>
 <span class="c1">#: types (this module does not tabulate them).</span>
@@ -450,11 +453,11 @@
 <div class="viewcode-block" id="bond_order_from_length">
 <a class="viewcode-back" href="../../../../api/structure.html#chemistrykit.structure.bond_order_from_length">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">bond_order_from_length</span><span class="p">(</span><span class="n">single_bond_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">observed_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">PAULING_C_C_CONSTANT</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Estimate a bond order from an observed bond length, via Pauling&#39;s empirical correlation.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Estimate a bond order from an observed bond length, via Pauling's empirical correlation.</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        D(n) = D(1) - c\ln n \quad\Longrightarrow\quad n = \exp\!\left(\frac{D(1)-D(n)}{c}\right)</span>
+<span class="sd">        D(n) = D(1) - c\log_{10} n \quad\Longrightarrow\quad n = 10^{(D(1)-D(n))/c}</span>
 
 <span class="sd">    where :math:`D(1)` is the reference single-bond length and `c` is an</span>
 <span class="sd">    empirical, bond-type-specific constant (L. Pauling, *J. Am. Chem.</span>
@@ -470,7 +473,7 @@
 <span class="sd">    observed_length : float</span>
 <span class="sd">        The bond length whose order is being estimated, :math:`D(n)`,</span>
 <span class="sd">        same units as `single_bond_length`.</span>
-<span class="sd">    c : float, default 0.71 (angstrom, Pauling&#39;s C-C value)</span>
+<span class="sd">    c : float, default 0.71 (angstrom, Pauling's C-C value)</span>
 <span class="sd">        The empirical correlation constant; must be re-fit for bond types</span>
 <span class="sd">        other than carbon-carbon.</span>
 
@@ -481,7 +484,7 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    Benzene&#39;s C-C bond (1.397 Å) is intermediate between a single</span>
+<span class="sd">    Benzene's C-C bond (1.397 Å) is intermediate between a single</span>
 <span class="sd">    (1.54 Å) and double (1.34 Å) bond, giving an estimated order between</span>
 <span class="sd">    1 and 2 (the classic evidence for delocalized aromatic bonding):</span>
 
@@ -493,19 +496,25 @@
 
 <span class="sd">    &gt;&gt;&gt; round(bond_order_from_length(1.54, 1.54), 6)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">single_bond_length</span> <span class="o">-</span> <span class="n">observed_length</span><span class="p">)</span> <span class="o">/</span> <span class="n">c</span><span class="p">))</span></div>
+
+<span class="sd">    With Pauling's C-C constant (0.71 Å per decade of bond order),</span>
+<span class="sd">    ethylene's 1.33 Å double bond comes out very close to order 2:</span>
+
+<span class="sd">    &gt;&gt;&gt; round(bond_order_from_length(1.54, 1.33), 2)</span>
+<span class="sd">    1.98</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="mf">10.0</span> <span class="o">**</span> <span class="p">((</span><span class="n">single_bond_length</span> <span class="o">-</span> <span class="n">observed_length</span><span class="p">)</span> <span class="o">/</span> <span class="n">c</span><span class="p">))</span></div>
 
 
 
 <div class="viewcode-block" id="bond_length_from_order">
 <a class="viewcode-back" href="../../../../api/structure.html#chemistrykit.structure.bond_length_from_order">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">bond_length_from_order</span><span class="p">(</span><span class="n">single_bond_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">bond_order</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">PAULING_C_C_CONSTANT</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Invert :func:`bond_order_from_length`: predict a bond length from a bond order.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Invert :func:`bond_order_from_length`: predict a bond length from a bond order.</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        D(n) = D(1) - c\ln n</span>
+<span class="sd">        D(n) = D(1) - c\log_{10} n</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -513,7 +522,7 @@
 <span class="sd">        Reference single-bond length :math:`D(1)`.</span>
 <span class="sd">    bond_order : float</span>
 <span class="sd">        Bond order `n` (&gt; 0).</span>
-<span class="sd">    c : float, default 0.71 (angstrom, Pauling&#39;s C-C value)</span>
+<span class="sd">    c : float, default 0.71 (angstrom, Pauling's C-C value)</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -541,17 +550,17 @@
 <span class="sd">    &gt;&gt;&gt; lengths = [bond_length_from_order(1.54, n) for n in (1, 2, 3)]</span>
 <span class="sd">    &gt;&gt;&gt; bool(lengths[0] &gt; lengths[1] &gt; lengths[2])</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">bond_order</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;bond_order must be positive&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">single_bond_length</span> <span class="o">-</span> <span class="n">c</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">bond_order</span><span class="p">))</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"bond_order must be positive"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">single_bond_length</span> <span class="o">-</span> <span class="n">c</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">bond_order</span><span class="p">))</span></div>
 
 
 
 <div class="viewcode-block" id="coulson_pi_bond_order">
 <a class="viewcode-back" href="../../../../api/structure.html#chemistrykit.structure.coulson_pi_bond_order">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">coulson_pi_bond_order</span><span class="p">(</span><span class="n">coefficients</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">occupations</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Coulson pi bond order between atoms `i` and `j` from Huckel molecular-orbital coefficients.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The Coulson pi bond order between atoms `i` and `j` from Huckel molecular-orbital coefficients.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -562,9 +571,9 @@
 <span class="sd">    413 (1939); Streitwieser, *Molecular Orbital Theory for Organic</span>
 <span class="sd">    Chemists*, Ch. 2). This measures the pi-bonding contribution only</span>
 <span class="sd">    (Huckel theory does not model the sigma framework at all, per</span>
-<span class="sd">    :mod:`chemistrykit.quantum.systems.huckel`&#39;s module docstring), so a</span>
-<span class="sd">    formally &quot;single&quot; sigma-bonded pair with a fractional</span>
-<span class="sd">    :math:`p_{ij}` (e.g. benzene&#39;s 2/3) has a *total* bond order of</span>
+<span class="sd">    :mod:`chemistrykit.quantum.systems.huckel`'s module docstring), so a</span>
+<span class="sd">    formally "single" sigma-bonded pair with a fractional</span>
+<span class="sd">    :math:`p_{ij}` (e.g. benzene's 2/3) has a *total* bond order of</span>
 <span class="sd">    :math:`1+p_{ij}`.</span>
 
 <span class="sd">    Parameters</span>
@@ -607,10 +616,60 @@
 <span class="sd">    &gt;&gt;&gt; occ[order[:3]] = 2.0</span>
 <span class="sd">    &gt;&gt;&gt; round(coulson_pi_bond_order(result.coefficients, occ, 0, 1), 4)</span>
 <span class="sd">    0.6667</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">coefficients</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">coefficients</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">occupations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">occupations</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">occupations</span> <span class="o">*</span> <span class="n">coefficients</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">coefficients</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:]))</span></div>
+
+
+
+<div class="viewcode-block" id="pauling_electronegativity_difference">
+<a class="viewcode-back" href="../../../../api/structure.html#chemistrykit.structure.pauling_electronegativity_difference">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">pauling_electronegativity_difference</span><span class="p">(</span><span class="n">d_ab</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">d_aa</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">d_bb</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Pauling's electronegativity difference from bond dissociation energies.</span>
+
+<span class="sd">    Pauling (1932) noticed that a heteronuclear bond A-B is stronger than</span>
+<span class="sd">    the arithmetic mean of the homonuclear bonds A-A and B-B. He assigned</span>
+<span class="sd">    this "extra ionic energy"</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \Delta = D(\mathrm{A{-}B}) - \tfrac{1}{2}\left[D(\mathrm{A{-}A}) + D(\mathrm{B{-}B})\right]</span>
+
+<span class="sd">    to the bond's partial ionic character and defined the electronegativity</span>
+<span class="sd">    difference through :math:`|\chi_A - \chi_B| = \sqrt{\Delta/\mathrm{eV}}`</span>
+<span class="sd">    (L. Pauling, *J. Am. Chem. Soc.* 54, 3570 (1932)). With energies in</span>
+<span class="sd">    kJ/mol this becomes :math:`|\chi_A-\chi_B| = 0.102\sqrt{\Delta}`, since</span>
+<span class="sd">    1 eV is 96.485 kJ/mol.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    d_ab, d_aa, d_bb : float</span>
+<span class="sd">        Bond dissociation energies of A-B, A-A and B-B, in kJ/mol.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        :math:`|\chi_A - \chi_B|` on the Pauling scale (0 if the extra</span>
+<span class="sd">        ionic energy is negative).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    H-Cl (432 kJ/mol) against H-H (436) and Cl-Cl (242): the extra ionic</span>
+<span class="sd">    energy of 93 kJ/mol gives a difference of about 0.98, close to the</span>
+<span class="sd">    tabulated Pauling values 3.16 - 2.20 = 0.96:</span>
+
+<span class="sd">    &gt;&gt;&gt; round(pauling_electronegativity_difference(432.0, 436.0, 242.0), 2)</span>
+<span class="sd">    0.98</span>
+
+<span class="sd">    Equal bond energies mean no ionic contribution:</span>
+
+<span class="sd">    &gt;&gt;&gt; pauling_electronegativity_difference(200.0, 200.0, 200.0)</span>
+<span class="sd">    0.0</span>
+<span class="sd">    """</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">d_ab</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">d_aa</span> <span class="o">+</span> <span class="n">d_bb</span><span class="p">)</span>
+    <span class="n">ev_per_kj_mol</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">96.485332</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">ev_per_kj_mol</span><span class="p">))</span></div>
 
 </pre></div>
 

@@ -410,27 +410,27 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.spectro.core.base_system</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The shared :class:`Spectrum` result container.</span>
+<span></span><span class="sa">r</span><span class="sd">"""The shared :class:`Spectrum` result container.</span>
 
 <span class="sd">:mod:`chemistrykit.spectro` mixes several genuinely different physical</span>
 <span class="sd">models -- rigid-rotor rotational transitions, harmonic/Morse vibrational</span>
 <span class="sd">bands, Franck-Condon vibronic progressions, and first-order NMR</span>
-<span class="sd">multiplets -- that don&#39;t share a common polymorphic solve interface the</span>
-<span class="sd">way :mod:`chemistrykit.quantum`&#39;s :class:`~chemistrykit.quantum.core.base_system.QuantumSystem`/</span>
+<span class="sd">multiplets -- that don't share a common polymorphic solve interface the</span>
+<span class="sd">way :mod:`chemistrykit.quantum`'s :class:`~chemistrykit.quantum.core.base_system.QuantumSystem`/</span>
 <span class="sd">:class:`~chemistrykit.quantum.core.base_system.VariationalSolver` do</span>
 <span class="sd">(following :mod:`chemistrykit.solutions` and</span>
-<span class="sd">:mod:`chemistrykit.structure`&#39;s precedent for non-uniform model</span>
+<span class="sd">:mod:`chemistrykit.structure`'s precedent for non-uniform model</span>
 <span class="sd">families, each is implemented directly as classes/functions in its own</span>
 <span class="sd">``systems/`` module). What *is* shared, and genuinely common</span>
 <span class="sd">machinery -- the same role</span>
 <span class="sd">:class:`chemistrykit.quantum.core.base_system.EigenstateResult` plays for</span>
 <span class="sd">every :class:`~chemistrykit.quantum.core.base_system.VariationalSolver` --</span>
 <span class="sd">is the output shape every one of those models eventually produces: a</span>
-<span class="sd">discrete &quot;stick spectrum&quot; of peak positions and relative intensities,</span>
+<span class="sd">discrete "stick spectrum" of peak positions and relative intensities,</span>
 <span class="sd">optionally broadened into a continuous lineshape via</span>
 <span class="sd">:mod:`chemistrykit.spectro.utils.lineshapes`. :class:`Spectrum` is that</span>
 <span class="sd">stable container.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -440,14 +440,14 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.spectro.utils.lineshapes</span><span class="w"> </span><span class="kn">import</span> <span class="n">broaden_stick_spectrum</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Spectrum&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Spectrum"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="Spectrum">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.Spectrum">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Spectrum</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A discrete &quot;stick&quot; spectrum: peak positions and relative intensities.</span>
+<span class="w">    </span><span class="sd">"""A discrete "stick" spectrum: peak positions and relative intensities.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -459,7 +459,7 @@
 <span class="sd">        Relative intensity (peak area) of each position, same order as</span>
 <span class="sd">        `positions`.</span>
 <span class="sd">    labels : sequence of str, optional</span>
-<span class="sd">        Human-readable label for each peak (e.g. ``&quot;J=0-&gt;1&quot;``).</span>
+<span class="sd">        Human-readable label for each peak (e.g. ``"J=0-&gt;1"``).</span>
 <span class="sd">    extra : dict, optional</span>
 <span class="sd">        Free-form slot for additional diagnostics a model chooses to</span>
 <span class="sd">        attach.</span>
@@ -469,10 +469,10 @@
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; spectrum = Spectrum(positions=np.array([100.0, 200.0]), intensities=np.array([1.0, 0.5]))</span>
 <span class="sd">    &gt;&gt;&gt; x = np.linspace(0, 300, 3001)</span>
-<span class="sd">    &gt;&gt;&gt; broadened = spectrum.broaden(x, shape=&quot;gaussian&quot;, fwhm=5.0)</span>
+<span class="sd">    &gt;&gt;&gt; broadened = spectrum.broaden(x, shape="gaussian", fwhm=5.0)</span>
 <span class="sd">    &gt;&gt;&gt; round(float(np.trapezoid(broadened, x)), 2)</span>
 <span class="sd">    1.5</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">positions</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="n">intensities</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
@@ -483,33 +483,33 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">intensities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">intensities</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">intensities</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;positions and intensities must have the same shape&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"positions and intensities must have the same shape"</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Spectrum.broaden">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.Spectrum.broaden">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">broaden</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">,</span> <span class="n">fwhm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">fwhm_lorentzian</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Broaden every stick into a continuous spectrum via :func:`chemistrykit.spectro.utils.lineshapes.broaden_stick_spectrum`.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">broaden</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"gaussian"</span><span class="p">,</span> <span class="n">fwhm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">fwhm_lorentzian</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Broaden every stick into a continuous spectrum via :func:`chemistrykit.spectro.utils.lineshapes.broaden_stick_spectrum`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        x : array-like of float</span>
 <span class="sd">            Grid to evaluate the broadened spectrum on.</span>
-<span class="sd">        shape : {&quot;gaussian&quot;, &quot;lorentzian&quot;, &quot;voigt&quot;}, default &quot;gaussian&quot;</span>
+<span class="sd">        shape : {"gaussian", "lorentzian", "voigt"}, default "gaussian"</span>
 <span class="sd">        fwhm : float, default 1.0</span>
 <span class="sd">        fwhm_lorentzian : float, optional</span>
-<span class="sd">            Required for `shape=&quot;voigt&quot;`.</span>
+<span class="sd">            Required for `shape="voigt"`.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ndarray, shape matching `x`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">broaden_stick_spectrum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">intensities</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">shape</span><span class="p">,</span> <span class="n">fwhm</span><span class="o">=</span><span class="n">fwhm</span><span class="p">,</span> <span class="n">fwhm_lorentzian</span><span class="o">=</span><span class="n">fwhm_lorentzian</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Spectrum.normalized">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.Spectrum.normalized">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">normalized</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Spectrum</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a copy with intensities rescaled so the maximum is 1.</span>
+<span class="w">        </span><span class="sd">"""Return a copy with intensities rescaled so the maximum is 1.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -520,7 +520,7 @@
 <span class="sd">        &gt;&gt;&gt; spectrum = Spectrum(positions=np.array([1.0, 2.0]), intensities=np.array([4.0, 2.0]))</span>
 <span class="sd">        &gt;&gt;&gt; spectrum.normalized().intensities.tolist()</span>
 <span class="sd">        [1.0, 0.5]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">peak</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">intensities</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">Spectrum</span><span class="p">(</span><span class="n">positions</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">intensities</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">intensities</span> <span class="o">/</span> <span class="n">peak</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">),</span> <span class="n">extra</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extra</span><span class="p">))</span></div>
 </div>

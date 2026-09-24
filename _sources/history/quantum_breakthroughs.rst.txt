@@ -69,9 +69,7 @@ conjugated pi system.
 *References:* G. N. Lewis, "The Atom and the Molecule," J. Am. Chem. Soc.
 38, 762-785 (1916).
 
-.. minigallery::
-   ../../examples/quantum/hartree_fock/plot_01_h2_plus_variational.py
-   ../../examples/quantum/huckel/plot_01_huckel_theory.py
+.. minigallery:: ../../examples/quantum/hartree_fock/plot_06_lewis_shared_electron_pair.py
 
 1926 -- Schrodinger's Wave Mechanics: the Equation, the Atom, and Perturbation Theory
 -------------------------------------------------------------------------------------------
@@ -228,9 +226,7 @@ its (electronically determined) bond length untouched.
 *References:* M. Born and R. Oppenheimer, "Zur Quantentheorie der
 Molekeln," Ann. Phys. 389, 457-484 (1927).
 
-.. minigallery::
-   ../../examples/quantum/hartree_fock/plot_01_h2_plus_variational.py
-   ../../examples/quantum/rigid_rotor/plot_01_rigid_rotor.py
+.. minigallery:: ../../examples/quantum/hartree_fock/plot_03_born_oppenheimer_potential_curve.py
 
 1927 -- Heitler and London's Quantum-Mechanical Treatment of H2
 ---------------------------------------------------------------------
@@ -274,6 +270,53 @@ und homoopolare Bindung nach der Quantenmechanik," Z. Phys. 44, 455-472
 (1927).
 
 .. minigallery:: ../../examples/quantum/hartree_fock/plot_02_bonding_antibonding_density.py
+
+1927 -- 1929 -- Kellner and Hylleraas: the Variational Helium Atom
+---------------------------------------------------------------------
+
+Heitler and London's H2 showed that quantum mechanics could explain a
+bond; helium, the simplest atom with two electrons, was the test of
+whether it could get an *energy* right once electron-electron repulsion
+enters. The repulsion term :math:`e^2/4\pi\varepsilon_0r_{12}` makes the
+Schrodinger equation unsolvable in closed form, so G. W. Kellner (1927)
+and, far more thoroughly, Egil Hylleraas (1928-1929) turned to the
+variational principle: any trial wavefunction gives an energy at or above
+the true ground state, so the best trial function in a family is the one
+with the lowest energy. The simplest family puts both electrons in
+hydrogen-like 1s orbitals with an adjustable nuclear charge
+:math:`\zeta`, giving
+
+.. math::
+
+   E(\zeta) = \left(\zeta^2 - 2Z\zeta + \tfrac{5}{8}\zeta\right)E_h,
+   \qquad \zeta^* = Z - \tfrac{5}{16}, \qquad E^* = -\left(Z-\tfrac{5}{16}\right)^2E_h
+
+For helium, :math:`\zeta^*=27/16`: each electron screens 5/16 of the
+nuclear charge from the other, a first quantitative version of the
+shielding idea later codified in Slater's rules. The energy,
+:math:`-2.848\,E_h`, lies 2% above the exact nonrelativistic
+:math:`-2.9037\,E_h`; Hylleraas closed most of the remaining gap by
+building the interelectronic distance :math:`r_{12}` directly into the
+trial function, bringing the computed ionization energy into agreement
+with experiment and putting the variational method, and the idea of
+electron correlation, at the centre of quantum chemistry.
+
+*Implementation:* :func:`~chemistrykit.quantum.helium_like_variational_energy`
+gives :math:`E(\zeta)` for any two-electron atom or ion, and
+:func:`~chemistrykit.quantum.optimize_helium_like_effective_charge`
+returns a :class:`~chemistrykit.quantum.HeliumVariationalResult` with the
+optimal screened charge, the variational energy, the first-order
+perturbation energy (:math:`\zeta=Z`), and the one-electron-removal
+energy, which comes out negative for H-: this trial function is too
+simple to bind the hydride ion.
+
+*References:* G. W. Kellner, "Die Ionisierungsspannung des Heliums nach
+der Schrodingerschen Theorie," Z. Phys. 44, 91 (1927); E. A. Hylleraas,
+"Uber den Grundzustand des Heliumatoms," Z. Phys. 48, 469 (1928); E. A.
+Hylleraas, "Neue Berechnung der Energie des Heliums im Grundzustande,
+sowie des tiefsten Terms von Ortho-Helium," Z. Phys. 54, 347 (1929).
+
+.. minigallery:: ../../examples/quantum/helium/plot_01_hylleraas_variational_helium.py
 
 1927 -- 1932 -- Hund and Mulliken's Molecular-Orbital Theory
 --------------------------------------------------------------
@@ -321,7 +364,7 @@ Structure in Diatomic Molecules," Phys. Rev. 32, 186-222 (1928), and
 papers across this period; the entries cited are representative rather
 than exhaustive, per standard secondary-literature summaries).
 
-.. minigallery:: ../../examples/quantum/hartree_fock/plot_01_h2_plus_variational.py
+.. minigallery:: ../../examples/quantum/hartree_fock/plot_01_lcao_molecular_orbitals.py
 
 1929 -- Morse's Anharmonic Potential for Molecular Vibration
 -------------------------------------------------------------------
@@ -396,7 +439,7 @@ benzene aromatic and cyclobutadiene not.
 I. Die Elektronenkonfiguration des Benzols und verwandter Verbindungen,"
 Z. Phys. 70, 204-286 (1931).
 
-.. minigallery:: ../../examples/quantum/huckel/plot_01_huckel_theory.py
+.. minigallery:: ../../examples/quantum/huckel/plot_01_huckel_aromaticity_rule.py
 
 1931 -- 1939 -- Pauling's Nature of the Chemical Bond
 --------------------------------------------------------
@@ -434,7 +477,7 @@ Soc. 53, 1367-1400 (1931); L. Pauling, *The Nature of the Chemical Bond
 and the Structure of Molecules and Crystals* (Ithaca: Cornell University
 Press, 1939).
 
-.. minigallery:: ../../examples/quantum/huckel/plot_01_huckel_theory.py
+.. minigallery:: ../../examples/quantum/huckel/plot_02_pauling_resonance_energy.py
 
 1939 -- 1953 -- Coulson, Frost, and Musulin: Closed-Form Huckel Spectra
 -------------------------------------------------------------------------
@@ -474,7 +517,7 @@ Orbital Method," Proc. R. Soc. Lond. A 169, 413-428 (1939); A. A. Frost
 and B. Musulin, "A Mnemonic Device for Molecular Orbital Energies," J.
 Chem. Phys. 21, 572-573 (1953).
 
-.. minigallery:: ../../examples/quantum/huckel/plot_01_huckel_theory.py
+.. minigallery:: ../../examples/quantum/huckel/plot_03_coulson_frost_closed_forms.py
 
 1949 -- Kuhn's Free-Electron Model of Conjugated Dyes
 ------------------------------------------------------------
@@ -508,7 +551,7 @@ trend.
 of Organic Dyes and Similar Compounds," J. Chem. Phys. 17, 1198-1212
 (1949).
 
-.. minigallery:: ../../examples/quantum/particle_in_box/plot_01_particle_in_box.py
+.. minigallery:: ../../examples/quantum/particle_in_box/plot_02_kuhn_free_electron_dye.py
 
 1950 -- Boys and the Gaussian-Type Orbital
 ------------------------------------------------
@@ -549,9 +592,7 @@ build its Hamiltonian and overlap matrices.
 Method of Calculation for the Stationary States of Any Molecular
 System," Proc. R. Soc. Lond. A 200, 542-554 (1950).
 
-.. minigallery::
-   ../../examples/quantum/hartree_fock/plot_01_h2_plus_variational.py
-   ../../examples/quantum/hartree_fock/plot_02_bonding_antibonding_density.py
+.. minigallery:: ../../examples/quantum/hartree_fock/plot_04_boys_gaussian_orbitals.py
 
 1951 -- Roothaan and Hall's LCAO Equations
 -------------------------------------------------
@@ -592,14 +633,52 @@ own iterative
 :meth:`~chemistrykit.quantum.H2PlusVariational.optimize_exponent`
 (re-solving the secular equation at each trial exponent) is a minimal,
 one-parameter echo of the self-consistent-field loop Roothaan-Hall
-calculations run in full generality.
+calculations run in full generality. The gallery example builds `H` and
+`S` for H2+ from the Gaussian integrals in
+``chemistrykit.quantum.utils.basis_sets`` in bases of growing size and
+shows the variational energy falling toward the exact value.
 
 *References:* C. C. J. Roothaan, "New Developments in Molecular Orbital
 Theory," Rev. Mod. Phys. 23, 69-89 (1951); G. G. Hall, "The Molecular
 Orbital Theory of Chemical Valency. VIII. A Method of Calculating
 Ionization Potentials," Proc. R. Soc. Lond. A 205, 541-552 (1951).
 
-.. minigallery:: ../../examples/quantum/hartree_fock/plot_01_h2_plus_variational.py
+.. minigallery:: ../../examples/quantum/hartree_fock/plot_05_roothaan_hall_secular_equation.py
+
+1952 -- Fukui's Frontier-Orbital Theory of Reactivity
+-------------------------------------------------------
+
+Molecular-orbital theory could explain why benzene is stable; Kenichi
+Fukui, with Teijiro Yonezawa and Haruo Shingu, asked it to predict where
+a molecule reacts. Their answer was surprisingly economical: of all the
+occupied orbitals, only the highest one (the HOMO) matters for attack by
+an electrophile, because its electrons are the most loosely held, and
+the favoured site is the atom where the HOMO's density is largest,
+
+.. math::
+
+   f_r = 2\,c_{r,\mathrm{HOMO}}^2
+
+(with the LUMO playing the same role for nucleophiles). For naphthalene
+the Huckel HOMO puts density 0.362 on the alpha carbons and 0.138 on the
+beta carbons, matching the observed preference for alpha substitution,
+where total pi-electron densities, all exactly 1 in an alternant
+hydrocarbon, predict nothing. Extended to pericyclic reactions and to
+the interaction of one molecule's HOMO with another's LUMO, frontier
+orbital theory earned Fukui a share of the 1981 Nobel Prize in Chemistry
+with Roald Hoffmann.
+
+*Implementation:* :meth:`~chemistrykit.quantum.HuckelSystem.frontier_electron_density`
+returns :math:`f_r` for the HOMO or LUMO of any
+:class:`~chemistrykit.quantum.systems.huckel.HuckelSystem`, refusing
+cases where the frontier orbital is degenerate (benzene) and the density
+is not uniquely defined.
+
+*References:* K. Fukui, T. Yonezawa, and H. Shingu, "A Molecular Orbital
+Theory of Reactivity in Aromatic Hydrocarbons," J. Chem. Phys. 20,
+722-725 (1952).
+
+.. minigallery:: ../../examples/quantum/huckel/plot_04_fukui_frontier_orbitals.py
 
 See Also
 --------

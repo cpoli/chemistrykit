@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.solutions.systems.solubility</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Solubility equilibria: Ksp, molar solubility, and the common-ion effect.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Solubility equilibria: Ksp, molar solubility, and the common-ion effect.</span>
 
 <span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 6.8, or Harris,</span>
 <span class="sd">*Quantitative Chemical Analysis*, 9th ed., Ch. 8, throughout.</span>
@@ -423,23 +423,23 @@
 <span class="sd">.. math::</span>
 
 <span class="sd">    K_{sp} = [M^{n+}]^p[X^{m-}]^q = p^p q^q\, s^{p+q}</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.solutions.utils.rootfinding</span><span class="w"> </span><span class="kn">import</span> <span class="n">find_positive_root</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;ksp_from_molar_solubility&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;molar_solubility_from_ksp&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;molar_solubility_with_common_ion&quot;</span><span class="p">,</span>
+    <span class="s2">"ksp_from_molar_solubility"</span><span class="p">,</span>
+    <span class="s2">"molar_solubility_from_ksp"</span><span class="p">,</span>
+    <span class="s2">"molar_solubility_with_common_ion"</span><span class="p">,</span>
 <span class="p">]</span>
 
 
 <div class="viewcode-block" id="ksp_from_molar_solubility">
 <a class="viewcode-back" href="../../../../api/solutions.html#chemistrykit.solutions.ksp_from_molar_solubility">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">ksp_from_molar_solubility</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">cation_coeff</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">anion_coeff</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute :math:`K_{sp} = p^pq^q s^{p+q}` from a measured molar solubility.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Compute :math:`K_{sp} = p^pq^q s^{p+q}` from a measured molar solubility.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -447,10 +447,10 @@
 <span class="sd">        Molar solubility of the salt, in mol/L.</span>
 <span class="sd">    cation_coeff : int</span>
 <span class="sd">        Stoichiometric coefficient of the cation, `p` (e.g. 1 for AgCl, 1</span>
-<span class="sd">        for CaF2&#39;s Ca2+, 2 for Ag2CrO4&#39;s Ag+).</span>
+<span class="sd">        for CaF2's Ca2+, 2 for Ag2CrO4's Ag+).</span>
 <span class="sd">    anion_coeff : int</span>
 <span class="sd">        Stoichiometric coefficient of the anion, `q` (e.g. 1 for AgCl, 2</span>
-<span class="sd">        for CaF2&#39;s F-, 1 for Ag2CrO4&#39;s CrO4 2-).</span>
+<span class="sd">        for CaF2's F-, 1 for Ag2CrO4's CrO4 2-).</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -467,7 +467,7 @@
 
 <span class="sd">    &gt;&gt;&gt; round(ksp_from_molar_solubility(s=2.1e-4, cation_coeff=1, anion_coeff=2), 12)</span>
 <span class="sd">    3.7e-11</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">cation_coeff</span><span class="p">,</span> <span class="n">anion_coeff</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">p</span><span class="o">**</span><span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">q</span><span class="o">**</span><span class="n">q</span><span class="p">)</span> <span class="o">*</span> <span class="n">s</span> <span class="o">**</span> <span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="n">q</span><span class="p">)</span></div>
 
@@ -476,7 +476,7 @@
 <div class="viewcode-block" id="molar_solubility_from_ksp">
 <a class="viewcode-back" href="../../../../api/solutions.html#chemistrykit.solutions.molar_solubility_from_ksp">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">molar_solubility_from_ksp</span><span class="p">(</span><span class="n">Ksp</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">cation_coeff</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">anion_coeff</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Invert :func:`ksp_from_molar_solubility`: :math:`s = (K_{sp}/(p^pq^q))^{1/(p+q)}`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Invert :func:`ksp_from_molar_solubility`: :math:`s = (K_{sp}/(p^pq^q))^{1/(p+q)}`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -499,7 +499,7 @@
 <span class="sd">    &gt;&gt;&gt; Ksp = ksp_from_molar_solubility(s=1.3e-5, cation_coeff=1, anion_coeff=1)</span>
 <span class="sd">    &gt;&gt;&gt; round(molar_solubility_from_ksp(Ksp, cation_coeff=1, anion_coeff=1), 12)</span>
 <span class="sd">    1.3e-05</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">cation_coeff</span><span class="p">,</span> <span class="n">anion_coeff</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">Ksp</span> <span class="o">/</span> <span class="p">((</span><span class="n">p</span><span class="o">**</span><span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">q</span><span class="o">**</span><span class="n">q</span><span class="p">)))</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="n">q</span><span class="p">))</span></div>
 
@@ -507,12 +507,12 @@
 
 <div class="viewcode-block" id="molar_solubility_with_common_ion">
 <a class="viewcode-back" href="../../../../api/solutions.html#chemistrykit.solutions.molar_solubility_with_common_ion">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">molar_solubility_with_common_ion</span><span class="p">(</span><span class="n">Ksp</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">cation_coeff</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">anion_coeff</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">common_ion_conc</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">common_ion</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cation&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Molar solubility of :math:`M_pX_q` in the presence of an added common ion.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">molar_solubility_with_common_ion</span><span class="p">(</span><span class="n">Ksp</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">cation_coeff</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">anion_coeff</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">common_ion_conc</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">common_ion</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"cation"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Molar solubility of :math:`M_pX_q` in the presence of an added common ion.</span>
 
-<span class="sd">    Le Chatelier&#39;s principle predicts that adding a common ion</span>
+<span class="sd">    Le Chatelier's principle predicts that adding a common ion</span>
 <span class="sd">    (independently, e.g. from a soluble salt sharing that ion) suppresses</span>
-<span class="sd">    the target salt&#39;s solubility relative to :func:`molar_solubility_from_ksp`</span>
+<span class="sd">    the target salt's solubility relative to :func:`molar_solubility_from_ksp`</span>
 <span class="sd">    (Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 6.8b). This</span>
 <span class="sd">    solves the exact polynomial</span>
 
@@ -536,7 +536,7 @@
 <span class="sd">    common_ion_conc : float</span>
 <span class="sd">        Concentration of the common ion contributed by an independent</span>
 <span class="sd">        (fully dissociated) source, in mol/L.</span>
-<span class="sd">    common_ion : {&quot;cation&quot;, &quot;anion&quot;}</span>
+<span class="sd">    common_ion : {"cation", "anion"}</span>
 <span class="sd">        Which ion is shared with the independent source.</span>
 
 <span class="sd">    Returns</span>
@@ -550,23 +550,23 @@
 <span class="sd">    ion) than in pure water:</span>
 
 <span class="sd">    &gt;&gt;&gt; s_pure = molar_solubility_from_ksp(1.8e-10, cation_coeff=1, anion_coeff=1)</span>
-<span class="sd">    &gt;&gt;&gt; s_common = molar_solubility_with_common_ion(1.8e-10, cation_coeff=1, anion_coeff=1, common_ion_conc=0.10, common_ion=&quot;anion&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; s_common = molar_solubility_with_common_ion(1.8e-10, cation_coeff=1, anion_coeff=1, common_ion_conc=0.10, common_ion="anion")</span>
 <span class="sd">    &gt;&gt;&gt; s_common &lt; s_pure</span>
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; round(s_common, 12)  # dominated by the 0.10 M Cl- already present: s ~= Ksp/0.10</span>
 <span class="sd">    1.8e-09</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">cation_coeff</span><span class="p">,</span> <span class="n">anion_coeff</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">residual</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">common_ion</span> <span class="o">==</span> <span class="s2">&quot;cation&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">common_ion</span> <span class="o">==</span> <span class="s2">"cation"</span><span class="p">:</span>
             <span class="n">cation</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="n">s</span> <span class="o">+</span> <span class="n">common_ion_conc</span>
             <span class="n">anion</span> <span class="o">=</span> <span class="n">q</span> <span class="o">*</span> <span class="n">s</span>
-        <span class="k">elif</span> <span class="n">common_ion</span> <span class="o">==</span> <span class="s2">&quot;anion&quot;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">common_ion</span> <span class="o">==</span> <span class="s2">"anion"</span><span class="p">:</span>
             <span class="n">cation</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="n">s</span>
             <span class="n">anion</span> <span class="o">=</span> <span class="n">q</span> <span class="o">*</span> <span class="n">s</span> <span class="o">+</span> <span class="n">common_ion_conc</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;common_ion must be &#39;cation&#39; or &#39;anion&#39;&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"common_ion must be 'cation' or 'anion'"</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">cation</span><span class="o">**</span><span class="n">p</span> <span class="o">*</span> <span class="n">anion</span><span class="o">**</span><span class="n">q</span> <span class="o">-</span> <span class="n">Ksp</span>
 
     <span class="c1"># An upper bound for s: the common-ion-free solubility (adding a</span>

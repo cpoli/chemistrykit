@@ -410,10 +410,10 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.polymer.systems.step_growth</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Step-growth (condensation) polymerization kinetics: the Carothers equation.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Step-growth (condensation) polymerization kinetics: the Carothers equation.</span>
 
-<span class="sd">See Odian, *Principles of Polymerization*, 4th ed., Ch. 2.2 (&quot;Kinetics of</span>
-<span class="sd">step polymerization&quot;), and the original: W. H. Carothers, *Trans.</span>
+<span class="sd">See Odian, *Principles of Polymerization*, 4th ed., Ch. 2.2 ("Kinetics of</span>
+<span class="sd">step polymerization"), and the original: W. H. Carothers, *Trans.</span>
 <span class="sd">Faraday Soc.* 32, 39 (1936).</span>
 
 <span class="sd">In an ideal step-growth polymerization (e.g. a diol + diacid</span>
@@ -443,21 +443,21 @@
 <span class="sd">polymerization (:mod:`chemistrykit.polymer.systems.chain_growth`), where</span>
 <span class="sd">high molecular weight chains form immediately even at low monomer</span>
 <span class="sd">conversion.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;degree_of_polymerization&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;extent_of_reaction_for_DP&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;degree_of_polymerization_stoichiometric_imbalance&quot;</span><span class="p">,</span>
+    <span class="s2">"degree_of_polymerization"</span><span class="p">,</span>
+    <span class="s2">"extent_of_reaction_for_DP"</span><span class="p">,</span>
+    <span class="s2">"degree_of_polymerization_stoichiometric_imbalance"</span><span class="p">,</span>
 <span class="p">]</span>
 
 
 <div class="viewcode-block" id="degree_of_polymerization">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.degree_of_polymerization">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">degree_of_polymerization</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Carothers equation: :math:`\bar{X}_n=1/(1-p)`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The Carothers equation: :math:`\bar{X}_n=1/(1-p)`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -476,13 +476,13 @@
 <span class="sd">    &gt;&gt;&gt; round(degree_of_polymerization(0.9), 6)</span>
 <span class="sd">    10.0</span>
 
-<span class="sd">    A &quot;high&quot; molecular weight polymer genuinely requires extreme</span>
+<span class="sd">    A "high" molecular weight polymer genuinely requires extreme</span>
 <span class="sd">    conversion -- reaching :math:`\bar X_n=100` needs 99% conversion, not</span>
 <span class="sd">    90%:</span>
 
 <span class="sd">    &gt;&gt;&gt; round(degree_of_polymerization(0.99), 1)</span>
 <span class="sd">    100.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span></div>
 
 
@@ -490,7 +490,7 @@
 <div class="viewcode-block" id="extent_of_reaction_for_DP">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.extent_of_reaction_for_DP">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">extent_of_reaction_for_DP</span><span class="p">(</span><span class="n">Xn</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Invert the Carothers equation: the extent of reaction needed for a target :math:`\bar X_n`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Invert the Carothers equation: the extent of reaction needed for a target :math:`\bar X_n`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -508,7 +508,7 @@
 
 <span class="sd">    &gt;&gt;&gt; round(extent_of_reaction_for_DP(degree_of_polymerization(0.95)), 10)</span>
 <span class="sd">    0.95</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">Xn</span></div>
 
 
@@ -516,12 +516,12 @@
 <div class="viewcode-block" id="degree_of_polymerization_stoichiometric_imbalance">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.degree_of_polymerization_stoichiometric_imbalance">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">degree_of_polymerization_stoichiometric_imbalance</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Carothers equation generalized to a stoichiometric imbalance of the two functional groups.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Carothers equation generalized to a stoichiometric imbalance of the two functional groups.</span>
 
 <span class="sd">    When the two reactive functional groups (e.g. -OH and -COOH) are not</span>
 <span class="sd">    present in exactly equal number -- either a deliberate stoichiometric</span>
-<span class="sd">    imbalance, or the deliberate addition of a monofunctional &quot;chain</span>
-<span class="sd">    stopper&quot; -- the maximum attainable degree of polymerization is capped</span>
+<span class="sd">    imbalance, or the deliberate addition of a monofunctional "chain</span>
+<span class="sd">    stopper" -- the maximum attainable degree of polymerization is capped</span>
 <span class="sd">    even at :math:`p=1` (Odian, *Principles of Polymerization*, 4th ed.,</span>
 <span class="sd">    Ch. 2.2, eq. 2-70):</span>
 
@@ -531,7 +531,7 @@
 
 <span class="sd">    where :math:`r\le1` is the ratio of the minority to majority</span>
 <span class="sd">    functional-group count (or, with a monofunctional chain stopper of</span>
-<span class="sd">    concentration :math:`N_B&#39;`, :math:`r=N_A/(N_B+2N_B&#39;)`; see Odian for</span>
+<span class="sd">    concentration :math:`N_B'`, :math:`r=N_A/(N_B+2N_B')`; see Odian for</span>
 <span class="sd">    the full derivation). Setting :math:`r=1` (perfect stoichiometric</span>
 <span class="sd">    balance) recovers the ordinary :func:`degree_of_polymerization`</span>
 <span class="sd">    exactly.</span>
@@ -561,7 +561,7 @@
 
 <span class="sd">    &gt;&gt;&gt; round(degree_of_polymerization_stoichiometric_imbalance(p=1.0, r=0.98), 4)</span>
 <span class="sd">    99.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">r</span> <span class="o">-</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">r</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span></div>
 
 </pre></div>

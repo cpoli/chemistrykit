@@ -410,19 +410,19 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.kinetics.systems.networks</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;A general stoichiometry-matrix reaction-network engine.</span>
+<span></span><span class="sd">"""A general stoichiometry-matrix reaction-network engine.</span>
 
 <span class="sd">:class:`StoichiometricNetwork` models an arbitrary set of elementary</span>
 <span class="sd">mass-action reactions from a stoichiometry matrix and per-reaction rate</span>
 <span class="sd">constants, integrated forward in time via :mod:`chemistrykit.integrators`.</span>
-<span class="sd">For a network of ``R`` reactions among ``N`` species, reaction ``j``&#39;s</span>
+<span class="sd">For a network of ``R`` reactions among ``N`` species, reaction ``j``'s</span>
 <span class="sd">rate is the mass-action law</span>
 
 <span class="sd">.. math::</span>
 
 <span class="sd">    \\text{rate}_j = k_j \\prod_i [X_i]^{\\nu_{ij}^{react}}</span>
 
-<span class="sd">(product over each species&#39; *reactant*-side stoichiometric coefficient</span>
+<span class="sd">(product over each species' *reactant*-side stoichiometric coefficient</span>
 <span class="sd">only) and the net rate of change of species `i` is</span>
 
 <span class="sd">.. math::</span>
@@ -441,7 +441,7 @@
 <span class="sd">topologies the mechanism has a closed-form solution for (see the</span>
 <span class="sd">``*_analytic`` functions), so numerical results can be checked against</span>
 <span class="sd">them; the general constructor accepts any stoichiometry matrix.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -454,23 +454,23 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.kinetics.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReactionNetwork</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;StoichiometricNetwork&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;consecutive_analytic&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;reversible_analytic&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ssa_intermediate_concentration&quot;</span><span class="p">,</span>
+    <span class="s2">"StoichiometricNetwork"</span><span class="p">,</span>
+    <span class="s2">"consecutive_analytic"</span><span class="p">,</span>
+    <span class="s2">"reversible_analytic"</span><span class="p">,</span>
+    <span class="s2">"ssa_intermediate_concentration"</span><span class="p">,</span>
 <span class="p">]</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_make_mass_action_rhs</span><span class="p">(</span><span class="n">stoich_matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">rate_constants</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">reactant_orders</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a standalone ``@njit`` mass-action right-hand side.</span>
+<span class="w">    </span><span class="sd">"""Build a standalone ``@njit`` mass-action right-hand side.</span>
 
-<span class="sd">    Factory that closes over the network&#39;s structural arrays (its</span>
+<span class="sd">    Factory that closes over the network's structural arrays (its</span>
 <span class="sd">    stoichiometry matrix, rate constants, and reactant orders) and returns</span>
 <span class="sd">    a genuine ``@njit`` dispatcher usable as</span>
 <span class="sd">    :attr:`chemistrykit.kinetics.core.base_system.ReactionNetwork._rhs_njit`</span>
 <span class="sd">    -- the same factory-closure pattern physicskit uses for e.g.</span>
 <span class="sd">    ``physicskit.classical.systems.newtonian._make_force_njit``, needed</span>
-<span class="sd">    because Numba&#39;s nopython mode can only call another genuine njit</span>
+<span class="sd">    because Numba's nopython mode can only call another genuine njit</span>
 <span class="sd">    dispatcher from inside a compiled function, not a bound Python method.</span>
 
 <span class="sd">    Parameters</span>
@@ -480,7 +480,7 @@
 <span class="sd">    rate_constants : ndarray, shape (n_reactions,)</span>
 <span class="sd">        Rate constant of each reaction.</span>
 <span class="sd">    reactant_orders : ndarray, shape (n_species, n_reactions)</span>
-<span class="sd">        Reactant-side order of each species in each reaction&#39;s mass-action</span>
+<span class="sd">        Reactant-side order of each species in each reaction's mass-action</span>
 <span class="sd">        rate law (0 for a species that is not a reactant in that</span>
 <span class="sd">        reaction).</span>
 
@@ -491,7 +491,7 @@
 <span class="sd">        ``params`` argument is accepted, per</span>
 <span class="sd">        :data:`chemistrykit.integrators.RHSFunc`, but unused: every</span>
 <span class="sd">        numeric parameter is already baked into this closure).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">stoich_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">stoich_matrix</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">rate_constants</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">rate_constants</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">reactant_orders</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">reactant_orders</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
@@ -521,7 +521,7 @@
 <div class="viewcode-block" id="StoichiometricNetwork">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.StoichiometricNetwork">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">StoichiometricNetwork</span><span class="p">(</span><span class="n">ReactionNetwork</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A network of elementary mass-action reactions, integrated numerically.</span>
+<span class="w">    </span><span class="sd">"""A network of elementary mass-action reactions, integrated numerically.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -533,14 +533,14 @@
 <span class="sd">    rate_constants : array-like, shape (n_reactions,)</span>
 <span class="sd">        Rate constant of each reaction.</span>
 <span class="sd">    reactant_orders : array-like, shape (n_species, n_reactions)</span>
-<span class="sd">        Reactant-side order of each species in each reaction&#39;s mass-action</span>
+<span class="sd">        Reactant-side order of each species in each reaction's mass-action</span>
 <span class="sd">        rate law (0 for a species that is not a reactant in that</span>
-<span class="sd">        reaction; for an elementary reaction this equals the reactant&#39;s</span>
+<span class="sd">        reaction; for an elementary reaction this equals the reactant's</span>
 <span class="sd">        stoichiometric coefficient, but is given independently so</span>
 <span class="sd">        non-elementary/pseudo-order rate laws can also be modeled).</span>
 <span class="sd">    state0 : array-like, shape (n_species,)</span>
 <span class="sd">        Initial concentrations, in `species` order.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -568,7 +568,7 @@
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.StoichiometricNetwork.parallel">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">parallel</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">k1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">A0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StoichiometricNetwork</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the parallel (competing) mechanism ``A -&gt; B`` (k1), ``A -&gt; C`` (k2).</span>
+<span class="w">        </span><span class="sd">"""Build the parallel (competing) mechanism ``A -&gt; B`` (k1), ``A -&gt; C`` (k2).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -589,20 +589,20 @@
 
 <span class="sd">        &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">        &gt;&gt;&gt; net = StoichiometricNetwork.parallel(k1=2.0, k2=1.0, A0=1.0)</span>
-<span class="sd">        &gt;&gt;&gt; result = net.integrate((0.0, 5.0), dt=1e-3, method=&quot;rk4&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; round(float(result.concentration(&quot;B&quot;)[-1] / result.concentration(&quot;C&quot;)[-1]), 4)</span>
+<span class="sd">        &gt;&gt;&gt; result = net.integrate((0.0, 5.0), dt=1e-3, method="rk4")</span>
+<span class="sd">        &gt;&gt;&gt; round(float(result.concentration("B")[-1] / result.concentration("C")[-1]), 4)</span>
 <span class="sd">        2.0</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">stoich</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]</span>
         <span class="n">orders</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]]</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">((</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">),</span> <span class="n">stoich</span><span class="p">,</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">],</span> <span class="n">orders</span><span class="p">,</span> <span class="p">[</span><span class="n">A0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">((</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">),</span> <span class="n">stoich</span><span class="p">,</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">],</span> <span class="n">orders</span><span class="p">,</span> <span class="p">[</span><span class="n">A0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="StoichiometricNetwork.consecutive">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.StoichiometricNetwork.consecutive">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">consecutive</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">k1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">A0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StoichiometricNetwork</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the consecutive (chain) mechanism ``A -&gt; B`` (k1), ``B -&gt; C`` (k2).</span>
+<span class="w">        </span><span class="sd">"""Build the consecutive (chain) mechanism ``A -&gt; B`` (k1), ``B -&gt; C`` (k2).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -618,20 +618,20 @@
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
 <span class="sd">        &gt;&gt;&gt; net = StoichiometricNetwork.consecutive(k1=1.0, k2=0.3, A0=1.0)</span>
-<span class="sd">        &gt;&gt;&gt; result = net.integrate((0.0, 20.0), dt=1e-3, method=&quot;rk4&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; round(float(result.concentration(&quot;A&quot;)[-1] + result.concentration(&quot;B&quot;)[-1] + result.concentration(&quot;C&quot;)[-1]), 6)</span>
+<span class="sd">        &gt;&gt;&gt; result = net.integrate((0.0, 20.0), dt=1e-3, method="rk4")</span>
+<span class="sd">        &gt;&gt;&gt; round(float(result.concentration("A")[-1] + result.concentration("B")[-1] + result.concentration("C")[-1]), 6)</span>
 <span class="sd">        1.0</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">stoich</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]</span>
         <span class="n">orders</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]]</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">((</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">),</span> <span class="n">stoich</span><span class="p">,</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">],</span> <span class="n">orders</span><span class="p">,</span> <span class="p">[</span><span class="n">A0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">((</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">),</span> <span class="n">stoich</span><span class="p">,</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">],</span> <span class="n">orders</span><span class="p">,</span> <span class="p">[</span><span class="n">A0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="StoichiometricNetwork.reversible">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.StoichiometricNetwork.reversible">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">reversible</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">kf</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">kr</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">A0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">B0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StoichiometricNetwork</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the reversible mechanism ``A &lt;-&gt; B`` (forward kf, reverse kr).</span>
+<span class="w">        </span><span class="sd">"""Build the reversible mechanism ``A &lt;-&gt; B`` (forward kf, reverse kr).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -647,13 +647,13 @@
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
 <span class="sd">        &gt;&gt;&gt; net = StoichiometricNetwork.reversible(kf=2.0, kr=1.0, A0=1.0)</span>
-<span class="sd">        &gt;&gt;&gt; result = net.integrate((0.0, 20.0), dt=1e-3, method=&quot;rk4&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; round(float(result.concentration(&quot;A&quot;)[-1]), 3)</span>
+<span class="sd">        &gt;&gt;&gt; result = net.integrate((0.0, 20.0), dt=1e-3, method="rk4")</span>
+<span class="sd">        &gt;&gt;&gt; round(float(result.concentration("A")[-1]), 3)</span>
 <span class="sd">        0.333</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">stoich</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">]]</span>
         <span class="n">orders</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]]</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">((</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">),</span> <span class="n">stoich</span><span class="p">,</span> <span class="p">[</span><span class="n">kf</span><span class="p">,</span> <span class="n">kr</span><span class="p">],</span> <span class="n">orders</span><span class="p">,</span> <span class="p">[</span><span class="n">A0</span><span class="p">,</span> <span class="n">B0</span><span class="p">])</span></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">((</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">),</span> <span class="n">stoich</span><span class="p">,</span> <span class="p">[</span><span class="n">kf</span><span class="p">,</span> <span class="n">kr</span><span class="p">],</span> <span class="n">orders</span><span class="p">,</span> <span class="p">[</span><span class="n">A0</span><span class="p">,</span> <span class="n">B0</span><span class="p">])</span></div>
 </div>
 
 
@@ -661,7 +661,7 @@
 <div class="viewcode-block" id="consecutive_analytic">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.consecutive_analytic">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">consecutive_analytic</span><span class="p">(</span><span class="n">A0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Closed-form ``A -&gt; B -&gt; C`` concentrations (Bateman&#39;s equations).</span>
+<span class="w">    </span><span class="sd">"""Closed-form ``A -&gt; B -&gt; C`` concentrations (Bateman's equations).</span>
 
 <span class="sd">    See Espenson, *Chemical Kinetics and Reaction Mechanisms*, 2nd ed.,</span>
 <span class="sd">    Ch. 4.2, or the original: H. Bateman, *Proc. Cambridge Philos. Soc.*</span>
@@ -669,7 +669,7 @@
 <span class="sd">    mathematical structure). The ``k1 != k2`` formula below has a</span>
 <span class="sd">    removable singularity at ``k1 == k2``; the degenerate limit</span>
 <span class="sd">    :math:`[B](t) = A_0 k_1 t\\,e^{-k_1 t}` is used automatically in that</span>
-<span class="sd">    case (obtained by L&#39;Hopital&#39;s rule / directly integrating</span>
+<span class="sd">    case (obtained by L'Hopital's rule / directly integrating</span>
 <span class="sd">    :math:`d[B]/dt = k_1[A] - k_1[B]` with equal rate constants).</span>
 
 <span class="sd">    Parameters</span>
@@ -693,7 +693,7 @@
 <span class="sd">    &gt;&gt;&gt; A, B, C = consecutive_analytic(A0=1.0, k1=1.0, k2=0.3, t=np.array([0.0, 1.0, 5.0, 20.0]))</span>
 <span class="sd">    &gt;&gt;&gt; np.allclose(A + B + C, 1.0)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">A</span> <span class="o">=</span> <span class="n">A0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">k1</span> <span class="o">==</span> <span class="n">k2</span><span class="p">:</span>
@@ -708,7 +708,7 @@
 <div class="viewcode-block" id="ssa_intermediate_concentration">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.ssa_intermediate_concentration">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">ssa_intermediate_concentration</span><span class="p">(</span><span class="n">A0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Steady-state-approximation (SSA) estimate of the intermediate [B].</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Steady-state-approximation (SSA) estimate of the intermediate [B].</span>
 
 <span class="sd">    When the second step is much faster than the first (:math:`k_2 \gg</span>
 <span class="sd">    k_1`), the intermediate B is consumed almost as fast as it forms, so</span>
@@ -717,7 +717,7 @@
 <span class="sd">    Reaction Mechanisms*, 2nd ed., Ch. 5.1). Applying it to</span>
 <span class="sd">    :math:`d[B]/dt = k_1[A] - k_2[B] = 0` gives</span>
 <span class="sd">    :math:`[B]_{ssa} = (k_1/k_2)[A](t) = (k_1/k_2) A_0 e^{-k_1 t}`, which</span>
-<span class="sd">    should agree closely with :func:`consecutive_analytic`&#39;s exact</span>
+<span class="sd">    should agree closely with :func:`consecutive_analytic`'s exact</span>
 <span class="sd">    :math:`[B](t)` whenever :math:`k_2/k_1` is large.</span>
 
 <span class="sd">    Parameters</span>
@@ -746,7 +746,7 @@
 <span class="sd">    ...     errs.append(np.max(np.abs(B_exact - B_ssa)))</span>
 <span class="sd">    &gt;&gt;&gt; bool(errs[0] &gt; errs[1] &gt; errs[2])</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">k1</span> <span class="o">/</span> <span class="n">k2</span><span class="p">)</span> <span class="o">*</span> <span class="n">A0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span></div>
 
@@ -755,7 +755,7 @@
 <div class="viewcode-block" id="reversible_analytic">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.reversible_analytic">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">reversible_analytic</span><span class="p">(</span><span class="n">A0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">kf</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">kr</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">B0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Closed-form ``A &lt;-&gt; B`` relaxation to equilibrium.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Closed-form ``A &lt;-&gt; B`` relaxation to equilibrium.</span>
 
 <span class="sd">    For :math:`d[A]/dt = -k_f[A] + k_r[B]` with :math:`[A]+[B] = A_0+B_0`</span>
 <span class="sd">    conserved, the solution relaxes exponentially to equilibrium with</span>
@@ -788,7 +788,7 @@
 <span class="sd">    &gt;&gt;&gt; A, B = reversible_analytic(A0=1.0, kf=2.0, kr=1.0, t=1e6)</span>
 <span class="sd">    &gt;&gt;&gt; round(float(A), 3), round(float(B), 3)</span>
 <span class="sd">    (0.333, 0.667)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">total</span> <span class="o">=</span> <span class="n">A0</span> <span class="o">+</span> <span class="n">B0</span>
     <span class="n">A_eq</span> <span class="o">=</span> <span class="n">kr</span> <span class="o">*</span> <span class="n">total</span> <span class="o">/</span> <span class="p">(</span><span class="n">kf</span> <span class="o">+</span> <span class="n">kr</span><span class="p">)</span>

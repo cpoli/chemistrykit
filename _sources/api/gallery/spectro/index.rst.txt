@@ -8,7 +8,10 @@ the Beer-Lambert absorbance law and its stray-light deviation from
 linearity; rigid-rotor rotational spectra with isotope shifts; harmonic
 vs. Morse-potential vibrational band positions, plus a genuine triatomic
 normal-mode calculation; Franck-Condon vibronic progressions for
-electronic spectra; and a first-order NMR multiplet simulator.
+electronic spectra; NMR from Larmor frequencies and chemical shifts to
+J-coupling multiplets, the Karplus relation, and Fourier-transform NMR;
+atomic line spectra (Fraunhofer, Kirchhoff-Bunsen, Balmer-Rydberg); and
+spectral lineshapes.
 
 Each script in this gallery is self-contained and can be run directly with
 ``python examples/spectro/<section>/<script>.py``. Every script also
@@ -22,15 +25,19 @@ Sections
 
 - **beer_lambert** -- the Beer-Lambert absorbance law and its stray-light
   deviation from linearity at high concentration.
+- **atomic** -- Fraunhofer's dark solar lines, Kirchhoff and Bunsen's
+  flame emission/absorption spectra, and the hydrogen series from the
+  Balmer-Rydberg formula.
 - **rotational** -- rigid-rotor rotational spectra, relative line
-  intensities, and the H/D isotope shift.
+  intensities, and microwave isotope shifts.
 - **vibrational** -- harmonic vs. Morse IR band positions and
-  anharmonicity constants, and a Wilson GF-matrix normal-mode calculation
-  for CO2 and H2O.
+  anharmonicity constants, Wilson GF-matrix normal modes for CO2 and H2O,
+  Raman/IR mutual exclusion, and a linear molecule's degenerate bend.
 - **electronic** -- Franck-Condon vibronic progressions in a UV-Vis
   absorption band.
-- **nmr** -- first-order NMR multiplet simulation, from simple n+1
-  multiplets to a genuine doublet of triplets.
+- **nmr** -- Larmor frequencies and chemical shifts, first-order
+  J-coupling multiplets, the Karplus relation, and Fourier-transform NMR.
+- **lineshapes** -- Gaussian, Lorentzian, and Voigt line profiles.
 
 
 .. raw:: html
@@ -43,6 +50,82 @@ Sections
     <div class="sphx-glr-thumbnails">
 
 .. thumbnail-parent-div-open
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Atomic line spectra
+--------------------
+
+Discrete atomic lines as chemical fingerprints: Fraunhofer's dark solar
+lines, Kirchhoff and Bunsen's flame emission and absorption spectra, and
+the Balmer-Rydberg formula for the hydrogen series.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Fraunhofer (1814) found that sunlight is not a smooth rainbow but a continuum crossed by hundreds of sharp dark lines at fixed, reproducible wavelengths, and he labelled the strongest ones A to K. This example builds a sun-like continuum from Planck&#x27;s law at 5800 K, removes light at the tabulated positions of Fraunhofer&#x27;s lettered lines using narrow Lorentzian absorption profiles, and marks each letter above its line.">
+
+.. only:: html
+
+  .. image:: /api/gallery/spectro/atomic/images/thumb/sphx_glr_plot_01_fraunhofer_dark_lines_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/spectro/atomic/plot_01_fraunhofer_dark_lines`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Fraunhofer's dark lines: sharp absorption lines at fixed wavelengths in the solar spectrum</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Bunsen and Kirchhoff (1859-1861) vaporized salts in a nearly colourless flame and found that each element gives bright lines at its own fixed wavelengths. The top panel shows the strongest visible and near-visible resonance lines of the alkali metals they studied, including caesium&#x27;s blue doublet and rubidium&#x27;s red and near-infrared lines, the lines that revealed those two new elements. The bottom panel illustrates Kirchhoff&#x27;s law: a cooler sodium vapour placed in front of a continuous source absorbs at exactly the wavelengths where hot sodium emits. This is what explains Fraunhofer&#x27;s D lines.">
+
+.. only:: html
+
+  .. image:: /api/gallery/spectro/atomic/images/thumb/sphx_glr_plot_02_kirchhoff_bunsen_flame_spectra_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/spectro/atomic/plot_02_kirchhoff_bunsen_flame_spectra`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Kirchhoff and Bunsen's flame spectra: bright emission lines and matching dark absorption lines</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Balmer (1885) fitted the four visible hydrogen lines with \lambda=B\,n^2/(n^2-4). Rydberg (1890) rewrote this in wavenumbers as \tilde\nu=R(1/n_1^2-1/n_2^2), and Bohr (1913) derived it from quantized electron energies E_n=-hcR/n^2. This example computes the Lyman, Balmer, and Paschen series with rydberg_wavenumber, checks the result against Balmer&#x27;s original formula, and shows each series bunching toward its series limit.">
+
+.. only:: html
+
+  .. image:: /api/gallery/spectro/atomic/images/thumb/sphx_glr_plot_03_balmer_rydberg_hydrogen_series_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/spectro/atomic/plot_03_balmer_rydberg_hydrogen_series`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The hydrogen spectrum: Balmer's formula, the Rydberg series, and Bohr's energy levels</div>
+    </div>
+
 
 .. thumbnail-parent-div-close
 
@@ -174,12 +257,13 @@ lifetime-collisional/homogeneous) that produce them.
 
     </div>
 
-NMR multiplets
----------------
+NMR spectroscopy
+-----------------
 
-First-order NMR multiplet simulation: Pascal's-triangle n+1 splitting
-patterns, and independent multi-coupling patterns like a doublet of
-triplets.
+Nuclear magnetic resonance: Larmor frequencies and the chemical shift,
+first-order spin-spin coupling multiplets (the n+1 rule and a doublet of
+triplets), the Karplus dihedral-angle dependence of vicinal couplings,
+and Fourier-transform NMR from a free-induction decay.
 
 
 .. raw:: html
@@ -195,7 +279,7 @@ triplets.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Simulates ethanol&#x27;s classic -CH3 triplet and -CH2- quartet (each proton set split only by its 3-bond neighbor, the textbook first-order pattern), then a genuine doublet of triplets from two chemically distinct coupling partners with different J values.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Indirect spin-spin coupling carried through the bonding electrons (Ramsey and Purcell, 1952) splits an NMR resonance into a multiplet. The splitting is J Hz regardless of field strength. In the first-order limit, n equivalent spin-1/2 neighbours give n+1 lines with Pascal&#x27;s-triangle intensities. This example simulates ethanol&#x27;s -CH3 triplet and -CH2- quartet, then a doublet of triplets from two inequivalent coupling partners with different J values.">
 
 .. only:: html
 
@@ -206,7 +290,58 @@ triplets.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">First-order NMR multiplets: ethanol's triplet/quartet, and a doublet of triplets</div>
+      <div class="sphx-glr-thumbnail-title">Spin-spin (J) coupling and the n+1 rule: ethanol's triplet/quartet and a doublet of triplets</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Bloch and Purcell (1946) showed that nuclei in a static field B_0 absorb radio-frequency energy sharply at the Larmor frequency \nu_0=\gamma B_0/(2\pi). The effect became a chemical tool when it was found that a nucleus&#x27;s surrounding electrons shield it slightly, so the exact resonance frequency depends on its chemical environment. This example computes ^1\mathrm{H} and ^{13}\mathrm{C} Larmor frequencies against field strength. It then places three proton environments of methyl acetate-like shielding on the frequency axis at two field strengths and shows that converting to ppm with chemical_shift_ppm makes the spectrum field-independent.">
+
+.. only:: html
+
+  .. image:: /api/gallery/spectro/nmr/images/thumb/sphx_glr_plot_02_nmr_resonance_chemical_shift_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/spectro/nmr/plot_02_nmr_resonance_chemical_shift`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Nuclear magnetic resonance: Larmor frequencies and the field-independent chemical shift</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Karplus (1959) used valence-bond theory to show that the three-bond (vicinal) H-C-C-H coupling constant depends on the dihedral angle \phi. It is large for eclipsed (0 degrees) and anti (180 degrees) protons and nearly zero near 90 degrees. This lets a measured ^3J report molecular conformation. This example plots Karplus&#x27;s 1959 curve from karplus_coupling, reads off the axial-axial and axial-equatorial couplings of a cyclohexane chair, and shows the resulting doublet splittings.">
+
+.. only:: html
+
+  .. image:: /api/gallery/spectro/nmr/images/thumb/sphx_glr_plot_03_karplus_vicinal_coupling_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/spectro/nmr/plot_03_karplus_vicinal_coupling`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Karplus relation: vicinal 3J(H,H) coupling as a function of dihedral angle</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Ernst and Anderson (1966) replaced the slow frequency sweep of continuous-wave NMR with a single short radio-frequency pulse. The pulse excites all resonances at once. The resulting free-induction decay (FID) is a sum of decaying oscillations, one per resonance, and its Fourier transform gives the whole spectrum. Because each FID takes about as long as a single scan and many can be averaged, the method is far more sensitive. This example simulates a noisy FID for three resonances with free_induction_decay, transforms it with fid_to_spectrum, and shows signal averaging: signal-to-noise grows as \sqrt{N} over N co-added scans.">
+
+.. only:: html
+
+  .. image:: /api/gallery/spectro/nmr/images/thumb/sphx_glr_plot_04_fourier_transform_nmr_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/spectro/nmr/plot_04_fourier_transform_nmr`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Fourier-transform NMR: from a free-induction decay to a spectrum</div>
     </div>
 
 
@@ -220,8 +355,9 @@ Rotational spectra
 -------------------
 
 Rigid-rotor rotational spectra built on ``chemistrykit.quantum``'s rigid
-rotor: transition wavenumbers, relative line intensities, and the H/D
-isotope shift.
+rotor: quantized levels, evenly spaced transition wavenumbers and
+Boltzmann line intensities, and microwave isotope shifts of CO
+isotopologues.
 
 
 .. raw:: html
@@ -237,7 +373,7 @@ isotope shift.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Builds an HCl-like rigid rotor from chemistrykit.quantum, predicts its rotational-spectrum line positions and relative (Boltzmann-weighted) intensities, and shows how substituting deuterium for hydrogen shifts every line -- the standard way isotopic substitution is used to confirm a rotational-spectrum assignment.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Dennison (1926) gave the quantum-mechanical rotational energy levels E_J=\hbar^2J(J+1)/(2I). With the \Delta J=+1 selection rule, these levels produce absorption lines at 2B(J+1), which are evenly spaced by 2B. This example builds an HCl-like rigid rotor from chemistrykit.quantum, prints its level energies and line positions, checks the constant 2B spacing, and adds the Boltzmann-population intensity pattern seen in a real far-infrared or microwave spectrum.">
 
 .. only:: html
 
@@ -248,7 +384,24 @@ isotope shift.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">HCl rotational spectrum, relative intensities, and the H->D isotope shift</div>
+      <div class="sphx-glr-thumbnail-title">Dennison's quantized rigid rotor: HCl rotational lines spaced by 2B, with Boltzmann intensities</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Rotational lines of light molecules lie in the microwave region, which became routinely accessible after Cleeton and Williams (1934) and postwar microwave spectroscopy by Townes and others. Microwave frequencies can be measured very precisely, so isotope shifts are easy to see. Isotopic substitution leaves the bond length unchanged but changes the reduced mass, so every line of the heavier isotopologue moves down by \mu_a/\mu_b, the ratio isotope_shift_ratio predicts. This example computes the J=1\leftarrow0 lines of ^{12}\mathrm{C}^{16}\mathrm{O}, ^{13}\mathrm{C}^{16}\mathrm{O} and ^{12}\mathrm{C}^{18}\mathrm{O} in GHz and compares them with the measured values (115.271, 110.201 and 109.782 GHz).">
+
+.. only:: html
+
+  .. image:: /api/gallery/spectro/rotational/images/thumb/sphx_glr_plot_02_microwave_isotope_shift_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/spectro/rotational/plot_02_microwave_isotope_shift`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Microwave spectroscopy and the isotope shift: CO isotopologues' J=1-0 lines in GHz</div>
     </div>
 
 
@@ -262,8 +415,9 @@ Vibrational spectra
 ---------------------
 
 Harmonic vs. Morse-potential IR band positions and anharmonicity
-constants, and a genuine Wilson GF-matrix normal-mode calculation for
-CO2 and H2O.
+constants; Wilson GF-matrix normal modes for CO2 and H2O; the Raman/IR
+mutual exclusion rule for CO2; and the doubly degenerate bend of a
+linear triatomic.
 
 
 .. raw:: html
@@ -296,7 +450,7 @@ CO2 and H2O.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="A genuine (not tabulated) normal-mode calculation for a linear (CO2) and a bent (H2O) triatomic, using TriatomicNormalModes: a numerically built Wilson B-matrix, mass-weighted G matrix, and simple diagonal valence-force-field F matrix are combined into a generalized eigenvalue problem and solved for the true normal-mode wavenumbers.">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example uses Wilson&#x27;s GF-matrix method to calculate normal modes for a linear triatomic (CO2) and a bent one (H2O) with TriatomicNormalModes. The molecule&#x27;s geometry and masses give the kinetic-energy matrix G=BM^{-1}B^T, where B is the Wilson B-matrix. A diagonal valence force field gives the potential-energy matrix F. Solving the eigenvalue problem GFL=L\Lambda, with \lambda_k=(2\pi c\tilde\nu_k)^2, gives the normal-mode wavenumbers. Changing only the bend entry of F shifts the bend frequency, while the stretches barely move.">
 
 .. only:: html
 
@@ -307,7 +461,41 @@ CO2 and H2O.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Triatomic normal modes via the Wilson GF-matrix method: CO2 and H2O</div>
+      <div class="sphx-glr-thumbnail-title">Wilson's GF-matrix method: CO2 and H2O normal-mode frequencies from the G and F matrices</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Raman and Krishnan (1928) found that a small fraction of scattered light is shifted in frequency by a molecule&#x27;s vibrational wavenumbers. A mode is Raman-active if it changes the molecule&#x27;s polarizability. It is infrared-active if it changes the dipole moment. For a centrosymmetric molecule such as CO2, no mode is active in both spectra.">
+
+.. only:: html
+
+  .. image:: /api/gallery/spectro/vibrational/images/thumb/sphx_glr_plot_03_raman_ir_mutual_exclusion_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/spectro/vibrational/plot_03_raman_ir_mutual_exclusion`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Raman scattering vs. infrared absorption: the mutual exclusion rule for CO2</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Herzberg&#x27;s Infrared and Raman Spectra of Polyatomic Molecules (1945) set out the rules for counting and labelling vibrations of polyatomic molecules. A nonlinear molecule of N atoms has 3N-6 vibrations. A linear molecule has 3N-5, because rotation about its axis does not count as a degree of freedom. For CO2 this means four vibrations: the symmetric stretch, the antisymmetric stretch, and a doubly degenerate bend (in-plane and out-of-plane bending have the same frequency by cylindrical symmetry). This example compares linear CO2 with bent H2O using TriatomicNormalModes, whose is_linear flag marks the bend as a degenerate pair.">
+
+.. only:: html
+
+  .. image:: /api/gallery/spectro/vibrational/images/thumb/sphx_glr_plot_04_linear_bend_degeneracy_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/spectro/vibrational/plot_04_linear_bend_degeneracy`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Herzberg's linear-molecule rules: CO2's doubly degenerate bend and 3N-5 vibrations</div>
     </div>
 
 
@@ -323,6 +511,7 @@ CO2 and H2O.
    :includehidden:
 
 
+   /api/gallery/spectro/atomic/index.rst
    /api/gallery/spectro/beer_lambert/index.rst
    /api/gallery/spectro/electronic/index.rst
    /api/gallery/spectro/lineshapes/index.rst

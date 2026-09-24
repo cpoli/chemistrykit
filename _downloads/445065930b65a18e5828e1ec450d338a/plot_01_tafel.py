@@ -1,48 +1,50 @@
 r"""
-Butler-Volmer kinetics and the Tafel-plot linearization
-==========================================================
+Tafel's law: overpotential linear in log current
+==================================================
 
-:func:`~chemistrykit.electrochem.systems.butler_volmer.butler_volmer_current_density`
-gives the full nonlinear current-overpotential relationship for an
-electrode reaction. At high overpotential its Tafel-linearized form
-(:func:`~chemistrykit.electrochem.systems.butler_volmer.tafel_overpotential`)
-becomes an excellent approximation; this example checks that
-convergence numerically and then fits synthetic Tafel-regime data back
-to recover the exchange current density and Tafel slope.
+Tafel (1905) found that far from equilibrium the overpotential of
+hydrogen evolution grows linearly with :math:`\log_{10} i`:
+:math:`\eta = b\log_{10}(i/i_0)`. This example generates noisy
+"measured" high-overpotential data, draws the Tafel plot, and uses
+:func:`~chemistrykit.electrochem.systems.butler_volmer.fit_tafel_plot`
+to recover the Tafel slope `b` and exchange current density :math:`i_0`
+by linear regression -- the analysis Tafel's successors still use, and
+compares the slope with
+:func:`~chemistrykit.electrochem.systems.butler_volmer.tafel_slope`'s
+textbook ~118 mV/decade for :math:`\alpha = 0.5`, n = 1.
 """
 
 # %%
 import matplotlib.pyplot as plt
 import numpy as np
 
-from chemistrykit.electrochem.systems.butler_volmer import (
-    butler_volmer_current_density,
-    fit_tafel_plot,
-    tafel_overpotential,
-    tafel_slope,
-)
-from chemistrykit.electrochem.visualizers.electrochem_plots import plot_tafel
+from chemistrykit.electrochem.systems.butler_volmer import fit_tafel_plot, tafel_overpotential, tafel_slope
 
-i0, alpha, n = 1.0e-6, 0.5, 1
+i0_true, alpha, n = 1.0e-6, 0.5, 1
+b_true = tafel_slope(alpha=alpha, n=n)
 
 # %%
-# Convergence of the Tafel approximation to the full Butler-Volmer
-# equation as overpotential grows.
-etas = np.array([0.05, 0.10, 0.15, 0.20, 0.30])
-i_full = butler_volmer_current_density(i0, etas, alpha=alpha, n=n)
-eta_tafel = tafel_overpotential(i_full, i0, alpha=alpha, n=n, branch="anodic")
-rel_error = np.abs(eta_tafel - etas) / etas
-for eta, err in zip(etas, rel_error, strict=True):
-    print(f"eta = {eta:.2f} V: Tafel relative error = {err:.2%}")
+# Synthetic measurements: current densities over three decades, with
+# the overpotential read to +/- 3 mV.
+rng = np.random.default_rng(1905)
+i_data = np.logspace(-4, -1, 15)
+eta_data = tafel_overpotential(i_data, i0_true, alpha=alpha, n=n) + rng.normal(0.0, 0.003, i_data.size)
+fit = fit_tafel_plot(eta_data, i_data)
+print(f"true b  = {b_true * 1e3:.1f} mV/decade, fitted b  = {fit.tafel_slope * 1e3:.1f} mV/decade")
+print(f"true i0 = {i0_true:.2e}, fitted i0 = {fit.exchange_current_density:.2e}, R^2 = {fit.r_squared:.4f}")
 
 # %%
-# Fit synthetic high-overpotential data to recover (i0, Tafel slope).
-eta_fit_data = np.linspace(0.20, 0.40, 12)
-i_fit_data = butler_volmer_current_density(i0, eta_fit_data, alpha=alpha, n=n)
-fit = fit_tafel_plot(eta_fit_data, i_fit_data)
-print(f"\ntrue i0   = {i0:.3e}, fitted i0   = {fit.exchange_current_density:.3e}")
-print(f"true b    = {tafel_slope(alpha=alpha, n=n):.4f} V/decade, fitted b = {fit.tafel_slope:.4f} V/decade")
-
-ax = plot_tafel(i0=i0, eta_range=(-0.4, 0.4), alpha=alpha, n=n, fit=fit)
-plt.tight_layout()
+# The Tafel plot: a straight line whose extrapolation to eta = 0 gives
+# log10(i0).
+log_i = np.linspace(-6.5, -0.5, 100)
+fig, ax = plt.subplots()
+ax.plot(np.log10(i_data), eta_data, "o", label="measured")
+ax.plot(log_i, fit.predict(10.0**log_i), label=f"Tafel fit, b = {fit.tafel_slope * 1e3:.0f} mV/dec")
+ax.axhline(0.0, color="gray", linewidth=0.8)
+ax.axvline(np.log10(fit.exchange_current_density), color="gray", linestyle=":", label=r"$\log_{10} i_0$")
+ax.set_xlabel(r"$\log_{10}\, i$")
+ax.set_ylabel(r"$\eta$ (V)")
+ax.set_title("Tafel plot")
+ax.legend()
+fig.tight_layout()
 plt.show()

@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.spectro.systems.nmr</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;First-order NMR multiplet simulation: chemical shifts and J-coupling splitting patterns.</span>
+<span></span><span class="sa">r</span><span class="sd">"""First-order NMR multiplet simulation: chemical shifts and J-coupling splitting patterns.</span>
 
 <span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 13.7-13.8, or</span>
 <span class="sd">Silverstein, Webster &amp; Kiemle, *Spectrometric Identification of Organic</span>
@@ -421,14 +421,14 @@
 <span class="sd">the coupled nuclei (in Hz, i.e. after multiplying a ppm difference by the</span>
 <span class="sd">spectrometer frequency); under that approximation, `n` magnetically</span>
 <span class="sd">equivalent spin-1/2 neighbors split a resonance into `n+1` lines with</span>
-<span class="sd">relative intensities given by the binomial coefficients (Pascal&#39;s</span>
+<span class="sd">relative intensities given by the binomial coefficients (Pascal's</span>
 <span class="sd">triangle), symmetric about the unperturbed chemical shift (N. F. Ramsey</span>
 <span class="sd">&amp; E. M. Purcell, *Phys. Rev.* 85, 143 (1952), for the coupling</span>
-<span class="sd">mechanism; Pascal&#39;s triangle itself long predates NMR). Coupling to</span>
+<span class="sd">mechanism; Pascal's triangle itself long predates NMR). Coupling to</span>
 <span class="sd">several *inequivalent* sets of neighbors (different `J` values) splits</span>
 <span class="sd">the line independently and multiplicatively -- each new splitting acts</span>
 <span class="sd">on every line already present.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -437,13 +437,23 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.spectro.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">Spectrum</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;multiplicity&quot;</span><span class="p">,</span> <span class="s2">&quot;pascals_triangle_intensities&quot;</span><span class="p">,</span> <span class="s2">&quot;first_order_multiplet&quot;</span><span class="p">,</span> <span class="s2">&quot;multi_coupling_multiplet&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"multiplicity"</span><span class="p">,</span>
+    <span class="s2">"pascals_triangle_intensities"</span><span class="p">,</span>
+    <span class="s2">"first_order_multiplet"</span><span class="p">,</span>
+    <span class="s2">"multi_coupling_multiplet"</span><span class="p">,</span>
+    <span class="s2">"larmor_frequency"</span><span class="p">,</span>
+    <span class="s2">"chemical_shift_ppm"</span><span class="p">,</span>
+    <span class="s2">"karplus_coupling"</span><span class="p">,</span>
+    <span class="s2">"free_induction_decay"</span><span class="p">,</span>
+    <span class="s2">"fid_to_spectrum"</span><span class="p">,</span>
+<span class="p">]</span>
 
 
 <div class="viewcode-block" id="multiplicity">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.multiplicity">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">multiplicity</span><span class="p">(</span><span class="n">n_equivalent_neighbors</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The n+1 rule: `n` equivalent spin-1/2 neighbors split a resonance into `n+1` lines.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The n+1 rule: `n` equivalent spin-1/2 neighbors split a resonance into `n+1` lines.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -457,14 +467,14 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    Ethanol&#39;s -CH2- protons, coupled to the 3 equivalent -CH3- protons,</span>
+<span class="sd">    Ethanol's -CH2- protons, coupled to the 3 equivalent -CH3- protons,</span>
 <span class="sd">    form a quartet:</span>
 
 <span class="sd">    &gt;&gt;&gt; multiplicity(3)</span>
 <span class="sd">    4</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">n_equivalent_neighbors</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n_equivalent_neighbors must be &gt;= 0&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n_equivalent_neighbors must be &gt;= 0"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">n_equivalent_neighbors</span> <span class="o">+</span> <span class="mi">1</span></div>
 
 
@@ -472,7 +482,7 @@
 <div class="viewcode-block" id="pascals_triangle_intensities">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.pascals_triangle_intensities">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">pascals_triangle_intensities</span><span class="p">(</span><span class="n">n_equivalent_neighbors</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Relative line intensities for `n` equivalent spin-1/2 neighbors: the binomial coefficients :math:`\binom{n}{k}`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Relative line intensities for `n` equivalent spin-1/2 neighbors: the binomial coefficients :math:`\binom{n}{k}`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -484,12 +494,12 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    A quartet&#39;s classic 1:3:3:1 intensity pattern (e.g. ethanol&#39;s CH2,</span>
+<span class="sd">    A quartet's classic 1:3:3:1 intensity pattern (e.g. ethanol's CH2,</span>
 <span class="sd">    coupled to 3 equivalent CH3 protons):</span>
 
 <span class="sd">    &gt;&gt;&gt; pascals_triangle_intensities(3)</span>
 <span class="sd">    array([1., 3., 3., 1.])</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_equivalent_neighbors</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span></div>
 
@@ -498,14 +508,14 @@
 <div class="viewcode-block" id="first_order_multiplet">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.first_order_multiplet">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">first_order_multiplet</span><span class="p">(</span><span class="n">chemical_shift_ppm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">j_coupling_hz</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">spectrometer_frequency_mhz</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Spectrum</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Simulate a simple multiplet from coupling to one set of `n` equivalent neighbors.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Simulate a simple multiplet from coupling to one set of `n` equivalent neighbors.</span>
 
 <span class="sd">    Line positions are evenly spaced by :math:`J/\nu_0` in ppm (`J` in Hz</span>
 <span class="sd">    converted to ppm by dividing by the spectrometer frequency in MHz,</span>
 <span class="sd">    since 1 ppm on the chemical-shift scale corresponds to</span>
 <span class="sd">    :math:`\nu_0\,[\text{Hz}]/10^6` at operating frequency</span>
 <span class="sd">    :math:`\nu_0`), symmetric about `chemical_shift_ppm`, with the</span>
-<span class="sd">    Pascal&#39;s-triangle relative intensities from</span>
+<span class="sd">    Pascal's-triangle relative intensities from</span>
 <span class="sd">    :func:`pascals_triangle_intensities`.</span>
 
 <span class="sd">    Parameters</span>
@@ -537,7 +547,7 @@
 <span class="sd">    True</span>
 <span class="sd">    &gt;&gt;&gt; spectrum.intensities.tolist()</span>
 <span class="sd">    [1.0, 2.0, 1.0]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">j_ppm</span> <span class="o">=</span> <span class="n">j_coupling_hz</span> <span class="o">/</span> <span class="n">spectrometer_frequency_mhz</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">multiplicity</span><span class="p">(</span><span class="n">n_neighbors</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">offsets</span> <span class="o">=</span> <span class="n">j_ppm</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">n</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
@@ -550,7 +560,7 @@
 <div class="viewcode-block" id="multi_coupling_multiplet">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.multi_coupling_multiplet">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">multi_coupling_multiplet</span><span class="p">(</span><span class="n">chemical_shift_ppm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">couplings</span><span class="p">,</span> <span class="n">spectrometer_frequency_mhz</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Spectrum</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Simulate a multiplet from independent first-order coupling to several *inequivalent* neighbor sets.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Simulate a multiplet from independent first-order coupling to several *inequivalent* neighbor sets.</span>
 
 <span class="sd">    Each coupling constant splits every line already present (the</span>
 <span class="sd">    couplings act independently and multiplicatively), giving</span>
@@ -576,7 +586,7 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    A doublet of doublets (dd) with equal J&#39;s degenerates into a triplet</span>
+<span class="sd">    A doublet of doublets (dd) with equal J's degenerates into a triplet</span>
 <span class="sd">    with 1:2:1 intensities (two different coupling partners with the</span>
 <span class="sd">    same `J` are indistinguishable from one set of two equivalent</span>
 <span class="sd">    partners):</span>
@@ -595,7 +605,7 @@
 <span class="sd">    6</span>
 <span class="sd">    &gt;&gt;&gt; round(float(np.sum(dt.intensities)), 6)</span>
 <span class="sd">    8.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">chemical_shift_ppm</span><span class="p">])</span>
     <span class="n">intensities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">])</span>
     <span class="k">for</span> <span class="n">j_hz</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">couplings</span><span class="p">:</span>
@@ -618,6 +628,224 @@
             <span class="n">merged_positions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
             <span class="n">merged_intensities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inten</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">Spectrum</span><span class="p">(</span><span class="n">positions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">merged_positions</span><span class="p">),</span> <span class="n">intensities</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">merged_intensities</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="larmor_frequency">
+<a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.larmor_frequency">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">larmor_frequency</span><span class="p">(</span><span class="n">gyromagnetic_ratio</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">field_tesla</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Nuclear Larmor (resonance) frequency :math:`\nu_0=\gamma B_0/(2\pi)`, in Hz.</span>
+
+<span class="sd">    The frequency at which Bloch's and Purcell's 1946 experiments found a</span>
+<span class="sd">    sharp resonant response from nuclear spins in a static field</span>
+<span class="sd">    :math:`B_0` (F. Bloch, *Phys. Rev.* 70, 460 (1946); Atkins &amp; de</span>
+<span class="sd">    Paula, *Physical Chemistry*, 11th ed., Ch. 12A).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    gyromagnetic_ratio : float</span>
+<span class="sd">        Nuclear gyromagnetic ratio :math:`\gamma`, in rad s^-1 T^-1</span>
+<span class="sd">        (e.g. ``scipy.constants.physical_constants["proton gyromag. ratio"][0]``).</span>
+<span class="sd">    field_tesla : float or array-like of float</span>
+<span class="sd">        Static field :math:`B_0`, in tesla.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float or ndarray</span>
+<span class="sd">        Resonance frequency, in Hz.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    A "400 MHz" spectrometer's magnet is about 9.4 T:</span>
+
+<span class="sd">    &gt;&gt;&gt; import scipy.constants as sc</span>
+<span class="sd">    &gt;&gt;&gt; gamma_h = sc.physical_constants["proton gyromag. ratio"][0]</span>
+<span class="sd">    &gt;&gt;&gt; round(larmor_frequency(gamma_h, 9.3947) / 1e6, 1)</span>
+<span class="sd">    400.0</span>
+<span class="sd">    """</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">gyromagnetic_ratio</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">field_tesla</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span></div>
+
+
+
+<div class="viewcode-block" id="chemical_shift_ppm">
+<a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.chemical_shift_ppm">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">chemical_shift_ppm</span><span class="p">(</span><span class="n">frequency_hz</span><span class="p">,</span> <span class="n">reference_frequency_hz</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Chemical shift :math:`\delta=10^6(\nu-\nu_\text{ref})/\nu_\text{ref}`, in ppm.</span>
+
+<span class="sd">    Dividing by the reference frequency removes the (field-proportional)</span>
+<span class="sd">    Larmor frequency, so :math:`\delta` is the same on every</span>
+<span class="sd">    spectrometer -- the reason NMR spectra are reported in ppm.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    frequency_hz : float or array-like of float</span>
+<span class="sd">        Resonance frequency of the nucleus of interest, in Hz.</span>
+<span class="sd">    reference_frequency_hz : float</span>
+<span class="sd">        Resonance frequency of the reference compound (e.g. TMS), in Hz.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float or ndarray</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    A proton resonating 2800 Hz above TMS on a 400 MHz instrument sits</span>
+<span class="sd">    at 7.0 ppm:</span>
+
+<span class="sd">    &gt;&gt;&gt; round(chemical_shift_ppm(400.0e6 + 2800.0, 400.0e6), 6)</span>
+<span class="sd">    7.0</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">reference_frequency_hz</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"reference_frequency_hz must be positive"</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mf">1e6</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">frequency_hz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">-</span> <span class="n">reference_frequency_hz</span><span class="p">)</span> <span class="o">/</span> <span class="n">reference_frequency_hz</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span></div>
+
+
+
+<div class="viewcode-block" id="karplus_coupling">
+<a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.karplus_coupling">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">karplus_coupling</span><span class="p">(</span><span class="n">dihedral_degrees</span><span class="p">,</span> <span class="n">coefficients</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Vicinal H-C-C-H coupling constant :math:`^3J` from the dihedral angle: the Karplus relation.</span>
+
+<span class="sd">    With ``coefficients=None`` this is Karplus's original 1959</span>
+<span class="sd">    valence-bond result (M. Karplus, *J. Chem. Phys.* 30, 11 (1959)),</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        ^3J(\phi) = \begin{cases}</span>
+<span class="sd">        8.5\cos^2\phi - 0.28, &amp; 0^\circ\le\phi\le90^\circ \\</span>
+<span class="sd">        9.5\cos^2\phi - 0.28, &amp; 90^\circ&lt;\phi\le180^\circ</span>
+<span class="sd">        \end{cases}\ \text{Hz};</span>
+
+<span class="sd">    otherwise the general three-term form</span>
+<span class="sd">    :math:`^3J=A\cos^2\phi+B\cos\phi+C` (M. Karplus, *J. Am. Chem.</span>
+<span class="sd">    Soc.* 85, 2870 (1963)) with ``coefficients=(A, B, C)`` in Hz.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dihedral_degrees : float or array-like of float</span>
+<span class="sd">        H-C-C-H dihedral angle :math:`\phi`, in degrees.</span>
+<span class="sd">    coefficients : tuple of float, optional</span>
+<span class="sd">        ``(A, B, C)`` in Hz for the three-term form.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float or ndarray</span>
+<span class="sd">        :math:`^3J`, in Hz.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Anti (180 degrees) protons couple strongly, gauche (60 degrees)</span>
+<span class="sd">    weakly, and perpendicular (90 degrees) protons hardly at all:</span>
+
+<span class="sd">    &gt;&gt;&gt; round(karplus_coupling(180.0), 2), round(karplus_coupling(60.0), 3), round(karplus_coupling(90.0), 2)</span>
+<span class="sd">    (9.22, 1.845, -0.28)</span>
+<span class="sd">    """</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">dihedral_degrees</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span> <span class="o">%</span> <span class="mf">360.0</span><span class="p">)</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">phi</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">-</span> <span class="n">phi</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
+    <span class="n">cos_phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">coefficients</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">prefactor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">phi</span> <span class="o">&lt;=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="mf">1e-12</span><span class="p">,</span> <span class="mf">8.5</span><span class="p">,</span> <span class="mf">9.5</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">prefactor</span> <span class="o">*</span> <span class="n">cos_phi</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mf">0.28</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">coefficients</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">cos_phi</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">B</span> <span class="o">*</span> <span class="n">cos_phi</span> <span class="o">+</span> <span class="n">C</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span></div>
+
+
+
+<div class="viewcode-block" id="free_induction_decay">
+<a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.free_induction_decay">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">free_induction_decay</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">offsets_hz</span><span class="p">,</span> <span class="n">amplitudes</span><span class="p">,</span> <span class="n">t2</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Complex free-induction decay (FID) after a single 90-degree pulse.</span>
+
+<span class="sd">    Each resonance, at offset :math:`\Delta\nu_k` from the rotating-frame</span>
+<span class="sd">    reference, contributes a decaying complex exponential,</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        s(t)=\sum_k a_k\,e^{2\pi i\Delta\nu_k t}\,e^{-t/T_2},</span>
+
+<span class="sd">    the time-domain signal whose Fourier transform is the spectrum</span>
+<span class="sd">    (R. R. Ernst &amp; W. A. Anderson, *Rev. Sci. Instrum.* 37, 93 (1966)).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t : array-like of float</span>
+<span class="sd">        Sample times, in s.</span>
+<span class="sd">    offsets_hz : array-like of float</span>
+<span class="sd">        Resonance offsets, in Hz.</span>
+<span class="sd">    amplitudes : array-like of float</span>
+<span class="sd">        Relative amplitude of each resonance.</span>
+<span class="sd">    t2 : float</span>
+<span class="sd">        Transverse relaxation time :math:`T_2`, in s (shared by all lines).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray of complex, shape matching `t`</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    At :math:`t=0` every component is in phase, so the signal is the sum</span>
+<span class="sd">    of the amplitudes:</span>
+
+<span class="sd">    &gt;&gt;&gt; fid = free_induction_decay([0.0, 0.1], offsets_hz=[10.0, -25.0], amplitudes=[1.0, 2.0], t2=0.5)</span>
+<span class="sd">    &gt;&gt;&gt; complex(fid[0])</span>
+<span class="sd">    (3+0j)</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">t2</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"t2 must be positive"</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">offsets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">offsets_hz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">amps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">amplitudes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">offsets</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">amps</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"offsets_hz and amplitudes must have the same shape"</span><span class="p">)</span>
+    <span class="n">phases</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">offsets</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">t</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">phases</span> <span class="o">@</span> <span class="n">amps</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="n">t2</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="fid_to_spectrum">
+<a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.fid_to_spectrum">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fid_to_spectrum</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span> <span class="n">dwell_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Fourier-transform an FID into a frequency-domain (absorption-mode) spectrum.</span>
+
+<span class="sd">    Uses the discrete Fourier transform with the first point halved (the</span>
+<span class="sd">    standard correction that removes a constant baseline offset) and</span>
+<span class="sd">    returns the real (absorption) part, frequency axis centered on zero.</span>
+<span class="sd">    A line of transverse relaxation time :math:`T_2` becomes a Lorentzian</span>
+<span class="sd">    of FWHM :math:`1/(\pi T_2)` Hz.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fid : array-like of complex</span>
+<span class="sd">        Uniformly sampled FID, starting at :math:`t=0`.</span>
+<span class="sd">    dwell_time : float</span>
+<span class="sd">        Sampling interval, in s.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    frequencies_hz : ndarray</span>
+<span class="sd">        Ascending frequency axis, in Hz.</span>
+<span class="sd">    spectrum : ndarray</span>
+<span class="sd">        Real (absorption-mode) spectrum, in units of FID amplitude times seconds.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    One resonance at +50 Hz Fourier-transforms into a single peak at +50 Hz:</span>
+
+<span class="sd">    &gt;&gt;&gt; t = np.arange(4096) * 1e-3</span>
+<span class="sd">    &gt;&gt;&gt; freqs, spec = fid_to_spectrum(free_induction_decay(t, [50.0], [1.0], t2=0.2), 1e-3)</span>
+<span class="sd">    &gt;&gt;&gt; round(float(freqs[np.argmax(spec)]), 1)</span>
+<span class="sd">    50.0</span>
+<span class="sd">    """</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+    <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*=</span> <span class="mf">0.5</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">size</span>
+    <span class="n">spectrum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">*</span> <span class="n">dwell_time</span>
+    <span class="n">frequencies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">dwell_time</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">frequencies</span><span class="p">,</span> <span class="n">spectrum</span><span class="o">.</span><span class="n">real</span></div>
 
 </pre></div>
 

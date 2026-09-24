@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.crystal.systems.madelung</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Madelung constant of the NaCl (rock-salt) structure, from a genuinely converging lattice sum.</span>
+<span></span><span class="sa">r</span><span class="sd">"""The Madelung constant of the NaCl (rock-salt) structure, from a genuinely converging lattice sum.</span>
 
 <span class="sd">The Madelung constant `M` of an ionic crystal is defined so that the</span>
 <span class="sd">electrostatic lattice energy per ion pair is</span>
@@ -430,7 +430,7 @@
 <span class="sd">    M = -\sum_{j\neq0}(-1)^{i+j+k}\,\frac{r_0}{r_j}</span>
 
 <span class="sd">which, remarkably, can be evaluated over a *simple cubic* lattice of</span>
-<span class="sd">alternating unit charges at spacing :math:`r_0`: NaCl&#39;s two</span>
+<span class="sd">alternating unit charges at spacing :math:`r_0`: NaCl's two</span>
 <span class="sd">interpenetrating FCC sublattices (Na+ at the FCC points, Cl- at the FCC</span>
 <span class="sd">points offset by half the conventional cell edge) combine into a single</span>
 <span class="sd">simple cubic lattice of spacing :math:`a/2` (`a` the conventional cubic</span>
@@ -438,7 +438,7 @@
 <span class="sd">exactly the object :func:`chemistrykit.crystal.utils.lattice_sums.evjen_lattice_sum_cubic_alternating`</span>
 <span class="sd">sums (Ashcroft &amp; Mermin, *Solid State Physics*, 1976, problem 20.1).</span>
 
-<span class="sd">**Why this needs Evjen&#39;s method, not a naive truncated sum.** The series</span>
+<span class="sd">**Why this needs Evjen's method, not a naive truncated sum.** The series</span>
 <span class="sd">above is only *conditionally* convergent -- it has no well-defined value</span>
 <span class="sd">independent of summation order, so truncating the sum to a growing cube</span>
 <span class="sd">or sphere of lattice points does not settle down to the right answer as</span>
@@ -459,20 +459,20 @@
 <span class="sd">&gt;&gt;&gt; bool(np.std(naive_values) &gt; 0.05)  # still swinging wildly at n=6..10</span>
 <span class="sd">True</span>
 <span class="sd">&gt;&gt;&gt; evjen_values = [madelung_constant_nacl(n) for n in range(6, 11)]</span>
-<span class="sd">&gt;&gt;&gt; bool(np.std(evjen_values) &lt; 1e-4)  # Evjen&#39;s method has already settled down</span>
+<span class="sd">&gt;&gt;&gt; bool(np.std(evjen_values) &lt; 1e-4)  # Evjen's method has already settled down</span>
 <span class="sd">True</span>
 
 <span class="sd">whereas :func:`madelung_constant_nacl` (Evjen-weighted) converges quickly</span>
 <span class="sd">and matches the literature value :math:`M_{NaCl}=1.747565` (Kittel,</span>
 <span class="sd">*Introduction to Solid State Physics*, 8th ed., Table 1, Ch. 3) to 5</span>
 <span class="sd">significant figures well before `n_shells=20`.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.crystal.utils.lattice_sums</span><span class="w"> </span><span class="kn">import</span> <span class="n">evjen_lattice_sum_cubic_alternating</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MADELUNG_CONSTANT_NACL_LITERATURE&quot;</span><span class="p">,</span> <span class="s2">&quot;madelung_constant_nacl&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"MADELUNG_CONSTANT_NACL_LITERATURE"</span><span class="p">,</span> <span class="s2">"madelung_constant_nacl"</span><span class="p">]</span>
 
 <span class="c1">#: float: The accepted literature value of the NaCl Madelung constant</span>
 <span class="c1">#: (Kittel, *Introduction to Solid State Physics*, 8th ed., Table 1, Ch.</span>
@@ -484,7 +484,7 @@
 <div class="viewcode-block" id="madelung_constant_nacl">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.madelung_constant_nacl">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">madelung_constant_nacl</span><span class="p">(</span><span class="n">n_shells</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute the NaCl Madelung constant via Evjen&#39;s converging lattice summation.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Compute the NaCl Madelung constant via Evjen's converging lattice summation.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -506,7 +506,7 @@
 <span class="sd">    1.7476</span>
 <span class="sd">    &gt;&gt;&gt; round(madelung_constant_nacl(20), 6)</span>
 <span class="sd">    1.747565</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">evjen_lattice_sum_cubic_alternating</span><span class="p">(</span><span class="n">n_shells</span><span class="p">)</span></div>
 
 </pre></div>

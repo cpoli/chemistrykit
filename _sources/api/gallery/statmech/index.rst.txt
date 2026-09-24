@@ -6,8 +6,9 @@ Examples
 This gallery walks through every public feature of
 ``chemistrykit.statmech``: translational/rotational/vibrational partition
 functions and the thermodynamic functions derived from them; the
-Maxwell-Boltzmann speed distribution; and the canonical-ensemble
-lattice-gas adsorption model.
+Maxwell-Boltzmann speed distribution; the lattice-gas adsorption model;
+quantum statistics and its classical limit; the Debye solid; exact
+Ising-model results; and the second virial coefficient.
 
 Each script in this gallery is self-contained and can be run directly with
 ``python examples/statmech/<section>/<script>.py``. Every script also
@@ -19,13 +20,19 @@ of truth for what you see, not a copy of it.
 Sections
 --------
 
-- **partition_functions** -- the Sackur-Tetrode translational entropy,
-  and the Einstein vibrational heat-capacity curve.
-- **maxwell_boltzmann** -- the Maxwell-Boltzmann speed distribution and
-  its characteristic speeds, cross-checked against an actual
-  :mod:`chemistrykit.md` molecular-dynamics trajectory.
-- **lattice_gas** -- the canonical-ensemble lattice-gas derivation of the
-  Langmuir adsorption isotherm.
+- **partition_functions** -- equipartition, the Einstein vibrational
+  heat capacity, Gibbs's canonical partition function, and the
+  Sackur-Tetrode translational entropy.
+- **maxwell_boltzmann** -- the Maxwell-Boltzmann speed distribution, its
+  characteristic speeds, and a Stern-type molecular-beam check.
+- **lattice_gas** -- the lattice-gas derivation of the Langmuir adsorption
+  isotherm, and :math:`S=k_B\ln W` by counting arrangements.
+- **quantum_statistics** -- the thermal de Broglie wavelength, and the
+  Maxwell-Boltzmann limit of Bose-Einstein and Fermi-Dirac statistics.
+- **solids** -- Debye's :math:`T^3` law for the heat capacity of a solid.
+- **ising** -- Ising's 1D chain, Kramers-Wannier duality, and Onsager's
+  exact 2D solution.
+- **virial** -- Mayer's second virial coefficient from a pair potential.
 
 
 .. raw:: html
@@ -45,11 +52,12 @@ Sections
 
     </div>
 
-Lattice-gas adsorption
------------------------
+Ising model
+------------
 
-The canonical-ensemble lattice-gas derivation of the Langmuir adsorption
-isotherm.
+Exact results for the nearest-neighbor Ising (lattice-gas) model: Ising's
+one-dimensional chain, Kramers-Wannier duality, and Onsager's
+two-dimensional solution.
 
 
 .. raw:: html
@@ -65,7 +73,82 @@ isotherm.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="LatticeGasAdsorption models M independent, non-interacting adsorption sites, each either empty or occupied with binding energy \epsilon. Treating the sites in equilibrium with an ideal-gas reservoir gives exactly the Langmuir isotherm \theta=P/(P+P_0) -- shown here for two binding strengths, alongside the purely combinatorial (fixed-`N`, canonical) configurational entropy of the lattice, which is maximal at half filling.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Ernst Ising (1925) solved the chain of spins s_i=\pm1 with nearest-neighbor coupling J and found no spontaneous magnetization at any temperature above zero. Ising1D solves it with the 2x2 transfer matrix, whose eigenvalues \lambda_\pm give Z_N=\lambda_+^N+\lambda_-^N exactly. The plots show a checked partition function, a magnetization that is a smooth function of field at every temperature (it only becomes a step at T=0), a correlation length that grows as e^{2J/k_BT} but stays finite, and a smooth heat-capacity maximum instead of a singularity.">
+
+.. only:: html
+
+  .. image:: /api/gallery/statmech/ising/images/thumb/sphx_glr_plot_01_ising_chain_transfer_matrix_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statmech/ising/plot_01_ising_chain_transfer_matrix`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Ising's one-dimensional chain: no phase transition</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Kramers and Wannier (1941) showed that the square-lattice Ising model&#x27;s high-temperature series at coupling K=J/k_BT equals its low-temperature series at the dual coupling K^*, with">
+
+.. only:: html
+
+  .. image:: /api/gallery/statmech/ising/images/thumb/sphx_glr_plot_02_kramers_wannier_duality_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statmech/ising/plot_02_kramers_wannier_duality`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Kramers-Wannier duality and the exact Ising critical temperature</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Onsager (1944) computed the free energy of the square-lattice Ising model exactly: the first exact solution of a model with a genuine phase transition. Ising2DOnsager evaluates his free energy, internal energy, and heat capacity, together with Yang&#x27;s (1952) spontaneous magnetization m=[1-\sinh^{-4}(2J/k_BT)]^{1/8}. The heat capacity diverges logarithmically at T_c, and the magnetization vanishes with exponent \beta=1/8. Neither the mean-field (Bragg-Williams) theory, shown for comparison, nor Ising&#x27;s own one-dimensional chain reproduces these features.">
+
+.. only:: html
+
+  .. image:: /api/gallery/statmech/ising/images/thumb/sphx_glr_plot_03_onsager_exact_solution_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statmech/ising/plot_03_onsager_exact_solution`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Onsager's exact solution of the two-dimensional Ising model</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Lattice-gas adsorption
+-----------------------
+
+The lattice-gas derivation of the Langmuir adsorption isotherm, and
+Boltzmann's :math:`S=k_B\ln W` counted directly on a lattice.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Irving Langmuir&#x27;s 1918 picture of adsorption: a fixed number of independent, non-interacting surface sites, each either empty or holding exactly one molecule with binding energy \epsilon. LatticeGasAdsorption treats those sites in equilibrium with an ideal-gas reservoir and recovers exactly the Langmuir isotherm \theta=P/(P+P_0) -- linear in P at low pressure, saturating at a full monolayer at high pressure -- shown here for two binding strengths.">
 
 .. only:: html
 
@@ -76,7 +159,24 @@ isotherm.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">A canonical-ensemble derivation of the Langmuir adsorption isotherm</div>
+      <div class="sphx-glr-thumbnail-title">Langmuir's adsorption isotherm from a lattice-gas model</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Boltzmann&#x27;s 1877 insight, written by Planck as S=k_B\ln W: entropy counts the microscopic arrangements W compatible with a macroscopic state. For N indistinguishable molecules on M lattice sites, W=\binom{M}{N}, and canonical_entropy evaluates k_B\ln W exactly via ln_binomial. The entropy is largest at half filling, where the number of arrangements peaks, and per site it converges to the Stirling-approximation mixing entropy -k_B[\theta\ln\theta+(1-\theta)\ln(1-\theta)] as M grows.">
+
+.. only:: html
+
+  .. image:: /api/gallery/statmech/lattice_gas/images/thumb/sphx_glr_plot_02_boltzmann_entropy_counting_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statmech/lattice_gas/plot_02_boltzmann_entropy_counting`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Boltzmann's S = k ln W by counting lattice arrangements</div>
     </div>
 
 
@@ -90,7 +190,7 @@ Maxwell-Boltzmann speed distribution
 --------------------------------------
 
 The Maxwell-Boltzmann speed distribution and its characteristic speeds,
-cross-checked against an actual molecular-dynamics trajectory.
+and a Stern-type molecular-beam sampling check of its shape.
 
 
 .. raw:: html
@@ -147,8 +247,9 @@ cross-checked against an actual molecular-dynamics trajectory.
 Partition functions
 ---------------------
 
-The Sackur-Tetrode translational entropy, and the Einstein vibrational
-heat-capacity curve.
+The equipartition theorem, Einstein's vibrational heat capacity, Gibbs's
+canonical-ensemble route from a partition function to every
+thermodynamic function, and the Sackur-Tetrode translational entropy.
 
 
 .. raw:: html
@@ -164,7 +265,7 @@ heat-capacity curve.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="VibrationalPartitionFunctionHarmonic&#x27;s heat capacity is the Einstein-oscillator formula: it vanishes as T\to0 (the vibration is &quot;frozen out&quot;) and approaches the classical equipartition value k_B per mode as T\to\infty. Separately, sackur_tetrode_entropy gives the translational entropy of an ideal gas directly from its molecular mass, temperature, and pressure -- checked here against the standard tabulated value for argon.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Einstein (1907) treated each vibration as a quantum oscillator of frequency \nu, so its heat capacity depends on \Theta_{\text{vib}}/T with \Theta_{\text{vib}}=h\nu/k_B. VibrationalPartitionFunctionHarmonic&#x27;s heat capacity is this formula: it vanishes as T\to0 (the vibration is &quot;frozen out&quot;) and approaches the classical equipartition value k_B per mode only once T is comparable to \Theta_{\text{vib}}. The second plot shows why a stiff mode (like Einstein&#x27;s diamond) stays frozen out at temperatures where a soft mode already behaves classically.">
 
 .. only:: html
 
@@ -175,7 +276,7 @@ heat-capacity curve.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">The Einstein vibrational heat capacity, and Sackur-Tetrode entropy</div>
+      <div class="sphx-glr-thumbnail-title">Einstein's quantum theory of the vibrational heat capacity</div>
     </div>
 
 
@@ -196,6 +297,181 @@ heat-capacity curve.
     </div>
 
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Gibbs (1902) showed that for a system at fixed temperature every thermodynamic function follows from the canonical partition function Q=\sum_i e^{-E_i/k_BT}:">
+
+.. only:: html
+
+  .. image:: /api/gallery/statmech/partition_functions/images/thumb/sphx_glr_plot_03_gibbs_canonical_partition_function_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statmech/partition_functions/plot_03_gibbs_canonical_partition_function`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Gibbs's canonical ensemble: all thermodynamics from one partition function</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Sackur (1911) and Tetrode (1912) obtained the absolute entropy of an ideal monatomic gas by dividing classical phase space into cells of size h^3:">
+
+.. only:: html
+
+  .. image:: /api/gallery/statmech/partition_functions/images/thumb/sphx_glr_plot_04_sackur_tetrode_entropy_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statmech/partition_functions/plot_04_sackur_tetrode_entropy`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Sackur-Tetrode entropy of a monatomic gas</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Quantum statistics and the classical limit
+--------------------------------------------
+
+The thermal de Broglie wavelength, and how Bose-Einstein and Fermi-Dirac
+statistics reduce to classical Maxwell-Boltzmann counting for ordinary
+molecular gases.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="De Broglie&#x27;s relation \lambda=h/p, averaged over a gas&#x27;s thermal spread of momenta, gives the thermal de Broglie wavelength">
+
+.. only:: html
+
+  .. image:: /api/gallery/statmech/quantum_statistics/images/thumb/sphx_glr_plot_01_thermal_de_broglie_wavelength_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statmech/quantum_statistics/plot_01_thermal_de_broglie_wavelength`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">De Broglie's matter waves: the thermal wavelength of a gas</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Bose and Einstein (1924-25) and Fermi and Dirac (1926) found the mean occupancy of a single-particle state of energy \varepsilon for indistinguishable bosons and fermions:">
+
+.. only:: html
+
+  .. image:: /api/gallery/statmech/quantum_statistics/images/thumb/sphx_glr_plot_02_bose_einstein_fermi_dirac_limit_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statmech/quantum_statistics/plot_02_bose_einstein_fermi_dirac_limit`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Bose-Einstein and Fermi-Dirac statistics reduce to Maxwell-Boltzmann</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Heat capacity of solids
+------------------------
+
+Debye's continuum model of lattice vibrations and its low-temperature
+:math:`T^3` law.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Debye (1912) replaced Einstein&#x27;s single vibrational frequency with the full spectrum of lattice sound waves, g(\nu)\propto\nu^2 up to a cutoff \nu_D. DebyeSolid gives">
+
+.. only:: html
+
+  .. image:: /api/gallery/statmech/solids/images/thumb/sphx_glr_plot_01_debye_t_cubed_law_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statmech/solids/plot_01_debye_t_cubed_law`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Debye's T-cubed law for the heat capacity of a solid</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Virial coefficients
+--------------------
+
+The second virial coefficient of an imperfect gas computed from its
+intermolecular pair potential.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Mayer (1937) expanded a real gas&#x27;s partition function in clusters of the Mayer function f(r)=e^{-u(r)/k_BT}-1. The first correction to the ideal-gas law, PV_m/RT=1+B_2(T)/V_m+\cdots, is">
+
+.. only:: html
+
+  .. image:: /api/gallery/statmech/virial/images/thumb/sphx_glr_plot_01_mayer_second_virial_coefficient_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/statmech/virial/plot_01_mayer_second_virial_coefficient`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Mayer's cluster expansion: the second virial coefficient</div>
+    </div>
+
+
 .. thumbnail-parent-div-close
 
 .. raw:: html
@@ -208,9 +484,13 @@ heat-capacity curve.
    :includehidden:
 
 
+   /api/gallery/statmech/ising/index.rst
    /api/gallery/statmech/lattice_gas/index.rst
    /api/gallery/statmech/maxwell_boltzmann/index.rst
    /api/gallery/statmech/partition_functions/index.rst
+   /api/gallery/statmech/quantum_statistics/index.rst
+   /api/gallery/statmech/solids/index.rst
+   /api/gallery/statmech/virial/index.rst
 
 
 

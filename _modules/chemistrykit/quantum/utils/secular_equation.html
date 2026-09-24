@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.quantum.utils.secular_equation</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shared generalized-eigenvalue (&quot;secular equation&quot;) solver.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Shared generalized-eigenvalue ("secular equation") solver.</span>
 
 <span class="sd">Every variational model in this subpackage --</span>
 <span class="sd">:class:`chemistrykit.quantum.systems.huckel.HuckelSystem` (an orthonormal</span>
@@ -426,13 +426,13 @@
 
 <span class="sd">    HC = SCE</span>
 
-<span class="sd">(the &quot;secular equation&quot; or &quot;Roothaan equation&quot;; Szabo &amp; Ostlund, *Modern</span>
+<span class="sd">(the "secular equation" or "Roothaan equation"; Szabo &amp; Ostlund, *Modern</span>
 <span class="sd">Quantum Chemistry*, 1st ed. rev., Ch. 3.4; Levine, *Quantum Chemistry*,</span>
 <span class="sd">7th ed., Ch. 11.1), where :math:`H_{ij}=\langle\chi_i|\hat H|\chi_j\rangle`</span>
 <span class="sd">is the Hamiltonian matrix, :math:`S_{ij}=\langle\chi_i|\chi_j\rangle` is</span>
 <span class="sd">the overlap matrix, `C` collects the eigenvectors as columns, and `E` is</span>
 <span class="sd">the diagonal matrix of orbital energies. When the basis is already</span>
-<span class="sd">orthonormal (:math:`S=I`, standard Huckel theory&#39;s approximation), this</span>
+<span class="sd">orthonormal (:math:`S=I`, standard Huckel theory's approximation), this</span>
 <span class="sd">reduces to the ordinary eigenvalue problem :math:`HC=CE`.</span>
 
 <span class="sd">Both `H` and `S` are Hermitian by construction (real-symmetric for the</span>
@@ -440,24 +440,24 @@
 <span class="sd">:func:`numpy.linalg.eigh`/:func:`scipy.linalg.eigh` -- which exploit that</span>
 <span class="sd">structure for speed and numerical stability, and guarantee real</span>
 <span class="sd">eigenvalues -- are the correct and only tool needed; this is exactly the</span>
-<span class="sd">diagonalization pattern physicskit&#39;s tight-binding Bloch Hamiltonians use</span>
+<span class="sd">diagonalization pattern physicskit's tight-binding Bloch Hamiltonians use</span>
 <span class="sd">(``physicskit.condensed.tight_binding.Hamiltonian.bands``), since Huckel</span>
 <span class="sd">theory *is* a (molecular, real-space) tight-binding model of the pi</span>
 <span class="sd">system.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sla</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;solve_secular_equation&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"solve_secular_equation"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="solve_secular_equation">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.solve_secular_equation">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">solve_secular_equation</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Solve the secular equation :math:`HC=SCE` for a Hermitian `H` and (optional) overlap `S`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Solve the secular equation :math:`HC=SCE` for a Hermitian `H` and (optional) overlap `S`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -507,12 +507,12 @@
 <span class="sd">    &gt;&gt;&gt; energies_S, _ = solve_secular_equation(H, S)</span>
 <span class="sd">    &gt;&gt;&gt; bool(np.any(np.abs(np.sort(energies_S) - np.sort(energies)) &gt; 1e-9))</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">H</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">H</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">H</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;H must be a square matrix&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"H must be a square matrix"</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">H</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;H must be (numerically) symmetric/Hermitian&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"H must be (numerically) symmetric/Hermitian"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">S</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">energies</span><span class="p">,</span> <span class="n">coefficients</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
@@ -520,13 +520,13 @@
 
     <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">S</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">H</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;S must have the same shape as H&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"S must have the same shape as H"</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;S must be (numerically) symmetric&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"S must be (numerically) symmetric"</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">energies</span><span class="p">,</span> <span class="n">coefficients</span> <span class="o">=</span> <span class="n">sla</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">sla</span><span class="o">.</span><span class="n">LinAlgError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;S is not symmetric positive-definite -- the basis is linearly dependent&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"S is not symmetric positive-definite -- the basis is linearly dependent"</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
     <span class="k">return</span> <span class="n">energies</span><span class="p">,</span> <span class="n">coefficients</span></div>
 
 </pre></div>

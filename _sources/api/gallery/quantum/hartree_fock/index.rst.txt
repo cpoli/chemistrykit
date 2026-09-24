@@ -2,12 +2,13 @@
 
 .. _sphx_glr_api_gallery_quantum_hartree_fock:
 
-Minimal variational H2+
--------------------------
+Minimal variational H2+ and the LCAO method
+---------------------------------------------
 
-A minimal 2-Gaussian LCAO variational treatment of H2+: solving the
-secular equation ``HC=SCE`` and variationally optimizing the Gaussian
-orbital exponent to improve on a naive fixed-exponent guess.
+The one-electron H2+ molecular ion in a small Gaussian basis: LCAO
+bonding and antibonding orbitals, bonding density, the Born-Oppenheimer
+potential curve, Gaussian-type orbital integrals, the Roothaan-Hall
+secular equation ``HC=SCE``, and the shared electron pair.
 
 
 .. raw:: html
@@ -23,18 +24,18 @@ orbital exponent to improve on a naive fixed-exponent guess.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="H2PlusVariational builds the 2x2 Hamiltonian and overlap matrices for a minimal one-Gaussian- per-proton basis, solves the secular equation HC=SCE, and then variationally optimizes the shared Gaussian exponent -- a genuine application of the Rayleigh-Ritz variational theorem: minimizing over a real parameter can only lower (never raise) the computed energy toward the true ground state.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Hund and Mulliken&#x27;s molecular-orbital theory builds one-electron orbitals spread over the whole molecule as a linear combination of atomic orbitals, \psi_\pm=c_A\chi_A\pm c_B\chi_B. H2PlusVariational does this for H2+ with one Gaussian orbital per proton: diagonalizing the 2x2 problem gives the in-phase bonding orbital (equal coefficients, energy below the isolated-atom level) and the out-of-phase antibonding orbital (opposite coefficients, energy above it). Following both orbital energies from short bond lengths out to separated atoms gives Mulliken&#x27;s correlation diagram for the simplest molecule.">
 
 .. only:: html
 
-  .. image:: /api/gallery/quantum/hartree_fock/images/thumb/sphx_glr_plot_01_h2_plus_variational_thumb.png
+  .. image:: /api/gallery/quantum/hartree_fock/images/thumb/sphx_glr_plot_01_lcao_molecular_orbitals_thumb.png
     :alt:
 
-  :doc:`/api/gallery/quantum/hartree_fock/plot_01_h2_plus_variational`
+  :doc:`/api/gallery/quantum/hartree_fock/plot_01_lcao_molecular_orbitals`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">H2+ in a minimal 2-Gaussian basis: the variational principle at work</div>
+      <div class="sphx-glr-thumbnail-title">Hund-Mulliken LCAO molecular orbitals of H2+: bonding and antibonding</div>
     </div>
 
 
@@ -55,6 +56,74 @@ orbital exponent to improve on a naive fixed-exponent guess.
     </div>
 
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Born and Oppenheimer separated the fast electrons from the slow nuclei: first solve the electronic problem with the nuclei clamped at a fixed separation R, then let the nuclei move on the resulting potential energy curve U(R)=E_{el}(R)+e^2/4\pi\varepsilon_0R. Here each point of the curve is a separate clamped-nuclei calculation with H2PlusVariational (``bond_length`` is a fixed input, never a dynamical variable). The curvature at the minimum then gives a nuclear vibrational frequency, and because the electronic curve does not depend on nuclear mass, H2+ and D2+ share the same curve but have different zero-point energies.">
+
+.. only:: html
+
+  .. image:: /api/gallery/quantum/hartree_fock/images/thumb/sphx_glr_plot_03_born_oppenheimer_potential_curve_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/quantum/hartree_fock/plot_03_born_oppenheimer_potential_curve`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Born-Oppenheimer clamped-nuclei potential curve of H2+</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="S. F. Boys (1950) proposed building molecular wavefunctions from Gaussian functions e^{-\alpha r^2} instead of the physically natural Slater-type e^{-\zeta r}. The payoff is the Gaussian product theorem: the product of two Gaussians on different centres is a single Gaussian on a point between them, so every multi-centre integral reduces to a closed form. This example checks the theorem numerically, checks the closed-form overlap integral (~chemistrykit.quantum.utils.basis_sets.overlap_integral) and the Boys function (~chemistrykit.quantum.utils.basis_sets.boys_f0) against brute-force quadrature, and shows the price paid: one Gaussian has no cusp at the nucleus, while a contraction of three (STO-3G) comes close to the Slater 1s orbital.">
+
+.. only:: html
+
+  .. image:: /api/gallery/quantum/hartree_fock/images/thumb/sphx_glr_plot_04_boys_gaussian_orbitals_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/quantum/hartree_fock/plot_04_boys_gaussian_orbitals`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Boys's Gaussian-type orbitals and the Gaussian product theorem</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Roothaan and Hall turned the molecular orbital problem into matrix algebra: expand each orbital in a finite, non-orthogonal basis and the variational condition becomes the generalized eigenvalue problem HC=SCE, solved here by solve_secular_equation. For the one-electron H2+ the Fock matrix is just the core Hamiltonian, so the equation is solved exactly once in each basis. The example shows that the overlap matrix S matters, that Lowdin&#x27;s symmetric orthogonalization S^{-1/2}HS^{-1/2} gives the same answer, and that enlarging the basis lowers the energy toward the exact H2+ value, as the variational principle requires.">
+
+.. only:: html
+
+  .. image:: /api/gallery/quantum/hartree_fock/images/thumb/sphx_glr_plot_05_roothaan_hall_secular_equation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/quantum/hartree_fock/plot_05_roothaan_hall_secular_equation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Roothaan-Hall equations: solving HC = SCE in a finite basis</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="G. N. Lewis&#x27;s 1916 covalent bond is a pair of electrons shared between two atoms. In molecular-orbital language that pair is two electrons of opposite spin in the same bonding orbital. Using the two orbitals of a hydrogen-like diatomic from H2PlusVariational (at the H2 bond length, electron-electron repulsion neglected), fill them with 1 to 4 electrons: the bond order (n_{bonding}-n_{antibonding})/2 is 1 exactly when a single Lewis pair sits in the bonding orbital, and adding a second pair to the antibonding orbital cancels the bond (the He2 case).">
+
+.. only:: html
+
+  .. image:: /api/gallery/quantum/hartree_fock/images/thumb/sphx_glr_plot_06_lewis_shared_electron_pair_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/quantum/hartree_fock/plot_06_lewis_shared_electron_pair`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Lewis's shared electron pair: two opposite-spin electrons in one bonding orbital</div>
+    </div>
+
+
 .. thumbnail-parent-div-close
 
 .. raw:: html
@@ -65,6 +134,10 @@ orbital exponent to improve on a naive fixed-exponent guess.
 .. toctree::
    :hidden:
 
-   /api/gallery/quantum/hartree_fock/plot_01_h2_plus_variational
+   /api/gallery/quantum/hartree_fock/plot_01_lcao_molecular_orbitals
    /api/gallery/quantum/hartree_fock/plot_02_bonding_antibonding_density
+   /api/gallery/quantum/hartree_fock/plot_03_born_oppenheimer_potential_curve
+   /api/gallery/quantum/hartree_fock/plot_04_boys_gaussian_orbitals
+   /api/gallery/quantum/hartree_fock/plot_05_roothaan_hall_secular_equation
+   /api/gallery/quantum/hartree_fock/plot_06_lewis_shared_electron_pair
 

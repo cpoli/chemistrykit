@@ -5,8 +5,9 @@
 Thermostats
 ------------
 
-Comparing an unthermostatted (NVE) Lennard-Jones fluid run against
-velocity-rescaling and Nose-Hoover temperature control.
+Temperature control for a Lennard-Jones fluid: the Nose-Hoover
+extended-system thermostat, Berendsen weak coupling, and
+Bussi-Donadio-Parrinello stochastic velocity rescaling.
 
 
 .. raw:: html
@@ -22,18 +23,52 @@ velocity-rescaling and Nose-Hoover temperature control.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Starting the same Lennard-Jones fluid configuration well away from its target temperature, three runs compare how the instantaneous kinetic temperature evolves: an unthermostatted (NVE, microcanonical) run, where it simply stays wherever it started; the crude, deterministic VelocityRescalingThermostat, which snaps it back to the target at every rescaling; and the NoseHooverThermostat, which relaxes it smoothly toward the target via an extended-system friction variable.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Nose&#x27;s extended system, in Hoover&#x27;s friction-coefficient form, adds a single dynamical variable \xi to Newton&#x27;s equations:">
 
 .. only:: html
 
-  .. image:: /api/gallery/md/thermostats/images/thumb/sphx_glr_plot_01_thermostats_thumb.png
+  .. image:: /api/gallery/md/thermostats/images/thumb/sphx_glr_plot_01_nose_hoover_thermostat_thumb.png
     :alt:
 
-  :doc:`/api/gallery/md/thermostats/plot_01_thermostats`
+  :doc:`/api/gallery/md/thermostats/plot_01_nose_hoover_thermostat`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Thermostats: NVE vs. velocity-rescaling vs. Nose-Hoover</div>
+      <div class="sphx-glr-thumbnail-title">The Nose-Hoover thermostat: a friction variable that steers the temperature</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Berendsen and coworkers (1984) couple the system to a heat bath at T_0 by rescaling all velocities each step by">
+
+.. only:: html
+
+  .. image:: /api/gallery/md/thermostats/images/thumb/sphx_glr_plot_02_berendsen_weak_coupling_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/md/thermostats/plot_02_berendsen_weak_coupling`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Berendsen's weak coupling: exponential relaxation to the bath temperature</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Bussi, Donadio, and Parrinello (2007) kept Berendsen&#x27;s exponential relaxation of the kinetic energy K but added a stochastic term of exactly the right size,">
+
+.. only:: html
+
+  .. image:: /api/gallery/md/thermostats/images/thumb/sphx_glr_plot_03_stochastic_velocity_rescaling_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/md/thermostats/plot_03_stochastic_velocity_rescaling`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Bussi-Donadio-Parrinello: stochastic velocity rescaling samples the canonical ensemble</div>
     </div>
 
 
@@ -47,5 +82,7 @@ velocity-rescaling and Nose-Hoover temperature control.
 .. toctree::
    :hidden:
 
-   /api/gallery/md/thermostats/plot_01_thermostats
+   /api/gallery/md/thermostats/plot_01_nose_hoover_thermostat
+   /api/gallery/md/thermostats/plot_02_berendsen_weak_coupling
+   /api/gallery/md/thermostats/plot_03_stochastic_velocity_rescaling
 

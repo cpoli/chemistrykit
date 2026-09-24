@@ -5,11 +5,11 @@
 Catalysis
 -----------
 
-Turnover frequency and turnover number, and the rate enhancement a
-catalyst produces by lowering the activation energy, via
-chemistrykit.kinetics's Arrhenius equation. Also the Sabatier-principle
-"volcano curve": why a catalyst's binding strength has an optimum rather
-than a monotonic effect on rate.
+One example per milestone in the history of catalysis: Doebereiner's
+platinum and Berzelius's naming of catalysis, Arrhenius and Ostwald's
+kinetic definition of a catalyst, Sabatier's catalytic hydrogenation,
+Constable's compensation effect, Balandin's volcano curve, and Boudart's
+turnover frequency.
 
 
 .. raw:: html
@@ -25,35 +25,103 @@ than a monotonic effect on rate.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="A catalyst lowers a reaction&#x27;s activation energy without changing its thermodynamics, which -- via the Arrhenius equation (chemistrykit.kinetics.systems.arrhenius) -- can speed the reaction up by many orders of magnitude even for a modest reduction in E_a. compare_catalyzed_rate quantifies this, and turnover_frequency/ turnover_number are the standard measures of catalytic activity and durability.">
+    <div class="sphx-glr-thumbcontainer" tooltip="In 1823 Doebereiner found that spongy platinum ignites a jet of hydrogen in air at room temperature and comes out of the reaction unchanged; in 1835 Berzelius named the phenomenon catalysis. This example makes both halves of that observation quantitative with illustrative (not measured) parameters for 2H_2 + O_2 \to 2H_2O. Lowering the activation energy on platinum (~chemistrykit.surface.systems.catalysis.compare_catalyzed_rate) turns a reaction that is frozen at room temperature into a fast one, and the turnover_number keeps growing while the amount of platinum stays exactly the same. The catalyst is used again and again, never used up.">
 
 .. only:: html
 
-  .. image:: /api/gallery/surface/catalysis/images/thumb/sphx_glr_plot_01_catalysis_thumb.png
+  .. image:: /api/gallery/surface/catalysis/images/thumb/sphx_glr_plot_01_doebereiner_berzelius_catalysis_thumb.png
     :alt:
 
-  :doc:`/api/gallery/surface/catalysis/plot_01_catalysis`
+  :doc:`/api/gallery/surface/catalysis/plot_01_doebereiner_berzelius_catalysis`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Catalysis: turnover frequency and Arrhenius rate enhancement</div>
+      <div class="sphx-glr-thumbnail-title">Doebereiner's platinum and Berzelius's catalysis: a catalyst that is not consumed</div>
     </div>
 
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Paul Sabatier&#x27;s qualitative principle -- that the best catalyst binds a reaction intermediate neither too weakly (nothing sticks long enough to react) nor too strongly (the surface clogs with product and never frees up for another turnover) -- is illustrated here with the standard modern textbook toy model (see, e.g., Chorkendorff &amp; Niemantsverdriet, Concepts of Modern Catalysis and Kinetics, 2nd ed., Wiley-VCH, 2007, Ch. 8): a two-step surface mechanism whose overall rate needs both an occupied site (to hold the adsorbed intermediate) and an empty site (for the next step to proceed), so the rate is proportional to \theta(1-\theta), with \theta the Langmuir coverage (~chemistrykit.surface.systems.langmuir.langmuir_coverage) set by the adsorption equilibrium constant K -- a proxy for binding strength. This is not a literal reproduction of Sabatier&#x27;s own (qualitative) or Balandin&#x27;s (multiplet-theory) equations, just the simplest possible model with the same volcano-shaped structure they established conceptually and structurally, respectively.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Arrhenius&#x27;s k = Ae^{-E_a/RT} explains why a catalyst&#x27;s lower activation energy multiplies the rate by e^{\Delta E_a/RT} (~chemistrykit.surface.systems.catalysis.compare_catalyzed_rate). Ostwald&#x27;s definition adds the key condition that a catalyst cannot move the equilibrium. It lowers the barrier for the forward and the reverse reaction by the same amount, so both rate constants grow by the same factor and K = k_f/k_r does not change. Below, the reversible reaction A \rightleftharpoons B reaches equilibrium far sooner with the catalyst, and it reaches exactly the same equilibrium.">
 
 .. only:: html
 
-  .. image:: /api/gallery/surface/catalysis/images/thumb/sphx_glr_plot_02_sabatier_volcano_thumb.png
+  .. image:: /api/gallery/surface/catalysis/images/thumb/sphx_glr_plot_02_arrhenius_ostwald_rate_enhancement_thumb.png
     :alt:
 
-  :doc:`/api/gallery/surface/catalysis/plot_02_sabatier_volcano`
+  :doc:`/api/gallery/surface/catalysis/plot_02_arrhenius_ostwald_rate_enhancement`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">The Sabatier principle and the catalytic volcano curve</div>
+      <div class="sphx-glr-thumbnail-title">Arrhenius and Ostwald: a catalyst speeds a reaction but leaves its equilibrium alone</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Sabatier and Senderens showed from 1897 that finely divided nickel hydrogenates ethylene (C_2H_4 + H_2 \to C_2H_6) at temperatures where the gas-phase reaction does not run at all. This example uses illustrative Arrhenius parameters and compare_catalyzed_rate to compute the conversion reached in a one-second contact time as the temperature rises. Over nickel the reaction lights off hundreds of kelvin earlier. A second panel shows Sabatier&#x27;s rule of thumb from screening many metals: a metal that binds the reactant too weakly holds almost none of it on the surface, and one that binds it too strongly leaves no free sites. Only a moderate binder has both.">
+
+.. only:: html
+
+  .. image:: /api/gallery/surface/catalysis/images/thumb/sphx_glr_plot_03_sabatier_hydrogenation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/surface/catalysis/plot_03_sabatier_hydrogenation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Sabatier and Senderens: catalytic hydrogenation over finely divided nickel</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Constable (1925) found that across a series of similar catalysts, a higher activation energy E_a came with a higher pre-exponential factor A, so \ln A rose linearly with E_a:">
+
+.. only:: html
+
+  .. image:: /api/gallery/surface/catalysis/images/thumb/sphx_glr_plot_04_constable_compensation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/surface/catalysis/plot_04_constable_compensation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Constable's compensation effect across a catalyst series</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Balandin&#x27;s multiplet theory (1929) predicted that when catalytic activity is plotted against binding strength across a series of catalysts, it rises, peaks and falls again, tracing a &quot;volcano&quot;. Bligaard, Norskov and coworkers (2004) later derived that shape from the Bronsted-Evans-Polanyi relation. This example reproduces the volcano with the standard textbook toy model (Chorkendorff &amp; Niemantsverdriet, Concepts of Modern Catalysis and Kinetics, 2nd ed., Wiley-VCH, 2007, Ch. 8). The rate needs an occupied site to hold the intermediate and an empty site for the next step, so rate \propto\theta(1-\theta), with \theta the Langmuir coverage (~chemistrykit.surface.systems.langmuir.langmuir_coverage). The adsorption constant K stands in for binding strength. A hypothetical series of catalysts sits on the two legs of the volcano, and its summit is exactly Langmuir&#x27;s half-saturation point K = 1/P. This is not a literal reproduction of Balandin&#x27;s multiplet equations.">
+
+.. only:: html
+
+  .. image:: /api/gallery/surface/catalysis/images/thumb/sphx_glr_plot_05_balandin_volcano_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/surface/catalysis/plot_05_balandin_volcano`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Balandin's volcano curve: catalytic activity peaks at intermediate binding</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Boudart argued that catalysts should be compared by their rate per active site, the turnover frequency (~chemistrykit.surface.systems.catalysis.turnover_frequency), and not by their rate per gram. Below, two samples of the same supported platinum differ only in dispersion, the fraction of Pt atoms exposed at the surface. The well-dispersed sample looks ten times more active per gram, yet both have the same TOF, because each exposed site works equally hard. A third, genuinely different metal does show a different TOF. The turnover_number gives the complementary lifetime measure of total cycles per site.">
+
+.. only:: html
+
+  .. image:: /api/gallery/surface/catalysis/images/thumb/sphx_glr_plot_06_boudart_turnover_frequency_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/surface/catalysis/plot_06_boudart_turnover_frequency`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Boudart's turnover frequency: comparing catalysts per active site</div>
     </div>
 
 
@@ -67,6 +135,10 @@ than a monotonic effect on rate.
 .. toctree::
    :hidden:
 
-   /api/gallery/surface/catalysis/plot_01_catalysis
-   /api/gallery/surface/catalysis/plot_02_sabatier_volcano
+   /api/gallery/surface/catalysis/plot_01_doebereiner_berzelius_catalysis
+   /api/gallery/surface/catalysis/plot_02_arrhenius_ostwald_rate_enhancement
+   /api/gallery/surface/catalysis/plot_03_sabatier_hydrogenation
+   /api/gallery/surface/catalysis/plot_04_constable_compensation
+   /api/gallery/surface/catalysis/plot_05_balandin_volcano
+   /api/gallery/surface/catalysis/plot_06_boudart_turnover_frequency
 

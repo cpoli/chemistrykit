@@ -1,6 +1,6 @@
 r"""
-Free-radical chain-growth polymerization kinetics
-====================================================
+Flory's steady-state kinetics of free-radical polymerization
+================================================================
 
 :func:`~chemistrykit.polymer.systems.chain_growth.free_radical_network`
 builds the lumped initiation/propagation/termination kinetics as a

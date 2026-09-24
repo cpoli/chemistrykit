@@ -410,14 +410,14 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.kinetics.systems.rate_laws</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Elementary integrated rate laws and half-lives (zero/first/second order).</span>
+<span></span><span class="sd">"""Elementary integrated rate laws and half-lives (zero/first/second order).</span>
 
 <span class="sd">These are the textbook closed-form solutions of ``d[A]/dt = -k[A]^n`` for</span>
 <span class="sd">``n = 0, 1, 2`` -- see e.g. Atkins &amp; de Paula, *Physical Chemistry*, 11th</span>
-<span class="sd">ed., Ch. 20 (&quot;The Rates of Chemical Reactions&quot;), Table 20.3, or Levine,</span>
+<span class="sd">ed., Ch. 20 ("The Rates of Chemical Reactions"), Table 20.3, or Levine,</span>
 <span class="sd">*Physical Chemistry*, 6th ed., Ch. 17. No numerical integration is used:</span>
 <span class="sd">each class implements the exact analytic solution directly.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -425,13 +425,13 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.kinetics.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">RateLaw</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ZeroOrder&quot;</span><span class="p">,</span> <span class="s2">&quot;FirstOrder&quot;</span><span class="p">,</span> <span class="s2">&quot;SecondOrder&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"ZeroOrder"</span><span class="p">,</span> <span class="s2">"FirstOrder"</span><span class="p">,</span> <span class="s2">"SecondOrder"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="ZeroOrder">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.ZeroOrder">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ZeroOrder</span><span class="p">(</span><span class="n">RateLaw</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Zero-order kinetics: ``d[A]/dt = -k``.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Zero-order kinetics: ``d[A]/dt = -k``.</span>
 
 <span class="sd">    Integrated law: :math:`[A](t) = [A]_0 - kt`, valid only while</span>
 <span class="sd">    :math:`[A](t) \geq 0` -- physically, the reaction stops (or crosses</span>
@@ -452,13 +452,13 @@
 <span class="sd">    0.5</span>
 <span class="sd">    &gt;&gt;&gt; round(law.half_life(), 6)</span>
 <span class="sd">    5.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">C0</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;k must be positive&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"k must be positive"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">C0</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;C0 must be positive&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"C0 must be positive"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">C0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">C0</span><span class="p">)</span>
 
@@ -472,7 +472,7 @@
 <div class="viewcode-block" id="ZeroOrder.rate">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.ZeroOrder.rate">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the (constant) rate ``k``.</span>
+<span class="w">        </span><span class="sd">"""Return the (constant) rate ``k``.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -484,14 +484,14 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span></div>
 
 
 <div class="viewcode-block" id="ZeroOrder.half_life">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.ZeroOrder.half_life">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">half_life</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;:math:`t_{1/2} = [A]_0 / (2k)`, per Atkins &amp; de Paula Table 20.3.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">""":math:`t_{1/2} = [A]_0 / (2k)`, per Atkins &amp; de Paula Table 20.3."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">C0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span></div>
 </div>
 
@@ -500,7 +500,7 @@
 <div class="viewcode-block" id="FirstOrder">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.FirstOrder">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FirstOrder</span><span class="p">(</span><span class="n">RateLaw</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;First-order kinetics: ``d[A]/dt = -k[A]``.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""First-order kinetics: ``d[A]/dt = -k[A]``.</span>
 
 <span class="sd">    Integrated law: :math:`[A](t) = [A]_0 e^{-kt}`. The half-life</span>
 <span class="sd">    :math:`t_{1/2} = \ln(2)/k` is independent of the initial</span>
@@ -524,13 +524,13 @@
 <span class="sd">    0.5</span>
 <span class="sd">    &gt;&gt;&gt; round(law.half_life(), 6)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">C0</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;k must be positive&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"k must be positive"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">C0</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;C0 must be positive&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"C0 must be positive"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">C0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">C0</span><span class="p">)</span>
 
@@ -544,7 +544,7 @@
 <div class="viewcode-block" id="FirstOrder.rate">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.FirstOrder.rate">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the instantaneous rate ``k * [A](t)``.</span>
+<span class="w">        </span><span class="sd">"""Return the instantaneous rate ``k * [A](t)``.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -555,7 +555,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">t</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">t</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="n">t</span><span class="p">)</span></div>
 
@@ -563,7 +563,7 @@
 <div class="viewcode-block" id="FirstOrder.half_life">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.FirstOrder.half_life">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">half_life</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;:math:`t_{1/2} = \ln(2)/k`, independent of :math:`[A]_0`.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">""":math:`t_{1/2} = \ln(2)/k`, independent of :math:`[A]_0`."""</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span></div>
 </div>
 
@@ -572,7 +572,7 @@
 <div class="viewcode-block" id="SecondOrder">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.SecondOrder">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SecondOrder</span><span class="p">(</span><span class="n">RateLaw</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Second-order kinetics (single reactant): ``d[A]/dt = -k[A]^2``.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Second-order kinetics (single reactant): ``d[A]/dt = -k[A]^2``.</span>
 
 <span class="sd">    Integrated law: :math:`1/[A](t) = 1/[A]_0 + kt`, i.e.</span>
 <span class="sd">    :math:`[A](t) = [A]_0 / (1 + k[A]_0 t)`. Unlike first order, the</span>
@@ -594,13 +594,13 @@
 <span class="sd">    0.5</span>
 <span class="sd">    &gt;&gt;&gt; round(law.half_life(), 6)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">C0</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;k must be positive&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"k must be positive"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">C0</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;C0 must be positive&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"C0 must be positive"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">C0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">C0</span><span class="p">)</span>
 
@@ -614,7 +614,7 @@
 <div class="viewcode-block" id="SecondOrder.rate">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.SecondOrder.rate">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the instantaneous rate ``k * [A](t)^2``.</span>
+<span class="w">        </span><span class="sd">"""Return the instantaneous rate ``k * [A](t)^2``.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -625,7 +625,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">t</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">t</span>
         <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">*</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span></div>
@@ -634,7 +634,7 @@
 <div class="viewcode-block" id="SecondOrder.half_life">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.SecondOrder.half_life">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">half_life</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;:math:`t_{1/2} = 1/(k[A]_0)`, unlike first order, depends on :math:`[A]_0`.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">""":math:`t_{1/2} = 1/(k[A]_0)`, unlike first order, depends on :math:`[A]_0`."""</span>
         <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">C0</span><span class="p">)</span></div>
 </div>
 

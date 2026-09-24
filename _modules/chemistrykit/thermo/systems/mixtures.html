@@ -410,13 +410,13 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.thermo.systems.mixtures</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Raoult&#39;s/Henry&#39;s law mixtures and colligative properties.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Raoult's/Henry's law mixtures and colligative properties.</span>
 
-<span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 5 (&quot;Simple</span>
-<span class="sd">mixtures&quot;) throughout: Sec. 5.4 for Raoult&#39;s and Henry&#39;s laws, Sec. 5.5</span>
+<span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 5 ("Simple</span>
+<span class="sd">mixtures") throughout: Sec. 5.4 for Raoult's and Henry's laws, Sec. 5.5</span>
 <span class="sd">for the colligative properties (freezing-point depression, boiling-point</span>
 <span class="sd">elevation, osmotic pressure).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -427,20 +427,21 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">R</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;raoult_vapor_pressure&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;BinaryIdealSolution&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;henry_law_pressure&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;CRYOSCOPIC_CONSTANTS&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;freezing_point_depression&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;boiling_point_elevation&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;osmotic_pressure&quot;</span><span class="p">,</span>
+    <span class="s2">"raoult_vapor_pressure"</span><span class="p">,</span>
+    <span class="s2">"BinaryIdealSolution"</span><span class="p">,</span>
+    <span class="s2">"henry_law_pressure"</span><span class="p">,</span>
+    <span class="s2">"CRYOSCOPIC_CONSTANTS"</span><span class="p">,</span>
+    <span class="s2">"freezing_point_depression"</span><span class="p">,</span>
+    <span class="s2">"boiling_point_elevation"</span><span class="p">,</span>
+    <span class="s2">"osmotic_pressure"</span><span class="p">,</span>
+    <span class="s2">"MargulesSolution"</span><span class="p">,</span>
 <span class="p">]</span>
 
 
 <div class="viewcode-block" id="raoult_vapor_pressure">
 <a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.raoult_vapor_pressure">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">raoult_vapor_pressure</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">P_pure</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Raoult&#39;s law: :math:`P_A = x_A P_A^*`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Raoult's law: :math:`P_A = x_A P_A^*`.</span>
 
 <span class="sd">    The partial vapor pressure of a component in an ideal mixture is</span>
 <span class="sd">    proportional to its mole fraction, with the pure-component vapor</span>
@@ -462,7 +463,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; round(float(raoult_vapor_pressure(x=0.4, P_pure=100.0)), 6)</span>
 <span class="sd">    40.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">P_pure</span></div>
 
@@ -472,9 +473,9 @@
 <a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.BinaryIdealSolution">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">BinaryIdealSolution</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A binary liquid mixture obeying Raoult&#39;s law for both components.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""A binary liquid mixture obeying Raoult's law for both components.</span>
 
-<span class="sd">    Combining Raoult&#39;s law for each component with Dalton&#39;s law for the</span>
+<span class="sd">    Combining Raoult's law for each component with Dalton's law for the</span>
 <span class="sd">    vapor phase gives the total vapor pressure as a function of liquid</span>
 <span class="sd">    composition, and the vapor-phase composition in equilibrium with it</span>
 <span class="sd">    (Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 5.4a):</span>
@@ -490,7 +491,7 @@
 <span class="sd">        Vapor pressure of pure A.</span>
 <span class="sd">    P_B_star : float</span>
 <span class="sd">        Vapor pressure of pure B.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">P_A_star</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">P_B_star</span><span class="p">:</span> <span class="nb">float</span>
@@ -498,7 +499,7 @@
 <div class="viewcode-block" id="BinaryIdealSolution.total_pressure">
 <a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.BinaryIdealSolution.total_pressure">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">total_pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_A</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Total vapor pressure above a liquid of composition `x_A`.</span>
+<span class="w">        </span><span class="sd">"""Total vapor pressure above a liquid of composition `x_A`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -508,7 +509,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">x_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x_A</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">x_A</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">P_A_star</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x_A</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">P_B_star</span></div>
 
@@ -516,7 +517,7 @@
 <div class="viewcode-block" id="BinaryIdealSolution.vapor_composition">
 <a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.BinaryIdealSolution.vapor_composition">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">vapor_composition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_A</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Vapor-phase mole fraction of A, :math:`y_A`, in equilibrium with liquid composition `x_A`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Vapor-phase mole fraction of A, :math:`y_A`, in equilibrium with liquid composition `x_A`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -542,7 +543,7 @@
 <span class="sd">        &gt;&gt;&gt; solution = BinaryIdealSolution(P_A_star=200.0, P_B_star=50.0)</span>
 <span class="sd">        &gt;&gt;&gt; bool(solution.vapor_composition(0.5) &gt; 0.5)</span>
 <span class="sd">        True</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">x_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x_A</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">x_A</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">P_A_star</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_pressure</span><span class="p">(</span><span class="n">x_A</span><span class="p">)</span></div>
 </div>
@@ -552,13 +553,13 @@
 <div class="viewcode-block" id="henry_law_pressure">
 <a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.henry_law_pressure">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">henry_law_pressure</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">K_H</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Henry&#39;s law: :math:`P_B = x_B K_H`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Henry's law: :math:`P_B = x_B K_H`.</span>
 
 <span class="sd">    For a dilute solute B, the partial vapor pressure is proportional to</span>
 <span class="sd">    its mole fraction with the (empirical, solute- and solvent-specific)</span>
-<span class="sd">    Henry&#39;s law constant :math:`K_H` as the proportionality constant --</span>
-<span class="sd">    unlike Raoult&#39;s law, :math:`K_H \neq P_B^*` in general, because the</span>
-<span class="sd">    solute&#39;s local environment in dilute solution (surrounded by solvent)</span>
+<span class="sd">    Henry's law constant :math:`K_H` as the proportionality constant --</span>
+<span class="sd">    unlike Raoult's law, :math:`K_H \neq P_B^*` in general, because the</span>
+<span class="sd">    solute's local environment in dilute solution (surrounded by solvent)</span>
 <span class="sd">    differs from pure solute (W. Henry, *Philos. Trans. R. Soc.* 93, 29</span>
 <span class="sd">    (1803); Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 5.4b).</span>
 
@@ -567,7 +568,7 @@
 <span class="sd">    x : float or array-like of float</span>
 <span class="sd">        Mole fraction of the (dilute) solute in solution.</span>
 <span class="sd">    K_H : float</span>
-<span class="sd">        Henry&#39;s law constant for this solute/solvent pair, same pressure</span>
+<span class="sd">        Henry's law constant for this solute/solvent pair, same pressure</span>
 <span class="sd">        units as the desired result.</span>
 
 <span class="sd">    Returns</span>
@@ -578,36 +579,36 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; round(float(henry_law_pressure(x=0.001, K_H=1.5e5)), 3)</span>
 <span class="sd">    150.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">K_H</span></div>
 
 
 
 <span class="c1">#: Cryoscopic (Kf) and ebullioscopic (Kb) constants for common solvents,</span>
-<span class="c1">#: in K kg/mol (i.e. per unit *molality*), plus each solvent&#39;s normal</span>
+<span class="c1">#: in K kg/mol (i.e. per unit *molality*), plus each solvent's normal</span>
 <span class="c1">#: freezing/boiling point in K -- commonly tabulated literature values</span>
 <span class="c1">#: (Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Table 5.4). Provided</span>
 <span class="c1">#: for convenience; :func:`freezing_point_depression` and</span>
 <span class="c1">#: :func:`boiling_point_elevation` also accept `Kf`/`Kb` directly for any</span>
 <span class="c1">#: solvent not listed here.</span>
 <span class="n">CRYOSCOPIC_CONSTANTS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;water&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Kf&quot;</span><span class="p">:</span> <span class="mf">1.86</span><span class="p">,</span> <span class="s2">&quot;Kb&quot;</span><span class="p">:</span> <span class="mf">0.51</span><span class="p">,</span> <span class="s2">&quot;Tf&quot;</span><span class="p">:</span> <span class="mf">273.15</span><span class="p">,</span> <span class="s2">&quot;Tb&quot;</span><span class="p">:</span> <span class="mf">373.15</span><span class="p">},</span>
-    <span class="s2">&quot;benzene&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Kf&quot;</span><span class="p">:</span> <span class="mf">5.12</span><span class="p">,</span> <span class="s2">&quot;Kb&quot;</span><span class="p">:</span> <span class="mf">2.53</span><span class="p">,</span> <span class="s2">&quot;Tf&quot;</span><span class="p">:</span> <span class="mf">278.65</span><span class="p">,</span> <span class="s2">&quot;Tb&quot;</span><span class="p">:</span> <span class="mf">353.25</span><span class="p">},</span>
-    <span class="s2">&quot;camphor&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Kf&quot;</span><span class="p">:</span> <span class="mf">37.7</span><span class="p">,</span> <span class="s2">&quot;Kb&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Tf&quot;</span><span class="p">:</span> <span class="mf">452.65</span><span class="p">,</span> <span class="s2">&quot;Tb&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
-    <span class="s2">&quot;acetic_acid&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Kf&quot;</span><span class="p">:</span> <span class="mf">3.90</span><span class="p">,</span> <span class="s2">&quot;Kb&quot;</span><span class="p">:</span> <span class="mf">3.07</span><span class="p">,</span> <span class="s2">&quot;Tf&quot;</span><span class="p">:</span> <span class="mf">289.75</span><span class="p">,</span> <span class="s2">&quot;Tb&quot;</span><span class="p">:</span> <span class="mf">391.05</span><span class="p">},</span>
+    <span class="s2">"water"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"Kf"</span><span class="p">:</span> <span class="mf">1.86</span><span class="p">,</span> <span class="s2">"Kb"</span><span class="p">:</span> <span class="mf">0.51</span><span class="p">,</span> <span class="s2">"Tf"</span><span class="p">:</span> <span class="mf">273.15</span><span class="p">,</span> <span class="s2">"Tb"</span><span class="p">:</span> <span class="mf">373.15</span><span class="p">},</span>
+    <span class="s2">"benzene"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"Kf"</span><span class="p">:</span> <span class="mf">5.12</span><span class="p">,</span> <span class="s2">"Kb"</span><span class="p">:</span> <span class="mf">2.53</span><span class="p">,</span> <span class="s2">"Tf"</span><span class="p">:</span> <span class="mf">278.65</span><span class="p">,</span> <span class="s2">"Tb"</span><span class="p">:</span> <span class="mf">353.25</span><span class="p">},</span>
+    <span class="s2">"camphor"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"Kf"</span><span class="p">:</span> <span class="mf">37.7</span><span class="p">,</span> <span class="s2">"Kb"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"Tf"</span><span class="p">:</span> <span class="mf">452.65</span><span class="p">,</span> <span class="s2">"Tb"</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+    <span class="s2">"acetic_acid"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"Kf"</span><span class="p">:</span> <span class="mf">3.90</span><span class="p">,</span> <span class="s2">"Kb"</span><span class="p">:</span> <span class="mf">3.07</span><span class="p">,</span> <span class="s2">"Tf"</span><span class="p">:</span> <span class="mf">289.75</span><span class="p">,</span> <span class="s2">"Tb"</span><span class="p">:</span> <span class="mf">391.05</span><span class="p">},</span>
 <span class="p">}</span>
 
 
 <div class="viewcode-block" id="freezing_point_depression">
 <a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.freezing_point_depression">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">freezing_point_depression</span><span class="p">(</span><span class="n">Kf</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Freezing-point depression :math:`\Delta T_f = i K_f b`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Freezing-point depression :math:`\Delta T_f = i K_f b`.</span>
 
 <span class="sd">    A colligative property: it depends on the *number* of dissolved</span>
 <span class="sd">    solute particles per kg of solvent, not their identity (Atkins &amp; de</span>
 <span class="sd">    Paula, *Physical Chemistry*, 11th ed., Ch. 5.5). See also</span>
-<span class="sd">    :mod:`chemistrykit.solutions`, which uses the same van&#39;t Hoff factor</span>
+<span class="sd">    :mod:`chemistrykit.solutions`, which uses the same van't Hoff factor</span>
 <span class="sd">    `i` convention for strong-electrolyte dissociation, but does not</span>
 <span class="sd">    duplicate this colligative-property machinery -- it lives here in</span>
 <span class="sd">    `chemistrykit.thermo` only.</span>
@@ -620,7 +621,7 @@
 <span class="sd">    b : float</span>
 <span class="sd">        Molality of solute, in mol/kg.</span>
 <span class="sd">    i : float, default 1.0</span>
-<span class="sd">        Van&#39;t Hoff factor: the number of particles each formula unit of</span>
+<span class="sd">        Van't Hoff factor: the number of particles each formula unit of</span>
 <span class="sd">        solute dissociates into (1 for a nonelectrolyte, 2 for e.g. NaCl</span>
 <span class="sd">        assuming complete dissociation).</span>
 
@@ -636,7 +637,7 @@
 
 <span class="sd">    &gt;&gt;&gt; round(freezing_point_depression(Kf=1.86, b=1.00, i=2.0), 2)</span>
 <span class="sd">    3.72</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="n">Kf</span> <span class="o">*</span> <span class="n">b</span></div>
 
 
@@ -644,7 +645,7 @@
 <div class="viewcode-block" id="boiling_point_elevation">
 <a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.boiling_point_elevation">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">boiling_point_elevation</span><span class="p">(</span><span class="n">Kb</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Boiling-point elevation :math:`\Delta T_b = i K_b b`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Boiling-point elevation :math:`\Delta T_b = i K_b b`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -654,7 +655,7 @@
 <span class="sd">    b : float</span>
 <span class="sd">        Molality of solute, in mol/kg.</span>
 <span class="sd">    i : float, default 1.0</span>
-<span class="sd">        Van&#39;t Hoff factor (see :func:`freezing_point_depression`).</span>
+<span class="sd">        Van't Hoff factor (see :func:`freezing_point_depression`).</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -665,7 +666,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; round(boiling_point_elevation(Kb=0.51, b=1.00, i=2.0), 2)</span>
 <span class="sd">    1.02</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="n">Kb</span> <span class="o">*</span> <span class="n">b</span></div>
 
 
@@ -673,11 +674,11 @@
 <div class="viewcode-block" id="osmotic_pressure">
 <a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.osmotic_pressure">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">osmotic_pressure</span><span class="p">(</span><span class="n">M</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The van&#39;t Hoff equation for osmotic pressure, :math:`\Pi = i M R T`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The van't Hoff equation for osmotic pressure, :math:`\Pi = i M R T`.</span>
 
-<span class="sd">    Formally identical to the ideal gas law -- van&#39;t Hoff originally</span>
+<span class="sd">    Formally identical to the ideal gas law -- van't Hoff originally</span>
 <span class="sd">    noted the (coincidental, but pedagogically useful) analogy (J. H.</span>
-<span class="sd">    van&#39;t Hoff, 1887; Atkins &amp; de Paula, *Physical Chemistry*, 11th ed.,</span>
+<span class="sd">    van't Hoff, 1887; Atkins &amp; de Paula, *Physical Chemistry*, 11th ed.,</span>
 <span class="sd">    Ch. 5.5e).</span>
 
 <span class="sd">    Parameters</span>
@@ -688,7 +689,7 @@
 <span class="sd">    T : float</span>
 <span class="sd">        Absolute temperature, in K.</span>
 <span class="sd">    i : float, default 1.0</span>
-<span class="sd">        Van&#39;t Hoff factor (see :func:`freezing_point_depression`).</span>
+<span class="sd">        Van't Hoff factor (see :func:`freezing_point_depression`).</span>
 <span class="sd">    R_gas : float, default :data:`chemistrykit.constants.R`</span>
 <span class="sd">        Gas constant, in J mol^-1 K^-1; with `M` in mol/m^3 this gives</span>
 <span class="sd">        `Pi` in Pa.</span>
@@ -704,8 +705,160 @@
 
 <span class="sd">    &gt;&gt;&gt; round(osmotic_pressure(M=100.0, T=298.15) / 1000.0, 2)</span>
 <span class="sd">    247.9</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="n">M</span> <span class="o">*</span> <span class="n">R_gas</span> <span class="o">*</span> <span class="n">T</span></div>
+
+
+
+<div class="viewcode-block" id="MargulesSolution">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.MargulesSolution">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MargulesSolution</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""A non-ideal binary liquid described by the one-parameter (two-suffix) Margules model.</span>
+
+<span class="sd">    Margules expanded the logarithms of the activity coefficients as power</span>
+<span class="sd">    series in mole fraction (M. Margules, *Sitzungsber. Kais. Akad. Wiss.</span>
+<span class="sd">    Wien, Math.-Naturwiss. Kl.* 104, 1243-1278 (1895)). Truncated at its</span>
+<span class="sd">    first term, the model has a symmetric excess Gibbs energy</span>
+<span class="sd">    :math:`G^E/(RT) = A\,x_1x_2`, giving</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \ln\gamma_1 = A\,x_2^2, \qquad \ln\gamma_2 = A\,x_1^2</span>
+
+<span class="sd">    and the modified Raoult's law :math:`P_i = x_i\gamma_i P_i^*` (Atkins &amp;</span>
+<span class="sd">    de Paula, *Physical Chemistry*, 11th ed., Ch. 5.3). :math:`A &gt; 0` gives</span>
+<span class="sd">    positive deviations from Raoult's law, :math:`A &lt; 0` negative ones,</span>
+<span class="sd">    and :math:`A = 0` recovers :class:`BinaryIdealSolution`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A : float</span>
+<span class="sd">        Dimensionless Margules parameter, :math:`W/(RT)`.</span>
+<span class="sd">    P1_star : float</span>
+<span class="sd">        Vapor pressure of pure component 1.</span>
+<span class="sd">    P2_star : float</span>
+<span class="sd">        Vapor pressure of pure component 2.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    At infinite dilution component 1 obeys Henry's law with</span>
+<span class="sd">    :math:`K_H = P_1^* e^{A}`, while near :math:`x_1 = 1` its activity</span>
+<span class="sd">    coefficient tends to 1 (Raoult's law):</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; sol = MargulesSolution(A=1.2, P1_star=30.0, P2_star=20.0)</span>
+<span class="sd">    &gt;&gt;&gt; round(sol.henry_constant_1 / 30.0, 6) == round(float(np.exp(1.2)), 6)</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; g1, g2 = sol.activity_coefficients(1.0)</span>
+<span class="sd">    &gt;&gt;&gt; float(g1), round(float(g2), 6) == round(float(np.exp(1.2)), 6)</span>
+<span class="sd">    (1.0, True)</span>
+<span class="sd">    """</span>
+
+    <span class="n">A</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">P1_star</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">P2_star</span><span class="p">:</span> <span class="nb">float</span>
+
+<div class="viewcode-block" id="MargulesSolution.activity_coefficients">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.MargulesSolution.activity_coefficients">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">activity_coefficients</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`(\gamma_1, \gamma_2)` at liquid mole fraction `x1`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x1 : float or array-like of float</span>
+<span class="sd">            Liquid-phase mole fraction of component 1.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple of (float or ndarray)</span>
+<span class="sd">        """</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">x1</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">*</span> <span class="n">x2</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">*</span> <span class="n">x1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MargulesSolution.excess_gibbs">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.MargulesSolution.excess_gibbs">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">excess_gibbs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Molar excess Gibbs energy :math:`G^E = RT\,A\,x_1x_2`, in J/mol.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x1 : float or array-like of float</span>
+<span class="sd">            Liquid-phase mole fraction of component 1.</span>
+<span class="sd">        T : float</span>
+<span class="sd">            Absolute temperature, in K.</span>
+<span class="sd">        R_gas : float, default :data:`chemistrykit.constants.R`</span>
+<span class="sd">            Gas constant.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float or ndarray</span>
+<span class="sd">        """</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">R_gas</span> <span class="o">*</span> <span class="n">T</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MargulesSolution.partial_pressures">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.MargulesSolution.partial_pressures">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">partial_pressures</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`(P_1, P_2)` from the modified Raoult's law :math:`P_i = x_i\gamma_iP_i^*`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x1 : float or array-like of float</span>
+<span class="sd">            Liquid-phase mole fraction of component 1.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple of (float or ndarray)</span>
+<span class="sd">        """</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">g1</span><span class="p">,</span> <span class="n">g2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activity_coefficients</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x1</span> <span class="o">*</span> <span class="n">g1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">P1_star</span><span class="p">,</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">*</span> <span class="n">g2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">P2_star</span></div>
+
+
+<div class="viewcode-block" id="MargulesSolution.total_pressure">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.MargulesSolution.total_pressure">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">total_pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Total vapor pressure above a liquid of composition `x1`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x1 : float or array-like of float</span>
+<span class="sd">            Liquid-phase mole fraction of component 1.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float or ndarray</span>
+<span class="sd">        """</span>
+        <span class="n">P1</span><span class="p">,</span> <span class="n">P2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">partial_pressures</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">P1</span> <span class="o">+</span> <span class="n">P2</span></div>
+
+
+<div class="viewcode-block" id="MargulesSolution.vapor_composition">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.MargulesSolution.vapor_composition">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vapor_composition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Vapor-phase mole fraction of component 1 in equilibrium with liquid `x1`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x1 : float or array-like of float</span>
+<span class="sd">            Liquid-phase mole fraction of component 1.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float or ndarray</span>
+<span class="sd">        """</span>
+        <span class="n">P1</span><span class="p">,</span> <span class="n">P2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">partial_pressures</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">P1</span> <span class="o">/</span> <span class="p">(</span><span class="n">P1</span> <span class="o">+</span> <span class="n">P2</span><span class="p">)</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">henry_constant_1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Henry's-law constant of component 1 at infinite dilution, :math:`P_1^* e^{A}`."""</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">P1_star</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">))</span></div>
 
 </pre></div>
 

@@ -456,8 +456,9 @@
 <p id="module-chemistrykit.md">chemistrykit.md: molecular dynamics and force fields.</p>
 <p>Lennard-Jones fluid simulation in reduced units (energy, pressure, radial
 distribution function g(r)); pairwise potentials (Morse, Buckingham,
-harmonic bond/angle terms); velocity-rescaling and Nose-Hoover
-thermostats; periodic boundary conditions with the minimum-image
+harmonic bond/angle terms); SHAKE bond constraints; velocity-rescaling,
+Berendsen, Nose-Hoover, and stochastic velocity-rescaling thermostats;
+Einstein and Green-Kubo self-diffusion coefficients; periodic boundary conditions with the minimum-image
 convention and a Verlet neighbor list. Integrated via
 <code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.integrators</span></code>’s velocity-Verlet
 (<code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.integrators.velocity_verlet_step()</span></code>) – not a
@@ -487,6 +488,62 @@ bonds <cite>i-j</cite> and <cite>k-j</cite>.</p>
 <dt class="sig sig-object py" id="chemistrykit.md.AnglePotential.torque">
 <span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">torque</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/core/base_system.html#AnglePotential.torque"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.AnglePotential.torque" title="Link to this definition">#</a></dt>
 <dd><p>Return <span class="math notranslate nohighlight">\(-dU/d\theta\)</span> for angle(s) <cite>theta</cite>, in radians.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.md.BerendsenThermostat">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">BerendsenThermostat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/thermostats.html#BerendsenThermostat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.BerendsenThermostat" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The Berendsen weak-coupling thermostat.</p>
+<p>Rescales every velocity by a common factor after each step so that the
+instantaneous kinetic temperature relaxes exponentially toward
+<cite>target_temperature</cite> with time constant <span class="math notranslate nohighlight">\(\tau\)</span> – H. J. C.
+Berendsen, J. P. M. Postma, W. F. van Gunsteren, A. DiNola &amp; J. R. Haak,
+<em>J. Chem. Phys.</em> 81, 3684 (1984), eq. 11:</p>
+<div class="math notranslate nohighlight">
+\[\lambda^2 = 1 + \frac{\Delta t}{\tau}\left(\frac{T_0}{T} - 1\right),
+\qquad \frac{dT}{dt} = \frac{T_0 - T}{\tau}.\]</div>
+<p>For <span class="math notranslate nohighlight">\(\tau = \Delta t\)</span> this reduces to the immediate, complete
+rescaling of <a class="reference internal" href="#chemistrykit.md.VelocityRescalingThermostat" title="chemistrykit.md.VelocityRescalingThermostat"><code class="xref py py-class docutils literal notranslate"><span class="pre">VelocityRescalingThermostat</span></code></a>. Like that scheme it
+suppresses canonical kinetic-energy fluctuations, so it does not sample
+the NVT ensemble exactly (see <a class="reference internal" href="#chemistrykit.md.StochasticVelocityRescalingThermostat" title="chemistrykit.md.StochasticVelocityRescalingThermostat"><code class="xref py py-class docutils literal notranslate"><span class="pre">StochasticVelocityRescalingThermostat</span></code></a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_temperature</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – <span class="math notranslate nohighlight">\(T_0\)</span>; must be positive.</p></li>
+<li><p><strong>tau</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Coupling time constant; must be positive.</p></li>
+<li><p><strong>k_b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>With no forces acting, each call moves the temperature a fraction
+<span class="math notranslate nohighlight">\(\Delta t/\tau\)</span> of the way to the target:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.md.systems.lj_fluid</span><span class="w"> </span><span class="kn">import</span> <span class="n">LJFluid</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fluid</span> <span class="o">=</span> <span class="n">LJFluid</span><span class="o">.</span><span class="n">from_lattice</span><span class="p">(</span><span class="n">n_per_side</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">thermostat</span> <span class="o">=</span> <span class="n">BerendsenThermostat</span><span class="p">(</span><span class="n">target_temperature</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">thermostat</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">fluid</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">fluid</span><span class="o">.</span><span class="n">temperature</span><span class="p">(),</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># 2.0 + 0.1 * (1.0 - 2.0)</span>
+<span class="go">1.9</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.md.BerendsenThermostat.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">system</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/thermostats.html#BerendsenThermostat.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.BerendsenThermostat.apply" title="Link to this definition">#</a></dt>
+<dd><p>Rescale <code class="docutils literal notranslate"><span class="pre">system.velocities</span></code> in place by the Berendsen factor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>system</strong> (<a class="reference internal" href="#chemistrykit.md.MolecularDynamicsSystem" title="chemistrykit.md.core.base_system.MolecularDynamicsSystem"><em>chemistrykit.md.core.base_system.MolecularDynamicsSystem</em></a>)</p></li>
+<li><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -1662,6 +1719,148 @@ particle <cite>j</cite> is <code class="docutils literal notranslate"><span clas
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.md.ShakeMolecule">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">ShakeMolecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">positions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">masses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bonds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/constraints.html#ShakeMolecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.ShakeMolecule" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.md.HarmonicMolecule" title="chemistrykit.md.systems.pair_potentials.HarmonicMolecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">HarmonicMolecule</span></code></a></p>
+<p>A <a class="reference internal" href="#chemistrykit.md.HarmonicMolecule" title="chemistrykit.md.systems.pair_potentials.HarmonicMolecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">HarmonicMolecule</span></code></a> with rigid (SHAKE) bonds.</p>
+<p>Each velocity-Verlet step makes an unconstrained half-kick and drift,
+corrects the positions with <a class="reference internal" href="#chemistrykit.md.shake" title="chemistrykit.md.shake"><code class="xref py py-func docutils literal notranslate"><span class="pre">shake()</span></code></a>, recovers the half-step
+velocities from the constrained displacement, completes the second
+half-kick, and finally removes each constrained bond’s relative
+velocity component (RATTLE’s velocity stage).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>positions</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="structure.html#chemistrykit.structure.Molecule.n_atoms" title="chemistrykit.structure.Molecule.n_atoms"><em>n_atoms</em></a><em>, </em><em>3</em><em>)</em>)</p></li>
+<li><p><strong>velocities</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="structure.html#chemistrykit.structure.Molecule.n_atoms" title="chemistrykit.structure.Molecule.n_atoms"><em>n_atoms</em></a><em>, </em><em>3</em><em>)</em>)</p></li>
+<li><p><strong>masses</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="structure.html#chemistrykit.structure.Molecule.n_atoms" title="chemistrykit.structure.Molecule.n_atoms"><em>n_atoms</em></a><em>,</em><em>)</em>)</p></li>
+<li><p><strong>constraints</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a></span>) – Rigid bonds; <cite>positions</cite> should already satisfy them.</p></li>
+<li><p><strong>bonds</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a></span>) – Flexible harmonic terms, as for
+<a class="reference internal" href="#chemistrykit.md.HarmonicMolecule" title="chemistrykit.md.systems.pair_potentials.HarmonicMolecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">HarmonicMolecule</span></code></a>.</p></li>
+<li><p><strong>angles</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a></span>) – Flexible harmonic terms, as for
+<a class="reference internal" href="#chemistrykit.md.HarmonicMolecule" title="chemistrykit.md.systems.pair_potentials.HarmonicMolecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">HarmonicMolecule</span></code></a>.</p></li>
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A rigid rotating diatomic keeps its bond length exactly:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rotor</span> <span class="o">=</span> <span class="n">ShakeMolecule</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="n">constraints</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">rotor</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">rotor</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">rotor</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> <span class="mi">8</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.md.ShakeMolecule.bond_lengths">
+<span class="sig-name descname"><span class="pre">bond_lengths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/constraints.html#ShakeMolecule.bond_lengths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.ShakeMolecule.bond_lengths" title="Link to this definition">#</a></dt>
+<dd><p>Current length of every constrained bond.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray, shape (n_constraints,)</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.md.ShakeMolecule.degrees_of_freedom">
+<span class="sig-name descname"><span class="pre">degrees_of_freedom</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/constraints.html#ShakeMolecule.degrees_of_freedom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.ShakeMolecule.degrees_of_freedom" title="Link to this definition">#</a></dt>
+<dd><p>Cartesian degrees of freedom minus center-of-mass motion and one per constraint.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>int</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.md.ShakeMolecule.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/constraints.html#ShakeMolecule.step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.ShakeMolecule.step" title="Link to this definition">#</a></dt>
+<dd><p>Advance one constrained velocity-Verlet (SHAKE/RATTLE) step, in place.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.md.StochasticVelocityRescalingThermostat">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">StochasticVelocityRescalingThermostat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dof</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/thermostats.html#StochasticVelocityRescalingThermostat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.StochasticVelocityRescalingThermostat" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The Bussi-Donadio-Parrinello stochastic velocity-rescaling thermostat.</p>
+<p>Berendsen’s exponential relaxation of the kinetic energy <span class="math notranslate nohighlight">\(K\)</span>
+plus a correctly scaled stochastic term, chosen so that the kinetic
+energy samples its exact canonical distribution – G. Bussi, D.
+Donadio &amp; M. Parrinello, <em>J. Chem. Phys.</em> 126, 014101 (2007), eq. 7
+and Appendix (eq. A7):</p>
+<div class="math notranslate nohighlight">
+\[\alpha^2 = c + (1-c)\frac{\bar K}{N_f K}\sum_{i=1}^{N_f} R_i^2
++ 2 R_1 \sqrt{c(1-c)\frac{\bar K}{N_f K}},
+\qquad c = e^{-\Delta t/\tau},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bar K = N_f k_B T_0/2\)</span>, the <span class="math notranslate nohighlight">\(R_i\)</span> are independent
+standard normal numbers (the sum over <span class="math notranslate nohighlight">\(i \ge 2\)</span> is drawn as a
+single <span class="math notranslate nohighlight">\(\chi^2_{N_f-1}\)</span> variate), and every velocity is scaled
+by <span class="math notranslate nohighlight">\(\alpha\)</span>. The stationary distribution of <span class="math notranslate nohighlight">\(K\)</span> is the
+canonical gamma distribution with mean <span class="math notranslate nohighlight">\(\bar K\)</span> and variance
+<span class="math notranslate nohighlight">\(2\bar K^2/N_f\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_temperature</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – <span class="math notranslate nohighlight">\(T_0\)</span>; must be positive.</p></li>
+<li><p><strong>tau</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Relaxation time; must be positive.</p></li>
+<li><p><strong>rng</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" title="(in NumPy v2.5)"><em>numpy.random.Generator</em></a><em>, or </em><em>None</em>)</p></li>
+<li><p><strong>dof</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – <span class="math notranslate nohighlight">\(N_f\)</span>; defaults to the system’s
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">degrees_of_freedom()</span></code>.</p></li>
+<li><p><strong>k_b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.md.systems.lj_fluid</span><span class="w"> </span><span class="kn">import</span> <span class="n">LJFluid</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fluid</span> <span class="o">=</span> <span class="n">LJFluid</span><span class="o">.</span><span class="n">from_lattice</span><span class="p">(</span><span class="n">n_per_side</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">thermostat</span> <span class="o">=</span> <span class="n">StochasticVelocityRescalingThermostat</span><span class="p">(</span><span class="n">target_temperature</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">thermostat</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">fluid</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">&lt;</span> <span class="n">fluid</span><span class="o">.</span><span class="n">temperature</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.md.StochasticVelocityRescalingThermostat.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">system</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/thermostats.html#StochasticVelocityRescalingThermostat.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.StochasticVelocityRescalingThermostat.apply" title="Link to this definition">#</a></dt>
+<dd><p>Rescale <code class="docutils literal notranslate"><span class="pre">system.velocities</span></code> in place by a stochastic factor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>system</strong> (<a class="reference internal" href="#chemistrykit.md.MolecularDynamicsSystem" title="chemistrykit.md.core.base_system.MolecularDynamicsSystem"><em>chemistrykit.md.core.base_system.MolecularDynamicsSystem</em></a>)</p></li>
+<li><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.md.VelocityRescalingThermostat">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">VelocityRescalingThermostat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/thermostats.html#VelocityRescalingThermostat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.VelocityRescalingThermostat" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
@@ -1815,6 +2014,101 @@ unbounded (non-periodic) system.</p></li>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.md.einstein_diffusion_coefficient">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">einstein_diffusion_coefficient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_from</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/transport.html#einstein_diffusion_coefficient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.einstein_diffusion_coefficient" title="Link to this definition">#</a></dt>
+<dd><p>Self-diffusion coefficient from the Einstein relation <span class="math notranslate nohighlight">\(\mathrm{MSD}=2dDt\)</span>.</p>
+<p>Fits a straight line to <code class="docutils literal notranslate"><span class="pre">msd</span></code> against <code class="docutils literal notranslate"><span class="pre">t</span></code> for <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">&gt;=</span> <span class="pre">fit_from</span></code>
+(skipping the short-time ballistic regime) and returns slope/(2d).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>array-like</em>) – Lag times.</p></li>
+<li><p><strong>msd</strong> (<em>array-like</em>) – Mean-squared displacement at each lag (see <a class="reference internal" href="#chemistrykit.md.mean_squared_displacement" title="chemistrykit.md.mean_squared_displacement"><code class="xref py py-func docutils literal notranslate"><span class="pre">mean_squared_displacement()</span></code></a>).</p></li>
+<li><p><strong>n_dim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>fit_from</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">einstein_diffusion_coefficient</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mf">6.0</span> <span class="o">*</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">),</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">0.25</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.md.green_kubo_diffusion_coefficient">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">green_kubo_diffusion_coefficient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vacf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/transport.html#green_kubo_diffusion_coefficient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.green_kubo_diffusion_coefficient" title="Link to this definition">#</a></dt>
+<dd><p>Self-diffusion coefficient from the Green-Kubo integral of the VACF.</p>
+<div class="math notranslate nohighlight">
+\[D = \frac{1}{d}\int_0^{t_{\max}} \langle\vec v(0)\cdot\vec v(t)\rangle\,dt\]</div>
+<p>evaluated by the trapezoidal rule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>array-like</em>) – Lag times, starting at 0.</p></li>
+<li><p><strong>vacf</strong> (<em>array-like</em>) – Unnormalized velocity autocorrelation (see <a class="reference internal" href="#chemistrykit.md.velocity_autocorrelation" title="chemistrykit.md.velocity_autocorrelation"><code class="xref py py-func docutils literal notranslate"><span class="pre">velocity_autocorrelation()</span></code></a>).</p></li>
+<li><p><strong>n_dim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>An exponentially decaying VACF <span class="math notranslate nohighlight">\(C(t)=3(k_BT/m)e^{-\gamma t}\)</span> (Langevin
+dynamics) integrates to the Stokes-Einstein-like value <span class="math notranslate nohighlight">\(k_BT/(m\gamma)\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mi">40001</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">green_kubo_diffusion_coefficient</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.75</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.md.mean_squared_displacement">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">mean_squared_displacement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">positions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_lag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/transport.html#mean_squared_displacement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.mean_squared_displacement" title="Link to this definition">#</a></dt>
+<dd><p>Time-origin-averaged mean-squared displacement.</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{MSD}(\ell) = \left\langle |\vec r_i(t_0+\ell) - \vec r_i(t_0)|^2 \right\rangle_{i,\,t_0}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>positions</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_frames</em><em>, </em><em>n_particles</em><em>, </em><em>n_dim</em><em>)</em>) – Sampled positions (e.g. <a class="reference internal" href="#chemistrykit.md.MDResult.positions" title="chemistrykit.md.MDResult.positions"><code class="xref py py-attr docutils literal notranslate"><span class="pre">chemistrykit.md.MDResult.positions</span></code></a>).
+Wrapped periodic positions are unwrapped first via
+<a class="reference internal" href="#chemistrykit.md.unwrap_trajectory" title="chemistrykit.md.unwrap_trajectory"><code class="xref py py-func docutils literal notranslate"><span class="pre">unwrap_trajectory()</span></code></a> when <cite>box_length</cite> is given.</p></li>
+<li><p><strong>box_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>)</p></li>
+<li><p><strong>max_lag</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Largest lag, in frames; defaults to <code class="docutils literal notranslate"><span class="pre">n_frames</span> <span class="pre">//</span> <span class="pre">2</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray, shape (max_lag + 1,)</em> – MSD at lags <code class="docutils literal notranslate"><span class="pre">0,</span> <span class="pre">1,</span> <span class="pre">...,</span> <span class="pre">max_lag</span></code> frames.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Particles moving ballistically at unit speed have MSD equal to the lag squared:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">5</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mean_squared_displacement</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">max_lag</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">array([0., 1., 4., 9.])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="chemistrykit.md.minimum_image_displacement">
 <span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">minimum_image_displacement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_length</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/utils/pbc.html#minimum_image_displacement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.minimum_image_displacement" title="Link to this definition">#</a></dt>
 <dd><p>Displacement <span class="math notranslate nohighlight">\(\vec r_i - \vec r_j\)</span> under the minimum-image convention.</p>
@@ -1852,6 +2146,98 @@ close together once the box wraps around:</p>
 <p>With no box, this is just the ordinary displacement:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">minimum_image_displacement</span><span class="p">(</span><span class="n">r_i</span><span class="p">,</span> <span class="n">r_j</span><span class="p">,</span> <span class="n">box_length</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="go">array([-9.,  0.,  0.])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.md.shake">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">shake</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">positions_new</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions_old</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">masses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/constraints.html#shake"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.shake" title="Link to this definition">#</a></dt>
+<dd><p>Correct unconstrained positions so every bond-length constraint holds (SHAKE).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>positions_new</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="structure.html#chemistrykit.structure.Molecule.n_atoms" title="chemistrykit.structure.Molecule.n_atoms"><em>n_atoms</em></a><em>, </em><em>n_dim</em><em>)</em>) – Positions after an unconstrained update.</p></li>
+<li><p><strong>positions_old</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="structure.html#chemistrykit.structure.Molecule.n_atoms" title="chemistrykit.structure.Molecule.n_atoms"><em>n_atoms</em></a><em>, </em><em>n_dim</em><em>)</em>) – Positions at the previous step (which satisfy the constraints);
+their bond vectors set the correction directions.</p></li>
+<li><p><strong>constraints</strong> (<em>sequence</em><em> of </em><em>(</em><em>i</em><em>, </em><em>j</em><em>, </em><em>d</em><em>)</em>) – Atom pairs and their fixed separations.</p></li>
+<li><p><strong>masses</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="structure.html#chemistrykit.structure.Molecule.n_atoms" title="chemistrykit.structure.Molecule.n_atoms"><em>n_atoms</em></a><em>,</em><em>)</em>)</p></li>
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Relative tolerance on <span class="math notranslate nohighlight">\(|s^2 - d^2|/d^2\)</span>.</p></li>
+<li><p><strong>max_iter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>positions</strong> (<em>ndarray, shape (n_atoms, n_dim)</em>) – Corrected positions.</p></li>
+<li><p><strong>n_iter</strong> (<em>int</em>) – Number of sweeps over the constraints needed to converge.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Two equal masses pulled apart to separation 1.2 are pulled back
+symmetrically to the constrained length 1.0:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">old</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fixed</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">shake</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)],</span> <span class="n">masses</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">fixed</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">array([0., 1.])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.md.unwrap_trajectory">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">unwrap_trajectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">positions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_length</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/transport.html#unwrap_trajectory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.unwrap_trajectory" title="Link to this definition">#</a></dt>
+<dd><p>Undo periodic wrapping of a sampled trajectory.</p>
+<p>Accumulates the minimum-image displacement between consecutive frames,
+so it is exact provided no particle moves more than half a box length
+between two samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>positions</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_frames</em><em>, </em><em>n_particles</em><em>, </em><em>n_dim</em><em>)</em>)</p></li>
+<li><p><strong>box_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Cubic periodic box side length; <code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;=</span> <span class="pre">0</span></code> returns the
+positions unchanged.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray, shape (n_frames, n_particles, n_dim)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wrapped</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mf">9.5</span><span class="p">]],</span> <span class="p">[[</span><span class="mf">0.3</span><span class="p">]],</span> <span class="p">[[</span><span class="mf">1.1</span><span class="p">]]])</span>  <span class="c1"># crosses the box edge at 10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unwrap_trajectory</span><span class="p">(</span><span class="n">wrapped</span><span class="p">,</span> <span class="n">box_length</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<span class="go">array([ 9.5, 10.3, 11.1])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.md.velocity_autocorrelation">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">velocity_autocorrelation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">velocities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_lag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/transport.html#velocity_autocorrelation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.velocity_autocorrelation" title="Link to this definition">#</a></dt>
+<dd><p>Time-origin-averaged velocity autocorrelation function.</p>
+<div class="math notranslate nohighlight">
+\[C(\ell) = \left\langle \vec v_i(t_0)\cdot\vec v_i(t_0+\ell) \right\rangle_{i,\,t_0}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>velocities</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_frames</em><em>, </em><em>n_particles</em><em>, </em><em>n_dim</em><em>)</em>)</p></li>
+<li><p><strong>max_lag</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Largest lag, in frames; defaults to <code class="docutils literal notranslate"><span class="pre">n_frames</span> <span class="pre">//</span> <span class="pre">2</span></code>.</p></li>
+<li><p><strong>normalize</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Divide by <span class="math notranslate nohighlight">\(C(0)\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray, shape (max_lag + 1,)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]],</span> <span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]],</span> <span class="p">[[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]]])</span>  <span class="c1"># a velocity rotating by 90 degrees per frame</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">velocity_autocorrelation</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">max_lag</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">array([ 1.,  0., -1.])</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1932,6 +2318,10 @@ float array).</p></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.AnglePotential"><code class="docutils literal notranslate"><span class="pre">AnglePotential</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.AnglePotential.energy"><code class="docutils literal notranslate"><span class="pre">AnglePotential.energy()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.AnglePotential.torque"><code class="docutils literal notranslate"><span class="pre">AnglePotential.torque()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.BerendsenThermostat"><code class="docutils literal notranslate"><span class="pre">BerendsenThermostat</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.BerendsenThermostat.apply"><code class="docutils literal notranslate"><span class="pre">BerendsenThermostat.apply()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.Buckingham"><code class="docutils literal notranslate"><span class="pre">Buckingham</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
@@ -2016,6 +2406,16 @@ float array).</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.PairPotential.force_scalar"><code class="docutils literal notranslate"><span class="pre">PairPotential.force_scalar()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.ShakeMolecule"><code class="docutils literal notranslate"><span class="pre">ShakeMolecule</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.ShakeMolecule.bond_lengths"><code class="docutils literal notranslate"><span class="pre">ShakeMolecule.bond_lengths()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.ShakeMolecule.degrees_of_freedom"><code class="docutils literal notranslate"><span class="pre">ShakeMolecule.degrees_of_freedom()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.ShakeMolecule.step"><code class="docutils literal notranslate"><span class="pre">ShakeMolecule.step()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.StochasticVelocityRescalingThermostat"><code class="docutils literal notranslate"><span class="pre">StochasticVelocityRescalingThermostat</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.StochasticVelocityRescalingThermostat.apply"><code class="docutils literal notranslate"><span class="pre">StochasticVelocityRescalingThermostat.apply()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.VelocityRescalingThermostat"><code class="docutils literal notranslate"><span class="pre">VelocityRescalingThermostat</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.VelocityRescalingThermostat.apply"><code class="docutils literal notranslate"><span class="pre">VelocityRescalingThermostat.apply()</span></code></a></li>
 </ul>
@@ -2026,7 +2426,13 @@ float array).</p></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.build_neighbor_list"><code class="docutils literal notranslate"><span class="pre">build_neighbor_list()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.einstein_diffusion_coefficient"><code class="docutils literal notranslate"><span class="pre">einstein_diffusion_coefficient()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.green_kubo_diffusion_coefficient"><code class="docutils literal notranslate"><span class="pre">green_kubo_diffusion_coefficient()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.mean_squared_displacement"><code class="docutils literal notranslate"><span class="pre">mean_squared_displacement()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.minimum_image_displacement"><code class="docutils literal notranslate"><span class="pre">minimum_image_displacement()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.shake"><code class="docutils literal notranslate"><span class="pre">shake()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.unwrap_trajectory"><code class="docutils literal notranslate"><span class="pre">unwrap_trajectory()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.velocity_autocorrelation"><code class="docutils literal notranslate"><span class="pre">velocity_autocorrelation()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.md.wrap_positions"><code class="docutils literal notranslate"><span class="pre">wrap_positions()</span></code></a></li>
 </ul>
   </nav></div>

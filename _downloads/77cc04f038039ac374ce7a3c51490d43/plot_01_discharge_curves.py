@@ -1,13 +1,15 @@
 r"""
-A simplified constant-current battery discharge model, and Peukert's law
-=============================================================================
+Peukert's law: battery capacity falls at high discharge rates
+===============================================================
 
+Peukert's 1897 power law, :math:`t = C_p/I^k`, says a lead-acid battery
+discharged faster delivers less total charge. Using
+:func:`~chemistrykit.electrochem.systems.battery.effective_capacity`, this
+example compares the ideal Peukert exponent k=1 (same capacity at every
+rate) with a realistic k=1.2, then draws discharge curves from
 :class:`~chemistrykit.electrochem.systems.battery.ConstantCurrentBattery`
-is a deliberately simplified constant-current discharge model (see its
-docstring for exactly what is and is not captured). This example shows
-the ideal (Peukert exponent k=1) case delivering the same effective
-capacity at every discharge rate, and a more realistic k>1 case showing
-the familiar "faster discharge delivers less total capacity" effect.
+(a deliberately simplified model; see its docstring) whose runtimes
+shrink faster than 1/I.
 """
 
 # %%

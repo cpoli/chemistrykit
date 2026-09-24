@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.polymer.core.base_system</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Abstract base class for polymer chain-statistics models, and a note on why no other ABC is added here.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Abstract base class for polymer chain-statistics models, and a note on why no other ABC is added here.</span>
 
 <span class="sd">An ideal (random-walk, theta-solvent) chain and a real chain under good-</span>
 <span class="sd">or poor-solvent conditions are described by the same two headline</span>
@@ -420,24 +420,24 @@
 <span class="sd">2-3): ideally, :math:`\langle R^2\rangle = nb^2` *exactly* (a simple</span>
 <span class="sd">random walk); more generally (real chains, any solvent quality),</span>
 <span class="sd">:math:`R \sim bn^\nu` with a solvent-quality-dependent Flory exponent</span>
-<span class="sd">:math:`\nu`. This is exactly the &quot;several interchangeable models of one</span>
-<span class="sd">physical relationship, compared side by side&quot; shape that</span>
+<span class="sd">:math:`\nu`. This is exactly the "several interchangeable models of one</span>
+<span class="sd">physical relationship, compared side by side" shape that</span>
 <span class="sd">:class:`chemistrykit.thermo.core.base_system.EquationOfState` already</span>
 <span class="sd">captures for pure-substance PVT equations of state, and</span>
 <span class="sd">:class:`chemistrykit.surface.core.base_system.AdsorptionIsotherm`</span>
 <span class="sd">captures for adsorption models, so :class:`PolymerChainModel` is this</span>
-<span class="sd">domain&#39;s one ABC.</span>
+<span class="sd">domain's one ABC.</span>
 
 <span class="sd">Molecular-weight distributions (Mn, Mw, PDI, the Flory-Schulz</span>
 <span class="sd">distribution), step-growth kinetics (the Carothers equation), and</span>
 <span class="sd">chain-growth/free-radical polymerization kinetics are each a</span>
 <span class="sd">self-contained closed-form relationship or reaction-network calculation</span>
 <span class="sd">with no shared polymorphic interface among them, so -- following</span>
-<span class="sd">``chemistrykit.electrochem``/``chemistrykit.photochem``&#39;s precedent of</span>
+<span class="sd">``chemistrykit.electrochem``/``chemistrykit.photochem``'s precedent of</span>
 <span class="sd">not forcing an ABC where the underlying models are algebraically</span>
 <span class="sd">independent -- they stay as plain functions and small result dataclasses</span>
 <span class="sd">in their own ``systems/`` modules rather than folded into an ABC here.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -445,13 +445,13 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;PolymerChainModel&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"PolymerChainModel"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="PolymerChainModel">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.PolymerChainModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PolymerChainModel</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common interface for a polymer chain&#39;s characteristic size as a function of chain length.</span>
+<span class="w">    </span><span class="sd">"""Common interface for a polymer chain's characteristic size as a function of chain length.</span>
 
 <span class="sd">    Concrete subclasses (:class:`chemistrykit.polymer.systems.chain_statistics.IdealChain`,</span>
 <span class="sd">    :class:`chemistrykit.polymer.systems.chain_statistics.RealChain`)</span>
@@ -459,13 +459,13 @@
 <span class="sd">    :meth:`mean_square_radius_of_gyration`; :meth:`end_to_end_distance`</span>
 <span class="sd">    and :meth:`radius_of_gyration` (their square roots) are then</span>
 <span class="sd">    available for every subclass for free.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
 <div class="viewcode-block" id="PolymerChainModel.mean_square_end_to_end">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.PolymerChainModel.mean_square_end_to_end">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mean_square_end_to_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\langle R^2\rangle` for a chain of `n` segments of length `b`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`\langle R^2\rangle` for a chain of `n` segments of length `b`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -477,14 +477,14 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="PolymerChainModel.mean_square_radius_of_gyration">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.PolymerChainModel.mean_square_radius_of_gyration">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mean_square_radius_of_gyration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\langle R_g^2\rangle` for a chain of `n` segments of length `b`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`\langle R_g^2\rangle` for a chain of `n` segments of length `b`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -494,13 +494,13 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="PolymerChainModel.end_to_end_distance">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.PolymerChainModel.end_to_end_distance">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">end_to_end_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`R = \sqrt{\langle R^2\rangle}`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`R = \sqrt{\langle R^2\rangle}`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -510,14 +510,14 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mean_square_end_to_end</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="PolymerChainModel.radius_of_gyration">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.PolymerChainModel.radius_of_gyration">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">radius_of_gyration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`R_g = \sqrt{\langle R_g^2\rangle}`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`R_g = \sqrt{\langle R_g^2\rangle}`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -527,7 +527,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mean_square_radius_of_gyration</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span></div>
 </div>
 

@@ -1,0 +1,829 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chemistrykit.kinetics.systems.rate_theory &#8212; chemistrykit 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../../../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/chemistrykit/kinetics/systems/rate_theory';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/chemistrykit_logo_transparent.png" class="logo__image only-light" alt="chemistrykit logo"/>
+    <img src="../../../../_static/chemistrykit_logo_transparent.png" class="logo__image only-dark pst-js-only" alt="chemistrykit logo"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/chemistrykit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../subpackages/index.html">
+    Subpackages
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history/index.html">
+    History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cpoli/chemistrykit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/chemistrykit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">chemistrykit.kinetics.systems.rate_theory</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for chemistrykit.kinetics.systems.rate_theory</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">"""Theories of the rate constant itself: collisions, diffusion, and transition states.</span>
+
+<span class="sd">Three classic routes from molecular properties to a bimolecular or</span>
+<span class="sd">unimolecular rate constant, each a closed-form formula:</span>
+
+<span class="sd">* :func:`collision_theory_rate_constant` -- hard-sphere collision theory</span>
+<span class="sd">  (M. Trautz, *Z. Anorg. Allg. Chem.* 96, 1 (1916); W. C. McC. Lewis,</span>
+<span class="sd">  *J. Chem. Soc., Trans.* 113, 471 (1918)).</span>
+<span class="sd">* :func:`smoluchowski_rate_constant`,</span>
+<span class="sd">  :func:`smoluchowski_transient_rate_constant`, and</span>
+<span class="sd">  :func:`diffusion_limited_rate_constant` -- the diffusion-controlled</span>
+<span class="sd">  encounter rate (M. v. Smoluchowski, *Z. Phys. Chem.* 92, 129 (1917)).</span>
+<span class="sd">* :func:`eyring_rate_constant` and :func:`fit_eyring` -- the</span>
+<span class="sd">  thermodynamic (Eyring-Polanyi) form of transition-state theory (H.</span>
+<span class="sd">  Eyring, *J. Chem. Phys.* 3, 107 (1935)).</span>
+
+<span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 18 ("Reaction</span>
+<span class="sd">dynamics") for all three.</span>
+<span class="sd">"""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">K_B</span><span class="p">,</span> <span class="n">NA</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">R</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.kinetics.utils.linear_regression</span><span class="w"> </span><span class="kn">import</span> <span class="n">linear_fit</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"collision_theory_rate_constant"</span><span class="p">,</span>
+    <span class="s2">"smoluchowski_rate_constant"</span><span class="p">,</span>
+    <span class="s2">"smoluchowski_transient_rate_constant"</span><span class="p">,</span>
+    <span class="s2">"diffusion_limited_rate_constant"</span><span class="p">,</span>
+    <span class="s2">"eyring_rate_constant"</span><span class="p">,</span>
+    <span class="s2">"EyringFit"</span><span class="p">,</span>
+    <span class="s2">"fit_eyring"</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="collision_theory_rate_constant">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.collision_theory_rate_constant">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">collision_theory_rate_constant</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">reduced_mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Ea</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">steric_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Hard-sphere collision-theory rate constant of a bimolecular reaction.</span>
+
+<span class="sd">    Every collision between reactant molecules with relative kinetic</span>
+<span class="sd">    energy along the line of centres above :math:`E_a` reacts (times an</span>
+<span class="sd">    empirical steric factor :math:`P`):</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k = P\,\sigma \sqrt{\frac{8 k_B T}{\pi \mu}}\; N_A\, e^{-E_a/RT}</span>
+
+<span class="sd">    where :math:`\sigma = \pi d^2` is the collision cross-section and</span>
+<span class="sd">    :math:`\sqrt{8k_BT/\pi\mu}` the mean relative speed (Atkins &amp; de Paula,</span>
+<span class="sd">    *Physical Chemistry*, 11th ed., Topic 18A).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    T : float or array-like of float</span>
+<span class="sd">        Absolute temperature(s), in K.</span>
+<span class="sd">    sigma : float</span>
+<span class="sd">        Collision cross-section, in m^2.</span>
+<span class="sd">    reduced_mass : float</span>
+<span class="sd">        Reduced mass :math:`\mu = m_A m_B/(m_A + m_B)` of the colliding</span>
+<span class="sd">        pair, in kg.</span>
+<span class="sd">    Ea : float, default 0.0</span>
+<span class="sd">        Activation (threshold) energy, in J/mol.</span>
+<span class="sd">    steric_factor : float, default 1.0</span>
+<span class="sd">        Steric factor :math:`P`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float or ndarray</span>
+<span class="sd">        Rate constant, in m^3 mol^-1 s^-1.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    With no barrier, :math:`k \propto \sqrt{T}` exactly:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; k = collision_theory_rate_constant(np.array([300.0, 1200.0]), sigma=4e-19, reduced_mass=1e-26)</span>
+<span class="sd">    &gt;&gt;&gt; round(float(k[1] / k[0]), 12)</span>
+<span class="sd">    2.0</span>
+<span class="sd">    """</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">mean_speed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">8.0</span> <span class="o">*</span> <span class="n">K_B</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">reduced_mass</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">steric_factor</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">mean_speed</span> <span class="o">*</span> <span class="n">NA</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Ea</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="smoluchowski_rate_constant">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.smoluchowski_rate_constant">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">smoluchowski_rate_constant</span><span class="p">(</span><span class="n">D</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">R_contact</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Smoluchowski's steady-state diffusion-limited encounter rate constant.</span>
+
+<span class="sd">    Two species diffusing with combined diffusion coefficient</span>
+<span class="sd">    :math:`D = D_A + D_B` react on first contact at separation</span>
+<span class="sd">    :math:`R^* = R_A + R_B`; solving the steady-state diffusion equation</span>
+<span class="sd">    around one reactant gives</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_D = 4\pi D R^* N_A</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    D : float</span>
+<span class="sd">        Sum of the two reactants' diffusion coefficients, in m^2/s.</span>
+<span class="sd">    R_contact : float</span>
+<span class="sd">        Reaction (contact) distance, in m.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Rate constant, in m^3 mol^-1 s^-1.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Two small molecules in water (D ~ 2e-9 m^2/s each, contact at 0.5 nm)</span>
+<span class="sd">    react at about 1.5e10 L mol^-1 s^-1 (1 m^3 = 1000 L):</span>
+
+<span class="sd">    &gt;&gt;&gt; k = smoluchowski_rate_constant(D=4e-9, R_contact=5e-10)</span>
+<span class="sd">    &gt;&gt;&gt; round(k * 1000 / 1e10, 2)</span>
+<span class="sd">    1.51</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">D</span> <span class="o">*</span> <span class="n">R_contact</span> <span class="o">*</span> <span class="n">NA</span></div>
+
+
+
+<div class="viewcode-block" id="smoluchowski_transient_rate_constant">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.smoluchowski_transient_rate_constant">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">smoluchowski_transient_rate_constant</span><span class="p">(</span><span class="n">D</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">R_contact</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Smoluchowski's time-dependent diffusion-limited rate constant.</span>
+
+<span class="sd">    Starting from a uniform (random) distribution of reactants, the</span>
+<span class="sd">    depletion zone around each reactant has not yet formed, so the rate</span>
+<span class="sd">    coefficient starts higher than :math:`k_D` and decays towards it:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k(t) = 4\pi D R^* N_A \left(1 + \frac{R^*}{\sqrt{\pi D t}}\right)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    D : float</span>
+<span class="sd">        Sum of the two reactants' diffusion coefficients, in m^2/s.</span>
+<span class="sd">    R_contact : float</span>
+<span class="sd">        Reaction (contact) distance, in m.</span>
+<span class="sd">    t : float or array-like of float</span>
+<span class="sd">        Time(s) since mixing, in s (must be positive).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float or ndarray</span>
+<span class="sd">        Rate constant(s), in m^3 mol^-1 s^-1.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    At :math:`t = R^{*2}/(\pi D)` the transient term exactly doubles the</span>
+<span class="sd">    steady-state rate:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; D, Rc = 4e-9, 5e-10</span>
+<span class="sd">    &gt;&gt;&gt; ratio = smoluchowski_transient_rate_constant(D, Rc, Rc**2 / (np.pi * D)) / smoluchowski_rate_constant(D, Rc)</span>
+<span class="sd">    &gt;&gt;&gt; round(float(ratio), 12)</span>
+<span class="sd">    2.0</span>
+<span class="sd">    """</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">smoluchowski_rate_constant</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">R_contact</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">R_contact</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">D</span> <span class="o">*</span> <span class="n">t</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="diffusion_limited_rate_constant">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.diffusion_limited_rate_constant">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">diffusion_limited_rate_constant</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">viscosity</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Diffusion-limited rate constant from the solvent viscosity alone.</span>
+
+<span class="sd">    Combining :func:`smoluchowski_rate_constant` with the Stokes-Einstein</span>
+<span class="sd">    relation :math:`D = k_B T/(6\pi\eta r)` for two reactants of equal</span>
+<span class="sd">    radius :math:`r` (so :math:`D = D_A + D_B = 2k_BT/(6\pi\eta r)` and</span>
+<span class="sd">    :math:`R^* = 2r`) makes the radius cancel:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_D = \frac{8RT}{3\eta}</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    T : float or array-like of float</span>
+<span class="sd">        Absolute temperature(s), in K.</span>
+<span class="sd">    viscosity : float</span>
+<span class="sd">        Solvent dynamic viscosity :math:`\eta`, in Pa s.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float or ndarray</span>
+<span class="sd">        Rate constant, in m^3 mol^-1 s^-1.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Water at 298 K (:math:`\eta \approx 8.9\times 10^{-4}` Pa s) gives</span>
+<span class="sd">    the familiar :math:`\sim 7\times 10^{9}` L mol^-1 s^-1:</span>
+
+<span class="sd">    &gt;&gt;&gt; k = diffusion_limited_rate_constant(298.15, 8.9e-4)</span>
+<span class="sd">    &gt;&gt;&gt; round(float(k) * 1000 / 1e9, 2)</span>
+<span class="sd">    7.43</span>
+<span class="sd">    """</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mf">8.0</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="mf">3.0</span> <span class="o">*</span> <span class="n">viscosity</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="eyring_rate_constant">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.eyring_rate_constant">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">eyring_rate_constant</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dH</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dS</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">kappa</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Eyring (transition-state theory) rate constant.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k = \kappa \frac{k_B T}{h}\, e^{\Delta S^{\ddagger}/R}\, e^{-\Delta H^{\ddagger}/RT}</span>
+
+<span class="sd">    i.e. :math:`k = \kappa (k_BT/h) e^{-\Delta G^{\ddagger}/RT}` with</span>
+<span class="sd">    :math:`\Delta G^{\ddagger} = \Delta H^{\ddagger} - T\Delta S^{\ddagger}`</span>
+<span class="sd">    (H. Eyring, *J. Chem. Phys.* 3, 107 (1935); Atkins &amp; de Paula,</span>
+<span class="sd">    *Physical Chemistry*, 11th ed., Topic 18C). Written for a unimolecular</span>
+<span class="sd">    step (or with the standard-state concentration factor absorbed into</span>
+<span class="sd">    :math:`\Delta S^{\ddagger}`), so `k` is in s^-1.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    T : float or array-like of float</span>
+<span class="sd">        Absolute temperature(s), in K.</span>
+<span class="sd">    dH : float</span>
+<span class="sd">        Enthalpy of activation :math:`\Delta H^{\ddagger}`, in J/mol.</span>
+<span class="sd">    dS : float</span>
+<span class="sd">        Entropy of activation :math:`\Delta S^{\ddagger}`, in J mol^-1 K^-1.</span>
+<span class="sd">    kappa : float, default 1.0</span>
+<span class="sd">        Transmission coefficient.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float or ndarray</span>
+<span class="sd">        Rate constant(s), in s^-1.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    With zero activation enthalpy and entropy, `k` is the universal</span>
+<span class="sd">    frequency :math:`k_BT/h` (about 6.25e12 s^-1 at 300 K):</span>
+
+<span class="sd">    &gt;&gt;&gt; round(float(eyring_rate_constant(300.0, dH=0.0, dS=0.0)) / 1e12, 3)</span>
+<span class="sd">    6.251</span>
+<span class="sd">    """</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">kappa</span> <span class="o">*</span> <span class="n">K_B</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="n">H</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">dS</span> <span class="o">/</span> <span class="n">R</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">dH</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="EyringFit">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.EyringFit">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">EyringFit</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Result of fitting rate-constant-vs-temperature data to the Eyring equation."""</span>
+
+    <span class="n">dH</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">"""float: Fitted enthalpy of activation, in J/mol."""</span>
+
+    <span class="n">dS</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">"""float: Fitted entropy of activation, in J mol^-1 K^-1."""</span>
+
+    <span class="n">r_squared</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">"""float: Coefficient of determination of the linear (ln(k/T) vs 1/T) fit."""</span>
+
+<div class="viewcode-block" id="EyringFit.dG">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.EyringFit.dG">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dG</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Gibbs energy of activation ``dH - T*dS`` at temperature(s) `T`, in J/mol.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        T : float or array-like of float</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float or ndarray</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dH</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dS</span></div>
+
+
+<div class="viewcode-block" id="EyringFit.predict">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.EyringFit.predict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Evaluate the fitted Eyring equation at temperature(s) `T`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        T : float or array-like of float</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float or ndarray</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="n">eyring_rate_constant</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dH</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dS</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="fit_eyring">
+<a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.fit_eyring">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fit_eyring</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EyringFit</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Fit rate constant vs. temperature data to the Eyring equation.</span>
+
+<span class="sd">    Linearizes :math:`\ln(k/T) = \ln(k_B/h) + \Delta S^{\ddagger}/R -</span>
+<span class="sd">    (\Delta H^{\ddagger}/R)(1/T)` and fits by ordinary least squares --</span>
+<span class="sd">    the "Eyring plot": slope :math:`-\Delta H^{\ddagger}/R`, intercept</span>
+<span class="sd">    :math:`\ln(k_B/h) + \Delta S^{\ddagger}/R`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    T : array-like of float</span>
+<span class="sd">        Absolute temperatures, in K (at least 2 distinct values).</span>
+<span class="sd">    k : array-like of float</span>
+<span class="sd">        First-order rate constants at each temperature, in s^-1.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    EyringFit</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; T = np.linspace(280.0, 360.0, 5)</span>
+<span class="sd">    &gt;&gt;&gt; fit = fit_eyring(T, eyring_rate_constant(T, dH=80e3, dS=-20.0))</span>
+<span class="sd">    &gt;&gt;&gt; round(fit.dH, 3), round(fit.dS, 6)</span>
+<span class="sd">    (80000.0, -20.0)</span>
+<span class="sd">    """</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">fit</span> <span class="o">=</span> <span class="n">linear_fit</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">k</span> <span class="o">/</span> <span class="n">T</span><span class="p">))</span>
+    <span class="n">dH</span> <span class="o">=</span> <span class="o">-</span><span class="n">fit</span><span class="o">.</span><span class="n">slope</span> <span class="o">*</span> <span class="n">R</span>
+    <span class="n">dS</span> <span class="o">=</span> <span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">intercept</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">K_B</span> <span class="o">/</span> <span class="n">H</span><span class="p">))</span> <span class="o">*</span> <span class="n">R</span>
+    <span class="k">return</span> <span class="n">EyringFit</span><span class="p">(</span><span class="n">dH</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">dH</span><span class="p">),</span> <span class="n">dS</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">dS</span><span class="p">),</span> <span class="n">r_squared</span><span class="o">=</span><span class="n">fit</span><span class="o">.</span><span class="n">r_squared</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, chemistrykit contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Triatomic normal modes via the Wilson GF-matrix method: CO2 and H2O &#8212; chemistrykit 0.1.0 documentation</title>
+    <title>Wilson’s GF-matrix method: CO2 and H2O normal-mode frequencies from the G and F matrices &#8212; chemistrykit 0.1.0 documentation</title>
   
   
   
@@ -48,11 +48,12 @@
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/gallery/spectro/vibrational/plot_02_triatomic_normal_modes';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Examples" href="../../statmech/index.html" />
+    <link rel="next" title="Raman scattering vs. infrared absorption: the mutual exclusion rule for CO2" href="plot_03_raman_ir_mutual_exclusion.html" />
     <link rel="prev" title="Harmonic vs. Morse IR band positions, and recovering anharmonicity from overtones" href="plot_01_harmonic_vs_morse.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -376,12 +377,15 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../analytical/index.html">chemistrykit.analytical</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../analytical/calibration/index.html">Calibration curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../analytical/chromatography/index.html">Chromatography</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../analytical/qtest/index.html">Q-test outlier rejection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../analytical/qtest/index.html">Outlier rejection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../analytical/smoothing/index.html">Signal smoothing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../analytical/statistics/index.html">Statistics of replicate measurements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../analytical/titration/index.html">Titration curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../analytical/uncertainty/index.html">Propagation of uncertainty</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../crystal/index.html">chemistrykit.crystal</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../crystal/crystal_chemistry/index.html">Crystal chemistry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../crystal/crystal_systems/index.html">Crystal systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../crystal/defects/index.html">Point defects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../crystal/lattice_energy/index.html">Lattice energy</a></li>
@@ -393,9 +397,12 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../electrochem/index.html">chemistrykit.electrochem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/battery/index.html">Battery discharge</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/butler_volmer/index.html">Butler-Volmer kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../electrochem/conductivity/index.html">Electrolytic conductivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/electrolysis/index.html">Electrolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../electrochem/fuel_cell/index.html">Fuel cells</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/nernst/index.html">The Nernst equation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../electrochem/standard_potentials/index.html">Standard reduction potentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../electrochem/voltammetry/index.html">Electroanalytical currents</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../kinetics/index.html">chemistrykit.kinetics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -404,15 +411,23 @@
 <li class="toctree-l2"><a class="reference internal" href="../../kinetics/networks/index.html">Reaction networks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../kinetics/oscillators/index.html">Oscillating reactions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../kinetics/rate_laws/index.html">Rate laws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../kinetics/rate_theory/index.html">Rate theory</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../md/index.html">chemistrykit.md</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../md/constraints/index.html">Constraints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../md/lj_fluid/index.html">Lennard-Jones fluid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../md/pair_potentials/index.html">Pair potentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../md/periodic_boundaries/index.html">Periodic boundaries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../md/thermostats/index.html">Thermostats</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../photochem/index.html">chemistrykit.photochem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/actinometry/index.html">Chemical actinometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/chain_reaction/index.html">Photochemical chain reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/electron_transfer/index.html">Photoinduced electron transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/energy_transfer/index.html">Energy transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../photochem/fluorescence/index.html">Fluorescence observables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../photochem/jablonski/index.html">Jablonski-diagram kinetics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../photochem/photostationary_state/index.html">Photostationary state</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../photochem/quantum_yield/index.html">Quantum yields</a></li>
@@ -423,12 +438,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../polymer/chain_growth/index.html">Chain-growth kinetics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../polymer/chain_statistics/index.html">Chain statistics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../polymer/molecular_weight_distribution/index.html">Molecular-weight distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../polymer/solution_properties/index.html">Solution properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../polymer/step_growth/index.html">Step-growth kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../polymer/stereochemistry/index.html">Stereochemistry</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../quantum/index.html">chemistrykit.quantum</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../quantum/harmonic_oscillator/index.html">Harmonic oscillator vs. Morse potential</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../quantum/hartree_fock/index.html">Minimal variational H2+</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quantum/hartree_fock/index.html">Minimal variational H2+ and the LCAO method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quantum/helium/index.html">Variational helium atom</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../quantum/huckel/index.html">Huckel molecular-orbital theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../quantum/hydrogenlike/index.html">Hydrogen-like atoms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../quantum/particle_in_box/index.html">Particle in a box</a></li>
@@ -444,42 +462,54 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">chemistrykit.spectro</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../atomic/index.html">Atomic line spectra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../beer_lambert/index.html">Beer-Lambert law</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../electronic/index.html">Electronic spectra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../lineshapes/index.html">Spectral lineshapes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../nmr/index.html">NMR multiplets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nmr/index.html">NMR spectroscopy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rotational/index.html">Rotational spectra</a></li>
 <li class="toctree-l2 current active"><a class="reference internal" href="index.html">Vibrational spectra</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statmech/index.html">chemistrykit.statmech</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statmech/ising/index.html">Ising model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statmech/lattice_gas/index.html">Lattice-gas adsorption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statmech/maxwell_boltzmann/index.html">Maxwell-Boltzmann speed distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statmech/partition_functions/index.html">Partition functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statmech/quantum_statistics/index.html">Quantum statistics and the classical limit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statmech/solids/index.html">Heat capacity of solids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statmech/virial/index.html">Virial coefficients</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../structure/index.html">chemistrykit.structure</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../structure/bonding/index.html">Bond order</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../structure/lewis/index.html">Formal charge and oxidation state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../structure/dipole/index.html">Dipole moments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../structure/kekule/index.html">Kekulé structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../structure/lewis/index.html">Lewis structures, oxidation states, and electronegativity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../structure/point_group/index.html">Point-group determination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../structure/ring_strain/index.html">Ring strain</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../structure/vsepr/index.html">VSEPR geometry prediction</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../surface/index.html">chemistrykit.surface</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/bet/index.html">BET isotherm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/catalysis/index.html">Catalysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/dubinin/index.html">Polanyi potential and Dubinin-Radushkevich</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/eley_rideal/index.html">Eley-Rideal kinetics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/freundlich/index.html">Freundlich isotherm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/gibbs_adsorption/index.html">Gibbs adsorption equation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/langmuir/index.html">Langmuir isotherm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../surface/langmuir_hinshelwood/index.html">Langmuir-Hinshelwood kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/temkin/index.html">Temkin isotherm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../surface/tpd/index.html">Temperature-programmed desorption</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../thermo/index.html">chemistrykit.thermo</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../thermo/equations_of_state/index.html">Equations of state</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../thermo/equilibrium/index.html">Reaction equilibrium</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../thermo/mixtures/index.html">Mixtures and colligative properties</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../thermo/phase_equilibria/index.html">Phase equilibria</a></li>
-</ul>
-</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thermo/index.html">Sections</a></li>
+
+
+
+
+
 </ul>
 </div>
 </nav></div>
@@ -529,7 +559,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Vibrational spectra</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Triatomic normal modes via the Wilson GF-matrix method: CO2 and H2O</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Wilson’s GF-matrix method: CO2 and H2O normal-mode frequencies from the G and F matrices</span></li>
   </ul>
 </nav>
 </div>
@@ -551,15 +581,20 @@
 <p><a class="reference internal" href="#sphx-glr-download-api-gallery-spectro-vibrational-plot-02-triatomic-normal-modes-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code.</p>
 </div>
-<section class="sphx-glr-example-title" id="triatomic-normal-modes-via-the-wilson-gf-matrix-method-co2-and-h2o">
-<span id="sphx-glr-api-gallery-spectro-vibrational-plot-02-triatomic-normal-modes-py"></span><h1>Triatomic normal modes via the Wilson GF-matrix method: CO2 and H2O<a class="headerlink" href="#triatomic-normal-modes-via-the-wilson-gf-matrix-method-co2-and-h2o" title="Link to this heading">#</a></h1>
-<p>A genuine (not tabulated) normal-mode calculation for a linear (CO2) and
-a bent (H2O) triatomic, using
-<a class="reference internal" href="../../../spectro.html#chemistrykit.spectro.TriatomicNormalModes" title="chemistrykit.spectro.systems.vibrational.TriatomicNormalModes"><code class="xref py py-class docutils literal notranslate"><span class="pre">TriatomicNormalModes</span></code></a>:
-a numerically built Wilson B-matrix, mass-weighted <cite>G</cite> matrix, and simple
-diagonal valence-force-field <cite>F</cite> matrix are combined into a generalized
-eigenvalue problem and solved for the true normal-mode wavenumbers.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy.constants</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sc</span>
+<section class="sphx-glr-example-title" id="wilson-s-gf-matrix-method-co2-and-h2o-normal-mode-frequencies-from-the-g-and-f-matrices">
+<span id="sphx-glr-api-gallery-spectro-vibrational-plot-02-triatomic-normal-modes-py"></span><h1>Wilson’s GF-matrix method: CO2 and H2O normal-mode frequencies from the G and F matrices<a class="headerlink" href="#wilson-s-gf-matrix-method-co2-and-h2o-normal-mode-frequencies-from-the-g-and-f-matrices" title="Link to this heading">#</a></h1>
+<p>This example uses Wilson’s GF-matrix method to calculate normal modes
+for a linear triatomic (CO2) and a bent one (H2O) with
+<a class="reference internal" href="../../../spectro.html#chemistrykit.spectro.TriatomicNormalModes" title="chemistrykit.spectro.systems.vibrational.TriatomicNormalModes"><code class="xref py py-class docutils literal notranslate"><span class="pre">TriatomicNormalModes</span></code></a>.
+The molecule’s geometry and masses give the kinetic-energy matrix
+<span class="math notranslate nohighlight">\(G=BM^{-1}B^T\)</span>, where <span class="math notranslate nohighlight">\(B\)</span> is the Wilson B-matrix. A diagonal
+valence force field gives the potential-energy matrix <span class="math notranslate nohighlight">\(F\)</span>. Solving
+the eigenvalue problem <span class="math notranslate nohighlight">\(GFL=L\Lambda\)</span>, with
+<span class="math notranslate nohighlight">\(\lambda_k=(2\pi c\tilde\nu_k)^2\)</span>, gives the normal-mode
+wavenumbers. Changing only the bend entry of <span class="math notranslate nohighlight">\(F\)</span> shifts the bend
+frequency, while the stretches barely move.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.constants</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sc</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.spectro.systems.vibrational</span><span class="w"> </span><span class="kn">import</span> <span class="n">TriatomicNormalModes</span>
 
@@ -571,10 +606,10 @@ eigenvalue problem and solved for the true normal-mode wavenumbers.</p>
     <span class="n">k_theta</span><span class="o">=</span><span class="mf">0.85e-18</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">co2_result</span> <span class="o">=</span> <span class="n">co2</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CO2 (linear) normal-mode wavenumbers (cm^-1):&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  bend (doubly degenerate): </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">co2_result</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  (real: 667)&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  symmetric stretch (IR-inactive): </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">co2_result</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  (real: 1388)&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  antisymmetric stretch: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">co2_result</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  (real: 2349)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"CO2 (linear) normal-mode wavenumbers (cm^-1):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  bend (doubly degenerate): </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">co2_result</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  (real: 667)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  symmetric stretch (IR-inactive): </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">co2_result</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  (real: 1388)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  antisymmetric stretch: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">co2_result</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  (real: 2349)"</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>CO2 (linear) normal-mode wavenumbers (cm^-1):
@@ -592,10 +627,10 @@ eigenvalue problem and solved for the true normal-mode wavenumbers.</p>
     <span class="n">k_theta</span><span class="o">=</span><span class="mf">0.7e-18</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">water_result</span> <span class="o">=</span> <span class="n">water</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">H2O (bent) normal-mode wavenumbers (cm^-1):&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  bend: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">water_result</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  (real: 1595)&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  symmetric stretch: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">water_result</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  (real: 3657)&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  antisymmetric stretch: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">water_result</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  (real: 3756)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">H2O (bent) normal-mode wavenumbers (cm^-1):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  bend: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">water_result</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  (real: 1595)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  symmetric stretch: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">water_result</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  (real: 3657)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  antisymmetric stretch: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">water_result</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  (real: 3756)"</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>H2O (bent) normal-mode wavenumbers (cm^-1):
@@ -627,9 +662,9 @@ only the bend frequency, as expected for a diagonal force field:</p>
     <span class="n">k_r</span><span class="o">=</span><span class="mf">770.0</span><span class="p">,</span>
     <span class="n">k_theta</span><span class="o">=</span><span class="mf">1.2e-18</span><span class="p">,</span>
 <span class="p">)</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Bend wavenumber with soft k_theta: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">soft_bend</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> cm^-1&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bend wavenumber with stiff k_theta: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">stiff_bend</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> cm^-1&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stretch wavenumbers unchanged: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">soft_bend</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">stiff_bend</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Bend wavenumber with soft k_theta: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">soft_bend</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> cm^-1"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Bend wavenumber with stiff k_theta: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">stiff_bend</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> cm^-1"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Stretch wavenumbers unchanged: </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">soft_bend</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">stiff_bend</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Bend wavenumber with soft k_theta: 1087.8 cm^-1
@@ -637,7 +672,25 @@ Bend wavenumber with stiff k_theta: 2174.0 cm^-1
 Stretch wavenumbers unchanged: [3685.35491056 3739.86728349] vs [3688.02836763 3739.86728349]
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.002 seconds)</p>
+<p>Computed GF-matrix wavenumbers (solid) next to the experimental
+fundamentals (dashed) for both molecules:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">axes</span></a> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">name</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">computed</span></a><span class="p">,</span> <a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">measured</span></a> <span class="ow">in</span> <span class="p">(</span>
+    <span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">axes</span></a><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"CO2"</span><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">co2_result</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">,</span> <span class="p">[</span><span class="mf">667.0</span><span class="p">,</span> <span class="mf">1388.0</span><span class="p">,</span> <span class="mf">2349.0</span><span class="p">]),</span>
+    <span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">axes</span></a><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"H2O"</span><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">water_result</span><span class="o">.</span><span class="n">wavenumbers</span></a><span class="p">,</span> <span class="p">[</span><span class="mf">1595.0</span><span class="p">,</span> <span class="mf">3657.0</span><span class="p">,</span> <span class="mf">3756.0</span><span class="p">]),</span>
+<span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">computed</span></a><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"tab:blue"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"GF-matrix (diagonal F)"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">measured</span></a><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"0.3"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"experiment"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><a href="https://docs.python.org/3/builtins/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">name</span></a><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">"upper left"</span><span class="p">)</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">axes</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"wavenumber (cm$^{-1}$)"</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">"Wilson GF-matrix normal modes"</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../../../_images/sphx_glr_plot_02_triatomic_normal_modes_001.png" srcset="../../../../_images/sphx_glr_plot_02_triatomic_normal_modes_001.png" alt="Wilson GF-matrix normal modes, CO2, H2O" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.042 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-api-gallery-spectro-vibrational-plot-02-triatomic-normal-modes-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../../../_downloads/23c623f795be1c2d24a0cece2d2ec46d/plot_02_triatomic_normal_modes.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_02_triatomic_normal_modes.ipynb</span></code></a></p>
@@ -672,11 +725,11 @@ Stretch wavenumbers unchanged: [3685.35491056 3739.86728349] vs [3688.02836763 3
       </div>
     </a>
     <a class="right-next"
-       href="../../statmech/index.html"
+       href="plot_03_raman_ir_mutual_exclusion.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Examples</p>
+        <p class="prev-next-title">Raman scattering vs. infrared absorption: the mutual exclusion rule for CO2</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

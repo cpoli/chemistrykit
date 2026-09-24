@@ -8,9 +8,10 @@ This gallery walks through every public feature of
 concentration cells (with activity-coefficient corrections), a curated
 standard-reduction-potential table with redox-couple balancing,
 Butler-Volmer electrode kinetics and Tafel-plot linearization, Faraday's
-laws of electrolysis and the galvanic-vs-electrolytic distinction, and a
+laws of electrolysis and the galvanic-vs-electrolytic distinction, a
 simplified constant-current battery discharge model with Peukert's-law
-rate dependence.
+rate dependence, fuel-cell thermodynamics, Kohlrausch's conductivity
+laws, and diffusion-limited electroanalytical currents.
 
 Each script in this gallery is self-contained and can be run directly
 with ``python examples/electrochem/<section>/<script>.py``. Every script
@@ -31,8 +32,13 @@ Sections
   high-overpotential Tafel-plot linearization, checked for convergence.
 - **electrolysis** -- Faraday's laws of electrolysis, and galvanic vs.
   electrolytic cell operation.
-- **battery** -- a simplified constant-current battery discharge model
-  and Peukert's-law capacity-vs-rate dependence.
+- **battery** -- Volta's pile, a simplified constant-current battery
+  discharge model, and Peukert's-law capacity-vs-rate dependence.
+- **fuel_cell** -- Grove's hydrogen-oxygen gas battery and its
+  thermodynamic voltage and efficiency limits.
+- **conductivity** -- Kohlrausch's laws of electrolytic conductivity.
+- **voltammetry** -- the Cottrell equation, polarography and the Ilkovič
+  equation, and the Randles-Ševčík peak current.
 
 
 .. raw:: html
@@ -55,7 +61,7 @@ Sections
 Battery discharge
 -------------------
 
-A simplified constant-current battery discharge model and Peukert's-law
+Volta's pile of series-stacked two-metal cells, a simplified constant-current battery discharge model and Peukert's-law
 capacity-vs-rate dependence.
 
 
@@ -72,7 +78,7 @@ capacity-vs-rate dependence.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="ConstantCurrentBattery is a deliberately simplified constant-current discharge model (see its docstring for exactly what is and is not captured). This example shows the ideal (Peukert exponent k=1) case delivering the same effective capacity at every discharge rate, and a more realistic k&gt;1 case showing the familiar &quot;faster discharge delivers less total capacity&quot; effect.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Peukert&#x27;s 1897 power law, t = C_p/I^k, says a lead-acid battery discharged faster delivers less total charge. Using effective_capacity, this example compares the ideal Peukert exponent k=1 (same capacity at every rate) with a realistic k=1.2, then draws discharge curves from ConstantCurrentBattery (a deliberately simplified model; see its docstring) whose runtimes shrink faster than 1/I.">
 
 .. only:: html
 
@@ -83,7 +89,24 @@ capacity-vs-rate dependence.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">A simplified constant-current battery discharge model, and Peukert's law</div>
+      <div class="sphx-glr-thumbnail-title">Peukert's law: battery capacity falls at high discharge rates</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Volta&#x27;s 1800 pile was a stack of identical zinc | brine | silver (or copper) pairs. Each pair contributes the difference between the two metals&#x27; reduction potentials -- the &quot;contact&quot; driving force Volta insisted on against Galvani&#x27;s animal electricity -- and stacking pairs in series adds their voltages. This example computes the single-pair voltage with cell_potential, shows how the pile voltage grows linearly with the number of pairs, and compares Volta&#x27;s zinc-silver pairing with zinc-copper and a frog-leg-free &quot;same metal&quot; pair that produces nothing at all.">
+
+.. only:: html
+
+  .. image:: /api/gallery/electrochem/battery/images/thumb/sphx_glr_plot_02_voltaic_pile_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/electrochem/battery/plot_02_voltaic_pile`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Volta's pile: stacking zinc-silver cells in series</div>
     </div>
 
 
@@ -113,7 +136,7 @@ linearization.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="butler_volmer_current_density gives the full nonlinear current-overpotential relationship for an electrode reaction. At high overpotential its Tafel-linearized form (~chemistrykit.electrochem.systems.butler_volmer.tafel_overpotential) becomes an excellent approximation; this example checks that convergence numerically and then fits synthetic Tafel-regime data back to recover the exchange current density and Tafel slope.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Tafel (1905) found that far from equilibrium the overpotential of hydrogen evolution grows linearly with \log_{10} i: \eta = b\log_{10}(i/i_0). This example generates noisy &quot;measured&quot; high-overpotential data, draws the Tafel plot, and uses fit_tafel_plot to recover the Tafel slope b and exchange current density i_0 by linear regression -- the analysis Tafel&#x27;s successors still use, and compares the slope with tafel_slope&#x27;s textbook ~118 mV/decade for \alpha = 0.5, n = 1.">
 
 .. only:: html
 
@@ -124,7 +147,24 @@ linearization.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Butler-Volmer kinetics and the Tafel-plot linearization</div>
+      <div class="sphx-glr-thumbnail-title">Tafel's law: overpotential linear in log current</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The Butler-Volmer equation writes the net electrode current as the difference of an anodic and a cathodic exponential. At zero overpotential the two partial currents are equal (each is i_0) and cancel -- a dynamic equilibrium; far from equilibrium one term dominates and the equation becomes Tafel&#x27;s straight line. This example plots both partial currents and butler_volmer_current_density, shows the effect of the transfer coefficient \alpha, and checks numerically how fast the Tafel limit is reached.">
+
+.. only:: html
+
+  .. image:: /api/gallery/electrochem/butler_volmer/images/thumb/sphx_glr_plot_02_butler_volmer_equation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/electrochem/butler_volmer/plot_02_butler_volmer_equation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Butler-Volmer equation: anodic and cathodic partial currents</div>
     </div>
 
 
@@ -134,11 +174,11 @@ linearization.
 
     </div>
 
-Electrolysis
--------------
+Electrolytic conductivity
+--------------------------
 
-Faraday's laws of electrolysis, and galvanic vs. electrolytic cell
-operation.
+Kohlrausch's law of independent migration of ions and his square-root
+law for molar conductivity.
 
 
 .. raw:: html
@@ -154,7 +194,48 @@ operation.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="faradays_law_mass gives the mass of a species deposited or consumed by a constant current over time. This example verifies the linear proportionality to both current and time (Faraday&#x27;s first law), computes the minimum applied voltage needed to force a non-spontaneous (electrolytic) reaction to run, and contrasts a spontaneous galvanic reaction against one that needs external electrolysis.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Kohlrausch found that the molar conductivity of a strong electrolyte falls linearly with \sqrt{c}, \Lambda_m = \Lambda_m^\circ - K\sqrt{c}, and that the infinite-dilution value \Lambda_m^\circ is a sum of independent ionic contributions. This example extrapolates noisy KCl data to infinite dilution with fit_kohlrausch_law, and uses limiting_molar_conductivity for his classic trick: the limiting conductivity of the weak acid acetic acid, which cannot be extrapolated, from three strong electrolytes.">
+
+.. only:: html
+
+  .. image:: /api/gallery/electrochem/conductivity/images/thumb/sphx_glr_plot_01_kohlrausch_laws_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/electrochem/conductivity/plot_01_kohlrausch_laws`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Kohlrausch's laws: independent migration and the square-root law</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Electrolysis
+-------------
+
+Faraday's laws of electrolysis, Nicholson and Carlisle's electrolysis of
+water, and Davy's electrolytic isolation of the alkali metals.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Faraday&#x27;s first law: the mass liberated at an electrode is proportional to the charge passed, m = QM/(nF). His second law: for a fixed charge, different substances are liberated in proportion to their equivalent weights M/n. This example verifies both with faradays_law_mass and mass_from_charge, recovering the single universal constant -- the Faraday -- that links charge to chemical change.">
 
 .. only:: html
 
@@ -165,7 +246,7 @@ operation.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Faraday's laws of electrolysis, and galvanic vs. electrolytic cells</div>
+      <div class="sphx-glr-thumbnail-title">Faraday's laws of electrolysis</div>
     </div>
 
 
@@ -183,6 +264,64 @@ operation.
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Nicholson and Carlisle's electrolysis of water</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In 1807 Humphry Davy passed current through molten potash and soda and isolated potassium and sodium -- metals no chemical reducing agent of the day could free, because their reduction potentials are among the most negative in the electrochemical series. This example ranks Davy&#x27;s two couples against the rest of STANDARD_REDUCTION_POTENTIALS, shows why the common reducing metals (Zn, Fe) cannot reduce K+ or Na+, computes the minimum electrolysis voltage for the molten chlorides with minimum_applied_voltage_electrolytic, and uses Faraday&#x27;s law to estimate how much potassium a current yields.">
+
+.. only:: html
+
+  .. image:: /api/gallery/electrochem/electrolysis/images/thumb/sphx_glr_plot_03_davy_alkali_metals_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/electrochem/electrolysis/plot_03_davy_alkali_metals`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Davy's electrolytic isolation of potassium and sodium</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Fuel cells
+-----------
+
+Grove's gas battery and the thermodynamic voltage and efficiency limits
+of the hydrogen-oxygen fuel cell.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In 1839-1842 William Grove ran electrolysis backwards: hydrogen and oxygen over platinum electrodes in dilute acid recombined to produce a current. This example computes the reversible voltage of that cell two ways -- from the standard potentials of the O2/H2O and H+/H2 couples and from \Delta G^\circ via reversible_cell_voltage -- its temperature dependence (~chemistrykit.electrochem.systems.fuel_cell.reversible_cell_voltage_at_temperature), and its thermodynamic efficiency limit \Delta G/\Delta H (~chemistrykit.electrochem.systems.fuel_cell.fuel_cell_efficiency_limit) compared with the Carnot limit of a heat engine.">
+
+.. only:: html
+
+  .. image:: /api/gallery/electrochem/fuel_cell/images/thumb/sphx_glr_plot_01_grove_gas_battery_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/electrochem/fuel_cell/plot_01_grove_gas_battery`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Grove's gas battery: the hydrogen-oxygen fuel cell</div>
     </div>
 
 
@@ -212,18 +351,35 @@ Debye-Huckel activity-coefficient-corrected reaction quotients.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="nernst_potential relates a cell&#x27;s potential under non-standard conditions to its standard potential and reaction quotient. A concentration cell (built from identical half-cells differing only in concentration) makes the entire driving force come from this activity term. Finally, nernst_potential_with_activity shows how Debye-Huckel activity-coefficient corrections (reused from chemistrykit.solutions.systems.activity) pull the cell potential away from the ideal, unit-activity-coefficient prediction as ionic strength grows.">
+    <div class="sphx-glr-thumbcontainer" tooltip="nernst_potential implements E = E^\circ - \frac{RT}{nF}\ln Q. This example checks that it reduces to E^\circ at Q=1, plots the logarithmic dependence on the reaction quotient, and then builds a concentration cell (~chemistrykit.electrochem.systems.nernst.concentration_cell_potential) whose voltage comes entirely from a concentration difference -- about 59 mV per decade for a one-electron couple at 25 degC, as Nernst predicted.">
 
 .. only:: html
 
-  .. image:: /api/gallery/electrochem/nernst/images/thumb/sphx_glr_plot_01_nernst_and_concentration_cells_thumb.png
+  .. image:: /api/gallery/electrochem/nernst/images/thumb/sphx_glr_plot_01_nernst_equation_thumb.png
     :alt:
 
-  :doc:`/api/gallery/electrochem/nernst/plot_01_nernst_and_concentration_cells`
+  :doc:`/api/gallery/electrochem/nernst/plot_01_nernst_equation`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">The Nernst equation: standard cells, concentration cells, and activity corrections</div>
+      <div class="sphx-glr-thumbnail-title">The Nernst equation: cell potential versus concentration</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Debye and Hückel (1923) showed that each ion&#x27;s cloud of counter-ions lowers its activity below its concentration, by an amount growing with ionic strength and ionic charge. This example uses nernst_potential_with_activity (built on chemistrykit.solutions.systems.activity) to show how the potential of a Cu2+/Cu electrode drifts away from the ideal Nernst value as the solution gets more concentrated, and that the correction vanishes in the dilute limit.">
+
+.. only:: html
+
+  .. image:: /api/gallery/electrochem/nernst/images/thumb/sphx_glr_plot_02_debye_huckel_activity_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/electrochem/nernst/plot_02_debye_huckel_activity`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Debye-Hückel activity corrections to the Nernst equation</div>
     </div>
 
 
@@ -236,8 +392,8 @@ Debye-Huckel activity-coefficient-corrected reaction quotients.
 Standard reduction potentials
 --------------------------------
 
-A curated standard-reduction-potential table, redox-couple electron
-balancing, and cell-potential combination.
+The Daniell cell from tabulated standard reduction potentials, and the
+1953 Stockholm sign convention behind the table.
 
 
 .. raw:: html
@@ -253,18 +409,111 @@ balancing, and cell-potential combination.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="STANDARD_REDUCTION_POTENTIALS is a small curated table of standard reduction potentials. cell_potential combines any two half-reactions into a standard cell potential, and balance_redox_reaction finds the electron-balancing multiples needed to write out the full mass-balanced overall reaction.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Daniell&#x27;s 1836 two-fluid cell separated a zinc electrode in zinc (or acid) solution from a copper electrode in copper sulfate. Copper metal, not hydrogen gas, is deposited at the cathode, so the cell does not polarize. This example reproduces its standard potential with standard_cell_potential, balances the overall reaction with balance_redox_reaction, and uses the Nernst equation to show how gently the voltage falls as the cell discharges -- the steadiness that made it the first practical voltage standard.">
 
 .. only:: html
 
-  .. image:: /api/gallery/electrochem/standard_potentials/images/thumb/sphx_glr_plot_01_cell_potentials_thumb.png
+  .. image:: /api/gallery/electrochem/standard_potentials/images/thumb/sphx_glr_plot_01_daniell_cell_thumb.png
     :alt:
 
-  :doc:`/api/gallery/electrochem/standard_potentials/plot_01_cell_potentials`
+  :doc:`/api/gallery/electrochem/standard_potentials/plot_01_daniell_cell`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Standard reduction potentials, redox-couple balancing, and cell potentials</div>
+      <div class="sphx-glr-thumbnail-title">The Daniell cell: a steady 1.10 V from zinc and copper</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Before IUPAC&#x27;s 1953 Stockholm meeting, one tradition tabulated oxidation potentials and another reduction potentials, so the same couple appeared with opposite signs in different books. This example shows both conventions for the table in STANDARD_REDUCTION_POTENTIALS (which follows Stockholm), and shows that the cathode-minus-anode rule of cell_potential only gives the right cell voltage and spontaneity when both half-reactions use the agreed reduction convention.">
+
+.. only:: html
+
+  .. image:: /api/gallery/electrochem/standard_potentials/images/thumb/sphx_glr_plot_02_stockholm_sign_convention_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/electrochem/standard_potentials/plot_02_stockholm_sign_convention`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The 1953 Stockholm convention: electrode potentials are reduction potentials</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Electroanalytical currents
+---------------------------
+
+Diffusion-limited currents: the Cottrell equation, Heyrovský's
+polarography and the Ilkovič equation, and the Randles-Ševčík peak
+current of cyclic voltammetry.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Cottrell (1903) solved the diffusion problem for a planar electrode whose potential is suddenly stepped so that the electroactive species is consumed at the surface: the current decays as t^{-1/2}, i = nFAC\sqrt{D/(\pi t)}. This example plots cottrell_current, checks the constant i\sqrt{t} signature, and recovers the diffusion coefficient from a noisy &quot;measured&quot; transient via the Cottrell plot of i against t^{-1/2}.">
+
+.. only:: html
+
+  .. image:: /api/gallery/electrochem/voltammetry/images/thumb/sphx_glr_plot_01_cottrell_equation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/electrochem/voltammetry/plot_01_cottrell_equation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Cottrell equation: current decay after a potential step</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Heyrovský&#x27;s dropping mercury electrode (1922) records a sigmoidal &quot;polarographic wave&quot; for each reducible species: its position (the half-wave potential) identifies the species and its height (the diffusion current, given by Ilkovič&#x27;s 1934 equation) measures its concentration. This example builds a two-component polarogram from polarographic_wave_current with wave heights from ilkovic_diffusion_current, and shows the linear calibration of diffusion current against concentration.">
+
+.. only:: html
+
+  .. image:: /api/gallery/electrochem/voltammetry/images/thumb/sphx_glr_plot_02_heyrovsky_polarography_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/electrochem/voltammetry/plot_02_heyrovsky_polarography`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Heyrovský's polarography and the Ilkovič equation</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Randles and Ševčík (1948) independently showed that the peak current of a reversible linear-sweep voltammogram grows with the square root of the scan rate, i_p = 0.4463\,nFAC\sqrt{nFvD/RT}. This example evaluates randles_sevcik_peak_current over a range of scan rates, and recovers the diffusion coefficient from the slope of the i_p vs. \sqrt{v} plot -- the standard diagnostic for a diffusion-controlled electrode reaction.">
+
+.. only:: html
+
+  .. image:: /api/gallery/electrochem/voltammetry/images/thumb/sphx_glr_plot_03_randles_sevcik_cyclic_voltammetry_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/electrochem/voltammetry/plot_03_randles_sevcik_cyclic_voltammetry`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Randles-Ševčík equation: peak current in cyclic voltammetry</div>
     </div>
 
 
@@ -282,9 +531,12 @@ balancing, and cell-potential combination.
 
    /api/gallery/electrochem/battery/index.rst
    /api/gallery/electrochem/butler_volmer/index.rst
+   /api/gallery/electrochem/conductivity/index.rst
    /api/gallery/electrochem/electrolysis/index.rst
+   /api/gallery/electrochem/fuel_cell/index.rst
    /api/gallery/electrochem/nernst/index.rst
    /api/gallery/electrochem/standard_potentials/index.rst
+   /api/gallery/electrochem/voltammetry/index.rst
 
 
 

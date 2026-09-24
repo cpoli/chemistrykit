@@ -410,12 +410,12 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.kinetics.systems.arrhenius</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;The Arrhenius equation and activation-energy fitting.</span>
+<span></span><span class="sd">"""The Arrhenius equation and activation-energy fitting.</span>
 
-<span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 20.3 (&quot;The</span>
-<span class="sd">temperature dependence of reaction rates&quot;), and the original: S.</span>
+<span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 20.3 ("The</span>
+<span class="sd">temperature dependence of reaction rates"), and the original: S.</span>
 <span class="sd">Arrhenius, *Z. Phys. Chem.* 4, 226 (1889).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -426,18 +426,18 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">R</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.kinetics.utils.linear_regression</span><span class="w"> </span><span class="kn">import</span> <span class="n">linear_fit</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;arrhenius_rate_constant&quot;</span><span class="p">,</span> <span class="s2">&quot;ArrheniusFit&quot;</span><span class="p">,</span> <span class="s2">&quot;fit_arrhenius&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"arrhenius_rate_constant"</span><span class="p">,</span> <span class="s2">"ArrheniusFit"</span><span class="p">,</span> <span class="s2">"fit_arrhenius"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="arrhenius_rate_constant">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.arrhenius_rate_constant">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">arrhenius_rate_constant</span><span class="p">(</span><span class="n">A</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Ea</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluate the Arrhenius equation :math:`k = A e^{-E_a/(RT)}`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Evaluate the Arrhenius equation :math:`k = A e^{-E_a/(RT)}`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    A : float</span>
-<span class="sd">        Pre-exponential (&quot;frequency&quot;) factor, in the same units as `k`.</span>
+<span class="sd">        Pre-exponential ("frequency") factor, in the same units as `k`.</span>
 <span class="sd">    Ea : float</span>
 <span class="sd">        Activation energy, in J/mol.</span>
 <span class="sd">    T : float or array-like of float</span>
@@ -454,7 +454,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; round(float(arrhenius_rate_constant(A=1e13, Ea=50e3, T=300.0)), 2)</span>
 <span class="sd">    19696.84</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">A</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Ea</span> <span class="o">/</span> <span class="p">(</span><span class="n">R_gas</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span></div>
 
@@ -464,24 +464,24 @@
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.ArrheniusFit">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ArrheniusFit</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Result of fitting rate-constant-vs-temperature data to the Arrhenius equation.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Result of fitting rate-constant-vs-temperature data to the Arrhenius equation."""</span>
 
     <span class="n">Ea</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Fitted activation energy, in J/mol.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""float: Fitted activation energy, in J/mol."""</span>
 
     <span class="n">A</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Fitted pre-exponential factor.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""float: Fitted pre-exponential factor."""</span>
 
     <span class="n">r_squared</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Coefficient of determination of the linear (ln k vs 1/T) fit.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""float: Coefficient of determination of the linear (ln k vs 1/T) fit."""</span>
 
     <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Gas constant used in the fit, in J mol^-1 K^-1.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""float: Gas constant used in the fit, in J mol^-1 K^-1."""</span>
 
 <div class="viewcode-block" id="ArrheniusFit.predict">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.ArrheniusFit.predict">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the fitted Arrhenius equation at temperature(s) `T`.</span>
+<span class="w">        </span><span class="sd">"""Evaluate the fitted Arrhenius equation at temperature(s) `T`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -491,7 +491,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">arrhenius_rate_constant</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ea</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">R_gas</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">R_gas</span><span class="p">)</span></div>
 </div>
 
@@ -500,10 +500,10 @@
 <div class="viewcode-block" id="fit_arrhenius">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.fit_arrhenius">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">fit_arrhenius</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ArrheniusFit</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fit rate constant vs. temperature data to the Arrhenius equation.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Fit rate constant vs. temperature data to the Arrhenius equation.</span>
 
 <span class="sd">    Linearizes :math:`\ln k = \ln A - E_a/R \cdot (1/T)` and fits by</span>
-<span class="sd">    ordinary least squares -- the standard &quot;Arrhenius plot&quot; method (Atkins</span>
+<span class="sd">    ordinary least squares -- the standard "Arrhenius plot" method (Atkins</span>
 <span class="sd">    &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 20.3): plotting</span>
 <span class="sd">    :math:`\ln k` against :math:`1/T` gives a straight line of slope</span>
 <span class="sd">    :math:`-E_a/R` and intercept :math:`\ln A`.</span>
@@ -534,7 +534,7 @@
 <span class="sd">    60000.0</span>
 <span class="sd">    &gt;&gt;&gt; round(fit.r_squared, 6)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">fit</span> <span class="o">=</span> <span class="n">linear_fit</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>

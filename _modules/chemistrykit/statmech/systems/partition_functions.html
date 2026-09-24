@@ -410,13 +410,13 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.statmech.systems.partition_functions</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Translational, rotational, and vibrational partition functions.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Translational, rotational, and vibrational partition functions.</span>
 
 <span class="sd">See McQuarrie, *Statistical Mechanics* (1976), Ch. 6, or Atkins &amp; de</span>
 <span class="sd">Paula, *Physical Chemistry*, 11th ed., Ch. 13, for the derivation of each</span>
 <span class="sd">partition function below and the thermodynamic-function formulas</span>
 <span class="sd">(:math:`U`, :math:`S`, :math:`C_V`) built from them.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -428,18 +428,18 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.statmech.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">PartitionFunction</span><span class="p">,</span> <span class="n">ThermodynamicFunctions</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;TranslationalPartitionFunction&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;RotationalPartitionFunctionLinear&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;VibrationalPartitionFunctionHarmonic&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;IdealGasMolecule&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sackur_tetrode_entropy&quot;</span><span class="p">,</span>
+    <span class="s2">"TranslationalPartitionFunction"</span><span class="p">,</span>
+    <span class="s2">"RotationalPartitionFunctionLinear"</span><span class="p">,</span>
+    <span class="s2">"VibrationalPartitionFunctionHarmonic"</span><span class="p">,</span>
+    <span class="s2">"IdealGasMolecule"</span><span class="p">,</span>
+    <span class="s2">"sackur_tetrode_entropy"</span><span class="p">,</span>
 <span class="p">]</span>
 
 
 <div class="viewcode-block" id="TranslationalPartitionFunction">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.TranslationalPartitionFunction">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TranslationalPartitionFunction</span><span class="p">(</span><span class="n">PartitionFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The translational partition function of a particle in a box (volume) `V`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The translational partition function of a particle in a box (volume) `V`.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -473,11 +473,11 @@
 <span class="sd">    &gt;&gt;&gt; q = TranslationalPartitionFunction(mass=6.63e-26, volume=1.0e-3)</span>
 <span class="sd">    &gt;&gt;&gt; round(q.internal_energy(298.15, N=1.0) / (1.5 * 1.380649e-23 * 298.15), 6)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">volume</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">mass</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">volume</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mass and volume must be positive&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"mass and volume must be positive"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mass</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">volume</span><span class="p">)</span>
 
@@ -496,7 +496,7 @@
 <div class="viewcode-block" id="TranslationalPartitionFunction.entropy">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.TranslationalPartitionFunction.entropy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">entropy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">NA</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return the Sackur-Tetrode translational entropy.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return the Sackur-Tetrode translational entropy.</span>
 
 <span class="sd">        .. math::</span>
 
@@ -508,7 +508,7 @@
 <span class="sd">        function :func:`sackur_tetrode_entropy` for computing this</span>
 <span class="sd">        directly from `P` and `T` without building a container volume by</span>
 <span class="sd">        hand.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">N</span> <span class="o">*</span> <span class="n">K_B</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">q</span> <span class="o">/</span> <span class="n">N</span><span class="p">)</span> <span class="o">+</span> <span class="mf">2.5</span><span class="p">)</span></div>
 
@@ -524,7 +524,7 @@
 <div class="viewcode-block" id="sackur_tetrode_entropy">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.sackur_tetrode_entropy">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">sackur_tetrode_entropy</span><span class="p">(</span><span class="n">mass</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">P</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Molar translational entropy of an ideal gas via the Sackur-Tetrode equation.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Molar translational entropy of an ideal gas via the Sackur-Tetrode equation.</span>
 
 <span class="sd">    A convenience wrapper around</span>
 <span class="sd">    :meth:`TranslationalPartitionFunction.entropy` that takes the</span>
@@ -556,7 +556,7 @@
 <span class="sd">    &gt;&gt;&gt; S = sackur_tetrode_entropy(mass=39.948 * sc.atomic_mass, T=298.15, P=1.0e5)</span>
 <span class="sd">    &gt;&gt;&gt; round(float(S), 1)</span>
 <span class="sd">    154.8</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">volume_per_molecule</span> <span class="o">=</span> <span class="n">K_B</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="n">P</span>
     <span class="n">q_per_molecule</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">mass</span> <span class="o">*</span> <span class="n">K_B</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="n">H</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">volume_per_molecule</span>
     <span class="k">return</span> <span class="n">R_gas</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">q_per_molecule</span><span class="p">)</span> <span class="o">+</span> <span class="mf">2.5</span><span class="p">)</span></div>
@@ -566,7 +566,7 @@
 <div class="viewcode-block" id="RotationalPartitionFunctionLinear">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.RotationalPartitionFunctionLinear">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RotationalPartitionFunctionLinear</span><span class="p">(</span><span class="n">PartitionFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The rotational partition function of a linear rigid rotor, high-temperature (classical) limit.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The rotational partition function of a linear rigid rotor, high-temperature (classical) limit.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -598,19 +598,19 @@
 <span class="sd">    &gt;&gt;&gt; q = RotationalPartitionFunctionLinear(moment_of_inertia=1.45e-46, symmetry_number=1)  # ~HCl-like</span>
 <span class="sd">    &gt;&gt;&gt; round(q.heat_capacity_v(298.15, N=1.0) / 1.380649e-23, 6)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">moment_of_inertia</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">symmetry_number</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">moment_of_inertia</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;moment_of_inertia must be positive&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"moment_of_inertia must be positive"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">symmetry_number</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;symmetry_number must be a positive integer&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"symmetry_number must be a positive integer"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">moment_of_inertia</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">moment_of_inertia</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">symmetry_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">symmetry_number</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">rotational_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The rotational temperature :math:`\Theta_{\text{rot}}=h^2/(8\pi^2Ik_B)`, in K.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""The rotational temperature :math:`\Theta_{\text{rot}}=h^2/(8\pi^2Ik_B)`, in K."""</span>
         <span class="k">return</span> <span class="n">H</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">8.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">moment_of_inertia</span> <span class="o">*</span> <span class="n">K_B</span><span class="p">)</span>
 
 <div class="viewcode-block" id="RotationalPartitionFunctionLinear.value">
@@ -642,7 +642,7 @@
 <div class="viewcode-block" id="VibrationalPartitionFunctionHarmonic">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">VibrationalPartitionFunctionHarmonic</span><span class="p">(</span><span class="n">PartitionFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The vibrational partition function of a single harmonic-oscillator mode.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The vibrational partition function of a single harmonic-oscillator mode.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -651,7 +651,7 @@
 
 <span class="sd">    with energies measured from the :math:`v=0` ground vibrational level</span>
 <span class="sd">    (Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 13.2d).</span>
-<span class="sd">    Unlike :class:`RotationalPartitionFunctionLinear`&#39;s classical limit,</span>
+<span class="sd">    Unlike :class:`RotationalPartitionFunctionLinear`'s classical limit,</span>
 <span class="sd">    this is an *exact* closed form within the harmonic approximation,</span>
 <span class="sd">    valid at every temperature -- it is the harmonic-potential assumption</span>
 <span class="sd">    itself (rather than a classical/high-`T` truncation) that is</span>
@@ -659,7 +659,7 @@
 <span class="sd">    :class:`chemistrykit.md.systems.pair_potentials.Morse`).</span>
 <span class="sd">    :meth:`heat_capacity_v` is the Einstein-solid heat-capacity formula</span>
 <span class="sd">    (A. Einstein, *Ann. Phys.* 22, 180 (1907)), reused here for a single</span>
-<span class="sd">    vibrational mode rather than a 3D solid&#39;s lattice vibrations.</span>
+<span class="sd">    vibrational mode rather than a 3D solid's lattice vibrations.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -679,18 +679,18 @@
 <span class="sd">    &gt;&gt;&gt; ratio = q.heat_capacity_v(1.0e6, N=1.0) / 1.380649e-23</span>
 <span class="sd">    &gt;&gt;&gt; bool(0.99 &lt; ratio &lt; 1.0)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequency</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">frequency</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;frequency must be positive&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"frequency must be positive"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">frequency</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">frequency</span><span class="p">)</span>
 
 <div class="viewcode-block" id="VibrationalPartitionFunctionHarmonic.from_wavenumber">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.VibrationalPartitionFunctionHarmonic.from_wavenumber">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_wavenumber</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">wavenumber_cm_inv</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VibrationalPartitionFunctionHarmonic</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Build from a vibrational wavenumber in cm^-1 via :math:`\nu=c\tilde\nu`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Build from a vibrational wavenumber in cm^-1 via :math:`\nu=c\tilde\nu`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -706,14 +706,14 @@
 <span class="sd">        &gt;&gt;&gt; q = VibrationalPartitionFunctionHarmonic.from_wavenumber(2886.0)  # HCl fundamental</span>
 <span class="sd">        &gt;&gt;&gt; round(q.frequency / 1.0e13, 3)</span>
 <span class="sd">        8.652</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">frequency</span> <span class="o">=</span> <span class="n">C</span> <span class="o">*</span> <span class="n">wavenumber_cm_inv</span> <span class="o">*</span> <span class="mf">100.0</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">frequency</span><span class="o">=</span><span class="n">frequency</span><span class="p">)</span></div>
 
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">vibrational_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The vibrational temperature :math:`\Theta_{\text{vib}}=h\nu/k_B`, in K.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""The vibrational temperature :math:`\Theta_{\text{vib}}=h\nu/k_B`, in K."""</span>
         <span class="k">return</span> <span class="n">H</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">frequency</span> <span class="o">/</span> <span class="n">K_B</span>
 
 <div class="viewcode-block" id="VibrationalPartitionFunctionHarmonic.value">
@@ -749,7 +749,7 @@
 <div class="viewcode-block" id="IdealGasMolecule">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.IdealGasMolecule">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">IdealGasMolecule</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Combined translational + rotational + vibrational thermodynamic functions for one ideal-gas species.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Combined translational + rotational + vibrational thermodynamic functions for one ideal-gas species.</span>
 
 <span class="sd">    Sums the independent contributions of a</span>
 <span class="sd">    :class:`TranslationalPartitionFunction`, an optional</span>
@@ -784,7 +784,7 @@
 <span class="sd">    &gt;&gt;&gt; Cv_over_R = molecule.heat_capacity_v(1.0e7) / 8.31446261815324</span>
 <span class="sd">    &gt;&gt;&gt; round(float(Cv_over_R), 2)</span>
 <span class="sd">    3.5</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -808,28 +808,28 @@
 <div class="viewcode-block" id="IdealGasMolecule.internal_energy">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.IdealGasMolecule.internal_energy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">internal_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">NA</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Total internal energy: sum of each mode&#39;s contribution. See :meth:`chemistrykit.statmech.core.base_system.PartitionFunction.internal_energy`.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Total internal energy: sum of each mode's contribution. See :meth:`chemistrykit.statmech.core.base_system.PartitionFunction.internal_energy`."""</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">mode</span><span class="o">.</span><span class="n">internal_energy</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="k">for</span> <span class="n">mode</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_modes</span><span class="p">())</span></div>
 
 
 <div class="viewcode-block" id="IdealGasMolecule.entropy">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.IdealGasMolecule.entropy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">entropy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">NA</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Total entropy: sum of each mode&#39;s contribution.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Total entropy: sum of each mode's contribution."""</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">mode</span><span class="o">.</span><span class="n">entropy</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="k">for</span> <span class="n">mode</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_modes</span><span class="p">())</span></div>
 
 
 <div class="viewcode-block" id="IdealGasMolecule.heat_capacity_v">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.IdealGasMolecule.heat_capacity_v">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">heat_capacity_v</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">NA</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Total heat capacity: sum of each mode&#39;s contribution.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Total heat capacity: sum of each mode's contribution."""</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">mode</span><span class="o">.</span><span class="n">heat_capacity_v</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="k">for</span> <span class="n">mode</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_modes</span><span class="p">())</span></div>
 
 
 <div class="viewcode-block" id="IdealGasMolecule.thermodynamic_functions">
 <a class="viewcode-back" href="../../../../api/statmech.html#chemistrykit.statmech.IdealGasMolecule.thermodynamic_functions">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">thermodynamic_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">NA</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ThermodynamicFunctions</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Bundle q, U, S, Cv, and A at temperature `T` into a :class:`~chemistrykit.statmech.core.base_system.ThermodynamicFunctions`.</span>
+<span class="w">        </span><span class="sd">"""Bundle q, U, S, Cv, and A at temperature `T` into a :class:`~chemistrykit.statmech.core.base_system.ThermodynamicFunctions`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -839,7 +839,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        chemistrykit.statmech.core.base_system.ThermodynamicFunctions</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">q</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">([</span><span class="n">mode</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="k">for</span> <span class="n">mode</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_modes</span><span class="p">()]))</span>
         <span class="n">U</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">internal_energy</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
         <span class="n">S</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entropy</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>

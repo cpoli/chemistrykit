@@ -1,11 +1,15 @@
 r"""
-First-order NMR multiplets: ethanol's triplet/quartet, and a doublet of triplets
-====================================================================================
+Spin-spin (J) coupling and the n+1 rule: ethanol's triplet/quartet and a doublet of triplets
+=============================================================================================
 
-Simulates ethanol's classic -CH3 triplet and -CH2- quartet (each proton
-set split only by its 3-bond neighbor, the textbook first-order pattern),
-then a genuine doublet of triplets from two chemically distinct coupling
-partners with different `J` values.
+Indirect spin-spin coupling carried through the bonding electrons
+(Ramsey and Purcell, 1952) splits an NMR resonance into a multiplet. The
+splitting is :math:`J` Hz regardless of field strength. In the
+first-order limit, :math:`n` equivalent spin-1/2 neighbours give
+:math:`n+1` lines with Pascal's-triangle intensities. This example
+simulates ethanol's -CH3 triplet and -CH2- quartet, then a doublet of
+triplets from two inequivalent coupling partners with different
+:math:`J` values.
 """
 
 # %%

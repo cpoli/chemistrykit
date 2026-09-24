@@ -410,10 +410,10 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.polymer.systems.chain_statistics</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Ideal random-walk chain statistics, and the Flory exponent for real chains.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Ideal random-walk chain statistics, and the Flory exponent for real chains.</span>
 
-<span class="sd">See Rubinstein &amp; Colby, *Polymer Physics* (2003), Ch. 2 (&quot;Ideal chains&quot;)</span>
-<span class="sd">and Ch. 3 (&quot;Real chains&quot;), and P. J. Flory, *Principles of Polymer</span>
+<span class="sd">See Rubinstein &amp; Colby, *Polymer Physics* (2003), Ch. 2 ("Ideal chains")</span>
+<span class="sd">and Ch. 3 ("Real chains"), and P. J. Flory, *Principles of Polymer</span>
 <span class="sd">Chemistry* (1953), Ch. X, for the original scaling argument.</span>
 
 <span class="sd">An **ideal chain** models a polymer as a simple random walk of :math:`n`</span>
@@ -436,7 +436,7 @@
 <span class="sd">  interactions cancel; the chain behaves exactly as an ideal chain.</span>
 <span class="sd">* **good solvent** (:math:`\nu=3/5` by default): the solvent favors</span>
 <span class="sd">  chain-solvent contacts, swelling the chain relative to ideal. This is</span>
-<span class="sd">  Flory&#39;s original 1953 mean-field estimate; a more precise</span>
+<span class="sd">  Flory's original 1953 mean-field estimate; a more precise</span>
 <span class="sd">  renormalization-group value, :math:`\nu\approx0.588` (de Gennes,</span>
 <span class="sd">  1979), is available separately via</span>
 <span class="sd">  :meth:`RealChain.good_solvent_renormalization_group` for comparison --</span>
@@ -452,48 +452,52 @@
 <span class="sd">-- the true prefactor for a self-avoiding walk is solvent- and model-</span>
 <span class="sd">dependent and not exactly 1/6 (Rubinstein &amp; Colby, *op. cit.*, Ch. 3.2);</span>
 <span class="sd">only the ideal-chain (theta-solvent) value is exact.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.polymer.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">PolymerChainModel</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;FLORY_EXPONENTS&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;flory_exponent&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;IdealChain&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;RealChain&quot;</span><span class="p">,</span>
+    <span class="s2">"FLORY_EXPONENTS"</span><span class="p">,</span>
+    <span class="s2">"FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP"</span><span class="p">,</span>
+    <span class="s2">"flory_exponent"</span><span class="p">,</span>
+    <span class="s2">"IdealChain"</span><span class="p">,</span>
+    <span class="s2">"RealChain"</span><span class="p">,</span>
+    <span class="s2">"freely_jointed_chain"</span><span class="p">,</span>
+    <span class="s2">"worm_like_chain_mean_square_end_to_end"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="c1">#: dict: Standard Flory exponents nu for R ~ b*n**nu, by solvent quality</span>
-<span class="c1">#: (Rubinstein &amp; Colby, *Polymer Physics*, 2003, Table 3.2). &quot;good&quot; is</span>
-<span class="c1">#: Flory&#39;s original 1953 mean-field estimate; see</span>
+<span class="c1">#: (Rubinstein &amp; Colby, *Polymer Physics*, 2003, Table 3.2). "good" is</span>
+<span class="c1">#: Flory's original 1953 mean-field estimate; see</span>
 <span class="c1">#: FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP for the more precise</span>
 <span class="c1">#: renormalization-group value.</span>
 <span class="n">FLORY_EXPONENTS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;theta&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
-    <span class="s2">&quot;good&quot;</span><span class="p">:</span> <span class="mf">3.0</span> <span class="o">/</span> <span class="mf">5.0</span><span class="p">,</span>
-    <span class="s2">&quot;poor&quot;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">,</span>
+    <span class="s2">"theta"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="s2">"good"</span><span class="p">:</span> <span class="mf">3.0</span> <span class="o">/</span> <span class="mf">5.0</span><span class="p">,</span>
+    <span class="s2">"poor"</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="c1">#: float: The renormalization-group-refined Flory exponent for a good</span>
-<span class="c1">#: solvent in 3D, :math:`\nu\approx0.588` (P.-G. de Gennes, &quot;Exponents</span>
-<span class="c1">#: for the Excluded Volume Problem as Derived by the Wilson Method,&quot;</span>
+<span class="c1">#: solvent in 3D, :math:`\nu\approx0.588` (P.-G. de Gennes, "Exponents</span>
+<span class="c1">#: for the Excluded Volume Problem as Derived by the Wilson Method,"</span>
 <span class="c1">#: Phys. Lett. A 38 (1972), 339-340; J. C. Le Guillou &amp; J. Zinn-Justin,</span>
-<span class="c1">#: Phys. Rev. Lett. 39 (1977), 95), refining Flory&#39;s original mean-field</span>
-<span class="c1">#: estimate of exactly 3/5 (FLORY_EXPONENTS[&quot;good&quot;]) by less than 2%.</span>
+<span class="c1">#: Phys. Rev. Lett. 39 (1977), 95), refining Flory's original mean-field</span>
+<span class="c1">#: estimate of exactly 3/5 (FLORY_EXPONENTS["good"]) by less than 2%.</span>
 <span class="n">FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP</span> <span class="o">=</span> <span class="mf">0.588</span>
 
 
 <div class="viewcode-block" id="flory_exponent">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.flory_exponent">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">flory_exponent</span><span class="p">(</span><span class="n">solvent</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return the standard Flory scaling exponent :math:`\nu` for a named solvent quality.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Return the standard Flory scaling exponent :math:`\nu` for a named solvent quality.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    solvent : {&quot;theta&quot;, &quot;good&quot;, &quot;poor&quot;}</span>
+<span class="sd">    solvent : {"theta", "good", "poor"}</span>
 <span class="sd">        Solvent quality (see the module docstring).</span>
 
 <span class="sd">    Returns</span>
@@ -502,24 +506,24 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; flory_exponent(&quot;theta&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; flory_exponent("theta")</span>
 <span class="sd">    0.5</span>
-<span class="sd">    &gt;&gt;&gt; round(flory_exponent(&quot;good&quot;), 3)</span>
+<span class="sd">    &gt;&gt;&gt; round(flory_exponent("good"), 3)</span>
 <span class="sd">    0.6</span>
-<span class="sd">    &gt;&gt;&gt; round(flory_exponent(&quot;poor&quot;), 4)</span>
+<span class="sd">    &gt;&gt;&gt; round(flory_exponent("poor"), 4)</span>
 <span class="sd">    0.3333</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">FLORY_EXPONENTS</span><span class="p">[</span><span class="n">solvent</span><span class="p">]</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unknown solvent quality </span><span class="si">{</span><span class="n">solvent</span><span class="si">!r}</span><span class="s2">; expected one of </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"unknown solvent quality </span><span class="si">{</span><span class="n">solvent</span><span class="si">!r}</span><span class="s2">; expected one of </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span></div>
 
 
 
 <div class="viewcode-block" id="IdealChain">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.IdealChain">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">IdealChain</span><span class="p">(</span><span class="n">PolymerChainModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;An ideal (theta-solvent) polymer chain: an exact random walk of `n` segments.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""An ideal (theta-solvent) polymer chain: an exact random walk of `n` segments.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -543,7 +547,7 @@
 
 <span class="sd">    &gt;&gt;&gt; chain.mean_square_end_to_end(n=400, b=0.5) / chain.mean_square_end_to_end(n=200, b=0.5)</span>
 <span class="sd">    2.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
 <div class="viewcode-block" id="IdealChain.mean_square_end_to_end">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.IdealChain.mean_square_end_to_end">[docs]</a>
@@ -562,7 +566,7 @@
 <div class="viewcode-block" id="RealChain">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RealChain</span><span class="p">(</span><span class="n">PolymerChainModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A real (excluded-volume) polymer chain: :math:`R = bn^\nu` with Flory exponent `nu`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""A real (excluded-volume) polymer chain: :math:`R = bn^\nu` with Flory exponent `nu`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -590,46 +594,46 @@
 <span class="sd">    True</span>
 
 <span class="sd">    At the theta point, :class:`RealChain` reduces exactly to the ideal</span>
-<span class="sd">    chain&#39;s end-to-end distance (though not, by construction here, to its</span>
+<span class="sd">    chain's end-to-end distance (though not, by construction here, to its</span>
 <span class="sd">    exact radius-of-gyration prefactor -- see the module docstring):</span>
 
 <span class="sd">    &gt;&gt;&gt; theta = RealChain.theta_solvent()</span>
 <span class="sd">    &gt;&gt;&gt; round(float(theta.end_to_end_distance(n, b)), 6) == round(float(ideal.end_to_end_distance(n, b)), 6)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nu</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">0.0</span> <span class="o">&lt;</span> <span class="n">nu</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;nu must be in (0, 1)&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"nu must be in (0, 1)"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nu</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">nu</span><span class="p">)</span>
 
 <div class="viewcode-block" id="RealChain.theta_solvent">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain.theta_solvent">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">theta_solvent</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealChain</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build a :class:`RealChain` with the theta-solvent Flory exponent (nu=1/2).&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">[</span><span class="s2">&quot;theta&quot;</span><span class="p">])</span></div>
+<span class="w">        </span><span class="sd">"""Build a :class:`RealChain` with the theta-solvent Flory exponent (nu=1/2)."""</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">[</span><span class="s2">"theta"</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="RealChain.good_solvent">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain.good_solvent">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">good_solvent</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealChain</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build a :class:`RealChain` with Flory&#39;s mean-field good-solvent exponent (nu=3/5).</span>
+<span class="w">        </span><span class="sd">"""Build a :class:`RealChain` with Flory's mean-field good-solvent exponent (nu=3/5).</span>
 
 <span class="sd">        See :meth:`good_solvent_renormalization_group` for the more</span>
 <span class="sd">        precise renormalization-group value.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">[</span><span class="s2">&quot;good&quot;</span><span class="p">])</span></div>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">[</span><span class="s2">"good"</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="RealChain.good_solvent_renormalization_group">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain.good_solvent_renormalization_group">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">good_solvent_renormalization_group</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealChain</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Build a :class:`RealChain` with the renormalization-group good-solvent exponent (nu ~= 0.588).</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Build a :class:`RealChain` with the renormalization-group good-solvent exponent (nu ~= 0.588).</span>
 
-<span class="sd">        This is de Gennes&#39; (1979) more precise value, refining Flory&#39;s</span>
+<span class="sd">        This is de Gennes' (1979) more precise value, refining Flory's</span>
 <span class="sd">        original mean-field estimate (:meth:`good_solvent`, nu=3/5) by</span>
 <span class="sd">        about 2% -- see the module docstring.</span>
 
@@ -640,7 +644,7 @@
 <span class="sd">        &gt;&gt;&gt; relative_difference = abs(flory.nu - de_gennes.nu) / flory.nu</span>
 <span class="sd">        &gt;&gt;&gt; round(float(relative_difference) * 100, 2)</span>
 <span class="sd">        2.0</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">FLORY_EXPONENT_GOOD_SOLVENT_RENORMALIZATION_GROUP</span><span class="p">)</span></div>
 
 
@@ -648,8 +652,8 @@
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain.poor_solvent">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">poor_solvent</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealChain</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build a :class:`RealChain` with the poor-solvent Flory exponent (nu=1/3).&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">[</span><span class="s2">&quot;poor&quot;</span><span class="p">])</span></div>
+<span class="w">        </span><span class="sd">"""Build a :class:`RealChain` with the poor-solvent Flory exponent (nu=1/3)."""</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">FLORY_EXPONENTS</span><span class="p">[</span><span class="s2">"poor"</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="RealChain.mean_square_end_to_end">
@@ -661,9 +665,112 @@
 <div class="viewcode-block" id="RealChain.mean_square_radius_of_gyration">
 <a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.RealChain.mean_square_radius_of_gyration">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">mean_square_radius_of_gyration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;See the module docstring: the 1/6 prefactor is an ideal-chain approximation, not exact for real chains.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""See the module docstring: the 1/6 prefactor is an ideal-chain approximation, not exact for real chains."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean_square_end_to_end</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mf">6.0</span></div>
 </div>
+
+
+
+<div class="viewcode-block" id="freely_jointed_chain">
+<a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.freely_jointed_chain">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">freely_jointed_chain</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n_chains</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Sample 3D conformations of Kuhn's freely jointed chain: `n` bonds of length `b` in uniformly random directions.</span>
+
+<span class="sd">    Each bond vector is drawn independently and isotropically on the</span>
+<span class="sd">    sphere of radius `b` (W. Kuhn, *Kolloid-Z.* 68, 2 (1934)); the chain</span>
+<span class="sd">    starts at the origin. Averaged over many samples, the squared</span>
+<span class="sd">    end-to-end distance converges to the exact ideal-chain result</span>
+<span class="sd">    :math:`\langle R^2\rangle=nb^2` (:class:`IdealChain`), since the</span>
+<span class="sd">    cross terms :math:`\langle\mathbf{b}_i\cdot\mathbf{b}_j\rangle`</span>
+<span class="sd">    vanish for independent bonds.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    n : int</span>
+<span class="sd">        Number of bonds (Kuhn segments).</span>
+<span class="sd">    b : float</span>
+<span class="sd">        Bond (Kuhn) length.</span>
+<span class="sd">    n_chains : int, optional</span>
+<span class="sd">        Number of independent conformations to sample.</span>
+<span class="sd">    rng : int, numpy.random.Generator, or None, optional</span>
+<span class="sd">        Seed or generator for reproducibility.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray, shape (n_chains, n + 1, 3)</span>
+<span class="sd">        Bead positions of every sampled chain.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Every bond has exactly length `b`:</span>
+
+<span class="sd">    &gt;&gt;&gt; X = freely_jointed_chain(50, 0.5, n_chains=3, rng=0)</span>
+<span class="sd">    &gt;&gt;&gt; X.shape</span>
+<span class="sd">    (3, 51, 3)</span>
+<span class="sd">    &gt;&gt;&gt; bool(np.allclose(np.linalg.norm(np.diff(X, axis=1), axis=-1), 0.5))</span>
+<span class="sd">    True</span>
+
+<span class="sd">    The sample mean of :math:`R^2` approaches :math:`nb^2=100\cdot1^2`:</span>
+
+<span class="sd">    &gt;&gt;&gt; X = freely_jointed_chain(100, 1.0, n_chains=20000, rng=1)</span>
+<span class="sd">    &gt;&gt;&gt; R2 = np.sum(X[:, -1] ** 2, axis=-1)</span>
+<span class="sd">    &gt;&gt;&gt; bool(abs(R2.mean() / 100.0 - 1.0) &lt; 0.03)</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span>
+    <span class="n">bonds</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_chains</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">bonds</span> <span class="o">*=</span> <span class="n">b</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">bonds</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_chains</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">positions</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">bonds</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">positions</span></div>
+
+
+
+<div class="viewcode-block" id="worm_like_chain_mean_square_end_to_end">
+<a class="viewcode-back" href="../../../../api/polymer.html#chemistrykit.polymer.worm_like_chain_mean_square_end_to_end">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">worm_like_chain_mean_square_end_to_end</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Kratky-Porod worm-like chain mean-square end-to-end distance.</span>
+
+<span class="sd">    For a semiflexible chain of contour length :math:`L` whose tangent</span>
+<span class="sd">    correlations decay as :math:`e^{-s/P}` along the contour (persistence</span>
+<span class="sd">    length :math:`P`), Kratky and Porod (*Recl. Trav. Chim. Pays-Bas* 68,</span>
+<span class="sd">    1106 (1949)) obtained</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \langle R^2\rangle = 2PL\left[1-\frac{P}{L}\left(1-e^{-L/P}\right)\right]</span>
+
+<span class="sd">    which interpolates between a rigid rod, :math:`\langle R^2\rangle\to</span>
+<span class="sd">    L^2` for :math:`L\ll P`, and an ideal random coil,</span>
+<span class="sd">    :math:`\langle R^2\rangle\to2PL` for :math:`L\gg P` -- i.e. a</span>
+<span class="sd">    freely jointed chain with Kuhn length :math:`b=2P`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    L : float or array-like of float</span>
+<span class="sd">        Contour length (&gt; 0).</span>
+<span class="sd">    P : float</span>
+<span class="sd">        Persistence length (&gt; 0).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float or ndarray</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    A very short chain is a rigid rod, :math:`R^2\approx L^2`:</span>
+
+<span class="sd">    &gt;&gt;&gt; round(float(worm_like_chain_mean_square_end_to_end(1e-3, 50.0) / 1e-6), 4)</span>
+<span class="sd">    1.0</span>
+
+<span class="sd">    A very long chain is an ideal coil with Kuhn length :math:`2P`:</span>
+
+<span class="sd">    &gt;&gt;&gt; round(float(worm_like_chain_mean_square_end_to_end(1e6, 50.0) / (2 * 50.0 * 1e6)), 4)</span>
+<span class="sd">    1.0</span>
+<span class="sd">    """</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">P</span>
+    <span class="k">return</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">P</span> <span class="o">*</span> <span class="n">L</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">x</span><span class="p">)</span></div>
 
 </pre></div>
 

@@ -18,9 +18,11 @@
 .. _sphx_glr_api_gallery_crystal_xrd_plot_01_powder_xrd.py:
 
 
-Powder XRD: Bragg's law and systematic absences
-===================================================
+Bragg's law: indexing powder XRD peaks
+========================================
 
+Each line of a diffraction pattern is a family of :math:`(hkl)` planes
+that satisfies Bragg's law :math:`n\lambda=2d\sin\theta`.
 :func:`~chemistrykit.crystal.systems.xrd.powder_xrd_peaks` computes each
 reflection's structure factor
 (:func:`~chemistrykit.crystal.systems.xrd.structure_factor`) directly
@@ -28,11 +30,12 @@ from atomic positions and Miller indices, so BCC's and FCC's systematic
 absences (reflections with zero intensity by symmetry) fall out
 automatically rather than being hardcoded as a rule.
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-37
+.. GENERATED FROM PYTHON SOURCE LINES 16-40
 
 .. code-block:: Python
 
     import matplotlib.pyplot as plt
+    import numpy as np
 
     from chemistrykit.crystal.systems.xrd import powder_xrd_peaks
     from chemistrykit.crystal.visualizers.crystal_plots import plot_xrd_pattern
@@ -131,13 +134,13 @@ automatically rather than being hardcoded as a rule.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 38-41
+.. GENERATED FROM PYTHON SOURCE LINES 41-44
 
 BCC's (100) reflection (h+k+l=1, odd) is absent -- the first line is
 (110) instead. FCC's (100) and (110) are both absent (mixed parity) --
 the first line is (111).
 
-.. GENERATED FROM PYTHON SOURCE LINES 41-48
+.. GENERATED FROM PYTHON SOURCE LINES 44-51
 
 .. code-block:: Python
 
@@ -165,7 +168,40 @@ the first line is (111).
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 49-58
+.. GENERATED FROM PYTHON SOURCE LINES 52-55
+
+Every listed peak obeys Bragg's law exactly -- recover the wavelength
+from each peak's d-spacing and angle, and the NaCl-style inverse problem
+(lattice constant from a measured angle) that the Braggs solved:
+
+.. GENERATED FROM PYTHON SOURCE LINES 55-64
+
+.. code-block:: Python
+
+
+    for peak in copper_fcc:
+        lam = 2.0 * peak.d_spacing * np.sin(np.radians(peak.two_theta / 2.0))
+        assert abs(lam - wavelength) < 1e-9
+    first = copper_fcc[0]
+    h, k, l = first.hkl
+    a_recovered = wavelength / (2.0 * np.sin(np.radians(first.two_theta / 2.0))) * np.sqrt(h * h + k * k + l * l)
+    print(f"\nCu lattice constant recovered from the (111) angle via Bragg's law: {a_recovered:.2f} pm")
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+
+    Cu lattice constant recovered from the (111) angle via Bragg's law: 361.50 pm
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 65-74
 
 .. code-block:: Python
 
@@ -193,7 +229,7 @@ the first line is (111).
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.125 seconds)
+   **Total running time of the script:** (0 minutes 0.126 seconds)
 
 
 .. _sphx_glr_download_api_gallery_crystal_xrd_plot_01_powder_xrd.py:

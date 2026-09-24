@@ -410,14 +410,14 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.electrochem.systems.battery</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A simplified constant-current battery discharge/capacity model.</span>
+<span></span><span class="sa">r</span><span class="sd">"""A simplified constant-current battery discharge/capacity model.</span>
 
 <span class="sd">**Simplified model, flagged explicitly**: see</span>
 <span class="sd">:class:`chemistrykit.electrochem.core.base_system.BatteryDischargeModel`</span>
 <span class="sd">for what is and is not captured here. See Linden &amp; Reddy, *Handbook of</span>
-<span class="sd">Batteries*, 3rd ed., Ch. 3.3, for Peukert&#39;s law, and the original: W.</span>
+<span class="sd">Batteries*, 3rd ed., Ch. 3.3, for Peukert's law, and the original: W.</span>
 <span class="sd">Peukert, *Elektrotechnische Zeitschrift* 20, 20 (1897).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -425,15 +425,15 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.electrochem.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">BatteryDischargeModel</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;peukert_discharge_time&quot;</span><span class="p">,</span> <span class="s2">&quot;effective_capacity&quot;</span><span class="p">,</span> <span class="s2">&quot;ConstantCurrentBattery&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"peukert_discharge_time"</span><span class="p">,</span> <span class="s2">"effective_capacity"</span><span class="p">,</span> <span class="s2">"ConstantCurrentBattery"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="peukert_discharge_time">
 <a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.peukert_discharge_time">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">peukert_discharge_time</span><span class="p">(</span><span class="n">capacity_peukert</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">current</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Peukert&#39;s-law discharge time at constant current: :math:`t = C_p / I^k`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Peukert's-law discharge time at constant current: :math:`t = C_p / I^k`.</span>
 
-<span class="sd">    :math:`C_p` (the &quot;Peukert capacity&quot;, in :math:`A^k\cdot h`) and the</span>
+<span class="sd">    :math:`C_p` (the "Peukert capacity", in :math:`A^k\cdot h`) and the</span>
 <span class="sd">    Peukert exponent :math:`k` are empirical constants of a given</span>
 <span class="sd">    battery chemistry/construction, fitted from discharge tests at</span>
 <span class="sd">    several currents (Linden &amp; Reddy, *Handbook of Batteries*, 3rd ed.,</span>
@@ -476,7 +476,7 @@
 <span class="sd">    &gt;&gt;&gt; t2 = peukert_discharge_time(10.0, current=4.0, k=1.2)</span>
 <span class="sd">    &gt;&gt;&gt; bool(t2 &lt; t1 / 2.0)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">current</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">current</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">capacity_peukert</span> <span class="o">/</span> <span class="n">current</span><span class="o">**</span><span class="n">k</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span></div>
@@ -486,14 +486,14 @@
 <div class="viewcode-block" id="effective_capacity">
 <a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.effective_capacity">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">effective_capacity</span><span class="p">(</span><span class="n">capacity_peukert</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">current</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Effective delivered capacity at a given discharge current: :math:`C_{eff}(I) = I\,t(I) = C_p I^{1-k}`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Effective delivered capacity at a given discharge current: :math:`C_{eff}(I) = I\,t(I) = C_p I^{1-k}`.</span>
 
 <span class="sd">    At the ideal Peukert exponent :math:`k=1`, this is exactly</span>
 <span class="sd">    :math:`C_p` regardless of current -- a battery that delivers its</span>
 <span class="sd">    full rated capacity no matter how fast it is discharged. Real</span>
 <span class="sd">    batteries (:math:`k&gt;1`) deliver progressively less effective</span>
 <span class="sd">    capacity as the discharge current increases, the practical meaning</span>
-<span class="sd">    of &quot;capacity fade with rate&quot; (Linden &amp; Reddy, *Handbook of</span>
+<span class="sd">    of "capacity fade with rate" (Linden &amp; Reddy, *Handbook of</span>
 <span class="sd">    Batteries*, 3rd ed., Ch. 3.3).</span>
 
 <span class="sd">    Parameters</span>
@@ -521,13 +521,13 @@
 <span class="sd">    (10.0, 10.0)</span>
 
 <span class="sd">    At `k&gt;1`, effective capacity decreases as discharge current</span>
-<span class="sd">    increases -- the real-battery &quot;capacity fade at high rate&quot; effect:</span>
+<span class="sd">    increases -- the real-battery "capacity fade at high rate" effect:</span>
 
 <span class="sd">    &gt;&gt;&gt; c_low = effective_capacity(10.0, current=1.0, k=1.2)</span>
 <span class="sd">    &gt;&gt;&gt; c_high = effective_capacity(10.0, current=5.0, k=1.2)</span>
 <span class="sd">    &gt;&gt;&gt; bool(c_high &lt; c_low)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">current</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">current</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">current</span> <span class="o">*</span> <span class="n">peukert_discharge_time</span><span class="p">(</span><span class="n">capacity_peukert</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span></div>
@@ -537,7 +537,7 @@
 <div class="viewcode-block" id="ConstantCurrentBattery">
 <a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.ConstantCurrentBattery">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ConstantCurrentBattery</span><span class="p">(</span><span class="n">BatteryDischargeModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A battery discharged at constant current, with a Peukert-law-limited runtime and an ohmic voltage sag.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""A battery discharged at constant current, with a Peukert-law-limited runtime and an ohmic voltage sag.</span>
 
 <span class="sd">    **Simplified model** (see the module and</span>
 <span class="sd">    :class:`~chemistrykit.electrochem.core.base_system.BatteryDischargeModel`</span>
@@ -571,7 +571,7 @@
 <span class="sd">    3.65</span>
 <span class="sd">    &gt;&gt;&gt; round(float(battery.terminal_voltage(3.0)), 4)</span>
 <span class="sd">    0.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capacity_peukert</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">current</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">v_nominal</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">internal_resistance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">capacity_peukert</span> <span class="o">=</span> <span class="n">capacity_peukert</span>
@@ -583,12 +583,12 @@
 <div class="viewcode-block" id="ConstantCurrentBattery.discharge_time">
 <a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.ConstantCurrentBattery.discharge_time">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">discharge_time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Total discharge time (runtime until exhausted), in h.</span>
+<span class="w">        </span><span class="sd">"""Total discharge time (runtime until exhausted), in h.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">peukert_discharge_time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">capacity_peukert</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span></div>
 
 

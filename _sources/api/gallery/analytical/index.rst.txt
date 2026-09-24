@@ -5,12 +5,13 @@ Examples
 
 This gallery walks through every public feature of
 ``chemistrykit.analytical``: redox and complexometric (EDTA)
-titration-curve simulation with equivalence-point detection (acid-base
-titrations are covered by ``chemistrykit.solutions``'s gallery, and used
-here directly alongside the new titration types); chromatographic plate
-theory and the van Deemter equation; linear-regression calibration
-curves with IUPAC-convention limits of detection/quantitation; and
-propagation of uncertainty plus Dixon's Q-test for outlier rejection.
+titration-curve simulation with equivalence-point detection and Gran
+plots (acid-base titrations are covered by ``chemistrykit.solutions``'s
+gallery); chromatographic plate theory, the van Deemter equation,
+retention indices, and resolution; linear-regression calibration curves
+with limits of detection/quantitation; propagation of uncertainty;
+Dixon's and Grubbs' outlier tests; Student's t intervals and the Horwitz
+function; and Savitzky-Golay smoothing.
 
 Each script in this gallery is self-contained and can be run directly
 with ``python examples/analytical/<section>/<script>.py``. Every script
@@ -22,17 +23,21 @@ of truth for what you see, not a copy of it.
 Sections
 --------
 
-- **titration** -- acid-base, redox, and EDTA titration curves, side by
-  side, with numerical equivalence-point detection.
-- **chromatography** -- theoretical plates, the van Deemter equation and
-  its optimum flow velocity, and resolution/selectivity between two peaks.
-- **calibration** -- a least-squares calibration curve and its IUPAC
-  limits of detection/quantitation.
+- **titration** -- redox (Nernst) and EDTA titration curves with
+  numerical equivalence-point detection, and the Gran plot.
+- **chromatography** -- Tsvet's column separation, theoretical plates,
+  the van Deemter and Golay equations, Kovats retention indices, and
+  Purnell's resolution equation.
+- **calibration** -- a least-squares calibration curve and its limits of
+  detection/quantitation.
 - **uncertainty** -- propagation-of-uncertainty formulas for sums,
   products, and powers, cross-checked against a general numerical
   implementation.
-- **qtest** -- Dixon's Q-test for rejecting a suspect outlier from a
-  small data set.
+- **qtest** -- Dixon's Q-test and Grubbs' test for rejecting a suspect
+  outlier from a small data set.
+- **statistics** -- Student's t confidence intervals and the Horwitz
+  interlaboratory-precision function.
+- **smoothing** -- Savitzky-Golay smoothing and differentiation.
 
 
 .. raw:: html
@@ -55,8 +60,8 @@ Sections
 Calibration curves
 --------------------
 
-A least-squares calibration curve and its IUPAC limits of detection and
-quantitation.
+Least-squares calibration lines, and the limits of detection and
+quantitation derived from their residual scatter.
 
 
 .. raw:: html
@@ -72,18 +77,35 @@ quantitation.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="fit_calibration fits a straight-line calibration by ordinary least squares, and LinearCalibration&#x27;s lod/~chemistrykit.analytical.systems.calibration.LinearCalibration.loq implement the IUPAC 3.3\sigma/m/10\sigma/m convention.">
+    <div class="sphx-glr-thumbcontainer" tooltip="The method of least squares picks the straight line that minimizes the sum of squared residuals S(m,b)=\sum_i(y_i-mx_i-b)^2. fit_calibration performs exactly that fit for a set of calibration standards; here we check that its slope sits at the bottom of the S(m) parabola, and that the residuals it leaves behind scatter around zero.">
 
 .. only:: html
 
-  .. image:: /api/gallery/analytical/calibration/images/thumb/sphx_glr_plot_01_calibration_curve_thumb.png
+  .. image:: /api/gallery/analytical/calibration/images/thumb/sphx_glr_plot_01_least_squares_calibration_thumb.png
     :alt:
 
-  :doc:`/api/gallery/analytical/calibration/plot_01_calibration_curve`
+  :doc:`/api/gallery/analytical/calibration/plot_01_least_squares_calibration`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Calibration curves, and IUPAC LOD/LOQ</div>
+      <div class="sphx-glr-thumbnail-title">Legendre and Gauss's least squares: fitting a calibration line</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Long and Winefordner argued that a detection limit should be tied to the calibration&#x27;s own residual scatter s_{y/x} and slope m. lod and loq use the widely adopted calibration-based convention \text{LOD}=3.3\,s_{y/x}/m and \text{LOQ}=10\,s_{y/x}/m. A noisier method has proportionally higher limits.">
+
+.. only:: html
+
+  .. image:: /api/gallery/analytical/calibration/images/thumb/sphx_glr_plot_02_limits_of_detection_and_quantitation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/analytical/calibration/plot_02_limits_of_detection_and_quantitation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Limits of detection and quantitation from a calibration curve</div>
     </div>
 
 
@@ -96,8 +118,9 @@ quantitation.
 Chromatography
 ----------------
 
-Theoretical plates, the van Deemter equation and its optimum flow
-velocity, and resolution/selectivity between two peaks.
+Tsvet's column separation, theoretical plates, the van Deemter and Golay
+plate-height equations, Kovats retention indices, and Purnell's
+resolution equation.
 
 
 .. raw:: html
@@ -113,18 +136,103 @@ velocity, and resolution/selectivity between two peaks.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="theoretical_plates converts a peak&#x27;s retention time and width into a plate count; van_deemter_H then predicts how plate height varies with flow velocity, with a minimum (the optimum operating velocity) at u_{opt}=\sqrt{B/C}.">
+    <div class="sphx-glr-thumbcontainer" tooltip="In Tsvet&#x27;s experiment a pigment extract moves down a chalk column, each pigment at its own speed u/(1+k) set by how strongly it is retained (retention factor k). Snapshots of the column show the mixture resolving into separate colored bands; at the column outlet a detector records the same separation as a chromatogram, rendered here by simulate_chromatogram.">
 
 .. only:: html
 
-  .. image:: /api/gallery/analytical/chromatography/images/thumb/sphx_glr_plot_01_van_deemter_thumb.png
+  .. image:: /api/gallery/analytical/chromatography/images/thumb/sphx_glr_plot_01_tsvet_column_chromatography_thumb.png
     :alt:
 
-  :doc:`/api/gallery/analytical/chromatography/plot_01_van_deemter`
+  :doc:`/api/gallery/analytical/chromatography/plot_01_tsvet_column_chromatography`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Plate theory and the van Deemter equation</div>
+      <div class="sphx-glr-thumbnail-title">Tsvet's column: separating leaf pigments into colored bands</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Treating a column as N equilibration stages (&quot;theoretical plates&quot;) predicts a Gaussian peak whose width grows as t_R/\sqrt N. theoretical_plates inverts that: N=16(t_R/w_{base})^2=5.545(t_R/w_{1/2})^2, and plate_height gives the plate height H=L/N. Here we measure the widths of simulated peaks and recover the plate count they were built from.">
+
+.. only:: html
+
+  .. image:: /api/gallery/analytical/chromatography/images/thumb/sphx_glr_plot_02_martin_synge_theoretical_plates_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/analytical/chromatography/plot_02_martin_synge_theoretical_plates`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Martin and Synge's theoretical plates from a peak's width</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="van_deemter_H evaluates H=A+B/u+Cu, the sum of eddy diffusion (`A`), longitudinal diffusion (`B/u`, dominant at low flow) and mass-transfer resistance (`Cu`, dominant at high flow). The competition between the last two gives a minimum plate height H_{min}=A+2\sqrt{BC} at u_{opt}=\sqrt{B/C} (~chemistrykit.analytical.minimum_plate_height, optimum_flow_velocity).">
+
+.. only:: html
+
+  .. image:: /api/gallery/analytical/chromatography/images/thumb/sphx_glr_plot_03_van_deemter_equation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/analytical/chromatography/plot_03_van_deemter_equation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The van Deemter equation and the optimum flow velocity</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="An open capillary has no packing, so Golay&#x27;s equation for it is the van Deemter equation with no eddy-diffusion term: H=B/u+Cu. Using van_deemter_H with A=0 for a capillary and A&gt;0 for a packed column shows the lower plate height, and hence the many more plates a long capillary delivers.">
+
+.. only:: html
+
+  .. image:: /api/gallery/analytical/chromatography/images/thumb/sphx_glr_plot_04_golay_open_tubular_column_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/analytical/chromatography/plot_04_golay_open_tubular_column`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Golay's open-tubular column: the van Deemter equation with A = 0</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Under isothermal gas chromatography, \log t&#x27; of the n-alkanes rises linearly with carbon number. Kováts placed every other compound on that ladder: kovats_retention_index interpolates \log t&#x27; between the bracketing alkanes, giving an index (n-octane = 800, n-nonane = 900, ...) that is far more transferable between instruments than a raw retention time.">
+
+.. only:: html
+
+  .. image:: /api/gallery/analytical/chromatography/images/thumb/sphx_glr_plot_05_kovats_retention_index_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/analytical/chromatography/plot_05_kovats_retention_index`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Kováts retention indices from an n-alkane ladder</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="purnell_resolution writes resolution as R_s=\frac{\sqrt N}{4}\,\frac{\alpha-1}{\alpha}\,\frac{k_2}{1+k_2}. We check it against the direct peak-width formula resolution on simulated chromatograms, then compare the three levers: doubling N only multiplies R_s by \sqrt2, whereas a small change in selectivity \alpha can do much more.">
+
+.. only:: html
+
+  .. image:: /api/gallery/analytical/chromatography/images/thumb/sphx_glr_plot_06_purnell_resolution_equation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/analytical/chromatography/plot_06_purnell_resolution_equation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Purnell's resolution equation: efficiency, selectivity, retention</div>
     </div>
 
 
@@ -134,10 +242,11 @@ velocity, and resolution/selectivity between two peaks.
 
     </div>
 
-Q-test outlier rejection
---------------------------
+Outlier rejection
+-------------------
 
-Dixon's Q-test for rejecting a suspect outlier from a small data set.
+Dixon's Q-test and Grubbs' test for rejecting a suspect outlier from a
+small data set.
 
 
 .. raw:: html
@@ -168,17 +277,33 @@ Dixon's Q-test for rejecting a suspect outlier from a small data set.
     </div>
 
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="grubbs_test computes G=\max_i|x_i-\bar x|/s and compares it with the critical value grubbs_critical_value, derived from Student&#x27;s t distribution so that it exists for any sample size. A Monte Carlo run on outlier-free normal data confirms that the test falsely rejects a point at the nominal rate \alpha.">
+
+.. only:: html
+
+  .. image:: /api/gallery/analytical/qtest/images/thumb/sphx_glr_plot_02_grubbs_outlier_test_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/analytical/qtest/plot_02_grubbs_outlier_test`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Grubbs' outlier test: the extreme value in standard deviations</div>
+    </div>
+
+
 .. thumbnail-parent-div-close
 
 .. raw:: html
 
     </div>
 
-Titration curves
+Signal smoothing
 ------------------
 
-Acid-base, redox, and EDTA (complexometric) titration curves, side by
-side, with numerical equivalence-point detection.
+Savitzky-Golay smoothing and differentiation of a noisy analytical signal.
 
 
 .. raw:: html
@@ -194,18 +319,151 @@ side, with numerical equivalence-point detection.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Three different titration types -- acid-base (pH, chemistrykit.solutions.systems.titration), redox (electrode potential E, RedoxTitration), and complexometric (`pM`, EDTATitration) -- all share the same qualitative S-shaped curve, and the same numerical equivalence-point detector (steepest response change).">
+    <div class="sphx-glr-thumbcontainer" tooltip="savitzky_golay fits a low-order polynomial by least squares to each moving window and keeps its value (or derivative) at the center, which reduces to a fixed convolution with weights from savitzky_golay_coefficients -- e.g. (-3,12,17,12,-3)/35 for 5 points and a quadratic. Unlike a plain moving average, it removes noise with little flattening of narrow peaks, and it also gives smooth derivatives.">
 
 .. only:: html
 
-  .. image:: /api/gallery/analytical/titration/images/thumb/sphx_glr_plot_01_titration_curves_thumb.png
+  .. image:: /api/gallery/analytical/smoothing/images/thumb/sphx_glr_plot_01_savitzky_golay_filter_thumb.png
     :alt:
 
-  :doc:`/api/gallery/analytical/titration/plot_01_titration_curves`
+  :doc:`/api/gallery/analytical/smoothing/plot_01_savitzky_golay_filter`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Acid-base, redox, and EDTA titration curves side by side</div>
+      <div class="sphx-glr-thumbnail-title">Savitzky-Golay smoothing and derivatives of a noisy spectrum</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Statistics of replicate measurements
+--------------------------------------
+
+Student's `t` confidence interval for a mean of a few replicates, and the
+Horwitz function for expected interlaboratory precision.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="With only n replicates the standard deviation s is itself uncertain, so the interval \bar x\pm t\,s/\sqrt n from t_confidence_interval uses Student&#x27;s t instead of the normal 1.96. We simulate many triplicate analyses and show that the t interval covers the true value 95% of the time, while the naive \pm1.96\,s/\sqrt n interval falls well short.">
+
+.. only:: html
+
+  .. image:: /api/gallery/analytical/statistics/images/thumb/sphx_glr_plot_01_student_t_confidence_interval_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/analytical/statistics/plot_01_student_t_confidence_interval`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Student's t: confidence intervals from a few replicates</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="horwitz_rsd gives Horwitz&#x27;s empirical expected between-laboratory RSD, 2^{1-0.5\log_{10}C}, which doubles for every 100-fold drop in concentration. Plotted as \pm\text{RSD} against concentration it opens like a trumpet. horrat scores a method&#x27;s observed RSD against it.">
+
+.. only:: html
+
+  .. image:: /api/gallery/analytical/statistics/images/thumb/sphx_glr_plot_02_horwitz_trumpet_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/analytical/statistics/plot_02_horwitz_trumpet`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Horwitz trumpet: interlaboratory precision vs. concentration</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Titration curves
+------------------
+
+Potentiometric redox (Nernst) and EDTA complexometric titration curves,
+with equivalence points located by steepest change or by a Gran plot.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="RedoxTitration computes the electrode potential during a redox titration from the Nernst equation, E=E^\circ-\frac{RT}{nF}\ln Q: before equivalence the analyte couple sets E, after it the titrant couple does. At half-equivalence E=E^\circ_1 exactly, at twice the equivalence volume E=E^\circ_2, and the endpoint is read, as in the laboratory, at the steepest rise of E.">
+
+.. only:: html
+
+  .. image:: /api/gallery/analytical/titration/images/thumb/sphx_glr_plot_01_nernst_redox_titration_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/analytical/titration/plot_01_nernst_redox_titration`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Nernst equation in a potentiometric redox titration</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="EDTATitration follows M+Y\rightleftharpoons MY through its conditional formation constant K_f&#x27;. The same EDTA titrant quantifies any metal it binds strongly enough; the size of the pM break at equivalence is set by K_f&#x27;, which is why Schwarzenbach&#x27;s titrations are run in a buffer at a pH where K_f&#x27; is large.">
+
+.. only:: html
+
+  .. image:: /api/gallery/analytical/titration/images/thumb/sphx_glr_plot_02_edta_complexometric_titration_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/analytical/titration/plot_02_edta_complexometric_titration`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">EDTA complexometric titration of a metal ion</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="gran_plot linearizes the buffer region of a weak-acid titration: V_b\,10^{-pH}=K_a(V_e-V_b). Plotting the left side against V_b gives a straight line whose x-intercept is the equivalence volume and whose slope is -K_a, so the endpoint follows from data taken well before it.">
+
+.. only:: html
+
+  .. image:: /api/gallery/analytical/titration/images/thumb/sphx_glr_plot_03_gran_plot_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/analytical/titration/plot_03_gran_plot`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Gran plot: the equivalence point by linear extrapolation</div>
     </div>
 
 
@@ -246,7 +504,7 @@ powers, cross-checked against a general numerical implementation.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Propagation of uncertainty</div>
+      <div class="sphx-glr-thumbnail-title">Propagation of uncertainty with the first-order (Ku) formula</div>
     </div>
 
 
@@ -265,6 +523,8 @@ powers, cross-checked against a general numerical implementation.
    /api/gallery/analytical/calibration/index.rst
    /api/gallery/analytical/chromatography/index.rst
    /api/gallery/analytical/qtest/index.rst
+   /api/gallery/analytical/smoothing/index.rst
+   /api/gallery/analytical/statistics/index.rst
    /api/gallery/analytical/titration/index.rst
    /api/gallery/analytical/uncertainty/index.rst
 

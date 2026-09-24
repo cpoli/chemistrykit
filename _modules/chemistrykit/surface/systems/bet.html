@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.surface.systems.bet</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The BET multilayer adsorption isotherm, and its standard linearization.</span>
+<span></span><span class="sa">r</span><span class="sd">"""The BET multilayer adsorption isotherm, and its standard linearization.</span>
 
 <span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 22.1, and the</span>
 <span class="sd">original: S. Brunauer, P. H. Emmett &amp; E. Teller, *J. Am. Chem. Soc.* 60,</span>
@@ -428,7 +428,7 @@
 
 <span class="sd">where :math:`V_m` is the monolayer capacity and :math:`C` (roughly,</span>
 <span class="sd">:math:`e^{(E_1-E_L)/RT}`, the ratio of first-layer to liquefaction</span>
-<span class="sd">adsorption energies) controls how sharply the isotherm&#39;s initial</span>
+<span class="sd">adsorption energies) controls how sharply the isotherm's initial</span>
 <span class="sd">(Langmuir-like) rise is separated from its later upswing toward bulk</span>
 <span class="sd">condensation.</span>
 
@@ -443,7 +443,7 @@
 <span class="sd">in :mod:`chemistrykit.surface.tests.test_bet` (and was verified</span>
 <span class="sd">numerically -- to a relative error below :math:`10^{-4}` at</span>
 <span class="sd">:math:`P_0/K \sim 10^7` -- before this docstring was written).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -454,25 +454,25 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.surface.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdsorptionIsotherm</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.surface.utils.regression</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearFit</span><span class="p">,</span> <span class="n">linear_fit</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;bet_loading&quot;</span><span class="p">,</span> <span class="s2">&quot;BETIsotherm&quot;</span><span class="p">,</span> <span class="s2">&quot;BETFit&quot;</span><span class="p">,</span> <span class="s2">&quot;fit_bet&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"bet_loading"</span><span class="p">,</span> <span class="s2">"BETIsotherm"</span><span class="p">,</span> <span class="s2">"BETFit"</span><span class="p">,</span> <span class="s2">"fit_bet"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="bet_loading">
 <a class="viewcode-back" href="../../../../api/surface.html#chemistrykit.surface.bet_loading">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">bet_loading</span><span class="p">(</span><span class="n">Vm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">C</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">P0</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The BET isotherm :math:`V(P) = V_m Cx/[(1-x)(1-x+Cx)]`, :math:`x=P/P_0`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The BET isotherm :math:`V(P) = V_m Cx/[(1-x)(1-x+Cx)]`, :math:`x=P/P_0`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Vm : float</span>
 <span class="sd">        Monolayer capacity (e.g. cm^3(STP)/g or mol/g).</span>
 <span class="sd">    C : float</span>
-<span class="sd">        BET energy constant (:math:`C \gg 1` gives a sharp &quot;knee&quot; at</span>
+<span class="sd">        BET energy constant (:math:`C \gg 1` gives a sharp "knee" at</span>
 <span class="sd">        monolayer completion; :math:`C \to 1` washes it out).</span>
 <span class="sd">    P : float or array-like of float</span>
 <span class="sd">        Equilibrium pressure, in the same units as `P0`.</span>
 <span class="sd">    P0 : float</span>
-<span class="sd">        Saturation vapor pressure of the adsorbate at the experiment&#39;s</span>
+<span class="sd">        Saturation vapor pressure of the adsorbate at the experiment's</span>
 <span class="sd">        temperature.</span>
 
 <span class="sd">    Returns</span>
@@ -502,7 +502,7 @@
 <span class="sd">    &gt;&gt;&gt; theta_langmuir = langmuir_coverage(K, P)</span>
 <span class="sd">    &gt;&gt;&gt; bool(np.allclose(V_bet, Vm * theta_langmuir, rtol=1e-4))</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">P</span> <span class="o">/</span> <span class="n">P0</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">Vm</span> <span class="o">*</span> <span class="n">C</span> <span class="o">*</span> <span class="n">x</span> <span class="o">/</span> <span class="p">((</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x</span> <span class="o">+</span> <span class="n">C</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span>
@@ -513,7 +513,7 @@
 <div class="viewcode-block" id="BETIsotherm">
 <a class="viewcode-back" href="../../../../api/surface.html#chemistrykit.surface.BETIsotherm">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BETIsotherm</span><span class="p">(</span><span class="n">AdsorptionIsotherm</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The BET multilayer adsorption isotherm.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The BET multilayer adsorption isotherm.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -529,15 +529,15 @@
 <span class="sd">    &gt;&gt;&gt; iso = BETIsotherm(Vm=2.0, C=100.0, P0=10.0)</span>
 <span class="sd">    &gt;&gt;&gt; round(float(iso.loading(P=1.0)), 4)</span>
 <span class="sd">    2.0387</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Vm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">C</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">P0</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">Vm</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Vm must be positive&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Vm must be positive"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">C</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;C must be positive&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"C must be positive"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">P0</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;P0 must be positive&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"P0 must be positive"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Vm</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">Vm</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">P0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">P0</span><span class="p">)</span>
@@ -555,31 +555,31 @@
 <a class="viewcode-back" href="../../../../api/surface.html#chemistrykit.surface.BETFit">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">BETFit</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Result of fitting loading-vs-pressure data to the BET isotherm.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Result of fitting loading-vs-pressure data to the BET isotherm."""</span>
 
     <span class="n">Vm</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Fitted monolayer capacity.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""float: Fitted monolayer capacity."""</span>
 
     <span class="n">C</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Fitted BET energy constant.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""float: Fitted BET energy constant."""</span>
 
     <span class="n">P0</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Saturation vapor pressure used (an input to the fit, not itself fitted).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""float: Saturation vapor pressure used (an input to the fit, not itself fitted)."""</span>
 
     <span class="n">r_squared</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;float: Coefficient of determination of the linearized fit.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""float: Coefficient of determination of the linearized fit."""</span>
 
 <div class="viewcode-block" id="BETFit.to_isotherm">
 <a class="viewcode-back" href="../../../../api/surface.html#chemistrykit.surface.BETFit.to_isotherm">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_isotherm</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BETIsotherm</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a :class:`BETIsotherm` built from the fitted parameters.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return a :class:`BETIsotherm` built from the fitted parameters."""</span>
         <span class="k">return</span> <span class="n">BETIsotherm</span><span class="p">(</span><span class="n">Vm</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Vm</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">C</span><span class="p">,</span> <span class="n">P0</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">P0</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="BETFit.predict">
 <a class="viewcode-back" href="../../../../api/surface.html#chemistrykit.surface.BETFit.predict">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the fitted BET isotherm at pressure(s) `P`.</span>
+<span class="w">        </span><span class="sd">"""Evaluate the fitted BET isotherm at pressure(s) `P`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -588,7 +588,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_isotherm</span><span class="p">()</span><span class="o">.</span><span class="n">loading</span><span class="p">(</span><span class="n">P</span><span class="p">)</span></div>
 </div>
 
@@ -597,7 +597,7 @@
 <div class="viewcode-block" id="fit_bet">
 <a class="viewcode-back" href="../../../../api/surface.html#chemistrykit.surface.fit_bet">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">fit_bet</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">P0</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BETFit</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Fit loading-vs-pressure data to the BET isotherm via its linearization.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Fit loading-vs-pressure data to the BET isotherm via its linearization.</span>
 
 <span class="sd">    The BET equation rearranges to a straight line in :math:`x=P/P_0`</span>
 <span class="sd">    (Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 22.1;</span>
@@ -641,7 +641,7 @@
 <span class="sd">    (5.0, 80.0)</span>
 <span class="sd">    &gt;&gt;&gt; round(fit.r_squared, 6)</span>
 <span class="sd">    1.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">P</span> <span class="o">/</span> <span class="n">P0</span>

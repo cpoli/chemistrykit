@@ -5,10 +5,9 @@
 Mixtures and colligative properties
 ------------------------------------
 
-Raoult's-law P-x-y diagrams for an ideal binary solution, the
-colligative properties (freezing-point depression, boiling-point
-elevation, osmotic pressure), and Henry's law and Raoult's law shown as
-the two limiting laws of the same real solution.
+Raoult's-law P-x-y diagrams, Henry's law for dilute solutes, van't Hoff's
+osmotic pressure and the colligative properties, and Margules activity
+coefficients for non-ideal solutions.
 
 
 .. raw:: html
@@ -24,35 +23,69 @@ the two limiting laws of the same real solution.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="A P-x-y diagram for an ideal binary solution (~chemistrykit.thermo.systems.mixtures.BinaryIdealSolution), showing how the vapor phase is enriched in the more volatile component, plus the three classic colligative properties -- freezing-point depression, boiling-point elevation, and osmotic pressure -- as a function of solute concentration.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Raoult&#x27;s law, P_A = x_A P_A^* (~chemistrykit.thermo.systems.mixtures.raoult_vapor_pressure), makes each partial vapor pressure a straight line in liquid mole fraction. Adding the two lines (Dalton&#x27;s law) gives the total pressure, and BinaryIdealSolution computes the vapor composition, which is always richer in the more volatile component. That enrichment is the basis of fractional distillation.">
 
 .. only:: html
 
-  .. image:: /api/gallery/thermo/mixtures/images/thumb/sphx_glr_plot_01_colligative_properties_thumb.png
+  .. image:: /api/gallery/thermo/mixtures/images/thumb/sphx_glr_plot_01_raoult_law_pxy_thumb.png
     :alt:
 
-  :doc:`/api/gallery/thermo/mixtures/plot_01_colligative_properties`
+  :doc:`/api/gallery/thermo/mixtures/plot_01_raoult_law_pxy`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Raoult's law P-x-y diagrams and colligative properties</div>
+      <div class="sphx-glr-thumbnail-title">Raoult's law and the P-x-y diagram of an ideal solution</div>
     </div>
 
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="A real (non-ideal) solute&#x27;s partial vapor pressure is not a straight line all the way from x_B=0 to x_B=1. But it is tangent to two different straight lines at its two ends: Henry&#x27;s law (~chemistrykit.thermo.systems.mixtures.henry_law_pressure), with slope K_H, as the solute becomes infinitely dilute, and Raoult&#x27;s law (~chemistrykit.thermo.systems.mixtures.raoult_vapor_pressure), with slope P_B^* (the pure-liquid vapor pressure), as the &quot;solute&quot; becomes the only thing present. A simple quadratic interpolation between the two limits, built only to match both slopes exactly, illustrates the textbook picture without needing any real non-ideal-mixture model.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Henry&#x27;s law, P_B = x_B K_H (~chemistrykit.thermo.systems.mixtures.henry_law_pressure), says the vapor pressure of a dilute solute (equivalently, the amount of a gas that dissolves at a given pressure) is proportional to its mole fraction, with an empirical constant K_H that differs from the pure solute&#x27;s vapor pressure. Below, an illustrative real solute&#x27;s partial pressure follows the Henry&#x27;s-law line at high dilution and leaves it as the solute becomes concentrated, where Raoult&#x27;s law (~chemistrykit.thermo.systems.mixtures.raoult_vapor_pressure) takes over.">
 
 .. only:: html
 
-  .. image:: /api/gallery/thermo/mixtures/images/thumb/sphx_glr_plot_02_henry_and_raoult_thumb.png
+  .. image:: /api/gallery/thermo/mixtures/images/thumb/sphx_glr_plot_02_henry_law_thumb.png
     :alt:
 
-  :doc:`/api/gallery/thermo/mixtures/plot_02_henry_and_raoult`
+  :doc:`/api/gallery/thermo/mixtures/plot_02_henry_law`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Henry's law and Raoult's law as two limits of a real solution</div>
+      <div class="sphx-glr-thumbnail-title">Henry's law: the dilute-solute limit of a real solution</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="van&#x27;t Hoff found that a dilute solution&#x27;s osmotic pressure (~chemistrykit.thermo.systems.mixtures.osmotic_pressure) equals the pressure the solute particles would exert as an ideal gas at the same concentration and temperature. The factor i counts particles per formula unit: 1 for sucrose, about 2 for NaCl. The same factor multiplies the other colligative effects, freezing-point depression and boiling-point elevation (~chemistrykit.thermo.systems.mixtures.freezing_point_depression, boiling_point_elevation).">
+
+.. only:: html
+
+  .. image:: /api/gallery/thermo/mixtures/images/thumb/sphx_glr_plot_03_osmotic_pressure_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/thermo/mixtures/plot_03_osmotic_pressure`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">van't Hoff's osmotic pressure law, Pi = iMRT</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Margules wrote the activity coefficients of a binary liquid as power series in mole fraction. The one-parameter form used by MargulesSolution, \ln\gamma_1 = A x_2^2 and \ln\gamma_2 = A x_1^2, turns Raoult&#x27;s straight lines into curves: A &gt; 0 (unlike molecules repel) bows the total pressure upward and can produce a maximum-pressure azeotrope, while A &lt; 0 bows it downward. The model still obeys the Gibbs-Duhem relation, and each component tends to Henry&#x27;s law at infinite dilution.">
+
+.. only:: html
+
+  .. image:: /api/gallery/thermo/mixtures/images/thumb/sphx_glr_plot_04_margules_activity_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/thermo/mixtures/plot_04_margules_activity`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Margules activity coefficients: deviations from Raoult's law</div>
     </div>
 
 
@@ -66,6 +99,8 @@ the two limiting laws of the same real solution.
 .. toctree::
    :hidden:
 
-   /api/gallery/thermo/mixtures/plot_01_colligative_properties
-   /api/gallery/thermo/mixtures/plot_02_henry_and_raoult
+   /api/gallery/thermo/mixtures/plot_01_raoult_law_pxy
+   /api/gallery/thermo/mixtures/plot_02_henry_law
+   /api/gallery/thermo/mixtures/plot_03_osmotic_pressure
+   /api/gallery/thermo/mixtures/plot_04_margules_activity
 

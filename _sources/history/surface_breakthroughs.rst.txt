@@ -77,7 +77,51 @@ Journal 21 (1836), 223-228 (an English rendering of Berzelius's 1835
 Swedish Academy report, itself the usual citation for the coinage of
 "catalysis").
 
-.. minigallery:: ../../examples/surface/catalysis/plot_01_catalysis.py
+.. minigallery:: ../../examples/surface/catalysis/plot_01_doebereiner_berzelius_catalysis.py
+
+1875 -- 1878 -- Gibbs and the Thermodynamics of Adsorption
+--------------------------------------------------------------
+
+In the second half of his memoir "On the Equilibrium of Heterogeneous
+Substances," J. Willard Gibbs treated the boundary between two phases as
+a thermodynamic object in its own right. He described it by a *surface
+excess* :math:`\Gamma`: the amount of a component held at the interface
+beyond what the two bulk phases would contain if they ran unchanged right
+up to a mathematical dividing surface. For a dilute solute at a liquid
+surface, his analysis gives the Gibbs adsorption equation
+
+.. math::
+
+   \Gamma = -\frac{1}{RT}\,\frac{d\gamma}{d\ln c}
+
+This links something invisible, how much solute sits at the surface, to
+something easy to measure, how the surface tension :math:`\gamma` changes
+as solute is added. A solute that lowers the surface tension, such as a
+soap or a fatty acid, must be concentrated at the surface. Thirty years
+later, Bohdan Szyszkowski's empirical surface-tension equation for
+aqueous fatty acids, :math:`\gamma = \gamma_0 - RT\Gamma_{max}\ln(1+Kc)`,
+turned under Gibbs's equation into exactly a saturating, Langmuir-shaped
+surface excess. This was one of the first quantitative signs of a
+monolayer at a liquid surface.
+
+*Implementation:*
+:func:`~chemistrykit.surface.gibbs_surface_excess` applies the Gibbs
+equation to measured surface-tension data by numerical differentiation
+in :math:`\ln c`, and
+:func:`~chemistrykit.surface.szyszkowski_surface_tension` provides the
+Szyszkowski equation. Together they recover
+:math:`\Gamma = \Gamma_{max}Kc/(1+Kc)`, the same form as
+:func:`~chemistrykit.surface.langmuir_coverage`.
+
+*References:* J. W. Gibbs, "On the Equilibrium of Heterogeneous
+Substances," *Trans. Connecticut Acad. Arts Sci.* 3 (1875-1876),
+108-248, and (1877-1878), 343-524; B. von Szyszkowski, "Experimentelle
+Studien ueber kapillare Eigenschaften der waesserigen Loesungen von
+Fettsaeuren," *Z. Phys. Chem.* 64 (1908); A. W. Adamson and A. P. Gast,
+*Physical Chemistry of Surfaces*, 6th ed. (New York: Wiley, 1997),
+Ch. III.
+
+.. minigallery:: ../../examples/surface/gibbs_adsorption/plot_01_gibbs_adsorption_equation.py
 
 1889 -- Arrhenius, Ostwald, and the Kinetic Meaning of a Catalyst
 ---------------------------------------------------------------------
@@ -124,7 +168,7 @@ e.g., his *Lehrbuch der allgemeinen Chemie*, 2nd ed., Vol. 2, Leipzig:
 Engelmann, 1896) rather than in one single citable paper; "The Nobel
 Prize in Chemistry 1909," NobelPrize.org.
 
-.. minigallery:: ../../examples/surface/catalysis/plot_01_catalysis.py
+.. minigallery:: ../../examples/surface/catalysis/plot_02_arrhenius_ostwald_rate_enhancement.py
 
 1897 -- 1912 -- Sabatier, Senderens, and Catalytic Hydrogenation
 --------------------------------------------------------------------
@@ -170,7 +214,7 @@ of notes to the Academy beginning in 1897; P. Sabatier, *La Catalyse en
 Chimie Organique* (Paris: Librairie Polytechnique Ch. Beranger, 1913);
 "The Nobel Prize in Chemistry 1912," NobelPrize.org.
 
-.. minigallery:: ../../examples/surface/catalysis/plot_02_sabatier_volcano.py
+.. minigallery:: ../../examples/surface/catalysis/plot_03_sabatier_hydrogenation.py
 
 1906 -- Freundlich's Empirical Adsorption Isotherm
 --------------------------------------------------------
@@ -209,6 +253,58 @@ on.
 Phys. Chem.* 57 (1906), 385-470.
 
 .. minigallery:: ../../examples/surface/freundlich/plot_01_freundlich_isotherm.py
+
+1914 -- 1947 -- Polanyi's Potential Theory and the Dubinin-Radushkevich Isotherm
+-----------------------------------------------------------------------------------
+
+Michael Polanyi proposed in 1914 a picture of adsorption quite unlike
+Langmuir's sites. The solid surrounds itself with a field of attraction,
+and gas within it is compressed into a dense, liquid-like adsorbed
+layer. He measured the strength of that field at any point by the
+*adsorption potential*
+
+.. math::
+
+   A = RT\ln\frac{P_0}{P},
+
+the work needed to compress vapor from its equilibrium pressure
+:math:`P` to its saturation pressure :math:`P_0`. His central claim was
+that the volume :math:`W` of adsorbed liquid depends on :math:`A` alone,
+through a *characteristic curve* :math:`W(A)` that is the same at every
+temperature. Isotherms measured at different temperatures should
+therefore collapse onto one curve when replotted against :math:`A`.
+The theory was eclipsed for decades by Langmuir's, but Mikhail Dubinin
+revived it for the microporous activated carbons used in gas masks and
+gas separation. In 1947 he and Leonid Radushkevich gave the
+characteristic curve an explicit form for pore filling,
+
+.. math::
+
+   W = W_0\exp\!\left[-\left(\frac{A}{E}\right)^2\right],
+
+with :math:`W_0` the micropore volume and :math:`E` a characteristic
+energy. It is still a standard tool for characterizing microporous
+adsorbents.
+
+*Implementation:* :func:`~chemistrykit.surface.polanyi_potential`
+computes :math:`A`;
+:func:`~chemistrykit.surface.dubinin_radushkevich_loading` and
+:class:`~chemistrykit.surface.DubininRadushkevichIsotherm` implement the
+Dubinin-Radushkevich isotherm; and
+:func:`~chemistrykit.surface.fit_dubinin_radushkevich` recovers
+:math:`(W_0, E)` from the linearization
+:math:`\ln W = \ln W_0 - A^2/E^2`, using the same shared least-squares
+routine as the other isotherm fits.
+
+*References:* M. Polanyi, "Adsorption von Gasen (Daempfen) durch ein
+festes nichtfluechtiges Adsorbens," *Verh. Dtsch. Phys. Ges.* 16 (1914),
+1012-1016; M. M. Dubinin and L. V. Radushkevich, "Equation of the
+Characteristic Curve of Activated Charcoal," *Proc. Acad. Sci. USSR,
+Phys. Chem. Sect.* 55 (1947), 331-333; S. J. Gregg and K. S. W. Sing,
+*Adsorption, Surface Area and Porosity*, 2nd ed. (London: Academic
+Press, 1982), Ch. 4.
+
+.. minigallery:: ../../examples/surface/dubinin/plot_01_polanyi_dubinin_characteristic_curve.py
 
 1916 -- 1918 -- Langmuir's Kinetic Theory of the Monolayer
 ------------------------------------------------------------
@@ -349,7 +445,7 @@ Decomposition," *Proc. R. Soc. A* 108 (1925), 355-378 (exact page range
 as commonly cited in secondary literature; not independently
 re-verified against the original volume).
 
-.. minigallery:: ../../examples/surface/catalysis/plot_01_catalysis.py
+.. minigallery:: ../../examples/surface/catalysis/plot_04_constable_compensation.py
 
 1929 -- 2004 -- Balandin, Sabatier's Principle, and the Volcano Curve
 -------------------------------------------------------------------------
@@ -406,7 +502,7 @@ Christensen, and J. Sehested, "The Broensted-Evans-Polanyi Relation and
 the Volcano Curve in Heterogeneous Catalysis," *J. Catal.* 224 (2004),
 206-217.
 
-.. minigallery:: ../../examples/surface/catalysis/plot_02_sabatier_volcano.py
+.. minigallery:: ../../examples/surface/catalysis/plot_05_balandin_volcano.py
 
 1937 -- 1938 -- Brunauer, Emmett, and Teller: The BET Isotherm
 -------------------------------------------------------------------
@@ -467,6 +563,118 @@ service).
 
 .. minigallery:: ../../examples/surface/bet/plot_01_bet_isotherm.py
 
+1940 -- Temkin, Pyzhev, and the Temkin Isotherm
+---------------------------------------------------
+
+Working on the kinetics of ammonia synthesis over promoted iron
+catalysts, the process at the heart of the Haber-Bosch industry, Mikhail
+Temkin and V. Pyzhev needed an isotherm for nitrogen on a surface that
+was plainly not uniform. They assumed that the heat of adsorption falls
+*linearly* as the surface fills, rather than staying constant as
+Langmuir had assumed. This is the same as a surface carrying a uniform
+spread of site energies. Averaging Langmuir's coverage over such a
+spread gives an isotherm that is logarithmic in pressure over a wide
+middle range of coverage,
+
+.. math::
+
+   \theta \approx \frac{1}{f}\ln(K_{max}P),
+
+where :math:`fRT` is the width of the energy spread. The same assumption
+gave them the Temkin-Pyzhev rate law for ammonia synthesis, which for
+decades was the standard kinetic model for designing ammonia
+converters.
+
+*Implementation:*
+:func:`~chemistrykit.surface.uniform_energy_coverage` gives the exact
+Langmuir coverage averaged over a uniform spread of site energies, which
+reduces to the Temkin logarithm at intermediate coverage;
+:func:`~chemistrykit.surface.temkin_loading` and
+:class:`~chemistrykit.surface.TemkinIsotherm` implement the loading form
+:math:`q = (RT/b_T)\ln(A_TP)`; and
+:func:`~chemistrykit.surface.fit_temkin` recovers :math:`(A_T, b_T)` from
+the straight line of :math:`q` against :math:`\ln P`.
+
+*References:* M. I. Temkin and V. Pyzhev, "Kinetics of Ammonia Synthesis
+on Promoted Iron Catalysts," *Acta Physicochim. URSS* 12 (1940),
+327-356; P. W. Atkins and J. de Paula, *Physical Chemistry*, 11th ed.
+(Oxford University Press, 2018).
+
+.. minigallery:: ../../examples/surface/temkin/plot_01_temkin_isotherm.py
+
+1940 -- Eley, Rideal, and the Eley-Rideal Mechanism
+-------------------------------------------------------
+
+Studying the conversion of para-hydrogen to ortho-hydrogen on tungsten,
+Daniel Eley and Eric Rideal proposed a surface mechanism different from
+Langmuir and Hinshelwood's. In their scheme only one reactant is
+adsorbed, and the other reacts with it by striking it *directly from the
+gas phase*, without first adsorbing. The rate is then
+
+.. math::
+
+   \text{rate} = k\,\theta_AP_B = \frac{kK_AP_AP_B}{1+K_AP_A}
+
+Because the two reactants never compete for the same sites, this rate
+rises steadily with the pressure of the adsorbed reactant and levels
+off, and it stays first order in the gas-phase reactant at every
+pressure. The competitive Langmuir-Hinshelwood rate instead passes
+through a maximum. Comparing measured rate laws against these two shapes
+became the standard first test of a surface mechanism. Later
+molecular-beam experiments showed that genuine Eley-Rideal reactions are
+fairly rare, with most surface reactions following the
+Langmuir-Hinshelwood route.
+
+*Implementation:* :func:`~chemistrykit.surface.er_rate` implements
+:math:`k\theta_AP_B`, built on
+:func:`~chemistrykit.surface.langmuir_coverage` just as
+:func:`~chemistrykit.surface.lh_rate_dual_site` is, so the two mechanisms
+can be compared directly.
+
+*References:* D. D. Eley and E. K. Rideal, "Parahydrogen Conversion on
+Tungsten," *Nature* 146 (1940), 401-402; P. W. Atkins and J. de Paula,
+*Physical Chemistry*, 11th ed. (Oxford University Press, 2018).
+
+.. minigallery:: ../../examples/surface/eley_rideal/plot_01_eley_rideal_mechanism.py
+
+1962 -- Redhead and Temperature-Programmed Desorption
+--------------------------------------------------------
+
+As ultrahigh-vacuum techniques matured, Paul Redhead at the National
+Research Council of Canada developed *flash* or *temperature-programmed*
+desorption into a quantitative method. A surface covered with adsorbate
+is heated at a steady rate :math:`\beta`, and the gas it releases is
+recorded; each distinct binding state shows up as a peak. The
+desorption rate follows the Polanyi-Wigner equation,
+:math:`-d\theta/dT = (\nu/\beta)\,\theta^n e^{-E_d/RT}`. For first-order
+desorption Redhead showed that the peak temperature :math:`T_p` alone
+fixes the desorption energy, to a good approximation
+
+.. math::
+
+   E_d = RT_p\left[\ln\frac{\nu T_p}{\beta} - 3.64\right].
+
+He also showed how the peak shape and its shift with coverage reveal the
+desorption order: first-order peaks stay put as the initial coverage
+changes, while second-order peaks move to lower temperature as coverage
+rises. TPD became one of the most widely used tools of surface science
+for measuring how strongly molecules bind to surfaces.
+
+*Implementation:* :func:`~chemistrykit.surface.simulate_tpd` integrates
+the Polanyi-Wigner equation for first- and second-order desorption and
+returns a :class:`~chemistrykit.surface.TPDResult`;
+:func:`~chemistrykit.surface.first_order_peak_temperature` solves the
+exact first-order peak condition
+:math:`E_d/(RT_p^2) = (\nu/\beta)e^{-E_d/RT_p}`; and
+:func:`~chemistrykit.surface.redhead_desorption_energy` implements
+Redhead's formula.
+
+*References:* P. A. Redhead, "Thermal Desorption of Gases," *Vacuum* 12
+(1962), 203-211; R. I. Masel, *Principles of Adsorption and Reaction on
+Solid Surfaces* (New York: Wiley, 1996), Ch. 7.
+
+.. minigallery:: ../../examples/surface/tpd/plot_01_redhead_tpd.py
+
 1968 -- 1995 -- Boudart and Turnover Rates in Heterogeneous Catalysis
 ---------------------------------------------------------------------
 
@@ -501,7 +709,7 @@ Arrhenius-based rate comparison in
 Cliffs, NJ: Prentice-Hall, 1968); M. Boudart, "Turnover Rates in
 Heterogeneous Catalysis," *Chem. Rev.* 95 (1995), 661-666.
 
-.. minigallery:: ../../examples/surface/catalysis/plot_01_catalysis.py
+.. minigallery:: ../../examples/surface/catalysis/plot_06_boudart_turnover_frequency.py
 
 See Also
 --------

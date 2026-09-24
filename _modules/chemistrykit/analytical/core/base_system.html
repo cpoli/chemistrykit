@@ -410,21 +410,21 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.analytical.core.base_system</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Abstract base class for potentiometric-style titration-curve models, and a note on scope.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Abstract base class for potentiometric-style titration-curve models, and a note on scope.</span>
 
 <span class="sd">:class:`TitrationCurve` captures the one genuinely polymorphic shape in</span>
 <span class="sd">this domain: several titration *types* (redox, complexometric --</span>
 <span class="sd">:mod:`chemistrykit.analytical.systems.titration`) that all reduce to</span>
-<span class="sd">&quot;compute some scalar response as a function of titrant volume, then find</span>
-<span class="sd">the equivalence point as the point of steepest response change&quot; -- the</span>
+<span class="sd">"compute some scalar response as a function of titrant volume, then find</span>
+<span class="sd">the equivalence point as the point of steepest response change" -- the</span>
 <span class="sd">same shape that :class:`chemistrykit.solutions.core.base_system.Titration`</span>
 <span class="sd">already captures for acid-base titrations (pH vs. volume).</span>
 
 <span class="sd">**Why a new ABC here, rather than reusing** :class:`chemistrykit.solutions.core.base_system.Titration`:</span>
-<span class="sd">that class&#39;s abstract method is named and documented specifically as</span>
+<span class="sd">that class's abstract method is named and documented specifically as</span>
 <span class="sd">``pH_at`` (a *hydrogen-ion* activity readout), which is the wrong</span>
-<span class="sd">abstraction for a redox titration&#39;s electrode potential `E` or a</span>
-<span class="sd">complexometric titration&#39;s `pM`. Rather than force those into a</span>
+<span class="sd">abstraction for a redox titration's electrode potential `E` or a</span>
+<span class="sd">complexometric titration's `pM`. Rather than force those into a</span>
 <span class="sd">pH-flavored interface (or reach across a domain boundary the way</span>
 <span class="sd">``chemistrykit.photochem`` reaches into ``chemistrykit.kinetics`` for</span>
 <span class="sd">substantial shared machinery -- not warranted here, since the shared</span>
@@ -434,10 +434,10 @@
 <span class="sd">the way :mod:`chemistrykit.surface.utils.regression`,</span>
 <span class="sd">:mod:`chemistrykit.electrochem.utils.regression`, and</span>
 <span class="sd">:mod:`chemistrykit.photochem.utils.regression` each keep their own small</span>
-<span class="sd">``linear_fit`` rather than importing one another&#39;s. Acid-base titration</span>
-<span class="sd">curves are *not* reimplemented here at all -- :mod:`chemistrykit.analytical`&#39;s</span>
+<span class="sd">``linear_fit`` rather than importing one another's. Acid-base titration</span>
+<span class="sd">curves are *not* reimplemented here at all -- :mod:`chemistrykit.analytical`'s</span>
 <span class="sd">examples and tests use</span>
-<span class="sd">:mod:`chemistrykit.solutions.systems.titration`&#39;s classes directly for</span>
+<span class="sd">:mod:`chemistrykit.solutions.systems.titration`'s classes directly for</span>
 <span class="sd">that case, side by side with the new redox/complexometric models below.</span>
 
 <span class="sd">Chromatography (:mod:`chemistrykit.analytical.systems.chromatography`),</span>
@@ -445,10 +445,10 @@
 <span class="sd">uncertainty propagation (:mod:`chemistrykit.analytical.systems.uncertainty`),</span>
 <span class="sd">and the Q-test (:mod:`chemistrykit.analytical.systems.qtest`) are each a</span>
 <span class="sd">self-contained set of formulas with no swappable sibling, so -- following</span>
-<span class="sd">``chemistrykit.electrochem``/``chemistrykit.photochem``/``chemistrykit.surface``&#39;s</span>
+<span class="sd">``chemistrykit.electrochem``/``chemistrykit.photochem``/``chemistrykit.surface``'s</span>
 <span class="sd">precedent -- they stay as plain functions (plus small result dataclasses)</span>
 <span class="sd">in their own ``systems/`` modules.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -457,40 +457,40 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;TitrationCurveResult&quot;</span><span class="p">,</span> <span class="s2">&quot;TitrationCurve&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"TitrationCurveResult"</span><span class="p">,</span> <span class="s2">"TitrationCurve"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="TitrationCurveResult">
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.TitrationCurveResult">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">TitrationCurveResult</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for the output of a :meth:`TitrationCurve.curve` call.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Container for the output of a :meth:`TitrationCurve.curve` call."""</span>
 
     <span class="n">V</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray: Volume(s) of titrant added, in L (or any consistent volume unit).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""ndarray: Volume(s) of titrant added, in L (or any consistent volume unit)."""</span>
 
     <span class="n">response</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ndarray: The titration&#39;s response variable at each volume in `V`</span>
-<span class="sd">    (e.g. electrode potential `E` in volts, or `pM`).&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">"""ndarray: The titration's response variable at each volume in `V`</span>
+<span class="sd">    (e.g. electrode potential `E` in volts, or `pM`)."""</span></div>
 
 
 
 <div class="viewcode-block" id="TitrationCurve">
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.TitrationCurve">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TitrationCurve</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common base for a potentiometric titration-curve model whose response is not pH.</span>
+<span class="w">    </span><span class="sd">"""Common base for a potentiometric titration-curve model whose response is not pH.</span>
 
 <span class="sd">    Concrete subclasses implement :meth:`response_at`; :meth:`curve` and</span>
 <span class="sd">    :meth:`find_equivalence_point` are then available for free, mirroring</span>
 <span class="sd">    :meth:`chemistrykit.solutions.core.base_system.Titration.curve`/</span>
 <span class="sd">    :meth:`~chemistrykit.solutions.core.base_system.Titration.find_equivalence_point`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
 <div class="viewcode-block" id="TitrationCurve.response_at">
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.TitrationCurve.response_at">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">response_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">V</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the titration&#39;s response variable at each titrant volume in `V`.</span>
+<span class="w">        </span><span class="sd">"""Return the titration's response variable at each titrant volume in `V`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -500,13 +500,13 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ndarray</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="TitrationCurve.curve">
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.TitrationCurve.curve">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">curve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TitrationCurveResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute the full titration curve over a range of titrant volumes.</span>
+<span class="w">        </span><span class="sd">"""Compute the full titration curve over a range of titrant volumes.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -516,7 +516,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TitrationCurveResult</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">response_at</span><span class="p">(</span><span class="n">V</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">TitrationCurveResult</span><span class="p">(</span><span class="n">V</span><span class="o">=</span><span class="n">V</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span></div>
@@ -525,7 +525,7 @@
 <div class="viewcode-block" id="TitrationCurve.find_equivalence_point">
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.TitrationCurve.find_equivalence_point">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">find_equivalence_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Numerically locate the equivalence point as the point of steepest response change.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Numerically locate the equivalence point as the point of steepest response change.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -536,7 +536,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">curve</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
         <span class="n">d_response_dV</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">response</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">V</span><span class="p">)</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">d_response_dV</span><span class="p">)))</span>

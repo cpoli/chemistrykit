@@ -461,8 +461,11 @@ mass-action reaction network and integrated via
 fluorescence/phosphorescence quantum yields and the photochemical
 quantum yield via Beer-Lambert (<a class="reference internal" href="spectro.html#module-chemistrykit.spectro" title="chemistrykit.spectro"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.spectro</span></code></a>);
 Stern-Volmer fluorescence quenching with a static-vs-dynamic diagnostic;
-and photostationary-state kinetics for a two-state photoswitch under
-simultaneous forward/reverse photolysis.</p>
+photostationary-state kinetics for a two-state photoswitch under
+simultaneous forward/reverse photolysis; the H2/Cl2 photochemical chain
+reaction; Stokes shifts and Perrin fluorescence anisotropy; Kasha’s-rule
+emission yields; Förster and Dexter energy transfer; ferrioxalate
+actinometry; and Rehm-Weller electron-transfer quenching.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.photochem.PhotostationaryStateResult">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.photochem.</span></span><span class="sig-name descname"><span class="pre">PhotostationaryStateResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A_pss</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B_pss</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratio_B_over_A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_AB</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_BA</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/photochem/core/base_system.html#PhotostationaryStateResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.photochem.PhotostationaryStateResult" title="Link to this definition">#</a></dt>
@@ -588,6 +591,35 @@ simultaneous forward/reverse photolysis.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.photochem.chain_quantum_yield">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.photochem.</span></span><span class="sig-name descname"><span class="pre">chain_quantum_yield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">I_abs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/photochem/systems/chain_reaction.html#chain_quantum_yield"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.photochem.chain_quantum_yield" title="Link to this definition">#</a></dt>
+<dd><p>Steady-state quantum yield of the H2/Cl2 chain: <span class="math notranslate nohighlight">\(\Phi = 2k_2[\mathrm{H_2}]/\sqrt{k_t I_{abs}}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – <span class="math notranslate nohighlight">\(\mathrm{Cl}+\mathrm{H_2}\)</span> propagation rate constant.</p></li>
+<li><p><strong>kt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – <span class="math notranslate nohighlight">\(\mathrm{Cl}+\mathrm{Cl}\)</span> termination rate constant.</p></li>
+<li><p><strong>H2</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Hydrogen concentration.</p></li>
+<li><p><strong>I_abs</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absorbed photon rate per unit volume (same concentration/time
+units as the rate constants).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – HCl molecules formed per photon absorbed – not bounded by 1.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Halving the light intensity by a factor of 4 doubles the quantum
+yield (the chain lengthens as <span class="math notranslate nohighlight">\(I_{abs}^{-1/2}\)</span>):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">phi1</span> <span class="o">=</span> <span class="n">chain_quantum_yield</span><span class="p">(</span><span class="n">k2</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">kt</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">H2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">I_abs</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phi2</span> <span class="o">=</span> <span class="n">chain_quantum_yield</span><span class="p">(</span><span class="n">k2</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">kt</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">H2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">I_abs</span><span class="o">=</span><span class="mf">0.25e-4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">phi1</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">phi2</span> <span class="o">/</span> <span class="n">phi1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">(200.0, 2.0)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="chemistrykit.photochem.classify_quenching_mechanism">
 <span class="sig-prename descclassname"><span class="pre">chemistrykit.photochem.</span></span><span class="sig-name descname"><span class="pre">classify_quenching_mechanism</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">intensity_ratio_slope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lifetime_ratio_slope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rtol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/photochem/systems/stern_volmer.html#classify_quenching_mechanism"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.photochem.classify_quenching_mechanism" title="Link to this definition">#</a></dt>
 <dd><p>Classify a quenching mechanism as dynamic, static, or mixed from the two Stern-Volmer slopes.</p>
@@ -622,18 +654,50 @@ vs. the lifetime slope “zero” (static).</p></li>
 <p class="rubric">Examples</p>
 <p>Equal slopes indicate purely dynamic quenching:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">classify_quenching_mechanism</span><span class="p">(</span><span class="n">intensity_ratio_slope</span><span class="o">=</span><span class="mf">40.0</span><span class="p">,</span> <span class="n">lifetime_ratio_slope</span><span class="o">=</span><span class="mf">40.0</span><span class="p">)</span>
-<span class="go">&#39;dynamic&#39;</span>
+<span class="go">'dynamic'</span>
 </pre></div>
 </div>
 <p>A vanishing lifetime slope with a nonzero intensity slope indicates
 purely static quenching:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">classify_quenching_mechanism</span><span class="p">(</span><span class="n">intensity_ratio_slope</span><span class="o">=</span><span class="mf">40.0</span><span class="p">,</span> <span class="n">lifetime_ratio_slope</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
-<span class="go">&#39;static&#39;</span>
+<span class="go">'static'</span>
 </pre></div>
 </div>
 <p>Something in between indicates a mixed mechanism:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">classify_quenching_mechanism</span><span class="p">(</span><span class="n">intensity_ratio_slope</span><span class="o">=</span><span class="mf">40.0</span><span class="p">,</span> <span class="n">lifetime_ratio_slope</span><span class="o">=</span><span class="mf">20.0</span><span class="p">)</span>
-<span class="go">&#39;mixed&#39;</span>
+<span class="go">'mixed'</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.photochem.dexter_rate">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.photochem.</span></span><span class="sig-name descname"><span class="pre">dexter_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/photochem/systems/energy_transfer.html#dexter_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.photochem.dexter_rate" title="Link to this definition">#</a></dt>
+<dd><p>Dexter exchange energy-transfer rate <span class="math notranslate nohighlight">\(k_{ET} = KJ\exp(-2r/L)\)</span>.</p>
+<p>Exchange transfer requires the donor’s and acceptor’s electron
+clouds to overlap, so the rate decays exponentially with separation
+rather than as the <span class="math notranslate nohighlight">\(r^{-6}\)</span> power law of Förster transfer, and
+it allows spin-forbidden triplet-triplet transfer that dipole
+coupling does not (Dexter 1953; Turro et al., Ch. 7).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Donor-acceptor edge-to-edge distance.</p></li>
+<li><p><strong>K</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pre-exponential factor (orbital interaction strength).</p></li>
+<li><p><strong>J</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Normalized spectral overlap integral.</p></li>
+<li><p><strong>L</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Effective average van der Waals radius (same unit as <cite>r</cite>).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Each increase of <span class="math notranslate nohighlight">\(r\)</span> by <span class="math notranslate nohighlight">\(L/2\)</span> reduces the rate by a
+factor of <span class="math notranslate nohighlight">\(e\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="n">dexter_rate</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">J</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mf">2.0</span><span class="p">),</span> <span class="n">dexter_rate</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">J</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">k1</span> <span class="o">/</span> <span class="n">k2</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -666,6 +730,59 @@ quenched before it decays on its own, hence the product form
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">dynamic_quenching_constant</span><span class="p">(</span><span class="n">kq</span><span class="o">=</span><span class="mf">1.0e10</span><span class="p">,</span> <span class="n">tau0</span><span class="o">=</span><span class="mf">5.0e-9</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
 <span class="go">50.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.photochem.ferrioxalate_fe2_moles">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.photochem.</span></span><span class="sig-name descname"><span class="pre">ferrioxalate_fe2_moles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">absorbance_510</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_length_cm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon_510</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">11100.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/photochem/systems/actinometry.html#ferrioxalate_fe2_moles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.photochem.ferrioxalate_fe2_moles" title="Link to this definition">#</a></dt>
+<dd><p>Moles of Fe(II) from the absorbance of its phenanthroline complex at 510 nm.</p>
+<p>Beer-Lambert: <span class="math notranslate nohighlight">\(n = A_{510} V/(\varepsilon_{510}\ell)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>absorbance_510</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absorbance change of the developed solution at 510 nm.</p></li>
+<li><p><strong>volume_L</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Volume of the developed solution, in L.</p></li>
+<li><p><strong>path_length_cm</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Cuvette path length, in cm.</p></li>
+<li><p><strong>epsilon_510</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Molar absorptivity of Fe(phen)3(2+), in M^-1 cm^-1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Moles of Fe(II).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">ferrioxalate_fe2_moles</span><span class="p">(</span><span class="mf">1.11</span><span class="p">,</span> <span class="n">volume_L</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e6</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.photochem.ferrioxalate_photon_flux">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.photochem.</span></span><span class="sig-name descname"><span class="pre">ferrioxalate_photon_flux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">moles_fe2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">absorbance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantum_yield</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.21</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/photochem/systems/actinometry.html#ferrioxalate_photon_flux"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.photochem.ferrioxalate_photon_flux" title="Link to this definition">#</a></dt>
+<dd><p>Incident photon flux <span class="math notranslate nohighlight">\(q_p = n_{Fe^{2+}}/(\Phi\,t\,(1-10^{-A}))\)</span> from ferrioxalate actinometry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>moles_fe2</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Moles of Fe(II) formed (e.g. from <a class="reference internal" href="#chemistrykit.photochem.ferrioxalate_fe2_moles" title="chemistrykit.photochem.ferrioxalate_fe2_moles"><code class="xref py py-func docutils literal notranslate"><span class="pre">ferrioxalate_fe2_moles()</span></code></a>).</p></li>
+<li><p><strong>time_s</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Irradiation time, in s.</p></li>
+<li><p><strong>absorbance</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Actinometer absorbance at the irradiation wavelength (<code class="docutils literal notranslate"><span class="pre">inf</span></code>
+means total absorption, the usual operating regime).</p></li>
+<li><p><strong>quantum_yield</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Fe(II) quantum yield at the irradiation wavelength (1.21 near
+365 nm per Hatchard &amp; Parker).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Incident photon flux, in einstein/s (mol photons/s).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>1.21 micromol Fe(II) in 100 s under total absorption means
+<span class="math notranslate nohighlight">\(10^{-8}\)</span> einstein/s:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">ferrioxalate_photon_flux</span><span class="p">(</span><span class="mf">1.21e-6</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e8</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">1.0</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -751,6 +868,122 @@ halves the yield:</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.photochem.forster_efficiency">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.photochem.</span></span><span class="sig-name descname"><span class="pre">forster_efficiency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/photochem/systems/energy_transfer.html#forster_efficiency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.photochem.forster_efficiency" title="Link to this definition">#</a></dt>
+<dd><p>FRET efficiency <span class="math notranslate nohighlight">\(E = 1/(1+(r/R_0)^6)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Donor-acceptor distance.</p></li>
+<li><p><strong>R0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Förster distance (same unit as <cite>r</cite>).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Efficiency in <span class="math notranslate nohighlight">\([0,1]\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">forster_efficiency</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">R0</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+<span class="go">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">forster_efficiency</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">R0</span><span class="o">=</span><span class="mf">5.0</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">0.01538</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.photochem.forster_radius">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.photochem.</span></span><span class="sig-name descname"><span class="pre">forster_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kappa2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantum_yield_donor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlap_J</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/photochem/systems/energy_transfer.html#forster_radius"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.photochem.forster_radius" title="Link to this definition">#</a></dt>
+<dd><p>Förster distance <span class="math notranslate nohighlight">\(R_0 = 0.211\,(\kappa^2 n^{-4} Q_D J)^{1/6}\)</span> Å.</p>
+<p>The donor-acceptor distance at which transfer is 50% efficient
+(Lakowicz, 3rd ed., eq. 13.12), with the spectral overlap integral
+<span class="math notranslate nohighlight">\(J\)</span> in M<sup>-1</sup> cm<sup>-1</sup> nm<sup>4</sup>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kappa2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Orientation factor <span class="math notranslate nohighlight">\(\kappa^2\)</span> (2/3 for isotropic averaging).</p></li>
+<li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Refractive index of the medium.</p></li>
+<li><p><strong>quantum_yield_donor</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Donor fluorescence quantum yield without acceptor.</p></li>
+<li><p><strong>overlap_J</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Spectral overlap integral, in M^-1 cm^-1 nm^4.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – <span class="math notranslate nohighlight">\(R_0\)</span>, in Å.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A typical dye pair (<span class="math notranslate nohighlight">\(J=10^{15}\)</span>, <span class="math notranslate nohighlight">\(Q_D=0.5\)</span>, <span class="math notranslate nohighlight">\(n=1.4\)</span>)
+gives <span class="math notranslate nohighlight">\(R_0\)</span> of about 4.4 nm:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">forster_radius</span><span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0e15</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">44.4</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.photochem.forster_rate">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.photochem.</span></span><span class="sig-name descname"><span class="pre">forster_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_D</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/photochem/systems/energy_transfer.html#forster_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.photochem.forster_rate" title="Link to this definition">#</a></dt>
+<dd><p>Förster transfer rate <span class="math notranslate nohighlight">\(k_T = \tau_D^{-1}(R_0/r)^6\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Donor-acceptor distance (same unit as <cite>R0</cite>).</p></li>
+<li><p><strong>R0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Förster distance.</p></li>
+<li><p><strong>tau_D</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Donor lifetime without acceptor.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Transfer rate constant, in 1/(unit of <cite>tau_D</cite>).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>At <span class="math notranslate nohighlight">\(r=R_0\)</span> transfer competes equally with donor decay:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">forster_rate</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">R0</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">tau_D</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.photochem.hydrogen_chlorine_chain_network">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.photochem.</span></span><span class="sig-name descname"><span class="pre">hydrogen_chlorine_chain_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H2_0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Cl2_0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/photochem/systems/chain_reaction.html#hydrogen_chlorine_chain_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.photochem.hydrogen_chlorine_chain_network" title="Link to this definition">#</a></dt>
+<dd><p>Build Nernst’s photochemical H2/Cl2 atom-chain mechanism as a mass-action network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>j</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Photolysis rate constant of <span class="math notranslate nohighlight">\(\mathrm{Cl_2}\)</span> (so the
+absorbed photon rate per volume is <span class="math notranslate nohighlight">\(I_{abs}=j[\mathrm{Cl_2}]\)</span>,
+assuming each absorbed photon dissociates one <span class="math notranslate nohighlight">\(\mathrm{Cl_2}\)</span>).</p></li>
+<li><p><strong>k2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – <span class="math notranslate nohighlight">\(\mathrm{Cl}+\mathrm{H_2}\to\mathrm{HCl}+\mathrm{H}\)</span> rate constant.</p></li>
+<li><p><strong>k3</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – <span class="math notranslate nohighlight">\(\mathrm{H}+\mathrm{Cl_2}\to\mathrm{HCl}+\mathrm{Cl}\)</span> rate constant.</p></li>
+<li><p><strong>kt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – <span class="math notranslate nohighlight">\(\mathrm{Cl}+\mathrm{Cl}\to\mathrm{Cl_2}\)</span> termination rate
+constant (mass-action rate <span class="math notranslate nohighlight">\(k_t[\mathrm{Cl}]^2\)</span>).</p></li>
+<li><p><strong>H2_0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial concentrations.</p></li>
+<li><p><strong>Cl2_0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial concentrations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="kinetics.html#chemistrykit.kinetics.StoichiometricNetwork" title="chemistrykit.kinetics.systems.networks.StoichiometricNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">StoichiometricNetwork</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>StoichiometricNetwork</em> – Species <code class="docutils literal notranslate"><span class="pre">(&quot;H2&quot;,</span> <span class="pre">&quot;Cl2&quot;,</span> <span class="pre">&quot;Cl&quot;,</span> <span class="pre">&quot;H&quot;,</span> <span class="pre">&quot;HCl&quot;)</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Hydrogen atoms are conserved between H2, H and HCl:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">hydrogen_chlorine_chain_network</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">k3</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">kt</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H_total</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">res</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"H2"</span><span class="p">)</span> <span class="o">+</span> <span class="n">res</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"H"</span><span class="p">)</span> <span class="o">+</span> <span class="n">res</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"HCl"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">H_total</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="chemistrykit.photochem.intersystem_crossing_yield">
 <span class="sig-prename descclassname"><span class="pre">chemistrykit.photochem.</span></span><span class="sig-name descname"><span class="pre">intersystem_crossing_yield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kisc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/photochem/systems/quantum_yield.html#intersystem_crossing_yield"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.photochem.intersystem_crossing_yield" title="Link to this definition">#</a></dt>
 <dd><p>Intersystem-crossing yield <span class="math notranslate nohighlight">\(\Phi_{isc} = k_{isc}/(k_f+k_{ic}+k_{isc})\)</span>.</p>
@@ -824,8 +1057,8 @@ constant.</p></li>
 <p>Total population is conserved (S0 is a pure sink, nothing is created
 or destroyed, just redistributed):</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">jablonski_network</span><span class="p">(</span><span class="n">kf</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">kic</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">kisc</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">kp</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">kic_T</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">S1_0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;rk4&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">total</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">&quot;S1&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">&quot;T1&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">&quot;S0&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">total</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"S1"</span><span class="p">)</span> <span class="o">+</span> <span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"T1"</span><span class="p">)</span> <span class="o">+</span> <span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"S0"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">))</span>
 <span class="go">True</span>
 </pre></div>
@@ -880,12 +1113,92 @@ developing this module.</p>
 <p>Matches <a class="reference internal" href="#chemistrykit.photochem.jablonski_network" title="chemistrykit.photochem.jablonski_network"><code class="xref py py-func docutils literal notranslate"><span class="pre">jablonski_network()</span></code></a>’s numerical integration:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">kf</span><span class="p">,</span> <span class="n">kic</span><span class="p">,</span> <span class="n">kisc</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">kic_T</span><span class="p">,</span> <span class="n">S1_0</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">jablonski_network</span><span class="p">(</span><span class="n">kf</span><span class="p">,</span> <span class="n">kic</span><span class="p">,</span> <span class="n">kisc</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">kic_T</span><span class="p">,</span> <span class="n">S1_0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;rk4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">S1</span><span class="p">,</span> <span class="n">T1</span><span class="p">,</span> <span class="n">S0</span> <span class="o">=</span> <span class="n">jablonski_populations_analytic</span><span class="p">(</span><span class="n">kf</span><span class="p">,</span> <span class="n">kic</span><span class="p">,</span> <span class="n">kisc</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">kic_T</span><span class="p">,</span> <span class="n">S1_0</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">&quot;S1&quot;</span><span class="p">),</span> <span class="n">S1</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"S1"</span><span class="p">),</span> <span class="n">S1</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">))</span>
 <span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">&quot;T1&quot;</span><span class="p">),</span> <span class="n">T1</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"T1"</span><span class="p">),</span> <span class="n">T1</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">))</span>
 <span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.photochem.kasha_emission_yields">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.photochem.</span></span><span class="sig-name descname"><span class="pre">kasha_emission_yields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kf2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_ic21</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kf1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">knr1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">excite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'S2'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/photochem/systems/jablonski.html#kasha_emission_yields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.photochem.kasha_emission_yields" title="Link to this definition">#</a></dt>
+<dd><p>Emission quantum yields from <span class="math notranslate nohighlight">\(S_2\)</span> and <span class="math notranslate nohighlight">\(S_1\)</span> for a four-level (<span class="math notranslate nohighlight">\(S_2,S_1,S_0\)</span>) model.</p>
+<p>After excitation into <span class="math notranslate nohighlight">\(S_2\)</span>, the molecule either emits directly
+from <span class="math notranslate nohighlight">\(S_2\)</span> (rate <span class="math notranslate nohighlight">\(k_{f2}\)</span>) or internally converts to
+<span class="math notranslate nohighlight">\(S_1\)</span> (rate <span class="math notranslate nohighlight">\(k_{ic,21}\)</span>); from <span class="math notranslate nohighlight">\(S_1\)</span> it fluoresces
+(<span class="math notranslate nohighlight">\(k_{f1}\)</span>) or decays nonradiatively by any other channel
+(<span class="math notranslate nohighlight">\(k_{nr1}\)</span>, lumping <span class="math notranslate nohighlight">\(k_{ic}+k_{isc}\)</span>). Branching ratios give</p>
+<div class="math notranslate nohighlight">
+\[\Phi_{S_2} = \frac{k_{f2}}{k_{f2}+k_{ic,21}}, \qquad
+\Phi_{S_1} = \frac{k_{ic,21}}{k_{f2}+k_{ic,21}}\cdot
+\frac{k_{f1}}{k_{f1}+k_{nr1}}.\]</div>
+<p>Because <span class="math notranslate nohighlight">\(k_{ic,21}\)</span> (typically <span class="math notranslate nohighlight">\(10^{12}\)</span>-<span class="math notranslate nohighlight">\(10^{14}\)</span>
+s<sup>-1</sup>) vastly exceeds <span class="math notranslate nohighlight">\(k_{f2}\)</span> (<span class="math notranslate nohighlight">\(\sim10^8\)</span>-<span class="math notranslate nohighlight">\(10^9\)</span>
+s<sup>-1</sup>), <span class="math notranslate nohighlight">\(\Phi_{S_2}\approx0\)</span> and essentially all
+emission comes from <span class="math notranslate nohighlight">\(S_1\)</span> – Kasha’s rule (M. Kasha, <em>Discuss.
+Faraday Soc.</em> 9, 14 (1950); Turro, Ramamurthy &amp; Scaiano, <em>Modern
+Molecular Photochemistry of Organic Molecules</em>, Ch. 4). Excitation
+directly into <span class="math notranslate nohighlight">\(S_1\)</span> (<code class="docutils literal notranslate"><span class="pre">excite=&quot;S1&quot;</span></code>) gives
+<span class="math notranslate nohighlight">\(\Phi_{S_2}=0\)</span> and <span class="math notranslate nohighlight">\(\Phi_{S_1}=k_{f1}/(k_{f1}+k_{nr1})\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kf2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Radiative rate constant of <span class="math notranslate nohighlight">\(S_2\to S_0\)</span>.</p></li>
+<li><p><strong>k_ic21</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Internal-conversion rate constant <span class="math notranslate nohighlight">\(S_2\to S_1\)</span>.</p></li>
+<li><p><strong>kf1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Radiative rate constant of <span class="math notranslate nohighlight">\(S_1\to S_0\)</span>.</p></li>
+<li><p><strong>knr1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Total nonradiative decay rate constant of <span class="math notranslate nohighlight">\(S_1\)</span>.</p></li>
+<li><p><strong>excite</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – State populated by absorption.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>phi_S2, phi_S1</strong> (<em>float</em>) – Quantum yields of emission from <span class="math notranslate nohighlight">\(S_2\)</span> and from <span class="math notranslate nohighlight">\(S_1\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>With realistic rates almost no emission comes from <span class="math notranslate nohighlight">\(S_2\)</span>, and
+the <span class="math notranslate nohighlight">\(S_1\)</span> fluorescence yield barely depends on which state was
+excited:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">phi2</span><span class="p">,</span> <span class="n">phi1</span> <span class="o">=</span> <span class="n">kasha_emission_yields</span><span class="p">(</span><span class="n">kf2</span><span class="o">=</span><span class="mf">1e8</span><span class="p">,</span> <span class="n">k_ic21</span><span class="o">=</span><span class="mf">1e13</span><span class="p">,</span> <span class="n">kf1</span><span class="o">=</span><span class="mf">1e8</span><span class="p">,</span> <span class="n">knr1</span><span class="o">=</span><span class="mf">1e8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phi2</span> <span class="o">&lt;</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">phi1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">(True, 0.5)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kasha_emission_yields</span><span class="p">(</span><span class="n">kf2</span><span class="o">=</span><span class="mf">1e8</span><span class="p">,</span> <span class="n">k_ic21</span><span class="o">=</span><span class="mf">1e13</span><span class="p">,</span> <span class="n">kf1</span><span class="o">=</span><span class="mf">1e8</span><span class="p">,</span> <span class="n">knr1</span><span class="o">=</span><span class="mf">1e8</span><span class="p">,</span> <span class="n">excite</span><span class="o">=</span><span class="s2">"S1"</span><span class="p">)</span>
+<span class="go">(0.0, 0.5)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.photochem.perrin_anisotropy">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.photochem.</span></span><span class="sig-name descname"><span class="pre">perrin_anisotropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/photochem/systems/fluorescence.html#perrin_anisotropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.photochem.perrin_anisotropy" title="Link to this definition">#</a></dt>
+<dd><p>Perrin equation for steady-state fluorescence anisotropy, <span class="math notranslate nohighlight">\(r = r_0/(1+\tau/\theta)\)</span>.</p>
+<p>A fluorophore excited by polarized light emits polarized light, but
+rotational diffusion during the excited-state lifetime <span class="math notranslate nohighlight">\(\tau\)</span>
+scrambles the orientation; for a spherical rotor with rotational
+correlation time <span class="math notranslate nohighlight">\(\theta\)</span> the time-averaged anisotropy is
+<span class="math notranslate nohighlight">\(r_0/r = 1+\tau/\theta\)</span> (Perrin 1926; Lakowicz, Ch. 10, eq.
+10.45). <span class="math notranslate nohighlight">\(r_0\)</span> (at most 0.4 for one-photon excitation) is the
+anisotropy in the absence of rotation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Fundamental (rotation-free) anisotropy.</p></li>
+<li><p><strong>tau</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Fluorescence lifetime.</p></li>
+<li><p><strong>theta</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Rotational correlation time (same unit as <cite>tau</cite>).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>When the lifetime equals the correlation time, the anisotropy is
+halved:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">perrin_anisotropy</span><span class="p">(</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">4.0</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.2</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1105,8 +1418,8 @@ photochemical rather than Arrhenius rate constants.</p>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">photoswitch_network</span><span class="p">(</span><span class="n">k_AB</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">k_BA</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">A0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;rk4&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">integrate</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rk4"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">result</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">3</span><span class="p">)</span>
 <span class="go">3.75</span>
 </pre></div>
 </div>
@@ -1151,6 +1464,90 @@ value.</p></li>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.photochem.rehm_weller_free_energy">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.photochem.</span></span><span class="sig-name descname"><span class="pre">rehm_weller_free_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">E_ox_donor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_red_acceptor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E00</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">work_term</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/photochem/systems/electron_transfer.html#rehm_weller_free_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.photochem.rehm_weller_free_energy" title="Link to this definition">#</a></dt>
+<dd><p>Free energy of photoinduced electron transfer, <span class="math notranslate nohighlight">\(\Delta G_{ET}=E_{ox}(D)-E_{red}(A)-E_{00}+w\)</span> (eV).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>E_ox_donor</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Oxidation potential of the donor, in V.</p></li>
+<li><p><strong>E_red_acceptor</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Reduction potential of the acceptor, in V (same reference).</p></li>
+<li><p><strong>E00</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Excitation energy of the excited partner, in eV.</p></li>
+<li><p><strong>work_term</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Coulombic ion-pair work term, in eV (small in polar solvents).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – <span class="math notranslate nohighlight">\(\Delta G_{ET}\)</span>, in eV (negative means exergonic).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">rehm_weller_free_energy</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.9</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">-0.2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.photochem.rehm_weller_quenching_rate">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.photochem.</span></span><span class="sig-name descname"><span class="pre">rehm_weller_quenching_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delta_G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_diff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20000000000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dG0_dagger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.104</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/photochem/systems/electron_transfer.html#rehm_weller_quenching_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.photochem.rehm_weller_quenching_rate" title="Link to this definition">#</a></dt>
+<dd><p>Rehm-Weller electron-transfer quenching rate constant <span class="math notranslate nohighlight">\(k_q(\Delta G_{ET})\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delta_G</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Electron-transfer free energy, in eV.</p></li>
+<li><p><strong>k_diff</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Diffusion rate constant <span class="math notranslate nohighlight">\(k_d\)</span>, in 1/(M*s).</p></li>
+<li><p><strong>ratio</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – <span class="math notranslate nohighlight">\(k_{-d}/k_e^0\)</span>.</p></li>
+<li><p><strong>dG0_dagger</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Intrinsic barrier <span class="math notranslate nohighlight">\(\Delta G^\ddagger(0)\)</span>, in eV.</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Temperature, in K.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – <span class="math notranslate nohighlight">\(k_q\)</span>, in 1/(M*s).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Strongly exergonic transfer approaches the plateau
+<span class="math notranslate nohighlight">\(k_d/(1+0.25)=1.6\times10^{10}\)</span>, while thermoneutral transfer
+is more than ten times slower:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">rehm_weller_quenching_rate</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1e10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">1.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">rehm_weller_quenching_rate</span><span class="p">(</span><span class="o">-</span><span class="mf">50.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1e10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">1.6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">rehm_weller_quenching_rate</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1e10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">0.128</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.photochem.rotational_correlation_time">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.photochem.</span></span><span class="sig-name descname"><span class="pre">rotational_correlation_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">viscosity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/photochem/systems/fluorescence.html#rotational_correlation_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.photochem.rotational_correlation_time" title="Link to this definition">#</a></dt>
+<dd><p>Stokes-Einstein-Debye rotational correlation time <span class="math notranslate nohighlight">\(\theta = \eta V/(k_B T)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>viscosity</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Solvent viscosity <span class="math notranslate nohighlight">\(\eta\)</span>, in Pa*s.</p></li>
+<li><p><strong>volume</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Hydrodynamic volume of the rotating molecule, in m<sup>3</sup>.</p></li>
+<li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Temperature, in K.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – <span class="math notranslate nohighlight">\(\theta\)</span>, in s.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A ~1 nm<sup>3</sup> fluorophore in water (1 mPa*s) at 298 K rotates in
+about a quarter of a nanosecond:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">rotational_correlation_time</span><span class="p">(</span><span class="mf">1.0e-3</span><span class="p">,</span> <span class="mf">1.0e-27</span><span class="p">,</span> <span class="mf">298.15</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e9</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">0.243</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="chemistrykit.photochem.stern_volmer_ratio">
 <span class="sig-prename descclassname"><span class="pre">chemistrykit.photochem.</span></span><span class="sig-name descname"><span class="pre">stern_volmer_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ksv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/photochem/systems/stern_volmer.html#stern_volmer_ratio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.photochem.stern_volmer_ratio" title="Link to this definition">#</a></dt>
 <dd><p>The Stern-Volmer equation: <span class="math notranslate nohighlight">\(I_0/I = 1 + K_{sv}[Q]\)</span>.</p>
@@ -1190,6 +1587,34 @@ formation constant) but the lifetime ratio stays exactly 1 – see
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ratio</span> <span class="o">=</span> <span class="n">stern_volmer_ratio</span><span class="p">(</span><span class="n">Ksv</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="n">Q</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">ratio</span><span class="p">),</span> <span class="mf">20.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">Q</span><span class="p">)))</span>
 <span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.photochem.stokes_shift">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.photochem.</span></span><span class="sig-name descname"><span class="pre">stokes_shift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">absorption_max_nm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emission_max_nm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/photochem/systems/fluorescence.html#stokes_shift"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.photochem.stokes_shift" title="Link to this definition">#</a></dt>
+<dd><p>Stokes shift in wavenumbers, <span class="math notranslate nohighlight">\(\Delta\tilde\nu = 10^7/\lambda_{abs} - 10^7/\lambda_{em}\)</span> (cm<sup>-1</sup>).</p>
+<p>Stokes (1852) observed that fluorescence is emitted at longer
+wavelength (lower energy) than the light that excites it; the energy
+difference is lost to vibrational relaxation and solvent
+reorganization in the excited state before emission (Lakowicz, Ch.
+1.4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>absorption_max_nm</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Wavelength of the absorption maximum, in nm.</p></li>
+<li><p><strong>emission_max_nm</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Wavelength of the emission maximum, in nm.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Stokes shift in cm<sup>-1</sup> (positive for red-shifted emission).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Absorption at 400 nm and emission at 500 nm:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">stokes_shift</span><span class="p">(</span><span class="mf">400.0</span><span class="p">,</span> <span class="mf">500.0</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">5000.0</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1257,13 +1682,23 @@ formation constant) but the lifetime ratio stays exactly 1 – see
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.SternVolmerFit.r_squared"><code class="docutils literal notranslate"><span class="pre">SternVolmerFit.r_squared</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.chain_quantum_yield"><code class="docutils literal notranslate"><span class="pre">chain_quantum_yield()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.classify_quenching_mechanism"><code class="docutils literal notranslate"><span class="pre">classify_quenching_mechanism()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.dexter_rate"><code class="docutils literal notranslate"><span class="pre">dexter_rate()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.dynamic_quenching_constant"><code class="docutils literal notranslate"><span class="pre">dynamic_quenching_constant()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.ferrioxalate_fe2_moles"><code class="docutils literal notranslate"><span class="pre">ferrioxalate_fe2_moles()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.ferrioxalate_photon_flux"><code class="docutils literal notranslate"><span class="pre">ferrioxalate_photon_flux()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.fit_stern_volmer"><code class="docutils literal notranslate"><span class="pre">fit_stern_volmer()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.fluorescence_quantum_yield"><code class="docutils literal notranslate"><span class="pre">fluorescence_quantum_yield()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.forster_efficiency"><code class="docutils literal notranslate"><span class="pre">forster_efficiency()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.forster_radius"><code class="docutils literal notranslate"><span class="pre">forster_radius()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.forster_rate"><code class="docutils literal notranslate"><span class="pre">forster_rate()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.hydrogen_chlorine_chain_network"><code class="docutils literal notranslate"><span class="pre">hydrogen_chlorine_chain_network()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.intersystem_crossing_yield"><code class="docutils literal notranslate"><span class="pre">intersystem_crossing_yield()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.jablonski_network"><code class="docutils literal notranslate"><span class="pre">jablonski_network()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.jablonski_populations_analytic"><code class="docutils literal notranslate"><span class="pre">jablonski_populations_analytic()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.kasha_emission_yields"><code class="docutils literal notranslate"><span class="pre">kasha_emission_yields()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.perrin_anisotropy"><code class="docutils literal notranslate"><span class="pre">perrin_anisotropy()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.phosphorescence_quantum_yield"><code class="docutils literal notranslate"><span class="pre">phosphorescence_quantum_yield()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.photochemical_quantum_yield"><code class="docutils literal notranslate"><span class="pre">photochemical_quantum_yield()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.photons_absorbed"><code class="docutils literal notranslate"><span class="pre">photons_absorbed()</span></code></a></li>
@@ -1271,7 +1706,11 @@ formation constant) but the lifetime ratio stays exactly 1 – see
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.photostationary_state"><code class="docutils literal notranslate"><span class="pre">photostationary_state()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.photoswitch_network"><code class="docutils literal notranslate"><span class="pre">photoswitch_network()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.photoswitch_rate_constants"><code class="docutils literal notranslate"><span class="pre">photoswitch_rate_constants()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.rehm_weller_free_energy"><code class="docutils literal notranslate"><span class="pre">rehm_weller_free_energy()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.rehm_weller_quenching_rate"><code class="docutils literal notranslate"><span class="pre">rehm_weller_quenching_rate()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.rotational_correlation_time"><code class="docutils literal notranslate"><span class="pre">rotational_correlation_time()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.stern_volmer_ratio"><code class="docutils literal notranslate"><span class="pre">stern_volmer_ratio()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.photochem.stokes_shift"><code class="docutils literal notranslate"><span class="pre">stokes_shift()</span></code></a></li>
 </ul>
   </nav></div>
 

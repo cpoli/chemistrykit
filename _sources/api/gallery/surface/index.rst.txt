@@ -8,7 +8,9 @@ This gallery walks through every public feature of
 isotherms with their standard linearizations for fitting parameters from
 data; Langmuir-Hinshelwood single- and dual-site surface-reaction
 kinetics; and a turnover-frequency/rate-enhancement catalysis model
-built on ``chemistrykit.kinetics``'s Arrhenius equation.
+built on ``chemistrykit.kinetics``'s Arrhenius equation; the Gibbs
+adsorption equation; Polanyi/Dubinin-Radushkevich and Temkin isotherms;
+Eley-Rideal kinetics; and temperature-programmed desorption.
 
 Each script in this gallery is self-contained and can be run directly
 with ``python examples/surface/<section>/<script>.py``. Every script
@@ -28,8 +30,19 @@ Sections
   Langmuir in the appropriate limit.
 - **langmuir_hinshelwood** -- single- and dual-site surface-reaction
   kinetics built on the Langmuir coverage.
-- **catalysis** -- turnover frequency/number, and rate enhancement from a
-  catalyst's activation-energy reduction.
+- **catalysis** -- one example per catalysis milestone: Doebereiner and
+  Berzelius, Arrhenius and Ostwald, Sabatier's hydrogenation, Constable's
+  compensation effect, Balandin's volcano curve, and Boudart's turnover
+  frequency.
+- **gibbs_adsorption** -- surface excess from surface tension via the
+  Gibbs adsorption equation.
+- **dubinin** -- Polanyi's adsorption potential and the
+  Dubinin-Radushkevich characteristic curve.
+- **temkin** -- the logarithmic Temkin isotherm from a spread of site
+  energies.
+- **eley_rideal** -- Eley-Rideal kinetics contrasted with dual-site
+  Langmuir-Hinshelwood kinetics.
+- **tpd** -- temperature-programmed desorption and Redhead's analysis.
 
 
 .. raw:: html
@@ -95,11 +108,11 @@ pressure range).
 Catalysis
 -----------
 
-Turnover frequency and turnover number, and the rate enhancement a
-catalyst produces by lowering the activation energy, via
-chemistrykit.kinetics's Arrhenius equation. Also the Sabatier-principle
-"volcano curve": why a catalyst's binding strength has an optimum rather
-than a monotonic effect on rate.
+One example per milestone in the history of catalysis: Doebereiner's
+platinum and Berzelius's naming of catalysis, Arrhenius and Ostwald's
+kinetic definition of a catalyst, Sabatier's catalytic hydrogenation,
+Constable's compensation effect, Balandin's volcano curve, and Boudart's
+turnover frequency.
 
 
 .. raw:: html
@@ -115,35 +128,187 @@ than a monotonic effect on rate.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="A catalyst lowers a reaction&#x27;s activation energy without changing its thermodynamics, which -- via the Arrhenius equation (chemistrykit.kinetics.systems.arrhenius) -- can speed the reaction up by many orders of magnitude even for a modest reduction in E_a. compare_catalyzed_rate quantifies this, and turnover_frequency/ turnover_number are the standard measures of catalytic activity and durability.">
+    <div class="sphx-glr-thumbcontainer" tooltip="In 1823 Doebereiner found that spongy platinum ignites a jet of hydrogen in air at room temperature and comes out of the reaction unchanged; in 1835 Berzelius named the phenomenon catalysis. This example makes both halves of that observation quantitative with illustrative (not measured) parameters for 2H_2 + O_2 \to 2H_2O. Lowering the activation energy on platinum (~chemistrykit.surface.systems.catalysis.compare_catalyzed_rate) turns a reaction that is frozen at room temperature into a fast one, and the turnover_number keeps growing while the amount of platinum stays exactly the same. The catalyst is used again and again, never used up.">
 
 .. only:: html
 
-  .. image:: /api/gallery/surface/catalysis/images/thumb/sphx_glr_plot_01_catalysis_thumb.png
+  .. image:: /api/gallery/surface/catalysis/images/thumb/sphx_glr_plot_01_doebereiner_berzelius_catalysis_thumb.png
     :alt:
 
-  :doc:`/api/gallery/surface/catalysis/plot_01_catalysis`
+  :doc:`/api/gallery/surface/catalysis/plot_01_doebereiner_berzelius_catalysis`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Catalysis: turnover frequency and Arrhenius rate enhancement</div>
+      <div class="sphx-glr-thumbnail-title">Doebereiner's platinum and Berzelius's catalysis: a catalyst that is not consumed</div>
     </div>
 
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Paul Sabatier&#x27;s qualitative principle -- that the best catalyst binds a reaction intermediate neither too weakly (nothing sticks long enough to react) nor too strongly (the surface clogs with product and never frees up for another turnover) -- is illustrated here with the standard modern textbook toy model (see, e.g., Chorkendorff &amp; Niemantsverdriet, Concepts of Modern Catalysis and Kinetics, 2nd ed., Wiley-VCH, 2007, Ch. 8): a two-step surface mechanism whose overall rate needs both an occupied site (to hold the adsorbed intermediate) and an empty site (for the next step to proceed), so the rate is proportional to \theta(1-\theta), with \theta the Langmuir coverage (~chemistrykit.surface.systems.langmuir.langmuir_coverage) set by the adsorption equilibrium constant K -- a proxy for binding strength. This is not a literal reproduction of Sabatier&#x27;s own (qualitative) or Balandin&#x27;s (multiplet-theory) equations, just the simplest possible model with the same volcano-shaped structure they established conceptually and structurally, respectively.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Arrhenius&#x27;s k = Ae^{-E_a/RT} explains why a catalyst&#x27;s lower activation energy multiplies the rate by e^{\Delta E_a/RT} (~chemistrykit.surface.systems.catalysis.compare_catalyzed_rate). Ostwald&#x27;s definition adds the key condition that a catalyst cannot move the equilibrium. It lowers the barrier for the forward and the reverse reaction by the same amount, so both rate constants grow by the same factor and K = k_f/k_r does not change. Below, the reversible reaction A \rightleftharpoons B reaches equilibrium far sooner with the catalyst, and it reaches exactly the same equilibrium.">
 
 .. only:: html
 
-  .. image:: /api/gallery/surface/catalysis/images/thumb/sphx_glr_plot_02_sabatier_volcano_thumb.png
+  .. image:: /api/gallery/surface/catalysis/images/thumb/sphx_glr_plot_02_arrhenius_ostwald_rate_enhancement_thumb.png
     :alt:
 
-  :doc:`/api/gallery/surface/catalysis/plot_02_sabatier_volcano`
+  :doc:`/api/gallery/surface/catalysis/plot_02_arrhenius_ostwald_rate_enhancement`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">The Sabatier principle and the catalytic volcano curve</div>
+      <div class="sphx-glr-thumbnail-title">Arrhenius and Ostwald: a catalyst speeds a reaction but leaves its equilibrium alone</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Sabatier and Senderens showed from 1897 that finely divided nickel hydrogenates ethylene (C_2H_4 + H_2 \to C_2H_6) at temperatures where the gas-phase reaction does not run at all. This example uses illustrative Arrhenius parameters and compare_catalyzed_rate to compute the conversion reached in a one-second contact time as the temperature rises. Over nickel the reaction lights off hundreds of kelvin earlier. A second panel shows Sabatier&#x27;s rule of thumb from screening many metals: a metal that binds the reactant too weakly holds almost none of it on the surface, and one that binds it too strongly leaves no free sites. Only a moderate binder has both.">
+
+.. only:: html
+
+  .. image:: /api/gallery/surface/catalysis/images/thumb/sphx_glr_plot_03_sabatier_hydrogenation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/surface/catalysis/plot_03_sabatier_hydrogenation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Sabatier and Senderens: catalytic hydrogenation over finely divided nickel</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Constable (1925) found that across a series of similar catalysts, a higher activation energy E_a came with a higher pre-exponential factor A, so \ln A rose linearly with E_a:">
+
+.. only:: html
+
+  .. image:: /api/gallery/surface/catalysis/images/thumb/sphx_glr_plot_04_constable_compensation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/surface/catalysis/plot_04_constable_compensation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Constable's compensation effect across a catalyst series</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Balandin&#x27;s multiplet theory (1929) predicted that when catalytic activity is plotted against binding strength across a series of catalysts, it rises, peaks and falls again, tracing a &quot;volcano&quot;. Bligaard, Norskov and coworkers (2004) later derived that shape from the Bronsted-Evans-Polanyi relation. This example reproduces the volcano with the standard textbook toy model (Chorkendorff &amp; Niemantsverdriet, Concepts of Modern Catalysis and Kinetics, 2nd ed., Wiley-VCH, 2007, Ch. 8). The rate needs an occupied site to hold the intermediate and an empty site for the next step, so rate \propto\theta(1-\theta), with \theta the Langmuir coverage (~chemistrykit.surface.systems.langmuir.langmuir_coverage). The adsorption constant K stands in for binding strength. A hypothetical series of catalysts sits on the two legs of the volcano, and its summit is exactly Langmuir&#x27;s half-saturation point K = 1/P. This is not a literal reproduction of Balandin&#x27;s multiplet equations.">
+
+.. only:: html
+
+  .. image:: /api/gallery/surface/catalysis/images/thumb/sphx_glr_plot_05_balandin_volcano_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/surface/catalysis/plot_05_balandin_volcano`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Balandin's volcano curve: catalytic activity peaks at intermediate binding</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Boudart argued that catalysts should be compared by their rate per active site, the turnover frequency (~chemistrykit.surface.systems.catalysis.turnover_frequency), and not by their rate per gram. Below, two samples of the same supported platinum differ only in dispersion, the fraction of Pt atoms exposed at the surface. The well-dispersed sample looks ten times more active per gram, yet both have the same TOF, because each exposed site works equally hard. A third, genuinely different metal does show a different TOF. The turnover_number gives the complementary lifetime measure of total cycles per site.">
+
+.. only:: html
+
+  .. image:: /api/gallery/surface/catalysis/images/thumb/sphx_glr_plot_06_boudart_turnover_frequency_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/surface/catalysis/plot_06_boudart_turnover_frequency`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Boudart's turnover frequency: comparing catalysts per active site</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Polanyi potential and Dubinin-Radushkevich
+--------------------------------------------
+
+Polanyi's adsorption potential, the temperature-independent
+characteristic curve, and the Dubinin-Radushkevich micropore-filling
+isotherm with its linearization.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Polanyi (1914) described adsorption by the potential A = RT\ln(P_0/P) (~chemistrykit.surface.systems.dubinin.polanyi_potential) and claimed that the filled pore volume depends on A alone, through one characteristic curve that does not change with temperature. Dubinin and Radushkevich (1947) gave that curve for microporous carbons as W = W_0\exp[-(A/E)^2] (~chemistrykit.surface.systems.dubinin.dubinin_radushkevich_loading). Below, isotherms measured at three temperatures look different against P/P_0 but fall onto a single curve when replotted against A. A Dubinin-Radushkevich fit then recovers the pore volume W_0 and the characteristic energy E (~chemistrykit.surface.systems.dubinin.fit_dubinin_radushkevich).">
+
+.. only:: html
+
+  .. image:: /api/gallery/surface/dubinin/images/thumb/sphx_glr_plot_01_polanyi_dubinin_characteristic_curve_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/surface/dubinin/plot_01_polanyi_dubinin_characteristic_curve`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Polanyi's potential theory and the Dubinin-Radushkevich characteristic curve</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Eley-Rideal kinetics
+----------------------
+
+The Eley-Rideal mechanism, in which a gas-phase molecule reacts directly
+with an adsorbed one, and how its rate law differs from the dual-site
+Langmuir-Hinshelwood mechanism.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In the Eley-Rideal mechanism (Eley and Rideal, 1940) only reactant A adsorbs. B reacts with adsorbed A straight from the gas phase, so the rate is k\theta_AP_B (~chemistrykit.surface.systems.eley_rideal.er_rate). A and B never compete for sites, so raising P_A can only help: the rate rises and levels off, and it stays first order in P_B. In the dual-site Langmuir-Hinshelwood mechanism (~chemistrykit.surface.systems.langmuir_hinshelwood.lh_rate_dual_site), too much A pushes B off the surface and the rate turns over. That difference is the standard kinetic test for telling the two mechanisms apart.">
+
+.. only:: html
+
+  .. image:: /api/gallery/surface/eley_rideal/images/thumb/sphx_glr_plot_01_eley_rideal_mechanism_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/surface/eley_rideal/plot_01_eley_rideal_mechanism`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Eley-Rideal mechanism: a gas molecule strikes an adsorbed one</div>
     </div>
 
 
@@ -185,6 +350,48 @@ The empirical Freundlich power-law adsorption isotherm, and fitting
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">The Freundlich adsorption isotherm</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Gibbs adsorption equation
+---------------------------
+
+Measuring how much solute is adsorbed at a liquid surface from surface
+tension alone, via the Gibbs adsorption equation and the Szyszkowski
+equation.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Gibbs showed that the amount of a dilute solute held at a liquid surface, the surface excess \Gamma, follows from how the surface tension changes with concentration: \Gamma = -(1/RT)\,d\gamma/d\ln c. So a surfactant that lowers \gamma must be concentrated at the surface, and no one has to look at the surface itself. This example takes Szyszkowski-type surface-tension data (~chemistrykit.surface.systems.gibbs_adsorption.szyszkowski_surface_tension) for an aqueous fatty-acid-like solute and applies gibbs_surface_excess. It recovers a saturating Langmuir curve for \Gamma and, from the plateau, the area each adsorbed molecule occupies.">
+
+.. only:: html
+
+  .. image:: /api/gallery/surface/gibbs_adsorption/images/thumb/sphx_glr_plot_01_gibbs_adsorption_equation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/surface/gibbs_adsorption/plot_01_gibbs_adsorption_equation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Gibbs adsorption equation: surface excess from surface tension</div>
     </div>
 
 
@@ -278,6 +485,88 @@ the non-monotonic rate-vs-pressure behavior of the dual-site mechanism.
 
     </div>
 
+Temkin isotherm
+-----------------
+
+The Temkin isotherm: a logarithmic isotherm arising from a heat of
+adsorption that falls with coverage, and its fit from data.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Temkin and Pyzhev (1940), modelling ammonia synthesis on iron, dropped Langmuir&#x27;s single site energy. In their picture the heat of adsorption falls linearly as the surface fills, which is the same as a uniform spread of site energies of width fRT. Averaging the Langmuir coverage over that spread (~chemistrykit.surface.systems.temkin.uniform_energy_coverage) gives an isotherm that is logarithmic over a wide middle range of coverage, \theta \approx (1/f)\ln(K_{max}P), the Temkin form. A single Langmuir curve covers only about two decades of pressure, while the Temkin curve rises steadily over many. Loading data in that range is a straight line in \ln P, which fit_temkin fits.">
+
+.. only:: html
+
+  .. image:: /api/gallery/surface/temkin/images/thumb/sphx_glr_plot_01_temkin_isotherm_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/surface/temkin/plot_01_temkin_isotherm`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Temkin isotherm: a heat of adsorption that falls with coverage</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Temperature-programmed desorption
+-----------------------------------
+
+Simulated TPD spectra from the Polanyi-Wigner equation, and Redhead's
+formula for turning a peak temperature into a desorption energy.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In a TPD experiment a covered surface is heated at a steady rate \beta while the desorbing gas is recorded, and each binding state shows up as a peak. simulate_tpd integrates the Polanyi-Wigner rate equation to produce these spectra. Redhead (1962) turned a first-order peak temperature T_p into a desorption energy: E_d = RT_p[\ln(\nu T_p/\beta) - 3.64] (~chemistrykit.surface.systems.tpd.redhead_desorption_energy). Below, the formula is checked against the exact peak condition (~chemistrykit.surface.systems.tpd.first_order_peak_temperature). First-order peaks shift with heating rate but not with coverage, while second-order peaks move to lower temperature as the coverage rises.">
+
+.. only:: html
+
+  .. image:: /api/gallery/surface/tpd/images/thumb/sphx_glr_plot_01_redhead_tpd_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/surface/tpd/plot_01_redhead_tpd`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Redhead's analysis of temperature-programmed desorption</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
 
 .. toctree::
    :hidden:
@@ -286,9 +575,14 @@ the non-monotonic rate-vs-pressure behavior of the dual-site mechanism.
 
    /api/gallery/surface/bet/index.rst
    /api/gallery/surface/catalysis/index.rst
+   /api/gallery/surface/dubinin/index.rst
+   /api/gallery/surface/eley_rideal/index.rst
    /api/gallery/surface/freundlich/index.rst
+   /api/gallery/surface/gibbs_adsorption/index.rst
    /api/gallery/surface/langmuir/index.rst
    /api/gallery/surface/langmuir_hinshelwood/index.rst
+   /api/gallery/surface/temkin/index.rst
+   /api/gallery/surface/tpd/index.rst
 
 
 

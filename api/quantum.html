@@ -461,7 +461,8 @@ levels; the rigid rotor; hydrogen-like radial wavefunctions and orbital
 shapes) and genuinely variational ones (Huckel molecular-orbital theory
 for conjugated pi systems, including Huckel’s 4n+2 aromaticity rule
 checked against the computed spectrum; a minimal Gaussian-basis
-variational treatment of H2+; Rayleigh-Schrodinger perturbation theory for
+variational treatment of H2+; the effective-nuclear-charge variational
+helium atom; Rayleigh-Schrodinger perturbation theory for
 the anharmonic oscillator, checked against exact numerical diagonalization
 in a truncated basis).</p>
 <p>Every variational model here reduces to the same secular equation
@@ -844,6 +845,101 @@ nuclear repulsion) are also attached.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.quantum.HeliumVariationalResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.quantum.</span></span><span class="sig-name descname"><span class="pre">HeliumVariationalResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">effective_charge</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_order_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">independent_electron_energy</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/quantum/systems/helium.html#HeliumVariationalResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.quantum.HeliumVariationalResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Result of <a class="reference internal" href="#chemistrykit.quantum.optimize_helium_like_effective_charge" title="chemistrykit.quantum.optimize_helium_like_effective_charge"><code class="xref py py-func docutils literal notranslate"><span class="pre">optimize_helium_like_effective_charge()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Z</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>effective_charge</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>energy</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>first_order_energy</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>independent_electron_energy</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.quantum.HeliumVariationalResult.Z">
+<span class="sig-name descname"><span class="pre">Z</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.quantum.HeliumVariationalResult.Z" title="Link to this definition">#</a></dt>
+<dd><p>True nuclear charge.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.quantum.HeliumVariationalResult.effective_charge">
+<span class="sig-name descname"><span class="pre">effective_charge</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.quantum.HeliumVariationalResult.effective_charge" title="Link to this definition">#</a></dt>
+<dd><p>Optimal variational charge <span class="math notranslate nohighlight">\(\zeta^*=Z-5/16\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.quantum.HeliumVariationalResult.energy">
+<span class="sig-name descname"><span class="pre">energy</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.quantum.HeliumVariationalResult.energy" title="Link to this definition">#</a></dt>
+<dd><p>Optimized variational energy, in J.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.quantum.HeliumVariationalResult.first_order_energy">
+<span class="sig-name descname"><span class="pre">first_order_energy</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.quantum.HeliumVariationalResult.first_order_energy" title="Link to this definition">#</a></dt>
+<dd><p>First-order perturbation-theory energy (<span class="math notranslate nohighlight">\(\zeta=Z\)</span>), in J.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.quantum.HeliumVariationalResult.independent_electron_energy">
+<span class="sig-name descname"><span class="pre">independent_electron_energy</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.quantum.HeliumVariationalResult.independent_electron_energy" title="Link to this definition">#</a></dt>
+<dd><p>Energy with electron-electron repulsion ignored, <span class="math notranslate nohighlight">\(-Z^2E_h\)</span>, in J.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chemistrykit.quantum.HeliumVariationalResult.ionization_energy">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ionization_energy</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.quantum.HeliumVariationalResult.ionization_energy" title="Link to this definition">#</a></dt>
+<dd><p>Energy to remove one electron, <span class="math notranslate nohighlight">\(-Z^2E_h/2-E^*\)</span>, in J (negative means predicted unbound).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chemistrykit.quantum.HeliumVariationalResult.screening_constant">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">screening_constant</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.quantum.HeliumVariationalResult.screening_constant" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(Z-\zeta^*\)</span> (always <span class="math notranslate nohighlight">\(5/16\)</span>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.quantum.HuckelSystem">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.quantum.</span></span><span class="sig-name descname"><span class="pre">HuckelSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_atoms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bonds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/quantum/systems/huckel.html#HuckelSystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.quantum.HuckelSystem" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#chemistrykit.quantum.VariationalSolver" title="chemistrykit.quantum.core.base_system.VariationalSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">VariationalSolver</span></code></a></p>
@@ -915,6 +1011,42 @@ bonds in <cite>bonds</cite> times 2.</p>
 <dd class="field-odd"><p><em>float</em> – More negative means more delocalization-stabilized.</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.quantum.HuckelSystem.frontier_electron_density">
+<span class="sig-name descname"><span class="pre">frontier_electron_density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_pi_electrons</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbital</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'homo'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/quantum/systems/huckel.html#HuckelSystem.frontier_electron_density"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.quantum.HuckelSystem.frontier_electron_density" title="Link to this definition">#</a></dt>
+<dd><p>Fukui’s frontier electron density on each atom, <span class="math notranslate nohighlight">\(f_r=2c_{r,\mathrm{F}}^2\)</span>.</p>
+<p>Fukui, Yonezawa, and Shingu’s frontier-orbital reactivity index
+(K. Fukui, T. Yonezawa, H. Shingu, <em>J. Chem. Phys.</em> 20, 722
+(1952)): an electrophile attacks the atom with the largest
+HOMO density and a nucleophile the atom with the largest LUMO
+density. The factor 2 makes the densities sum to 2 over all atoms
+(two frontier electrons).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_pi_electrons</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Total pi electrons (must be even, so the HOMO is doubly occupied).</p></li>
+<li><p><strong>orbital</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Which frontier orbital to use.</p></li>
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – A frontier orbital degenerate with its neighbor within <cite>tol</cite>
+is ambiguous and raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (n_atoms,)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Butadiene’s HOMO is concentrated on the terminal carbons, the
+sites where electrophiles add:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">density</span> <span class="o">=</span> <span class="n">HuckelSystem</span><span class="o">.</span><span class="n">linear_polyene</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">frontier_electron_density</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">density</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">array([0.724, 0.276, 0.276, 0.724])</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -2022,6 +2154,31 @@ Phys.</em> 21, 572 (1953); Levine, <em>Quantum Chemistry</em>, 7th ed., eq.
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.quantum.helium_like_variational_energy">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.quantum.</span></span><span class="sig-name descname"><span class="pre">helium_like_variational_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zeta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/quantum/systems/helium.html#helium_like_variational_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.quantum.helium_like_variational_energy" title="Link to this definition">#</a></dt>
+<dd><p>Energy of the screened-1s-product trial wavefunction for a two-electron atom or ion.</p>
+<p><span class="math notranslate nohighlight">\(E(\zeta)=(\zeta^2-2Z\zeta+5\zeta/8)\,E_h\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zeta</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Variational effective nuclear charge (dimensionless, positive).</p></li>
+<li><p><strong>Z</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – True nuclear charge (2 for helium, 1 for H-, 3 for Li+, …).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Energy, in J.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Setting <span class="math notranslate nohighlight">\(\zeta=Z\)</span> recovers first-order perturbation theory,
+<span class="math notranslate nohighlight">\(E=(-Z^2+5Z/8)E_h=-2.75\,E_h\)</span> for helium:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">helium_like_variational_energy</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">Z</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">HARTREE_ENERGY</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">-2.75</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="chemistrykit.quantum.is_aromatic_by_huckel_rule">
 <span class="sig-prename descclassname"><span class="pre">chemistrykit.quantum.</span></span><span class="sig-name descname"><span class="pre">is_aromatic_by_huckel_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_pi_electrons</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/quantum/systems/huckel.html#is_aromatic_by_huckel_rule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.quantum.is_aromatic_by_huckel_rule" title="Link to this definition">#</a></dt>
 <dd><p>Check Huckel’s <span class="math notranslate nohighlight">\(4n+2\)</span> rule against an <em>actual computed</em> Huckel spectrum.</p>
@@ -2105,6 +2262,34 @@ an independent closed-form cross-check of
 <p>Butadiene’s Huckel eigenvalues (<span class="math notranslate nohighlight">\(n=4\)</span>):</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">linear_polyene_eigenvalues</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
 <span class="go">array([-1.618, -0.618,  0.618,  1.618])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.quantum.optimize_helium_like_effective_charge">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.quantum.</span></span><span class="sig-name descname"><span class="pre">optimize_helium_like_effective_charge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/quantum/systems/helium.html#optimize_helium_like_effective_charge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.quantum.optimize_helium_like_effective_charge" title="Link to this definition">#</a></dt>
+<dd><p>Minimize <a class="reference internal" href="#chemistrykit.quantum.helium_like_variational_energy" title="chemistrykit.quantum.helium_like_variational_energy"><code class="xref py py-func docutils literal notranslate"><span class="pre">helium_like_variational_energy()</span></code></a> over the effective charge (closed form).</p>
+<p><span class="math notranslate nohighlight">\(dE/d\zeta=0\)</span> gives <span class="math notranslate nohighlight">\(\zeta^*=Z-5/16\)</span> and
+<span class="math notranslate nohighlight">\(E^*=-(Z-5/16)^2E_h\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Z</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – True nuclear charge; must exceed 5/16.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.quantum.HeliumVariationalResult" title="chemistrykit.quantum.systems.helium.HeliumVariationalResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">HeliumVariationalResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>HeliumVariationalResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Helium: <span class="math notranslate nohighlight">\(\zeta^*=27/16\)</span> and <span class="math notranslate nohighlight">\(E^*=-(27/16)^2E_h\approx-2.8477\,E_h\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">optimize_helium_like_effective_charge</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">effective_charge</span>
+<span class="go">1.6875</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">energy</span> <span class="o">/</span> <span class="n">HARTREE_ENERGY</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">-2.84766</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -2320,9 +2505,20 @@ relative to the naive (ordinary) eigenvalue problem:</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.H2PlusVariational.total_energy"><code class="docutils literal notranslate"><span class="pre">H2PlusVariational.total_energy()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.HeliumVariationalResult"><code class="docutils literal notranslate"><span class="pre">HeliumVariationalResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.HeliumVariationalResult.Z"><code class="docutils literal notranslate"><span class="pre">HeliumVariationalResult.Z</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.HeliumVariationalResult.effective_charge"><code class="docutils literal notranslate"><span class="pre">HeliumVariationalResult.effective_charge</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.HeliumVariationalResult.energy"><code class="docutils literal notranslate"><span class="pre">HeliumVariationalResult.energy</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.HeliumVariationalResult.first_order_energy"><code class="docutils literal notranslate"><span class="pre">HeliumVariationalResult.first_order_energy</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.HeliumVariationalResult.independent_electron_energy"><code class="docutils literal notranslate"><span class="pre">HeliumVariationalResult.independent_electron_energy</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.HeliumVariationalResult.ionization_energy"><code class="docutils literal notranslate"><span class="pre">HeliumVariationalResult.ionization_energy</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.HeliumVariationalResult.screening_constant"><code class="docutils literal notranslate"><span class="pre">HeliumVariationalResult.screening_constant</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.HuckelSystem"><code class="docutils literal notranslate"><span class="pre">HuckelSystem</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.HuckelSystem.cyclic_polyene"><code class="docutils literal notranslate"><span class="pre">HuckelSystem.cyclic_polyene()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.HuckelSystem.delocalization_energy"><code class="docutils literal notranslate"><span class="pre">HuckelSystem.delocalization_energy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.HuckelSystem.frontier_electron_density"><code class="docutils literal notranslate"><span class="pre">HuckelSystem.frontier_electron_density()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.HuckelSystem.hamiltonian"><code class="docutils literal notranslate"><span class="pre">HuckelSystem.hamiltonian()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.HuckelSystem.linear_polyene"><code class="docutils literal notranslate"><span class="pre">HuckelSystem.linear_polyene()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.HuckelSystem.pi_electron_energy"><code class="docutils literal notranslate"><span class="pre">HuckelSystem.pi_electron_energy()</span></code></a></li>
@@ -2387,8 +2583,10 @@ relative to the naive (ordinary) eigenvalue problem:</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.conjugated_dye_absorption_wavelength"><code class="docutils literal notranslate"><span class="pre">conjugated_dye_absorption_wavelength()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.cubic_perturbation_first_order_correction"><code class="docutils literal notranslate"><span class="pre">cubic_perturbation_first_order_correction()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.cyclic_polyene_eigenvalues"><code class="docutils literal notranslate"><span class="pre">cyclic_polyene_eigenvalues()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.helium_like_variational_energy"><code class="docutils literal notranslate"><span class="pre">helium_like_variational_energy()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.is_aromatic_by_huckel_rule"><code class="docutils literal notranslate"><span class="pre">is_aromatic_by_huckel_rule()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.linear_polyene_eigenvalues"><code class="docutils literal notranslate"><span class="pre">linear_polyene_eigenvalues()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.optimize_helium_like_effective_charge"><code class="docutils literal notranslate"><span class="pre">optimize_helium_like_effective_charge()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.position_operator_matrix"><code class="docutils literal notranslate"><span class="pre">position_operator_matrix()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.quartic_perturbation_first_order_correction"><code class="docutils literal notranslate"><span class="pre">quartic_perturbation_first_order_correction()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.solve_secular_equation"><code class="docutils literal notranslate"><span class="pre">solve_secular_equation()</span></code></a></li>

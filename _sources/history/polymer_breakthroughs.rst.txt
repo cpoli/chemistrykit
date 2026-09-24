@@ -57,7 +57,11 @@ molecular-scale repeat spacing -- before the macromolecular picture was
 generally accepted. He was awarded the 1953 Nobel Prize in Chemistry
 "for his discoveries in the field of macromolecular chemistry."
 
-*Connection:* every model in :mod:`chemistrykit.polymer` presupposes
+*Implementation:*
+:func:`~chemistrykit.polymer.staudinger_specific_viscosity` implements
+Staudinger's viscosity rule, :math:`\eta_\text{sp}/c=K_mM`, the
+chain-length dependence behind his viscosity evidence. More broadly,
+every model in :mod:`chemistrykit.polymer` presupposes
 Staudinger's hypothesis as settled fact rather than a live controversy --
 a polymer chain's end-to-end distance
 (``chemistrykit.polymer.systems.chain_statistics``), the closed-form
@@ -72,9 +76,11 @@ aggregate with no molecular identity of its own.
 
 *References:* H. Staudinger, "Ueber Polymerisation," *Ber. Dtsch. Chem.
 Ges.* 53 (1920), 1073-1085; "The Nobel Prize in Chemistry 1953,"
-NobelPrize.org.
+NobelPrize.org; H. Staudinger and W. Heuer, *Ber. Dtsch. Chem.
+Ges.* 63 (1930), 222-234 (the viscosity rule illustrated in the gallery
+example).
 
-.. minigallery:: ../../examples/polymer/chain_statistics/plot_01_chain_scaling.py
+.. minigallery:: ../../examples/polymer/solution_properties/plot_01_staudinger_viscosity_law.py
 
 1929 -- 1936 -- Carothers, Nylon, and the Carothers Equation
 -----------------------------------------------------------------
@@ -171,14 +177,17 @@ gyration, via the shared
 interface that
 :class:`~chemistrykit.polymer.systems.chain_statistics.RealChain` (see
 1953, below) also implements, so the two can be compared side by side at
-the same chain length and segment size.
+the same chain length and segment size;
+:func:`~chemistrykit.polymer.freely_jointed_chain` samples explicit
+freely jointed conformations whose averaged :math:`R^2` converges to
+:math:`nb^2`.
 
 *References:* W. Kuhn, "Ueber die Gestalt fadenfoermiger Molekuele in
 Loesungen," *Kolloid-Zeitschrift* 68 (1934), 2-15 (exact page range as
 commonly cited in secondary literature; not independently re-verified
 against the original volume).
 
-.. minigallery:: ../../examples/polymer/chain_statistics/plot_01_chain_scaling.py
+.. minigallery:: ../../examples/polymer/chain_statistics/plot_03_kuhn_freely_jointed_chain.py
 
 1936 -- Flory and the Molecular-Weight Distribution of Step-Growth Polymers
 -------------------------------------------------------------------------------
@@ -282,6 +291,45 @@ Am. Chem. Soc.* 59 (1937), 241-253.
 
 .. minigallery:: ../../examples/polymer/chain_growth/plot_01_free_radical_kinetics.py
 
+1938 -- 1940 -- Mark, Houwink, and the Intrinsic-Viscosity Law
+------------------------------------------------------------------
+
+Staudinger's viscosity rule, :math:`\eta_\text{sp}/c=K_mM`, proved too
+simple: careful measurements on fractionated samples showed intrinsic
+viscosity growing more slowly than linearly with molar mass. Herman Mark
+(1938) and Roelof Houwink (1940), and independently Ichiro Sakurada in
+Japan, proposed the power law
+
+.. math::
+
+    [\eta] = KM^a
+
+with constants :math:`K` and :math:`a` characteristic of a given polymer,
+solvent, and temperature, and :math:`a` typically between 0.5 and 0.8
+for flexible coils. Calibrated once against absolute molar masses, the
+Mark-Houwink (or Mark-Houwink-Sakurada) equation turned a cheap
+capillary-viscometer measurement into a routine molar-mass determination,
+still used today (including as the "universal calibration" of
+size-exclusion chromatography). Flory and Fox later explained the
+exponent: :math:`[\eta]\propto R^3/M` with :math:`R\propto M^\nu` gives
+:math:`a=3\nu-1`, so :math:`a=1/2` in a theta solvent and :math:`a=4/5`
+with Flory's good-solvent :math:`\nu=3/5`.
+
+*Implementation:*
+:func:`~chemistrykit.polymer.mark_houwink_intrinsic_viscosity` implements
+the power law, :func:`~chemistrykit.polymer.fit_mark_houwink` recovers
+:math:`K` and :math:`a` from a log-log fit of measurements, and
+:func:`~chemistrykit.polymer.mark_houwink_exponent_from_flory` gives the
+Flory-Fox exponent :math:`a=3\nu-1`.
+
+*References:* H. Mark, in *Der feste Koerper*, ed. R. Saenger (Leipzig:
+Hirzel, 1938); R. Houwink, "Zusammenhang zwischen viscosimetrisch und
+osmotisch bestimmten Polymerisationsgraden bei Hochpolymeren," *J.
+Prakt. Chem.* 157 (1940), 15-18; P. J. Flory and T. G Fox, "Treatment of
+Intrinsic Viscosities," *J. Am. Chem. Soc.* 73 (1951), 1904-1908.
+
+.. minigallery:: ../../examples/polymer/solution_properties/plot_02_mark_houwink.py
+
 1941 -- 1942 -- Flory-Huggins Lattice Theory of Polymer Solutions
 -----------------------------------------------------------------------
 
@@ -305,21 +353,78 @@ theta condition -- the solvent quality at which a real chain's excluded
 volume is effectively cancelled out and it behaves, to leading order,
 exactly like Kuhn's ideal random walk above.
 
-*Connection:* ``chemistrykit.polymer.systems.chain_statistics`` uses
-Flory and Huggins's theta/good/poor solvent-quality vocabulary directly
-(``chemistrykit.polymer.systems.chain_statistics.FLORY_EXPONENTS``,
-:func:`~chemistrykit.polymer.flory_exponent`),
-but works at the level of the resulting Flory exponent
-:math:`\nu` for chain-size scaling rather than implementing the
-underlying lattice free energy or the :math:`\chi` parameter itself,
-which this package does not model directly.
+In lattice units the free energy of mixing per site is
+
+.. math::
+
+    \frac{\Delta F_\text{mix}}{k_BT} = \frac{\phi}{N}\ln\phi
+    + (1-\phi)\ln(1-\phi) + \chi\phi(1-\phi)
+
+for polymer volume fraction :math:`\phi` and :math:`N` segments per
+chain, with a critical point at :math:`\phi_c=1/(1+\sqrt N)`,
+:math:`\chi_c=\tfrac12(1+1/\sqrt N)^2`, which tends to the theta value
+:math:`\chi=1/2` for long chains.
+
+*Implementation:*
+:func:`~chemistrykit.polymer.flory_huggins_free_energy`,
+:func:`~chemistrykit.polymer.flory_huggins_spinodal_chi`, and
+:func:`~chemistrykit.polymer.flory_huggins_critical_point` implement the
+lattice free energy, its spinodal, and the critical point;
+``chemistrykit.polymer.systems.chain_statistics`` uses the same
+theta/good/poor solvent-quality vocabulary
+(``FLORY_EXPONENTS``, :func:`~chemistrykit.polymer.flory_exponent`) at the
+level of the resulting chain-size exponent :math:`\nu`.
 
 *References:* P. J. Flory, "Thermodynamics of High Polymer Solutions,"
 *J. Chem. Phys.* 9 (1941), 660; M. L. Huggins, "Solutions of Long Chain
 Compounds," *J. Chem. Phys.* 9 (1941), 440; M. L. Huggins, "Theory of
 Solutions of High Polymers," *J. Am. Chem. Soc.* 64 (1942), 1712-1719.
 
-.. minigallery:: ../../examples/polymer/chain_statistics/plot_01_chain_scaling.py
+.. minigallery:: ../../examples/polymer/solution_properties/plot_03_flory_huggins.py
+
+1941 -- 1943 -- Flory, Stockmayer, and the Theory of Gelation
+-----------------------------------------------------------------
+
+When some monomers carry three or more reactive groups, a step-growth
+polymerization makes branched molecules, and at a well-defined extent of
+reaction the mixture abruptly sets into a gel -- a single molecule
+spanning the whole sample, as in the glyptal (glycerol/phthalic
+anhydride) resins studied by Roy Kienle. Carothers estimated
+the gel point by setting :math:`\bar X_n` to infinity,
+:math:`p_c=2/f_\text{avg}`. Paul Flory (1941) instead treated the
+branched molecules as trees built by independent reaction events and
+found that the network appears when the expected number of further
+branches reached from each branch point exceeds one; for
+self-condensation of an :math:`f`-functional monomer this gives
+
+.. math::
+
+    p_c = \frac{1}{f-1}, \qquad
+    \bar X_w = \frac{1+p}{1-(f-1)p}, \qquad
+    \bar X_n = \frac{1}{1-fp/2}
+
+so the *weight*-average size diverges at :math:`p_c` while the number
+average stays small (:math:`\bar X_n=4` at the gel point for
+:math:`f=3`). Walter Stockmayer (1943) derived the full size
+distribution of the branched molecules. The Flory-Stockmayer theory was
+an early example of what is now called percolation, and its gel points
+bracket experiment from below, with Carothers's from above.
+
+*Implementation:* :func:`~chemistrykit.polymer.flory_stockmayer_gel_point`
+and :func:`~chemistrykit.polymer.carothers_gel_point` give the two gel
+point estimates;
+:func:`~chemistrykit.polymer.branching_number_average_DP` and
+:func:`~chemistrykit.polymer.branching_weight_average_DP` give the
+pre-gel averages, reducing to the Carothers and Flory-Schulz results for
+:math:`f=2`.
+
+*References:* P. J. Flory, "Molecular Size Distribution in Three
+Dimensional Polymers. I. Gelation," *J. Am. Chem. Soc.* 63 (1941),
+3083-3090; W. H. Stockmayer, "Theory of Molecular Size Distribution and
+Gel Formation in Branched-Chain Polymers," *J. Chem. Phys.* 11 (1943),
+45-55.
+
+.. minigallery:: ../../examples/polymer/step_growth/plot_02_flory_stockmayer_gelation.py
 
 1944 -- Debye's Light-Scattering Measurement of Weight-Average Molar Mass
 -------------------------------------------------------------------------------
@@ -350,12 +455,89 @@ implements exactly the moment light scattering measures,
 implements the complementary :math:`M_n` an osmometry- or
 end-group-based measurement would instead give, and
 :func:`~chemistrykit.polymer.polydispersity_index`
-computes their ratio.
+computes their ratio;
+:func:`~chemistrykit.polymer.rayleigh_ratio_dilute_mixture`,
+:func:`~chemistrykit.polymer.debye_Kc_over_R`, and
+:func:`~chemistrykit.polymer.osmotic_pressure_dilute_mixture` model the
+two measurements themselves.
 
 *References:* P. Debye, "Light Scattering in Solutions," *J. Appl.
 Phys.* 15 (1944), 338-342.
 
-.. minigallery:: ../../examples/polymer/molecular_weight_distribution/plot_01_flory_schulz.py
+.. minigallery:: ../../examples/polymer/molecular_weight_distribution/plot_02_debye_light_scattering.py
+
+1944 -- Mayo and Lewis: The Copolymer Composition Equation
+-------------------------------------------------------------
+
+When two monomers polymerize together, the copolymer that forms usually
+has a different composition from the monomer feed, because each growing
+radical prefers one monomer over the other. Frank Mayo and Frederick
+Lewis (and, in the same year, Turner Alfrey and George Goldfinger)
+assumed that a radical's reactivity depends only on its terminal unit,
+so there are four propagation rate constants :math:`k_{11}, k_{12},
+k_{21}, k_{22}`. Applying a steady state to the two radical types gives
+the instantaneous copolymer mole fraction :math:`F_1` in terms of the
+feed mole fraction :math:`f_1`:
+
+.. math::
+
+    F_1 = \frac{r_1f_1^2+f_1f_2}{r_1f_1^2+2f_1f_2+r_2f_2^2}, \qquad
+    r_1=\frac{k_{11}}{k_{12}},\; r_2=\frac{k_{22}}{k_{21}}
+
+Just two reactivity ratios capture whether a pair copolymerizes
+randomly (:math:`r_1r_2=1`), tends to alternate (:math:`r_1,r_2\to0`), or
+drifts in composition, and when both ratios are below one the curve
+crosses :math:`F_1=f_1` at an azeotropic feed
+:math:`f_1^*=(1-r_2)/(2-r_1-r_2)`. Mayo and Lewis tested it on
+styrene/methyl methacrylate, and tabulated reactivity ratios became the
+standard way to design copolymers.
+
+*Implementation:*
+:func:`~chemistrykit.polymer.mayo_lewis_copolymer_composition` implements
+the copolymer equation and
+:func:`~chemistrykit.polymer.azeotropic_feed_composition` the azeotropic
+feed.
+
+*References:* F. R. Mayo and F. M. Lewis, "Copolymerization. I. A Basis
+for Comparing the Behavior of Monomers in Copolymerization; The
+Copolymerization of Styrene and Methyl Methacrylate," *J. Am. Chem. Soc.*
+66 (1944), 1594-1601; T. Alfrey Jr. and G. Goldfinger, "The Mechanism of
+Copolymerization," *J. Chem. Phys.* 12 (1944), 205-209.
+
+.. minigallery:: ../../examples/polymer/chain_growth/plot_03_mayo_lewis_copolymerization.py
+
+1949 -- Kratky and Porod's Worm-Like Chain
+----------------------------------------------
+
+Kuhn's freely jointed chain suits very flexible polymers, but many
+chains -- cellulose derivatives, and later DNA -- bend only gradually.
+Otto Kratky and Guenther Porod, analyzing small-angle X-ray scattering
+from dissolved chain molecules, modeled such a polymer as a continuous
+filament whose direction loses memory of itself exponentially along the
+contour, with a characteristic persistence length :math:`P`. For contour
+length :math:`L` this gives
+
+.. math::
+
+    \langle R^2\rangle = 2PL\left[1-\frac{P}{L}\left(1-e^{-L/P}\right)\right]
+
+which behaves as a rigid rod (:math:`R^2\approx L^2`) when
+:math:`L\ll P` and as an ideal Kuhn coil with Kuhn length :math:`b=2P`
+(:math:`R^2\approx2PL`) when :math:`L\gg P`. The worm-like chain is now
+the standard model for semiflexible biopolymers; the double-stranded DNA
+persistence length of about 50 nm is quoted in these terms.
+
+*Implementation:*
+:func:`~chemistrykit.polymer.worm_like_chain_mean_square_end_to_end`
+implements the Kratky-Porod formula, with its rod and coil limits checked
+in the tests against :math:`L^2` and
+:class:`~chemistrykit.polymer.systems.chain_statistics.IdealChain`'s
+:math:`nb^2` with :math:`b=2P`.
+
+*References:* O. Kratky and G. Porod, "Roentgenuntersuchung geloester
+Fadenmolekuele," *Recl. Trav. Chim. Pays-Bas* 68 (1949), 1106-1122.
+
+.. minigallery:: ../../examples/polymer/chain_statistics/plot_04_kratky_porod_worm_like_chain.py
 
 1953 -- 1963 -- Ziegler, Natta, and Coordination (Insertion) Polymerization
 -----------------------------------------------------------------------------
@@ -392,71 +574,31 @@ stereochemistry. Ziegler and Natta shared the 1963 Nobel Prize in
 Chemistry "for their discoveries in the field of the chemistry and
 technology of high polymers."
 
-*Connection:* :mod:`chemistrykit.polymer` models the free-radical
-chain-growth mechanism only (see 1937, above) -- coordination/insertion
-polymerization's controlling chemistry is the catalyst's own coordination
-geometry rather than a bulk-solution rate law of the kind
-:func:`~chemistrykit.polymer.free_radical_network`
-integrates, so it has no direct counterpart here -- but the *result*
-Ziegler-Natta catalysis is famous for, a narrow, controllable
-molecular-weight distribution and a tunable microstructure, is exactly
-the qualitative contrast the free-radical polydispersity index
-:func:`~chemistrykit.polymer.flory_schulz_pdi`
-(see 1936, above) and its ceiling of 2 makes vivid: a coordination
-catalyst's single, well-defined active site is what later single-site
-catalysis (metallocenes, and Ziegler-Natta's own more modern descendants)
-exploits to push polydispersity well below what any random-termination
-free-radical mechanism can reach.
+*Implementation:* the catalyst chemistry itself is outside the scope of
+:mod:`chemistrykit.polymer`, but its most visible outcome -- the
+stereoregularity of the chain -- is modeled statistically:
+:func:`~chemistrykit.polymer.bernoullian_triad_fractions` gives the
+meso/racemo triad fractions :math:`[mm]=P_m^2`,
+:math:`[mr]=2P_m(1-P_m)`, :math:`[rr]=(1-P_m)^2` for a meso-placement
+probability :math:`P_m` (close to 1 for an isotactic Ziegler-Natta
+polypropylene, near 1/2 for an atactic free-radical one),
+:func:`~chemistrykit.polymer.mean_isotactic_run_length` the average
+isotactic run :math:`1/(1-P_m)`, and
+:func:`~chemistrykit.polymer.sample_dyad_sequence` explicit sequences.
+(Bernoullian tacticity statistics were formalized for NMR analysis by
+Bovey and Tiers in 1960.)
 
 *References:* K. Ziegler, E. Holzkamp, H. Breil, and H. Martin, "Das
 Mulheimer Normaldruck-Polyaethylen-Verfahren," *Angew. Chem.* 67 (1955),
-541-547; G. Natta, "Una nuova classe di polimeri di alfa-olefine aventi
-regolarita di struttura," *Chim. Ind.* (Milan) 37 (1955), 927-936; "The
-Nobel Prize in Chemistry 1963," NobelPrize.org.
+541-547; G. Natta, P. Pino, P. Corradini, F. Danusso, E. Mantica, G. Mazzanti,
+and G. Moraglio, "Crystalline High Polymers of alpha-Olefins," *J. Am.
+Chem. Soc.* 77 (1955), 1708-1710; F. A. Bovey and G. V. D. Tiers,
+"Polymer NSR Spectroscopy. II. The High Resolution Spectra of Methyl
+Methacrylate Polymers Prepared with Free Radical and Anionic
+Initiators," *J. Polym. Sci.* 44 (1960), 173-182; "The Nobel Prize in
+Chemistry 1963," NobelPrize.org.
 
-.. minigallery::
-   ../../examples/polymer/chain_growth/plot_01_free_radical_kinetics.py
-   ../../examples/polymer/molecular_weight_distribution/plot_01_flory_schulz.py
-
-1954 -- Bevington, Melville, and Taylor: Combination vs. Disproportionation
---------------------------------------------------------------------------------
-
-Free-radical chain termination can happen in either of two distinct
-ways: two growing radical chains can fuse directly into a single dead
-chain ("combination"), or one radical can abstract a hydrogen atom from
-the other, leaving two separate dead chains, one with a saturated and
-one with an unsaturated chain end ("disproportionation") -- and which
-mechanism dominates depends on the specific monomer and temperature.
-John Bevington, Harry Melville, and Reginald Taylor worked out how to
-distinguish the two experimentally, principally through end-group
-analysis (using radioactively labeled initiator to count how many
-initiator fragments end up per dead chain -- one per chain for
-disproportionation, but only one for every *two* chains for
-combination) and through the resulting degree of polymerization's
-relationship to the kinetic chain length :math:`\nu` Flory had defined
-above: :math:`\bar X_n=2\nu` if termination is by combination (each dead
-chain carries two radicals' worth of added monomer), but
-:math:`\bar X_n=\nu` if by disproportionation (each dead chain carries
-only one radical's worth).
-
-*Implementation:*
-:func:`~chemistrykit.polymer.free_radical_network`'s
-`mode` parameter selects between exactly these two termination
-stoichiometries -- one dead chain per termination event for
-``mode="combination"``, two for ``mode="disproportionation"`` -- while
-leaving the initiator, monomer, and radical dynamics themselves
-identical between the two (only the bookkeeping of how many dead chains
-result from a given number of termination events differs), directly
-reproducing the factor-of-two relationship between :math:`\bar X_n` and
-:math:`\nu` Bevington, Melville, and Taylor's analysis predicts.
-
-*References:* J. C. Bevington, H. W. Melville, and R. P. Taylor, "The
-Termination Reaction in Radical Polymerizations," *J. Polym. Sci.* 12
-(1954), 449-459, and its sequel in the same volume (exact page ranges
-as commonly cited in secondary literature; not independently
-re-verified against the original volume).
-
-.. minigallery:: ../../examples/polymer/chain_growth/plot_02_combination_vs_disproportionation.py
+.. minigallery:: ../../examples/polymer/stereochemistry/plot_01_ziegler_natta_tacticity.py
 
 1953 -- 1974 -- Flory's Statistical Thermodynamics of Chain Conformations
 -------------------------------------------------------------------------------
@@ -505,6 +647,88 @@ NY: Cornell University Press, 1953); "The Nobel Prize in Chemistry
 1974," NobelPrize.org.
 
 .. minigallery:: ../../examples/polymer/chain_statistics/plot_01_chain_scaling.py
+
+1954 -- Bevington, Melville, and Taylor: Combination vs. Disproportionation
+--------------------------------------------------------------------------------
+
+Free-radical chain termination can happen in either of two distinct
+ways: two growing radical chains can fuse directly into a single dead
+chain ("combination"), or one radical can abstract a hydrogen atom from
+the other, leaving two separate dead chains, one with a saturated and
+one with an unsaturated chain end ("disproportionation") -- and which
+mechanism dominates depends on the specific monomer and temperature.
+John Bevington, Harry Melville, and Reginald Taylor worked out how to
+distinguish the two experimentally, principally through end-group
+analysis (using radioactively labeled initiator to count how many
+initiator fragments end up per dead chain -- one per chain for
+disproportionation, but only one for every *two* chains for
+combination) and through the resulting degree of polymerization's
+relationship to the kinetic chain length :math:`\nu` Flory had defined
+above: :math:`\bar X_n=2\nu` if termination is by combination (each dead
+chain carries two radicals' worth of added monomer), but
+:math:`\bar X_n=\nu` if by disproportionation (each dead chain carries
+only one radical's worth).
+
+*Implementation:*
+:func:`~chemistrykit.polymer.free_radical_network`'s
+`mode` parameter selects between exactly these two termination
+stoichiometries -- one dead chain per termination event for
+``mode="combination"``, two for ``mode="disproportionation"`` -- while
+leaving the initiator, monomer, and radical dynamics themselves
+identical between the two (only the bookkeeping of how many dead chains
+result from a given number of termination events differs), directly
+reproducing the factor-of-two relationship between :math:`\bar X_n` and
+:math:`\nu` Bevington, Melville, and Taylor's analysis predicts.
+
+*References:* J. C. Bevington, H. W. Melville, and R. P. Taylor, "The
+Termination Reaction in Radical Polymerizations," *J. Polym. Sci.* 12
+(1954), 449-459, and its sequel in the same volume (exact page ranges
+as commonly cited in secondary literature; not independently
+re-verified against the original volume).
+
+.. minigallery:: ../../examples/polymer/chain_growth/plot_02_combination_vs_disproportionation.py
+
+1956 -- Szwarc and Living Polymerization
+--------------------------------------------
+
+Michael Szwarc found that styrene polymerized in tetrahydrofuran by
+sodium naphthalenide, an electron-transfer initiator, has no termination
+step: when the monomer runs out, the chain ends stay active -- the
+solution keeps its red color -- and adding more monomer, even a different
+one, restarts growth. He called these "living" polymers. With all chains
+started at once and growing until the monomer is used up, each chain
+receives monomers as independent random events, so the chain lengths
+follow a Poisson distribution, as Flory had worked out in 1940 for
+ethylene oxide polymerization. With :math:`\nu` monomers per initiator,
+
+.. math::
+
+    N_x = \frac{e^{-\nu}\nu^{x-1}}{(x-1)!}, \qquad
+    \frac{\bar X_w}{\bar X_n} = 1+\frac{\nu}{(1+\nu)^2}
+
+so the polydispersity index approaches 1 for long chains -- far narrower
+than the value of about 2 of step-growth or conventional free-radical
+polymerization. Living anionic polymerization made well-defined block
+copolymers and near-monodisperse molar-mass standards possible, and it
+inspired the later "controlled" radical methods.
+
+*Implementation:*
+:func:`~chemistrykit.polymer.poisson_number_fraction`,
+:func:`~chemistrykit.polymer.poisson_number_average_DP`,
+:func:`~chemistrykit.polymer.poisson_weight_average_DP`, and
+:func:`~chemistrykit.polymer.poisson_pdi` implement the distribution and
+its moments, and
+:func:`~chemistrykit.polymer.simulate_living_polymerization` grows living
+chains by random monomer addition to check them.
+
+*References:* M. Szwarc, "'Living' Polymers," *Nature* 178 (1956),
+1168-1169; M. Szwarc, M. Levy, and R. Milkovich, "Polymerization
+Initiated by Electron Transfer to Monomer. A New Method of Formation of
+Block Polymers," *J. Am. Chem. Soc.* 78 (1956), 2656-2657; P. J. Flory,
+"Molecular Size Distribution in Ethylene Oxide Polymers," *J. Am. Chem.
+Soc.* 62 (1940), 1561-1565.
+
+.. minigallery:: ../../examples/polymer/chain_growth/plot_04_szwarc_living_polymerization.py
 
 1979 -- de Gennes and the Renormalization-Group Refinement of the Flory Exponent
 --------------------------------------------------------------------------------------

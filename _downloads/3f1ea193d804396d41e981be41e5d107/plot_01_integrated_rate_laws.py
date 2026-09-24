@@ -1,8 +1,9 @@
 r"""
-Zero-, first-, and second-order integrated rate laws
-======================================================
+van't Hoff's reaction orders: zero-, first-, and second-order rate laws
+==========================================================================
 
-The three textbook elementary rate laws -- :class:`~chemistrykit.kinetics.systems.rate_laws.ZeroOrder`,
+van't Hoff (1884) classified reactions by the *order* :math:`n` of their
+rate law :math:`-d[A]/dt = k[A]^n`. The three textbook cases -- :class:`~chemistrykit.kinetics.systems.rate_laws.ZeroOrder`,
 :class:`~chemistrykit.kinetics.systems.rate_laws.FirstOrder`, and
 :class:`~chemistrykit.kinetics.systems.rate_laws.SecondOrder` -- all
 started from the same initial concentration and with rate constants
@@ -49,5 +50,28 @@ fig.tight_layout()
 
 for law, label in [(zero, "zero"), (first, "first"), (second, "second")]:
     print(f"{label}-order: [A](t_1/2) = {law.concentration(law.half_life()):.6f} (expected {C0 / 2.0})")
+
+# %%
+# van't Hoff's differential method: measure the *initial* rate at several
+# starting concentrations. Since :math:`\log v_0 = \log k + n\log[A]_0`,
+# the slope of a log-log plot of initial rate against initial
+# concentration reads off the order :math:`n` directly.
+
+C0_values = np.array([0.25, 0.5, 1.0, 2.0, 4.0])
+fig2, ax2 = plt.subplots(figsize=(7, 5))
+for cls, k, label, color in [
+    (ZeroOrder, 0.1, "zero order", "steelblue"),
+    (FirstOrder, 0.1, "first order", "darkorange"),
+    (SecondOrder, 0.1, "second order", "seagreen"),
+]:
+    v0 = np.array([cls(k=k, C0=c).rate(0.0) for c in C0_values])
+    n_fit = np.polyfit(np.log(C0_values), np.log(v0), 1)[0]
+    ax2.loglog(C0_values, v0, "o-", color=color, label=f"{label}: fitted slope n = {n_fit:.2f}")
+    print(f"{label}: order from log-log slope = {n_fit:.3f}")
+ax2.set_xlabel("[A]_0")
+ax2.set_ylabel("initial rate v_0")
+ax2.set_title("Reading off the reaction order from initial rates")
+ax2.legend()
+fig2.tight_layout()
 
 plt.show()

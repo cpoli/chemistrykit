@@ -454,9 +454,11 @@
 <p><a class="reference internal" href="../_generated/subpackages/solutions.html"><span class="doc">chemistrykit.solutions hub</span></a> · <a class="reference internal" href="../history/solutions_breakthroughs.html"><span class="doc">History</span></a> · <a class="reference internal" href="gallery/solutions/index.html"><span class="doc">Examples</span></a> · <a class="reference internal" href="#"><span class="doc">API reference</span></a></p>
 </div>
 <p id="module-chemistrykit.solutions">chemistrykit.solutions: solution chemistry.</p>
-<p>pH/pOH and weak acid/base equilibria with Henderson-Hasselbalch buffers;
-a full titration-curve solver (strong/weak acid-base); solubility
-equilibria (Ksp, common-ion effect); and Debye-Huckel limiting/extended
+<p>pH/pOH and weak acid/base equilibria with Henderson-Hasselbalch buffers,
+Van Slyke buffer capacity, and Bjerrum polyprotic speciation; a full
+titration-curve solver (strong/weak acid-base) with Gran-plot
+equivalence-point estimation; solubility equilibria (Ksp, common-ion
+effect); and Debye-Huckel limiting/extended and Davies
 activity-coefficient laws. Colligative properties (freezing-point
 depression, boiling-point elevation, osmotic pressure) live in
 <a class="reference internal" href="thermo.html#module-chemistrykit.thermo" title="chemistrykit.thermo"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.thermo</span></code></a> instead – see
@@ -537,6 +539,79 @@ distributing the fixed total concentration
 <dt class="sig sig-object py" id="chemistrykit.solutions.Buffer.pKa">
 <span class="sig-name descname"><span class="pre">pKa</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.solutions.Buffer.pKa" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.solutions.GranPlotResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.solutions.</span></span><span class="sig-name descname"><span class="pre">GranPlotResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intercept</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equivalence_volume</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/solutions/core/base_system.html#GranPlotResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.solutions.GranPlotResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Container for the output of <code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.solutions.systems.titration.gran_plot()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Vb</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>G</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>slope</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>intercept</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>equivalence_volume</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.solutions.GranPlotResult.G">
+<span class="sig-name descname"><span class="pre">G</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.solutions.GranPlotResult.G" title="Link to this definition">#</a></dt>
+<dd><p>Gran function <span class="math notranslate nohighlight">\((V_a+V_b)\,10^{-\mathrm{pH}}\)</span> at each volume, in mol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.solutions.GranPlotResult.Vb">
+<span class="sig-name descname"><span class="pre">Vb</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.solutions.GranPlotResult.Vb" title="Link to this definition">#</a></dt>
+<dd><p>Titrant volumes used in the fit, in L.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.solutions.GranPlotResult.equivalence_volume">
+<span class="sig-name descname"><span class="pre">equivalence_volume</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.solutions.GranPlotResult.equivalence_volume" title="Link to this definition">#</a></dt>
+<dd><p>Extrapolated x-intercept <code class="docutils literal notranslate"><span class="pre">-intercept/slope</span></code> – the Gran estimate of the equivalence volume, in L.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.solutions.GranPlotResult.intercept">
+<span class="sig-name descname"><span class="pre">intercept</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.solutions.GranPlotResult.intercept" title="Link to this definition">#</a></dt>
+<dd><p>Least-squares intercept of <cite>G</cite> at <code class="docutils literal notranslate"><span class="pre">Vb</span> <span class="pre">=</span> <span class="pre">0</span></code>, in mol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.solutions.GranPlotResult.slope">
+<span class="sig-name descname"><span class="pre">slope</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.solutions.GranPlotResult.slope" title="Link to this definition">#</a></dt>
+<dd><p>Least-squares slope of <cite>G</cite> against <cite>Vb</cite>, in mol/L.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -1100,6 +1175,50 @@ a base, symmetrically, <span class="math notranslate nohighlight">\([OH^-] - [H^
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.solutions.activity_coefficient_davies">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.solutions.</span></span><span class="sig-name descname"><span class="pre">activity_coefficient_davies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">I</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.509</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/solutions/systems/activity.html#activity_coefficient_davies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.solutions.activity_coefficient_davies" title="Link to this definition">#</a></dt>
+<dd><p>Davies equation: <span class="math notranslate nohighlight">\(\log_{10}\gamma = -A z^2\left(\frac{\sqrt{I}}{1+\sqrt{I}} - bI\right)\)</span>.</p>
+<p>An empirical extension of the Guntelberg form
+(<a class="reference internal" href="#chemistrykit.solutions.activity_coefficient_debye_huckel_extended" title="chemistrykit.solutions.activity_coefficient_debye_huckel_extended"><code class="xref py py-func docutils literal notranslate"><span class="pre">activity_coefficient_debye_huckel_extended()</span></code></a> with <code class="docutils literal notranslate"><span class="pre">Ba</span> <span class="pre">=</span> <span class="pre">1</span></code>)
+by a term linear in ionic strength, which makes <span class="math notranslate nohighlight">\(\log\gamma\)</span>
+pass through a minimum and turn back up at high ionic strength, as
+measured activity coefficients do; useful up to roughly
+<span class="math notranslate nohighlight">\(I \approx 0.5\)</span> mol/L with no ion-specific parameter at all.
+Davies originally used <span class="math notranslate nohighlight">\(b = 0.2\)</span> (C. W. Davies, <em>J. Chem. Soc.</em>
+1938, 2093); the now-standard <span class="math notranslate nohighlight">\(b = 0.3\)</span> is from his later
+monograph (C. W. Davies, <em>Ion Association</em>, Butterworths, 1962).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>z</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Charge number of the ion.</p></li>
+<li><p><strong>I</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Ionic strength, in mol/L.</p></li>
+<li><p><strong>A</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Debye-Huckel constant for the solvent/temperature.</p></li>
+<li><p><strong>b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Coefficient of the linear correction term.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em> – Activity coefficient <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">0</span></code> it is exactly the Guntelberg (<code class="docutils literal notranslate"><span class="pre">Ba</span> <span class="pre">=</span> <span class="pre">1</span></code>) extended law:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g_davies</span> <span class="o">=</span> <span class="n">activity_coefficient_davies</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g_ext</span> <span class="o">=</span> <span class="n">activity_coefficient_debye_huckel_extended</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">Ba</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">g_davies</span> <span class="o">-</span> <span class="n">g_ext</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<p>The linear term raises <span class="math notranslate nohighlight">\(\gamma\)</span> again at high ionic strength:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activity_coefficient_davies</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">activity_coefficient_davies</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="chemistrykit.solutions.activity_coefficient_debye_huckel_extended">
 <span class="sig-prename descclassname"><span class="pre">chemistrykit.solutions.</span></span><span class="sig-name descname"><span class="pre">activity_coefficient_debye_huckel_extended</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">I</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.509</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ba</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/solutions/systems/activity.html#activity_coefficient_debye_huckel_extended"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.solutions.activity_coefficient_debye_huckel_extended" title="Link to this definition">#</a></dt>
 <dd><p>Extended Debye-Huckel law: <span class="math notranslate nohighlight">\(\log_{10}\gamma = -A z^2 \sqrt{I}/(1+Ba\sqrt{I})\)</span>.</p>
@@ -1184,6 +1303,89 @@ ionic strength:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gamma_2</span> <span class="o">=</span> <span class="n">activity_coefficient_debye_huckel_limiting</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gamma_2</span> <span class="o">&lt;</span> <span class="n">gamma_1</span> <span class="o">&lt;</span> <span class="mf">1.0</span>
 <span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.solutions.buffer_capacity">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.solutions.</span></span><span class="sig-name descname"><span class="pre">buffer_capacity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ka</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Kw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-14</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/solutions/systems/acid_base.html#buffer_capacity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.solutions.buffer_capacity" title="Link to this definition">#</a></dt>
+<dd><p>Van Slyke’s buffer value <span class="math notranslate nohighlight">\(\beta = dC_b/d\mathrm{pH}\)</span> of a weak monoprotic acid.</p>
+<p>The moles of strong base per litre needed to raise the pH of a
+solution containing a weak acid/conjugate base pair (total
+concentration <span class="math notranslate nohighlight">\(C\)</span>) by one unit, from differentiating the charge
+balance <span class="math notranslate nohighlight">\(C_b = CK_a/(K_a+h) + K_w/h - h\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\beta = \ln 10\left(h + \frac{K_w}{h} + \frac{CK_ah}{(K_a+h)^2}\right)\]</div>
+<p>The buffer term peaks at <span class="math notranslate nohighlight">\(pH = pK_a\)</span> with value
+<span class="math notranslate nohighlight">\(\ln 10\,C/4\)</span> (D. D. Van Slyke, <em>J. Biol. Chem.</em> 52, 525
+(1922); Harris, <em>Quantitative Chemical Analysis</em>, 9th ed., Ch. 9-5).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pH</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – pH value(s).</p></li>
+<li><p><strong>C</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Total concentration of the buffer pair, <span class="math notranslate nohighlight">\([HA]+[A^-]\)</span>, in mol/L.</p></li>
+<li><p><strong>Ka</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Acid dissociation constant.</p></li>
+<li><p><strong>Kw</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Water autoionization constant.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em> – Buffer capacity, in mol/L per pH unit.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A 0.10 M acetate buffer at <span class="math notranslate nohighlight">\(pH = pK_a\)</span> (water terms negligible):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">buffer_capacity</span><span class="p">(</span><span class="mf">4.76</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span> <span class="n">Ka</span><span class="o">=</span><span class="mi">10</span><span class="o">**-</span><span class="mf">4.76</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.0576</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.10</span> <span class="o">/</span> <span class="mi">4</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.0576</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.solutions.gran_plot">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.solutions.</span></span><span class="sig-name descname"><span class="pre">gran_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Va</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/solutions/systems/titration.html#gran_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.solutions.gran_plot" title="Link to this definition">#</a></dt>
+<dd><p>Gran’s linearization of a strong-acid/strong-base titration curve.</p>
+<p>Before the equivalence point of a strong acid (initial volume
+<span class="math notranslate nohighlight">\(V_a\)</span>) titrated with a strong base, the charge balance gives,
+once <span class="math notranslate nohighlight">\([OH^-]\)</span> is negligible,</p>
+<div class="math notranslate nohighlight">
+\[(V_a + V_b)\,10^{-\mathrm{pH}} = C_aV_a - C_bV_b,\]</div>
+<p>a straight line in <span class="math notranslate nohighlight">\(V_b\)</span> whose x-intercept is exactly the
+equivalence volume <span class="math notranslate nohighlight">\(V_e = C_aV_a/C_b\)</span> – so <span class="math notranslate nohighlight">\(V_e\)</span> can be
+found by extrapolating pre-equivalence data, without having to
+resolve the steep inflection itself (G. Gran, <em>Analyst</em> 77, 661
+(1952); Harris, <em>Quantitative Chemical Analysis</em>, 9th ed., Ch. 11-5).
+Neither <span class="math notranslate nohighlight">\(C_a\)</span> nor <span class="math notranslate nohighlight">\(C_b\)</span> needs to be known.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Vb</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Titrant volumes, in L, all <em>before</em> the equivalence point
+(conventionally the last 10-90% of the way to it).</p></li>
+<li><p><strong>pH</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Measured pH at each volume in <cite>Vb</cite>.</p></li>
+<li><p><strong>Va</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial volume of the acid being titrated, in L.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.solutions.GranPlotResult" title="chemistrykit.solutions.core.base_system.GranPlotResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">GranPlotResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>GranPlotResult</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Recovering the 50.00 mL equivalence volume of 50.00 mL of 0.100 M HCl
+titrated with 0.100 M NaOH from pre-equivalence points only:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">titration</span> <span class="o">=</span> <span class="n">StrongAcidStrongBaseTitration</span><span class="p">(</span><span class="n">Ca</span><span class="o">=</span><span class="mf">0.100</span><span class="p">,</span> <span class="n">Va</span><span class="o">=</span><span class="mf">0.050</span><span class="p">,</span> <span class="n">Cb</span><span class="o">=</span><span class="mf">0.100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Vb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.030</span><span class="p">,</span> <span class="mf">0.045</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">gran_plot</span><span class="p">(</span><span class="n">Vb</span><span class="p">,</span> <span class="n">titration</span><span class="o">.</span><span class="n">pH_at</span><span class="p">(</span><span class="n">Vb</span><span class="p">),</span> <span class="n">Va</span><span class="o">=</span><span class="mf">0.050</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">equivalence_volume</span> <span class="o">*</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">50.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="o">-</span><span class="n">result</span><span class="o">.</span><span class="n">slope</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>  <span class="c1"># slope is -Cb</span>
+<span class="go">0.1</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1363,7 +1565,7 @@ special case).</p>
 <p>AgCl (Ksp = 1.8e-10) is much less soluble in 0.10 M NaCl (common Cl-
 ion) than in pure water:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s_pure</span> <span class="o">=</span> <span class="n">molar_solubility_from_ksp</span><span class="p">(</span><span class="mf">1.8e-10</span><span class="p">,</span> <span class="n">cation_coeff</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">anion_coeff</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s_common</span> <span class="o">=</span> <span class="n">molar_solubility_with_common_ion</span><span class="p">(</span><span class="mf">1.8e-10</span><span class="p">,</span> <span class="n">cation_coeff</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">anion_coeff</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">common_ion_conc</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span> <span class="n">common_ion</span><span class="o">=</span><span class="s2">&quot;anion&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s_common</span> <span class="o">=</span> <span class="n">molar_solubility_with_common_ion</span><span class="p">(</span><span class="mf">1.8e-10</span><span class="p">,</span> <span class="n">cation_coeff</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">anion_coeff</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">common_ion_conc</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span> <span class="n">common_ion</span><span class="o">=</span><span class="s2">"anion"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">s_common</span> <span class="o">&lt;</span> <span class="n">s_pure</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">s_common</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>  <span class="c1"># dominated by the 0.10 M Cl- already present: s ~= Ksp/0.10</span>
@@ -1407,6 +1609,45 @@ ion) than in pure water:</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">poh_from_oh</span><span class="p">(</span><span class="mf">1.0e-7</span><span class="p">)),</span> <span class="mi">6</span><span class="p">)</span>
 <span class="go">7.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.solutions.polyprotic_fractions">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.solutions.</span></span><span class="sig-name descname"><span class="pre">polyprotic_fractions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ka</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/solutions/systems/acid_base.html#polyprotic_fractions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.solutions.polyprotic_fractions" title="Link to this definition">#</a></dt>
+<dd><p>Bjerrum’s species-distribution fractions of a polyprotic acid <span class="math notranslate nohighlight">\(H_nA\)</span>.</p>
+<p>With stepwise dissociation constants <span class="math notranslate nohighlight">\(K_1, \dots, K_n\)</span> and
+<span class="math notranslate nohighlight">\(h = [H^+]\)</span>, the fraction of the total acid present as
+<span class="math notranslate nohighlight">\(H_{n-j}A^{j-}\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\alpha_j = \frac{h^{n-j}\prod_{i=1}^{j} K_i}{\sum_{k=0}^{n} h^{n-k}\prod_{i=1}^{k} K_i},\]</div>
+<p>which depends only on pH, not on the total concentration (N.
+Bjerrum, <em>Die Theorie der alkalimetrischen und azidimetrischen
+Titrierungen</em>, Stuttgart: Enke, 1914; Harris, <em>Quantitative Chemical
+Analysis</em>, 9th ed., Ch. 11-7).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pH</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – pH value(s).</p></li>
+<li><p><strong>Ka</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Stepwise dissociation constants <span class="math notranslate nohighlight">\(K_1, \dots, K_n\)</span>, in order.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray</em> – Shape <code class="docutils literal notranslate"><span class="pre">(n</span> <span class="pre">+</span> <span class="pre">1,</span> <span class="pre">len(pH))</span></code>: row <code class="docutils literal notranslate"><span class="pre">j</span></code> is <span class="math notranslate nohighlight">\(\alpha_j\)</span>, the
+fraction that has lost <code class="docutils literal notranslate"><span class="pre">j</span></code> protons. The rows sum to 1.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Carbonic acid (<span class="math notranslate nohighlight">\(pK_1 = 6.35\)</span>, <span class="math notranslate nohighlight">\(pK_2 = 10.33\)</span>): at
+<span class="math notranslate nohighlight">\(pH = pK_1\)</span> the fully protonated form and bicarbonate are
+(almost exactly) equally abundant:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">=</span> <span class="n">polyprotic_fractions</span><span class="p">(</span><span class="mf">6.35</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="o">**-</span><span class="mf">6.35</span><span class="p">,</span> <span class="mi">10</span><span class="o">**-</span><span class="mf">10.33</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">alpha</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="go">[0.5, 0.5, 0.0]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1468,6 +1709,14 @@ ion) than in pure water:</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.Buffer.pKa"><code class="docutils literal notranslate"><span class="pre">Buffer.pKa</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.GranPlotResult"><code class="docutils literal notranslate"><span class="pre">GranPlotResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.GranPlotResult.G"><code class="docutils literal notranslate"><span class="pre">GranPlotResult.G</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.GranPlotResult.Vb"><code class="docutils literal notranslate"><span class="pre">GranPlotResult.Vb</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.GranPlotResult.equivalence_volume"><code class="docutils literal notranslate"><span class="pre">GranPlotResult.equivalence_volume</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.GranPlotResult.intercept"><code class="docutils literal notranslate"><span class="pre">GranPlotResult.intercept</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.GranPlotResult.slope"><code class="docutils literal notranslate"><span class="pre">GranPlotResult.slope</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.StrongAcidStrongBaseTitration"><code class="docutils literal notranslate"><span class="pre">StrongAcidStrongBaseTitration</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.StrongAcidStrongBaseTitration.equivalence_volume"><code class="docutils literal notranslate"><span class="pre">StrongAcidStrongBaseTitration.equivalence_volume()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.StrongAcidStrongBaseTitration.pH_at"><code class="docutils literal notranslate"><span class="pre">StrongAcidStrongBaseTitration.pH_at()</span></code></a></li>
@@ -1522,8 +1771,11 @@ ion) than in pure water:</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.WeakElectrolyte.total_concentration"><code class="docutils literal notranslate"><span class="pre">WeakElectrolyte.total_concentration</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.activity_coefficient_davies"><code class="docutils literal notranslate"><span class="pre">activity_coefficient_davies()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.activity_coefficient_debye_huckel_extended"><code class="docutils literal notranslate"><span class="pre">activity_coefficient_debye_huckel_extended()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.activity_coefficient_debye_huckel_limiting"><code class="docutils literal notranslate"><span class="pre">activity_coefficient_debye_huckel_limiting()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.buffer_capacity"><code class="docutils literal notranslate"><span class="pre">buffer_capacity()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.gran_plot"><code class="docutils literal notranslate"><span class="pre">gran_plot()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.h_from_ph"><code class="docutils literal notranslate"><span class="pre">h_from_ph()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.henderson_hasselbalch_ph"><code class="docutils literal notranslate"><span class="pre">henderson_hasselbalch_ph()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.ionic_strength"><code class="docutils literal notranslate"><span class="pre">ionic_strength()</span></code></a></li>
@@ -1533,6 +1785,7 @@ ion) than in pure water:</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.oh_from_poh"><code class="docutils literal notranslate"><span class="pre">oh_from_poh()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.ph_from_h"><code class="docutils literal notranslate"><span class="pre">ph_from_h()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.poh_from_oh"><code class="docutils literal notranslate"><span class="pre">poh_from_oh()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.polyprotic_fractions"><code class="docutils literal notranslate"><span class="pre">polyprotic_fractions()</span></code></a></li>
 </ul>
   </nav></div>
 

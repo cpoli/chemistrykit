@@ -18,16 +18,21 @@
 .. _sphx_glr_api_gallery_structure_point_group_plot_01_point_groups.py:
 
 
-Point-group determination for water, ammonia, methane, and carbon dioxide
-==========================================================================
+Schoenflies point-group symbols for water, ammonia, methane, and carbon dioxide
+================================================================================
 
-Builds each molecule's actual 3D geometry, then runs
+Arthur Schoenflies named every point group after the symmetry elements that
+generate it: a principal axis :math:`C_n`, extra :math:`C_2` axes
+(:math:`D_n`), mirror planes :math:`\sigma_v` or :math:`\sigma_h`, an
+inversion centre :math:`i`, and the special cubic groups :math:`T_d` and
+:math:`O_h`. This example builds four molecules from their real 3D
+geometry, lets
 :func:`~chemistrykit.structure.systems.point_group.determine_point_group`
--- which finds rotation axes, mirror planes, and an inversion center by
-direct geometric testing, not by recognizing the molecular formula -- to
-recover the textbook point-group assignments C2v, C3v, Td, and D_inf_h.
+find the symmetry elements by testing the coordinates directly, and shows
+how the elements it finds spell out each Schoenflies symbol: :math:`C_{2v}`,
+:math:`C_{3v}`, :math:`T_d` and :math:`D_{\infty h}`.
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-52
+.. GENERATED FROM PYTHON SOURCE LINES 18-59
 
 .. code-block:: Python
 
@@ -35,10 +40,10 @@ recover the textbook point-group assignments C2v, C3v, Td, and D_inf_h.
     import numpy as np
 
     from chemistrykit.structure.core.base_system import Molecule
-    from chemistrykit.structure.systems.point_group import determine_point_group, get_character_table
+    from chemistrykit.structure.systems.point_group import determine_point_group
     from chemistrykit.structure.visualizers.structure_plots import plot_molecule_3d
 
-    # Water: experimental geometry, r(O-H) = 0.958 A, angle(H-O-H) = 104.5 deg.
+    # Water: r(O-H) = 0.958 A, angle(H-O-H) = 104.5 deg.
     angle = np.radians(104.5)
     r = 0.958
     water = Molecule(
@@ -51,54 +56,57 @@ recover the textbook point-group assignments C2v, C3v, Td, and D_inf_h.
         bonds=[(0, 1), (0, 2)],
     )
 
-    # Methane: perfect tetrahedron, r(C-H) = 1.09 A.
+    # Ammonia: trigonal pyramid, r(N-H) = 1.012 A, the three H atoms 0.38 A
+    # below the nitrogen.
+    r_nh, drop = 1.012, 0.38
+    rho = np.sqrt(r_nh**2 - drop**2)
+    phis = np.radians([90.0, 210.0, 330.0])
+    ammonia = Molecule(
+        symbols=["N", "H", "H", "H"],
+        coordinates=np.vstack([[0.0, 0.0, 0.0], np.column_stack([rho * np.cos(phis), rho * np.sin(phis), -drop * np.ones(3)])]),
+        bonds=[(0, 1), (0, 2), (0, 3)],
+    )
+
+    # Methane: regular tetrahedron, r(C-H) = 1.09 A.
     verts = np.array([[1.0, 1.0, 1.0], [1.0, -1.0, -1.0], [-1.0, 1.0, -1.0], [-1.0, -1.0, 1.0]])
     verts = verts / np.linalg.norm(verts[0]) * 1.09
-    methane = Molecule(symbols=["C", "H", "H", "H", "H"], coordinates=np.vstack([[0.0, 0.0, 0.0], verts]))
+    methane = Molecule(symbols=["C", "H", "H", "H", "H"], coordinates=np.vstack([[0.0, 0.0, 0.0], verts]), bonds=[(0, k) for k in range(1, 5)])
 
     # Carbon dioxide: linear, r(C=O) = 1.16 A.
     co2 = Molecule(symbols=["O", "C", "O"], coordinates=[[0.0, 0.0, -1.16], [0.0, 0.0, 0.0], [0.0, 0.0, 1.16]], bonds=[(0, 1), (1, 2)])
 
-    molecules = {"water": water, "methane": methane, "carbon dioxide": co2}
+    molecules = {"water": water, "ammonia": ammonia, "methane": methane, "carbon dioxide": co2}
 
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 60-64
+
+Read the Schoenflies symbol off the elements that were found. The
+subscript number is the order of the principal axis, ``v`` means mirror
+planes that contain that axis, and ``d`` / ``h`` mark the diagonal and
+horizontal planes of the higher groups:
+
+.. GENERATED FROM PYTHON SOURCE LINES 64-77
+
+.. code-block:: Python
+
+
+    results = {}
     for name, molecule in molecules.items():
-        result = determine_point_group(molecule)
+        res = determine_point_group(molecule)
+        results[name] = res
         print(
-            f"{name}: {result.group_name}  "
-            f"(principal axis order={result.principal_axis_order}, "
-            f"sigma_v={result.has_sigma_v}, sigma_h={result.has_sigma_h}, "
-            f"i={result.has_inversion_center})"
+            f"{name:15s} -> {res.group_name:8s} principal C_n: n={res.principal_axis_order}, "
+            f"mirror planes: {res.n_mirror_planes}, sigma_v: {res.has_sigma_v}, "
+            f"sigma_h: {res.has_sigma_h}, inversion centre: {res.has_inversion_center}, C3 axes: {res.n_c3_axes}"
         )
 
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    water: C2v  (principal axis order=2, sigma_v=True, sigma_h=False, i=False)
-    methane: Td  (principal axis order=3, sigma_v=True, sigma_h=False, i=False)
-    carbon dioxide: D_inf_h  (principal axis order=0, sigma_v=False, sigma_h=True, i=True)
-
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 53-55
-
-The C2v character table -- 4 one-dimensional irreducible
-representations, since C2v is abelian:
-
-.. GENERATED FROM PYTHON SOURCE LINES 55-61
-
-.. code-block:: Python
-
-
-    c2v = get_character_table("C2v")
-    print(f"\nC2v operations: {c2v.operations}")
-    for irrep in c2v.irreps:
-        print(f"  {irrep}: {c2v.characters[c2v.irreps.index(irrep)]}")
+    assert [results[k].group_name for k in molecules] == ["C2v", "C3v", "Td", "D_inf_h"]
 
 
 
@@ -108,37 +116,36 @@ representations, since C2v is abelian:
 
  .. code-block:: none
 
-
-    C2v operations: ['E', 'C2', 'sigma_v(xz)', "sigma_v'(yz)"]
-      A1: [1.0, 1.0, 1.0, 1.0]
-      A2: [1.0, 1.0, -1.0, -1.0]
-      B1: [1.0, -1.0, 1.0, -1.0]
-      B2: [1.0, -1.0, -1.0, 1.0]
+    water           -> C2v      principal C_n: n=2, mirror planes: 2, sigma_v: True, sigma_h: False, inversion centre: False, C3 axes: 0
+    ammonia         -> C3v      principal C_n: n=3, mirror planes: 3, sigma_v: True, sigma_h: False, inversion centre: False, C3 axes: 1
+    methane         -> Td       principal C_n: n=3, mirror planes: 6, sigma_v: True, sigma_h: False, inversion centre: False, C3 axes: 4
+    carbon dioxide  -> D_inf_h  principal C_n: n=0, mirror planes: 0, sigma_v: False, sigma_h: True, inversion centre: True, C3 axes: 0
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 62-63
+.. GENERATED FROM PYTHON SOURCE LINES 78-79
 
-Plot each molecule:
+Plot each molecule with the symbol :func:`determine_point_group` assigned:
 
-.. GENERATED FROM PYTHON SOURCE LINES 63-71
+.. GENERATED FROM PYTHON SOURCE LINES 79-88
 
 .. code-block:: Python
 
 
-    fig = plt.figure(figsize=(12, 4))
+    fig = plt.figure(figsize=(14, 4))
     for i, (name, molecule) in enumerate(molecules.items(), start=1):
-        ax = fig.add_subplot(1, 3, i, projection="3d")
+        ax = fig.add_subplot(1, 4, i, projection="3d")
         plot_molecule_3d(molecule, ax=ax)
-        ax.set_title(f"{name}: {determine_point_group(molecule).group_name}", fontsize=10)
+        ax.set_title(f"{name}: {results[name].group_name}", fontsize=10)
+    fig.suptitle("Schoenflies symbols found from the geometry")
     fig.tight_layout()
     plt.show()
 
 
 
 .. image-sg:: /api/gallery/structure/point_group/images/sphx_glr_plot_01_point_groups_001.png
-   :alt: water: C2v, methane: Td, carbon dioxide: D_inf_h
+   :alt: Schoenflies symbols found from the geometry, water: C2v, ammonia: C3v, methane: Td, carbon dioxide: D_inf_h
    :srcset: /api/gallery/structure/point_group/images/sphx_glr_plot_01_point_groups_001.png
    :class: sphx-glr-single-img
 
@@ -149,7 +156,7 @@ Plot each molecule:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.109 seconds)
+   **Total running time of the script:** (0 minutes 0.145 seconds)
 
 
 .. _sphx_glr_download_api_gallery_structure_point_group_plot_01_point_groups.py:

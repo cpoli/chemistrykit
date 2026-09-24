@@ -410,14 +410,14 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.quantum.systems.particle_in_box</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The particle in a box (1D and 3D), and its free-electron-model application to conjugated-dye UV-Vis absorption.</span>
+<span></span><span class="sa">r</span><span class="sd">"""The particle in a box (1D and 3D), and its free-electron-model application to conjugated-dye UV-Vis absorption.</span>
 
 <span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 7.3 for the</span>
-<span class="sd">particle-in-a-box energy levels and wavefunctions, and Ch. 7&#39;s &quot;Impact on</span>
-<span class="sd">nanoscience&quot; (or Levine, *Quantum Chemistry*, 7th ed., Ch. 2.2c) for the</span>
+<span class="sd">particle-in-a-box energy levels and wavefunctions, and Ch. 7's "Impact on</span>
+<span class="sd">nanoscience" (or Levine, *Quantum Chemistry*, 7th ed., Ch. 2.2c) for the</span>
 <span class="sd">Kuhn free-electron model of a linear conjugated polyene/cyanine dye as a</span>
 <span class="sd">1D box of the pi electrons (H. Kuhn, *J. Chem. Phys.* 17, 1198 (1949)).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -426,13 +426,13 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">ELECTRON_MASS</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">H</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.quantum.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumSystem</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ParticleInBox1D&quot;</span><span class="p">,</span> <span class="s2">&quot;ParticleInBox3D&quot;</span><span class="p">,</span> <span class="s2">&quot;conjugated_dye_absorption_wavelength&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"ParticleInBox1D"</span><span class="p">,</span> <span class="s2">"ParticleInBox3D"</span><span class="p">,</span> <span class="s2">"conjugated_dye_absorption_wavelength"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="ParticleInBox1D">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.ParticleInBox1D">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ParticleInBox1D</span><span class="p">(</span><span class="n">QuantumSystem</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A particle of mass `m` confined to an infinite 1D box of length `L`, :math:`0\le x\le L`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""A particle of mass `m` confined to an infinite 1D box of length `L`, :math:`0\le x\le L`.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -458,20 +458,20 @@
 <span class="sd">    &gt;&gt;&gt; box2 = ParticleInBox1D(length=2.0e-9)</span>
 <span class="sd">    &gt;&gt;&gt; round(float(box1.energy(1) / box2.energy(1)), 6)</span>
 <span class="sd">    4.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">ELECTRON_MASS</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">length</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;length must be positive&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"length must be positive"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">mass</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mass must be positive&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"mass must be positive"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mass</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ParticleInBox1D.energy">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.ParticleInBox1D.energy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return :math:`E_n=n^2h^2/(8mL^2)`.</span>
+<span class="w">        </span><span class="sd">"""Return :math:`E_n=n^2h^2/(8mL^2)`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -488,17 +488,17 @@
 <span class="sd">        &gt;&gt;&gt; box = ParticleInBox1D(length=1.0e-9)  # a 1 nm box</span>
 <span class="sd">        &gt;&gt;&gt; round(float(box.energy(1) / 1.602176634e-19), 4)  # in eV</span>
 <span class="sd">        0.376</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n must be &gt;= 1&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n must be &gt;= 1"</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">H</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">8.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ParticleInBox1D.wavefunction">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.ParticleInBox1D.wavefunction">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">wavefunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\psi_n(x)=\sqrt{2/L}\sin(n\pi x/L)`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`\psi_n(x)=\sqrt{2/L}\sin(n\pi x/L)`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -524,9 +524,9 @@
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; bool(abs(box.wavefunction(1.0e-9, n=1)) &lt; 1e-9)</span>
 <span class="sd">        True</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n must be &gt;= 1&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n must be &gt;= 1"</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">)</span></div>
 
@@ -534,7 +534,7 @@
 <div class="viewcode-block" id="ParticleInBox1D.probability_density">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.ParticleInBox1D.probability_density">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">probability_density</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`|\psi_n(x)|^2`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`|\psi_n(x)|^2`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -545,7 +545,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
 <span class="sd">            Probability density, in m^-1.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">wavefunction</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span></div>
 </div>
 
@@ -554,7 +554,7 @@
 <div class="viewcode-block" id="ParticleInBox3D">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.ParticleInBox3D">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ParticleInBox3D</span><span class="p">(</span><span class="n">QuantumSystem</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A particle confined to an infinite rectangular box of dimensions `(Lx, Ly, Lz)`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""A particle confined to an infinite rectangular box of dimensions `(Lx, Ly, Lz)`.</span>
 
 <span class="sd">    .. math::</span>
 
@@ -582,21 +582,21 @@
 <span class="sd">    &gt;&gt;&gt; e112 = box.energy(1, 1, 2)</span>
 <span class="sd">    &gt;&gt;&gt; round(e211, 30) == round(e121, 30) == round(e112, 30)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Lx</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Ly</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Lz</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">ELECTRON_MASS</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">L</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Lx</span><span class="p">,</span> <span class="n">Ly</span><span class="p">,</span> <span class="n">Lz</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">L</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;box dimensions must be positive&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"box dimensions must be positive"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">mass</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mass must be positive&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"mass must be positive"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Lx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ly</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lz</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">Lx</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">Ly</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">Lz</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mass</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ParticleInBox3D.energy">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.ParticleInBox3D.energy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return :math:`E_{n_x,n_y,n_z}`.</span>
+<span class="w">        </span><span class="sd">"""Return :math:`E_{n_x,n_y,n_z}`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -607,16 +607,16 @@
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
 <span class="sd">            Energy, in J.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">nx</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">ny</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">nz</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;quantum numbers must be &gt;= 1&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"quantum numbers must be &gt;= 1"</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">H</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">8.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">nx</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lx</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">ny</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ly</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">nz</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lz</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ParticleInBox3D.degeneracy">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.ParticleInBox3D.degeneracy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">degeneracy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_max</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enumerate energies (rounded) and their degeneracies up to ``nx, ny, nz &lt;= n_max``.</span>
+<span class="w">        </span><span class="sd">"""Enumerate energies (rounded) and their degeneracies up to ``nx, ny, nz &lt;= n_max``.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -637,7 +637,7 @@
 <span class="sd">        &gt;&gt;&gt; degeneracies = box.degeneracy(n_max=2)</span>
 <span class="sd">        &gt;&gt;&gt; sorted(degeneracies.values())[-2]</span>
 <span class="sd">        3</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">energies</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">nx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">ny</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
@@ -653,7 +653,7 @@
 <div class="viewcode-block" id="conjugated_dye_absorption_wavelength">
 <a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.conjugated_dye_absorption_wavelength">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">conjugated_dye_absorption_wavelength</span><span class="p">(</span><span class="n">box_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n_pi_electrons</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">ELECTRON_MASS</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Predict a linear conjugated dye&#39;s UV-Vis absorption wavelength via Kuhn&#39;s free-electron model.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Predict a linear conjugated dye's UV-Vis absorption wavelength via Kuhn's free-electron model.</span>
 
 <span class="sd">    Models the delocalized pi electrons of a linear conjugated chain</span>
 <span class="sd">    (e.g. a cyanine dye) as free particles in a 1D box spanning the</span>
@@ -672,18 +672,18 @@
 
 <span class="sd">    and the predicted absorption wavelength follows from</span>
 <span class="sd">    :math:`\Delta E=hc/\lambda`. This is a crude model (it ignores the</span>
-<span class="sd">    actual sigma-bond framework&#39;s effect on the box walls and treats the</span>
+<span class="sd">    actual sigma-bond framework's effect on the box walls and treats the</span>
 <span class="sd">    pi electrons as fully independent/non-interacting), but it correctly</span>
 <span class="sd">    predicts the qualitative trend that longer conjugated chains (more</span>
 <span class="sd">    pi electrons, longer effective box) absorb at longer wavelength -- the</span>
-<span class="sd">    basis of dye chemistry&#39;s color tuning by conjugation length.</span>
+<span class="sd">    basis of dye chemistry's color tuning by conjugation length.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    box_length : float</span>
 <span class="sd">        Effective 1D box length spanned by the conjugated pi system, in m</span>
 <span class="sd">        (conventionally taken as the number of conjugated bonds times a</span>
-<span class="sd">        typical C-C bond length, plus one bond length of &quot;overhang&quot; at</span>
+<span class="sd">        typical C-C bond length, plus one bond length of "overhang" at</span>
 <span class="sd">        each end).</span>
 <span class="sd">    n_pi_electrons : int</span>
 <span class="sd">        Number of pi electrons, must be a positive even integer</span>
@@ -715,9 +715,9 @@
 <span class="sd">    &gt;&gt;&gt; long = conjugated_dye_absorption_wavelength(box_length=1.4e-9, n_pi_electrons=10)</span>
 <span class="sd">    &gt;&gt;&gt; bool(long &gt; short)</span>
 <span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">n_pi_electrons</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n_pi_electrons</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n_pi_electrons must be a positive even integer (closed-shell filling)&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n_pi_electrons must be a positive even integer (closed-shell filling)"</span><span class="p">)</span>
     <span class="n">delta_e</span> <span class="o">=</span> <span class="p">(</span><span class="n">H</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">8.0</span> <span class="o">*</span> <span class="n">mass</span> <span class="o">*</span> <span class="n">box_length</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_pi_electrons</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">H</span> <span class="o">*</span> <span class="n">C</span> <span class="o">/</span> <span class="n">delta_e</span></div>
 
