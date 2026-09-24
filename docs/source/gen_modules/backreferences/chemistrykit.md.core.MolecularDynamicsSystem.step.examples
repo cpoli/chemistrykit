@@ -15,6 +15,48 @@ Examples using ``chemistrykit.md.core.MolecularDynamicsSystem.step``
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Ryckaert, Ciccotti, and Berendsen&#x27;s SHAKE algorithm (1977) replaces stiff bond springs by exact length constraints, restored after every Verlet position update by iterative corrections along the old bond vectors (~chemistrykit.md.systems.constraints.shake). A water-like triatomic is simulated twice: with stiff harmonic O-H springs (~chemistrykit.md.systems.pair_potentials.HarmonicMolecule), and with the two bonds held rigid by SHAKE (~chemistrykit.md.systems.constraints.ShakeMolecule), keeping the same flexible angle-bending term. Both runs use the same time step, chosen comfortably for the slow bending motion but too long for the fast bond stretch.">
+
+.. only:: html
+
+  .. image:: /api/gallery/md/constraints/images/thumb/sphx_glr_plot_01_shake_rigid_bonds_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/md/constraints/plot_01_shake_rigid_bonds`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">SHAKE: rigid bonds let a bending molecule take larger time steps</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/md/constraints/plot_01_shake_rigid_bonds`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Checking every pair of N particles costs N(N-1)/2 distance evaluations per step. Verlet&#x27;s 1967 trick: list the pairs within r_c + r_\text{skin} and reuse that list for several steps; a pair outside the list can only come inside the true cutoff r_c after the two particles have closed the skin distance between them. VerletNeighborList implements this. Here a Lennard-Jones fluid is run with a list that is never rebuilt, and at every step the listed pairs are checked against the exact set of pairs inside the cutoff (~chemistrykit.md.utils.neighbor_list.build_neighbor_list), for lists built with no skin and with a skin of 0.3\sigma.">
+
+.. only:: html
+
+  .. image:: /api/gallery/md/lj_fluid/images/thumb/sphx_glr_plot_06_verlet_neighbor_list_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/md/lj_fluid/plot_06_verlet_neighbor_list`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Verlet's neighbor list: a skin that lets one pair list serve many steps</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/md/lj_fluid/plot_06_verlet_neighbor_list`
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="The harmonic bond potential (~chemistrykit.md.systems.pair_potentials.HarmonicBond) is the small-oscillation limit of the anharmonic Morse potential -- they agree near the equilibrium separation but diverge away from it (Morse correctly flattens out toward a finite dissociation energy; harmonic does not). DiatomicOscillator integrates the classical two-body bond-vibration problem via the shared velocity-Verlet integrator, for either potential.">
 
 .. only:: html

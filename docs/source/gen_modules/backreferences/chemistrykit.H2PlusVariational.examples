@@ -15,24 +15,24 @@ Examples using ``chemistrykit.H2PlusVariational``
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="H2PlusVariational builds the 2x2 Hamiltonian and overlap matrices for a minimal one-Gaussian- per-proton basis, solves the secular equation HC=SCE, and then variationally optimizes the shared Gaussian exponent -- a genuine application of the Rayleigh-Ritz variational theorem: minimizing over a real parameter can only lower (never raise) the computed energy toward the true ground state.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Hund and Mulliken&#x27;s molecular-orbital theory builds one-electron orbitals spread over the whole molecule as a linear combination of atomic orbitals, \psi_\pm=c_A\chi_A\pm c_B\chi_B. H2PlusVariational does this for H2+ with one Gaussian orbital per proton: diagonalizing the 2x2 problem gives the in-phase bonding orbital (equal coefficients, energy below the isolated-atom level) and the out-of-phase antibonding orbital (opposite coefficients, energy above it). Following both orbital energies from short bond lengths out to separated atoms gives Mulliken&#x27;s correlation diagram for the simplest molecule.">
 
 .. only:: html
 
-  .. image:: /api/gallery/quantum/hartree_fock/images/thumb/sphx_glr_plot_01_h2_plus_variational_thumb.png
+  .. image:: /api/gallery/quantum/hartree_fock/images/thumb/sphx_glr_plot_01_lcao_molecular_orbitals_thumb.png
     :alt:
 
-  :doc:`/api/gallery/quantum/hartree_fock/plot_01_h2_plus_variational`
+  :doc:`/api/gallery/quantum/hartree_fock/plot_01_lcao_molecular_orbitals`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">H2+ in a minimal 2-Gaussian basis: the variational principle at work</div>
+      <div class="sphx-glr-thumbnail-title">Hund-Mulliken LCAO molecular orbitals of H2+: bonding and antibonding</div>
     </div>
 
 
 .. only:: not html
 
- * :doc:`/api/gallery/quantum/hartree_fock/plot_01_h2_plus_variational`
+ * :doc:`/api/gallery/quantum/hartree_fock/plot_01_lcao_molecular_orbitals`
 
 .. raw:: html
 
@@ -54,6 +54,48 @@ Examples using ``chemistrykit.H2PlusVariational``
 .. only:: not html
 
  * :doc:`/api/gallery/quantum/hartree_fock/plot_02_bonding_antibonding_density`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Born and Oppenheimer separated the fast electrons from the slow nuclei: first solve the electronic problem with the nuclei clamped at a fixed separation R, then let the nuclei move on the resulting potential energy curve U(R)=E_{el}(R)+e^2/4\pi\varepsilon_0R. Here each point of the curve is a separate clamped-nuclei calculation with H2PlusVariational (``bond_length`` is a fixed input, never a dynamical variable). The curvature at the minimum then gives a nuclear vibrational frequency, and because the electronic curve does not depend on nuclear mass, H2+ and D2+ share the same curve but have different zero-point energies.">
+
+.. only:: html
+
+  .. image:: /api/gallery/quantum/hartree_fock/images/thumb/sphx_glr_plot_03_born_oppenheimer_potential_curve_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/quantum/hartree_fock/plot_03_born_oppenheimer_potential_curve`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Born-Oppenheimer clamped-nuclei potential curve of H2+</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/quantum/hartree_fock/plot_03_born_oppenheimer_potential_curve`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="G. N. Lewis&#x27;s 1916 covalent bond is a pair of electrons shared between two atoms. In molecular-orbital language that pair is two electrons of opposite spin in the same bonding orbital. Using the two orbitals of a hydrogen-like diatomic from H2PlusVariational (at the H2 bond length, electron-electron repulsion neglected), fill them with 1 to 4 electrons: the bond order (n_{bonding}-n_{antibonding})/2 is 1 exactly when a single Lewis pair sits in the bonding orbital, and adding a second pair to the antibonding orbital cancels the bond (the He2 case).">
+
+.. only:: html
+
+  .. image:: /api/gallery/quantum/hartree_fock/images/thumb/sphx_glr_plot_06_lewis_shared_electron_pair_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/quantum/hartree_fock/plot_06_lewis_shared_electron_pair`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Lewis's shared electron pair: two opposite-spin electrons in one bonding orbital</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/quantum/hartree_fock/plot_06_lewis_shared_electron_pair`
 
 .. thumbnail-parent-div-close
 

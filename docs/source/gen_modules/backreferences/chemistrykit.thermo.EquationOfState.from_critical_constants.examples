@@ -15,24 +15,87 @@ Examples using ``chemistrykit.thermo.EquationOfState.from_critical_constants``
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Comparing three equations of state for carbon dioxide at a fixed temperature: the ideal gas law (~chemistrykit.thermo.systems.equations_of_state.IdealGas), van der Waals (~chemistrykit.thermo.systems.equations_of_state.VanDerWaals), and Redlich-Kwong (~chemistrykit.thermo.systems.equations_of_state.RedlichKwong). Both real-gas equations are built directly from CO2&#x27;s critical temperature and pressure via from_critical_constants, so no separately fitted a/`b` parameters are needed. The further below the critical temperature, the more the real-gas isotherms deviate from the ideal gas law&#x27;s simple hyperbola.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Andrews&#x27;s CO2 isotherms showed a flat liquid-vapor plateau below a critical temperature and none above it. The van der Waals equation (~chemistrykit.thermo.systems.equations_of_state.VanDerWaals), built from CO2&#x27;s critical constants with from_critical_constants, reproduces the whole family: loops with three volume roots below T_c, an inflection at T_c, and single-valued isotherms above it, so gas can be turned into liquid continuously by going around the critical point.">
 
 .. only:: html
 
-  .. image:: /api/gallery/thermo/equations_of_state/images/thumb/sphx_glr_plot_01_equations_of_state_thumb.png
+  .. image:: /api/gallery/thermo/equations_of_state/images/thumb/sphx_glr_plot_02_van_der_waals_continuity_thumb.png
     :alt:
 
-  :doc:`/api/gallery/thermo/equations_of_state/plot_01_equations_of_state`
+  :doc:`/api/gallery/thermo/equations_of_state/plot_02_van_der_waals_continuity`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Ideal gas, van der Waals, and Redlich-Kwong P-V isotherms</div>
+      <div class="sphx-glr-thumbnail-title">Andrews and van der Waals: continuity of the liquid and gas states</div>
     </div>
 
 
 .. only:: not html
 
- * :doc:`/api/gallery/thermo/equations_of_state/plot_01_equations_of_state`
+ * :doc:`/api/gallery/thermo/equations_of_state/plot_02_van_der_waals_continuity`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Redlich and Kwong divided van der Waals&#x27;s attraction term by \sqrt{T}. This example draws CO2 P-V isotherms well above and just below the critical temperature from RedlichKwong, with VanDerWaals and IdealGas for comparison. Both real-gas equations are built from CO2&#x27;s critical temperature and pressure alone via from_critical_constants. Redlich-Kwong&#x27;s universal critical compressibility factor is 1/3, closer to real gases than van der Waals&#x27;s 3/8.">
+
+.. only:: html
+
+  .. image:: /api/gallery/thermo/equations_of_state/images/thumb/sphx_glr_plot_03_redlich_kwong_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/thermo/equations_of_state/plot_03_redlich_kwong`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Redlich-Kwong isotherms of CO2 against van der Waals and the ideal gas</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/thermo/equations_of_state/plot_03_redlich_kwong`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Peng and Robinson tuned the temperature dependence of their attraction term, \alpha(T), to Pitzer&#x27;s acentric factor \omega so that the equation reproduces pure-fluid vapor pressures. This example computes the CO2 vapor-pressure curve predicted by PengRobinson (\omega = 0.224) with saturation_pressure, and compares it with van der Waals and Redlich-Kwong built from the same critical constants. Only Peng-Robinson passes through Pitzer&#x27;s defining point, \log_{10}(P_{sat}/P_c) = -1 - \omega at T/T_c = 0.7.">
+
+.. only:: html
+
+  .. image:: /api/gallery/thermo/equations_of_state/images/thumb/sphx_glr_plot_04_peng_robinson_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/thermo/equations_of_state/plot_04_peng_robinson`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Peng-Robinson: vapor pressures from the acentric factor</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/thermo/equations_of_state/plot_04_peng_robinson`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="G. N. Lewis replaced pressure by the fugacity f = \phi P so that the ideal-gas form \mu = \mu^\circ + RT\ln(f/P^\circ) stays exact for real fluids. The left panel shows the fugacity coefficient \phi of supercritical CO2 computed by fugacity_coefficient from three equations of state. The right panel shows Lewis&#x27;s phase-equilibrium criterion: below T_c the liquid and vapor fugacities from fugacity cross exactly at the saturation pressure.">
+
+.. only:: html
+
+  .. image:: /api/gallery/thermo/equations_of_state/images/thumb/sphx_glr_plot_05_lewis_fugacity_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/thermo/equations_of_state/plot_05_lewis_fugacity`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Lewis fugacity: the effective pressure of a real gas</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/thermo/equations_of_state/plot_05_lewis_fugacity`
 
 .. thumbnail-parent-div-close
 

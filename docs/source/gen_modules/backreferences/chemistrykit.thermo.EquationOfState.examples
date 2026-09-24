@@ -15,24 +15,108 @@ Examples using ``chemistrykit.thermo.EquationOfState``
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Comparing three equations of state for carbon dioxide at a fixed temperature: the ideal gas law (~chemistrykit.thermo.systems.equations_of_state.IdealGas), van der Waals (~chemistrykit.thermo.systems.equations_of_state.VanDerWaals), and Redlich-Kwong (~chemistrykit.thermo.systems.equations_of_state.RedlichKwong). Both real-gas equations are built directly from CO2&#x27;s critical temperature and pressure via from_critical_constants, so no separately fitted a/`b` parameters are needed. The further below the critical temperature, the more the real-gas isotherms deviate from the ideal gas law&#x27;s simple hyperbola.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Clapeyron&#x27;s 1834 combined gas law unites Boyle&#x27;s law (PV constant at fixed T), Charles&#x27;s and Gay-Lussac&#x27;s law (V \propto T at fixed P), and Avogadro&#x27;s hypothesis into PV_m = RT. This example draws both classic views with IdealGas: hyperbolic Boyle isotherms, and straight Charles isobars that all extrapolate to zero volume at absolute zero.">
 
 .. only:: html
 
-  .. image:: /api/gallery/thermo/equations_of_state/images/thumb/sphx_glr_plot_01_equations_of_state_thumb.png
+  .. image:: /api/gallery/thermo/equations_of_state/images/thumb/sphx_glr_plot_01_ideal_gas_law_thumb.png
     :alt:
 
-  :doc:`/api/gallery/thermo/equations_of_state/plot_01_equations_of_state`
+  :doc:`/api/gallery/thermo/equations_of_state/plot_01_ideal_gas_law`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Ideal gas, van der Waals, and Redlich-Kwong P-V isotherms</div>
+      <div class="sphx-glr-thumbnail-title">Clapeyron's ideal gas law, PV = RT</div>
     </div>
 
 
 .. only:: not html
 
- * :doc:`/api/gallery/thermo/equations_of_state/plot_01_equations_of_state`
+ * :doc:`/api/gallery/thermo/equations_of_state/plot_01_ideal_gas_law`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Redlich and Kwong divided van der Waals&#x27;s attraction term by \sqrt{T}. This example draws CO2 P-V isotherms well above and just below the critical temperature from RedlichKwong, with VanDerWaals and IdealGas for comparison. Both real-gas equations are built from CO2&#x27;s critical temperature and pressure alone via from_critical_constants. Redlich-Kwong&#x27;s universal critical compressibility factor is 1/3, closer to real gases than van der Waals&#x27;s 3/8.">
+
+.. only:: html
+
+  .. image:: /api/gallery/thermo/equations_of_state/images/thumb/sphx_glr_plot_03_redlich_kwong_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/thermo/equations_of_state/plot_03_redlich_kwong`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Redlich-Kwong isotherms of CO2 against van der Waals and the ideal gas</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/thermo/equations_of_state/plot_03_redlich_kwong`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Peng and Robinson tuned the temperature dependence of their attraction term, \alpha(T), to Pitzer&#x27;s acentric factor \omega so that the equation reproduces pure-fluid vapor pressures. This example computes the CO2 vapor-pressure curve predicted by PengRobinson (\omega = 0.224) with saturation_pressure, and compares it with van der Waals and Redlich-Kwong built from the same critical constants. Only Peng-Robinson passes through Pitzer&#x27;s defining point, \log_{10}(P_{sat}/P_c) = -1 - \omega at T/T_c = 0.7.">
+
+.. only:: html
+
+  .. image:: /api/gallery/thermo/equations_of_state/images/thumb/sphx_glr_plot_04_peng_robinson_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/thermo/equations_of_state/plot_04_peng_robinson`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Peng-Robinson: vapor pressures from the acentric factor</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/thermo/equations_of_state/plot_04_peng_robinson`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="G. N. Lewis replaced pressure by the fugacity f = \phi P so that the ideal-gas form \mu = \mu^\circ + RT\ln(f/P^\circ) stays exact for real fluids. The left panel shows the fugacity coefficient \phi of supercritical CO2 computed by fugacity_coefficient from three equations of state. The right panel shows Lewis&#x27;s phase-equilibrium criterion: below T_c the liquid and vapor fugacities from fugacity cross exactly at the saturation pressure.">
+
+.. only:: html
+
+  .. image:: /api/gallery/thermo/equations_of_state/images/thumb/sphx_glr_plot_05_lewis_fugacity_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/thermo/equations_of_state/plot_05_lewis_fugacity`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Lewis fugacity: the effective pressure of a real gas</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/thermo/equations_of_state/plot_05_lewis_fugacity`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="van&#x27;t Hoff found that a dilute solution&#x27;s osmotic pressure (~chemistrykit.thermo.systems.mixtures.osmotic_pressure) equals the pressure the solute particles would exert as an ideal gas at the same concentration and temperature. The factor i counts particles per formula unit: 1 for sucrose, about 2 for NaCl. The same factor multiplies the other colligative effects, freezing-point depression and boiling-point elevation (~chemistrykit.thermo.systems.mixtures.freezing_point_depression, boiling_point_elevation).">
+
+.. only:: html
+
+  .. image:: /api/gallery/thermo/mixtures/images/thumb/sphx_glr_plot_03_osmotic_pressure_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/thermo/mixtures/plot_03_osmotic_pressure`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">van't Hoff's osmotic pressure law, Pi = iMRT</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/thermo/mixtures/plot_03_osmotic_pressure`
 
 .. thumbnail-parent-div-close
 

@@ -15,24 +15,45 @@ Examples using ``chemistrykit.kinetics.core.KineticsResult``
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="StoichiometricNetwork integrates an arbitrary mass-action reaction network numerically via chemistrykit.integrators. Three classic mechanisms -- built from its named constructors -- are each checked here against a closed-form solution, and the steady-state approximation for the consecutive chain is shown converging as the second step is made much faster than the first.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Michaelis and Menten (1913) showed that an enzyme-catalyzed rate saturates with substrate, v = V_{max}[S]/(K_m + [S]), reaching exactly half of V_{max} at [S] = K_m. This example draws that saturation curve with its two limiting regimes, integrates the substrate-depletion progress curve an assay actually records, and shows how competitive and noncompetitive inhibitors distort the curve.">
 
 .. only:: html
 
-  .. image:: /api/gallery/kinetics/networks/images/thumb/sphx_glr_plot_01_reaction_networks_thumb.png
+  .. image:: /api/gallery/kinetics/enzyme/images/thumb/sphx_glr_plot_01_michaelis_menten_thumb.png
     :alt:
 
-  :doc:`/api/gallery/kinetics/networks/plot_01_reaction_networks`
+  :doc:`/api/gallery/kinetics/enzyme/plot_01_michaelis_menten`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Parallel, consecutive, and reversible reaction networks</div>
+      <div class="sphx-glr-thumbnail-title">Michaelis and Menten's saturating enzyme rate law</div>
     </div>
 
 
 .. only:: not html
 
- * :doc:`/api/gallery/kinetics/networks/plot_01_reaction_networks`
+ * :doc:`/api/gallery/kinetics/enzyme/plot_01_michaelis_menten`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Bodenstein (1913) set the net rate of change of a short-lived intermediate to zero; Lindemann (1922) used exactly that trick on the energized molecule A^* of the mechanism">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/networks/images/thumb/sphx_glr_plot_01_steady_state_lindemann_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/networks/plot_01_steady_state_lindemann`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Bodenstein's steady-state approximation and Lindemann's unimolecular fall-off</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/kinetics/networks/plot_01_steady_state_lindemann`
 
 .. raw:: html
 
@@ -57,6 +78,69 @@ Examples using ``chemistrykit.kinetics.core.KineticsResult``
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Bateman (1910) solved the chain of first-order steps A \xrightarrow{k_1} B \xrightarrow{k_2} C (written for radioactive decay series, but identical for consecutive chemical reactions) in closed form:">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/networks/images/thumb/sphx_glr_plot_03_bateman_consecutive_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/networks/plot_03_bateman_consecutive`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Bateman's closed-form solution for consecutive reactions</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/kinetics/networks/plot_03_bateman_consecutive`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Eigen (1954) measured reactions far too fast to mix by perturbing an equilibrium mixture (a sudden temperature, pressure, or field jump) and timing its exponential return to the new equilibrium. For A \rightleftharpoons B the relaxation time is \tau = 1/(k_f + k_r), so combining \tau with the equilibrium constant K = k_f/k_r yields both rate constants. For the association A + B \rightleftharpoons C linearizing about equilibrium gives 1/\tau = k_f([A]_{eq} + [B]_{eq}) + k_r, the formula Eigen used to show that H^+ + OH^- recombination is diffusion-controlled.">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/networks/images/thumb/sphx_glr_plot_04_eigen_relaxation_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/networks/plot_04_eigen_relaxation`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Eigen's chemical relaxation: temperature jump and relaxation time</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/kinetics/networks/plot_04_eigen_relaxation`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="For two competing channels A \xrightarrow{k_1} B and A \xrightarrow{k_2} C, the reactant decays with the sum k_1 + k_2, while the product ratio [B]/[C] = k_1/k_2 is fixed at every instant -- the kinetic basis of product selectivity. Integrated with parallel.">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/networks/images/thumb/sphx_glr_plot_05_parallel_reactions_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/networks/plot_05_parallel_reactions`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Parallel (competing) first-order reactions</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/kinetics/networks/plot_05_parallel_reactions`
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="Below the Hopf-bifurcation threshold (:math:`B &lt; 1 + A^2`) the Brusselator&#x27;s single fixed point is a stable focus and any initial concentration relaxes toward it. Above threshold, that same fixed point becomes unstable and every trajectory is drawn instead onto a surrounding stable limit cycle -- sustained chemical oscillation with no external forcing, driven purely by the autocatalytic X^2 Y term.">
 
 .. only:: html
@@ -68,13 +152,76 @@ Examples using ``chemistrykit.kinetics.core.KineticsResult``
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">The Brusselator limit cycle</div>
+      <div class="sphx-glr-thumbnail-title">Prigogine and Lefever's Brusselator limit cycle</div>
     </div>
 
 
 .. only:: not html
 
  * :doc:`/api/gallery/kinetics/oscillators/plot_01_brusselator`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Lotka&#x27;s 1920 chemical scheme, with the reservoir A held constant,">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/oscillators/images/thumb/sphx_glr_plot_02_lotka_autocatalytic_oscillator_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/oscillators/plot_02_lotka_autocatalytic_oscillator`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Lotka's autocatalytic oscillator and its neutral orbits</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/kinetics/oscillators/plot_02_lotka_autocatalytic_oscillator`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Field and Noyes (1974) boiled the FKN mechanism of the Belousov-Zhabotinsky (BZ) reaction -- cerium-catalyzed oxidation of malonic acid by bromate -- down to three intermediates: HBrO\ 2 (x), bromide (y), and the oxidized catalyst Ce(IV) (z). The resulting &quot;Oregonator&quot; (~chemistrykit.kinetics.systems.oscillators.Oregonator) produces the BZ reaction&#x27;s hallmark relaxation oscillations: long quiet stretches while bromide is slowly consumed, then an autocatalytic burst of HBrO\ 2 that oxidizes the catalyst (the colour flash seen by Belousov), which in turn regenerates bromide and shuts the burst off. Raising the stoichiometric factor f well above 2 stabilizes the steady state and the oscillation disappears.">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/oscillators/images/thumb/sphx_glr_plot_03_oregonator_bz_reaction_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/oscillators/plot_03_oregonator_bz_reaction`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The Oregonator: oscillations of the Belousov-Zhabotinsky reaction</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/kinetics/oscillators/plot_03_oregonator_bz_reaction`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Bodenstein (1913) measured that one absorbed photon forms up to 10^5-10^6 HCl molecules in an illuminated H2/Cl2 mixture, apparently violating photochemical equivalence. Nernst (1918) explained it: the photon only splits one Cl2 into two Cl atoms, which then start a chain (Cl + H2 -&gt; HCl + H, H + Cl2 -&gt; HCl + Cl) that runs until two atoms recombine. hydrogen_chlorine_chain_network integrates this mechanism, and chain_quantum_yield gives the steady-state yield \Phi=2k_2[\mathrm{H_2}]/\sqrt{k_t I_{abs}}. Rate constants are in arbitrary consistent units.">
+
+.. only:: html
+
+  .. image:: /api/gallery/photochem/chain_reaction/images/thumb/sphx_glr_plot_01_bodenstein_nernst_hcl_chain_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/photochem/chain_reaction/plot_01_bodenstein_nernst_hcl_chain`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Bodenstein and Nernst: the H2 + Cl2 photochemical chain reaction</div>
+    </div>
+
+
+.. only:: not html
+
+ * :doc:`/api/gallery/photochem/chain_reaction/plot_01_bodenstein_nernst_hcl_chain`
 
 .. raw:: html
 
@@ -131,7 +278,7 @@ Examples using ``chemistrykit.kinetics.core.KineticsResult``
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Free-radical chain-growth polymerization kinetics</div>
+      <div class="sphx-glr-thumbnail-title">Flory's steady-state kinetics of free-radical polymerization</div>
     </div>
 
 

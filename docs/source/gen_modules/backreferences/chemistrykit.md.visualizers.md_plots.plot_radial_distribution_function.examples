@@ -15,28 +15,7 @@ Examples using ``chemistrykit.md.visualizers.md_plots.plot_radial_distribution_f
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="A monatomic Lennard-Jones fluid (~chemistrykit.md.systems.lj_fluid.LJFluid) started on a simple-cubic lattice with Maxwell-Boltzmann velocities (~chemistrykit.md.systems.lj_fluid.LJFluid.from_lattice), integrated with no thermostat (a microcanonical, NVE run) via the shared velocity-Verlet integrator. Two standard checks: total energy should be constant to within integration error, and the radial distribution function g(r) should show liquid-like structure (a first peak near the Lennard-Jones minimum) rather than the flat g(r)=1 of an ideal gas.">
-
-.. only:: html
-
-  .. image:: /api/gallery/md/lj_fluid/images/thumb/sphx_glr_plot_01_lj_fluid_equilibration_thumb.png
-    :alt:
-
-  :doc:`/api/gallery/md/lj_fluid/plot_01_lj_fluid_equilibration`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">An NVE Lennard-Jones fluid: energy conservation and g(r)</div>
-    </div>
-
-
-.. only:: not html
-
- * :doc:`/api/gallery/md/lj_fluid/plot_01_lj_fluid_equilibration`
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Truncating the Lennard-Jones potential at its own minimum, r=2^{1/6}\sigma (~chemistrykit.md.systems.lj_fluid.LennardJones.r_min), and shifting it to be continuous there removes the attractive tail entirely and leaves a purely repulsive potential -- the Weeks-Chandler-Andersen (WCA) reference system, and (in reduced units) a smoothed stand-in for a fluid of hard spheres. Comparing the radial distribution function g(r) of this purely repulsive LJFluid at low and high density shows that pronounced short-range positional order can appear from packing alone, with no attractive force anywhere in the potential -- the essential physics behind Alder and Wainwright&#x27;s 1957 discovery that hard spheres alone can freeze.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Alder and Wainwright&#x27;s 1957 computer experiments showed that particles with no attraction at all -- hard spheres -- order into a crystal-like arrangement once they are packed densely enough: freezing driven by excluded volume (entropy), not by energy. This package integrates smooth forces rather than hard-sphere collision events, so the hard spheres are approximated by steeply repulsive particles: the Lennard-Jones potential cut off at its own minimum r=2^{1/6}\sigma (~chemistrykit.md.systems.lj_fluid.LennardJones.r_min) and shifted, which leaves only a repulsive wall. Comparing the radial distribution function g(r) of this purely repulsive LJFluid at low density and at a density near hard-sphere freezing shows sharp positional order appearing from packing alone.">
 
 .. only:: html
 
@@ -47,7 +26,7 @@ Examples using ``chemistrykit.md.visualizers.md_plots.plot_radial_distribution_f
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Purely repulsive (WCA) particles: packing order without attraction</div>
+      <div class="sphx-glr-thumbnail-title">Alder and Wainwright's hard spheres: packing-driven order with no attraction</div>
     </div>
 
 
