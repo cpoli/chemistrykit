@@ -54,3 +54,17 @@ def test_all_population_reaches_ground_state_at_long_time():
     net = jablonski_network(kf=2.0, kic=1.0, kisc=0.5, kp=0.3, kic_T=0.2, S1_0=1.0)
     result = net.integrate((0.0, 100.0), dt=1e-2, method="rk4")
     assert result.concentration("S0")[-1] == pytest.approx(1.0, abs=1e-6)
+
+
+def test_kasha_emission_yields_branching():
+    from chemistrykit.photochem.systems.jablonski import kasha_emission_yields
+
+    phi2, phi1 = kasha_emission_yields(kf2=1.0, k_ic21=3.0, kf1=1.0, knr1=1.0)
+    assert phi2 == pytest.approx(0.25)
+    assert phi1 == pytest.approx(0.75 * 0.5)
+    phi2, phi1 = kasha_emission_yields(kf2=1e8, k_ic21=1e13, kf1=1e8, knr1=1e8)
+    assert phi2 == pytest.approx(1e-5, rel=1e-4)
+    assert phi1 == pytest.approx(0.5, rel=1e-4)
+    assert kasha_emission_yields(1.0, 1.0, 1.0, 3.0, excite="S1") == (0.0, 0.25)
+    with pytest.raises(ValueError):
+        kasha_emission_yields(1.0, 1.0, 1.0, 1.0, excite="S3")

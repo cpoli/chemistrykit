@@ -7,14 +7,31 @@ mass-action reaction network and integrated via
 fluorescence/phosphorescence quantum yields and the photochemical
 quantum yield via Beer-Lambert (:mod:`chemistrykit.spectro`);
 Stern-Volmer fluorescence quenching with a static-vs-dynamic diagnostic;
-and photostationary-state kinetics for a two-state photoswitch under
-simultaneous forward/reverse photolysis.
+photostationary-state kinetics for a two-state photoswitch under
+simultaneous forward/reverse photolysis; the H2/Cl2 photochemical chain
+reaction; Stokes shifts and Perrin fluorescence anisotropy; Kasha's-rule
+emission yields; Förster and Dexter energy transfer; ferrioxalate
+actinometry; and Rehm-Weller electron-transfer quenching.
 """
 
 __version__ = "0.1.0"
 
 from chemistrykit.photochem.core.base_system import PhotostationaryStateResult
-from chemistrykit.photochem.systems.jablonski import jablonski_network, jablonski_populations_analytic
+from chemistrykit.photochem.systems.actinometry import ferrioxalate_fe2_moles, ferrioxalate_photon_flux
+from chemistrykit.photochem.systems.chain_reaction import chain_quantum_yield, hydrogen_chlorine_chain_network
+from chemistrykit.photochem.systems.electron_transfer import rehm_weller_free_energy, rehm_weller_quenching_rate
+from chemistrykit.photochem.systems.energy_transfer import (
+    dexter_rate,
+    forster_efficiency,
+    forster_radius,
+    forster_rate,
+)
+from chemistrykit.photochem.systems.fluorescence import perrin_anisotropy, rotational_correlation_time, stokes_shift
+from chemistrykit.photochem.systems.jablonski import (
+    jablonski_network,
+    jablonski_populations_analytic,
+    kasha_emission_yields,
+)
 from chemistrykit.photochem.systems.photostationary_state import (
     photostationary_ratio,
     photostationary_state,
@@ -41,6 +58,7 @@ __all__ = [
     "PhotostationaryStateResult",
     "jablonski_network",
     "jablonski_populations_analytic",
+    "kasha_emission_yields",
     "fluorescence_quantum_yield",
     "intersystem_crossing_yield",
     "phosphorescence_quantum_yield",
@@ -55,4 +73,17 @@ __all__ = [
     "photoswitch_network",
     "photostationary_ratio",
     "photostationary_state",
+    "hydrogen_chlorine_chain_network",
+    "chain_quantum_yield",
+    "stokes_shift",
+    "perrin_anisotropy",
+    "rotational_correlation_time",
+    "forster_radius",
+    "forster_rate",
+    "forster_efficiency",
+    "dexter_rate",
+    "ferrioxalate_fe2_moles",
+    "ferrioxalate_photon_flux",
+    "rehm_weller_free_energy",
+    "rehm_weller_quenching_rate",
 ]

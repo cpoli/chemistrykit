@@ -30,7 +30,7 @@ import numpy as np
 
 from chemistrykit.kinetics.systems.networks import StoichiometricNetwork, consecutive_analytic
 
-__all__ = ["jablonski_network", "jablonski_populations_analytic"]
+__all__ = ["jablonski_network", "jablonski_populations_analytic", "kasha_emission_yields"]
 
 
 def jablonski_network(kf: float, kic: float, kisc: float, kp: float, kic_T: float, S1_0: float = 1.0) -> StoichiometricNetwork:
@@ -155,3 +155,66 @@ def jablonski_populations_analytic(kf: float, kic: float, kisc: float, kp: float
     T1 = (kisc / k_S1) * B
     S0 = S1_0 - S1 - T1
     return S1, T1, S0
+
+
+def kasha_emission_yields(kf2: float, k_ic21: float, kf1: float, knr1: float, excite: str = "S2"):
+    r"""Emission quantum yields from :math:`S_2` and :math:`S_1` for a four-level (:math:`S_2,S_1,S_0`) model.
+
+    After excitation into :math:`S_2`, the molecule either emits directly
+    from :math:`S_2` (rate :math:`k_{f2}`) or internally converts to
+    :math:`S_1` (rate :math:`k_{ic,21}`); from :math:`S_1` it fluoresces
+    (:math:`k_{f1}`) or decays nonradiatively by any other channel
+    (:math:`k_{nr1}`, lumping :math:`k_{ic}+k_{isc}`). Branching ratios give
+
+    .. math::
+
+        \Phi_{S_2} = \frac{k_{f2}}{k_{f2}+k_{ic,21}}, \qquad
+        \Phi_{S_1} = \frac{k_{ic,21}}{k_{f2}+k_{ic,21}}\cdot
+        \frac{k_{f1}}{k_{f1}+k_{nr1}}.
+
+    Because :math:`k_{ic,21}` (typically :math:`10^{12}`-:math:`10^{14}`
+    s\ :sup:`-1`) vastly exceeds :math:`k_{f2}` (:math:`\sim10^8`-:math:`10^9`
+    s\ :sup:`-1`), :math:`\Phi_{S_2}\approx0` and essentially all
+    emission comes from :math:`S_1` -- Kasha's rule (M. Kasha, *Discuss.
+    Faraday Soc.* 9, 14 (1950); Turro, Ramamurthy & Scaiano, *Modern
+    Molecular Photochemistry of Organic Molecules*, Ch. 4). Excitation
+    directly into :math:`S_1` (``excite="S1"``) gives
+    :math:`\Phi_{S_2}=0` and :math:`\Phi_{S_1}=k_{f1}/(k_{f1}+k_{nr1})`.
+
+    Parameters
+    ----------
+    kf2 : float
+        Radiative rate constant of :math:`S_2\to S_0`.
+    k_ic21 : float
+        Internal-conversion rate constant :math:`S_2\to S_1`.
+    kf1 : float
+        Radiative rate constant of :math:`S_1\to S_0`.
+    knr1 : float
+        Total nonradiative decay rate constant of :math:`S_1`.
+    excite : {"S2", "S1"}, default "S2"
+        State populated by absorption.
+
+    Returns
+    -------
+    phi_S2, phi_S1 : float
+        Quantum yields of emission from :math:`S_2` and from :math:`S_1`.
+
+    Examples
+    --------
+    With realistic rates almost no emission comes from :math:`S_2`, and
+    the :math:`S_1` fluorescence yield barely depends on which state was
+    excited:
+
+    >>> phi2, phi1 = kasha_emission_yields(kf2=1e8, k_ic21=1e13, kf1=1e8, knr1=1e8)
+    >>> phi2 < 1e-4, round(phi1, 4)
+    (True, 0.5)
+    >>> kasha_emission_yields(kf2=1e8, k_ic21=1e13, kf1=1e8, knr1=1e8, excite="S1")
+    (0.0, 0.5)
+    """
+    phi_S1_given_S1 = kf1 / (kf1 + knr1)
+    if excite == "S1":
+        return 0.0, phi_S1_given_S1
+    if excite != "S2":
+        raise ValueError("excite must be 'S2' or 'S1'")
+    k_S2 = kf2 + k_ic21
+    return kf2 / k_S2, (k_ic21 / k_S2) * phi_S1_given_S1
