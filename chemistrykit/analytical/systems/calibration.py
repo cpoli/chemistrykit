@@ -1,10 +1,11 @@
-r"""Linear-regression calibration curves, and IUPAC-convention limits of detection/quantitation.
+r"""Linear-regression calibration curves, and 3.3/10-sigma limits of detection/quantitation.
 
 See Harris, *Quantitative Chemical Analysis*, 9th ed., Ch. 4.5 ("Method
-Validation") and Ch. 5, or the IUPAC recommendation (G. L. Long & J. D.
-Winefordner, *Anal. Chem.* 55, 712A (1983)), for the standard :math:`3.3
-\sigma/m` (LOD) and :math:`10\sigma/m` (LOQ) convention, with `sigma` the
-calibration curve's residual standard error and `m` its slope.
+Validation") and Ch. 5, and the ICH Q2 method-validation guideline, for the
+:math:`3.3\sigma/m` (LOD) and :math:`10\sigma/m` (LOQ) convention, with
+`sigma` the calibration curve's residual standard error and `m` its slope.
+(The IUPAC-based treatment of G. L. Long & J. D. Winefordner, *Anal. Chem.*
+55, 712A (1983), recommends :math:`k=3` for the LOD.)
 """
 
 from __future__ import annotations
@@ -17,10 +18,10 @@ from chemistrykit.analytical.utils.regression import linear_fit
 
 __all__ = ["LinearCalibration", "fit_calibration"]
 
-#: float: IUPAC LOD multiplier (Long & Winefordner, 1983).
+#: float: LOD multiplier (ICH Q2 convention).
 _LOD_MULTIPLIER = 3.3
 
-#: float: IUPAC LOQ multiplier (Long & Winefordner, 1983).
+#: float: LOQ multiplier (ICH Q2 convention).
 _LOQ_MULTIPLIER = 10.0
 
 
@@ -76,7 +77,7 @@ class LinearCalibration:
         return float(result) if result.ndim == 0 else result
 
     def lod(self) -> float:
-        r"""Limit of detection, :math:`\text{LOD}=3.3\,s_{y/x}/|m|` (IUPAC convention).
+        r"""Limit of detection, :math:`\text{LOD}=3.3\,s_{y/x}/|m|` (ICH Q2 convention).
 
         Returns
         -------
@@ -85,7 +86,7 @@ class LinearCalibration:
         return _LOD_MULTIPLIER * self.residual_std_error / abs(self.slope)
 
     def loq(self) -> float:
-        r"""Limit of quantitation, :math:`\text{LOQ}=10\,s_{y/x}/|m|` (IUPAC convention).
+        r"""Limit of quantitation, :math:`\text{LOQ}=10\,s_{y/x}/|m|` (ICH Q2 convention).
 
         Returns
         -------

@@ -1,5 +1,6 @@
 Chromatography
 ----------------
 
-Theoretical plates, the van Deemter equation and its optimum flow
-velocity, and resolution/selectivity between two peaks.
+Tsvet's column separation, theoretical plates, the van Deemter and Golay
+plate-height equations, Kovats retention indices, and Purnell's
+resolution equation.

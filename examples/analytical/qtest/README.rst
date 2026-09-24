@@ -1,4 +1,5 @@
-Q-test outlier rejection
---------------------------
+Outlier rejection
+-------------------
 
-Dixon's Q-test for rejecting a suspect outlier from a small data set.
+Dixon's Q-test and Grubbs' test for rejecting a suspect outlier from a
+small data set.

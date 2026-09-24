@@ -1,6 +1,6 @@
 r"""
-Propagation of uncertainty
-=============================
+Propagation of uncertainty with the first-order (Ku) formula
+===============================================================
 
 The closed-form rules for sums (:func:`~chemistrykit.analytical.systems.uncertainty.propagate_sum`),
 products/quotients (:func:`~chemistrykit.analytical.systems.uncertainty.propagate_product`),

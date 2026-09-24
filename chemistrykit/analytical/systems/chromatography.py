@@ -22,6 +22,8 @@ __all__ = [
     "selectivity_factor",
     "resolution",
     "simulate_chromatogram",
+    "kovats_retention_index",
+    "purnell_resolution",
 ]
 
 
@@ -315,3 +317,108 @@ def simulate_chromatogram(t, centers, retention_times=None, N: float = 10000.0, 
         fwhm = tR * np.sqrt(8.0 * np.log(2.0) / N)
         chrom += amp * gaussian(t, tR, fwhm)
     return chrom
+
+
+def kovats_retention_index(t_x, t_n, t_N, n: int, N: int | None = None, dead_time: float = 0.0):
+    r"""Kováts retention index of an analyte, bracketed by two n-alkane standards.
+
+    Under isothermal conditions the logarithm of an n-alkane's adjusted
+    retention time :math:`t'=t_R-t_0` grows linearly with its carbon
+    number, so an analyte eluting between the n-alkanes with `n` and `N`
+    carbons is assigned the logarithmically interpolated index (E. Kováts,
+    *Helv. Chim. Acta* 41, 1915 (1958)):
+
+    .. math::
+
+        I = 100\left[n + (N-n)\,\frac{\log t'_x-\log t'_n}{\log t'_N-\log t'_n}\right]
+
+    With the usual choice :math:`N=n+1` this is Kováts' original
+    definition; every n-alkane itself has, by construction, :math:`I=100n`.
+
+    Parameters
+    ----------
+    t_x : float or array-like of float
+        Retention time(s) of the analyte.
+    t_n, t_N : float
+        Retention times of the smaller (`n` carbons) and larger (`N`
+        carbons) bracketing n-alkanes.
+    n : int
+        Carbon number of the earlier-eluting n-alkane.
+    N : int, optional
+        Carbon number of the later-eluting n-alkane; defaults to ``n + 1``.
+    dead_time : float, default 0.0
+        Column dead time :math:`t_0`, subtracted from every retention time
+        to form the adjusted retention times :math:`t'`.
+
+    Returns
+    -------
+    float or ndarray
+
+    Examples
+    --------
+    An analyte eluting at the geometric mean of the adjusted retention
+    times of n-octane and n-nonane sits exactly halfway, at `I` = 850:
+
+    >>> import numpy as np
+    >>> t0, t8, t9 = 1.0, 5.0, 9.0
+    >>> t_x = t0 + np.sqrt((t8 - t0) * (t9 - t0))
+    >>> round(float(kovats_retention_index(t_x, t8, t9, n=8, dead_time=t0)), 6)
+    850.0
+    """
+    if N is None:
+        N = n + 1
+    tx = np.asarray(t_x, dtype=np.float64) - dead_time
+    tn = t_n - dead_time
+    tN = t_N - dead_time
+    result = 100.0 * (n + (N - n) * (np.log10(tx) - np.log10(tn)) / (np.log10(tN) - np.log10(tn)))
+    return float(result) if result.ndim == 0 else result
+
+
+def purnell_resolution(N, alpha: float, k2: float):
+    r"""Purnell's resolution equation: resolution in terms of efficiency, selectivity, and retention.
+
+    .. math::
+
+        R_s = \frac{\sqrt N}{4}\,\frac{\alpha-1}{\alpha}\,\frac{k_2}{1+k_2}
+
+    (J. H. Purnell, *J. Chem. Soc.* 1960, 1268), with `N` the plate count,
+    :math:`\alpha=k_2/k_1` the selectivity factor, and :math:`k_2` the
+    retention factor of the later-eluting peak. It is exact when both
+    peaks have the base width :math:`4t_{R,2}/\sqrt N` of the second peak,
+    and separates the three independent levers a chromatographer can pull:
+    efficiency (:math:`\sqrt N`), selectivity, and retention.
+
+    Parameters
+    ----------
+    N : float or array-like of float
+        Number of theoretical plates.
+    alpha : float
+        Selectivity factor :math:`\alpha\ge1`.
+    k2 : float
+        Retention factor of the later-eluting peak.
+
+    Returns
+    -------
+    float or ndarray
+
+    Examples
+    --------
+    Agrees with the direct :func:`resolution` formula for two peaks of
+    equal base width :math:`4t_{R,2}/\sqrt N`:
+
+    >>> import numpy as np
+    >>> N, t0, k1, k2 = 10000.0, 1.0, 4.0, 4.4
+    >>> tR1, tR2 = t0 * (1 + k1), t0 * (1 + k2)
+    >>> w = 4.0 * tR2 / np.sqrt(N)
+    >>> bool(abs(purnell_resolution(N, alpha=k2 / k1, k2=k2) - resolution(tR1, tR2, w, w)) < 1e-12)
+    True
+
+    Resolution grows only as :math:`\sqrt N`: quadrupling the plate count
+    doubles it.
+
+    >>> round(float(purnell_resolution(40000.0, 1.1, 4.4) / purnell_resolution(10000.0, 1.1, 4.4)), 6)
+    2.0
+    """
+    N = np.asarray(N, dtype=np.float64)
+    result = np.sqrt(N) / 4.0 * (alpha - 1.0) / alpha * k2 / (1.0 + k2)
+    return float(result) if result.ndim == 0 else result

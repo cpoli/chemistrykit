@@ -3,7 +3,8 @@
 import numpy as np
 import pytest
 
-from chemistrykit.analytical.systems.titration import EDTATitration, RedoxTitration
+from chemistrykit.analytical.systems.titration import EDTATitration, RedoxTitration, gran_plot
+from chemistrykit.solutions.systems.titration import WeakAcidStrongBaseTitration
 
 
 def test_redox_titration_equivalence_potential_is_weighted_average():
@@ -81,3 +82,19 @@ def test_edta_titration_higher_K_gives_sharper_endpoint():
     low_jump = np.max(np.abs(np.gradient(low_curve.response, low_curve.V)))
     high_jump = np.max(np.abs(np.gradient(high_curve.response, high_curve.V)))
     assert high_jump > low_jump
+
+
+def test_gran_plot_recovers_exact_ideal_equivalence_volume_and_ka():
+    Ka, Ve = 1.8e-5, 0.050
+    V = np.linspace(0.005, 0.045, 12)
+    result = gran_plot(V, -np.log10(Ka * (Ve - V) / V))
+    assert result.equivalence_volume == pytest.approx(Ve, rel=1e-9)
+    assert result.Ka == pytest.approx(Ka, rel=1e-9)
+
+
+def test_gran_plot_on_exact_weak_acid_titration_curve():
+    titration = WeakAcidStrongBaseTitration(Ca=0.100, Va=0.050, Ka=1.8e-5, Cb=0.100)
+    V = np.linspace(0.010, 0.045, 10)
+    result = gran_plot(V, titration.pH_at(V))
+    assert result.equivalence_volume == pytest.approx(titration.equivalence_volume(), rel=5e-3)
+    assert result.Ka == pytest.approx(1.8e-5, rel=2e-2)

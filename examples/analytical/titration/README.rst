@@ -1,5 +1,5 @@
 Titration curves
 ------------------
 
-Acid-base, redox, and EDTA (complexometric) titration curves, side by
-side, with numerical equivalence-point detection.
+Potentiometric redox (Nernst) and EDTA complexometric titration curves,
+with equivalence points located by steepest change or by a Gran plot.

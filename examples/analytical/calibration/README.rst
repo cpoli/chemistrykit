@@ -1,5 +1,5 @@
 Calibration curves
 --------------------
 
-A least-squares calibration curve and its IUPAC limits of detection and
-quantitation.
+Least-squares calibration lines, and the limits of detection and
+quantitation derived from their residual scatter.

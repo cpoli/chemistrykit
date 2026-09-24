@@ -4,9 +4,11 @@ import numpy as np
 import pytest
 
 from chemistrykit.analytical.systems.chromatography import (
+    kovats_retention_index,
     minimum_plate_height,
     optimum_flow_velocity,
     plate_height,
+    purnell_resolution,
     resolution,
     retention_factor,
     selectivity_factor,
@@ -75,3 +77,26 @@ def test_resolution_increases_with_peak_separation():
     r_close = resolution(9.5, 10.0, 0.5, 0.5)
     r_far = resolution(8.0, 10.0, 0.5, 0.5)
     assert r_far > r_close
+
+
+def test_kovats_index_of_alkanes_is_100_times_carbon_number():
+    t0, t8, t9 = 0.8, 4.0, 7.5
+    assert kovats_retention_index(t8, t8, t9, n=8, dead_time=t0) == pytest.approx(800.0)
+    assert kovats_retention_index(t9, t8, t9, n=8, dead_time=t0) == pytest.approx(900.0)
+
+
+def test_kovats_index_follows_log_linear_alkane_series():
+    t0 = 1.0
+    t_adj = lambda c: 0.05 * 1.8**c  # noqa: E731 -- log t' linear in carbon number
+    tx = t0 + t_adj(9.37)
+    assert kovats_retention_index(tx, t0 + t_adj(9), t0 + t_adj(10), n=9, dead_time=t0) == pytest.approx(937.0)
+    assert kovats_retention_index(tx, t0 + t_adj(8), t0 + t_adj(12), n=8, N=12, dead_time=t0) == pytest.approx(937.0)
+
+
+def test_purnell_matches_direct_resolution_for_equal_widths():
+    for N, k1, alpha in [(2500.0, 2.0, 1.05), (10000.0, 5.0, 1.2), (40000.0, 0.5, 1.02)]:
+        k2 = alpha * k1
+        t0 = 1.3
+        tR1, tR2 = t0 * (1 + k1), t0 * (1 + k2)
+        w = 4 * tR2 / np.sqrt(N)
+        assert purnell_resolution(N, alpha, k2) == pytest.approx(resolution(tR1, tR2, w, w))

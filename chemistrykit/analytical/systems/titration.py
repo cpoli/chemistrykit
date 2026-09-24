@@ -20,12 +20,14 @@ throughout.
 
 from __future__ import annotations
 
+from dataclasses import dataclass
+
 import numpy as np
 
 from chemistrykit.analytical.core.base_system import TitrationCurve
 from chemistrykit.constants import FARADAY, R
 
-__all__ = ["RedoxTitration", "EDTATitration"]
+__all__ = ["RedoxTitration", "EDTATitration", "GranPlotResult", "gran_plot"]
 
 
 class RedoxTitration(TitrationCurve):
@@ -238,3 +240,77 @@ class EDTATitration(TitrationCurve):
             free_M = self._free_metal_concentration(C_M, C_Y)
             pM[i] = -np.log10(free_M)
         return pM
+
+
+@dataclass
+class GranPlotResult:
+    """Result of a :func:`gran_plot` call."""
+
+    V: np.ndarray
+    """ndarray: Titrant volumes used in the fit, in L."""
+
+    gran_function: np.ndarray
+    r"""ndarray: The Gran function :math:`V_b\,10^{-pH}` at each volume in `V`."""
+
+    slope: float
+    """float: Least-squares slope of the Gran function vs. `V` (equal to :math:`-K_a`)."""
+
+    intercept: float
+    """float: Least-squares intercept of the Gran function vs. `V`."""
+
+    @property
+    def equivalence_volume(self) -> float:
+        """float: The extrapolated x-intercept, ``-intercept / slope``: the equivalence volume."""
+        return -self.intercept / self.slope
+
+    @property
+    def Ka(self) -> float:
+        """float: The acid dissociation constant implied by the slope, ``-slope``."""
+        return -self.slope
+
+
+def gran_plot(V, pH) -> GranPlotResult:
+    r"""Gran plot for a weak acid titrated by a strong base: locate the equivalence point by linear extrapolation.
+
+    Before the equivalence volume :math:`V_e`, the buffer region obeys
+    :math:`[H^+]=K_a\,n_{HA}/n_{A^-}=K_a(V_e-V_b)/V_b`, so the Gran function
+
+    .. math::
+
+        V_b\,10^{-pH} = K_a\,(V_e - V_b)
+
+    is a straight line in :math:`V_b` whose x-intercept is :math:`V_e` and
+    whose slope is :math:`-K_a` (G. Gran, *Analyst* 77, 661 (1952)). This
+    turns the equivalence point into a linear extrapolation of data taken
+    well *before* it, rather than a search for the steepest point of the
+    sigmoidal curve (activity coefficients are neglected here).
+
+    Parameters
+    ----------
+    V : array-like of float
+        Titrant volumes in the buffer region (before the equivalence point), in L.
+    pH : array-like of float
+        Measured pH at each volume.
+
+    Returns
+    -------
+    GranPlotResult
+
+    Examples
+    --------
+    Ideal buffer-region data built from the Gran relation itself recover
+    :math:`V_e` and :math:`K_a` exactly:
+
+    >>> import numpy as np
+    >>> Ka, Ve = 1.8e-5, 0.050
+    >>> V = np.linspace(0.010, 0.045, 8)
+    >>> pH = -np.log10(Ka * (Ve - V) / V)
+    >>> result = gran_plot(V, pH)
+    >>> round(result.equivalence_volume, 9), round(result.Ka / Ka, 9)
+    (0.05, 1.0)
+    """
+    V = np.asarray(V, dtype=np.float64)
+    pH = np.asarray(pH, dtype=np.float64)
+    G = V * 10.0 ** (-pH)
+    slope, intercept = np.polyfit(V, G, 1)
+    return GranPlotResult(V=V, gran_function=G, slope=float(slope), intercept=float(intercept))
