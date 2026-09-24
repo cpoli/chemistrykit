@@ -1,0 +1,72 @@
+r"""
+Arrhenius and Ostwald: a catalyst speeds a reaction but leaves its equilibrium alone
+======================================================================================
+
+Arrhenius's :math:`k = Ae^{-E_a/RT}` explains why a catalyst's lower
+activation energy multiplies the rate by :math:`e^{\Delta E_a/RT}`
+(:func:`~chemistrykit.surface.systems.catalysis.compare_catalyzed_rate`).
+Ostwald's definition adds the key condition that a catalyst cannot move
+the equilibrium. It lowers the barrier for the forward and the reverse
+reaction by the same amount, so both rate constants grow by the same
+factor and :math:`K = k_f/k_r` does not change. Below, the reversible
+reaction :math:`A \rightleftharpoons B` reaches equilibrium far sooner
+with the catalyst, and it reaches exactly the same equilibrium.
+"""
+
+# %%
+import matplotlib.pyplot as plt
+import numpy as np
+
+from chemistrykit.surface.systems.catalysis import compare_catalyzed_rate
+
+T = 298.15
+Ea_forward, delta_H = 100.0e3, -20.0e3  # J/mol; reverse barrier is Ea_forward - delta_H
+
+# %%
+# Rate enhancement grows exponentially with the activation-energy drop.
+delta_Ea_values = np.linspace(0.0, 50e3, 26)
+enhancements = [compare_catalyzed_rate(Ea_forward, Ea_forward - d, T, A_uncatalyzed=1e13).rate_enhancement for d in delta_Ea_values]
+print(f"Lowering Ea by 30 kJ/mol at {T} K speeds the reaction up {enhancements[15]:.2e}-fold")
+
+# %%
+# Ostwald: the same barrier drop for forward and reverse steps.
+delta_Ea = 30e3
+fwd = compare_catalyzed_rate(Ea_forward, Ea_forward - delta_Ea, T, A_uncatalyzed=1e13)
+rev = compare_catalyzed_rate(Ea_forward - delta_H, Ea_forward - delta_H - delta_Ea, T, A_uncatalyzed=1e13)
+K_uncat = fwd.k_uncatalyzed / rev.k_uncatalyzed
+K_cat = fwd.k_catalyzed / rev.k_catalyzed
+print(f"Forward enhancement {fwd.rate_enhancement:.3e}, reverse enhancement {rev.rate_enhancement:.3e}")
+print(f"K without catalyst = {K_uncat:.4f}, K with catalyst = {K_cat:.4f}")
+
+
+def approach(kf, kr, t, A0=1.0):
+    A_eq = A0 * kr / (kf + kr)
+    return A_eq + (A0 - A_eq) * np.exp(-(kf + kr) * t)
+
+
+t_cat = np.linspace(0.0, 5.0 / (fwd.k_catalyzed + rev.k_catalyzed), 300)
+t_uncat = t_cat * fwd.rate_enhancement
+
+# %%
+fig, axes = plt.subplots(1, 3, figsize=(15, 4))
+axes[0].semilogy(delta_Ea_values / 1e3, enhancements, "o-")
+axes[0].set_xlabel(r"$\Delta E_a$ (kJ/mol)")
+axes[0].set_ylabel(r"$k_{cat}/k_{uncat}$")
+axes[0].set_title("Arrhenius: exponential rate enhancement")
+
+axes[1].plot(t_cat, approach(fwd.k_catalyzed, rev.k_catalyzed, t_cat), label="catalyzed")
+axes[1].plot(t_cat, approach(fwd.k_uncatalyzed, rev.k_uncatalyzed, t_cat), label="uncatalyzed")
+axes[1].set_xlabel("time (s)")
+axes[1].set_ylabel("[A] / [A]$_0$")
+axes[1].set_title("Same time axis: only the catalyzed run moves")
+axes[1].legend()
+
+axes[2].plot(t_cat / t_cat[-1], approach(fwd.k_catalyzed, rev.k_catalyzed, t_cat), label="catalyzed")
+axes[2].plot(t_uncat / t_uncat[-1], approach(fwd.k_uncatalyzed, rev.k_uncatalyzed, t_uncat), "--", label="uncatalyzed (time rescaled)")
+axes[2].axhline(1.0 / (1.0 + K_cat), color="gray", linewidth=0.8)
+axes[2].set_xlabel("time / run length")
+axes[2].set_ylabel("[A] / [A]$_0$")
+axes[2].set_title("Ostwald: identical equilibrium")
+axes[2].legend()
+plt.tight_layout()
+plt.show()

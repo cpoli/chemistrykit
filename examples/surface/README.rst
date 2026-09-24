@@ -6,7 +6,9 @@ This gallery walks through every public feature of
 isotherms with their standard linearizations for fitting parameters from
 data; Langmuir-Hinshelwood single- and dual-site surface-reaction
 kinetics; and a turnover-frequency/rate-enhancement catalysis model
-built on ``chemistrykit.kinetics``'s Arrhenius equation.
+built on ``chemistrykit.kinetics``'s Arrhenius equation; the Gibbs
+adsorption equation; Polanyi/Dubinin-Radushkevich and Temkin isotherms;
+Eley-Rideal kinetics; and temperature-programmed desorption.
 
 Each script in this gallery is self-contained and can be run directly
 with ``python examples/surface/<section>/<script>.py``. Every script
@@ -26,5 +28,16 @@ Sections
   Langmuir in the appropriate limit.
 - **langmuir_hinshelwood** -- single- and dual-site surface-reaction
   kinetics built on the Langmuir coverage.
-- **catalysis** -- turnover frequency/number, and rate enhancement from a
-  catalyst's activation-energy reduction.
+- **catalysis** -- one example per catalysis milestone: Doebereiner and
+  Berzelius, Arrhenius and Ostwald, Sabatier's hydrogenation, Constable's
+  compensation effect, Balandin's volcano curve, and Boudart's turnover
+  frequency.
+- **gibbs_adsorption** -- surface excess from surface tension via the
+  Gibbs adsorption equation.
+- **dubinin** -- Polanyi's adsorption potential and the
+  Dubinin-Radushkevich characteristic curve.
+- **temkin** -- the logarithmic Temkin isotherm from a spread of site
+  energies.
+- **eley_rideal** -- Eley-Rideal kinetics contrasted with dual-site
+  Langmuir-Hinshelwood kinetics.
+- **tpd** -- temperature-programmed desorption and Redhead's analysis.

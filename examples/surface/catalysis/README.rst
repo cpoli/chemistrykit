@@ -1,8 +1,8 @@
 Catalysis
 -----------
 
-Turnover frequency and turnover number, and the rate enhancement a
-catalyst produces by lowering the activation energy, via
-chemistrykit.kinetics's Arrhenius equation. Also the Sabatier-principle
-"volcano curve": why a catalyst's binding strength has an optimum rather
-than a monotonic effect on rate.
+One example per milestone in the history of catalysis: Doebereiner's
+platinum and Berzelius's naming of catalysis, Arrhenius and Ostwald's
+kinetic definition of a catalyst, Sabatier's catalytic hydrogenation,
+Constable's compensation effect, Balandin's volcano curve, and Boudart's
+turnover frequency.
