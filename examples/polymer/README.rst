@@ -21,13 +21,19 @@ Sections
 
 - **chain_statistics** -- ideal-chain end-to-end distance and radius of
   gyration, and the Flory-exponent scaling of real chains under
-  theta/good/poor solvent conditions.
+  theta/good/poor solvent conditions; sampled freely jointed chains and
+  the Kratky-Porod worm-like chain.
 - **molecular_weight_distribution** -- Mn/Mw/PDI, and the closed-form
   Flory-Schulz (most-probable) chain-length distribution, cross-checked
-  by direct numerical summation.
+  by direct numerical summation; Debye light scattering vs. osmometry.
 - **step_growth** -- the Carothers equation relating degree of
   polymerization to extent of reaction, plain and with a stoichiometric
-  imbalance.
+  imbalance; Flory-Stockmayer gelation.
 - **chain_growth** -- free-radical initiation/propagation/termination
   kinetics, integrated numerically and checked against the steady-state
-  approximation's closed form.
+  approximation's closed form; combination vs. disproportionation; the
+  Mayo-Lewis copolymer equation; and Szwarc's living polymerization.
+- **solution_properties** -- Staudinger's viscosity rule, the
+  Mark-Houwink equation, and Flory-Huggins solution thermodynamics.
+- **stereochemistry** -- Ziegler-Natta stereocontrol and Bernoullian
+  tacticity statistics.

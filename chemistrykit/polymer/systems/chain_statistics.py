@@ -44,6 +44,8 @@ only the ideal-chain (theta-solvent) value is exact.
 
 from __future__ import annotations
 
+import numpy as np
+
 from chemistrykit.polymer.core.base_system import PolymerChainModel
 
 __all__ = [
@@ -52,6 +54,8 @@ __all__ = [
     "flory_exponent",
     "IdealChain",
     "RealChain",
+    "freely_jointed_chain",
+    "worm_like_chain_mean_square_end_to_end",
 ]
 
 #: dict: Standard Flory exponents nu for R ~ b*n**nu, by solvent quality
@@ -220,3 +224,100 @@ class RealChain(PolymerChainModel):
     def mean_square_radius_of_gyration(self, n, b):
         """See the module docstring: the 1/6 prefactor is an ideal-chain approximation, not exact for real chains."""
         return self.mean_square_end_to_end(n, b) / 6.0
+
+
+def freely_jointed_chain(n: int, b: float, n_chains: int = 1, rng=None) -> np.ndarray:
+    r"""Sample 3D conformations of Kuhn's freely jointed chain: `n` bonds of length `b` in uniformly random directions.
+
+    Each bond vector is drawn independently and isotropically on the
+    sphere of radius `b` (W. Kuhn, *Kolloid-Z.* 68, 2 (1934)); the chain
+    starts at the origin. Averaged over many samples, the squared
+    end-to-end distance converges to the exact ideal-chain result
+    :math:`\langle R^2\rangle=nb^2` (:class:`IdealChain`), since the
+    cross terms :math:`\langle\mathbf{b}_i\cdot\mathbf{b}_j\rangle`
+    vanish for independent bonds.
+
+    Parameters
+    ----------
+    n : int
+        Number of bonds (Kuhn segments).
+    b : float
+        Bond (Kuhn) length.
+    n_chains : int, optional
+        Number of independent conformations to sample.
+    rng : int, numpy.random.Generator, or None, optional
+        Seed or generator for reproducibility.
+
+    Returns
+    -------
+    ndarray, shape (n_chains, n + 1, 3)
+        Bead positions of every sampled chain.
+
+    Examples
+    --------
+    Every bond has exactly length `b`:
+
+    >>> X = freely_jointed_chain(50, 0.5, n_chains=3, rng=0)
+    >>> X.shape
+    (3, 51, 3)
+    >>> bool(np.allclose(np.linalg.norm(np.diff(X, axis=1), axis=-1), 0.5))
+    True
+
+    The sample mean of :math:`R^2` approaches :math:`nb^2=100\cdot1^2`:
+
+    >>> X = freely_jointed_chain(100, 1.0, n_chains=20000, rng=1)
+    >>> R2 = np.sum(X[:, -1] ** 2, axis=-1)
+    >>> bool(abs(R2.mean() / 100.0 - 1.0) < 0.03)
+    True
+    """
+    rng = np.random.default_rng(rng)
+    bonds = rng.normal(size=(n_chains, n, 3))
+    bonds *= b / np.linalg.norm(bonds, axis=-1, keepdims=True)
+    positions = np.zeros((n_chains, n + 1, 3))
+    positions[:, 1:] = np.cumsum(bonds, axis=1)
+    return positions
+
+
+def worm_like_chain_mean_square_end_to_end(L, P):
+    r"""Kratky-Porod worm-like chain mean-square end-to-end distance.
+
+    For a semiflexible chain of contour length :math:`L` whose tangent
+    correlations decay as :math:`e^{-s/P}` along the contour (persistence
+    length :math:`P`), Kratky and Porod (*Recl. Trav. Chim. Pays-Bas* 68,
+    1106 (1949)) obtained
+
+    .. math::
+
+        \langle R^2\rangle = 2PL\left[1-\frac{P}{L}\left(1-e^{-L/P}\right)\right]
+
+    which interpolates between a rigid rod, :math:`\langle R^2\rangle\to
+    L^2` for :math:`L\ll P`, and an ideal random coil,
+    :math:`\langle R^2\rangle\to2PL` for :math:`L\gg P` -- i.e. a
+    freely jointed chain with Kuhn length :math:`b=2P`.
+
+    Parameters
+    ----------
+    L : float or array-like of float
+        Contour length (> 0).
+    P : float
+        Persistence length (> 0).
+
+    Returns
+    -------
+    float or ndarray
+
+    Examples
+    --------
+    A very short chain is a rigid rod, :math:`R^2\approx L^2`:
+
+    >>> round(float(worm_like_chain_mean_square_end_to_end(1e-3, 50.0) / 1e-6), 4)
+    1.0
+
+    A very long chain is an ideal coil with Kuhn length :math:`2P`:
+
+    >>> round(float(worm_like_chain_mean_square_end_to_end(1e6, 50.0) / (2 * 50.0 * 1e6)), 4)
+    1.0
+    """
+    L = np.asarray(L, dtype=float)
+    x = L / P
+    return 2.0 * P * L * (1.0 - (1.0 - np.exp(-x)) / x)

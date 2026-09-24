@@ -7,3 +7,6 @@ numerically, checked against the closed-form steady-state
 approximation. Also combination vs. disproportionation termination, and
 the factor-of-two difference in degree of polymerization it produces for
 the same kinetic chain length.
+
+Also the Mayo-Lewis copolymer equation and the Poisson distribution of
+Szwarc's living polymerization.
