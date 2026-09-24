@@ -1,5 +1,5 @@
 Standard reduction potentials
 --------------------------------
 
-A curated standard-reduction-potential table, redox-couple electron
-balancing, and cell-potential combination.
+The Daniell cell from tabulated standard reduction potentials, and the
+1953 Stockholm sign convention behind the table.

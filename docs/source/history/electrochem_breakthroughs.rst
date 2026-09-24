@@ -81,7 +81,7 @@ Conducting Substances of Different Kinds," Phil. Trans. R. Soc. Lond. 90,
 403-431 (1800); L. Galvani, *De Viribus Electricitatis in Motu Musculari
 Commentarius* (Bologna, 1791).
 
-.. minigallery:: ../../examples/electrochem/battery/plot_01_discharge_curves.py
+.. minigallery:: ../../examples/electrochem/battery/plot_02_voltaic_pile.py
 
 1800 -- Nicholson and Carlisle: the First Electrolysis
 --------------------------------------------------------
@@ -152,7 +152,7 @@ Chemical Changes Produced by Electricity," Phil. Trans. R. Soc. Lond. 98,
 commonly cited in secondary literature and has not been independently
 verified against the original volume).
 
-.. minigallery:: ../../examples/electrochem/standard_potentials/plot_01_cell_potentials.py
+.. minigallery:: ../../examples/electrochem/electrolysis/plot_03_davy_alkali_metals.py
 
 1833 -- 1834 -- Faraday's Laws of Electrolysis and Electrochemical Nomenclature
 ------------------------------------------------------------------------------------
@@ -234,7 +234,85 @@ multiples for the overall reaction.
 *References:* J. F. Daniell, "On Voltaic Combinations," Phil. Trans. R.
 Soc. Lond. 126, 107-124 (1836).
 
-.. minigallery:: ../../examples/electrochem/standard_potentials/plot_01_cell_potentials.py
+.. minigallery:: ../../examples/electrochem/standard_potentials/plot_01_daniell_cell.py
+
+1839 -- 1842 -- Grove's Gas Battery: the First Fuel Cell
+-------------------------------------------------------------
+
+William Robert Grove, a Welsh lawyer turned experimental physicist,
+reasoned that if a current could split water into hydrogen and oxygen,
+the reverse reaction ought to be able to produce a current. In 1839 he
+immersed two platinum strips in dilute sulfuric acid, their upper ends
+sealed in tubes of hydrogen and of oxygen, and found a steady current
+flowing between them; by 1842 he had built a "gaseous voltaic battery"
+of such cells in series, strong enough to electrolyze water itself --
+the gas battery driving the very decomposition it reversed. Grove also
+recognized the essential role of the platinum surface, where gas,
+electrolyte and electrode meet. His device is the direct ancestor of
+the modern hydrogen fuel cell, whose electrical output is governed not
+by the heat of combustion :math:`\Delta H` but by the Gibbs energy
+:math:`\Delta G`, so that its efficiency is not bounded by the Carnot
+factor of a heat engine:
+
+.. math::
+
+   E = -\frac{\Delta G}{nF}, \qquad \eta_{max} = \frac{\Delta G}{\Delta H}
+
+*Implementation:* :func:`~chemistrykit.electrochem.reversible_cell_voltage`
+converts :math:`\Delta G^\circ = -237.13` kJ/mol into the 1.23 V
+reversible voltage of the hydrogen-oxygen cell (matching
+:func:`~chemistrykit.electrochem.standard_cell_potential` for the O2/H2O
+and H+/H2 couples),
+:func:`~chemistrykit.electrochem.reversible_cell_voltage_at_temperature`
+gives its temperature dependence, and
+:func:`~chemistrykit.electrochem.fuel_cell_efficiency_limit` the 83%
+thermodynamic efficiency limit.
+
+*References:* W. R. Grove, "On Voltaic Series and the Combination of
+Gases by Platinum," Phil. Mag. 14, 127-130 (1839); W. R. Grove, "On a
+Gaseous Voltaic Battery," Phil. Mag. 21, 417-420 (1842).
+
+.. minigallery:: ../../examples/electrochem/fuel_cell/plot_01_grove_gas_battery.py
+
+1876 -- 1900 -- Kohlrausch's Laws of Electrolytic Conductivity
+-------------------------------------------------------------------
+
+Friedrich Kohlrausch turned the conductivity of salt solutions into a
+precision measurement, using alternating current to avoid electrode
+polarization. Comparing salts with a common ion, he found in 1876 that
+the difference between, say, the potassium and sodium salts was the same
+whatever the anion: at infinite dilution each ion migrates
+independently and contributes its own fixed share,
+:math:`\lambda_i^\circ`, to the molar conductivity -- the law of
+independent migration of ions. His measurements on very dilute solutions
+over the following decades, collected in his 1898 monograph with Ludwig
+Holborn, established the second law: for strong electrolytes the molar
+conductivity falls linearly with the square root of concentration,
+allowing extrapolation to infinite dilution. Combining the two lets the
+limiting conductivity of a *weak* electrolyte such as acetic acid, whose
+curve cannot be extrapolated, be assembled from those of strong ones --
+a value Arrhenius and Ostwald soon needed for their degree of
+dissociation.
+
+.. math::
+
+   \Lambda_m^\circ = \sum_i \nu_i\lambda_i^\circ, \qquad
+   \Lambda_m = \Lambda_m^\circ - K\sqrt{c}
+
+*Implementation:* :func:`~chemistrykit.electrochem.limiting_molar_conductivity`
+sums ionic contributions from
+``chemistrykit.electrochem.systems.conductivity.LIMITING_IONIC_CONDUCTIVITIES``
+(its doctest checks the common-ion difference that Kohlrausch observed),
+:func:`~chemistrykit.electrochem.kohlrausch_molar_conductivity` implements
+the square-root law, and :func:`~chemistrykit.electrochem.fit_kohlrausch_law`
+performs the extrapolation to infinite dilution, returning a
+:class:`~chemistrykit.electrochem.KohlrauschFit`.
+
+*References:* F. Kohlrausch, Nachr. Königl. Ges. Wiss. Göttingen (1876)
+(independent migration of ions); F. Kohlrausch and L. Holborn, *Das
+Leitvermögen der Elektrolyte* (Teubner, Leipzig, 1898).
+
+.. minigallery:: ../../examples/electrochem/conductivity/plot_01_kohlrausch_laws.py
 
 1889 -- Nernst's Equation
 ------------------------------
@@ -267,7 +345,7 @@ decade of concentration ratio for a one-electron couple at 25 degC.
 *References:* W. Nernst, "Die elektromotorische Wirksamkeit der Ionen,"
 Z. Phys. Chem. 4, 129-181 (1889).
 
-.. minigallery:: ../../examples/electrochem/nernst/plot_01_nernst_and_concentration_cells.py
+.. minigallery:: ../../examples/electrochem/nernst/plot_01_nernst_equation.py
 
 1897 -- Peukert's Law of Battery Capacity
 ------------------------------------------------
@@ -308,10 +386,39 @@ for exactly what is and is not captured).
 
 *References:* W. Peukert, "Über die Abhängigkeit der Kapazität von der
 Entladestromstärke bei Bleiakkumulatoren," Elektrotechnische Zeitschrift
-20, 20 (1897); see also Linden & Reddy, *Handbook of Batteries*, 3rd ed.,
+18 (1897); see also Linden & Reddy, *Handbook of Batteries*, 3rd ed.,
 Ch. 3.3, for the modern textbook treatment this module follows.
 
 .. minigallery:: ../../examples/electrochem/battery/plot_01_discharge_curves.py
+
+1903 -- Cottrell and the Diffusion-Limited Current
+------------------------------------------------------
+
+Frederick Gardner Cottrell, working in Leipzig on the "residual current"
+that flows after an electrode's potential is changed, treated it as a
+problem in Fick's diffusion. If the potential is stepped so that the
+electroactive species is consumed as soon as it reaches a planar
+electrode, a depleted layer grows into the solution like
+:math:`\sqrt{Dt}`, and the current -- the rate at which fresh material
+diffuses in -- decays as :math:`t^{-1/2}`. The Cottrell equation was the
+first quantitative link between an electrode current and mass transport,
+and underlies chronoamperometry and the measurement of diffusion
+coefficients to this day.
+
+.. math::
+
+   i(t) = nFAC\sqrt{\frac{D}{\pi t}}
+
+*Implementation:* :func:`~chemistrykit.electrochem.cottrell_current`
+implements the equation; its doctest confirms the constant
+:math:`i\sqrt{t}` signature, and the unit tests check that integrating
+it reproduces the accumulated charge :math:`2nFAC\sqrt{Dt/\pi}`.
+
+*References:* F. G. Cottrell, "Der Reststrom bei galvanischer
+Polarisation, betrachtet als ein Diffusionsproblem," Z. Phys. Chem. 42,
+385-431 (1903).
+
+.. minigallery:: ../../examples/electrochem/voltammetry/plot_01_cottrell_equation.py
 
 1905 -- Tafel's Empirical Overpotential Law
 --------------------------------------------------
@@ -349,6 +456,42 @@ Wasserstoffentwicklung," Z. Phys. Chem. 50, 641-712 (1905).
 
 .. minigallery:: ../../examples/electrochem/butler_volmer/plot_01_tafel.py
 
+1922 -- Heyrovský's Polarography
+-------------------------------------
+
+Jaroslav Heyrovský, in Prague, measured the current through a dropping
+mercury electrode -- a capillary releasing a fresh, perfectly clean
+mercury drop every few seconds -- as the applied voltage was slowly
+increased. Each reducible species in the solution produced a sigmoidal
+step, a "polarographic wave": the potential at half its height (the
+half-wave potential) identifies the species, and the height of its
+plateau is proportional to its concentration. With Masuzo Shikata he
+automated the recording in the polarograph (1925), making polarography
+the first widely used instrumental method of electroanalysis. Dionýz
+Ilkovič derived the height of the plateau from diffusion to the growing
+drop (1934), and Heyrovský and Ilkovič the shape of the reversible wave
+(1935). Heyrovský received the 1959 Nobel Prize in Chemistry.
+
+.. math::
+
+   \bar{i}_d = 607\,n D^{1/2} m^{2/3} t^{1/6} C, \qquad
+   E = E_{1/2} + \frac{RT}{nF}\ln\frac{i_d - i}{i}
+
+*Implementation:* :func:`~chemistrykit.electrochem.ilkovic_diffusion_current`
+implements the Ilkovič equation (maximum or drop-averaged, in its
+traditional microampere units), and
+:func:`~chemistrykit.electrochem.polarographic_wave_current` the
+Heyrovský-Ilkovič wave, whose doctest confirms the current is exactly half
+the plateau at the half-wave potential.
+
+*References:* J. Heyrovský, "Elektrolysa se rtuťovou kapkovou kathodou,"
+Chem. Listy 16, 256-264 (1922); J. Heyrovský and M. Shikata, Recl. Trav.
+Chim. Pays-Bas 44, 496-498 (1925); D. Ilkovič, Collect. Czech. Chem.
+Commun. 6, 498-513 (1934); J. Heyrovský and D. Ilkovič, Collect. Czech.
+Chem. Commun. 7, 198-214 (1935).
+
+.. minigallery:: ../../examples/electrochem/voltammetry/plot_02_heyrovsky_polarography.py
+
 1923 -- Debye-Hückel Theory and Nonideal Electrolytes
 ------------------------------------------------------------
 
@@ -378,7 +521,7 @@ the ideal Nernst potential, exactly as Debye-Hückel theory predicts.
 *References:* P. Debye and E. Hückel, "Zur Theorie der Elektrolyte," Phys.
 Z. 24, 185-206 (1923).
 
-.. minigallery:: ../../examples/electrochem/nernst/plot_01_nernst_and_concentration_cells.py
+.. minigallery:: ../../examples/electrochem/nernst/plot_02_debye_huckel_activity.py
 
 1924, 1930 -- Butler, Erdey-Grúz and Volmer: the Butler-Volmer Equation
 ------------------------------------------------------------------------
@@ -421,7 +564,38 @@ Trans. Faraday Soc. 19, 729-733 (1924); T. Erdey-Grúz and M. Volmer,
 "Zur Theorie der Wasserstoff Überspannung," Z. Phys. Chem. A 150, 203-213
 (1930).
 
-.. minigallery:: ../../examples/electrochem/butler_volmer/plot_01_tafel.py
+.. minigallery:: ../../examples/electrochem/butler_volmer/plot_02_butler_volmer_equation.py
+
+1948 -- Randles, Ševčík and the Theory of Linear-Sweep Voltammetry
+------------------------------------------------------------------------
+
+Instead of stepping the potential, John Randles in Birmingham and
+Augustin Ševčík in Prague swept it linearly in time, recording the
+current on a cathode-ray oscillograph. Both, independently and in the
+same year, solved the resulting diffusion problem for a reversible
+couple: the current rises to a peak and then decays as the depletion
+layer grows, and the peak current is proportional to concentration and
+to the square root of the scan rate. Their result is the foundation of
+linear-sweep and cyclic voltammetry, today the most widely used
+electroanalytical technique; a linear plot of :math:`i_p` against
+:math:`\sqrt{v}` is the standard test that an electrode reaction is
+diffusion-controlled.
+
+.. math::
+
+   i_p = 0.4463\,nFAC\sqrt{\frac{nFvD}{RT}}
+
+*Implementation:* :func:`~chemistrykit.electrochem.randles_sevcik_peak_current`
+implements the equation in SI units; its doctest checks the
+:math:`\sqrt{v}` scaling, and the unit tests recover the familiar
+:math:`2.69\times10^5` coefficient of the 25 degC textbook form.
+
+*References:* J. E. B. Randles, "A cathode ray polarograph. Part II. The
+current-voltage curves," Trans. Faraday Soc. 44, 327-338 (1948);
+A. Ševčík, "Oscillographic polarography with periodical triangular
+voltage," Collect. Czech. Chem. Commun. 13, 349-377 (1948).
+
+.. minigallery:: ../../examples/electrochem/voltammetry/plot_03_randles_sevcik_cyclic_voltammetry.py
 
 1953 -- The Stockholm Convention and the Modern Sign Convention
 --------------------------------------------------------------------
@@ -456,7 +630,7 @@ IUPAC Conference, Stockholm, 1953; summarized in the electrochemistry
 sections of the IUPAC *Green Book* (*Quantities, Units and Symbols in
 Physical Chemistry*) in all subsequent editions.
 
-.. minigallery:: ../../examples/electrochem/standard_potentials/plot_01_cell_potentials.py
+.. minigallery:: ../../examples/electrochem/standard_potentials/plot_02_stockholm_sign_convention.py
 
 See Also
 --------
