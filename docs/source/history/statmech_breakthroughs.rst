@@ -176,7 +176,7 @@ respektive den Sätzen über das Wärmegleichgewicht," Sitzungsberichte Akad.
 Wiss. Wien 76, 373-435 (1877); M. Planck, "Über das Gesetz der
 Energieverteilung im Normalspektrum," Ann. Phys. 4, 553-563 (1901).
 
-.. minigallery:: ../../examples/statmech/lattice_gas/plot_01_langmuir_adsorption.py
+.. minigallery:: ../../examples/statmech/lattice_gas/plot_02_boltzmann_entropy_counting.py
 
 1902 -- Gibbs's Elementary Principles in Statistical Mechanics
 -----------------------------------------------------------------
@@ -215,7 +215,7 @@ bundles the resulting `U`, `S`, `Cv`, and `A` together.
 Mechanics, Developed with Especial Reference to the Rational Foundation
 of Thermodynamics* (New Haven: Yale University Press, 1902).
 
-.. minigallery:: ../../examples/statmech/partition_functions/plot_01_vibrational_heat_capacity.py
+.. minigallery:: ../../examples/statmech/partition_functions/plot_03_gibbs_canonical_partition_function.py
 
 1907 -- Einstein's Quantum Theory of Specific Heats
 -------------------------------------------------------
@@ -293,7 +293,48 @@ auf chemische Probleme," Ann. Phys. 36, 958-980 (1911); H. Tetrode, "Die
 chemische Konstante der Gase und das elementare Wirkungsquantum," Ann.
 Phys. 38, 434-442 (1912).
 
-.. minigallery:: ../../examples/statmech/partition_functions/plot_01_vibrational_heat_capacity.py
+.. minigallery:: ../../examples/statmech/partition_functions/plot_04_sackur_tetrode_entropy.py
+
+1912 -- Debye's T-Cubed Law for the Heat Capacity of Solids
+----------------------------------------------------------------
+
+Einstein's 1907 theory (above) explained why a solid's heat capacity
+falls below the Dulong-Petit value :math:`3R` on cooling, but it predicted
+an *exponential* fall, far faster than the measurements Walther Nernst's
+laboratory was then making on solids near liquid-hydrogen temperatures.
+Peter Debye saw the reason: the atoms of a crystal do not vibrate
+independently at one frequency, but collectively, as sound waves with a
+whole spectrum of frequencies. Treating the solid as an elastic continuum
+gives a density of vibrational states growing as :math:`\nu^2`, which
+Debye cut off at a maximum frequency :math:`\nu_D` so that the crystal
+has exactly :math:`3N` modes in total. However low the temperature, the
+longest-wavelength sound waves still have energy spacings smaller than
+:math:`k_BT` and stay thermally active, so the heat capacity falls only as
+a power law, :math:`C_V\propto T^3`. The single parameter
+:math:`\Theta_D=h\nu_D/k_B`, the Debye temperature, fits the heat
+capacities of many simple solids over the whole temperature range, and
+the :math:`T^3` law remains the standard way to extrapolate
+calorimetric data to absolute zero when determining third-law entropies.
+
+.. math::
+
+   C_V = 9Nk_B\left(\frac{T}{\Theta_D}\right)^3
+         \int_0^{\Theta_D/T}\frac{x^4e^x}{(e^x-1)^2}\,dx
+   \;\xrightarrow{T\ll\Theta_D}\;
+   \frac{12\pi^4}{5}Nk_B\left(\frac{T}{\Theta_D}\right)^3
+
+*Implementation:* :class:`chemistrykit.statmech.DebyeSolid` evaluates
+this integral numerically in
+:meth:`~chemistrykit.statmech.DebyeSolid.heat_capacity_v` (with the
+matching thermal energy in
+:meth:`~chemistrykit.statmech.DebyeSolid.internal_energy`), and
+:meth:`~chemistrykit.statmech.DebyeSolid.low_temperature_heat_capacity`
+gives the limiting :math:`T^3` law it approaches as :math:`T\to0`.
+
+*References:* P. Debye, "Zur Theorie der spezifischen Wärmen," Ann.
+Phys. 39, 789-839 (1912); McQuarrie, *Statistical Mechanics*, Ch. 11.
+
+.. minigallery:: ../../examples/statmech/solids/plot_01_debye_t_cubed_law.py
 
 1918 -- Langmuir's Statistical Theory of Adsorption
 ---------------------------------------------------------
@@ -404,7 +445,7 @@ pressure :math:`P_0` (see 1918, above).
 thesis, University of Paris (1924), published as Ann. Phys. 10, 22-128
 (1925).
 
-.. minigallery:: ../../examples/statmech/lattice_gas/plot_01_langmuir_adsorption.py
+.. minigallery:: ../../examples/statmech/quantum_statistics/plot_01_thermal_de_broglie_wavelength.py
 
 1924 -- 1926 -- Bose, Einstein, Fermi, Dirac, and the Classical Limit of Quantum Statistics
 -----------------------------------------------------------------------------------------------
@@ -446,7 +487,162 @@ idealen Gases," Sitzungsber. Preuss. Akad. Wiss. (1924), 261-267, and
 monoatomico," Rend. Lincei 3, 145-149 (1926); P. A. M. Dirac, "On the
 Theory of Quantum Mechanics," Proc. R. Soc. Lond. A 112, 661-677 (1926).
 
-.. minigallery:: ../../examples/statmech/maxwell_boltzmann/plot_01_maxwell_boltzmann.py
+.. minigallery:: ../../examples/statmech/quantum_statistics/plot_02_bose_einstein_fermi_dirac_limit.py
+
+1925 -- Ising's One-Dimensional Model of a Ferromagnet
+-----------------------------------------------------------
+
+Wilhelm Lenz proposed, and his student Ernst Ising solved for his 1924
+Hamburg dissertation, the simplest possible model of cooperative
+behavior: a row of "spins" :math:`s_i=\pm1`, each interacting only with
+its nearest neighbors through an energy :math:`-Js_is_{i+1}`, in a field
+`h`. The same model, read as occupied and empty sites, is a lattice gas
+with nearest-neighbor attraction, the natural interacting extension of
+Langmuir's independent sites (1918, above). Ising found that the
+one-dimensional chain never orders at any temperature above absolute
+zero: a single broken bond costs a finite energy but gains an entropy
+that grows with the chain's length, so thermal fluctuations always win.
+He concluded, wrongly as it turned out, that the model could not describe
+a phase transition in any dimension. The exact solution is most easily
+written with the transfer matrix introduced later by Kramers and Wannier
+(1941, below): the partition function of a ring of `N` spins is
+:math:`Z_N=\lambda_+^N+\lambda_-^N`, where :math:`\lambda_\pm` are the
+eigenvalues of a 2x2 matrix.
+
+.. math::
+
+   \lambda_\pm = e^{K}\left[\cosh b\pm\sqrt{\sinh^2b+e^{-4K}}\right],
+   \qquad K=\frac{J}{k_BT},\quad b=\frac{h}{k_BT}
+
+*Implementation:* :class:`chemistrykit.statmech.Ising1D` implements the
+transfer-matrix solution:
+:meth:`~chemistrykit.statmech.Ising1D.partition_function`,
+:meth:`~chemistrykit.statmech.Ising1D.free_energy_per_spin`,
+:meth:`~chemistrykit.statmech.Ising1D.magnetization` (zero in zero field
+at every :math:`T>0`), the finite
+:meth:`~chemistrykit.statmech.Ising1D.correlation_length`, and the smooth
+:meth:`~chemistrykit.statmech.Ising1D.heat_capacity_per_spin`.
+
+*References:* E. Ising, "Beitrag zur Theorie des Ferromagnetismus," Z.
+Phys. 31, 253-258 (1925); S. G. Brush, "History of the Lenz-Ising Model,"
+Rev. Mod. Phys. 39, 883-893 (1967).
+
+.. minigallery:: ../../examples/statmech/ising/plot_01_ising_chain_transfer_matrix.py
+
+1937 -- Mayer's Cluster Expansion and the Second Virial Coefficient
+------------------------------------------------------------------------
+
+Every result above treats molecules as non-interacting apart from the
+occasional collision. Joseph E. Mayer, building on H. D. Ursell's 1927
+expansion of the configurational integral, showed how to put
+intermolecular forces into the partition function systematically. The
+Boltzmann factor of each pair is written as :math:`1+f(r)`, where the
+Mayer function :math:`f(r)=e^{-u(r)/k_BT}-1` is non-zero only when two
+molecules are close together. Expanding the product over all pairs and
+grouping the terms into connected "clusters" gives the virial equation of
+state :math:`PV_m/RT=1+B_2(T)/V_m+B_3(T)/V_m^2+\cdots`, in which every
+coefficient is an explicit integral over the pair potential. This turned
+measured gas non-ideality into a direct probe of intermolecular forces.
+Fitting :math:`B_2(T)` data was for decades the main way the parameters
+of potentials such as the Lennard-Jones potential were determined.
+
+.. math::
+
+   B_2(T) = -2\pi N_A\int_0^\infty\left(e^{-u(r)/k_BT}-1\right)r^2\,dr
+
+*Implementation:* :func:`chemistrykit.statmech.second_virial_coefficient`
+evaluates this integral by quadrature for any spherical pair potential,
+including hard-core potentials, and reproduces the hard-sphere value
+:math:`\frac{2\pi}{3}N_A\sigma^3`, the closed-form square-well result, and
+the Lennard-Jones Boyle temperature :math:`T_B\approx3.418\,\epsilon/k_B`
+(tested in ``chemistrykit/statmech/tests/test_virial.py``).
+
+*References:* H. D. Ursell, "The Evaluation of Gibbs' Phase-Integral for
+Imperfect Gases," Proc. Cambridge Philos. Soc. 23, 685-697 (1927); J. E.
+Mayer, "The Statistical Mechanics of Condensing Systems. I," J. Chem.
+Phys. 5, 67-73 (1937); J. E. Mayer and M. G. Mayer, *Statistical
+Mechanics* (New York: Wiley, 1940); McQuarrie, *Statistical Mechanics*,
+Ch. 12.
+
+.. minigallery:: ../../examples/statmech/virial/plot_01_mayer_second_virial_coefficient.py
+
+1941 -- Kramers and Wannier's Duality and the Exact Critical Temperature
+-----------------------------------------------------------------------------
+
+Hendrik Kramers and Gregory Wannier reopened the question Ising had
+closed (1925, above) by studying the two-dimensional square lattice. They
+introduced the transfer-matrix method and found a hidden symmetry: the
+high-temperature expansion of the partition function (a sum over closed
+loops of bonds) and its low-temperature expansion (a sum over domain
+walls around flipped spins) have exactly the same form, with the
+coupling :math:`K=J/k_BT` in one replaced by a dual coupling :math:`K^*`
+in the other. The duality maps high temperature onto low temperature.
+If the model has a single phase transition, it must therefore sit at the
+self-dual point :math:`K_c=K_c^*`, which fixes the critical temperature
+exactly, three years before anyone could solve the model. It was the
+first exact critical temperature for any lattice model, and the first
+firm evidence that the Ising model does order in two dimensions.
+
+.. math::
+
+   \sinh 2K\,\sinh 2K^* = 1
+   \quad\Longrightarrow\quad
+   \sinh 2K_c = 1,\qquad
+   T_c = \frac{2J}{k_B\ln\left(1+\sqrt2\right)}\approx 2.269\,\frac{J}{k_B}
+
+*Implementation:* :func:`chemistrykit.statmech.kramers_wannier_dual_coupling`
+computes :math:`K^*=-\tfrac12\ln\tanh K` (an involution whose fixed point is
+:math:`K_c`), and :func:`chemistrykit.statmech.ising_2d_critical_temperature`
+returns the exact :math:`T_c` for a given coupling `J`.
+
+*References:* H. A. Kramers and G. H. Wannier, "Statistics of the
+Two-Dimensional Ferromagnet. Part I," Phys. Rev. 60, 252-262 (1941).
+
+.. minigallery:: ../../examples/statmech/ising/plot_02_kramers_wannier_duality.py
+
+1944 -- 1952 -- Onsager's Exact Solution of the Two-Dimensional Ising Model
+--------------------------------------------------------------------------------
+
+Lars Onsager calculated the partition function of the zero-field square
+lattice Ising model exactly, by diagonalizing Kramers and Wannier's
+transfer matrix with an algebraic method of his own. It was the first
+exact solution of any model with a genuine phase transition, and it
+settled the long debate over whether the partition function, a sum of
+smooth exponentials, could produce a singularity at all: in the limit of
+an infinite lattice, it does. The solution also showed that the
+approximate mean-field (Bragg-Williams) theory, the standard treatment
+of the time, is qualitatively wrong near :math:`T_c`: the heat capacity
+does not jump but diverges logarithmically. Onsager announced the
+spontaneous magnetization, :math:`m=[1-\sinh^{-4}2K]^{1/8}`, at a 1949
+conference without publishing a derivation. C. N. Yang supplied the proof
+in 1952, and its exponent :math:`\beta=1/8` (against the mean-field
+value 1/2) became a benchmark for the theory of critical phenomena.
+
+.. math::
+
+   -\frac{f}{k_BT} = \ln(2\cosh 2K)+\frac1\pi\int_0^{\pi/2}
+   \ln\frac{1+\sqrt{1-\kappa^2\sin^2\phi}}{2}\,d\phi,
+   \qquad \kappa=\frac{2\sinh 2K}{\cosh^2 2K}
+
+*Implementation:* :class:`chemistrykit.statmech.Ising2DOnsager` evaluates
+Onsager's free energy
+(:meth:`~chemistrykit.statmech.Ising2DOnsager.free_energy_per_spin`), and
+the internal energy and heat capacity in closed form via complete
+elliptic integrals
+(:meth:`~chemistrykit.statmech.Ising2DOnsager.internal_energy_per_spin`,
+:meth:`~chemistrykit.statmech.Ising2DOnsager.heat_capacity_per_spin`), as
+well as Yang's
+:meth:`~chemistrykit.statmech.Ising2DOnsager.spontaneous_magnetization`.
+The tests check each quantity against numerical derivatives of the free
+energy.
+
+*References:* L. Onsager, "Crystal Statistics. I. A Two-Dimensional Model
+with an Order-Disorder Transition," Phys. Rev. 65, 117-149 (1944); C. N.
+Yang, "The Spontaneous Magnetization of a Two-Dimensional Ising Model,"
+Phys. Rev. 85, 808-816 (1952); K. Huang, *Statistical Mechanics*, 2nd ed.
+(New York: Wiley, 1987), Ch. 15.
+
+.. minigallery:: ../../examples/statmech/ising/plot_03_onsager_exact_solution.py
 
 See Also
 --------
