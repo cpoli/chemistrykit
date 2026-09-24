@@ -53,3 +53,50 @@ def test_nose_hoover_thermostat_rejects_nonpositive_parameters():
         NoseHooverThermostat(target_temperature=0.0, Q=1.0)
     with pytest.raises(ValueError):
         NoseHooverThermostat(target_temperature=1.0, Q=0.0)
+
+
+def test_berendsen_relaxes_temperature_geometrically_without_dynamics():
+    from chemistrykit.md.systems.thermostats import BerendsenThermostat
+
+    fluid = LJFluid.from_lattice(n_per_side=3, cutoff=1.5, density=0.6, temperature=2.0, rng=3)
+    thermostat = BerendsenThermostat(target_temperature=1.0, tau=0.1)
+    for _ in range(10):
+        thermostat.apply(fluid, dt=0.01)
+    # T_n = T0 + (T_i - T0) (1 - dt/tau)^n
+    assert fluid.temperature() == pytest.approx(1.0 + 1.0 * 0.9**10, rel=1e-12)
+
+
+def test_berendsen_with_tau_equal_dt_is_full_rescaling():
+    from chemistrykit.md.systems.thermostats import BerendsenThermostat
+
+    fluid = LJFluid.from_lattice(n_per_side=3, cutoff=1.5, density=0.6, temperature=2.5, rng=4)
+    BerendsenThermostat(target_temperature=1.2, tau=0.005).apply(fluid, dt=0.005)
+    assert fluid.temperature() == pytest.approx(1.2)
+
+
+def test_stochastic_velocity_rescaling_samples_canonical_kinetic_energy():
+    import numpy as np
+
+    from chemistrykit.md.systems.thermostats import StochasticVelocityRescalingThermostat
+
+    fluid = LJFluid.from_lattice(n_per_side=3, cutoff=1.5, density=0.6, temperature=2.0, rng=5)
+    T0 = 1.3
+    thermostat = StochasticVelocityRescalingThermostat(target_temperature=T0, tau=0.05, rng=0)
+    samples = []
+    for step in range(40000):
+        thermostat.apply(fluid, dt=0.01)
+        if step >= 1000:
+            samples.append(fluid.kinetic_energy())
+    samples = np.array(samples)
+    nf = fluid.degrees_of_freedom()
+    k_bar = 0.5 * nf * T0
+    assert samples.mean() == pytest.approx(k_bar, rel=0.02)
+    assert samples.var() == pytest.approx(2.0 * k_bar**2 / nf, rel=0.1)
+
+
+@pytest.mark.parametrize("cls_name", ["BerendsenThermostat", "StochasticVelocityRescalingThermostat"])
+def test_new_thermostats_reject_nonpositive_tau(cls_name):
+    from chemistrykit.md.systems import thermostats
+
+    with pytest.raises(ValueError):
+        getattr(thermostats, cls_name)(target_temperature=1.0, tau=0.0)

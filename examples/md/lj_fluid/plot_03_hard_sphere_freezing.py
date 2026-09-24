@@ -1,19 +1,20 @@
 r"""
-Purely repulsive (WCA) particles: packing order without attraction
-=====================================================================
+Alder and Wainwright's hard spheres: packing-driven order with no attraction
+===============================================================================
 
-Truncating the Lennard-Jones potential at its own minimum,
-:math:`r=2^{1/6}\sigma` (:attr:`~chemistrykit.md.systems.lj_fluid.LennardJones.r_min`),
-and shifting it to be continuous there removes the attractive tail
-entirely and leaves a purely repulsive potential -- the
-Weeks-Chandler-Andersen (WCA) reference system, and (in reduced units) a
-smoothed stand-in for a fluid of hard spheres. Comparing the radial
-distribution function g(r) of this purely repulsive
-:class:`~chemistrykit.md.systems.lj_fluid.LJFluid` at low and high density
-shows that pronounced short-range positional order can appear from
-*packing alone*, with no attractive force anywhere in the potential --
-the essential physics behind Alder and Wainwright's 1957 discovery that
-hard spheres alone can freeze.
+Alder and Wainwright's 1957 computer experiments showed that particles
+with *no attraction at all* -- hard spheres -- order into a crystal-like
+arrangement once they are packed densely enough: freezing driven by
+excluded volume (entropy), not by energy. This package integrates smooth
+forces rather than hard-sphere collision events, so the hard spheres are
+approximated by steeply repulsive particles: the Lennard-Jones potential
+cut off at its own minimum :math:`r=2^{1/6}\sigma`
+(:attr:`~chemistrykit.md.systems.lj_fluid.LennardJones.r_min`) and shifted,
+which leaves only a repulsive wall. Comparing the radial distribution
+function g(r) of this purely repulsive
+:class:`~chemistrykit.md.systems.lj_fluid.LJFluid` at low density and at
+a density near hard-sphere freezing shows sharp positional order
+appearing from packing alone.
 """
 
 # %%
@@ -23,7 +24,7 @@ from chemistrykit.md.systems.lj_fluid import LennardJones, LJFluid
 from chemistrykit.md.systems.thermostats import VelocityRescalingThermostat
 from chemistrykit.md.visualizers.md_plots import plot_radial_distribution_function
 
-r_wca_cutoff = LennardJones().r_min  # 2**(1/6) sigma: purely repulsive LJ (WCA)
+r_wca_cutoff = LennardJones().r_min  # 2**(1/6) sigma: purely repulsive, hard-sphere-like
 T_target = 1.0
 dt, n_steps = 0.003, 4000
 
@@ -45,7 +46,7 @@ for density, color in [(0.30, "steelblue"), (1.05, "darkorange")]:
     plot_radial_distribution_function(r, g, ax=ax, color=color, label=f"density = {density}")
     peak_heights[density] = float(g.max())
 
-ax.set_title("g(r) of a purely repulsive (WCA) fluid: dilute vs. dense")
+ax.set_title("Hard-sphere-like particles: dilute gas vs. densely packed")
 ax.legend()
 fig.tight_layout()
 

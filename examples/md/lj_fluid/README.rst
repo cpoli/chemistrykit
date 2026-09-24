@@ -1,8 +1,8 @@
 Lennard-Jones fluid
 --------------------
 
-An equilibrated NVE Lennard-Jones fluid: energy conservation, the radial
-distribution function g(r), a cross-check of the simulated velocity
-ensemble against the Maxwell-Boltzmann speed distribution, and a purely
-repulsive (Weeks-Chandler-Andersen) fluid illustrating packing-driven
-positional order at high density.
+Simulations of the Lennard-Jones fluid: Rahman's liquid argon, the
+Maxwell-Boltzmann speed distribution, hard-sphere-like packing order,
+the Weeks-Chandler-Andersen repulsive reference fluid, Verlet's
+integrator and neighbor list, and self-diffusion from the Einstein
+mean-squared displacement and the Green-Kubo velocity autocorrelation.

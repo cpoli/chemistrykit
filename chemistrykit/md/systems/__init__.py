@@ -1,2 +1,3 @@
 """Concrete molecular-dynamics models: the Lennard-Jones fluid, bonded/angle
-force fields, and thermostats."""
+force fields, SHAKE constraints, thermostats,
+and transport (diffusion) analysis."""
