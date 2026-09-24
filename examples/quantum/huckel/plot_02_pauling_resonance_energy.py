@@ -31,11 +31,12 @@ for name, (system, n_pi) in molecules.items():
     print(f"{name:15s} pi energy = {system.pi_electron_energy(n_pi):7.4f} |beta|, resonance energy = {resonance[name]:7.4f}")
 
 # %%
-# With beta = -1, benzene's resonance energy is exactly 2|beta|, far more
+# With :math:`\beta = -1`, benzene's resonance energy is exactly
+# :math:`2|\beta|`, far more
 # than open-chain hexatriene with the same six pi electrons, and
 # cyclobutadiene gets none at all. The thermochemical benzene
-# benzene resonance energy of about 36 kcal/mol (from heats of
-# hydrogenation) corresponds to |beta| near 18 kcal/mol on this scale.
+# resonance energy of about 36 kcal/mol (from heats of
+# hydrogenation) corresponds to :math:`|\beta|` near 18 kcal/mol on this scale.
 
 fig, ax = plt.subplots(figsize=(7, 4))
 names = list(resonance)
@@ -47,7 +48,7 @@ fig.tight_layout()
 
 # %%
 # Resonance energy per pi electron in linear polyenes creeps up with chain
-# length but stays well below benzene's 1/3 |beta| per electron.
+# length but stays well below benzene's :math:`|\beta|/3` per electron.
 
 n_values = np.arange(2, 21, 2)
 per_electron = [-HuckelSystem.linear_polyene(n).delocalization_energy(n) / n for n in n_values]
