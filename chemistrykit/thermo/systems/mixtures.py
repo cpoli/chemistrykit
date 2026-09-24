@@ -22,6 +22,7 @@ __all__ = [
     "freezing_point_depression",
     "boiling_point_elevation",
     "osmotic_pressure",
+    "MargulesSolution",
 ]
 
 
@@ -271,3 +272,137 @@ def osmotic_pressure(M: float, T: float, i: float = 1.0, R_gas: float = R) -> fl
     247.9
     """
     return i * M * R_gas * T
+
+
+@dataclass
+class MargulesSolution:
+    r"""A non-ideal binary liquid described by the one-parameter (two-suffix) Margules model.
+
+    Margules expanded the logarithms of the activity coefficients as power
+    series in mole fraction (M. Margules, *Sitzungsber. Kais. Akad. Wiss.
+    Wien, Math.-Naturwiss. Kl.* 104, 1243-1278 (1895)). Truncated at its
+    first term, the model has a symmetric excess Gibbs energy
+    :math:`G^E/(RT) = A\,x_1x_2`, giving
+
+    .. math::
+
+        \ln\gamma_1 = A\,x_2^2, \qquad \ln\gamma_2 = A\,x_1^2
+
+    and the modified Raoult's law :math:`P_i = x_i\gamma_i P_i^*` (Atkins &
+    de Paula, *Physical Chemistry*, 11th ed., Ch. 5.3). :math:`A > 0` gives
+    positive deviations from Raoult's law, :math:`A < 0` negative ones,
+    and :math:`A = 0` recovers :class:`BinaryIdealSolution`.
+
+    Parameters
+    ----------
+    A : float
+        Dimensionless Margules parameter, :math:`W/(RT)`.
+    P1_star : float
+        Vapor pressure of pure component 1.
+    P2_star : float
+        Vapor pressure of pure component 2.
+
+    Examples
+    --------
+    At infinite dilution component 1 obeys Henry's law with
+    :math:`K_H = P_1^* e^{A}`, while near :math:`x_1 = 1` its activity
+    coefficient tends to 1 (Raoult's law):
+
+    >>> import numpy as np
+    >>> sol = MargulesSolution(A=1.2, P1_star=30.0, P2_star=20.0)
+    >>> round(sol.henry_constant_1 / 30.0, 6) == round(float(np.exp(1.2)), 6)
+    True
+    >>> g1, g2 = sol.activity_coefficients(1.0)
+    >>> float(g1), round(float(g2), 6) == round(float(np.exp(1.2)), 6)
+    (1.0, True)
+    """
+
+    A: float
+    P1_star: float
+    P2_star: float
+
+    def activity_coefficients(self, x1):
+        r"""Return :math:`(\gamma_1, \gamma_2)` at liquid mole fraction `x1`.
+
+        Parameters
+        ----------
+        x1 : float or array-like of float
+            Liquid-phase mole fraction of component 1.
+
+        Returns
+        -------
+        tuple of (float or ndarray)
+        """
+        x1 = np.asarray(x1, dtype=np.float64)
+        x2 = 1.0 - x1
+        return np.exp(self.A * x2**2), np.exp(self.A * x1**2)
+
+    def excess_gibbs(self, x1, T: float, R_gas: float = R):
+        r"""Molar excess Gibbs energy :math:`G^E = RT\,A\,x_1x_2`, in J/mol.
+
+        Parameters
+        ----------
+        x1 : float or array-like of float
+            Liquid-phase mole fraction of component 1.
+        T : float
+            Absolute temperature, in K.
+        R_gas : float, default :data:`chemistrykit.constants.R`
+            Gas constant.
+
+        Returns
+        -------
+        float or ndarray
+        """
+        x1 = np.asarray(x1, dtype=np.float64)
+        return R_gas * T * self.A * x1 * (1.0 - x1)
+
+    def partial_pressures(self, x1):
+        r"""Return :math:`(P_1, P_2)` from the modified Raoult's law :math:`P_i = x_i\gamma_iP_i^*`.
+
+        Parameters
+        ----------
+        x1 : float or array-like of float
+            Liquid-phase mole fraction of component 1.
+
+        Returns
+        -------
+        tuple of (float or ndarray)
+        """
+        x1 = np.asarray(x1, dtype=np.float64)
+        g1, g2 = self.activity_coefficients(x1)
+        return x1 * g1 * self.P1_star, (1.0 - x1) * g2 * self.P2_star
+
+    def total_pressure(self, x1):
+        """Total vapor pressure above a liquid of composition `x1`.
+
+        Parameters
+        ----------
+        x1 : float or array-like of float
+            Liquid-phase mole fraction of component 1.
+
+        Returns
+        -------
+        float or ndarray
+        """
+        P1, P2 = self.partial_pressures(x1)
+        return P1 + P2
+
+    def vapor_composition(self, x1):
+        """Vapor-phase mole fraction of component 1 in equilibrium with liquid `x1`.
+
+        Parameters
+        ----------
+        x1 : float or array-like of float
+            Liquid-phase mole fraction of component 1.
+
+        Returns
+        -------
+        float or ndarray
+        """
+        P1, P2 = self.partial_pressures(x1)
+        return P1 / (P1 + P2)
+
+    @property
+    def henry_constant_1(self) -> float:
+        r"""Henry's-law constant of component 1 at infinite dilution, :math:`P_1^* e^{A}`."""
+        return float(self.P1_star * np.exp(self.A))

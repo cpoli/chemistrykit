@@ -1,5 +1,5 @@
 Equations of state
 -------------------
 
-Ideal gas, van der Waals, and Redlich-Kwong P-V isotherms, and how real
-gases deviate from ideality as the critical point is approached.
+The ideal gas law, van der Waals, Redlich-Kwong, and Peng-Robinson
+equations of state, and Lewis fugacities computed from them.

@@ -1,6 +1,5 @@
 Reaction equilibrium
 --------------------
 
-The reaction quotient, Kp/Kc, the van't Hoff temperature dependence of an
-equilibrium constant, and the Gibbs-energy-minimization
-equilibrium-composition solver.
+The law of mass action, Gibbs-energy minimization, the van't Hoff plot,
+and Le Chatelier's principle.

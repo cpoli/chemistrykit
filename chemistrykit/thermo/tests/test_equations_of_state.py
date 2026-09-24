@@ -93,3 +93,43 @@ def test_van_der_waals_vapor_branch_has_larger_volume_than_liquid_branch():
     assert vapor > liquid
     assert eos.pressure(vapor, T) == pytest.approx(P, rel=1e-6)
     assert eos.pressure(liquid, T) == pytest.approx(P, rel=1e-6)
+
+
+def test_peng_robinson_alpha_is_one_at_critical_temperature():
+    from chemistrykit.thermo.systems.equations_of_state import PengRobinson
+
+    eos = PengRobinson(Tc=304.13, Pc=7.3773e6, omega=0.224)
+    assert eos.alpha(304.13) == pytest.approx(1.0)
+    assert eos.kappa == pytest.approx(0.37464 + 1.54226 * 0.224 - 0.26992 * 0.224**2)
+
+
+def test_peng_robinson_critical_point_is_inflection():
+    """P(Vc, Tc) = Pc and dP/dV = 0 at Vc = Zc RTc/Pc with Zc = 0.30740."""
+    from chemistrykit.thermo.systems.equations_of_state import PengRobinson
+
+    Tc, Pc = 190.56, 4.599e6
+    eos = PengRobinson(Tc=Tc, Pc=Pc, omega=0.011)
+    Vc = 0.307401 * R * Tc / Pc
+    assert eos.pressure(Vc, Tc) == pytest.approx(Pc, rel=2e-4)
+    h = 1e-3 * Vc
+    slope = (eos.pressure(Vc + h, Tc) - eos.pressure(Vc - h, Tc)) / (2 * h)
+    assert abs(slope * Vc / Pc) < 1e-2
+
+
+def test_peng_robinson_molar_volume_round_trips_and_branches():
+    from chemistrykit.thermo.systems.equations_of_state import PengRobinson
+
+    eos = PengRobinson(Tc=304.13, Pc=7.3773e6, omega=0.224)
+    P, T = 3.0e6, 270.0
+    Vv = eos.molar_volume(P, T)
+    Vl = eos.molar_volume(P, T, branch="liquid")
+    assert Vl < Vv
+    assert eos.pressure(Vv, T) == pytest.approx(P, rel=1e-8)
+    assert eos.pressure(Vl, T) == pytest.approx(P, rel=1e-6)
+
+
+def test_peng_robinson_approaches_ideal_gas_at_low_pressure():
+    from chemistrykit.thermo.systems.equations_of_state import PengRobinson
+
+    eos = PengRobinson(Tc=304.13, Pc=7.3773e6, omega=0.224)
+    assert eos.compressibility_factor(10.0, 500.0) == pytest.approx(1.0, abs=1e-5)

@@ -66,7 +66,7 @@ composition range.
 by Water, at Different Temperatures, and under Different Pressures,"
 Philos. Trans. R. Soc. 93, 29-274 (1803).
 
-.. minigallery:: ../../examples/thermo/mixtures/plot_02_henry_and_raoult.py
+.. minigallery:: ../../examples/thermo/mixtures/plot_02_henry_law.py
 
 1834 -- 1850 -- Clapeyron, Clausius, and the Ideal Gas and Vapor-Pressure Laws
 ------------------------------------------------------------------------------------
@@ -119,8 +119,45 @@ Clausius, "Über die bewegende Kraft der Wärme," Ann. Phys. Chem. 79,
 368-397 and 500-524 (1850).
 
 .. minigallery::
-   ../../examples/thermo/equations_of_state/plot_01_equations_of_state.py
+   ../../examples/thermo/equations_of_state/plot_01_ideal_gas_law.py
    ../../examples/thermo/phase_equilibria/plot_01_clausius_clapeyron.py
+
+1840 -- Hess's Law of Constant Heat Summation
+---------------------------------------------
+
+Germain Henri Hess, a Swiss-born chemist working in St. Petersburg,
+measured the heat released when sulfuric acid was diluted with water in
+one step or in several, and when various bases were neutralized by
+different routes. He found that the total heat was always the same:
+the heat of a chemical change depends only on where it starts and where
+it ends, not on the intermediate steps. His law predates the first law
+of thermodynamics by several years, but it is exactly what the first law
+later explained -- enthalpy is a state function, so the enthalpy changes
+of any set of steps that add up to a reaction also add up:
+
+.. math::
+
+   \Delta H_{\text{overall}} = \sum_k c_k\,\Delta H_k
+
+The law made thermochemistry a bookkeeping science. Enthalpies of
+reactions that are hard or impossible to carry out cleanly -- such as
+burning graphite only as far as carbon monoxide -- can be found from
+reactions that are easy to measure, and a single table of standard
+enthalpies of formation gives the enthalpy of any reaction:
+:math:`\Delta_rH^\circ = \sum_i \nu_i\,\Delta_fH_i^\circ`.
+
+*Implementation:* :func:`~chemistrykit.thermo.hess_law_enthalpy` sums a
+weighted combination of step enthalpies (a negative weight reverses a
+step), and :func:`~chemistrykit.thermo.reaction_enthalpy_from_formation`
+applies the law to formation enthalpies. The tests check the two-step
+combustion of graphite (-110.5 and -283.0 kJ/mol adding up to
+-393.5 kJ/mol) and that both functions agree for random reaction
+combinations.
+
+*References:* G. H. Hess, "Thermochemische Untersuchungen," Ann. Phys.
+Chem. 50, 385-404 (1840).
+
+.. minigallery:: ../../examples/thermo/thermochemistry/plot_01_hess_law.py
 
 1864 -- Guldberg and Waage's Law of Mass Action
 -----------------------------------------------------
@@ -168,7 +205,7 @@ translation, "Études sur les affinités chimiques," (Christiania:
 Brøgger & Christie, 1867); revised treatment: C. M. Guldberg and P.
 Waage, J. Prakt. Chem. 19, 69-114 (1879).
 
-.. minigallery:: ../../examples/thermo/equilibrium/plot_01_reaction_equilibrium.py
+.. minigallery:: ../../examples/thermo/equilibrium/plot_01_law_of_mass_action.py
 
 1869 -- 1873 -- Andrews, van der Waals, and the Continuity of Liquid and Gas
 ------------------------------------------------------------------------------------
@@ -218,7 +255,7 @@ States of Matter," Philos. Trans. R. Soc. 159, 575-590 (1869); J. D. van
 der Waals, *Over de Continuiteit van den Gas- en Vloeistoftoestand*
 (doctoral thesis, Leiden, 1873).
 
-.. minigallery:: ../../examples/thermo/equations_of_state/plot_01_equations_of_state.py
+.. minigallery:: ../../examples/thermo/equations_of_state/plot_02_van_der_waals_continuity.py
 
 1876 -- 1878 -- Gibbs's Equilibrium of Heterogeneous Substances
 -----------------------------------------------------------------
@@ -269,8 +306,8 @@ Substances," Trans. Conn. Acad. Arts Sci. 3, 108-248 (1876) and 343-524
 (1878).
 
 .. minigallery::
-   ../../examples/thermo/phase_equilibria/plot_01_clausius_clapeyron.py
-   ../../examples/thermo/equilibrium/plot_01_reaction_equilibrium.py
+   ../../examples/thermo/equilibrium/plot_02_gibbs_energy_minimization.py
+   ../../examples/thermo/phase_equilibria/plot_02_gibbs_phase_rule.py
 
 1884 -- van't Hoff's Equation for the Temperature Dependence of K
 -----------------------------------------------------------------------
@@ -321,7 +358,7 @@ fit for rate constants (see :doc:`/history/kinetics_breakthroughs`).
 *References:* J. H. van't Hoff, *Études de Dynamique Chimique* (Amsterdam:
 Frederik Muller, 1884).
 
-.. minigallery:: ../../examples/thermo/equilibrium/plot_01_reaction_equilibrium.py
+.. minigallery:: ../../examples/thermo/equilibrium/plot_03_van_t_hoff_plot.py
 
 1884 -- Le Chatelier's Principle
 ------------------------------------
@@ -355,7 +392,7 @@ the response of.
 *References:* H. Le Chatelier, "Sur un énoncé général des lois des
 équilibres chimiques," C. R. Acad. Sci. 99, 786-789 (1884).
 
-.. minigallery:: ../../examples/thermo/equilibrium/plot_01_reaction_equilibrium.py
+.. minigallery:: ../../examples/thermo/equilibrium/plot_04_le_chatelier.py
 
 1886 -- van't Hoff's Osmotic Pressure Law and the Modern Theory of Solutions
 ----------------------------------------------------------------------------------
@@ -403,7 +440,7 @@ Analogie zwischen Lösungen und Gasen," Z. Phys. Chem. 1, 481-508 (1887)
 (the definitive German statement; first announced in Swedish the
 previous year: K. Sven. Vetensk.-Akad. Handl. 21, No. 17 (1886)).
 
-.. minigallery:: ../../examples/thermo/mixtures/plot_02_henry_and_raoult.py
+.. minigallery:: ../../examples/thermo/mixtures/plot_03_osmotic_pressure.py
 
 1887 -- Raoult's Law of Vapor Pressure
 -------------------------------------------
@@ -446,7 +483,92 @@ below plots for an idealized benzene/toluene mixture.
 *References:* F. M. Raoult, "Loi générale de la tension de vapeur des
 dissolvants," C. R. Acad. Sci. 104, 1430-1433 (1887).
 
-.. minigallery:: ../../examples/thermo/mixtures/plot_01_colligative_properties.py
+.. minigallery:: ../../examples/thermo/mixtures/plot_01_raoult_law_pxy.py
+
+1895 -- Margules's Activity Coefficients for Non-Ideal Solutions
+------------------------------------------------------------------
+
+Raoult's law (1887, above) describes an ideal mixture, but most real
+liquid mixtures deviate from it -- sometimes so strongly that the vapor
+and liquid have the same composition at some point (an azeotrope), which
+no ideal solution can do. Max Margules, a Viennese physicist and
+meteorologist, showed how to describe these deviations while staying
+consistent with thermodynamics. He wrote the logarithm of each
+component's activity coefficient :math:`\gamma_i` as a power series in
+mole fraction, constrained by the Gibbs-Duhem relation
+:math:`x_1\,d\ln\gamma_1 + x_2\,d\ln\gamma_2 = 0`. Keeping only the first
+term gives the one-parameter Margules model,
+
+.. math::
+
+   \ln\gamma_1 = A\,x_2^2, \qquad \ln\gamma_2 = A\,x_1^2, \qquad
+   P_i = x_i\,\gamma_i\,P_i^*
+
+with excess Gibbs energy :math:`G^E = RT A x_1 x_2`. A positive
+:math:`A` raises the vapor pressure above Raoult's line, a negative one
+lowers it, and a large enough :math:`A` of either sign produces an
+azeotrope. The model also unites the two limiting laws above: each
+component obeys Raoult's law as it becomes pure (:math:`\gamma_i \to 1`)
+and Henry's law with :math:`K_H = P_i^* e^{A}` as it becomes dilute.
+Margules's expansion is the ancestor of every activity-coefficient model
+used in chemical engineering, from van Laar's to Wilson's and NRTL.
+
+*Implementation:* :class:`~chemistrykit.thermo.MargulesSolution`
+implements the one-parameter model, with activity coefficients, excess
+Gibbs energy, partial and total pressures, vapor composition, and the
+infinite-dilution Henry's-law constant. The tests check that
+:math:`A = 0` reproduces
+:class:`~chemistrykit.thermo.BinaryIdealSolution`, that the model
+satisfies the Gibbs-Duhem relation, and that it tends to Henry's law at
+infinite dilution.
+
+*References:* M. Margules, "Über die Zusammensetzung der gesättigten
+Dämpfe von Mischungen," Sitzungsber. Kais. Akad. Wiss. Wien,
+Math.-Naturwiss. Kl., Abt. IIa, 104, 1243-1278 (1895).
+
+.. minigallery:: ../../examples/thermo/mixtures/plot_04_margules_activity.py
+
+1901 -- Lewis's Fugacity
+------------------------
+
+Gibbs's chemical potential (1876, above) has a simple form only for
+ideal gases: :math:`\mu = \mu^\circ + RT\ln(P/P^\circ)`. Gilbert Newton
+Lewis kept that simple form for every real substance by defining a new
+quantity, the fugacity :math:`f` (from the Latin for "tendency to
+escape"), to take the place of pressure:
+
+.. math::
+
+   \mu = \mu^\circ + RT\ln\frac{f}{P^\circ}, \qquad
+   \lim_{P\to 0}\frac{f}{P} = 1
+
+The ratio :math:`\phi = f/P`, the fugacity coefficient, measures how far
+a real gas is from ideal, and it can be computed from any equation of
+state. Lewis's definition also gives a practical test for phase
+equilibrium: two phases of a substance coexist when their fugacities are
+equal, which is how vapor pressures are now computed from equations of
+state. Lewis later extended the same idea to solutions with the
+activity (1907), and his 1923 textbook with Merle Randall,
+*Thermodynamics and the Free Energy of Chemical Substances*, made both
+concepts standard.
+
+*Implementation:* :func:`~chemistrykit.thermo.fugacity_coefficient`
+evaluates
+:math:`\ln\phi = Z - 1 - \ln Z + \frac{1}{RT}\int_{V_m}^\infty (P - RT/V)\,dV`
+by quadrature for any equation of state, and
+:func:`~chemistrykit.thermo.fugacity` returns :math:`f = \phi P`.
+:func:`~chemistrykit.thermo.saturation_pressure` applies Lewis's
+equal-fugacity condition to a cubic equation of state to find the vapor
+pressure. The tests compare against the closed-form van der Waals and
+Redlich-Kwong fugacity coefficients and the known van der Waals
+coexistence pressure :math:`P/P_c = 0.647` at :math:`T/T_c = 0.9`.
+
+*References:* G. N. Lewis, "The Law of Physico-Chemical Change," Proc.
+Am. Acad. Arts Sci. 37, 49-69 (1901); G. N. Lewis and M. Randall,
+*Thermodynamics and the Free Energy of Chemical Substances* (New York:
+McGraw-Hill, 1923).
+
+.. minigallery:: ../../examples/thermo/equations_of_state/plot_05_lewis_fugacity.py
 
 1906 -- Nernst's Heat Theorem and the Third Law
 -----------------------------------------------------
@@ -488,7 +610,7 @@ aus thermischen Messungen," Nachr. Ges. Wiss. Göttingen, Math.-Phys. Kl.
 (1906), 1-40; M. Planck, *Thermodynamik*, 3rd ed. (Leipzig: Veit & Comp.,
 1911), Sec. 282.
 
-.. minigallery:: ../../examples/thermo/equilibrium/plot_01_reaction_equilibrium.py
+.. minigallery:: ../../examples/thermo/thermochemistry/plot_02_nernst_heat_theorem.py
 
 1949 -- Redlich and Kwong's Equation of State
 ----------------------------------------------------
@@ -532,7 +654,50 @@ above and just below the critical temperature.
 Solutions. V. An Equation of State. Fugacities of Gaseous Solutions,"
 Chem. Rev. 44, 233-244 (1949).
 
-.. minigallery:: ../../examples/thermo/equations_of_state/plot_01_equations_of_state.py
+.. minigallery:: ../../examples/thermo/equations_of_state/plot_03_redlich_kwong.py
+
+1976 -- Peng and Robinson's Equation of State
+---------------------------------------------
+
+Redlich-Kwong (1949, above) and Giorgio Soave's 1972 modification of it
+predicted gas-phase properties well but liquid densities poorly. Ding-Yu
+Peng and Donald B. Robinson, at the University of Alberta, changed the
+denominator of the attraction term and made its strength depend on
+temperature through Kenneth Pitzer's acentric factor :math:`\omega`,
+a single number describing how far a molecule is from a simple
+spherical one:
+
+.. math::
+
+   P = \frac{RT}{V_m - b} - \frac{a\,\alpha(T)}{V_m^2 + 2bV_m - b^2},
+   \qquad
+   \alpha(T) = \left[1 + \kappa\left(1 - \sqrt{T/T_c}\right)\right]^2
+
+with :math:`\kappa = 0.37464 + 1.54226\,\omega - 0.26992\,\omega^2`.
+Peng and Robinson fitted :math:`\kappa(\omega)` to measured vapor
+pressures, so the equation passes through Pitzer's defining point,
+:math:`\log_{10}(P_{sat}/P_c) = -1 - \omega` at :math:`T/T_c = 0.7`. Its
+universal critical compressibility factor is about 0.307, closer to real
+fluids than Redlich-Kwong's 1/3. With only :math:`T_c`, :math:`P_c`, and
+:math:`\omega` as input, it became the most widely used equation of state
+in the oil, gas, and chemical industries.
+
+*Implementation:* :class:`~chemistrykit.thermo.PengRobinson` implements
+the equation, built from critical constants and the acentric factor, and
+solves its cubic in :math:`Z` for the liquid or vapor molar volume. The
+tests check that its critical isotherm passes through :math:`P_c` with
+zero slope at :math:`Z_c = 0.3074`, and that
+:func:`~chemistrykit.thermo.saturation_pressure` recovers the acentric
+factor it was built with.
+
+*References:* D.-Y. Peng and D. B. Robinson, "A New Two-Constant
+Equation of State," Ind. Eng. Chem. Fundam. 15, 59-64 (1976); K. S.
+Pitzer, D. Z. Lippmann, R. F. Curl, C. M. Huggins, and D. E. Petersen,
+"The Volumetric and Thermodynamic Properties of Fluids. II.
+Compressibility Factor, Vapor Pressure and Entropy of Vaporization,"
+J. Am. Chem. Soc. 77, 3433-3440 (1955).
+
+.. minigallery:: ../../examples/thermo/equations_of_state/plot_04_peng_robinson.py
 
 See Also
 --------

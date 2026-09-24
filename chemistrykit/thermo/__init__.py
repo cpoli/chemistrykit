@@ -1,17 +1,19 @@
 """chemistrykit.thermo: chemical thermodynamics.
 
-Equations of state (ideal gas, van der Waals, Redlich-Kwong);
+Equations of state (ideal gas, van der Waals, Redlich-Kwong,
+Peng-Robinson) and Lewis fugacities; Hess's-law thermochemistry;
 Clausius-Clapeyron phase boundaries and the Gibbs phase rule; reaction
 equilibrium (Kp/Kc, the reaction quotient, the van't Hoff equation, and a
 Gibbs-energy-minimization equilibrium-composition solver); and
 Raoult's/Henry's law mixtures with colligative properties (freezing-point
-depression, boiling-point elevation, osmotic pressure).
+depression, boiling-point elevation, osmotic pressure) and the Margules
+activity-coefficient model of non-ideal solutions.
 """
 
 __version__ = "0.1.0"
 
 from chemistrykit.thermo.core.base_system import EquationOfState
-from chemistrykit.thermo.systems.equations_of_state import IdealGas, RedlichKwong, VanDerWaals
+from chemistrykit.thermo.systems.equations_of_state import IdealGas, PengRobinson, RedlichKwong, VanDerWaals
 from chemistrykit.thermo.systems.equilibrium import (
     EquilibriumComposition,
     VantHoffFit,
@@ -23,9 +25,11 @@ from chemistrykit.thermo.systems.equilibrium import (
     solve_equilibrium_composition,
     van_t_hoff_equilibrium_constant,
 )
+from chemistrykit.thermo.systems.fugacity import fugacity, fugacity_coefficient, saturation_pressure
 from chemistrykit.thermo.systems.mixtures import (
     CRYOSCOPIC_CONSTANTS,
     BinaryIdealSolution,
+    MargulesSolution,
     boiling_point_elevation,
     freezing_point_depression,
     henry_law_pressure,
@@ -33,6 +37,7 @@ from chemistrykit.thermo.systems.mixtures import (
     raoult_vapor_pressure,
 )
 from chemistrykit.thermo.systems.phase_equilibria import ClausiusClapeyron, gibbs_phase_rule
+from chemistrykit.thermo.systems.thermochemistry import hess_law_enthalpy, reaction_enthalpy_from_formation
 
 __all__ = [
     "__version__",
@@ -40,6 +45,12 @@ __all__ = [
     "IdealGas",
     "VanDerWaals",
     "RedlichKwong",
+    "PengRobinson",
+    "fugacity_coefficient",
+    "fugacity",
+    "saturation_pressure",
+    "hess_law_enthalpy",
+    "reaction_enthalpy_from_formation",
     "ClausiusClapeyron",
     "gibbs_phase_rule",
     "reaction_quotient",
@@ -58,4 +69,5 @@ __all__ = [
     "freezing_point_depression",
     "boiling_point_elevation",
     "osmotic_pressure",
+    "MargulesSolution",
 ]

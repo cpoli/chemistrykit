@@ -66,3 +66,44 @@ def test_osmotic_pressure_scales_linearly_with_concentration():
     p1 = osmotic_pressure(M=10.0, T=298.15)
     p2 = osmotic_pressure(M=20.0, T=298.15)
     assert p2 == pytest.approx(2.0 * p1)
+
+
+def test_margules_with_zero_parameter_is_ideal():
+    from chemistrykit.thermo.systems.mixtures import MargulesSolution
+
+    x = np.linspace(0.0, 1.0, 11)
+    ideal = BinaryIdealSolution(P_A_star=30.0, P_B_star=10.0)
+    marg = MargulesSolution(A=0.0, P1_star=30.0, P2_star=10.0)
+    np.testing.assert_allclose(marg.total_pressure(x), ideal.total_pressure(x))
+    np.testing.assert_allclose(marg.vapor_composition(x[1:]), ideal.vapor_composition(x[1:]))
+
+
+def test_margules_limiting_laws():
+    """Raoult's law as x1 -> 1 and Henry's law K_H = P1* exp(A) as x1 -> 0."""
+    from chemistrykit.thermo.systems.mixtures import MargulesSolution
+
+    sol = MargulesSolution(A=1.5, P1_star=30.0, P2_star=10.0)
+    P1_dilute, _ = sol.partial_pressures(1e-6)
+    assert P1_dilute / 1e-6 == pytest.approx(sol.henry_constant_1, rel=1e-5)
+    g1, _ = sol.activity_coefficients(1.0)
+    assert g1 == pytest.approx(1.0)
+
+
+def test_margules_satisfies_gibbs_duhem():
+    """x1 dln(g1)/dx1 + x2 dln(g2)/dx1 = 0."""
+    from chemistrykit.thermo.systems.mixtures import MargulesSolution
+
+    sol = MargulesSolution(A=-0.8, P1_star=1.0, P2_star=1.0)
+    x = np.linspace(0.05, 0.95, 19)
+    h = 1e-6
+    lg1p, lg2p = (np.log(g) for g in sol.activity_coefficients(x + h))
+    lg1m, lg2m = (np.log(g) for g in sol.activity_coefficients(x - h))
+    residual = x * (lg1p - lg1m) / (2 * h) + (1 - x) * (lg2p - lg2m) / (2 * h)
+    np.testing.assert_allclose(residual, 0.0, atol=1e-6)
+
+
+def test_margules_excess_gibbs_closed_form():
+    from chemistrykit.thermo.systems.mixtures import MargulesSolution
+
+    sol = MargulesSolution(A=2.0, P1_star=1.0, P2_star=1.0)
+    assert sol.excess_gibbs(0.5, T=300.0) == pytest.approx(8.314462618 * 300.0 * 2.0 * 0.25, rel=1e-6)

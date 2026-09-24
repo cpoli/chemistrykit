@@ -1,13 +1,14 @@
-r"""Equations of state: ideal gas, van der Waals, and Redlich-Kwong.
+r"""Equations of state: ideal gas, van der Waals, Redlich-Kwong, and Peng-Robinson.
 
-All three share the :class:`~chemistrykit.thermo.core.base_system.EquationOfState`
+All four share the :class:`~chemistrykit.thermo.core.base_system.EquationOfState`
 interface (``pressure(Vm, T)``, ``molar_volume(P, T)``,
 ``compressibility_factor(P, T)``) so they can be compared directly on the
 same P-V isotherm plot. See Atkins & de Paula, *Physical Chemistry*, 11th
 ed., Ch. 1 for the ideal gas law and van der Waals equation, and O.
 Redlich & J. N. S. Kwong, *Chem. Rev.* 44, 233 (1949) (also tabulated in
 Smith, Van Ness & Abbott, *Introduction to Chemical Engineering
-Thermodynamics*, 7th ed., Ch. 3) for Redlich-Kwong.
+Thermodynamics*, 7th ed., Ch. 3) for Redlich-Kwong, and D.-Y. Peng &
+D. B. Robinson, *Ind. Eng. Chem. Fundam.* 15, 59 (1976) for Peng-Robinson.
 """
 
 from __future__ import annotations
@@ -18,7 +19,7 @@ from chemistrykit.constants import R
 from chemistrykit.thermo.core.base_system import EquationOfState
 from chemistrykit.thermo.utils.cubic_roots import real_positive_roots
 
-__all__ = ["IdealGas", "VanDerWaals", "RedlichKwong"]
+__all__ = ["IdealGas", "VanDerWaals", "RedlichKwong", "PengRobinson"]
 
 
 class IdealGas(EquationOfState):
@@ -301,3 +302,124 @@ class RedlichKwong(EquationOfState):
         a = 0.42748 * R**2 * Tc**2.5 / Pc
         b = 0.08664 * R * Tc / Pc
         return cls(a=a, b=b)
+
+
+class PengRobinson(EquationOfState):
+    r"""The Peng-Robinson equation of state.
+
+    .. math::
+
+        P = \frac{RT}{V_m - b} - \frac{a\,\alpha(T)}{V_m^2 + 2bV_m - b^2}
+
+    with :math:`a = 0.45724\,R^2T_c^2/P_c`, :math:`b = 0.07780\,RT_c/P_c`,
+    and the temperature-dependent attraction factor
+
+    .. math::
+
+        \alpha(T) = \left[1 + \kappa\left(1 - \sqrt{T/T_c}\right)\right]^2,
+        \qquad \kappa = 0.37464 + 1.54226\,\omega - 0.26992\,\omega^2
+
+    where :math:`\omega` is Pitzer's acentric factor. The
+    :math:`\kappa(\omega)` correlation was fitted by Peng and Robinson so
+    that the equation reproduces pure-substance vapor pressures, which is
+    why, unlike van der Waals or Redlich-Kwong, it predicts saturated
+    liquid densities and vapor pressures well enough for process design
+    (D.-Y. Peng & D. B. Robinson, *Ind. Eng. Chem. Fundam.* 15, 59-64
+    (1976), eqs. 7-9 and 17-18).
+
+    Parameters
+    ----------
+    Tc : float
+        Critical temperature, in K.
+    Pc : float
+        Critical pressure, in Pa.
+    omega : float, default 0.0
+        Pitzer acentric factor (0 for a simple fluid such as argon).
+
+    Examples
+    --------
+    At the critical temperature :math:`\alpha = 1`, and the equation's
+    universal critical compressibility factor is :math:`Z_c \approx
+    0.3074`, closer to real fluids' 0.23-0.31 than van der Waals's 3/8 or
+    Redlich-Kwong's 1/3. The critical isotherm passes through
+    :math:`(V_c, P_c)` with :math:`V_c = Z_c RT_c/P_c`:
+
+    >>> eos = PengRobinson(Tc=304.13, Pc=7.3773e6, omega=0.224)  # CO2
+    >>> float(eos.alpha(304.13))
+    1.0
+    >>> Vc = 0.30740 * eos.R * 304.13 / 7.3773e6
+    >>> round(float(eos.pressure(Vc, 304.13)) / 7.3773e6, 3)
+    1.0
+    """
+
+    def __init__(self, Tc: float, Pc: float, omega: float = 0.0):
+        if Tc <= 0 or Pc <= 0:
+            raise ValueError("Tc and Pc must be positive")
+        self.Tc = float(Tc)
+        self.Pc = float(Pc)
+        self.omega = float(omega)
+        self.a = 0.45724 * R**2 * self.Tc**2 / self.Pc
+        self.b = 0.07780 * R * self.Tc / self.Pc
+        self.kappa = 0.37464 + 1.54226 * self.omega - 0.26992 * self.omega**2
+
+    def alpha(self, T):
+        r"""Return the attraction factor :math:`\alpha(T) = [1 + \kappa(1 - \sqrt{T/T_c})]^2`.
+
+        Parameters
+        ----------
+        T : float or array-like of float
+            Absolute temperature(s), in K.
+
+        Returns
+        -------
+        float or ndarray
+        """
+        T = np.asarray(T, dtype=np.float64)
+        return (1.0 + self.kappa * (1.0 - np.sqrt(T / self.Tc))) ** 2
+
+    def pressure(self, Vm, T):
+        Vm = np.asarray(Vm, dtype=np.float64)
+        T = np.asarray(T, dtype=np.float64)
+        return self.R * T / (Vm - self.b) - self.a * self.alpha(T) / (Vm**2 + 2.0 * self.b * Vm - self.b**2)
+
+    def molar_volume(self, P, T, branch: str = "vapor") -> float:
+        r"""Solve the Peng-Robinson cubic for `Vm` at pressure `P`, temperature `T`.
+
+        In terms of :math:`A = a\alpha P/(RT)^2` and :math:`B = bP/(RT)`,
+        the equation becomes a cubic in :math:`Z = PV_m/(RT)` (Peng &
+        Robinson 1976, eq. 5):
+
+        .. math::
+
+            Z^3 - (1-B)Z^2 + (A - 3B^2 - 2B)Z - (AB - B^2 - B^3) = 0
+
+        Parameters
+        ----------
+        P : float
+            Pressure, in Pa.
+        T : float
+            Absolute temperature, in K.
+        branch : {"vapor", "liquid"}
+            Return the largest ("vapor") or smallest ("liquid") admissible root.
+
+        Returns
+        -------
+        float
+
+        Examples
+        --------
+        >>> eos = PengRobinson(Tc=304.13, Pc=7.3773e6, omega=0.224)
+        >>> Vm = eos.molar_volume(P=1.0e5, T=300.0)
+        >>> round(float(eos.pressure(Vm, T=300.0)), 3)
+        100000.0
+        """
+        RT = self.R * T
+        A = self.a * float(self.alpha(T)) * P / RT**2
+        B = self.b * P / RT
+        coeffs = [1.0, -(1.0 - B), A - 3.0 * B**2 - 2.0 * B, -(A * B - B**2 - B**3)]
+        roots = real_positive_roots(coeffs)
+        roots = roots[roots > B]
+        if roots.size == 0:
+            raise ValueError("no physically admissible molar volume found for the given P, T")
+        Z = roots[-1] if branch == "vapor" else roots[0]
+        return float(Z * RT / P)
