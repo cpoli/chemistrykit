@@ -1,5 +1,6 @@
-Formal charge and oxidation state
------------------------------------
+Lewis structures, oxidation states, and electronegativity
+----------------------------------------------------------
 
-Algorithmic formal-charge and oxidation-state assignment from a Lewis
-structure (connectivity, bond orders, lone pairs) and electronegativity.
+Lewis's shared electron pair and formal charge, Kossel's ionic limit and
+oxidation states, and Pauling's electronegativity scale from bond
+energies.

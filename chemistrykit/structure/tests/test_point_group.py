@@ -163,3 +163,31 @@ def test_character_table_orthogonality_c2v():
 def test_unknown_character_table_raises():
     with pytest.raises(KeyError):
         get_character_table("not_a_real_point_group")
+
+
+def test_reduce_d_orbitals_in_oh_gives_eg_plus_t2g():
+    from chemistrykit.structure.systems.point_group import get_character_table
+
+    oh = get_character_table("Oh")
+    assert oh.order == 48
+    assert oh.reduce([5, -1, 1, -1, 1, 5, -1, -1, 1, 1]) == {"Eg": 1, "T2g": 1}
+
+
+def test_reduce_regular_representation_contains_each_irrep_dimension_times():
+    from chemistrykit.structure.systems.point_group import get_character_table
+
+    for name in ("C2v", "C3v", "Td", "Oh", "D4h"):
+        table = get_character_table(name)
+        regular = [table.order] + [0] * (len(table.operations) - 1)
+        reduced = table.reduce(regular)
+        for irrep in table.irreps:
+            assert reduced[irrep] == int(table.character(irrep, table.operations[0]))
+
+
+def test_reduce_rejects_non_representation_and_infinite_groups():
+    from chemistrykit.structure.systems.point_group import get_character_table
+
+    with pytest.raises(ValueError):
+        get_character_table("C2v").reduce([1, 0, 0, 0.5])
+    with pytest.raises(ValueError):
+        _ = get_character_table("D_inf_h").order

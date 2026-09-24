@@ -6,8 +6,10 @@ This gallery walks through every public feature of
 coordinate generation; point-group determination from 3D coordinates
 (genuine symmetry-element detection, not a formula lookup) and character
 tables; bond order from the Pauling length correlation and from
-Huckel-theory MO coefficients; and formal-charge/oxidation-state
-assignment from a Lewis structure.
+Huckel-theory MO coefficients; formal-charge/oxidation-state
+assignment from a Lewis structure and Pauling electronegativities;
+Kekule-structure enumeration; Baeyer ring angle strain; and dipole
+moments.
 
 Each script in this gallery is self-contained and can be run directly with
 ``python examples/structure/<section>/<script>.py``. Every script also
@@ -19,12 +21,16 @@ truth for what you see, not a copy of it.
 Sections
 --------
 
-- **vsepr** -- steric number to idealized molecular shape, with real 3D
-  coordinates for methane, water, sulfur tetrafluoride, and xenon
-  tetrafluoride.
-- **point_group** -- symmetry-element detection and point-group
-  classification for water, ammonia, methane, and carbon dioxide.
-- **bonding** -- the Pauling bond-order/bond-length correlation, and the
-  Coulson pi bond order from Huckel molecular-orbital theory.
-- **lewis** -- formal charge and oxidation-state assignment for a handful
-  of classic Lewis-structure examples.
+- **vsepr** -- van't Hoff and Le Bel's tetrahedral carbon and chirality,
+  steric number to idealized molecular shape, and hypervalent molecules.
+- **point_group** -- Schoenflies symbols from detected symmetry elements,
+  Werner's octahedral isomer counting, Mulliken's irrep labels, and
+  Bethe's crystal-field splitting of the d orbitals.
+- **bonding** -- the Coulson pi bond order from Huckel molecular-orbital
+  theory, and the Pauling bond-order/bond-length correlation.
+- **lewis** -- formal charges of competing Lewis structures, oxidation
+  states in Kossel's ionic limit, and Pauling electronegativities from
+  bond energies.
+- **kekule** -- Kekule structures of benzene and larger aromatics.
+- **ring_strain** -- Baeyer's angle strain in planar cycloalkanes.
+- **dipole** -- molecular dipole moments from bond dipoles and charges.

@@ -63,3 +63,18 @@ def test_coulson_bond_order_zero_for_unbonded_atoms_in_polyene():
     p12 = coulson_pi_bond_order(result.coefficients, occupations, 0, 1)
     p14 = coulson_pi_bond_order(result.coefficients, occupations, 0, 3)
     assert abs(p12) > abs(p14)
+
+
+def test_pauling_correlation_reproduces_carbon_double_and_triple_bonds():
+    # D(n) = 1.54 - 0.71 log10(n): C=C 1.33 A, C#C 1.20 A.
+    assert bond_length_from_order(1.54, 2.0) == pytest.approx(1.54 - 0.71 * np.log10(2.0))
+    assert bond_length_from_order(1.54, 2.0) == pytest.approx(1.33, abs=0.01)
+    assert bond_length_from_order(1.54, 3.0) == pytest.approx(1.20, abs=0.01)
+
+
+def test_pauling_electronegativity_difference_closed_form():
+    from chemistrykit.structure.systems.bonding import pauling_electronegativity_difference
+
+    delta = 568.0 - 0.5 * (436.0 + 158.0)
+    assert pauling_electronegativity_difference(568.0, 436.0, 158.0) == pytest.approx(np.sqrt(delta / 96.485332))
+    assert pauling_electronegativity_difference(100.0, 300.0, 300.0) == 0.0

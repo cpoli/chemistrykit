@@ -314,6 +314,89 @@ class PointGroupCharacterTable:
         """
         return self.characters[self.irreps.index(irrep)][self.operations.index(operation)]
 
+    @property
+    def class_sizes(self) -> list:
+        """list of int: Number of operations in each class, read from the leading count of each label.
+
+        ``"8C3"`` is a class of 8 operations, ``"E"`` or ``"sigma_v(xz)"`` a
+        class of 1. Raises ``ValueError`` for the infinite groups
+        (``C_inf_v``, ``D_inf_h``), whose classes are continuous.
+        """
+        sizes = []
+        for label in self.operations:
+            if "inf" in label:
+                raise ValueError(f"point group {self.name} is infinite; its classes have no finite size")
+            digits = ""
+            for ch in label:
+                if not ch.isdigit():
+                    break
+                digits += ch
+            sizes.append(int(digits) if digits else 1)
+        return sizes
+
+    @property
+    def order(self) -> int:
+        """int: The group order h (total number of symmetry operations)."""
+        return sum(self.class_sizes)
+
+    def reduce(self, reducible_characters) -> dict:
+        r"""Decompose a reducible representation into irreducible ones.
+
+        Uses the reduction formula (the "great orthogonality theorem"
+        applied to characters; Cotton, *Chemical Applications of Group
+        Theory*, 3rd ed., Ch. 4.3):
+
+        .. math::
+
+            a_i = \frac{1}{h}\sum_{R} g_R\,\chi(R)\,\chi_i(R)
+
+        where the sum runs over operation classes of size :math:`g_R` and
+        :math:`h` is the group order.
+
+        Parameters
+        ----------
+        reducible_characters : sequence of float
+            Characters of the reducible representation, one per operation
+            class, in the order of :attr:`operations`.
+
+        Returns
+        -------
+        dict of str to int
+            Multiplicity of each irrep that occurs (irreps with zero
+            multiplicity are left out).
+
+        Raises
+        ------
+        ValueError
+            If the input length does not match the number of classes, or
+            the multiplicities are not integers (the characters do not form
+            a representation of this group).
+
+        Examples
+        --------
+        The five d orbitals in an octahedral field (Bethe, 1929) split into
+        a doubly degenerate :math:`e_g` and a triply degenerate
+        :math:`t_{2g}` set:
+
+        >>> oh = get_character_table("Oh")
+        >>> oh.reduce([5, -1, 1, -1, 1, 5, -1, -1, 1, 1])
+        {'Eg': 1, 'T2g': 1}
+        """
+        chi = np.asarray(reducible_characters, dtype=np.float64)
+        if chi.shape != (len(self.operations),):
+            raise ValueError(f"expected {len(self.operations)} characters (one per class), got {chi.shape}")
+        sizes = np.asarray(self.class_sizes, dtype=np.float64)
+        h = sizes.sum()
+        result = {}
+        for irrep, row in zip(self.irreps, self.characters):
+            a = float(np.sum(sizes * chi * np.asarray(row)) / h)
+            n = int(round(a))
+            if abs(a - n) > 1e-8:
+                raise ValueError(f"non-integer multiplicity {a:.6f} for {irrep}: not a representation of {self.name}")
+            if n:
+                result[irrep] = n
+        return result
+
 
 #: Built-in character tables for common point groups (Cotton, *Chemical
 #: Applications of Group Theory*, 3rd ed., Appendix A). ``D_inf_h`` and

@@ -20,17 +20,54 @@ molecular formula, what shape does the molecule actually take, and why?
 answer chemistry has assembled over a century and a half -- Lewis
 structures and formal charge/oxidation-state bookkeeping, VSEPR geometry
 prediction from real 3D electron-domain coordinates, point-group
-symmetry classification from direct geometric testing, and two
-independent routes to a bond order. This chronology traces the major
-breakthroughs behind it, from van't Hoff and Le Bel's 1874 proposal that
-carbon's four bonds point toward a tetrahedron's corners to the
-group-theoretic notation this package's own character tables still use,
+symmetry classification from direct geometric testing, two
+independent routes to a bond order, Kekule-structure enumeration, ring
+angle strain, and molecular dipole moments. This chronology traces the
+major breakthroughs behind it, from Kekule's 1865 benzene ring and van't
+Hoff and Le Bel's 1874 proposal that carbon's four bonds point toward a
+tetrahedron's corners to the group-theoretic notation this package's own
+character tables still use,
 with a pointer to the corresponding implementation in this package at
 each stop.
 
 .. contents:: Timeline
    :local:
    :depth: 1
+
+1865 -- Kekulé's Benzene Ring
+------------------------------
+
+August Kekulé had argued in 1858 that carbon is tetravalent and can bond
+to itself in chains. In 1865 he extended this to the aromatic compounds,
+proposing that benzene, :math:`\mathrm{C_6H_6}`, is a closed ring of six
+carbon atoms joined by alternating single and double bonds, each carbon
+also carrying one hydrogen. The ring explained why benzene derivatives
+keep a six-carbon core through many reactions. It also raised a puzzle:
+with fixed alternating bonds there should be two different
+1,2-disubstituted benzenes (substituents across a single bond or across a
+double bond), but only one is ever found. In 1872 Kekulé proposed that
+the two alternating arrangements rapidly interconvert, so the six bonds
+are equivalent on average. That pair of structures is the origin of the
+later resonance and delocalization pictures of aromatic bonding. In
+modern graph language, a Kekulé structure is a *perfect matching* of the
+carbon skeleton, a set of double bonds that uses every carbon exactly
+once. Benzene has two, naphthalene three and phenanthrene five, and the
+count :math:`K` is still used as a rough index of aromatic stability.
+
+*Implementation:*
+:func:`~chemistrykit.structure.kekule_structures` enumerates every
+Kekulé structure of a conjugated skeleton given its connectivity, and
+:func:`~chemistrykit.structure.count_kekule_structures` returns their
+number :math:`K`: 2 for benzene, :math:`r+1` for a linear acene with
+:math:`r` rings, 5 for phenanthrene.
+
+*References:* A. Kekulé, "Sur la constitution des substances
+aromatiques," Bull. Soc. Chim. Paris 3, 98-110 (1865); A. Kekulé,
+"Ueber einige Condensationsproducte des Aldehyds," Liebigs Ann. Chem.
+162, 77-124 (1872); I. Gutman and S. J. Cyvin, *Introduction to the
+Theory of Benzenoid Hydrocarbons* (Springer, Berlin, 1989).
+
+.. minigallery:: ../../examples/structure/kekule/plot_01_kekule_structures.py
 
 1874 -- Van't Hoff and Le Bel's Tetrahedral Carbon
 ------------------------------------------------------
@@ -73,6 +110,50 @@ formules atomiques des corps organiques et le pouvoir rotatoire de leurs
 dissolutions," Bull. Soc. Chim. Fr. 22, 337-347 (1874).
 
 .. minigallery:: ../../examples/structure/vsepr/plot_02_tetrahedral_chirality.py
+
+1885 -- Baeyer's Strain Theory
+-------------------------------
+
+Adolf von Baeyer, in a paper on polyacetylene compounds, applied van't
+Hoff's tetrahedral carbon to ring compounds. If a carbon's bonds prefer
+the tetrahedral angle, :math:`109.47^\circ`, then a ring whose atoms are
+forced into a flat polygon, with interior angle :math:`180^\circ(n-2)/n`,
+must bend its bonds. Baeyer split the distortion between the two ring
+bonds at each carbon, giving a strain per bond of
+
+.. math::
+
+   \delta(n) = \tfrac{1}{2}\left[109.47^\circ - \frac{180^\circ\,(n-2)}{n}\right],
+
+about :math:`24.7^\circ` for cyclopropane, :math:`9.7^\circ` for
+cyclobutane and only :math:`0.7^\circ` for cyclopentane. This explained
+why three- and four-membered rings are reactive and easily opened while
+five- and six-membered rings are so common. Baeyer's assumption that
+rings are planar was wrong for larger rings, which his theory predicted
+to be increasingly strained. Hermann Sachse pointed out in 1890 that
+cyclohexane can pucker into strain-free "chair" and "boat" forms, an idea
+confirmed after Ernst Mohr's 1918 analysis of diamond and decalin, and
+heats of combustion show cyclohexane to be essentially strain-free.
+Baeyer's angle strain survives as one component of the modern ring
+strain, alongside torsional and transannular strain. Baeyer received the
+1905 Nobel Prize in Chemistry, chiefly for his work on dyes and
+hydroaromatic compounds.
+
+*Implementation:*
+:func:`~chemistrykit.structure.baeyer_angle_strain` computes
+:math:`\delta(n)` and :func:`~chemistrykit.structure.planar_ring_angle` the
+planar ring angle it is measured from, while
+:func:`~chemistrykit.structure.chair_cyclohexane_coordinates` builds the
+puckered chair with every C-C-C angle exactly tetrahedral, the
+counterexample to Baeyer's planar assumption.
+
+*References:* A. Baeyer, "Ueber Polyacetylenverbindungen," Ber. Dtsch.
+Chem. Ges. 18, 2269-2281 (1885); H. Sachse, "Ueber die geometrischen
+Isomerien der Hexamethylenderivate," Ber. Dtsch. Chem. Ges. 23,
+1363-1370 (1890); E. L. Eliel and S. H. Wilen, *Stereochemistry of
+Organic Compounds* (Wiley, New York, 1994), Ch. 11.
+
+.. minigallery:: ../../examples/structure/ring_strain/plot_01_baeyer_angle_strain.py
 
 1891 -- Schoenflies and Point-Group Notation
 ------------------------------------------------
@@ -153,6 +234,40 @@ Verbindungen," Z. Anorg. Chem. 3, 267-330 (1893).
 
 .. minigallery:: ../../examples/structure/point_group/plot_02_octahedral_symmetry.py
 
+1912 -- Debye's Permanent Dipole Moments
+-----------------------------------------
+
+Peter Debye explained why the dielectric constant of some gases falls as
+the temperature rises while that of others hardly changes. Molecules of
+the first kind carry a *permanent* electric dipole moment,
+:math:`\boldsymbol\mu = \sum_i q_i \mathbf r_i` for charges :math:`q_i` at
+positions :math:`\mathbf r_i`, which an applied field partly aligns
+against thermal disorder. This adds a term :math:`\mu^2/3k_BT` to the
+molecular polarizability, so the dipole moment can be read off the slope
+of polarization against :math:`1/T`. Measured moments became a direct
+test of molecular shape. A molecular dipole is the vector sum of its bond
+dipoles, so symmetric shapes cancel: linear :math:`\mathrm{CO_2}`,
+trigonal planar :math:`\mathrm{BF_3}` and tetrahedral
+:math:`\mathrm{CH_4}` have no moment, while bent water (1.85 D) and
+pyramidal ammonia do. Only molecules in the point groups :math:`C_n`,
+:math:`C_{nv}` and :math:`C_s` can be polar. Debye's 1929 monograph
+*Polar Molecules* collected the method, and he received the 1936 Nobel
+Prize in Chemistry in part for this work. The unit of dipole moment, the
+debye (:math:`10^{-18}` esu cm, about 0.208 e Å), is named after him.
+
+*Implementation:*
+:func:`~chemistrykit.structure.dipole_moment` computes
+:math:`\sum_i q_i\mathbf r_i` in debye from partial charges and
+coordinates, :func:`~chemistrykit.structure.bond_dipole_sum` adds bond
+dipoles as vectors, and ``E_ANGSTROM_IN_DEBYE`` gives the unit conversion
+(4.803 D per e Å).
+
+*References:* P. Debye, "Einige Resultate einer kinetischen Theorie der
+Isolatoren," Phys. Z. 13, 97-100 (1912); P. Debye, *Polar Molecules*
+(Chemical Catalog Company, New York, 1929).
+
+.. minigallery:: ../../examples/structure/dipole/plot_01_debye_dipole_moments.py
+
 1916 -- Lewis's Shared Electron Pair
 ------------------------------------------
 
@@ -188,7 +303,7 @@ structure's formal charges must sum to the molecule's actual net charge.
 *References:* G. N. Lewis, "The Atom and the Molecule," J. Am. Chem. Soc.
 38, 762-785 (1916).
 
-.. minigallery:: ../../examples/structure/lewis/plot_01_formal_charge_oxidation_state.py
+.. minigallery:: ../../examples/structure/lewis/plot_01_lewis_formal_charge.py
 
 1916 -- Kossel's Ionic Bond and the Two Extremes of Bond Polarity
 -----------------------------------------------------------------------
@@ -228,7 +343,7 @@ evenly-split, Lewis-style convention on the very same
 *References:* W. Kossel, "Über Molekülbildung als Frage des Atombaus,"
 Ann. Phys. 354, 229-362 (1916).
 
-.. minigallery:: ../../examples/structure/lewis/plot_01_formal_charge_oxidation_state.py
+.. minigallery:: ../../examples/structure/lewis/plot_02_kossel_oxidation_states.py
 
 1929 -- Bethe's Crystal-Field Theory and Group Theory Enters Chemistry
 -------------------------------------------------------------------------
@@ -267,11 +382,14 @@ package implements is precisely the tool Bethe's theory needs, applied
 here to a concrete :math:`O_h` structure (sulfur hexafluoride) rather
 than a transition-metal complex, since :mod:`chemistrykit.structure`
 does not model transition-metal electronic structure directly.
+:meth:`~chemistrykit.structure.PointGroupCharacterTable.reduce` carries out
+Bethe's reduction itself: fed the characters of the five d orbitals under
+the :math:`O_h` operations, it returns :math:`E_g + T_{2g}`.
 
 *References:* H. Bethe, "Termaufspaltung in Kristallen," Ann. Phys. 395,
 133-208 (1929).
 
-.. minigallery:: ../../examples/structure/point_group/plot_02_octahedral_symmetry.py
+.. minigallery:: ../../examples/structure/point_group/plot_04_crystal_field_splitting.py
 
 1932 -- Pauling's Electronegativity Scale
 ------------------------------------------------
@@ -301,12 +419,16 @@ the Pauling scale values this paper introduced, and
 (see 1916, above) uses them directly to decide, bond by bond, which atom
 is the more electronegative partner -- the same electronegativity
 comparison Pauling's own ionic-character argument is built on.
+:func:`~chemistrykit.structure.pauling_electronegativity_difference`
+reproduces Pauling's original construction, turning the extra ionic
+energy of an A-B bond (from bond dissociation energies) into
+:math:`|\chi_A - \chi_B|`.
 
 *References:* L. Pauling, "The Nature of the Chemical Bond. IV. The
 Energy of Single Bonds and the Relative Electronegativity of Atoms," J.
 Am. Chem. Soc. 54, 3570-3582 (1932).
 
-.. minigallery:: ../../examples/structure/lewis/plot_01_formal_charge_oxidation_state.py
+.. minigallery:: ../../examples/structure/lewis/plot_03_pauling_electronegativity.py
 
 1939 -- Coulson's Molecular-Orbital Bond Order
 ------------------------------------------------
@@ -346,7 +468,7 @@ order is a direct property of the Huckel molecular orbitals themselves.
 and Aromatic Molecules. VII. Bonds of Fractional Order by the Molecular
 Orbital Method," Proc. R. Soc. Lond. A 169, 413-428 (1939).
 
-.. minigallery:: ../../examples/structure/bonding/plot_01_bond_order_correlation.py
+.. minigallery:: ../../examples/structure/bonding/plot_01_coulson_bond_order.py
 
 1940 -- 1970 -- Sidgwick, Powell, Gillespie, and Nyholm: VSEPR Theory
 --------------------------------------------------------------------------
@@ -404,11 +526,12 @@ consistent, logarithmic way as its bond order increases:
 
 .. math::
 
-   D(n) = D(1) - c\ln n
+   D(n) = D(1) - c\log_{10} n
 
 with :math:`D(1)` a reference single-bond length and :math:`c` an
 empirically fitted, bond-type-specific constant (Pauling's own value for
-carbon-carbon bonds, 0.71 angstrom). Inverting the relation lets a
+carbon-carbon bonds, 0.71 angstrom, which puts the double and triple
+bonds at 1.33 and 1.20 angstrom). Inverting the relation lets a
 measured, non-integer bond length be converted directly into an
 estimated, generally non-integer bond order -- applied to benzene's
 carbon-carbon bond length of 1.397 angstrom (intermediate between
@@ -431,7 +554,7 @@ module does not tabulate).
 *References:* L. Pauling, "Atomic Radii and Interatomic Distances in
 Metals," J. Am. Chem. Soc. 69, 542-553 (1947).
 
-.. minigallery:: ../../examples/structure/bonding/plot_01_bond_order_correlation.py
+.. minigallery:: ../../examples/structure/bonding/plot_02_pauling_bond_length.py
 
 1955 -- Mulliken's Notation for Molecular Term Symbols
 ------------------------------------------------------------
@@ -465,7 +588,7 @@ looks up a specific character by exactly these labels.
 *References:* R. S. Mulliken, "Report on Notation for the Spectra of
 Polyatomic Molecules," J. Chem. Phys. 23, 1997-2011 (1955).
 
-.. minigallery:: ../../examples/structure/point_group/plot_01_point_groups.py
+.. minigallery:: ../../examples/structure/point_group/plot_03_mulliken_symbols.py
 
 1969 -- Musher and Hypervalent Bonding
 ------------------------------------------
@@ -501,7 +624,7 @@ electron domains at all.
 *References:* J. I. Musher, "The Chemistry of Hypervalent Molecules,"
 Angew. Chem. Int. Ed. 8, 54-68 (1969).
 
-.. minigallery:: ../../examples/structure/vsepr/plot_01_vsepr_geometries.py
+.. minigallery:: ../../examples/structure/vsepr/plot_03_hypervalent_molecules.py
 
 See Also
 --------

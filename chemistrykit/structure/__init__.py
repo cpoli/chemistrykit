@@ -10,13 +10,23 @@ character tables for the common point groups; bond order from the
 Pauling bond-length correlation and from Huckel-theory MO coefficients
 (the Coulson bond order); and formal-charge/oxidation-state assignment
 from a Lewis structure, using electronegativities from
-:mod:`chemistrykit.periodic_table`.
+:mod:`chemistrykit.periodic_table`; Kekule-structure enumeration,
+Baeyer ring angle strain, and dipole moments from point charges or bond
+dipoles.
 """
 
 __version__ = "0.1.0"
 
 from chemistrykit.structure.core.base_system import Molecule, angle_between, unit_vector
-from chemistrykit.structure.systems.bonding import bond_length_from_order, bond_order_from_length, coulson_pi_bond_order
+from chemistrykit.structure.systems.bonding import (
+    PAULING_C_C_CONSTANT,
+    bond_length_from_order,
+    bond_order_from_length,
+    coulson_pi_bond_order,
+    pauling_electronegativity_difference,
+)
+from chemistrykit.structure.systems.dipole import DEBYE, E_ANGSTROM_IN_DEBYE, bond_dipole_sum, dipole_moment
+from chemistrykit.structure.systems.kekule import count_kekule_structures, kekule_structures
 from chemistrykit.structure.systems.lewis import LewisStructure
 from chemistrykit.structure.systems.point_group import (
     CHARACTER_TABLES,
@@ -25,6 +35,7 @@ from chemistrykit.structure.systems.point_group import (
     determine_point_group,
     get_character_table,
 )
+from chemistrykit.structure.systems.ring_strain import TETRAHEDRAL_ANGLE, baeyer_angle_strain, chair_cyclohexane_coordinates, planar_ring_angle
 from chemistrykit.structure.systems.vsepr import AXE_SHAPE_NAMES, IDEAL_BOND_ANGLES, VSEPRGeometry, build_vsepr_molecule, domain_positions
 
 __all__ = [
@@ -46,4 +57,16 @@ __all__ = [
     "bond_length_from_order",
     "coulson_pi_bond_order",
     "LewisStructure",
+    "PAULING_C_C_CONSTANT",
+    "pauling_electronegativity_difference",
+    "kekule_structures",
+    "count_kekule_structures",
+    "TETRAHEDRAL_ANGLE",
+    "planar_ring_angle",
+    "baeyer_angle_strain",
+    "chair_cyclohexane_coordinates",
+    "DEBYE",
+    "E_ANGSTROM_IN_DEBYE",
+    "dipole_moment",
+    "bond_dipole_sum",
 ]

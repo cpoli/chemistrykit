@@ -25,10 +25,13 @@ from __future__ import annotations
 
 import numpy as np
 
-__all__ = ["bond_order_from_length", "bond_length_from_order", "coulson_pi_bond_order"]
+__all__ = ["bond_order_from_length", "bond_length_from_order", "coulson_pi_bond_order", "pauling_electronegativity_difference"]
 
 #: Pauling's original carbon-carbon bond-order/length correlation
-#: constant, in angstrom (L. Pauling, *J. Am. Chem. Soc.* 69, 542 (1947)).
+#: constant, in angstrom per decade of bond order (the relation uses a
+#: base-10 logarithm, :math:`D(n) = D(1) - 0.71\log_{10} n`; L. Pauling,
+#: *J. Am. Chem. Soc.* 69, 542 (1947)). With it, n = 2 and n = 3 give
+#: 1.33 Å and 1.20 Å, the C=C and C#C lengths.
 #: The default for `c` in :func:`bond_order_from_length` /
 #: :func:`bond_length_from_order`; pass a different value for other bond
 #: types (this module does not tabulate them).
@@ -40,7 +43,7 @@ def bond_order_from_length(single_bond_length: float, observed_length: float, c:
 
     .. math::
 
-        D(n) = D(1) - c\ln n \quad\Longrightarrow\quad n = \exp\!\left(\frac{D(1)-D(n)}{c}\right)
+        D(n) = D(1) - c\log_{10} n \quad\Longrightarrow\quad n = 10^{(D(1)-D(n))/c}
 
     where :math:`D(1)` is the reference single-bond length and `c` is an
     empirical, bond-type-specific constant (L. Pauling, *J. Am. Chem.
@@ -79,8 +82,14 @@ def bond_order_from_length(single_bond_length: float, observed_length: float, c:
 
     >>> round(bond_order_from_length(1.54, 1.54), 6)
     1.0
+
+    With Pauling's C-C constant (0.71 Å per decade of bond order),
+    ethylene's 1.33 Å double bond comes out very close to order 2:
+
+    >>> round(bond_order_from_length(1.54, 1.33), 2)
+    1.98
     """
-    return float(np.exp((single_bond_length - observed_length) / c))
+    return float(10.0 ** ((single_bond_length - observed_length) / c))
 
 
 def bond_length_from_order(single_bond_length: float, bond_order: float, c: float = PAULING_C_C_CONSTANT) -> float:
@@ -88,7 +97,7 @@ def bond_length_from_order(single_bond_length: float, bond_order: float, c: floa
 
     .. math::
 
-        D(n) = D(1) - c\ln n
+        D(n) = D(1) - c\log_{10} n
 
     Parameters
     ----------
@@ -127,7 +136,7 @@ def bond_length_from_order(single_bond_length: float, bond_order: float, c: floa
     """
     if bond_order <= 0:
         raise ValueError("bond_order must be positive")
-    return float(single_bond_length - c * np.log(bond_order))
+    return float(single_bond_length - c * np.log10(bond_order))
 
 
 def coulson_pi_bond_order(coefficients: np.ndarray, occupations, i: int, j: int) -> float:
@@ -191,3 +200,50 @@ def coulson_pi_bond_order(coefficients: np.ndarray, occupations, i: int, j: int)
     coefficients = np.asarray(coefficients, dtype=np.float64)
     occupations = np.asarray(occupations, dtype=np.float64)
     return float(np.sum(occupations * coefficients[i, :] * coefficients[j, :]))
+
+
+def pauling_electronegativity_difference(d_ab: float, d_aa: float, d_bb: float) -> float:
+    r"""Pauling's electronegativity difference from bond dissociation energies.
+
+    Pauling (1932) noticed that a heteronuclear bond A-B is stronger than
+    the arithmetic mean of the homonuclear bonds A-A and B-B. He assigned
+    this "extra ionic energy"
+
+    .. math::
+
+        \Delta = D(\mathrm{A{-}B}) - \tfrac{1}{2}\left[D(\mathrm{A{-}A}) + D(\mathrm{B{-}B})\right]
+
+    to the bond's partial ionic character and defined the electronegativity
+    difference through :math:`|\chi_A - \chi_B| = \sqrt{\Delta/\mathrm{eV}}`
+    (L. Pauling, *J. Am. Chem. Soc.* 54, 3570 (1932)). With energies in
+    kJ/mol this becomes :math:`|\chi_A-\chi_B| = 0.102\sqrt{\Delta}`, since
+    1 eV is 96.485 kJ/mol.
+
+    Parameters
+    ----------
+    d_ab, d_aa, d_bb : float
+        Bond dissociation energies of A-B, A-A and B-B, in kJ/mol.
+
+    Returns
+    -------
+    float
+        :math:`|\chi_A - \chi_B|` on the Pauling scale (0 if the extra
+        ionic energy is negative).
+
+    Examples
+    --------
+    H-Cl (432 kJ/mol) against H-H (436) and Cl-Cl (242): the extra ionic
+    energy of 93 kJ/mol gives a difference of about 0.98, close to the
+    tabulated Pauling values 3.16 - 2.20 = 0.96:
+
+    >>> round(pauling_electronegativity_difference(432.0, 436.0, 242.0), 2)
+    0.98
+
+    Equal bond energies mean no ionic contribution:
+
+    >>> pauling_electronegativity_difference(200.0, 200.0, 200.0)
+    0.0
+    """
+    delta = d_ab - 0.5 * (d_aa + d_bb)
+    ev_per_kj_mol = 1.0 / 96.485332
+    return float(np.sqrt(max(delta, 0.0) * ev_per_kj_mol))
