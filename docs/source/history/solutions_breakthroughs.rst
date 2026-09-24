@@ -100,9 +100,7 @@ Forhandlinger: Videnskabs-Selskabet i Christiania (1864); English
 translation and commentary in H. I. Abrash, "Studies Concerning
 Affinity," J. Chem. Educ. 63(12), 1044-1047 (1986).
 
-.. minigallery::
-   ../../examples/solutions/solubility/plot_01_solubility_equilibria.py
-   ../../examples/solutions/titration/plot_01_titration_curves.py
+.. minigallery:: ../../examples/solutions/acid_base/plot_02_law_of_mass_action.py
 
 1884 -- Le Chatelier's Principle and the Common-Ion Effect
 --------------------------------------------------------------
@@ -138,7 +136,7 @@ equilibres chimiques," Comptes Rendus de l'Academie des Sciences 99,
 786-789 (1884) (page range as commonly cited in secondary/textbook
 literature; not independently verified against the original).
 
-.. minigallery:: ../../examples/solutions/solubility/plot_01_solubility_equilibria.py
+.. minigallery:: ../../examples/solutions/solubility/plot_01_le_chatelier_common_ion_effect.py
 
 1884 -- 1887 -- Arrhenius and the Theory of Electrolytic Dissociation
 ------------------------------------------------------------------------
@@ -179,7 +177,7 @@ des electrolytes," doctoral dissertation, Uppsala University (1884); S.
 Arrhenius, "Ueber die Dissociation der in Wasser gelosten Stoffe,"
 Zeitschrift fur Physikalische Chemie 1, 631-648 (1887).
 
-.. minigallery:: ../../examples/solutions/acid_base/plot_01_weak_acid_base.py
+.. minigallery:: ../../examples/solutions/acid_base/plot_03_arrhenius_electrolytic_dissociation.py
 
 1888 -- Ostwald's Dilution Law
 --------------------------------
@@ -210,7 +208,7 @@ Ostwald's own simplified square-root approximation.
 *References:* W. Ostwald, "Ueber die Dissociationstheorie fur
 Elektrolyte," Zeitschrift fur Physikalische Chemie 2, 270-283 (1888).
 
-.. minigallery:: ../../examples/solutions/acid_base/plot_01_weak_acid_base.py
+.. minigallery:: ../../examples/solutions/acid_base/plot_01_ostwald_dilution_law.py
 
 1889 -- Nernst and the Solubility-Product Principle
 -------------------------------------------------------
@@ -242,7 +240,7 @@ Physikalische Chemie 4, 372-383 (1889) (page range as commonly cited in
 secondary/textbook accounts of the solubility-product concept's origin;
 not independently verified against the original).
 
-.. minigallery:: ../../examples/solutions/solubility/plot_01_solubility_equilibria.py
+.. minigallery:: ../../examples/solutions/solubility/plot_02_nernst_solubility_product.py
 
 1908 -- 1917 -- Henderson and Hasselbalch: The Buffer Equation
 --------------------------------------------------------------------
@@ -277,7 +275,7 @@ Physiol. 21, 173-179 (1908); K. A. Hasselbalch, "Die Berechnung der
 Wasserstoffzahl des Blutes aus der freien und gebundenen Kohlensaure
 desselben," Biochem. Z. 78, 112-144 (1917).
 
-.. minigallery:: ../../examples/solutions/acid_base/plot_01_weak_acid_base.py
+.. minigallery:: ../../examples/solutions/acid_base/plot_04_henderson_hasselbalch_buffer.py
 
 1909 -- Sorensen and the pH Scale
 ------------------------------------
@@ -314,10 +312,82 @@ the Henderson-Hasselbalch buffer above -- is built on this one definition.
 
 *References:* S. P. L. Sorensen, "Ueber die Messung und die Bedeutung der
 Wasserstoffionenkonzentration bei enzymatischen Prozessen," Biochem. Z.
-21, 131-200 (1909) (page range as commonly cited in secondary literature;
-not independently verified against the original).
+21, 131 (1909).
 
-.. minigallery:: ../../examples/solutions/titration/plot_01_titration_curves.py
+.. minigallery:: ../../examples/solutions/acid_base/plot_05_sorensen_ph_scale.py
+
+1914 -- Bjerrum's Species-Distribution Diagrams
+---------------------------------------------------
+
+A polyprotic acid such as phosphoric or carbonic acid can give up its
+protons one at a time, so its solution holds a whole family of species --
+:math:`H_3PO_4`, :math:`H_2PO_4^-`, :math:`HPO_4^{2-}`, :math:`PO_4^{3-}`
+-- in proportions that shift with pH. The Danish chemist Niels Bjerrum,
+in a 1914 monograph on the theory of acid-base titrations, worked out
+these proportions systematically from the stepwise mass-action
+constants and drew them as curves against the (then brand-new)
+Sorensen pH scale. His key observation is that the fraction of the acid
+in each protonation state depends on pH alone, not on how much acid is
+present, and that neighboring species are exactly equally abundant where
+:math:`\mathrm{pH} = pK_j`:
+
+.. math::
+
+   \alpha_j = \frac{[H^+]^{n-j}\prod_{i\le j}K_i}
+   {\sum_{k=0}^{n}[H^+]^{n-k}\prod_{i\le k}K_i}
+
+These "Bjerrum plots" (distribution diagrams) became the standard way to
+read which form of an acid dominates at a given pH -- why dissolved
+carbon dioxide in blood at pH 7.4 is almost all bicarbonate, and why
+phosphate buffers work near pH 7.2 -- and they underlie the later
+logarithmic diagrams of Sillen and others.
+
+*Implementation:*
+:func:`~chemistrykit.solutions.polyprotic_fractions` returns every
+:math:`\alpha_j` for an arbitrary list of stepwise dissociation
+constants, as an array whose rows sum to one at every pH.
+
+*References:* N. Bjerrum, *Die Theorie der alkalimetrischen und
+azidimetrischen Titrierungen* (Stuttgart: F. Enke, 1914), Sammlung
+chemischer und chemisch-technischer Vortrage, vol. 21.
+
+.. minigallery:: ../../examples/solutions/acid_base/plot_06_bjerrum_speciation_diagram.py
+
+1922 -- Van Slyke and the Buffer Value
+------------------------------------------
+
+The Henderson-Hasselbalch equation says *where* a buffer holds the pH,
+but not *how strongly*. Donald D. Van Slyke, at the Rockefeller Institute
+in New York, supplied the missing measure in 1922: the buffer value
+:math:`\beta`, defined as the amount of strong base per litre needed to
+raise the pH by one unit, :math:`\beta = dC_b/d\mathrm{pH}`.
+Differentiating the charge balance of a weak acid/conjugate base pair
+of total concentration :math:`C` gives it in closed form,
+
+.. math::
+
+   \beta = \ln 10\left([H^+] + \frac{K_w}{[H^+]}
+   + \frac{C K_a [H^+]}{(K_a + [H^+])^2}\right),
+
+which shows directly what practical chemists had observed: buffering is
+strongest exactly at :math:`\mathrm{pH} = pK_a`, where it reaches
+:math:`\ln 10\, C/4`, grows in proportion to the buffer's
+concentration, and fades within about one pH unit on either side. Van
+Slyke developed the idea while working on the acid-base balance of
+blood, and the buffer value has been the standard quantitative measure
+of buffer strength in chemistry and physiology ever since.
+
+*Implementation:*
+:func:`~chemistrykit.solutions.buffer_capacity` evaluates Van Slyke's
+:math:`\beta` for a monoprotic buffer, including the water terms that
+dominate at the extremes of the pH scale.
+
+*References:* D. D. Van Slyke, "On the measurement of buffer values and
+on the relationship of buffer value to the dissociation constant of the
+buffer and the concentration and reaction of the buffer solution," J.
+Biol. Chem. 52, 525-570 (1922).
+
+.. minigallery:: ../../examples/solutions/acid_base/plot_07_van_slyke_buffer_capacity.py
 
 1923 -- Bronsted and Lowry: The Proton-Transfer Theory of Acids and Bases
 ------------------------------------------------------------------------------
@@ -347,13 +417,10 @@ the conjugate-pair structure the Bronsted-Lowry theory formalizes.
 
 *References:* J. N. Bronsted, "Einige Bemerkungen ueber den Begriff der
 Sauren und Basen," Recueil des Travaux Chimiques des Pays-Bas 42, 718-728
-(1923); T. M. Lowry, "The uniqueness of hydrogen," J. Chem. Soc., Trans.
-123, 1897-1902 (1923) (Lowry's exact place and page of publication are
-given inconsistently across secondary sources; the citation given here
-follows the most commonly repeated version and has not been independently
-verified against the original).
+(1923); T. M. Lowry, "The uniqueness of hydrogen," Journal of the Society of
+Chemical Industry 42, 43-47 (1923).
 
-.. minigallery:: ../../examples/solutions/acid_base/plot_01_weak_acid_base.py
+.. minigallery:: ../../examples/solutions/acid_base/plot_08_bronsted_lowry_conjugate_pairs.py
 
 1923 -- Debye and Huckel: The Limiting Law of Ionic Activity
 -----------------------------------------------------------------
@@ -391,7 +458,7 @@ aqueous solutions at 25 degC.
 *References:* P. Debye and E. Huckel, "Zur Theorie der Elektrolyte,"
 Physikalische Zeitschrift 24, 185-206 (1923).
 
-.. minigallery:: ../../examples/solutions/activity/plot_01_debye_huckel.py
+.. minigallery:: ../../examples/solutions/activity/plot_01_debye_huckel_limiting_law.py
 
 1926 -- Guntelberg's Extended Activity-Coefficient Approximation
 -----------------------------------------------------------------------
@@ -427,7 +494,81 @@ Zeitschrift fur Physikalische Chemie 123, 199-247 (1926) (page range as
 commonly cited in secondary/textbook literature on activity-coefficient
 theory; not independently verified against the original).
 
-.. minigallery:: ../../examples/solutions/activity/plot_01_debye_huckel.py
+.. minigallery:: ../../examples/solutions/activity/plot_02_guntelberg_extended_law.py
+
+1938 -- Davies's Empirical Activity-Coefficient Equation
+------------------------------------------------------------
+
+Even Guntelberg's extended law keeps predicting that activity
+coefficients fall steadily as ionic strength rises, yet measured mean
+activity coefficients of most salts pass through a minimum and climb
+again in concentrated solutions. Cecil W. Davies, fitting the
+activity-coefficient data of a large number of strong electrolytes in
+1938, found that adding a single term linear in ionic strength to the
+Guntelberg form captured this turnaround well up to about
+:math:`I \approx 0.5` mol/L -- still with no ion-specific parameter at
+all:
+
+.. math::
+
+   \log_{10}\gamma = -A z^2\left(\frac{\sqrt{I}}{1+\sqrt{I}} - bI\right)
+
+Davies's 1938 paper used :math:`b = 0.2`; the value :math:`b = 0.3`
+given in his 1962 monograph *Ion Association* is the one most widely
+used today. Because it needs only the charge of each ion, the Davies
+equation became the default activity model in chemical-speciation
+calculations for natural waters and many geochemical codes.
+
+*Implementation:*
+:func:`~chemistrykit.solutions.activity_coefficient_davies` implements
+the equation with the linear coefficient ``b`` defaulting to 0.3; with
+``b = 0`` it reduces exactly to
+:func:`~chemistrykit.solutions.activity_coefficient_debye_huckel_extended`
+at ``Ba = 1``.
+
+*References:* C. W. Davies, "The extent of dissociation of salts in
+water. Part VIII. An equation for the mean ionic activity coefficient of
+an electrolyte in water, and a revision of the dissociation constants of
+some sulphates," J. Chem. Soc. 1938, 2093-2098; C. W. Davies, *Ion
+Association* (London: Butterworths, 1962).
+
+.. minigallery:: ../../examples/solutions/activity/plot_03_davies_equation.py
+
+1950 -- 1952 -- Gran's Linearized Titration Plot
+----------------------------------------------------
+
+Locating an equivalence point as the steepest point of a titration curve
+requires dense, accurate readings exactly where the pH changes fastest
+and is hardest to measure. The Swedish chemist Gunnar Gran showed in
+1950 and 1952 that the problem can be sidestepped by transforming the
+data. Before the equivalence point of a strong acid titrated with a
+strong base, the charge balance gives
+
+.. math::
+
+   (V_a + V_b)\,10^{-\mathrm{pH}} = C_aV_a - C_bV_b,
+
+so the "Gran function" on the left is a straight line in the titrant
+volume that reaches zero exactly at the equivalence volume
+:math:`V_e = C_aV_a/C_b`. Fitting a line to readings taken well before
+the endpoint and extrapolating it to the axis gives :math:`V_e` without
+knowing either concentration and without measuring near the steep part
+of the curve at all. Gran plots remain a standard technique in
+potentiometric titration, especially for dilute or weak systems whose
+endpoints are too gradual to locate by eye.
+
+*Implementation:*
+:func:`~chemistrykit.solutions.gran_plot` computes the Gran function
+from titrant volumes and pH readings and returns its least-squares
+line and extrapolated equivalence volume in a
+:class:`~chemistrykit.solutions.GranPlotResult`.
+
+*References:* G. Gran, "Determination of the equivalent point in
+potentiometric titrations," Acta Chem. Scand. 4, 559-577 (1950); G.
+Gran, "Determination of the equivalence point in potentiometric
+titrations. Part II," Analyst 77, 661-671 (1952).
+
+.. minigallery:: ../../examples/solutions/titration/plot_02_gran_plot.py
 
 See Also
 --------

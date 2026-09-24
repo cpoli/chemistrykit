@@ -1,7 +1,13 @@
 r"""
-Strong/strong and weak-acid/strong-base titration curves
-===========================================================
+Volumetric titration: locating the equivalence point
+======================================================
 
+The volumetric analysis Gay-Lussac and Mohr systematized finds how much
+acid a sample contains from the burette volume at which it has been
+exactly neutralized -- the equivalence point, seen by eye as an
+indicator's sudden colour change and here located numerically as the
+steepest point of the pH curve
+(:meth:`~chemistrykit.solutions.core.base_system.Titration.find_equivalence_point`).
 Comparing a strong-acid/strong-base titration
 (:class:`~chemistrykit.solutions.systems.titration.StrongAcidStrongBaseTitration`)
 against a weak-acid/strong-base titration

@@ -28,7 +28,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from chemistrykit.solutions.core.base_system import Titration
+from chemistrykit.solutions.core.base_system import GranPlotResult, Titration
 from chemistrykit.solutions.systems.acid_base import ph_from_h, poh_from_oh
 from chemistrykit.solutions.utils.rootfinding import find_positive_root
 
@@ -36,6 +36,7 @@ __all__ = [
     "StrongAcidStrongBaseTitration",
     "WeakAcidStrongBaseTitration",
     "WeakBaseStrongAcidTitration",
+    "gran_plot",
 ]
 
 
@@ -217,3 +218,56 @@ class WeakBaseStrongAcidTitration(Titration):
             oh_values[i] = find_positive_root(lambda oh, Cb_tot=Cb_tot, Ca_added=Ca_added: self._residual(oh, Cb_tot, Ca_added))
         pOH = poh_from_oh(oh_values)
         return -np.log10(self.Kw) - pOH
+
+
+def gran_plot(Vb, pH, Va: float) -> GranPlotResult:
+    r"""Gran's linearization of a strong-acid/strong-base titration curve.
+
+    Before the equivalence point of a strong acid (initial volume
+    :math:`V_a`) titrated with a strong base, the charge balance gives,
+    once :math:`[OH^-]` is negligible,
+
+    .. math::
+
+        (V_a + V_b)\,10^{-\mathrm{pH}} = C_aV_a - C_bV_b,
+
+    a straight line in :math:`V_b` whose x-intercept is exactly the
+    equivalence volume :math:`V_e = C_aV_a/C_b` -- so :math:`V_e` can be
+    found by extrapolating pre-equivalence data, without having to
+    resolve the steep inflection itself (G. Gran, *Analyst* 77, 661
+    (1952); Harris, *Quantitative Chemical Analysis*, 9th ed., Ch. 11-5).
+    Neither :math:`C_a` nor :math:`C_b` needs to be known.
+
+    Parameters
+    ----------
+    Vb : array-like of float
+        Titrant volumes, in L, all *before* the equivalence point
+        (conventionally the last 10-90% of the way to it).
+    pH : array-like of float
+        Measured pH at each volume in `Vb`.
+    Va : float
+        Initial volume of the acid being titrated, in L.
+
+    Returns
+    -------
+    GranPlotResult
+
+    Examples
+    --------
+    Recovering the 50.00 mL equivalence volume of 50.00 mL of 0.100 M HCl
+    titrated with 0.100 M NaOH from pre-equivalence points only:
+
+    >>> import numpy as np
+    >>> titration = StrongAcidStrongBaseTitration(Ca=0.100, Va=0.050, Cb=0.100)
+    >>> Vb = np.linspace(0.030, 0.045, 10)
+    >>> result = gran_plot(Vb, titration.pH_at(Vb), Va=0.050)
+    >>> round(result.equivalence_volume * 1000.0, 4)
+    50.0
+    >>> round(-result.slope, 6)  # slope is -Cb
+    0.1
+    """
+    Vb = np.atleast_1d(np.asarray(Vb, dtype=np.float64))
+    pH = np.atleast_1d(np.asarray(pH, dtype=np.float64))
+    G = (Va + Vb) * 10.0**-pH
+    slope, intercept = np.polyfit(Vb, G, 1)
+    return GranPlotResult(Vb=Vb, G=G, slope=float(slope), intercept=float(intercept), equivalence_volume=float(-intercept / slope))

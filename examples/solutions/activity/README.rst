@@ -1,5 +1,5 @@
 Activity coefficients
 ----------------------
 
-Debye-Huckel limiting and extended activity-coefficient laws as a
-function of ionic strength.
+The Debye-Huckel limiting law, Guntelberg's extended law, and the Davies
+equation for activity coefficients as a function of ionic strength.

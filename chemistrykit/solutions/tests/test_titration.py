@@ -84,3 +84,27 @@ def test_titration_curve_dataclass_shapes_match():
     Vb = np.linspace(0.0, 0.1, 50)
     result = titration.curve(Vb)
     assert result.pH.shape == result.Vb.shape == Vb.shape
+
+
+def test_gran_plot_recovers_exact_equivalence_volume():
+    from chemistrykit.solutions.systems.titration import gran_plot
+
+    titration = StrongAcidStrongBaseTitration(Ca=0.080, Va=0.025, Cb=0.100)
+    Ve = titration.equivalence_volume()
+    Vb = np.linspace(0.3 * Ve, 0.9 * Ve, 15)
+    result = gran_plot(Vb, titration.pH_at(Vb), Va=0.025)
+    assert result.equivalence_volume == pytest.approx(Ve, rel=1e-6)
+    assert result.slope == pytest.approx(-0.100, rel=1e-6)
+    assert result.intercept == pytest.approx(0.080 * 0.025, rel=1e-6)
+
+
+def test_gran_plot_is_robust_to_seeded_ph_noise():
+    from chemistrykit.solutions.systems.titration import gran_plot
+
+    rng = np.random.default_rng(12345)
+    titration = StrongAcidStrongBaseTitration(Ca=0.100, Va=0.050, Cb=0.100)
+    Ve = titration.equivalence_volume()
+    Vb = np.linspace(0.5 * Ve, 0.95 * Ve, 20)
+    noisy_pH = titration.pH_at(Vb) + rng.normal(0.0, 0.005, Vb.size)
+    result = gran_plot(Vb, noisy_pH, Va=0.050)
+    assert result.equivalence_volume == pytest.approx(Ve, rel=5e-3)

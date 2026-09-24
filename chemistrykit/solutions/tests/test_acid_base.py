@@ -91,3 +91,56 @@ def test_buffer_from_target_ph_recovers_target():
 def test_buffer_from_target_ph_more_base_when_ph_above_pka():
     buf = Buffer.from_target_ph(pKa=7.21, target_pH=7.4, total_conc=0.5)
     assert buf.base_conc > buf.acid_conc
+
+
+def test_polyprotic_fractions_sum_to_one_and_have_right_shape():
+    from chemistrykit.solutions.systems.acid_base import polyprotic_fractions
+
+    pH = np.linspace(0.0, 14.0, 57)
+    alpha = polyprotic_fractions(pH, [10**-2.15, 10**-7.20, 10**-12.35])
+    assert alpha.shape == (4, pH.size)
+    assert np.allclose(alpha.sum(axis=0), 1.0)
+
+
+def test_polyprotic_fractions_monoprotic_matches_closed_form():
+    from chemistrykit.solutions.systems.acid_base import polyprotic_fractions
+
+    Ka = 1.8e-5
+    pH = np.array([3.0, 4.7447, 6.0])
+    h = 10.0**-pH
+    alpha = polyprotic_fractions(pH, [Ka])
+    assert alpha[1] == pytest.approx(Ka / (Ka + h))
+    assert alpha[0] == pytest.approx(h / (Ka + h))
+
+
+def test_polyprotic_fractions_adjacent_species_equal_at_each_pka():
+    """For a diprotic acid, alpha_1 = alpha_2 exactly at pH = pK2 (ratio K2/h = 1)."""
+    from chemistrykit.solutions.systems.acid_base import polyprotic_fractions
+
+    alpha = polyprotic_fractions(10.33, [10**-6.35, 10**-10.33])
+    assert alpha[1, 0] == pytest.approx(alpha[2, 0], rel=1e-12)
+
+
+def test_buffer_capacity_matches_numerical_derivative_of_charge_balance():
+    from chemistrykit.solutions.systems.acid_base import buffer_capacity
+
+    C, Ka, Kw = 0.05, 1.8e-5, 1.0e-14
+
+    def base_added(pH):
+        h = 10.0**-pH
+        return C * Ka / (Ka + h) + Kw / h - h
+
+    for pH in (3.5, 4.74, 6.0, 9.0, 11.5):
+        dpH = 1e-6
+        numeric = (base_added(pH + dpH) - base_added(pH - dpH)) / (2 * dpH)
+        assert float(buffer_capacity(pH, C, Ka, Kw)) == pytest.approx(numeric, rel=1e-6)
+
+
+def test_buffer_capacity_peaks_at_pka():
+    from chemistrykit.solutions.systems.acid_base import buffer_capacity
+
+    Ka = 10**-4.76
+    pH = np.linspace(3.5, 6.0, 2501)
+    beta = buffer_capacity(pH, 0.1, Ka)
+    assert pH[np.argmax(beta)] == pytest.approx(4.76, abs=2e-3)
+    assert beta.max() == pytest.approx(np.log(10) * 0.1 / 4, rel=1e-3)

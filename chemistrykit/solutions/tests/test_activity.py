@@ -59,3 +59,31 @@ def test_debye_huckel_extended_matches_manual_formula():
     A, z, I, Ba = 0.509, 1, 0.05, 1.5
     expected = 10.0 ** (-A * z**2 * np.sqrt(I) / (1.0 + Ba * np.sqrt(I)))
     assert activity_coefficient_debye_huckel_extended(z, I, A=A, Ba=Ba) == pytest.approx(expected)
+
+
+def test_davies_matches_manual_formula():
+    from chemistrykit.solutions.systems.activity import activity_coefficient_davies
+
+    A, z, I, b = 0.509, 2, 0.1, 0.3
+    expected = 10.0 ** (-A * z**2 * (np.sqrt(I) / (1 + np.sqrt(I)) - b * I))
+    assert activity_coefficient_davies(z, I, A=A, b=b) == pytest.approx(expected)
+
+
+def test_davies_reduces_to_limiting_law_at_low_ionic_strength():
+    from chemistrykit.solutions.systems.activity import activity_coefficient_davies
+
+    I = 1e-8
+    assert activity_coefficient_davies(z=2, I=I) == pytest.approx(activity_coefficient_debye_huckel_limiting(z=2, I=I), rel=1e-6)
+
+
+def test_davies_log_gamma_has_minimum_where_derivative_vanishes():
+    """d/dI [sqrt(I)/(1+sqrt(I)) - bI] = 0  <=>  1/(2 sqrt(I)(1+sqrt(I))^2) = b."""
+    from scipy.optimize import brentq
+
+    from chemistrykit.solutions.systems.activity import activity_coefficient_davies
+
+    b = 0.3
+    I_min = brentq(lambda I: 1.0 / (2 * np.sqrt(I) * (1 + np.sqrt(I)) ** 2) - b, 1e-3, 5.0)
+    I_grid = np.linspace(0.01, 2.0, 20001)
+    gammas = np.array([activity_coefficient_davies(1, I, b=b) for I in I_grid])
+    assert I_grid[np.argmin(gammas)] == pytest.approx(I_min, abs=1e-3)

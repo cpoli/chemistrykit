@@ -30,7 +30,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-__all__ = ["WeakElectrolyte", "TitrationResult", "Titration"]
+__all__ = ["WeakElectrolyte", "TitrationResult", "Titration", "GranPlotResult"]
 
 
 class WeakElectrolyte(ABC):
@@ -84,6 +84,26 @@ class TitrationResult:
 
     pH: np.ndarray
     """ndarray: pH at each volume in `Vb`."""
+
+
+@dataclass
+class GranPlotResult:
+    """Container for the output of :func:`chemistrykit.solutions.systems.titration.gran_plot`."""
+
+    Vb: np.ndarray
+    """ndarray: Titrant volumes used in the fit, in L."""
+
+    G: np.ndarray
+    """ndarray: Gran function :math:`(V_a+V_b)\\,10^{-\\mathrm{pH}}` at each volume, in mol."""
+
+    slope: float
+    """float: Least-squares slope of `G` against `Vb`, in mol/L."""
+
+    intercept: float
+    """float: Least-squares intercept of `G` at ``Vb = 0``, in mol."""
+
+    equivalence_volume: float
+    """float: Extrapolated x-intercept ``-intercept/slope`` -- the Gran estimate of the equivalence volume, in L."""
 
 
 class Titration(ABC):

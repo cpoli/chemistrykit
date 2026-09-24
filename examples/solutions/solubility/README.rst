@@ -1,4 +1,5 @@
 Solubility equilibria
 ---------------------
 
-Ksp, molar solubility, and the common-ion effect.
+Nernst's solubility product for salts of any stoichiometry, and Le
+Chatelier's common-ion effect.

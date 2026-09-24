@@ -14,6 +14,7 @@ __all__ = [
     "ionic_strength",
     "activity_coefficient_debye_huckel_limiting",
     "activity_coefficient_debye_huckel_extended",
+    "activity_coefficient_davies",
 ]
 
 #: The Debye-Huckel constant `A` for water at 25 degC, in (mol/L)^-1/2 --
@@ -149,4 +150,52 @@ def activity_coefficient_debye_huckel_extended(z: float, I: float, A: float = DE
     True
     """
     log_gamma = -A * z**2 * np.sqrt(I) / (1.0 + Ba * np.sqrt(I))
+    return float(10.0**log_gamma)
+
+
+def activity_coefficient_davies(z: float, I: float, A: float = DEBYE_HUCKEL_A_25C, b: float = 0.3) -> float:
+    r"""Davies equation: :math:`\log_{10}\gamma = -A z^2\left(\frac{\sqrt{I}}{1+\sqrt{I}} - bI\right)`.
+
+    An empirical extension of the Guntelberg form
+    (:func:`activity_coefficient_debye_huckel_extended` with ``Ba = 1``)
+    by a term linear in ionic strength, which makes :math:`\log\gamma`
+    pass through a minimum and turn back up at high ionic strength, as
+    measured activity coefficients do; useful up to roughly
+    :math:`I \approx 0.5` mol/L with no ion-specific parameter at all.
+    Davies originally used :math:`b = 0.2` (C. W. Davies, *J. Chem. Soc.*
+    1938, 2093); the now-standard :math:`b = 0.3` is from his later
+    monograph (C. W. Davies, *Ion Association*, Butterworths, 1962).
+
+    Parameters
+    ----------
+    z : float
+        Charge number of the ion.
+    I : float
+        Ionic strength, in mol/L.
+    A : float, default :data:`DEBYE_HUCKEL_A_25C`
+        Debye-Huckel constant for the solvent/temperature.
+    b : float, default 0.3
+        Coefficient of the linear correction term.
+
+    Returns
+    -------
+    float
+        Activity coefficient :math:`\gamma`.
+
+    Examples
+    --------
+    With ``b = 0`` it is exactly the Guntelberg (``Ba = 1``) extended law:
+
+    >>> g_davies = activity_coefficient_davies(z=1, I=0.05, b=0.0)
+    >>> g_ext = activity_coefficient_debye_huckel_extended(z=1, I=0.05, Ba=1.0)
+    >>> round(g_davies - g_ext, 12)
+    0.0
+
+    The linear term raises :math:`\gamma` again at high ionic strength:
+
+    >>> activity_coefficient_davies(z=1, I=1.0) > activity_coefficient_davies(z=1, I=0.4)
+    True
+    """
+    sqrt_I = np.sqrt(I)
+    log_gamma = -A * z**2 * (sqrt_I / (1.0 + sqrt_I) - b * I)
     return float(10.0**log_gamma)

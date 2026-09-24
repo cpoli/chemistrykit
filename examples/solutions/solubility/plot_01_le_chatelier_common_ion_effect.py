@@ -1,11 +1,14 @@
 r"""
-The common-ion effect on AgCl solubility
-==========================================
+Le Chatelier's principle: the common-ion effect on AgCl solubility
+===================================================================
 
-AgCl's molar solubility (:func:`~chemistrykit.solutions.systems.solubility.molar_solubility_from_ksp`)
+Le Chatelier's principle says an equilibrium disturbed by adding one of
+its participants shifts to consume it. Adding chloride to saturated AgCl
+drives :math:`\text{AgCl}(s) \rightleftharpoons \text{Ag}^+ + \text{Cl}^-`
+back toward the solid, so AgCl's molar solubility (:func:`~chemistrykit.solutions.systems.solubility.molar_solubility_from_ksp`)
 drops sharply as increasing concentrations of a common ion (here, Cl-
-from added NaCl) are introduced -- Le Chatelier's principle, quantified
-exactly by :func:`~chemistrykit.solutions.systems.solubility.molar_solubility_with_common_ion`.
+from added NaCl) are introduced -- the direction Le Chatelier predicts,
+and the size quantified exactly by :func:`~chemistrykit.solutions.systems.solubility.molar_solubility_with_common_ion`.
 """
 
 # %%

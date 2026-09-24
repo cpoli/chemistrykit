@@ -40,6 +40,8 @@ __all__ = [
     "WeakBase",
     "Buffer",
     "henderson_hasselbalch_ph",
+    "polyprotic_fractions",
+    "buffer_capacity",
 ]
 
 
@@ -322,3 +324,96 @@ class Buffer:
         acid_conc = total_conc / (1.0 + ratio)
         base_conc = total_conc - acid_conc
         return cls(pKa=pKa, acid_conc=acid_conc, base_conc=base_conc)
+
+
+def polyprotic_fractions(pH, Ka) -> np.ndarray:
+    r"""Bjerrum's species-distribution fractions of a polyprotic acid :math:`H_nA`.
+
+    With stepwise dissociation constants :math:`K_1, \dots, K_n` and
+    :math:`h = [H^+]`, the fraction of the total acid present as
+    :math:`H_{n-j}A^{j-}` is
+
+    .. math::
+
+        \alpha_j = \frac{h^{n-j}\prod_{i=1}^{j} K_i}{\sum_{k=0}^{n} h^{n-k}\prod_{i=1}^{k} K_i},
+
+    which depends only on pH, not on the total concentration (N.
+    Bjerrum, *Die Theorie der alkalimetrischen und azidimetrischen
+    Titrierungen*, Stuttgart: Enke, 1914; Harris, *Quantitative Chemical
+    Analysis*, 9th ed., Ch. 11-7).
+
+    Parameters
+    ----------
+    pH : float or array-like of float
+        pH value(s).
+    Ka : array-like of float
+        Stepwise dissociation constants :math:`K_1, \dots, K_n`, in order.
+
+    Returns
+    -------
+    ndarray
+        Shape ``(n + 1, len(pH))``: row ``j`` is :math:`\alpha_j`, the
+        fraction that has lost ``j`` protons. The rows sum to 1.
+
+    Examples
+    --------
+    Carbonic acid (:math:`pK_1 = 6.35`, :math:`pK_2 = 10.33`): at
+    :math:`pH = pK_1` the fully protonated form and bicarbonate are
+    (almost exactly) equally abundant:
+
+    >>> alpha = polyprotic_fractions(6.35, [10**-6.35, 10**-10.33])
+    >>> [round(float(a), 3) for a in alpha[:, 0]]
+    [0.5, 0.5, 0.0]
+    """
+    h = np.atleast_1d(h_from_ph(pH))
+    Ka = np.asarray(Ka, dtype=np.float64)
+    n = Ka.size
+    cumulative = np.concatenate(([1.0], np.cumprod(Ka)))
+    terms = np.array([cumulative[j] * h ** (n - j) for j in range(n + 1)])
+    return terms / terms.sum(axis=0)
+
+
+def buffer_capacity(pH, C: float, Ka: float, Kw: float = 1.0e-14):
+    r"""Van Slyke's buffer value :math:`\beta = dC_b/d\mathrm{pH}` of a weak monoprotic acid.
+
+    The moles of strong base per litre needed to raise the pH of a
+    solution containing a weak acid/conjugate base pair (total
+    concentration :math:`C`) by one unit, from differentiating the charge
+    balance :math:`C_b = CK_a/(K_a+h) + K_w/h - h`:
+
+    .. math::
+
+        \beta = \ln 10\left(h + \frac{K_w}{h} + \frac{CK_ah}{(K_a+h)^2}\right)
+
+    The buffer term peaks at :math:`pH = pK_a` with value
+    :math:`\ln 10\,C/4` (D. D. Van Slyke, *J. Biol. Chem.* 52, 525
+    (1922); Harris, *Quantitative Chemical Analysis*, 9th ed., Ch. 9-5).
+
+    Parameters
+    ----------
+    pH : float or array-like of float
+        pH value(s).
+    C : float
+        Total concentration of the buffer pair, :math:`[HA]+[A^-]`, in mol/L.
+    Ka : float
+        Acid dissociation constant.
+    Kw : float, default 1.0e-14
+        Water autoionization constant.
+
+    Returns
+    -------
+    float or ndarray
+        Buffer capacity, in mol/L per pH unit.
+
+    Examples
+    --------
+    A 0.10 M acetate buffer at :math:`pH = pK_a` (water terms negligible):
+
+    >>> import numpy as np
+    >>> round(float(buffer_capacity(4.76, C=0.10, Ka=10**-4.76)), 4)
+    0.0576
+    >>> round(float(np.log(10) * 0.10 / 4), 4)
+    0.0576
+    """
+    h = h_from_ph(pH)
+    return np.log(10.0) * (h + Kw / h + C * Ka * h / (Ka + h) ** 2)
