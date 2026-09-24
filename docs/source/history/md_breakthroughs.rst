@@ -461,12 +461,14 @@ of Swope et al. (1982) -- and
 Verlet's own skin-list optimization directly, rebuilding only every
 ``rebuild_every`` calls rather than at every step.
 :meth:`~chemistrykit.md.LJFluid.radial_distribution_function`
-computes the same g(r) diagnostic Verlet used to characterize the
-Lennard-Jones fluid's structure.
+computes the same g(r) diagnostic Verlet used, in the second paper of
+the series (1968), to characterize the Lennard-Jones fluid's structure.
 
 *References:* L. Verlet, "Computer 'Experiments' on Classical Fluids. I.
 Thermodynamical Properties of Lennard-Jones Molecules," Phys. Rev. 159,
-98-103 (1967); W. C. Swope, H. C. Andersen, P. H. Berens, and K. R.
+98-103 (1967); L. Verlet, "Computer 'Experiments' on Classical Fluids.
+II. Equilibrium Correlation Functions," Phys. Rev. 165, 201-214 (1968);
+W. C. Swope, H. C. Andersen, P. H. Berens, and K. R.
 Wilson, "A computer simulation method for the calculation of equilibrium
 constants for the formation of physical clusters of molecules,"
 J. Chem. Phys. 76, 637-649 (1982).
