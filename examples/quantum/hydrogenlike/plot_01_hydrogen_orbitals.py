@@ -1,7 +1,10 @@
 r"""
-Hydrogen radial wavefunctions and orbital energies
-=====================================================
+Schrodinger's hydrogen atom: radial wavefunctions and orbital energies
+=========================================================================
 
+Schrodinger's first 1926 paper solved his wave equation for the hydrogen
+atom and recovered the Bohr energies :math:`E_n\propto-1/n^2` without any
+quantization postulate.
 :class:`~chemistrykit.quantum.systems.hydrogenlike.HydrogenLikeAtom`
 reproduces the textbook 13.6 eV hydrogen ground-state energy exactly,
 and its radial wavefunctions (built from the associated Laguerre

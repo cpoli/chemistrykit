@@ -1,6 +1,7 @@
-Minimal variational H2+
--------------------------
+Minimal variational H2+ and the LCAO method
+---------------------------------------------
 
-A minimal 2-Gaussian LCAO variational treatment of H2+: solving the
-secular equation ``HC=SCE`` and variationally optimizing the Gaussian
-orbital exponent to improve on a naive fixed-exponent guess.
+The one-electron H2+ molecular ion in a small Gaussian basis: LCAO
+bonding and antibonding orbitals, bonding density, the Born-Oppenheimer
+potential curve, Gaussian-type orbital integrals, the Roothaan-Hall
+secular equation ``HC=SCE``, and the shared electron pair.

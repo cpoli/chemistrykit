@@ -1,28 +1,28 @@
 r"""
-Particle-in-a-box wavefunctions, cubic-box degeneracy, and dye color
-======================================================================
+Solving Schrodinger's equation for a particle in a box
+========================================================
 
 Plots the first few 1D particle-in-a-box wavefunctions
 (:class:`~chemistrykit.quantum.systems.particle_in_box.ParticleInBox1D`),
 each offset by its own energy level, then checks the textbook 3D
 cubic-box degeneracy pattern
-(:class:`~chemistrykit.quantum.systems.particle_in_box.ParticleInBox3D`),
-and finally applies Kuhn's free-electron model
-(:func:`~chemistrykit.quantum.systems.particle_in_box.conjugated_dye_absorption_wavelength`)
-to predict how a cyanine dye's absorption color shifts with conjugation
-length.
+(:class:`~chemistrykit.quantum.systems.particle_in_box.ParticleInBox3D`).
+These are the simplest exact solutions of Schrodinger's 1926
+time-independent equation :math:`-\frac{\hbar^2}{2m}\nabla^2\psi=E\psi`
+inside hard walls: quantized energies :math:`E_n=n^2h^2/8mL^2` appear
+from the boundary conditions alone, with no quantization postulate.
 """
 
 # %%
 import matplotlib.pyplot as plt
 import numpy as np
 
-from chemistrykit.quantum.systems.particle_in_box import ParticleInBox1D, ParticleInBox3D, conjugated_dye_absorption_wavelength
+from chemistrykit.quantum.systems.particle_in_box import ParticleInBox1D, ParticleInBox3D
 from chemistrykit.quantum.visualizers.quantum_plots import plot_particle_in_box_wavefunctions
 
 box = ParticleInBox1D(length=1.0e-9)
 for n in (1, 2, 3, 4):
-    print(f"E_{n} = {box.energy(n) / 1.602176634e-19:.4f} eV")
+    print(f"E_{n} = {box.energy(n) / 1.602176634e-19:.4f} eV, E_{n}/E_1 = {box.energy(n) / box.energy(1):.4f} (n^2 = {n**2})")
 
 fig, ax = plt.subplots(figsize=(7, 5))
 plot_particle_in_box_wavefunctions(box, [1, 2, 3, 4], ax=ax, scale=2.0e-20)
@@ -48,26 +48,5 @@ ax2.set_xlabel("energy (eV)")
 ax2.set_ylabel("degeneracy")
 ax2.set_title("Cubic-box level degeneracies")
 fig2.tight_layout()
-
-# %%
-# Kuhn's free-electron model: treating a linear conjugated dye's pi
-# electrons as particles in a 1D box predicts that longer conjugation
-# (more pi electrons, longer effective box) red-shifts the absorption
-# -- the qualitative basis of cyanine-dye color tuning.
-
-chain_lengths_nm = np.linspace(0.6, 2.0, 8)
-electron_counts = [6, 8, 10, 12, 14, 16, 18, 20]
-wavelengths_nm = [
-    conjugated_dye_absorption_wavelength(box_length=L * 1.0e-9, n_pi_electrons=n) * 1.0e9 for L, n in zip(chain_lengths_nm, electron_counts, strict=True)
-]
-for L, n, wl in zip(chain_lengths_nm, electron_counts, wavelengths_nm, strict=True):
-    print(f"L = {L:.2f} nm, {n} pi electrons -> lambda = {wl:.0f} nm")
-
-fig3, ax3 = plt.subplots(figsize=(6, 4))
-ax3.plot(electron_counts, wavelengths_nm, "o-", color="darkorange")
-ax3.set_xlabel("number of pi electrons")
-ax3.set_ylabel("predicted absorption wavelength (nm)")
-ax3.set_title("Kuhn free-electron model: longer conjugation red-shifts absorption")
-fig3.tight_layout()
 
 plt.show()

@@ -110,3 +110,34 @@ def test_labels_default_and_custom():
     assert system.labels == ("C1", "C2", "C3")
     custom = HuckelSystem(n_atoms=2, bonds=[(0, 1)], labels=["A", "B"])
     assert custom.solve().basis_labels == ("A", "B")
+
+
+NAPHTHALENE_BONDS = [(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8), (8, 9), (9, 0), (4, 9)]
+
+
+def test_naphthalene_homo_density_favors_alpha_position():
+    # Fukui, Yonezawa & Shingu (1952): HOMO coefficients 0.425 (alpha), 0.263 (beta), 0 (bridgehead).
+    naphthalene = HuckelSystem(n_atoms=10, bonds=NAPHTHALENE_BONDS)
+    density = naphthalene.frontier_electron_density(10, "homo")
+    assert density.sum() == pytest.approx(2.0)
+    alpha_density = (5.0 + np.sqrt(5.0)) / 20.0  # 2 c_alpha^2 = 0.3618
+    np.testing.assert_allclose(density[[0, 3, 5, 8]], alpha_density, atol=1e-9)
+    np.testing.assert_allclose(density[[1, 2, 6, 7]], 0.5 - alpha_density, atol=1e-9)
+    np.testing.assert_allclose(density[[4, 9]], 0.0, atol=1e-12)
+
+
+def test_butadiene_frontier_densities_closed_form():
+    butadiene = HuckelSystem.linear_polyene(4)
+    c = np.sqrt(2.0 / 5.0) * np.sin(np.arange(1, 5) * 2.0 * np.pi / 5.0)  # HOMO, k=2
+    np.testing.assert_allclose(butadiene.frontier_electron_density(4, "homo"), 2.0 * c**2, atol=1e-9)
+    np.testing.assert_allclose(butadiene.frontier_electron_density(4, "lumo").sum(), 2.0)
+
+
+def test_frontier_density_rejects_degenerate_and_bad_input():
+    benzene = HuckelSystem.cyclic_polyene(6)
+    with pytest.raises(ValueError):
+        benzene.frontier_electron_density(6)
+    with pytest.raises(ValueError):
+        benzene.frontier_electron_density(5)
+    with pytest.raises(ValueError):
+        HuckelSystem.linear_polyene(4).frontier_electron_density(4, "somo")

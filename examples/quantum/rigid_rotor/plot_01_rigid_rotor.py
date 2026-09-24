@@ -1,7 +1,9 @@
 r"""
-Rigid-rotor rotational levels and the microwave rotational spectrum
+Dennison's rigid rotor: rotational levels and the microwave spectrum
 ======================================================================
 
+Dennison (1926) solved Schrodinger's equation for a rotating diatomic
+molecule, giving levels :math:`E_J=J(J+1)\hbar^2/2I`.
 Builds an HCl-like :class:`~chemistrykit.quantum.systems.rigid_rotor.RigidRotor`
 from its atomic masses and bond length
 (:meth:`~chemistrykit.quantum.systems.rigid_rotor.RigidRotor.from_diatomic`),

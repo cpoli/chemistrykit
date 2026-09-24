@@ -1,7 +1,7 @@
 Huckel molecular-orbital theory
 ---------------------------------
 
-Building and diagonalizing the Huckel secular matrix for butadiene and
-benzene, cross-checked against the closed-form Coulson/Frost eigenvalue
-formulas, and checking Huckel's 4n+2 aromaticity rule against the
-computed spectrum.
+Huckel pi-electron theory for conjugated molecules: the 4n+2 aromaticity
+rule checked against computed spectra, resonance (delocalization)
+energies, the Coulson and Frost-circle closed forms, and Fukui's
+frontier-orbital reactivity index.

@@ -197,6 +197,53 @@ class HuckelSystem(VariationalSolver):
         localized = n_bonds * 2.0 * (self.alpha + self.beta)
         return self.pi_electron_energy(n_pi_electrons) - localized
 
+    def frontier_electron_density(self, n_pi_electrons: int, orbital: str = "homo", tol: float = 1e-6) -> np.ndarray:
+        r"""Fukui's frontier electron density on each atom, :math:`f_r=2c_{r,\mathrm{F}}^2`.
+
+        Fukui, Yonezawa, and Shingu's frontier-orbital reactivity index
+        (K. Fukui, T. Yonezawa, H. Shingu, *J. Chem. Phys.* 20, 722
+        (1952)): an electrophile attacks the atom with the largest
+        HOMO density and a nucleophile the atom with the largest LUMO
+        density. The factor 2 makes the densities sum to 2 over all atoms
+        (two frontier electrons).
+
+        Parameters
+        ----------
+        n_pi_electrons : int
+            Total pi electrons (must be even, so the HOMO is doubly occupied).
+        orbital : {"homo", "lumo"}, default "homo"
+            Which frontier orbital to use.
+        tol : float, default 1e-6
+            A frontier orbital degenerate with its neighbor within `tol`
+            is ambiguous and raises ``ValueError``.
+
+        Returns
+        -------
+        ndarray, shape (n_atoms,)
+
+        Examples
+        --------
+        Butadiene's HOMO is concentrated on the terminal carbons, the
+        sites where electrophiles add:
+
+        >>> density = HuckelSystem.linear_polyene(4).frontier_electron_density(4)
+        >>> np.round(density, 3)
+        array([0.724, 0.276, 0.276, 0.724])
+        """
+        if n_pi_electrons <= 0 or n_pi_electrons % 2 != 0 or n_pi_electrons >= 2 * self.n_atoms:
+            raise ValueError("n_pi_electrons must be even, positive, and leave at least one empty orbital")
+        if orbital not in ("homo", "lumo"):
+            raise ValueError("orbital must be 'homo' or 'lumo'")
+        result = self.solve()
+        order = np.argsort(result.energies)
+        energies = result.energies[order]
+        index = n_pi_electrons // 2 - 1 if orbital == "homo" else n_pi_electrons // 2
+        neighbors = [k for k in (index - 1, index + 1) if 0 <= k < self.n_atoms]
+        if any(abs(energies[k] - energies[index]) < tol for k in neighbors):
+            raise ValueError("the frontier orbital is degenerate; its density is not uniquely defined")
+        c = result.coefficients[:, order[index]]
+        return 2.0 * c**2
+
 
 def linear_polyene_eigenvalues(n_atoms: int, alpha: float = 0.0, beta: float = -1.0) -> np.ndarray:
     r"""Closed-form Huckel eigenvalues of a linear (acyclic) conjugated chain.

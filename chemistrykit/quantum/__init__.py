@@ -7,7 +7,8 @@ levels; the rigid rotor; hydrogen-like radial wavefunctions and orbital
 shapes) and genuinely variational ones (Huckel molecular-orbital theory
 for conjugated pi systems, including Huckel's 4n+2 aromaticity rule
 checked against the computed spectrum; a minimal Gaussian-basis
-variational treatment of H2+; Rayleigh-Schrodinger perturbation theory for
+variational treatment of H2+; the effective-nuclear-charge variational
+helium atom; Rayleigh-Schrodinger perturbation theory for
 the anharmonic oscillator, checked against exact numerical diagonalization
 in a truncated basis).
 
@@ -26,6 +27,12 @@ __version__ = "0.1.0"
 from chemistrykit.quantum.core.base_system import EigenstateResult, QuantumSystem, VariationalSolver
 from chemistrykit.quantum.systems.harmonic_oscillator import MorseOscillator, QuantumHarmonicOscillator, compare_harmonic_vs_morse
 from chemistrykit.quantum.systems.hartree_fock import ExponentOptimizationResult, H2PlusVariational
+from chemistrykit.quantum.systems.helium import (
+    HARTREE_ENERGY,
+    HeliumVariationalResult,
+    helium_like_variational_energy,
+    optimize_helium_like_effective_charge,
+)
 from chemistrykit.quantum.systems.huckel import (
     HuckelSystem,
     cyclic_polyene_eigenvalues,
@@ -63,6 +70,10 @@ __all__ = [
     "is_aromatic_by_huckel_rule",
     "H2PlusVariational",
     "ExponentOptimizationResult",
+    "HARTREE_ENERGY",
+    "HeliumVariationalResult",
+    "helium_like_variational_energy",
+    "optimize_helium_like_effective_charge",
     "position_operator_matrix",
     "cubic_perturbation_first_order_correction",
     "quartic_perturbation_first_order_correction",
