@@ -88,3 +88,16 @@ def test_powder_xrd_peaks_no_100_or_110_for_fcc():
     hkls = {p.hkl for p in peaks}
     assert (1, 0, 0) not in hkls
     assert (1, 1, 0) not in hkls
+
+
+def test_scherrer_closed_form_and_inverse_width_scaling():
+    import numpy as np
+    import pytest
+
+    from chemistrykit.crystal.systems.xrd import scherrer_crystallite_size
+
+    fwhm, two_theta, lam = 0.4, 44.0, 0.15418
+    expected = 0.9 * lam / (np.radians(fwhm) * np.cos(np.radians(two_theta / 2.0)))
+    assert scherrer_crystallite_size(fwhm, two_theta, lam) == pytest.approx(expected)
+    sizes = scherrer_crystallite_size(np.array([0.2, 0.4, 0.8]), two_theta, lam)
+    np.testing.assert_allclose(sizes[0] / sizes, [1.0, 2.0, 4.0])

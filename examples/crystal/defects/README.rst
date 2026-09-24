@@ -1,5 +1,5 @@
 Point defects
 ---------------
 
-Schottky and Frenkel point-defect concentration vs. temperature, from
+Frenkel and Schottky point-defect concentrations vs. temperature, from
 Boltzmann-factor equilibrium.

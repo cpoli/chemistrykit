@@ -29,9 +29,42 @@ two modules do not share code despite the conceptual overlap.
 
 from __future__ import annotations
 
+from fractions import Fraction
+from math import gcd, isinf, lcm
+
 import numpy as np
 
-__all__ = ["classify_crystal_system", "unit_cell_volume"]
+__all__ = [
+    "classify_crystal_system",
+    "unit_cell_volume",
+    "BRAVAIS_LATTICES",
+    "cubic_lattice_points",
+    "miller_indices_from_intercepts",
+    "interplanar_angle_cubic",
+]
+
+#: dict: The 14 Bravais lattices (A. Bravais, 1848/1850), as the lattice
+#: centerings allowed in each of the 7 crystal systems: ``"P"`` primitive,
+#: ``"C"`` base-centered, ``"I"`` body-centered, ``"F"`` face-centered,
+#: ``"R"`` rhombohedral (Ashcroft & Mermin, *Solid State Physics*, 1976,
+#: Ch. 7). The counts sum to exactly 14.
+BRAVAIS_LATTICES: dict = {
+    "cubic": ("P", "I", "F"),
+    "tetragonal": ("P", "I"),
+    "orthorhombic": ("P", "C", "I", "F"),
+    "hexagonal": ("P",),
+    "trigonal": ("R",),
+    "monoclinic": ("P", "C"),
+    "triclinic": ("P",),
+}
+
+#: dict: Fractional lattice-point positions in the conventional cubic cell
+#: for the three cubic Bravais centerings.
+_CUBIC_CENTERINGS: dict = {
+    "P": [(0.0, 0.0, 0.0)],
+    "I": [(0.0, 0.0, 0.0), (0.5, 0.5, 0.5)],
+    "F": [(0.0, 0.0, 0.0), (0.5, 0.5, 0.0), (0.5, 0.0, 0.5), (0.0, 0.5, 0.5)],
+}
 
 _CRYSTAL_SYSTEMS = (
     "cubic",
@@ -156,3 +189,143 @@ def unit_cell_volume(a: float, b: float, c: float, alpha: float, beta: float, ga
     factor = np.sqrt(np.clip(1.0 - ca**2 - cb**2 - cg**2 + 2.0 * ca * cb * cg, 0.0, None))
     result = a * b * c * factor
     return float(result) if result.ndim == 0 else result
+
+
+def cubic_lattice_points(centering: str, a: float = 1.0, n_cells: int = 1) -> np.ndarray:
+    r"""Cartesian lattice points of a cubic Bravais lattice inside an ``n_cells``-cube block of conventional cells.
+
+    Generates every point :math:`a(\mathbf{n}+\mathbf{f})` with integer
+    cell index :math:`\mathbf{n}` and centering offset :math:`\mathbf{f}`
+    (see :data:`BRAVAIS_LATTICES`) that lies in the closed cube
+    :math:`[0, n_{cells}a]^3` -- so corner and face points shared with
+    neighboring cells are included, as in a textbook unit-cell drawing.
+
+    Parameters
+    ----------
+    centering : {"P", "I", "F"}
+        Primitive (simple), body-centered, or face-centered cubic.
+    a : float, default 1.0
+        Conventional cubic lattice constant.
+    n_cells : int, default 1
+        Number of conventional cells along each axis.
+
+    Returns
+    -------
+    ndarray, shape (n_points, 3)
+
+    Examples
+    --------
+    One conventional cell drawn with all shared corner/face points: 8
+    corners (P), plus a body center (I), or plus 6 face centers (F):
+
+    >>> [len(cubic_lattice_points(c)) for c in ("P", "I", "F")]
+    [8, 9, 14]
+    """
+    offsets = _CUBIC_CENTERINGS[centering]
+    eps = 1e-9
+    points = []
+    for i in range(n_cells + 1):
+        for j in range(n_cells + 1):
+            for k in range(n_cells + 1):
+                for fx, fy, fz in offsets:
+                    p = (i + fx, j + fy, k + fz)
+                    if all(x <= n_cells + eps for x in p):
+                        points.append(p)
+    return a * np.array(points, dtype=np.float64)
+
+
+def miller_indices_from_intercepts(a_intercept, b_intercept, c_intercept) -> tuple:
+    r"""Miller indices :math:`(hkl)` of a crystal face from its axial intercepts (Hauy's law of rational indices).
+
+    A face cutting the three crystallographic axes at :math:`p a`,
+    :math:`q b`, :math:`r c` (intercepts in units of the cell edges) has
+    indices proportional to :math:`(1/p, 1/q, 1/r)`, cleared of fractions
+    and common factors to the smallest integer triple. Hauy's law states
+    that for every natural face the intercept ratios are rational -- small
+    whole-number ratios -- which is exactly what makes this integer triple
+    exist (Hauy, *Traité de Minéralogie*, 1801; notation of W. H. Miller,
+    *A Treatise on Crystallography*, 1839).
+
+    Parameters
+    ----------
+    a_intercept, b_intercept, c_intercept : int, float, Fraction, or math.inf
+        Intercepts in units of `a`, `b`, `c`; ``math.inf`` for a face
+        parallel to that axis. Floats are converted with
+        :meth:`fractions.Fraction.limit_denominator` (denominator <= 1000).
+        Negative intercepts give negative indices.
+
+    Returns
+    -------
+    tuple of (int, int, int)
+
+    Examples
+    --------
+    A face cutting the axes at 1, 2, and 3 cell edges is the (632) face:
+
+    >>> miller_indices_from_intercepts(1, 2, 3)
+    (6, 3, 2)
+
+    A cube face parallel to `b` and `c`:
+
+    >>> import math
+    >>> miller_indices_from_intercepts(1, math.inf, math.inf)
+    (1, 0, 0)
+    """
+    reciprocals = []
+    for x in (a_intercept, b_intercept, c_intercept):
+        if isinstance(x, float) and isinf(x):
+            reciprocals.append(Fraction(0))
+            continue
+        frac = x if isinstance(x, Fraction) else Fraction(x).limit_denominator(1000)
+        if frac == 0:
+            raise ValueError("a face cannot pass through the origin (zero intercept); shift the origin")
+        reciprocals.append(1 / frac)
+    if all(r == 0 for r in reciprocals):
+        raise ValueError("at least one intercept must be finite")
+    common_denominator = lcm(*(r.denominator for r in reciprocals))
+    integers = [int(r * common_denominator) for r in reciprocals]
+    divisor = gcd(*integers)
+    return tuple(i // divisor for i in integers)
+
+
+def interplanar_angle_cubic(hkl_1, hkl_2) -> float:
+    r"""Angle between two crystal faces (planes) :math:`(h_1k_1l_1)` and :math:`(h_2k_2l_2)` of a cubic crystal, in degrees.
+
+    .. math::
+
+        \cos\phi = \frac{h_1h_2+k_1k_2+l_1l_2}
+                         {\sqrt{h_1^2+k_1^2+l_1^2}\sqrt{h_2^2+k_2^2+l_2^2}}
+
+    the angle between the face normals, which in a cubic crystal lie
+    along :math:`[hkl]` (West, *Solid State Chemistry and its
+    Applications*, 2nd ed., Ch. 1). It depends only on the indices, not
+    on the lattice constant or the size of the faces -- Steno's constancy
+    of interfacial angles.
+
+    Parameters
+    ----------
+    hkl_1, hkl_2 : tuple of (int, int, int)
+        Miller indices of the two planes (neither all zero).
+
+    Returns
+    -------
+    float
+        Angle between the plane normals, in degrees, in :math:`[0, 180]`.
+
+    Examples
+    --------
+    Adjacent cube faces are perpendicular; a cube face and an octahedral
+    face meet at :math:`\arccos(1/\sqrt3)\approx54.74°`:
+
+    >>> interplanar_angle_cubic((1, 0, 0), (0, 1, 0))
+    90.0
+    >>> round(interplanar_angle_cubic((1, 0, 0), (1, 1, 1)), 2)
+    54.74
+    """
+    v1 = np.asarray(hkl_1, dtype=np.float64)
+    v2 = np.asarray(hkl_2, dtype=np.float64)
+    n1, n2 = np.linalg.norm(v1), np.linalg.norm(v2)
+    if n1 == 0 or n2 == 0:
+        raise ValueError("(h, k, l) = (0, 0, 0) is not a plane")
+    cos_phi = np.clip(np.dot(v1, v2) / (n1 * n2), -1.0, 1.0)
+    return float(np.degrees(np.arccos(cos_phi)))

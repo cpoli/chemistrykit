@@ -1,7 +1,10 @@
 r"""
-Classifying the 7 crystal systems
-====================================
+Weiss's crystal systems: classifying a unit cell by its axes
+=============================================================
 
+Christian Samuel Weiss (1815) sorted crystals into *systems* by the
+lengths of, and angles between, their crystallographic axes -- the idea
+that survives as today's 7 crystal systems.
 :func:`~chemistrykit.crystal.systems.crystal_systems.classify_crystal_system`
 classifies a unit cell purely from the equalities/inequalities among its
 six lattice parameters :math:`(a,b,c,\alpha,\beta,\gamma)`, and

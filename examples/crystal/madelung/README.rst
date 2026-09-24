@@ -1,6 +1,6 @@
 Madelung constant
 -------------------
 
-The NaCl Madelung constant from a genuinely converging (Evjen-method)
-lattice summation, contrasted with a naive truncated sum that does not
-converge.
+Madelung's electrostatic lattice sum for NaCl, shell by shell, and
+Evjen's genuinely converging summation of it, contrasted with a naive
+truncated sum that does not converge.

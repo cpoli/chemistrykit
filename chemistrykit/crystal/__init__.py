@@ -8,13 +8,29 @@ the Born-Lande and Kapustinskii equations, and the Madelung constant of
 the NaCl structure from a genuinely converging (Evjen-method) lattice
 summation; Bragg's law and powder-XRD peak positions with structure
 factors (including systematic absences) for cubic lattices; and
-Schottky/Frenkel point-defect equilibrium.
+Schottky/Frenkel point-defect equilibrium; Miller indices from face
+intercepts, interfacial angles, and the 14 Bravais lattices; Scherrer
+crystallite sizes; and Pauling's radius-ratio rule and Goldschmidt's
+perovskite tolerance factor.
 """
 
 __version__ = "0.1.0"
 
 from chemistrykit.crystal.core.base_system import LatticeEnergyModel, LatticePacking
-from chemistrykit.crystal.systems.crystal_systems import classify_crystal_system, unit_cell_volume
+from chemistrykit.crystal.systems.crystal_chemistry import (
+    RADIUS_RATIO_LIMITS,
+    RadiusRatioPrediction,
+    goldschmidt_tolerance_factor,
+    radius_ratio_coordination,
+)
+from chemistrykit.crystal.systems.crystal_systems import (
+    BRAVAIS_LATTICES,
+    classify_crystal_system,
+    cubic_lattice_points,
+    interplanar_angle_cubic,
+    miller_indices_from_intercepts,
+    unit_cell_volume,
+)
 from chemistrykit.crystal.systems.defects import frenkel_defect_concentration, schottky_defect_concentration
 from chemistrykit.crystal.systems.lattice_energy import BornLandeLatticeEnergy, KapustinskiiLatticeEnergy
 from chemistrykit.crystal.systems.madelung import MADELUNG_CONSTANT_NACL_LITERATURE, madelung_constant_nacl
@@ -24,7 +40,14 @@ from chemistrykit.crystal.systems.packing import (
     HexagonalClosePacking,
     SimpleCubicPacking,
 )
-from chemistrykit.crystal.systems.xrd import XRDPeak, bragg_angle, d_spacing_cubic, powder_xrd_peaks, structure_factor
+from chemistrykit.crystal.systems.xrd import (
+    XRDPeak,
+    bragg_angle,
+    d_spacing_cubic,
+    powder_xrd_peaks,
+    scherrer_crystallite_size,
+    structure_factor,
+)
 
 __all__ = [
     "__version__",
@@ -32,6 +55,14 @@ __all__ = [
     "LatticeEnergyModel",
     "classify_crystal_system",
     "unit_cell_volume",
+    "BRAVAIS_LATTICES",
+    "cubic_lattice_points",
+    "miller_indices_from_intercepts",
+    "interplanar_angle_cubic",
+    "RADIUS_RATIO_LIMITS",
+    "RadiusRatioPrediction",
+    "radius_ratio_coordination",
+    "goldschmidt_tolerance_factor",
     "SimpleCubicPacking",
     "BodyCenteredCubicPacking",
     "FaceCenteredCubicPacking",
@@ -45,6 +76,7 @@ __all__ = [
     "structure_factor",
     "XRDPeak",
     "powder_xrd_peaks",
+    "scherrer_crystallite_size",
     "schottky_defect_concentration",
     "frenkel_defect_concentration",
 ]

@@ -28,6 +28,78 @@ package, with a pointer to the corresponding implementation at each stop.
    :local:
    :depth: 1
 
+1611 -- Kepler's Snowflake and the Close-Packing Conjecture
+------------------------------------------------------------
+
+In a short New Year's pamphlet on why snowflakes are six-cornered,
+Johannes Kepler asked how equal spheres -- small pellets, or the seeds of a
+pomegranate -- can be stacked most tightly. He described the stacking in
+which each layer of spheres nests in the hollows of the layer below, so
+that every sphere touches twelve others, and asserted that this packing
+would be the tightest possible. That arrangement fills a fraction
+
+.. math::
+
+   \frac{\pi}{\sqrt{18}} \approx 0.7405
+
+of space, and it is the face-centered cubic packing (with the hexagonal
+close packing sharing the same density by stacking the layers
+differently). Kepler's pamphlet is one of the first attempts to explain
+a crystal's outward shape by the regular stacking of small identical
+units, and his density claim -- the Kepler conjecture -- resisted proof
+for almost four centuries, until Thomas Hales's computer-assisted proof
+(published 2005).
+
+*Implementation:* :class:`~chemistrykit.crystal.systems.packing.FaceCenteredCubicPacking`
+and :class:`~chemistrykit.crystal.systems.packing.HexagonalClosePacking`
+both return Kepler's :math:`\pi/\sqrt{18}` from
+:meth:`~chemistrykit.crystal.core.base_system.LatticePacking.packing_fraction`,
+while :class:`~chemistrykit.crystal.systems.packing.SimpleCubicPacking`
+(:math:`\pi/6\approx0.524`) and
+:class:`~chemistrykit.crystal.systems.packing.BodyCenteredCubicPacking`
+(:math:`\sqrt3\pi/8\approx0.680`) fall below the bound.
+
+*References:* J. Kepler, *Strena Seu de Nive Sexangula* (Frankfurt:
+Godfrey Tampach, 1611); T. C. Hales, "A Proof of the Kepler Conjecture,"
+Ann. Math. 162 (2005), 1065-1185.
+
+.. minigallery:: ../../examples/crystal/packing/plot_01_packing_fractions.py
+
+1669 -- Steno and the Constancy of Interfacial Angles
+------------------------------------------------------
+
+Nicolas Steno (Niels Stensen), a Danish anatomist working in Florence,
+compared cross sections of many quartz crystals and found that however
+unequally their faces had grown -- some faces large, others shrunk almost
+to nothing -- the angles between corresponding faces were always the
+same. The external shape of a crystal can vary without limit, but the
+angles cannot: they are a fingerprint of the substance. Steno reported
+the observation in his 1669 *Prodromus*, and Jean-Baptiste Romé de
+l'Isle, measuring hundreds of minerals with Arnould Carangeot's contact
+goniometer, generalized it into a law of crystallography in 1783. The law
+is the first hint that the faces of a crystal are fixed by an internal
+structure rather than by the accidents of growth; Hauy's stacking
+hypothesis, next, explained why.
+
+*Implementation:* in modern terms a face is labelled by its Miller
+indices :math:`(hkl)`, and the angle between two faces of a cubic crystal
+depends on the indices alone,
+
+.. math::
+
+   \cos\phi = \frac{h_1h_2+k_1k_2+l_1l_2}
+                  {\sqrt{h_1^2+k_1^2+l_1^2}\sqrt{h_2^2+k_2^2+l_2^2}},
+
+which :func:`~chemistrykit.crystal.interplanar_angle_cubic` evaluates --
+for example :math:`54.74°` between a cube face and an octahedron face,
+whatever the crystal's size or shape.
+
+*References:* N. Steno, *De solido intra solidum naturaliter contento
+dissertationis prodromus* (Florence, 1669); J.-B. L. Romé de l'Isle,
+*Cristallographie*, 2nd ed. (Paris, 1783).
+
+.. minigallery:: ../../examples/crystal/crystal_systems/plot_02_steno_interfacial_angles.py
+
 1784 -- 1801 -- Hauy and the Law of Rational Indices
 -----------------------------------------------------
 
@@ -66,11 +138,43 @@ few decades later) that index every reflection and atomic-plane spacing
 throughout ``chemistrykit.crystal.systems.xrd`` -- the `hkl` argument
 of :func:`~chemistrykit.crystal.structure_factor` and
 :func:`~chemistrykit.crystal.d_spacing_cubic` is, in substance,
-Hauy's own rational triple of intercepts.
+Hauy's own rational triple of intercepts, and
+:func:`~chemistrykit.crystal.miller_indices_from_intercepts` performs the
+conversion from a face's rational axial intercepts to that integer triple.
 
 *References:* R. J. Hauy, *Essai d'une théorie sur la structure des
 crystaux* (Paris: Gogué & Née de la Rochelle, 1784); R. J. Hauy, *Traité
 de Minéralogie*, 4 vols. (Paris: Chez Louis, 1801).
+
+.. minigallery:: ../../examples/crystal/crystal_systems/plot_03_hauy_rational_indices.py
+
+1815 -- Weiss and the Crystal Systems
+--------------------------------------
+
+Christian Samuel Weiss, professor of mineralogy in Berlin, reorganized
+crystal description around *axes* rather than around Hauy's stacked
+molecules. He referred every crystal form to a set of crystallographic
+axes and grouped forms into "systems" according to how many of those axes
+are equivalent and how they are inclined to one another -- the regular
+(cubic) system with three equal perpendicular axes, systems with one
+distinct perpendicular axis or with three unequal perpendicular axes, and
+the hexagonal system built on a sixfold axis. Friedrich Mohs and Carl
+Friedrich Naumann added the oblique (monoclinic and triclinic) systems in
+the 1820s, completing the scheme that survives as the seven crystal
+systems. Weiss also introduced the axial intercepts ("Weiss parameters")
+from which Miller's indices were later derived.
+
+*Implementation:* :func:`~chemistrykit.crystal.classify_crystal_system`
+sorts a unit cell into one of the seven systems purely from the
+equalities among its axial lengths :math:`a,b,c` and interaxial angles
+:math:`\alpha,\beta,\gamma`, exactly Weiss's criterion, and
+:func:`~chemistrykit.crystal.unit_cell_volume` gives the cell volume for
+any system from the same six parameters.
+
+*References:* C. S. Weiss, "Übersichtliche Darstellung der verschiedenen
+natürlichen Abtheilungen der Krystallisationssysteme," Abhandlungen der
+Königlichen Akademie der Wissenschaften zu Berlin, physikalische Klasse,
+1814-1815 (published 1818).
 
 .. minigallery:: ../../examples/crystal/crystal_systems/plot_01_crystal_systems.py
 
@@ -109,6 +213,10 @@ matches FCC's close packing even though the underlying lattice is
 different in kind, not just in centering. The same three cubic Bravais
 lattices reappear as the conventional-cell bases (`_CUBIC_BASES`) that
 :func:`~chemistrykit.crystal.powder_xrd_peaks` sums over below.
+:data:`~chemistrykit.crystal.BRAVAIS_LATTICES` lists all 14 lattices as
+the centerings allowed in each crystal system, and
+:func:`~chemistrykit.crystal.cubic_lattice_points` generates the P, I,
+and F cubic lattices point by point.
 
 *References:* A. Bravais, "Mémoire sur les systèmes formés par des points
 distribués régulièrement sur un plan ou dans l'espace," J. Ecole
@@ -116,7 +224,7 @@ Polytechnique 19 (1850), 1-128 (the memoir is dated and generally credited
 to 1848, the year of its presentation to the Académie des Sciences, though
 formal publication followed in 1850).
 
-.. minigallery:: ../../examples/crystal/packing/plot_01_packing_fractions.py
+.. minigallery:: ../../examples/crystal/crystal_systems/plot_04_bravais_cubic_lattices.py
 
 1912 -- von Laue, Friedrich, and Knipping: X-ray Diffraction by Crystals
 ---------------------------------------------------------------------------
@@ -160,7 +268,7 @@ Bayerischen Akademie der Wissenschaften, math.-phys. Klasse (1912),
 Theorie für die Interferenz-Erscheinungen bei Röntgenstrahlen," same
 volume, 363-373.
 
-.. minigallery:: ../../examples/crystal/xrd/plot_01_powder_xrd.py
+.. minigallery:: ../../examples/crystal/xrd/plot_02_laue_interference.py
 
 1912 -- 1913 -- The Braggs and Bragg's Law
 ---------------------------------------------
@@ -204,6 +312,38 @@ Phil. Soc. 17 (1913), 43-57 (read to the Society on 11 November 1912).
 
 .. minigallery:: ../../examples/crystal/xrd/plot_01_powder_xrd.py
 
+1918 -- Scherrer and Crystallite Size from Line Broadening
+------------------------------------------------------------
+
+Peter Debye and Paul Scherrer had just shown (1916) that a powder of
+randomly oriented crystallites diffracts X-rays into sharp cones, one per
+family of lattice planes. Scherrer then asked what happens when the
+crystallites are very small -- colloidal gold particles a few nanometres
+across. A crystal only a few hundred planes thick cannot cancel slightly
+off-Bragg waves completely, so each line is broadened, by an amount
+inversely proportional to the crystal's thickness:
+
+.. math::
+
+   \beta = \frac{K\lambda}{\tau\cos\theta},
+
+with :math:`\beta` the line width (in radians of :math:`2\theta`),
+:math:`\tau` the crystallite size, and `K` a shape factor near 0.9. The
+Scherrer equation remains the standard quick estimate of nanocrystal size
+from a powder pattern.
+
+*Implementation:* :func:`~chemistrykit.crystal.scherrer_crystallite_size`
+inverts the equation for :math:`\tau` from a measured line width and
+position.
+
+*References:* P. Scherrer, "Bestimmung der Grösse und der inneren
+Struktur von Kolloidteilchen mittels Röntgenstrahlen," Nachr. Ges. Wiss.
+Göttingen, Math.-Phys. Kl. (1918), 98-100; A. L. Patterson, "The Scherrer
+Formula for X-Ray Particle Size Determination," Phys. Rev. 56 (1939),
+978-982.
+
+.. minigallery:: ../../examples/crystal/xrd/plot_03_scherrer_crystallite_size.py
+
 1918 -- Born and Lande's Lattice-Energy Equation
 ----------------------------------------------------
 
@@ -240,7 +380,7 @@ exponents) for a salt of two different ion types.
 Kompressibilität regulärer Kristalle aus der Gittertheorie," Verh. Dtsch.
 Phys. Ges. 20 (1918), 210-216.
 
-.. minigallery:: ../../examples/crystal/lattice_energy/plot_01_lattice_energy.py
+.. minigallery:: ../../examples/crystal/lattice_energy/plot_01_born_lande.py
 
 1918 -- Madelung's Electrostatic Lattice Sum
 ------------------------------------------------
@@ -278,7 +418,7 @@ references; an occasional secondary source instead cites p. 32 of the same
 volume, and the discrepancy has not been independently resolved against
 the original issue).
 
-.. minigallery:: ../../examples/crystal/madelung/plot_01_madelung_convergence.py
+.. minigallery:: ../../examples/crystal/madelung/plot_02_madelung_lattice_sum.py
 
 1926 -- Frenkel and the Vacancy-Interstitial Defect
 -------------------------------------------------------
@@ -307,7 +447,67 @@ sites.
 *References:* J. Frenkel, "Über die Wärmebewegung in festen und flüssigen
 Körpern," Z. Phys. 35 (1926), 652-669.
 
-.. minigallery:: ../../examples/crystal/defects/plot_01_defect_equilibrium.py
+.. minigallery:: ../../examples/crystal/defects/plot_01_frenkel_defects.py
+
+1926 -- Goldschmidt's Tolerance Factor
+---------------------------------------
+
+Victor Moritz Goldschmidt, working in Oslo, set out to predict crystal
+structures from the sizes of the ions alone. Using a new set of ionic
+radii determined by his group, he formulated "laws of crystal chemistry":
+the structure a compound adopts is governed by the numbers, sizes, and
+polarizabilities of its ions. His best-known example is the perovskite
+structure :math:`ABX_3`, in which a small B cation sits in an octahedron
+of X anions and a large A cation fills the twelve-coordinate cavity
+between octahedra. In the ideal cubic cell the A-X distance is
+:math:`\sqrt2` times the B-X distance, so hard-sphere ions fit exactly
+when the tolerance factor
+
+.. math::
+
+   t = \frac{r_A + r_X}{\sqrt{2}\,(r_B + r_X)}
+
+equals 1. Values somewhat below 1 lead to tilted octahedra and lower
+symmetry, and values above 1 to hexagonal or polar distortions. The
+tolerance factor is still the first screen applied to candidate
+perovskites, from ferroelectrics to solar-cell absorbers.
+
+*Implementation:* :func:`~chemistrykit.crystal.goldschmidt_tolerance_factor`
+evaluates :math:`t` from three ionic radii (for example Shannon's).
+
+*References:* V. M. Goldschmidt, "Die Gesetze der Krystallochemie,"
+Naturwissenschaften 14 (1926), 477-485.
+
+.. minigallery:: ../../examples/crystal/crystal_chemistry/plot_02_goldschmidt_tolerance_factor.py
+
+1929 -- Pauling's Rules and the Radius-Ratio Rule
+--------------------------------------------------
+
+Linus Pauling condensed the structural chemistry of ionic crystals into
+five rules. The first says that each cation is surrounded by a
+coordination polyhedron of anions, with the cation-anion distance set by
+the sum of the radii and the coordination number set by the radius ratio
+:math:`r_+/r_-`. The geometry is simple: a polyhedron is stable only
+while its anions can touch the central cation without overlapping each
+other, which gives exact lower limits for each coordination --
+:math:`\sqrt{3/2}-1\approx0.225` for a tetrahedron,
+:math:`\sqrt2-1\approx0.414` for an octahedron, and
+:math:`\sqrt3-1\approx0.732` for a cube. The remaining rules (electrostatic
+valence, sharing of edges and faces, and parsimony) explain how the
+polyhedra link together. Pauling's rules remain the standard qualitative
+guide to ionic and mineral structures, even though real ions are not
+hard spheres and the radius-ratio rule fails for a sizeable minority of
+salts.
+
+*Implementation:* :func:`~chemistrykit.crystal.radius_ratio_coordination`
+returns a :class:`~chemistrykit.crystal.RadiusRatioPrediction` (ratio,
+coordination number, polyhedron) using the geometric limits tabulated in
+:data:`~chemistrykit.crystal.RADIUS_RATIO_LIMITS`.
+
+*References:* L. Pauling, "The Principles Determining the Structure of
+Complex Ionic Crystals," J. Am. Chem. Soc. 51 (1929), 1010-1026.
+
+.. minigallery:: ../../examples/crystal/crystal_chemistry/plot_01_pauling_radius_ratio.py
 
 1930 -- Wagner and Schottky: The Paired-Vacancy Defect
 ------------------------------------------------------------
@@ -340,7 +540,7 @@ enthalpies produce -- visually explicit.
 *References:* W. Schottky and C. Wagner, "Theorie der geordneten
 Mischphasen," Z. Phys. Chem. B 11 (1930), 163-210.
 
-.. minigallery:: ../../examples/crystal/defects/plot_01_defect_equilibrium.py
+.. minigallery:: ../../examples/crystal/defects/plot_02_schottky_defects.py
 
 1932 -- Evjen's Method for a Genuinely Convergent Madelung Sum
 --------------------------------------------------------------------
@@ -412,7 +612,7 @@ the same salt.
 *References:* A. F. Kapustinskii, "Lattice Energy of Ionic Crystals," Q.
 Rev. Chem. Soc. 10 (1956), 283-294.
 
-.. minigallery:: ../../examples/crystal/lattice_energy/plot_01_lattice_energy.py
+.. minigallery:: ../../examples/crystal/lattice_energy/plot_02_kapustinskii.py
 
 1976 -- Shannon's Revised Effective Ionic Radii
 -----------------------------------------------------
@@ -442,7 +642,7 @@ arguments of :class:`chemistrykit.crystal.systems.lattice_energy.KapustinskiiLat
 Systematic Studies of Interatomic Distances in Halides and
 Chalcogenides," Acta Cryst. A32 (1976), 751-767.
 
-.. minigallery:: ../../examples/crystal/lattice_energy/plot_01_lattice_energy.py
+.. minigallery:: ../../examples/crystal/lattice_energy/plot_03_shannon_ionic_radii.py
 
 See Also
 --------

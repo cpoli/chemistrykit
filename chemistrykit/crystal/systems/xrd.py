@@ -17,6 +17,7 @@ __all__ = [
     "structure_factor",
     "XRDPeak",
     "powder_xrd_peaks",
+    "scherrer_crystallite_size",
 ]
 
 #: dict: Fractional atomic positions (basis) of the lattice point per
@@ -220,3 +221,54 @@ def powder_xrd_peaks(lattice_type: str, a: float, wavelength: float, hkl_max: in
     # highest-index-first ordering, purely so results are deterministic.
     peaks.sort(key=lambda p: (p.two_theta, tuple(-x for x in p.hkl)))
     return peaks
+
+
+def scherrer_crystallite_size(fwhm_deg, two_theta_deg, wavelength: float, shape_factor: float = 0.9):
+    r"""Mean crystallite size from powder-XRD line broadening, via the Scherrer equation.
+
+    .. math::
+
+        \tau = \frac{K\lambda}{\beta\cos\theta}
+
+    with :math:`\beta` the peak's full width at half maximum in radians of
+    :math:`2\theta` (instrumental broadening already subtracted),
+    :math:`\theta` the Bragg angle, and `K` a dimensionless shape factor
+    (about 0.9 for roughly spherical crystallites) (P. Scherrer, *Nachr.
+    Ges. Wiss. Göttingen*, 1918, 98-100; A. L. Patterson, *Phys. Rev.* 56
+    (1939), 978).
+
+    Parameters
+    ----------
+    fwhm_deg : float or array-like of float
+        Full width at half maximum of the peak, in degrees of :math:`2\theta`.
+    two_theta_deg : float or array-like of float
+        Peak position :math:`2\theta`, in degrees.
+    wavelength : float
+        X-ray wavelength; the result is in the same length unit.
+    shape_factor : float, default 0.9
+        Scherrer constant `K`.
+
+    Returns
+    -------
+    float or ndarray
+        Mean crystallite dimension perpendicular to the diffracting planes.
+
+    Examples
+    --------
+    A Cu-Kalpha peak at :math:`2\theta=38.2°` that is 0.5° wide comes from
+    crystallites about 17 nm across:
+
+    >>> round(scherrer_crystallite_size(0.5, 38.2, wavelength=0.15418), 1)
+    16.8
+
+    Size is inversely proportional to width -- halve the width, double the size:
+
+    >>> tau_1 = scherrer_crystallite_size(0.5, 38.2, 0.15418)
+    >>> tau_2 = scherrer_crystallite_size(0.25, 38.2, 0.15418)
+    >>> round(tau_2 / tau_1, 12)
+    2.0
+    """
+    beta = np.radians(np.asarray(fwhm_deg, dtype=np.float64))
+    theta = np.radians(np.asarray(two_theta_deg, dtype=np.float64)) / 2.0
+    tau = shape_factor * wavelength / (beta * np.cos(theta))
+    return float(tau) if tau.ndim == 0 else tau
