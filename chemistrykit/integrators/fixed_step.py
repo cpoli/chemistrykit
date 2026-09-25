@@ -10,6 +10,17 @@ Numba compile these integrators once and reuse them, as first-class
 functions, across many differently-parameterized systems -- e.g. sweeping a
 grid of rate constants without recompiling per value.
 
+These integrators (and :mod:`chemistrykit.integrators.adaptive`'s) are
+deliberately *not* ``cache=True``: their signature includes the type of
+the ``rhs``/``force`` dispatcher passed in, and Numba's on-disk cache cannot
+reliably serialize that. A dispatcher built by a factory closure (as
+:class:`chemistrykit.kinetics.systems.networks.StoichiometricNetwork` and
+the :mod:`chemistrykit.md` systems do) gets a fresh type per instance, so
+every run appended new, never-reused index entries. Once such an entry's
+dispatcher was garbage-collected, re-saving the index raised
+``ReferenceError: underlying object has vanished``. The ``rhs``/``force``
+kernels themselves take only arrays and remain cacheable.
+
 :func:`rk4_integrate` is the workhorse for :mod:`chemistrykit.kinetics`'s
 reaction-network ODEs ``dC/dt = f(C, t)``, which have no notion of a
 "force" and are not, in general, separable or symplectic -- the two
@@ -21,7 +32,7 @@ where the force may not depend on velocity.
 
 from __future__ import annotations
 
-from typing import Callable
+from collections.abc import Callable
 
 import numpy as np
 from numba import njit
@@ -44,7 +55,7 @@ __all__ = [
 RHSFunc = Callable[[NDArray[np.float64], float, NDArray[np.float64]], NDArray[np.float64]]
 
 
-@njit(cache=True)
+@njit
 def rk4_step(
     rhs: RHSFunc,
     state: NDArray[np.float64],
@@ -80,7 +91,7 @@ def rk4_step(
     return state + (dt / 6.0) * (k1 + 2.0 * k2 + 2.0 * k3 + k4)
 
 
-@njit(cache=True)
+@njit
 def rk4_integrate(
     rhs: RHSFunc,
     state0: NDArray[np.float64],
@@ -129,7 +140,7 @@ def rk4_integrate(
     return times, states
 
 
-@njit(cache=True)
+@njit
 def leapfrog_step(
     force: RHSFunc,
     pos: NDArray[np.float64],
@@ -170,7 +181,7 @@ def leapfrog_step(
     return pos_new, vel_new
 
 
-@njit(cache=True)
+@njit
 def leapfrog_integrate(
     force: RHSFunc,
     pos0: NDArray[np.float64],
@@ -243,7 +254,7 @@ _YOSHIDA_W0 = -_YOSHIDA_CBRT2 / (2.0 - _YOSHIDA_CBRT2)
 _YOSHIDA_W1 = 1.0 / (2.0 - _YOSHIDA_CBRT2)
 
 
-@njit(cache=True)
+@njit
 def yoshida4_step(
     force: RHSFunc,
     pos: NDArray[np.float64],
@@ -294,7 +305,7 @@ def yoshida4_step(
     return pos, vel
 
 
-@njit(cache=True)
+@njit
 def yoshida4_integrate(
     force: RHSFunc,
     pos0: NDArray[np.float64],

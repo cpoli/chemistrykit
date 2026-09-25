@@ -7,6 +7,7 @@ only rewords the docstrings' physics-specific framing).
 """
 
 import numpy as np
+import pytest
 from numba import njit
 
 from chemistrykit.integrators import (
@@ -112,3 +113,48 @@ def test_rk4_matches_analytic_first_order_decay():
     ts, cs = rk4_integrate(_decay_rhs, c0, 0.0, 1e-3, 5000, np.array([k]))
     expected = 2.0 * np.exp(-k * ts)
     np.testing.assert_allclose(cs[:, 0], expected, atol=1e-6)
+
+
+def test_dopri5_warns_when_max_steps_exhausted_before_t_end():
+    params = np.array([2.0])
+    state0 = np.array([1.0, 0.0])
+
+    with pytest.warns(RuntimeWarning, match="max_steps=5"):
+        ts, _ = dopri5_integrate(_harmonic_rhs, state0, 0.0, 10.0, 0.01, params, max_steps=5)
+    assert ts[-1] < 10.0
+
+
+def test_dopri5_does_not_warn_when_t_end_reached(recwarn):
+    ts, _ = dopri5_integrate(_harmonic_rhs, np.array([1.0, 0.0]), 0.0, 1.0, 0.01, np.array([2.0]))
+    assert ts[-1] == 1.0
+    assert not [w for w in recwarn if issubclass(w.category, RuntimeWarning)]
+
+
+def test_reaction_network_dopri5_surfaces_max_steps_warning():
+    from chemistrykit.kinetics.systems.networks import StoichiometricNetwork
+
+    net = StoichiometricNetwork.consecutive(k1=1.0, k2=0.3, A0=1.0)
+    with pytest.warns(RuntimeWarning, match="before reaching t_end"):
+        result = net.integrate((0.0, 20.0), method="dopri5", max_steps=3)
+    assert result.t[-1] < 20.0
+
+
+def test_function_taking_kernels_are_not_disk_cached():
+    # Their compiled signature includes the rhs/force dispatcher's type, which is fresh
+    # per factory-closure instance, so on-disk caching only accumulates dead entries.
+    from numba.core.caching import NullCache
+
+    from chemistrykit.integrators import adaptive, fixed_step
+
+    kernels = [
+        fixed_step.rk4_step,
+        fixed_step.rk4_integrate,
+        fixed_step.leapfrog_step,
+        fixed_step.leapfrog_integrate,
+        fixed_step.yoshida4_step,
+        fixed_step.yoshida4_integrate,
+        adaptive.dopri5_step,
+        adaptive._dopri5_integrate_njit,
+    ]
+    for kernel in kernels:
+        assert isinstance(kernel._cache, NullCache), kernel.py_func.__qualname__

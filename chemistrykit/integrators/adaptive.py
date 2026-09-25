@@ -19,6 +19,8 @@ long-time Hamiltonian/molecular-dynamics evolution.
 
 from __future__ import annotations
 
+import warnings
+
 import numpy as np
 from numba import njit
 from numpy.typing import NDArray
@@ -55,7 +57,7 @@ _E6 = _B6 - _B6S
 _E7 = -_B7S
 
 
-@njit(cache=True)
+@njit
 def dopri5_step(
     rhs: RHSFunc,
     state: NDArray[np.float64],
@@ -99,61 +101,23 @@ def dopri5_step(
     return state_new, error
 
 
-@njit(cache=True)
-def dopri5_integrate(
+@njit
+def _dopri5_integrate_njit(
     rhs: RHSFunc,
     state0: NDArray[np.float64],
     t0: float,
     t_end: float,
     dt0: float,
     params: NDArray[np.float64],
-    rtol: float = 1e-6,
-    atol: float = 1e-9,
-    dt_min: float = 1e-12,
-    dt_max: float = 1e6,
-    safety: float = 0.9,
-    max_steps: int = 100_000,
+    rtol: float,
+    atol: float,
+    dt_min: float,
+    dt_max: float,
+    safety: float,
+    max_steps: int,
 ) -> tuple[NDArray[np.float64], NDArray[np.float64]]:
-    """Integrate forward from ``t0`` to ``t_end`` with adaptive step-size control.
-
-    Steps are accepted or rejected from the embedded RK5(4) error estimate
-    against an ``atol + rtol * |state|`` tolerance (the same convention as
-    :func:`scipy.integrate.solve_ivp`), with the step size adjusted after
-    every attempt. Only forward integration (``t_end > t0``, ``dt0 > 0``) is
-    supported.
-
-    Parameters
-    ----------
-    rhs : callable
-        Numba-jitted right-hand-side function ``rhs(state, t, params) ->
-        ndarray``.
-    state0 : ndarray of float, shape (dim,)
-        Initial state vector.
-    t0, t_end : float
-        Integration interval, with ``t_end > t0``.
-    dt0 : float
-        Initial step size to attempt.
-    params : ndarray of float
-        Parameter vector passed through to `rhs`.
-    rtol, atol : float
-        Relative and absolute error tolerances.
-    dt_min, dt_max : float
-        Step-size bounds; a step is accepted once ``dt`` shrinks to
-        `dt_min` regardless of its error estimate, to guarantee progress.
-    safety : float, default=0.9
-        Safety factor applied to the step-size update.
-    max_steps : int
-        Upper bound on the number of attempted steps (accepted or
-        rejected), to guarantee termination.
-
-    Returns
-    -------
-    times : ndarray of float, shape (n_accepted + 1,)
-        Times of the accepted steps, starting at `t0` and ending at
-        `t_end`.
-    states : ndarray of float, shape (n_accepted + 1, dim)
-        State at each accepted step.
-    """
+    # Compiled loop behind :func:`dopri5_integrate`, which adds the Python-side
+    # ``max_steps`` warning (njit code cannot call ``warnings.warn``).
     dim = state0.shape[0]
     cap = 1024
     times = np.empty(cap)
@@ -199,3 +163,69 @@ def dopri5_integrate(
         dt = min(max(dt * factor, dt_min), dt_max)
 
     return times[: count + 1], states[: count + 1]
+
+
+def dopri5_integrate(
+    rhs: RHSFunc,
+    state0: NDArray[np.float64],
+    t0: float,
+    t_end: float,
+    dt0: float,
+    params: NDArray[np.float64],
+    rtol: float = 1e-6,
+    atol: float = 1e-9,
+    dt_min: float = 1e-12,
+    dt_max: float = 1e6,
+    safety: float = 0.9,
+    max_steps: int = 100_000,
+) -> tuple[NDArray[np.float64], NDArray[np.float64]]:
+    """Integrate forward from ``t0`` to ``t_end`` with adaptive step-size control.
+
+    Steps are accepted or rejected from the embedded RK5(4) error estimate
+    against an ``atol + rtol * |state|`` tolerance (the same convention as
+    :func:`scipy.integrate.solve_ivp`), with the step size adjusted after
+    every attempt. Only forward integration (``t_end > t0``, ``dt0 > 0``) is
+    supported.
+
+    Parameters
+    ----------
+    rhs : callable
+        Numba-jitted right-hand-side function ``rhs(state, t, params) ->
+        ndarray``.
+    state0 : ndarray of float, shape (dim,)
+        Initial state vector.
+    t0, t_end : float
+        Integration interval, with ``t_end > t0``.
+    dt0 : float
+        Initial step size to attempt.
+    params : ndarray of float
+        Parameter vector passed through to `rhs`.
+    rtol, atol : float
+        Relative and absolute error tolerances.
+    dt_min, dt_max : float
+        Step-size bounds; a step is accepted once ``dt`` shrinks to
+        `dt_min` regardless of its error estimate, to guarantee progress.
+    safety : float, default=0.9
+        Safety factor applied to the step-size update.
+    max_steps : int, default=100_000
+        Upper bound on the number of attempted steps (accepted or
+        rejected), to guarantee termination.
+
+    Returns
+    -------
+    times : ndarray of float, shape (n_accepted + 1,)
+        Times of the accepted steps, starting at `t0` and ending at
+        `t_end` -- or earlier, with a :class:`RuntimeWarning`, if
+        `max_steps` ran out first.
+    states : ndarray of float, shape (n_accepted + 1, dim)
+        State at each accepted step.
+    """
+    times, states = _dopri5_integrate_njit(rhs, state0, t0, t_end, dt0, params, rtol, atol, dt_min, dt_max, safety, max_steps)
+    if times[-1] < t_end:
+        warnings.warn(
+            f"dopri5_integrate stopped at t={times[-1]:.6g} before reaching t_end={t_end:.6g}: "
+            f"max_steps={max_steps} attempted steps were exhausted; increase max_steps or loosen rtol/atol.",
+            RuntimeWarning,
+            stacklevel=2,
+        )
+    return times, states
