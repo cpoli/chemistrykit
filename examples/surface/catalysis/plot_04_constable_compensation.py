@@ -43,13 +43,16 @@ print(f"Recovered from the Constable plot:     {1.0 / (R * slope):.1f} K")
 # at, and below T_iso: the ordering flips at T_iso.
 ref_Ea, ref_A = Ea_series[0], np.exp(lnA_series[0])
 for T in [450.0, T_iso, 650.0]:
-    ratios = [compare_catalyzed_rate(ref_Ea, Ea, T, A_uncatalyzed=ref_A, A_catalyzed=np.exp(lnA)).rate_enhancement for Ea, lnA in zip(Ea_series, lnA_series)]
+    ratios = [
+        compare_catalyzed_rate(ref_Ea, Ea, T, A_uncatalyzed=ref_A, A_catalyzed=np.exp(lnA)).rate_enhancement
+        for Ea, lnA in zip(Ea_series, lnA_series, strict=True)
+    ]
     print(f"T = {T:5.1f} K: k/k_ref = " + ", ".join(f"{r:.3g}" for r in ratios))
 
 # %%
 invT = np.linspace(1 / 800.0, 1 / 400.0, 200)
 fig, axes = plt.subplots(1, 2, figsize=(11, 4))
-for Ea, lnA in zip(Ea_series, lnA_series):
+for Ea, lnA in zip(Ea_series, lnA_series, strict=True):
     axes[0].plot(1e3 * invT, lnA - Ea / R * invT, label=f"$E_a$={Ea / 1e3:.0f} kJ/mol")
 axes[0].axvline(1e3 / T_iso, color="gray", linestyle="--", linewidth=0.8)
 axes[0].set_xlabel("1000 / T (1/K)")

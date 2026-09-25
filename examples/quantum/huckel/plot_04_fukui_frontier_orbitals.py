@@ -25,7 +25,7 @@ bonds = [(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8), (8, 9),
 naphthalene = HuckelSystem(n_atoms=10, bonds=bonds, labels=labels)
 
 homo_density = naphthalene.frontier_electron_density(10, "homo")
-for label, f in zip(labels, homo_density):
+for label, f in zip(labels, homo_density, strict=True):
     print(f"C{label:3s} HOMO density = {f:.3f}")
 
 # %%
@@ -52,7 +52,7 @@ fig, ax = plt.subplots(figsize=(6, 5))
 for i, j in bonds:
     ax.plot(xy[[i, j], 0], xy[[i, j], 1], color="black", linewidth=1.5)
 ax.scatter(xy[:, 0], xy[:, 1], s=4000 * homo_density + 5, color="crimson", alpha=0.6, zorder=3)
-for (x, y), label in zip(xy, labels):
+for (x, y), label in zip(xy, labels, strict=True):
     ax.text(x, y, label, ha="center", va="center", fontsize=9, zorder=4)
 ax.set_aspect("equal")
 ax.axis("off")

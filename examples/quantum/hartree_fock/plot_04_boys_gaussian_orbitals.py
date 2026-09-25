@@ -75,7 +75,7 @@ slater = np.exp(-r) / np.sqrt(np.pi)
 
 
 def contracted(exponents, coefficients):
-    return sum(c * (2.0 * e / np.pi) ** 0.75 * np.exp(-e * r**2) for e, c in zip(exponents, coefficients))
+    return sum(c * (2.0 * e / np.pi) ** 0.75 * np.exp(-e * r**2) for e, c in zip(exponents, coefficients, strict=True))
 
 
 sto1g = contracted([0.270950], [1.0])

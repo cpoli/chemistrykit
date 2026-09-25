@@ -28,11 +28,11 @@ fluid.run(dt=dt, n_steps=400, sample_every=400)  # melt the lattice first
 n = fluid.positions.shape[0]
 L = fluid.box_length
 
-lists = {skin: set(zip(*[a.tolist() for a in build_neighbor_list(fluid.positions, L, cutoff + skin)])) for skin in (0.0, 0.3)}
+lists = {skin: set(zip(*[a.tolist() for a in build_neighbor_list(fluid.positions, L, cutoff + skin)], strict=True)) for skin in (0.0, 0.3)}
 missed = {skin: [] for skin in lists}
 for _ in range(n_steps):
     fluid.step(dt)
-    exact = set(zip(*[a.tolist() for a in build_neighbor_list(fluid.positions, L, cutoff)]))
+    exact = set(zip(*[a.tolist() for a in build_neighbor_list(fluid.positions, L, cutoff)], strict=True))
     for skin, pairs in lists.items():
         missed[skin].append(len(exact - pairs))
 

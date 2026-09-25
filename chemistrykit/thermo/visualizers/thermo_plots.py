@@ -49,7 +49,7 @@ def plot_isotherms(eos_list, T: float, Vm_range, labels=None, ax=None, **kwargs)
         _, ax = plt.subplots()
     Vm_range = np.asarray(Vm_range, dtype=np.float64)
     labels = [type(eos).__name__ for eos in eos_list] if labels is None else labels
-    for eos, label in zip(eos_list, labels):
+    for eos, label in zip(eos_list, labels, strict=True):
         ax.plot(Vm_range, eos.pressure(Vm_range, T), label=label, **kwargs)
     ax.set_xlabel("Vm (m^3/mol)")
     ax.set_ylabel("P (Pa)")

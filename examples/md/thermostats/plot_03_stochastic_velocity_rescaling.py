@@ -36,7 +36,7 @@ thermostats = {
 
 fig, axes = plt.subplots(1, 2, figsize=(11, 4.5))
 samples = {}
-for (name, thermostat), color in zip(thermostats.items(), ["firebrick", "steelblue"]):
+for (name, thermostat), color in zip(thermostats.items(), ["firebrick", "steelblue"], strict=True):
     liquid = LJFluid.from_lattice(n_per_side=5, density=0.8, temperature=2.0 * T0, cutoff=2.4, rng=1)
     result = liquid.run(dt=dt, n_steps=6000, thermostat=thermostat, sample_every=5)
     axes[0].plot(result.t, result.temperature, color=color, linewidth=0.8, label=name)
@@ -52,7 +52,7 @@ axes[0].legend()
 
 K = np.linspace(0.7 * k_bar, 1.3 * k_bar, 300)
 canonical = gamma(a=nf / 2, scale=T0)  # K is Gamma(N_f/2, k_B T_0)
-for (name, ks), color in zip(samples.items(), ["firebrick", "steelblue"]):
+for (name, ks), color in zip(samples.items(), ["firebrick", "steelblue"], strict=True):
     axes[1].hist(ks, bins=40, range=(K[0], K[-1]), density=True, alpha=0.5, color=color, label=name)
 axes[1].plot(K, canonical.pdf(K), color="black", label="canonical (gamma)")
 axes[1].set_xlabel("kinetic energy K")

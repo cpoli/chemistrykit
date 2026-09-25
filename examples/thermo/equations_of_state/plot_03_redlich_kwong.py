@@ -27,7 +27,7 @@ vdw = VanDerWaals.from_critical_constants(Tc, Pc)
 rk = RedlichKwong.from_critical_constants(Tc, Pc)
 
 fig, axes = plt.subplots(1, 2, figsize=(11, 5))
-for ax, T, title in zip(axes, [1.5 * Tc, 0.95 * Tc], ["well above Tc", "just below Tc"]):
+for ax, T, title in zip(axes, [1.5 * Tc, 0.95 * Tc], ["well above Tc", "just below Tc"], strict=True):
     Vm = np.linspace(1.5 * vdw.b, 6.0e-4, 400)
     ax.plot(Vm * 1000.0, rk.pressure(Vm, T) / 1.0e6, color="crimson", linewidth=2, label="Redlich-Kwong")
     ax.plot(Vm * 1000.0, vdw.pressure(Vm, T) / 1.0e6, "--", label="van der Waals")

@@ -28,7 +28,7 @@ t_grid = np.linspace(0.0, 15.0, 301)
 rng = np.random.default_rng(1976)
 
 fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
-for ax, N in zip(axes, (20, 2000)):
+for ax, N in zip(axes, (20, 2000), strict=True):
     _, B_det, _ = consecutive_analytic(1.0, c1, c2, t_grid)
     runs = []
     for i in range(100):

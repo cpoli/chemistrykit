@@ -23,7 +23,7 @@ dH_direct = hess_law_enthalpy([1.0, 1.0], [dH_C_to_CO, dH_CO_to_CO2])
 
 levels = {"C + O2": 0.0, "CO + 1/2 O2": dH_C_to_CO, "CO2": dH_direct}
 fig, ax = plt.subplots(figsize=(7, 5))
-for x, (label, H) in zip([0.0, 1.0, 2.0], levels.items()):
+for x, (label, H) in zip([0.0, 1.0, 2.0], levels.items(), strict=True):
     ax.hlines(H, x - 0.3, x + 0.3, color="black", linewidth=2)
     ax.text(x, H + 10, label, ha="center")
 ax.annotate("", xy=(1.0, dH_C_to_CO), xytext=(0.0, 0.0), arrowprops=dict(arrowstyle="->", color="steelblue"))

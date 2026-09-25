@@ -94,7 +94,7 @@ MPLBACKEND=Agg pytest --doctest-modules chemistrykit \
 ```
 
 Both commands, plus `ruff check`/`ruff format --check`, run in CI on
-every PR (`.github/workflows/ci.yml`) across Python 3.9-3.12 on Linux and
+every PR (`.github/workflows/ci.yml`) across Python 3.10-3.12 on Linux and
 macOS. See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a PR.
 
 ### Coverage

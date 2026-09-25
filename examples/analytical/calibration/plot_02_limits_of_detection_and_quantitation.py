@@ -39,7 +39,7 @@ print(f"Signal at LOQ: {cal_lo.predict_signal(cal_lo.loq()):.3f} = blank + 10 s_
 
 # %%
 fig, axes = plt.subplots(1, 2, figsize=(11, 4))
-for ax, (noise, (signal, cal)) in zip(axes, calibrations.items()):
+for ax, (noise, (signal, cal)) in zip(axes, calibrations.items(), strict=True):
     plot_calibration_curve(concentration, signal, calibration=cal, lod=cal.lod(), ax=ax)
     ax.axvline(cal.loq(), color="darkorange", linestyle=":", label=f"LOQ = {cal.loq():.2f} ppm")
     ax.set_title(f"noise sigma = {noise}: LOD = {cal.lod():.2f} ppm")

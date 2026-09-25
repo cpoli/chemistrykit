@@ -126,7 +126,7 @@ def gillespie_ssa(
     rng = seed if isinstance(seed, np.random.Generator) else np.random.default_rng(seed)
 
     # (species, reaction, order, 1/order!) for every reactant entry
-    terms = [(i, j, int(orders[i, j]), 1.0 / factorial(int(orders[i, j]))) for i, j in zip(*np.nonzero(orders))]
+    terms = [(i, j, int(orders[i, j]), 1.0 / factorial(int(orders[i, j]))) for i, j in zip(*np.nonzero(orders), strict=True)]
 
     ts = [0.0]
     states = [n.copy()]

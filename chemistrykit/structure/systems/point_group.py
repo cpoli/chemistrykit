@@ -388,7 +388,7 @@ class PointGroupCharacterTable:
         sizes = np.asarray(self.class_sizes, dtype=np.float64)
         h = sizes.sum()
         result = {}
-        for irrep, row in zip(self.irreps, self.characters):
+        for irrep, row in zip(self.irreps, self.characters, strict=True):
             a = float(np.sum(sizes * chi * np.asarray(row)) / h)
             n = int(round(a))
             if abs(a - n) > 1e-8:

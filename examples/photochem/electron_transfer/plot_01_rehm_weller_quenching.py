@@ -40,7 +40,7 @@ ax.set_title("Rehm-Weller: quenching rate vs. electron-transfer free energy")
 ax.legend()
 fig.tight_layout()
 
-for E, g, k in zip(E_ox, dG_pairs, kq_meas):
+for E, g, k in zip(E_ox, dG_pairs, kq_meas, strict=True):
     print(f"E_ox = {E:.1f} V: dG_ET = {g:+.2f} eV, kq = {k:.2e} 1/(M s)")
 
 plt.show()

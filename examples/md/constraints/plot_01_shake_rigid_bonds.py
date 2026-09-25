@@ -59,7 +59,7 @@ for _ in range(n_steps + 1):
 
 t = np.arange(n_steps + 1) * dt
 fig, axes = plt.subplots(1, 3, figsize=(14, 4.2))
-for name, color in zip(records, ["firebrick", "steelblue"]):
+for name, color in zip(records, ["firebrick", "steelblue"], strict=True):
     tr = traces[name]
     axes[0].plot(t, tr["bond"], color=color, label=name)
     axes[1].plot(t, tr["angle"], color=color, label=name)
@@ -70,7 +70,7 @@ axes[1].set_ylabel("H-O-H angle (degrees)")
 axes[2].set_ylabel("change in total energy")
 axes[2].set_yscale("symlog", linthresh=1e-3)
 axes[2].set_ylim(-10, 10)
-for ax, title in zip(axes, ["Bond length", "Bond angle", "Energy conservation"]):
+for ax, title in zip(axes, ["Bond length", "Bond angle", "Energy conservation"], strict=True):
     ax.set_xlabel("t")
     ax.set_title(title)
 axes[0].legend()

@@ -35,7 +35,7 @@ sigma_per_length = 1.0 / np.sqrt(N)  # band std. dev. per cm traveled (plate the
 z = np.linspace(0.0, L, 800)
 snapshots = [2.0, 8.0, 16.0]
 fig, axes = plt.subplots(1, len(snapshots) + 1, figsize=(13, 4.5), gridspec_kw={"width_ratios": [1, 1, 1, 3]})
-for ax, t in zip(axes[:-1], snapshots):
+for ax, t in zip(axes[:-1], snapshots, strict=True):
     img = np.ones((z.size, 20, 3))
     for k, color in pigments.values():
         x = u * t / (1.0 + k)  # distance traveled by this band
@@ -53,7 +53,7 @@ tR = [t0 * (1.0 + k) for k, _ in pigments.values()]
 t = np.linspace(0.0, 1.2 * max(tR), 4000)
 trace = simulate_chromatogram(t, centers=tR, N=N)
 axes[-1].plot(t, trace, color="black")
-for (name, (_k, color)), tr in zip(pigments.items(), tR):
+for (name, (_k, color)), tr in zip(pigments.items(), tR, strict=True):
     axes[-1].axvspan(tr - 1, tr + 1, color=color, alpha=0.4)
     axes[-1].text(tr, 1.05, name, ha="center", fontsize=8)
     print(f"{name:14s}: t_R = {tr:5.1f} min, k = {retention_factor(tr, t0):.2f}")

@@ -26,7 +26,7 @@ def test_debye_huckel_limiting_law_gamma_is_one_at_zero_ionic_strength():
 
 def test_debye_huckel_limiting_law_gamma_decreases_with_ionic_strength():
     gammas = [activity_coefficient_debye_huckel_limiting(z=1, I=I) for I in (0.0, 0.001, 0.01, 0.1)]
-    assert all(g1 > g2 for g1, g2 in zip(gammas, gammas[1:]))
+    assert all(g1 > g2 for g1, g2 in zip(gammas[:-1], gammas[1:], strict=True))
 
 
 def test_debye_huckel_limiting_law_higher_charge_deviates_more():

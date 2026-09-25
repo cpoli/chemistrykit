@@ -45,7 +45,7 @@ def test_build_neighbor_list_matches_brute_force():
             diff -= box_length * np.round(diff / box_length)
             if np.linalg.norm(diff) < cutoff:
                 brute.add((i, j))
-    found = set(zip(pairs_i.tolist(), pairs_j.tolist()))
+    found = set(zip(pairs_i.tolist(), pairs_j.tolist(), strict=True))
     assert found == brute
 
 

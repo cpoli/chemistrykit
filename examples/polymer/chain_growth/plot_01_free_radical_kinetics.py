@@ -42,7 +42,7 @@ print(f"Relative difference: {abs(R_numeric_final - R_ss) / R_ss:.2%}")
 I_values = np.array([0.0025, 0.01, 0.04, 0.16])
 Rp_values = steady_state_rate_of_polymerization(kd, f, kp, kt, I=I_values, M=M0)
 print("\n[I]      Rp           Rp/sqrt([I])")
-for I_val, Rp in zip(I_values, Rp_values):
+for I_val, Rp in zip(I_values, Rp_values, strict=True):
     print(f"{I_val:<8} {Rp:<12.4e} {Rp / np.sqrt(I_val):.4e}")
 
 # %%

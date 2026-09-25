@@ -27,7 +27,7 @@ MPLBACKEND=Agg pytest --doctest-modules chemistrykit \
 ```
 
 All three run in CI (`.github/workflows/ci.yml`) on every PR, across
-Python 3.9-3.12 on Linux and macOS. `mypy` also runs in CI but is
+Python 3.10-3.12 on Linux and macOS. `mypy` also runs in CI but is
 currently advisory (non-blocking) — see "Type checking" below.
 
 If you touch anything under `docs/` or add/modify an example in

@@ -75,7 +75,7 @@ def second_virial_coefficient(pair_potential: Callable[[float], float], T: float
 
     edges = sorted({0.0, 0.5, 1.0, 2.0, 5.0, *(float(b) / length_scale for b in breakpoints if b > 0)})
     total = 0.0
-    for a, b in zip(edges[:-1], edges[1:]):
+    for a, b in zip(edges[:-1], edges[1:], strict=True):
         total += quad(integrand, a, b, limit=500)[0]
     total += quad(integrand, edges[-1], np.inf, limit=500)[0]
     return -2.0 * np.pi * NA * length_scale**3 * total

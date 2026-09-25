@@ -55,7 +55,7 @@ assert np.allclose(orders["benzene"], 2 / 3)
 # pi order bond by bond:
 
 fig, axes = plt.subplots(1, 4, figsize=(13, 3.5), sharey=True)
-for ax, (name, p) in zip(axes, orders.items()):
+for ax, (name, p) in zip(axes, orders.items(), strict=True):
     ax.bar([f"{i + 1}-{(i + 1) % len(p) + 1 if name == 'benzene' else i + 2}" for i in range(len(p))], p, color="C0")
     ax.axhline(1.0, color="gray", linestyle="--", linewidth=0.8)
     ax.set_title(name)

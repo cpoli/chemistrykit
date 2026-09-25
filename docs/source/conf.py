@@ -216,14 +216,7 @@ html_static_path = ["_static"]
 
 def _card(link, blurb, link_title):
     """One sphinx-design grid-item-card, indented for direct concatenation into a ``.. grid::`` block."""
-    return (
-        f"   .. grid-item-card:: {link_title}\n"
-        f"      :link: {link}\n"
-        f"      :link-type: doc\n"
-        f"\n"
-        f"      {blurb}\n"
-        f"\n"
-    )
+    return f"   .. grid-item-card:: {link_title}\n      :link: {link}\n      :link-type: doc\n\n      {blurb}\n\n"
 
 
 def _grid(cards):

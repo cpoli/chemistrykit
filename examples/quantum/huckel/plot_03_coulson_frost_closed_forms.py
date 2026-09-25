@@ -21,7 +21,7 @@ from chemistrykit.quantum.systems.huckel import HuckelSystem, cyclic_polyene_eig
 
 fig, axes = plt.subplots(1, 4, figsize=(12, 3.8))
 theta = np.linspace(0.0, 2.0 * np.pi, 200)
-for ax, n in zip(axes, (3, 4, 5, 6)):
+for ax, n in zip(axes, (3, 4, 5, 6), strict=True):
     numeric = np.sort(HuckelSystem.cyclic_polyene(n).solve().energies)
     closed = cyclic_polyene_eigenvalues(n)
     print(f"ring n={n}: max |numeric - Frost| = {np.max(np.abs(numeric - closed)):.1e}")

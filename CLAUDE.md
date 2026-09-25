@@ -37,7 +37,7 @@ pip install -e ".[docs]"
 cd docs && make html
 ```
 
-All of lint, unit tests, doctests, and (advisory) mypy run in CI (`.github/workflows/ci.yml`) across Python 3.9-3.12 on Linux and macOS. Unlike physicskit, `pytest-xdist` is not a test dependency here, so there's no `-n auto` parallel flag -- just `pytest -q`.
+All of lint, unit tests, doctests, and (advisory) mypy run in CI (`.github/workflows/ci.yml`) across Python 3.10-3.12 on Linux and macOS. Unlike physicskit, `pytest-xdist` is not a test dependency here, so there's no `-n auto` parallel flag -- just `pytest -q`.
 
 ## Architecture
 

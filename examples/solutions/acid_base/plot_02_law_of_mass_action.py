@@ -29,7 +29,7 @@ acids = {"formic acid": 1.8e-4, "acetic acid": 1.8e-5, "hypochlorous acid": 3.0e
 Ca_values = np.logspace(-5, 0, 60)
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.5))
-for (name, Ka), color in zip(acids.items(), ["steelblue", "darkorange", "seagreen"]):
+for (name, Ka), color in zip(acids.items(), ["steelblue", "darkorange", "seagreen"], strict=True):
     Q_mass_action, Q_other = [], []
     for Ca in Ca_values:
         acid = WeakAcid(Ca=Ca, Ka=Ka)

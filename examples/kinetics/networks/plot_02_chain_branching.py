@@ -52,7 +52,7 @@ cases = {
 }
 
 fig, axes = plt.subplots(1, 2, figsize=(11, 4.5))
-for ax, (label, k_b) in zip(axes, cases.items()):
+for ax, (label, k_b) in zip(axes, cases.items(), strict=True):
     rate_constants = [k_i, k_b, k_t]
     net = StoichiometricNetwork(species, stoich_matrix, rate_constants, reactant_orders, state0=[A0, 0.0, 0.0])
     result = net.integrate((0.0, 5.0), dt=1e-4, method="rk4")
