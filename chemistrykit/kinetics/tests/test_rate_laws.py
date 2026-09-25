@@ -15,10 +15,19 @@ def test_zero_order_concentration_and_half_life():
     assert law.concentration(law.half_life()) == pytest.approx(law.C0 / 2.0)
 
 
-def test_zero_order_rate_is_constant():
-    law = ZeroOrder(k=0.3, C0=2.0)
+def test_zero_order_rate_is_constant_until_exhaustion():
+    law = ZeroOrder(k=0.3, C0=2.0)  # exhausted at t = C0/k = 6.67
     assert law.rate() == pytest.approx(0.3)
-    assert law.rate(t=100.0) == pytest.approx(0.3)
+    assert law.rate(t=5.0) == pytest.approx(0.3)
+    assert law.rate(t=100.0) == 0.0
+    np.testing.assert_allclose(law.rate(np.array([0.0, 6.0, 7.0])), [0.3, 0.3, 0.0])
+
+
+def test_zero_order_concentration_never_goes_negative():
+    law = ZeroOrder(k=0.1, C0=1.0)
+    assert law.concentration(10.0) == pytest.approx(0.0)
+    assert law.concentration(50.0) == 0.0
+    np.testing.assert_allclose(law.concentration(np.array([0.0, 5.0, 15.0])), [1.0, 0.5, 0.0])
 
 
 def test_first_order_matches_exponential_decay():

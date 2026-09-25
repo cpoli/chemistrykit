@@ -69,26 +69,35 @@ IDEAL_BOND_ANGLES: dict = {
 }
 
 #: AXE-method shape name for each (steric_number, lone_pairs) combination
-#: (A = central atom, X = bonded ligand, E = lone pair; e.g. AX2E2 for
-#: water). This is reference nomenclature data, the same spirit as
+#: with at least one bonded ligand (A = central atom, X = bonded ligand,
+#: E = lone pair; e.g. AX2E2 for water, AX1E3 for HF). Every
+#: single-ligand AX1En entry is "linear", since two atoms always are.
+#: This is reference nomenclature data, the same spirit as
 #: :mod:`chemistrykit.periodic_table`'s element table -- the actual
 #: *geometry* for each entry is still generated as real 3D coordinates by
 #: :func:`domain_positions` / :func:`build_vsepr_molecule`, not looked up
 #: here.
 AXE_SHAPE_NAMES: dict = {
     (2, 0): "linear",
+    (2, 1): "linear",
     (3, 0): "trigonal planar",
     (3, 1): "bent",
+    (3, 2): "linear",
     (4, 0): "tetrahedral",
     (4, 1): "trigonal pyramidal",
     (4, 2): "bent",
+    (4, 3): "linear",
     (5, 0): "trigonal bipyramidal",
     (5, 1): "seesaw",
     (5, 2): "T-shaped",
     (5, 3): "linear",
+    (5, 4): "linear",
     (6, 0): "octahedral",
     (6, 1): "square pyramidal",
     (6, 2): "square planar",
+    (6, 3): "T-shaped",
+    (6, 4): "linear",
+    (6, 5): "linear",
 }
 
 
@@ -196,7 +205,14 @@ class VSEPRGeometry:
     steric_number : int
         Number of electron domains (sigma bonds + lone pairs).
     lone_pairs : int
-        Number of lone pairs on the central atom, ``<= steric_number``.
+        Number of lone pairs on the central atom, ``< steric_number``
+        (at least one domain must be a bond, or there is no molecule).
+
+    Raises
+    ------
+    ValueError
+        If `steric_number` is outside 2-6 or `lone_pairs` is outside
+        ``0 <= lone_pairs < steric_number``.
 
     Examples
     --------
@@ -204,6 +220,8 @@ class VSEPRGeometry:
     'bent'
     >>> VSEPRGeometry(steric_number=4, lone_pairs=0).shape_name
     'tetrahedral'
+    >>> VSEPRGeometry(steric_number=4, lone_pairs=3).shape_name  # HF, AX1E3
+    'linear'
     """
 
     steric_number: int
@@ -212,8 +230,8 @@ class VSEPRGeometry:
     def __post_init__(self):
         if not (2 <= self.steric_number <= 6):
             raise ValueError("steric_number must be 2, 3, 4, 5, or 6")
-        if not (0 <= self.lone_pairs <= self.steric_number):
-            raise ValueError("lone_pairs must be between 0 and steric_number")
+        if not (0 <= self.lone_pairs < self.steric_number):
+            raise ValueError("lone_pairs must satisfy 0 <= lone_pairs < steric_number (at least one bonded ligand)")
 
     @property
     def n_bonding_domains(self) -> int:

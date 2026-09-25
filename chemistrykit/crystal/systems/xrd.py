@@ -8,6 +8,7 @@ Bragg diffraction and the kinematic structure factor.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from itertools import permutations
 
 import numpy as np
 
@@ -155,16 +156,27 @@ class XRDPeak:
     relative_intensity: float
     """float: :math:`|F_{hkl}|^2`, not multiplicity- or Lorentz-polarization-corrected."""
 
+    multiplicity: int = 1
+    """int: Number of symmetry-equivalent :math:`(hkl)` planes (all sign flips and
+    permutations) in the family this peak represents, e.g. 6 for {100}, 12
+    for {110}, 8 for {111}; multiply by `relative_intensity` for the
+    multiplicity-corrected intensity."""
+
 
 def powder_xrd_peaks(lattice_type: str, a: float, wavelength: float, hkl_max: int = 3) -> list:
     r"""Enumerate the allowed powder-XRD peaks of a cubic Bravais lattice up to a Miller-index cutoff.
 
-    Iterates every :math:`(h,k,l)` with :math:`0\le h,k,l\le` `hkl_max`
-    (not all zero), computes each reflection's structure factor via
-    :func:`structure_factor` (dropping systematically-absent
-    reflections, :math:`|F_{hkl}|^2<10^{-9}`) and Bragg angle via
-    :func:`bragg_angle` (dropping reflections with no real solution),
-    and returns the surviving peaks sorted by :math:`2\theta`.
+    Returns one peak per family of symmetry-equivalent planes
+    :math:`\{hkl\}`, labelled by its canonical member
+    :math:`h\ge k\ge l\ge 0` (so BCC's first line is a single (110)
+    peak with ``multiplicity=12``, not separate (110)/(101)/(011) peaks).
+    Each family's structure factor comes from :func:`structure_factor`
+    (systematically-absent families, :math:`|F_{hkl}|^2<10^{-9}`, are
+    dropped) and its Bragg angle from :func:`bragg_angle` (families with no
+    real solution are dropped); peaks are sorted by :math:`2\theta`.
+    Distinct families that happen to share :math:`h^2+k^2+l^2`, and so
+    :math:`2\theta` (e.g. {300} and {221}), are kept as separate,
+    coincident peaks.
 
     Parameters
     ----------
@@ -175,10 +187,12 @@ def powder_xrd_peaks(lattice_type: str, a: float, wavelength: float, hkl_max: in
     wavelength : float
         X-ray wavelength.
     hkl_max : int, default 3
-        Largest Miller index to search (non-negative indices only, since
+        Largest Miller index to search. Only canonical
+        :math:`h\ge k\ge l\ge 0` indices are enumerated, since
         :math:`d_{hkl}` and :math:`|F_{hkl}|` depend only on
         :math:`h^2+k^2+l^2` and the mixed-parity pattern, both invariant
-        under sign flips of any index).
+        under sign flips and permutations of the indices for these
+        cubic lattices.
 
     Returns
     -------
@@ -190,8 +204,8 @@ def powder_xrd_peaks(lattice_type: str, a: float, wavelength: float, hkl_max: in
     systematically absent since :math:`1+0+0=1` is odd:
 
     >>> peaks = powder_xrd_peaks("BCC", a=286.65, wavelength=154.18, hkl_max=2)
-    >>> peaks[0].hkl
-    (1, 1, 0)
+    >>> peaks[0].hkl, peaks[0].multiplicity
+    ((1, 1, 0), 12)
 
     FCC's first line is (111) -- (100) and (110) are both absent (mixed
     parity):
@@ -203,9 +217,9 @@ def powder_xrd_peaks(lattice_type: str, a: float, wavelength: float, hkl_max: in
     basis = _CUBIC_BASES[lattice_type]
     peaks = []
     for h in range(0, hkl_max + 1):
-        for k in range(0, hkl_max + 1):
-            for l in range(0, hkl_max + 1):
-                if h == 0 and k == 0 and l == 0:
+        for k in range(0, h + 1):
+            for l in range(0, k + 1):
+                if h == 0:
                     continue
                 F = structure_factor((h, k, l), basis)
                 intensity = abs(F) ** 2
@@ -215,12 +229,26 @@ def powder_xrd_peaks(lattice_type: str, a: float, wavelength: float, hkl_max: in
                 theta = bragg_angle(d, wavelength)
                 if np.isnan(theta):
                     continue
-                peaks.append(XRDPeak(hkl=(h, k, l), d_spacing=float(d), two_theta=float(np.degrees(2.0 * theta)), relative_intensity=float(intensity)))
-    # Peaks that tie exactly on 2*theta (e.g. BCC's (110)/(101)/(011), all
-    # equivalent by cubic symmetry) are broken by a canonical
-    # highest-index-first ordering, purely so results are deterministic.
+                peaks.append(
+                    XRDPeak(
+                        hkl=(h, k, l),
+                        d_spacing=float(d),
+                        two_theta=float(np.degrees(2.0 * theta)),
+                        relative_intensity=float(intensity),
+                        multiplicity=_cubic_multiplicity(h, k, l),
+                    )
+                )
+    # Distinct families that tie exactly on 2*theta (e.g. {300}/{221}) are
+    # ordered highest-index-first, purely so results are deterministic.
     peaks.sort(key=lambda p: (p.two_theta, tuple(-x for x in p.hkl)))
     return peaks
+
+
+def _cubic_multiplicity(h: int, k: int, l: int) -> int:
+    """Number of distinct (hkl) related to ``(h, k, l)`` by permutations and sign flips (point group m-3m)."""
+    n_permutations = len(set(permutations((h, k, l))))
+    n_sign_flips = 2 ** sum(1 for x in (h, k, l) if x != 0)
+    return n_permutations * n_sign_flips
 
 
 def scherrer_crystallite_size(fwhm_deg, two_theta_deg, wavelength: float, shape_factor: float = 0.9):

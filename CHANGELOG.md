@@ -109,4 +109,63 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   propagation-of-uncertainty formulas plus Dixon's Q-test outlier
   rejection with the Rorabacher (1991) critical-value table.
 
+### Changed
+
+- Dropped Python 3.9 support: `requires-python` is now `>=3.10` (matching
+  physicskit), and the CI matrix, classifiers, ruff `target-version`, and
+  mypy `python_version` follow. Current mypy and NumPy's own type stubs
+  no longer support 3.9.
+- `chemistrykit.crystal.powder_xrd_peaks` returns one peak per family of
+  symmetry-equivalent planes, labelled by its canonical `h >= k >= l`
+  member, instead of one per ordering (BCC's first line was three
+  coincident `(1, 1, 0)`/`(1, 0, 1)`/`(0, 1, 1)` peaks). `XRDPeak` gained
+  a `multiplicity` field (e.g. 12 for {110}).
+- `VSEPRGeometry` now requires at least one bonded ligand
+  (`lone_pairs < steric_number`) and has shape names for every remaining
+  combination (e.g. HF as AX1E3, "linear"; AX3E3, "T-shaped").
+
+### Fixed
+
+- `chemistrykit.electrochem`: `exchange_current_density` applied the
+  charge-transfer coefficient to the wrong species
+  (`C_ox^(1-alpha) C_red^alpha`) relative to `butler_volmer_current_density`'s
+  anodic `alpha`; it is now `C_ox^alpha C_red^(1-alpha)`, and every
+  function in the module documents `alpha` as the anodic coefficient.
+- `chemistrykit.polymer.free_radical_network` folded the initiator
+  efficiency `f` into the decomposition rate constant (`f*kd`), so the
+  initiator was consumed `1/f` times too slowly. It now decomposes at
+  `kd` and yields `2f` radicals per event, keeping `R_i = 2 f kd [I]`.
+- `chemistrykit.spectro.rotational_spectrum` weighted line intensities by
+  `(J+1)(2J+1)`, double-counting the level degeneracy; the
+  degeneracy-averaged transition dipole `(J+1)/(2J+1)` cancels it,
+  giving `(J+1) exp(-E_J/kT)`.
+- `chemistrykit.spectro.apparent_absorbance_with_stray_light` omitted
+  the stray light reaching the detector during the blank reading, so a
+  blank read a nonzero absorbance; it now uses
+  `log10((P0 + Ps) / (P + Ps))`.
+- `chemistrykit.analytical.EDTATitration` computed free `[M]` as
+  `C_M - [MY]`, which cancels catastrophically at and past equivalence;
+  it now solves the mass-action quadratic for `[M]` directly.
+- The weak-acid/weak-base titrations in `chemistrykit.solutions` searched
+  a fixed pH 0-14 bracket that concentrated solutions step outside of,
+  and `find_positive_root`'s absolute tolerance (2e-12) exceeded a basic
+  solution's `[H+]`. Both now use concentration-derived brackets and
+  relative tolerances.
+- `chemistrykit.constants.R` is computed as `NA * K_B` (exact by SI
+  definition) rather than taken from `scipy.constants.R`, which older
+  SciPy releases store truncated.
+- The shared `chemistrykit.integrators` kernels that take an njit
+  callback are no longer `@njit(cache=True)`: their signature includes the
+  callback's per-instance dispatcher type, so the on-disk cache only
+  accumulated dead entries and could raise
+  `ReferenceError: underlying object has vanished` when re-saved.
+- `chemistrykit.integrators.dopri5_integrate` (and so
+  `ReactionNetwork.integrate(method="dopri5")`) now emits a
+  `RuntimeWarning` when `max_steps` runs out before `t_end`, instead of
+  silently returning a truncated trajectory.
+- `ZeroOrder.concentration` no longer goes negative past the exhaustion
+  time `C0/k` (it stays at 0), and `ZeroOrder.rate` drops to 0 there.
+- `VSEPRGeometry.shape_name` raised a bare `KeyError` for valid inputs
+  such as `(steric_number=4, lone_pairs=3)`.
+
 [Unreleased]: https://github.com/cpoli/chemistrykit/compare/main...HEAD

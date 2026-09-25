@@ -77,6 +77,24 @@ def test_powder_xrd_peaks_fcc_first_line_is_111():
     assert peaks[0].hkl == (1, 1, 1)
 
 
+@pytest.mark.parametrize("lattice_type", ["SC", "BCC", "FCC"])
+def test_powder_xrd_peaks_one_peak_per_hkl_family(lattice_type):
+    # Previously (110), (101), and (011) etc. came back as separate, coincident peaks.
+    peaks = powder_xrd_peaks(lattice_type, a=408.6, wavelength=154.18, hkl_max=3)
+    families = [tuple(sorted(p.hkl, reverse=True)) for p in peaks]
+    assert len(families) == len(set(families))
+    assert all(p.hkl == family for p, family in zip(peaks, families, strict=True))
+
+
+def test_powder_xrd_peaks_cubic_multiplicities():
+    peaks = {p.hkl: p.multiplicity for p in powder_xrd_peaks("SC", a=408.6, wavelength=154.18, hkl_max=3)}
+    assert peaks[(1, 0, 0)] == 6
+    assert peaks[(1, 1, 0)] == 12
+    assert peaks[(1, 1, 1)] == 8
+    assert peaks[(2, 1, 0)] == 24
+    assert peaks[(3, 2, 1)] == 48
+
+
 def test_powder_xrd_peaks_sorted_by_two_theta():
     peaks = powder_xrd_peaks("FCC", a=408.6, wavelength=154.18, hkl_max=3)
     two_thetas = [p.two_theta for p in peaks]

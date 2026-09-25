@@ -22,7 +22,10 @@ class ZeroOrder(RateLaw):
     Integrated law: :math:`[A](t) = [A]_0 - kt`, valid only while
     :math:`[A](t) \geq 0` -- physically, the reaction stops (or crosses
     over to a different rate law) once the reactant is exhausted, at
-    :math:`t = [A]_0 / k`.
+    :math:`t = [A]_0 / k`. :meth:`concentration` and :meth:`rate` model
+    that stop: past the exhaustion time the concentration stays at 0 and
+    the rate drops to 0, rather than extrapolating the line to negative
+    concentrations.
 
     Parameters
     ----------
@@ -38,6 +41,8 @@ class ZeroOrder(RateLaw):
     0.5
     >>> round(law.half_life(), 6)
     5.0
+    >>> float(law.concentration(20.0))  # exhausted at t = C0/k = 10
+    0.0
     """
 
     def __init__(self, k: float, C0: float):
@@ -49,24 +54,38 @@ class ZeroOrder(RateLaw):
         self.C0 = float(C0)
 
     def concentration(self, t):
+        r"""Return :math:`\max([A]_0 - kt, 0)` at time(s) `t`.
+
+        Parameters
+        ----------
+        t : float or array-like of float
+
+        Returns
+        -------
+        float or ndarray
+        """
         t = np.asarray(t, dtype=np.float64)
-        return self.C0 - self.k * t
+        return np.maximum(self.C0 - self.k * t, 0.0)
 
     def rate(self, t=None):
-        """Return the (constant) rate ``k``.
+        """Return the rate: ``k`` until the reactant is exhausted, 0 after.
 
         Parameters
         ----------
         t : float or array-like of float, optional
-            Unused (the rate does not depend on time or concentration for
-            a zero-order reaction); accepted for interface consistency
-            with :class:`FirstOrder`/:class:`SecondOrder`.
+            Time at which to evaluate the rate; defaults to 0 (the
+            initial rate ``k``). The rate does not depend on
+            concentration, only on whether any reactant remains, i.e.
+            whether ``t < C0 / k``.
 
         Returns
         -------
-        float
+        float or ndarray
         """
-        return self.k
+        if t is None:
+            return self.k
+        t = np.asarray(t, dtype=np.float64)
+        return np.where(t < self.C0 / self.k, self.k, 0.0)
 
     def half_life(self) -> float:
         r""":math:`t_{1/2} = [A]_0 / (2k)`, per Atkins & de Paula Table 20.3."""

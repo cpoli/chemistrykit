@@ -101,3 +101,25 @@ def test_geometry_rejects_invalid_lone_pair_count():
 def test_geometry_rejects_invalid_steric_number():
     with pytest.raises(ValueError):
         VSEPRGeometry(steric_number=1, lone_pairs=0)
+
+
+def test_every_valid_geometry_has_a_shape_name():
+    # Previously (4, 3) (HF), (6, 3), (6, 4), etc. raised a bare KeyError from shape_name.
+    for steric_number in range(2, 7):
+        for lone_pairs in range(steric_number):
+            geometry = VSEPRGeometry(steric_number=steric_number, lone_pairs=lone_pairs)
+            assert isinstance(geometry.shape_name, str)
+            assert len(geometry.bonding_positions) == steric_number - lone_pairs
+
+
+def test_single_ligand_and_high_lone_pair_shapes():
+    assert VSEPRGeometry(steric_number=4, lone_pairs=3).shape_name == "linear"  # HF
+    assert VSEPRGeometry(steric_number=6, lone_pairs=3).shape_name == "T-shaped"
+    molecule = build_vsepr_molecule(6, 4)
+    assert molecule.bond_angle(1, 0, 2) == pytest.approx(180.0)
+    assert VSEPRGeometry(steric_number=6, lone_pairs=4).shape_name == "linear"
+
+
+def test_geometry_rejects_all_lone_pair_domains():
+    with pytest.raises(ValueError, match="at least one bonded ligand"):
+        VSEPRGeometry(steric_number=4, lone_pairs=4)
