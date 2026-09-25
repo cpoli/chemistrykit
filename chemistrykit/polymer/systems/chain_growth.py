@@ -66,9 +66,11 @@ def free_radical_network(kd: float, f: float, kp: float, kt: float, I0: float, M
     polymer chains formed by termination -- a count of *chains*, not
     monomer units incorporated). The three reactions:
 
-    1. ``I -> 2R`` at rate :math:`(fk_d)[I]` (so the net radical
-       production rate is :math:`2fk_d[I]=R_i`, matching the standard
-       definition above).
+    1. ``I -> 2f R`` at rate :math:`k_d[I]` (the initiator decomposes
+       with its own rate constant :math:`k_d` regardless of efficiency;
+       only the :math:`2f` radicals per decomposition that escape the
+       solvent cage are counted, so the net radical production rate is
+       :math:`2fk_d[I]=R_i`, matching the standard definition above).
     2. ``R + M -> R`` at rate :math:`k_p[R][M]` (propagation: consumes a
        monomer, leaves the radical count unchanged -- the radical that
        reacted is regenerated one unit longer).
@@ -121,7 +123,7 @@ def free_radical_network(kd: float, f: float, kp: float, kt: float, I0: float, M
     stoich = [
         [-1.0, 0.0, 0.0],  # I
         [0.0, -1.0, 0.0],  # M
-        [2.0, 0.0, -2.0],  # R
+        [2.0 * f, 0.0, -2.0],  # R
         [0.0, 0.0, D_per_event],  # D
     ]
     reactant_orders = [
@@ -130,7 +132,7 @@ def free_radical_network(kd: float, f: float, kp: float, kt: float, I0: float, M
         [0.0, 1.0, 2.0],  # R: order 1 in reaction 2, order 2 in reaction 3
         [0.0, 0.0, 0.0],  # D: never a reactant
     ]
-    rate_constants = [f * kd, kp, kt]
+    rate_constants = [kd, kp, kt]
     state0 = [I0, M0, 0.0, 0.0]
     return StoichiometricNetwork(species, stoich, rate_constants, reactant_orders, state0)
 

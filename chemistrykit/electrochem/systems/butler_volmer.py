@@ -32,9 +32,12 @@ def butler_volmer_current_density(i0: float, eta, alpha: float = 0.5, n: int = 1
                      -\exp\!\left(-\frac{(1-\alpha)nF\eta}{RT}\right)\right]
 
     where :math:`\eta = E - E_{eq}` is the overpotential, :math:`i_0` the
-    exchange current density, and :math:`\alpha` the (cathodic) charge
-    transfer coefficient (Bard & Faulkner, *Electrochemical Methods*,
-    2nd ed., Ch. 3.3, eq. 3.3.11). The first term is the anodic
+    exchange current density, and :math:`\alpha` the *anodic* charge
+    transfer coefficient, so :math:`1-\alpha` is the cathodic one (Bard &
+    Faulkner, *Electrochemical Methods*, 2nd ed., Ch. 3.4, eq. 3.4.11,
+    written there with anodic current positive and cathodic coefficient
+    :math:`\alpha_c=1-\alpha`). The same anodic convention is used by
+    every function in this module. The first term is the anodic
     (oxidation) partial current, the second the cathodic (reduction)
     partial current; at :math:`\eta=0` they exactly cancel, so no net
     current flows at equilibrium even though both partial reactions are
@@ -49,9 +52,9 @@ def butler_volmer_current_density(i0: float, eta, alpha: float = 0.5, n: int = 1
     eta : float or array-like of float
         Overpotential, in V.
     alpha : float, default 0.5
-        Charge transfer (symmetry) coefficient, in :math:`(0, 1)`; 0.5 is
-        the common approximation for a simple, symmetric one-electron
-        step.
+        Anodic charge transfer (symmetry) coefficient, in :math:`(0, 1)`;
+        0.5 is the common approximation for a simple, symmetric
+        one-electron step.
     n : int, default 1
         Number of electrons transferred in the rate-determining step.
     T : float, default :data:`chemistrykit.constants.STANDARD_TEMPERATURE`
@@ -88,10 +91,11 @@ def exchange_current_density(k0: float, C_ox: float, C_red: float, n: int = 1, a
 
     .. math::
 
-        i_0 = nFk^0 C_{ox}^{1-\alpha}C_{red}^{\alpha}
+        i_0 = nFk^0 C_{ox}^{\alpha}C_{red}^{1-\alpha}
 
     (Bard & Faulkner, *Electrochemical Methods*, 2nd ed., Ch. 3.4, eq.
-    3.4.6) -- the current density that flows equally in both directions
+    3.4.6, :math:`i_0=nFk^0C_{ox}^{1-\alpha_c}C_{red}^{\alpha_c}`,
+    rewritten with this module's anodic :math:`\alpha=1-\alpha_c`) -- the current density that flows equally in both directions
     at equilibrium, before any net overpotential is applied.
 
     Parameters
@@ -105,7 +109,8 @@ def exchange_current_density(k0: float, C_ox: float, C_red: float, n: int = 1, a
     n : int, default 1
         Electrons transferred.
     alpha : float, default 0.5
-        Charge transfer coefficient.
+        Anodic charge transfer coefficient, as in
+        :func:`butler_volmer_current_density`.
     F : float, default :data:`chemistrykit.constants.FARADAY`
         Faraday constant, in C/mol.
 
@@ -122,7 +127,7 @@ def exchange_current_density(k0: float, C_ox: float, C_red: float, n: int = 1, a
     >>> round(i0, 6)
     0.964853
     """
-    return n * F * k0 * C_ox ** (1.0 - alpha) * C_red**alpha
+    return n * F * k0 * C_ox**alpha * C_red ** (1.0 - alpha)
 
 
 def tafel_slope(alpha: float, n: int = 1, T: float = STANDARD_TEMPERATURE, R_gas: float = R, F: float = FARADAY, branch: str = "anodic") -> float:
@@ -141,7 +146,8 @@ def tafel_slope(alpha: float, n: int = 1, T: float = STANDARD_TEMPERATURE, R_gas
     Parameters
     ----------
     alpha : float
-        Charge transfer coefficient.
+        Anodic charge transfer coefficient, as in
+        :func:`butler_volmer_current_density`.
     n : int, default 1
         Electrons transferred.
     T : float, default :data:`chemistrykit.constants.STANDARD_TEMPERATURE`

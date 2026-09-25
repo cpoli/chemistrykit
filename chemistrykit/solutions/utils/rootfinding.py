@@ -114,4 +114,6 @@ def find_positive_root(residual, lo: float = 1e-14, hi: float = 1.0, n_scan: int
     if sign_changes.size == 0:
         raise ValueError("no sign change found in [lo, hi]; residual may not have a root in this bracket")
     i = sign_changes[0]
-    return float(brentq(residual, grid[i], grid[i + 1]))
+    # brentq's default absolute xtol (2e-12) exceeds a basic solution's [H+] itself, so
+    # the tolerance is made relative to the bracket instead.
+    return float(brentq(residual, grid[i], grid[i + 1], xtol=1e-14 * grid[i], rtol=1e-13))

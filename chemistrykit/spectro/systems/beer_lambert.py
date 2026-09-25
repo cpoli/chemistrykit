@@ -108,20 +108,21 @@ def apparent_absorbance_with_stray_light(molar_absorptivity: float, concentratio
     well-characterized, purely instrumental effect (Skoog, Holler &
     Crouch, *Principles of Instrumental Analysis*, 7th ed., Ch. 13.4).
 
-    A small fraction :math:`p_s` of the light reaching the detector is
-    "stray" radiation that never actually passed through the fully
-    absorbing sample path (e.g. light scattered around the sample cell),
-    so it is *not* attenuated by the sample the way the main beam is.
-    The detector reads the combined transmitted-plus-stray intensity, so
+    A small stray-light intensity :math:`P_s=p_sP_0` reaches the detector
+    without passing through the fully absorbing sample path (e.g. light
+    scattered around the sample cell), so it is *not* attenuated by the
+    sample the way the main beam is. It adds to both the sample reading
+    :math:`P+P_s` and the blank (reference) reading :math:`P_0+P_s`, so
     the apparent absorbance is
 
     .. math::
 
-        A_{\text{apparent}} = -\log_{10}\!\left(10^{-A_{\text{true}}} + p_s\right)
+        A_{\text{apparent}} = \log_{10}\frac{P_0+P_s}{P+P_s}
+        = -\log_{10}\!\left(\frac{10^{-A_{\text{true}}} + p_s}{1+p_s}\right)
 
-    (normalized so that at `stray_light_fraction=0`, or in the dilute
-    limit :math:`A_{\text{true}}\to0`, this reduces exactly to the true
-    Beer-Lambert absorbance). Because the stray-light term does not
+    which reduces exactly to the true Beer-Lambert absorbance at
+    `stray_light_fraction=0`, and reads zero for a blank
+    (:math:`A_{\text{true}}=0`) at any stray-light level. Because the stray-light term does not
     shrink as the sample absorbs more strongly, it dominates the
     detector reading at high true absorbance, causing the classic
     *negative* (sublinear, "rolling over") deviation from Beer-Lambert
@@ -171,4 +172,4 @@ def apparent_absorbance_with_stray_light(molar_absorptivity: float, concentratio
     if not (0.0 <= stray_light_fraction < 1.0):
         raise ValueError("stray_light_fraction must be in [0, 1)")
     true_absorbance = absorbance(molar_absorptivity, concentration, path_length)
-    return float(-np.log10(10.0**-true_absorbance + stray_light_fraction))
+    return float(-np.log10((10.0**-true_absorbance + stray_light_fraction) / (1.0 + stray_light_fraction)))

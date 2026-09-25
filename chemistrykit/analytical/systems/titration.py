@@ -161,15 +161,18 @@ class EDTATitration(TitrationCurve):
 
     Mass balance on total metal :math:`C_M` and total EDTA added
     :math:`C_Y` (both diluted by the growing total volume), with
-    :math:`x=[MY]`, :math:`[M]=C_M-x`, :math:`[Y]=C_Y-x`, and
-    :math:`K_f'=x/[(C_M-x)(C_Y-x)]`, gives the exact quadratic
+    :math:`m=[M]`, :math:`[MY]=C_M-m`, :math:`[Y]=C_Y-C_M+m`, and
+    :math:`K_f'=[MY]/([M][Y])`, gives the exact quadratic
 
     .. math::
 
-        K_f'x^2-\left[K_f'(C_M+C_Y)+1\right]x+K_f'C_MC_Y=0
+        K_f'm^2+\left[K_f'(C_Y-C_M)+1\right]m-C_M=0
 
-    solved here in closed form for the physical root :math:`0\le x\le
-    \min(C_M,C_Y)`, then :math:`pM=-\log_{10}[M]`.
+    solved here in closed form for its single positive root, then
+    :math:`pM=-\log_{10}[M]`. Solving for :math:`[M]` directly (rather
+    than for :math:`[MY]` and subtracting it from :math:`C_M`) avoids
+    catastrophic cancellation at and past equivalence, where
+    :math:`[M]\ll C_M` for realistically large :math:`K_f'`.
 
     Parameters
     ----------
@@ -219,16 +222,12 @@ class EDTATitration(TitrationCurve):
 
     def _free_metal_concentration(self, C_M: float, C_Y: float) -> float:
         K = self.K_conditional
-        a, b, c = K, -(K * (C_M + C_Y) + 1.0), K * C_M * C_Y
-        disc = b * b - 4.0 * a * c
-        sqrt_disc = np.sqrt(max(disc, 0.0))
-        x_minus = (-b - sqrt_disc) / (2.0 * a)
-        x_plus = (-b + sqrt_disc) / (2.0 * a)
-        x_max = min(C_M, C_Y)
-        for x in (x_minus, x_plus):
-            if -1e-15 <= x <= x_max + 1e-15:
-                return max(C_M - x, 1e-300)
-        raise ValueError("no physical root found for the M/Y mass-action quadratic")
+        b = K * (C_Y - C_M) + 1.0
+        sqrt_disc = np.sqrt(b * b + 4.0 * K * C_M)
+        # Pick the cancellation-free form of the positive root for each sign of b.
+        if b >= 0.0:
+            return 2.0 * C_M / (b + sqrt_disc)
+        return (sqrt_disc - b) / (2.0 * K)
 
     def response_at(self, V):
         V = np.atleast_1d(np.asarray(V, dtype=np.float64))

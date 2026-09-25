@@ -79,6 +79,33 @@ def test_weak_base_strong_acid_equivalence_point_is_acidic():
     assert pH_eq < 7.0
 
 
+def test_weak_acid_titration_satisfies_charge_balance_on_basic_side():
+    # Past equivalence [H+] ~ 1e-12, below brentq's default absolute xtol; the solved pH must
+    # still satisfy the charge balance C_b + [H+] = [A-] + Kw/[H+] to high relative precision.
+    Ca, Va, Ka, Cb, Kw = 0.1, 25.0, 1.8e-5, 0.1, 1.0e-14
+    titration = WeakAcidStrongBaseTitration(Ca=Ca, Va=Va, Ka=Ka, Cb=Cb)
+    for Vb in (30.0, 35.0, 50.0):
+        h = 10.0 ** -titration.pH_at(Vb)[0]
+        Ca_tot, Cb_added = Ca * Va / (Va + Vb), Cb * Vb / (Va + Vb)
+        oh = Kw / h
+        assert Cb_added + h == pytest.approx(Ka * Ca_tot / (Ka + h) + oh, rel=1e-10)
+
+
+def test_concentrated_weak_acid_titration_solves_past_equivalence():
+    # Far past equivalence the excess strong base sets [OH-]; here [OH-] = (2*50 - 1*25)/75 = 1 M,
+    # so pH = 14 exactly at the edge of (and in concentrated cases beyond) a fixed pH 0-14 bracket.
+    titration = WeakAcidStrongBaseTitration(Ca=1.0, Va=25.0, Ka=1e-5, Cb=2.0)
+    assert titration.pH_at(50.0)[0] == pytest.approx(14.0, abs=1e-4)
+    # [OH-] = (4*50 - 1*25)/75 > 1 M, i.e. pH > 14.
+    titration = WeakAcidStrongBaseTitration(Ca=1.0, Va=25.0, Ka=1e-5, Cb=4.0)
+    assert titration.pH_at(50.0)[0] == pytest.approx(14.0 + np.log10(175.0 / 75.0), abs=1e-4)
+
+
+def test_concentrated_weak_base_titration_solves_past_equivalence():
+    titration = WeakBaseStrongAcidTitration(Cb=1.0, Vb0=25.0, Kb=1e-5, Ca=4.0)
+    assert titration.pH_at(50.0)[0] == pytest.approx(-np.log10(175.0 / 75.0), abs=1e-4)
+
+
 def test_titration_curve_dataclass_shapes_match():
     titration = StrongAcidStrongBaseTitration(Ca=0.1, Va=0.05, Cb=0.1)
     Vb = np.linspace(0.0, 0.1, 50)

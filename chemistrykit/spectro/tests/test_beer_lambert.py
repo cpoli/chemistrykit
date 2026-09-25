@@ -1,5 +1,6 @@
 """Tests for chemistrykit.spectro.systems.beer_lambert against closed-form results."""
 
+import numpy as np
 import pytest
 
 from chemistrykit.spectro.systems.beer_lambert import (
@@ -57,6 +58,17 @@ def test_apparent_absorbance_never_exceeds_true_absorbance():
     a_true = absorbance(5000.0, 2.0e-4, 1.0)
     a_apparent = apparent_absorbance_with_stray_light(5000.0, 2.0e-4, 1.0, stray_light_fraction=0.002)
     assert a_apparent <= a_true
+
+
+def test_apparent_absorbance_of_blank_is_zero_with_stray_light():
+    assert apparent_absorbance_with_stray_light(5000.0, 0.0, 1.0, stray_light_fraction=0.01) == pytest.approx(0.0, abs=1e-15)
+
+
+def test_apparent_absorbance_saturates_at_stray_light_limit():
+    # As the sample becomes opaque, only stray light reaches the detector: A -> log10((1 + s)/s).
+    s = 0.01
+    a_apparent = apparent_absorbance_with_stray_light(5000.0, 1.0, 1.0, stray_light_fraction=s)
+    assert a_apparent == pytest.approx(np.log10((1.0 + s) / s), rel=1e-12)
 
 
 def test_apparent_absorbance_rejects_invalid_stray_light_fraction():

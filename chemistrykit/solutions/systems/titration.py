@@ -40,6 +40,22 @@ __all__ = [
 ]
 
 
+def _charge_balance_bracket(C_weak: float, C_strong: float, Kw: float) -> tuple:
+    r"""Bracket ``[lo, hi]`` guaranteed to contain the root of a weak/strong titration charge balance.
+
+    For :math:`r(x)=C_{strong}+x-K C_{weak}/(K+x)-K_w/x` (with `x` the
+    :math:`[H^+]` of a weak-acid titration or the :math:`[OH^-]` of a
+    weak-base one), `r` is increasing in `x`, and since the conjugate
+    ion's concentration lies in :math:`[0, C_{weak}]`,
+    :math:`r(hi)>0` at :math:`hi=2(C_{weak}+\sqrt{K_w})` and
+    :math:`r(lo)<0` at :math:`lo=K_w/[2(C_{weak}+C_{strong}+\sqrt{K_w})]`,
+    for any concentrations -- unlike a fixed pH 0-14 bracket, which
+    concentrated solutions step outside of.
+    """
+    sqrt_Kw = np.sqrt(Kw)
+    return Kw / (2.0 * (C_weak + C_strong + sqrt_Kw)), 2.0 * (C_weak + sqrt_Kw)
+
+
 class StrongAcidStrongBaseTitration(Titration):
     r"""Titrating a strong acid (in the flask) with a strong base (the titrant).
 
@@ -151,7 +167,8 @@ class WeakAcidStrongBaseTitration(Titration):
             V_tot = self.Va + vb
             Ca_tot = self.Ca * self.Va / V_tot
             Cb_added = self.Cb * vb / V_tot
-            h_values[i] = find_positive_root(lambda h, Ca_tot=Ca_tot, Cb_added=Cb_added: self._residual(h, Ca_tot, Cb_added))
+            lo, hi = _charge_balance_bracket(Ca_tot, Cb_added, self.Kw)
+            h_values[i] = find_positive_root(lambda h, Ca_tot=Ca_tot, Cb_added=Cb_added: self._residual(h, Ca_tot, Cb_added), lo=lo, hi=hi)
         return ph_from_h(h_values)
 
 
@@ -215,7 +232,8 @@ class WeakBaseStrongAcidTitration(Titration):
             V_tot = self.Vb0 + va
             Cb_tot = self.Cb * self.Vb0 / V_tot
             Ca_added = self.Ca * va / V_tot
-            oh_values[i] = find_positive_root(lambda oh, Cb_tot=Cb_tot, Ca_added=Ca_added: self._residual(oh, Cb_tot, Ca_added))
+            lo, hi = _charge_balance_bracket(Cb_tot, Ca_added, self.Kw)
+            oh_values[i] = find_positive_root(lambda oh, Cb_tot=Cb_tot, Ca_added=Ca_added: self._residual(oh, Cb_tot, Ca_added), lo=lo, hi=hi)
         pOH = poh_from_oh(oh_values)
         return -np.log10(self.Kw) - pOH
 

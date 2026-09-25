@@ -73,6 +73,21 @@ def test_edta_titration_equivalence_point_approaches_large_K_approximation():
     assert pM_exact == pytest.approx(pM_approx, abs=1e-3)
 
 
+@pytest.mark.parametrize("K", [1e18, 1e25])
+def test_edta_titration_stays_accurate_for_very_large_K(K):
+    titration = EDTATitration(C_metal=0.010, V_metal=0.050, K_conditional=K, C_edta=0.010)
+    V_eq = titration.equivalence_volume()
+    V_past = 1.02 * V_eq
+    pM_eq, pM_past = titration.response_at(np.array([V_eq, V_past]))
+    C_M_eq = titration.C_metal * titration.V_metal / (titration.V_metal + V_eq)
+    assert pM_eq == pytest.approx(0.5 * np.log10(K / C_M_eq), abs=1e-6)
+    # Past equivalence, [M] = [MY]/(K[Y]) with [MY] ~ C_M and [Y] ~ C_Y - C_M.
+    V_tot = titration.V_metal + V_past
+    C_M = titration.C_metal * titration.V_metal / V_tot
+    C_Y = titration.C_edta * V_past / V_tot
+    assert pM_past == pytest.approx(-np.log10(C_M / (K * (C_Y - C_M))), abs=1e-6)
+
+
 def test_edta_titration_higher_K_gives_sharper_endpoint():
     V = np.linspace(1e-6, 0.09, 20000)
     low_K = EDTATitration(C_metal=0.010, V_metal=0.050, K_conditional=1e6, C_edta=0.010)

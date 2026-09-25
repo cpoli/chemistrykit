@@ -78,16 +78,20 @@ def rotational_spectrum(rotor: RigidRotor, J_max: int, temperature: float) -> Sp
     r"""Build a rotational-spectrum :class:`~chemistrykit.spectro.core.base_system.Spectrum`, with relative intensities.
 
     **Approximation flagged explicitly**: the relative intensity of the
-    :math:`J\to J+1` line is modeled here as proportional to the thermal
-    (Boltzmann) population of the initial level `J`, weighted by its
-    :math:`(2J+1)`-fold degeneracy, times a :math:`(J+1)` line-strength
-    factor coming from the :math:`\Delta J=\pm1` transition-dipole matrix
-    element (Atkins & de Paula, *Physical Chemistry*, 11th ed., Ch.
-    12.2(b)):
+    :math:`J\to J+1` line is modeled here as the thermal (Boltzmann)
+    population of the initial level `J`, :math:`(2J+1)e^{-E_J/k_BT}`,
+    times the degeneracy-averaged squared transition dipole
+    :math:`|\mu_{J+1,J}|^2\propto(J+1)/(2J+1)` of a linear rotor (Atkins &
+    de Paula, *Physical Chemistry*, 11th ed., Ch. 12.2(b); Bernath,
+    *Spectra of Atoms and Molecules*, 2nd ed., Ch. 6.5). The
+    :math:`(2J+1)` factors cancel, leaving
 
     .. math::
 
-        I_J \propto (J+1)(2J+1)\exp\!\left[-\frac{E_J}{k_BT}\right]
+        I_J \propto (J+1)\exp\!\left[-\frac{E_J}{k_BT}\right]
+
+    The frequency factor and stimulated-emission correction of a full
+    absorption-coefficient calculation are omitted.
 
     This reproduces the qualitative textbook feature of a rotational
     spectrum -- intensity rising from `J=0`, peaking at some intermediate
@@ -123,7 +127,7 @@ def rotational_spectrum(rotor: RigidRotor, J_max: int, temperature: float) -> Sp
     J_values = np.arange(0, J_max + 1)
     positions = rotational_line_wavenumbers(rotor, J_max)
     energies = np.array([rotor.energy(int(J)) for J in J_values])
-    intensities = (J_values + 1.0) * (2.0 * J_values + 1.0) * np.exp(-energies / (K_B * temperature))
+    intensities = (J_values + 1.0) * np.exp(-energies / (K_B * temperature))
     labels = [f"J={J}->{J + 1}" for J in J_values]
     return Spectrum(positions=positions, intensities=intensities, labels=labels)
 

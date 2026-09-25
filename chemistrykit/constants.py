@@ -63,8 +63,10 @@ __all__ = [
     "molar_mass",
 ]
 
-#: Molar gas constant, in J mol^-1 K^-1.
-R = _sc.R
+#: Molar gas constant, in J mol^-1 K^-1 -- exactly ``NA * K_B`` by SI
+#: definition. Computed rather than taken from ``scipy.constants.R``, which
+#: older SciPy releases store truncated (8.314462618).
+R = _sc.N_A * _sc.k
 
 #: Avogadro constant, in mol^-1 (exact by SI definition).
 NA = _sc.N_A

@@ -44,6 +44,17 @@ def test_rotational_spectrum_intensities_are_nonnegative():
     assert len(spectrum.positions) == 11
 
 
+def test_rotational_spectrum_intensity_is_population_times_linear_rotor_line_strength():
+    # (2J+1) e^{-E_J/kT} population x (J+1)/(2J+1) transition moment = (J+1) e^{-E_J/kT};
+    # E_0 = 0, so the intensity relative to the J=0->1 line has no leftover degeneracy factor.
+    rotor = _hcl_rotor()
+    T = 300.0
+    spectrum = rotational_spectrum(rotor, J_max=10, temperature=T)
+    J = np.arange(11)
+    expected = (J + 1.0) * np.exp(-rotor.energy(J) / (sc.k * T))
+    assert spectrum.intensities / spectrum.intensities[0] == pytest.approx(expected, rel=1e-12)
+
+
 def test_rotational_spectrum_higher_temperature_populates_higher_j():
     rotor = _hcl_rotor()
     cold = rotational_spectrum(rotor, J_max=20, temperature=50.0)

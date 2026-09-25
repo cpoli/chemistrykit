@@ -3,6 +3,7 @@
 import numpy as np
 import pytest
 
+from chemistrykit.constants import FARADAY, STANDARD_TEMPERATURE, R
 from chemistrykit.electrochem.systems.butler_volmer import (
     butler_volmer_current_density,
     exchange_current_density,
@@ -72,6 +73,17 @@ def test_exchange_current_density_scales_linearly_with_rate_constant():
     i0_1 = exchange_current_density(k0=1e-5, C_ox=1.0, C_red=1.0)
     i0_2 = exchange_current_density(k0=2e-5, C_ox=1.0, C_red=1.0)
     assert i0_2 == pytest.approx(2.0 * i0_1)
+
+
+def test_exchange_current_density_uses_same_anodic_alpha_as_butler_volmer():
+    # i0 equals the anodic partial current nFk0*C_red*exp(alpha*n*f*(E_eq - E0')) at the
+    # Nernst equilibrium potential E_eq = E0' + ln(C_ox/C_red)/(n*f), with alpha the same
+    # (anodic) coefficient that multiplies eta in butler_volmer_current_density.
+    k0, C_ox, C_red, n, alpha = 1e-5, 4.0, 0.25, 1, 0.3
+    nf = n * FARADAY / (R * STANDARD_TEMPERATURE)
+    E_eq_minus_E0 = np.log(C_ox / C_red) / nf
+    anodic_partial = n * FARADAY * k0 * C_red * np.exp(alpha * nf * E_eq_minus_E0)
+    assert exchange_current_density(k0, C_ox, C_red, n=n, alpha=alpha) == pytest.approx(anodic_partial, rel=1e-12)
 
 
 def test_fit_tafel_plot_recovers_known_parameters():

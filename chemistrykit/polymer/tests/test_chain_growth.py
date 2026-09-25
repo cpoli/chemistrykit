@@ -56,6 +56,13 @@ def test_free_radical_network_initiator_and_monomer_are_depleted():
     assert result.concentration("M")[-1] < M0
 
 
+def test_free_radical_network_initiator_decays_with_kd_not_f_kd():
+    kd, f, t_end = 1.0e-4, 0.5, 1.0e4
+    net = free_radical_network(kd, f, KP, KT, I0, M0)
+    result = net.integrate((0.0, t_end), method="dopri5", rtol=1e-8, atol=1e-14, max_steps=10**6)
+    assert result.concentration("I")[-1] == pytest.approx(I0 * np.exp(-kd * t_end), rel=1e-5)
+
+
 def test_free_radical_network_rejects_bad_mode():
     with pytest.raises(ValueError):
         free_radical_network(KD, F, KP, KT, I0, M0, mode="bogus")
