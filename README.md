@@ -24,6 +24,12 @@ API. Conventionally imported as `ck`. chemistrykit clones the
 architecture and engineering conventions of the sibling project
 [physicskit](https://github.com/cpoli/physicskit) (`pk`).
 
+chemistrykit is part of a family of packages --
+[physicskit](https://github.com/cpoli/physicskit),
+[mathematicskit](https://github.com/cpoli/mathematicskit) and
+**chemistrykit** -- that share the same architecture, API conventions,
+and history-driven documentation.
+
 All 14 domains from `chemistrykit-spec.md`'s build plan are implemented
 -- see [Subpackages](#subpackages) for the full list, or browse the docs
 at <https://cpoli.github.io/chemistrykit/>.

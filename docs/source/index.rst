@@ -100,6 +100,12 @@ Project -- each one linked to the code that reproduces it.
   Gibbs-energy-minimization equilibrium-composition solver), and
   Raoult's/Henry's law mixtures with colligative properties.
 
+**chemistrykit** is part of a family of packages --
+`physicskit <https://cpoli.github.io/physicskit/>`_,
+`mathematicskit <https://cpoli.github.io/mathematicskit/>`_ and
+**chemistrykit** -- that share the same architecture, API conventions,
+and history-driven documentation.
+
 Conventionally imported as ``ck``:
 
 .. code-block:: python
