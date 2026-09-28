@@ -85,7 +85,7 @@ axes[1].set_ylabel("effective first-order rate constant")
 axes[1].set_title("Lindemann fall-off curve")
 axes[1].legend(fontsize=8)
 
-for M, k_meas in zip(M_values[::4], k_measured[::4]):
+for M, k_meas in zip(M_values[::4], k_measured[::4], strict=True):
     print(f"[M]={M:9.3g}: measured k_uni={k_meas:.4f}, SSA k_uni={k1 * k2 * M / (k_m1 * M + k2):.4f}")
 
 fig.tight_layout()

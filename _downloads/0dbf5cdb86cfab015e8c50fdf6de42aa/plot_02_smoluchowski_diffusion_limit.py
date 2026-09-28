@@ -61,7 +61,7 @@ axes[1].barh(names, k_solvent, color="steelblue")
 axes[1].set_xscale("log")
 axes[1].set_xlabel("diffusion-limited k (L mol$^{-1}$ s$^{-1}$)")
 axes[1].set_title("Diffusion limit 8RT/(3 eta) at 298 K")
-for name, kv in zip(names, k_solvent):
+for name, kv in zip(names, k_solvent, strict=True):
     print(f"{name:16s}: {kv:.2e} L/(mol s)")
 
 fig.tight_layout()

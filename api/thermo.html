@@ -455,12 +455,214 @@
 <p id="module-chemistrykit.thermo">chemistrykit.thermo: chemical thermodynamics.</p>
 <p>Equations of state (ideal gas, van der Waals, Redlich-Kwong,
 Peng-Robinson) and Lewis fugacities; Hess’s-law thermochemistry;
-Clausius-Clapeyron phase boundaries and the Gibbs phase rule; reaction
+Clausius-Clapeyron and Antoine vapor-pressure curves and the Gibbs phase rule; reaction
 equilibrium (Kp/Kc, the reaction quotient, the van’t Hoff equation, and a
 Gibbs-energy-minimization equilibrium-composition solver); and
 Raoult’s/Henry’s law mixtures with colligative properties (freezing-point
-depression, boiling-point elevation, osmotic pressure) and the Margules
-activity-coefficient model of non-ideal solutions.</p>
+depression, boiling-point elevation, osmotic pressure) and the Margules,
+Wilson, NRTL and UNIQUAC activity-coefficient models of non-ideal
+solutions, with P-x-y vapor-liquid equilibrium and azeotrope location.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.thermo.AntoineEquation">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.thermo.</span></span><span class="sig-name descname"><span class="pre">AntoineEquation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/phase_equilibria.html#AntoineEquation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.AntoineEquation" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The Antoine vapor-pressure equation, <span class="math notranslate nohighlight">\(\log_{10}P = A - B/(C+T)\)</span>.</p>
+<p>An empirical three-parameter refinement of the integrated
+Clausius-Clapeyron equation (which it reduces to at <span class="math notranslate nohighlight">\(C=0\)</span>) that
+absorbs most of the temperature dependence of
+<span class="math notranslate nohighlight">\(\Delta H_{vap}\)</span> (C. Antoine, <em>C. R. Acad. Sci.</em> 107, 681
+(1888); Poling, Prausnitz &amp; O’Connell, <em>The Properties of Gases and
+Liquids</em>, 5th ed., Ch. 7-3). Constants are only valid over the
+temperature range they were fitted on, and their units vary between
+tables: NIST WebBook gives <span class="math notranslate nohighlight">\(P\)</span> in bar and <span class="math notranslate nohighlight">\(T\)</span> in K, many
+older tables mmHg and degC. <a class="reference internal" href="#chemistrykit.thermo.AntoineEquation.pressure" title="chemistrykit.thermo.AntoineEquation.pressure"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pressure()</span></code></a> and <a class="reference internal" href="#chemistrykit.thermo.AntoineEquation.temperature" title="chemistrykit.thermo.AntoineEquation.temperature"><code class="xref py py-meth docutils literal notranslate"><span class="pre">temperature()</span></code></a>
+use whatever units the constants imply.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Antoine constants.</p></li>
+<li><p><strong>B</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Antoine constants.</p></li>
+<li><p><strong>C</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Antoine constants.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Water, NIST WebBook constants for 344-373 K (P in bar, T in K), at the
+normal boiling point:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">water</span> <span class="o">=</span> <span class="n">AntoineEquation</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="mf">5.08354</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mf">1663.125</span><span class="p">,</span> <span class="n">C</span><span class="o">=-</span><span class="mf">45.622</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">water</span><span class="o">.</span><span class="n">pressure</span><span class="p">(</span><span class="mf">373.15</span><span class="p">)),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">1.013</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">water</span><span class="o">.</span><span class="n">temperature</span><span class="p">(</span><span class="mf">1.01325</span><span class="p">)),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">373.1</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.AntoineEquation.A">
+<span class="sig-name descname"><span class="pre">A</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.AntoineEquation.A" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.AntoineEquation.B">
+<span class="sig-name descname"><span class="pre">B</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.AntoineEquation.B" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.AntoineEquation.C">
+<span class="sig-name descname"><span class="pre">C</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.AntoineEquation.C" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.thermo.AntoineEquation.pressure">
+<span class="sig-name descname"><span class="pre">pressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/phase_equilibria.html#AntoineEquation.pressure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.AntoineEquation.pressure" title="Link to this definition">#</a></dt>
+<dd><p>Vapor pressure at temperature(s) <cite>T</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.thermo.AntoineEquation.temperature">
+<span class="sig-name descname"><span class="pre">temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/phase_equilibria.html#AntoineEquation.temperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.AntoineEquation.temperature" title="Link to this definition">#</a></dt>
+<dd><p>Boiling temperature at pressure(s) <cite>P</cite> (the inverse of <a class="reference internal" href="#chemistrykit.thermo.AntoineEquation.pressure" title="chemistrykit.thermo.AntoineEquation.pressure"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pressure()</span></code></a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.thermo.BinaryActivityModel">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.thermo.</span></span><span class="sig-name descname"><span class="pre">BinaryActivityModel</span></span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#BinaryActivityModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.BinaryActivityModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<p>Isothermal vapor-liquid equilibrium of a binary liquid from an activity-coefficient model.</p>
+<p>Subclasses supply <a class="reference internal" href="#chemistrykit.thermo.BinaryActivityModel.activity_coefficients" title="chemistrykit.thermo.BinaryActivityModel.activity_coefficients"><code class="xref py py-meth docutils literal notranslate"><span class="pre">activity_coefficients()</span></code></a> and the pure-component
+vapor pressures <code class="docutils literal notranslate"><span class="pre">P1_star</span></code>/<code class="docutils literal notranslate"><span class="pre">P2_star</span></code> at the temperature of
+interest (e.g. from <a class="reference internal" href="#chemistrykit.thermo.AntoineEquation" title="chemistrykit.thermo.AntoineEquation"><code class="xref py py-class docutils literal notranslate"><span class="pre">chemistrykit.thermo.AntoineEquation</span></code></a>);
+this base turns them into the modified Raoult’s law
+<span class="math notranslate nohighlight">\(P_i = x_i\gamma_iP_i^*\)</span> with an ideal vapor, i.e. a P-x-y
+diagram (Atkins &amp; de Paula, <em>Physical Chemistry</em>, 11th ed., Ch. 5.3).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.BinaryActivityModel.P1_star">
+<span class="sig-name descname"><span class="pre">P1_star</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.BinaryActivityModel.P1_star" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.BinaryActivityModel.P2_star">
+<span class="sig-name descname"><span class="pre">P2_star</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.BinaryActivityModel.P2_star" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.thermo.BinaryActivityModel.activity_coefficients">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">activity_coefficients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#BinaryActivityModel.activity_coefficients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.BinaryActivityModel.activity_coefficients" title="Link to this definition">#</a></dt>
+<dd><p>Return <span class="math notranslate nohighlight">\((\gamma_1, \gamma_2)\)</span> at liquid mole fraction <cite>x1</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.thermo.BinaryActivityModel.azeotrope">
+<span class="sig-name descname"><span class="pre">azeotrope</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#BinaryActivityModel.azeotrope"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.BinaryActivityModel.azeotrope" title="Link to this definition">#</a></dt>
+<dd><p>Locate an azeotrope, where vapor and liquid compositions coincide.</p>
+<p>At an azeotrope <span class="math notranslate nohighlight">\(y_1 = x_1\)</span>, i.e. the relative volatility is
+1. One exists in <span class="math notranslate nohighlight">\(0 &lt; x_1 &lt; 1\)</span> exactly when
+<span class="math notranslate nohighlight">\(\ln\alpha_{12}\)</span> changes sign across the composition range,
+and is found by root bracketing (<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.brentq.html#scipy.optimize.brentq" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.brentq()</span></code></a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>] | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>(x1, P) or None</em> – Azeotropic composition and pressure, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if there is
+no sign change (no azeotrope, or an even number of them).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.thermo.BinaryActivityModel.excess_gibbs">
+<span class="sig-name descname"><span class="pre">excess_gibbs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.31446261815324</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#BinaryActivityModel.excess_gibbs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.BinaryActivityModel.excess_gibbs" title="Link to this definition">#</a></dt>
+<dd><p>Molar excess Gibbs energy <span class="math notranslate nohighlight">\(G^E = RT(x_1\ln\gamma_1 + x_2\ln\gamma_2)\)</span>, in J/mol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x1</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Liquid-phase mole fraction of component 1.</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Absolute temperature, in K.</p></li>
+<li><p><strong>R_gas</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Gas constant.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.thermo.BinaryActivityModel.partial_pressures">
+<span class="sig-name descname"><span class="pre">partial_pressures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#BinaryActivityModel.partial_pressures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.BinaryActivityModel.partial_pressures" title="Link to this definition">#</a></dt>
+<dd><p>Return <span class="math notranslate nohighlight">\((P_1, P_2)\)</span> from the modified Raoult’s law <span class="math notranslate nohighlight">\(P_i = x_i\gamma_iP_i^*\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x1</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Liquid-phase mole fraction of component 1.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>tuple of (float or ndarray)</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.thermo.BinaryActivityModel.relative_volatility">
+<span class="sig-name descname"><span class="pre">relative_volatility</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#BinaryActivityModel.relative_volatility"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.BinaryActivityModel.relative_volatility" title="Link to this definition">#</a></dt>
+<dd><p>Relative volatility <span class="math notranslate nohighlight">\(\alpha_{12} = \gamma_1P_1^*/(\gamma_2P_2^*)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x1</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Liquid-phase mole fraction of component 1.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.thermo.BinaryActivityModel.total_pressure">
+<span class="sig-name descname"><span class="pre">total_pressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#BinaryActivityModel.total_pressure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.BinaryActivityModel.total_pressure" title="Link to this definition">#</a></dt>
+<dd><p>Total (bubble-point) vapor pressure above a liquid of composition <cite>x1</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x1</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Liquid-phase mole fraction of component 1.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.thermo.BinaryActivityModel.vapor_composition">
+<span class="sig-name descname"><span class="pre">vapor_composition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#BinaryActivityModel.vapor_composition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.BinaryActivityModel.vapor_composition" title="Link to this definition">#</a></dt>
+<dd><p>Vapor-phase mole fraction of component 1 in equilibrium with liquid <cite>x1</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x1</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Liquid-phase mole fraction of component 1.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.thermo.BinaryIdealSolution">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.thermo.</span></span><span class="sig-name descname"><span class="pre">BinaryIdealSolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P_A_star</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P_B_star</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#BinaryIdealSolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.BinaryIdealSolution" title="Link to this definition">#</a></dt>
@@ -686,7 +888,7 @@ for every subclass for free.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="chemistrykit.thermo.EquationOfState.compressibility_factor">
-<span class="sig-name descname"><span class="pre">compressibility_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/core/base_system.html#EquationOfState.compressibility_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.EquationOfState.compressibility_factor" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">compressibility_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vapor'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/core/base_system.html#EquationOfState.compressibility_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.EquationOfState.compressibility_factor" title="Link to this definition">#</a></dt>
 <dd><p>Return the compressibility factor <span class="math notranslate nohighlight">\(Z = PV_m/(RT)\)</span>.</p>
 <p><span class="math notranslate nohighlight">\(Z = 1\)</span> exactly for an ideal gas; deviations from 1
 quantify real-gas non-ideality (Atkins &amp; de Paula, <em>Physical
@@ -696,8 +898,7 @@ Chemistry</em>, 11th ed., Ch. 1.3).</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Pressure, in Pa.</p></li>
 <li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperature, in K.</p></li>
-<li><p><strong>**kwargs</strong> – Forwarded to <a class="reference internal" href="#chemistrykit.thermo.EquationOfState.molar_volume" title="chemistrykit.thermo.EquationOfState.molar_volume"><code class="xref py py-meth docutils literal notranslate"><span class="pre">molar_volume()</span></code></a> (e.g. <code class="docutils literal notranslate"><span class="pre">branch</span></code> for a
-cubic EOS).</p></li>
+<li><p><strong>branch</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Forwarded to <a class="reference internal" href="#chemistrykit.thermo.EquationOfState.molar_volume" title="chemistrykit.thermo.EquationOfState.molar_volume"><code class="xref py py-meth docutils literal notranslate"><span class="pre">molar_volume()</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -708,13 +909,15 @@ cubic EOS).</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="chemistrykit.thermo.EquationOfState.molar_volume">
-<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">molar_volume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/core/base_system.html#EquationOfState.molar_volume"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.EquationOfState.molar_volume" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">molar_volume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vapor'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/core/base_system.html#EquationOfState.molar_volume"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.EquationOfState.molar_volume" title="Link to this definition">#</a></dt>
 <dd><p>Return the molar volume at pressure <cite>P</cite> and temperature <cite>T</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Pressure, in Pa.</p></li>
 <li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperature, in K.</p></li>
+<li><p><strong>branch</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Which root to return where a cubic equation of state has
+three; ignored by equations of state with a single root.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -850,13 +1053,15 @@ cubic EOS).</p></li>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="chemistrykit.thermo.IdealGas.molar_volume">
-<span class="sig-name descname"><span class="pre">molar_volume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/equations_of_state.html#IdealGas.molar_volume"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.IdealGas.molar_volume" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">molar_volume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vapor'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/equations_of_state.html#IdealGas.molar_volume"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.IdealGas.molar_volume" title="Link to this definition">#</a></dt>
 <dd><p>Return the molar volume at pressure <cite>P</cite> and temperature <cite>T</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Pressure, in Pa.</p></li>
 <li><p><strong>T</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Absolute temperature, in K.</p></li>
+<li><p><strong>branch</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Which root to return where a cubic equation of state has
+three; ignored by equations of state with a single root.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -887,7 +1092,7 @@ cubic EOS).</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.thermo.MargulesSolution">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.thermo.</span></span><span class="sig-name descname"><span class="pre">MargulesSolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P1_star</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P2_star</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#MargulesSolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.MargulesSolution" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.thermo.BinaryActivityModel" title="chemistrykit.thermo.systems.mixtures.BinaryActivityModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryActivityModel</span></code></a></p>
 <p>A non-ideal binary liquid described by the one-parameter (two-suffix) Margules model.</p>
 <p>Margules expanded the logarithms of the activity coefficients as power
 series in mole fraction (M. Margules, <em>Sitzungsber. Kais. Akad. Wiss.
@@ -951,37 +1156,65 @@ coefficient tends to 1 (Raoult’s law):</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="chemistrykit.thermo.MargulesSolution.excess_gibbs">
-<span class="sig-name descname"><span class="pre">excess_gibbs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.31446261815324</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#MargulesSolution.excess_gibbs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.MargulesSolution.excess_gibbs" title="Link to this definition">#</a></dt>
-<dd><p>Molar excess Gibbs energy <span class="math notranslate nohighlight">\(G^E = RT\,A\,x_1x_2\)</span>, in J/mol.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x1</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Liquid-phase mole fraction of component 1.</p></li>
-<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Absolute temperature, in K.</p></li>
-<li><p><strong>R_gas</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Gas constant.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>float or ndarray</em></p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py property">
 <dt class="sig sig-object py" id="chemistrykit.thermo.MargulesSolution.henry_constant_1">
 <span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">henry_constant_1</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.MargulesSolution.henry_constant_1" title="Link to this definition">#</a></dt>
 <dd><p>Henry’s-law constant of component 1 at infinite dilution, <span class="math notranslate nohighlight">\(P_1^* e^{A}\)</span>.</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="chemistrykit.thermo.MargulesSolution.partial_pressures">
-<span class="sig-name descname"><span class="pre">partial_pressures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#MargulesSolution.partial_pressures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.MargulesSolution.partial_pressures" title="Link to this definition">#</a></dt>
-<dd><p>Return <span class="math notranslate nohighlight">\((P_1, P_2)\)</span> from the modified Raoult’s law <span class="math notranslate nohighlight">\(P_i = x_i\gamma_iP_i^*\)</span>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.thermo.NRTLSolution">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.thermo.</span></span><span class="sig-name descname"><span class="pre">NRTLSolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tau12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau21</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P1_star</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P2_star</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#NRTLSolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.NRTLSolution" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.thermo.BinaryActivityModel" title="chemistrykit.thermo.systems.mixtures.BinaryActivityModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryActivityModel</span></code></a></p>
+<p>The non-random two-liquid (NRTL) model of a non-ideal binary liquid.</p>
+<p>H. Renon &amp; J. M. Prausnitz, <em>AIChE J.</em> 14, 135 (1968). With
+<span class="math notranslate nohighlight">\(G_{ij}=\exp(-\alpha\tau_{ij})\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\ln\gamma_1 = x_2^2\left[\tau_{21}\left(\frac{G_{21}}{x_1+x_2G_{21}}\right)^2
+    + \frac{\tau_{12}G_{12}}{(x_2+x_1G_{12})^2}\right]\]</div>
+<p>and symmetrically for <span class="math notranslate nohighlight">\(\gamma_2\)</span>. Unlike Wilson’s model, NRTL
+can describe partially miscible (liquid-liquid) systems.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>x1</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Liquid-phase mole fraction of component 1.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tau12</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Dimensionless interaction parameters at the temperature of
+interest (commonly <span class="math notranslate nohighlight">\(\tau_{ij}=b_{ij}/RT\)</span>).</p></li>
+<li><p><strong>tau21</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Dimensionless interaction parameters at the temperature of
+interest (commonly <span class="math notranslate nohighlight">\(\tau_{ij}=b_{ij}/RT\)</span>).</p></li>
+<li><p><strong>P1_star</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pure-component vapor pressures at that temperature.</p></li>
+<li><p><strong>P2_star</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pure-component vapor pressures at that temperature.</p></li>
+<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Non-randomness parameter (0.2-0.47 in Renon &amp; Prausnitz’s fits).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>At infinite dilution, <span class="math notranslate nohighlight">\(\ln\gamma_1^\infty=\tau_{21}+\tau_{12}e^{-\alpha\tau_{12}}\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sol</span> <span class="o">=</span> <span class="n">NRTLSolution</span><span class="p">(</span><span class="n">tau12</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">tau21</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">P1_star</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span> <span class="n">P2_star</span><span class="o">=</span><span class="mf">20.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">activity_coefficients</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">g1</span><span class="p">),</span> <span class="mf">1.2</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.3</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.NRTLSolution.P1_star">
+<span class="sig-name descname"><span class="pre">P1_star</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.NRTLSolution.P1_star" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.NRTLSolution.P2_star">
+<span class="sig-name descname"><span class="pre">P2_star</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.NRTLSolution.P2_star" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.thermo.NRTLSolution.activity_coefficients">
+<span class="sig-name descname"><span class="pre">activity_coefficients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#NRTLSolution.activity_coefficients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.NRTLSolution.activity_coefficients" title="Link to this definition">#</a></dt>
+<dd><p>Return <span class="math notranslate nohighlight">\((\gamma_1, \gamma_2)\)</span> at liquid mole fraction <cite>x1</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x1</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>tuple of (float or ndarray)</em></p>
@@ -989,33 +1222,20 @@ coefficient tends to 1 (Raoult’s law):</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="chemistrykit.thermo.MargulesSolution.total_pressure">
-<span class="sig-name descname"><span class="pre">total_pressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#MargulesSolution.total_pressure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.MargulesSolution.total_pressure" title="Link to this definition">#</a></dt>
-<dd><p>Total vapor pressure above a liquid of composition <cite>x1</cite>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>x1</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Liquid-phase mole fraction of component 1.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>float or ndarray</em></p>
-</dd>
-</dl>
-</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.NRTLSolution.alpha">
+<span class="sig-name descname"><span class="pre">alpha</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.3</span></span><a class="headerlink" href="#chemistrykit.thermo.NRTLSolution.alpha" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="chemistrykit.thermo.MargulesSolution.vapor_composition">
-<span class="sig-name descname"><span class="pre">vapor_composition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#MargulesSolution.vapor_composition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.MargulesSolution.vapor_composition" title="Link to this definition">#</a></dt>
-<dd><p>Vapor-phase mole fraction of component 1 in equilibrium with liquid <cite>x1</cite>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>x1</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Liquid-phase mole fraction of component 1.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>float or ndarray</em></p>
-</dd>
-</dl>
-</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.NRTLSolution.tau12">
+<span class="sig-name descname"><span class="pre">tau12</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.NRTLSolution.tau12" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.NRTLSolution.tau21">
+<span class="sig-name descname"><span class="pre">tau21</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.NRTLSolution.tau21" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -1242,6 +1462,111 @@ pressure:</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.thermo.UNIQUACSolution">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.thermo.</span></span><span class="sig-name descname"><span class="pre">UNIQUACSolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau21</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P1_star</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P2_star</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#UNIQUACSolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.UNIQUACSolution" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.thermo.BinaryActivityModel" title="chemistrykit.thermo.systems.mixtures.BinaryActivityModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryActivityModel</span></code></a></p>
+<p>The universal quasi-chemical (UNIQUAC) model of a non-ideal binary liquid.</p>
+<p>D. S. Abrams &amp; J. M. Prausnitz, <em>AIChE J.</em> 21, 116 (1975).
+<span class="math notranslate nohighlight">\(\ln\gamma_i\)</span> is the sum of a combinatorial (size/shape) part,
+fixed by each molecule’s van der Waals volume <cite>r</cite> and surface area
+<cite>q</cite>, and a residual (energetic) part:</p>
+<div class="math notranslate nohighlight">
+\[\ln\gamma_i^C = \ln\frac{\Phi_i}{x_i} + \frac z2 q_i\ln\frac{\theta_i}{\Phi_i}
+    + l_i - \frac{\Phi_i}{x_i}\sum_j x_jl_j, \qquad
+\ln\gamma_i^R = q_i\left[1-\ln\sum_j\theta_j\tau_{ji}
+    - \sum_j\frac{\theta_j\tau_{ij}}{\sum_k\theta_k\tau_{kj}}\right]\]</div>
+<p>with <span class="math notranslate nohighlight">\(\Phi_i=r_ix_i/\sum_jr_jx_j\)</span>,
+<span class="math notranslate nohighlight">\(\theta_i=q_ix_i/\sum_jq_jx_j\)</span>,
+<span class="math notranslate nohighlight">\(l_i=\frac z2(r_i-q_i)-(r_i-1)\)</span>, <span class="math notranslate nohighlight">\(\tau_{ii}=1\)</span> and
+coordination number <span class="math notranslate nohighlight">\(z=10\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Relative van der Waals volumes and surface areas (tabulated, e.g.
+water r=0.92, q=1.40; ethanol r=2.1055, q=1.972).</p></li>
+<li><p><strong>r2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Relative van der Waals volumes and surface areas (tabulated, e.g.
+water r=0.92, q=1.40; ethanol r=2.1055, q=1.972).</p></li>
+<li><p><strong>q1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Relative van der Waals volumes and surface areas (tabulated, e.g.
+water r=0.92, q=1.40; ethanol r=2.1055, q=1.972).</p></li>
+<li><p><strong>q2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Relative van der Waals volumes and surface areas (tabulated, e.g.
+water r=0.92, q=1.40; ethanol r=2.1055, q=1.972).</p></li>
+<li><p><strong>tau12</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Dimensionless energy parameters, <span class="math notranslate nohighlight">\(\tau_{ij}=\exp(-a_{ij}/T)\)</span>.</p></li>
+<li><p><strong>tau21</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Dimensionless energy parameters, <span class="math notranslate nohighlight">\(\tau_{ij}=\exp(-a_{ij}/T)\)</span>.</p></li>
+<li><p><strong>P1_star</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pure-component vapor pressures at the temperature of interest.</p></li>
+<li><p><strong>P2_star</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pure-component vapor pressures at the temperature of interest.</p></li>
+<li><p><strong>z</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Lattice coordination number.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Identical-size molecules with <span class="math notranslate nohighlight">\(\tau_{12}=\tau_{21}=1\)</span> form an ideal solution:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sol</span> <span class="o">=</span> <span class="n">UNIQUACSolution</span><span class="p">(</span><span class="n">r1</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">r2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">q1</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">q2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tau12</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tau21</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">P1_star</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span> <span class="n">P2_star</span><span class="o">=</span><span class="mf">20.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">g</span><span class="p">),</span> <span class="mi">12</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">sol</span><span class="o">.</span><span class="n">activity_coefficients</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)]</span>
+<span class="go">[1.0, 1.0]</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.UNIQUACSolution.P1_star">
+<span class="sig-name descname"><span class="pre">P1_star</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.UNIQUACSolution.P1_star" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.UNIQUACSolution.P2_star">
+<span class="sig-name descname"><span class="pre">P2_star</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.UNIQUACSolution.P2_star" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.thermo.UNIQUACSolution.activity_coefficients">
+<span class="sig-name descname"><span class="pre">activity_coefficients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#UNIQUACSolution.activity_coefficients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.UNIQUACSolution.activity_coefficients" title="Link to this definition">#</a></dt>
+<dd><p>Return <span class="math notranslate nohighlight">\((\gamma_1, \gamma_2)\)</span> at liquid mole fraction <cite>x1</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x1</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>tuple of (float or ndarray)</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.UNIQUACSolution.q1">
+<span class="sig-name descname"><span class="pre">q1</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.UNIQUACSolution.q1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.UNIQUACSolution.q2">
+<span class="sig-name descname"><span class="pre">q2</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.UNIQUACSolution.q2" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.UNIQUACSolution.r1">
+<span class="sig-name descname"><span class="pre">r1</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.UNIQUACSolution.r1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.UNIQUACSolution.r2">
+<span class="sig-name descname"><span class="pre">r2</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.UNIQUACSolution.r2" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.UNIQUACSolution.tau12">
+<span class="sig-name descname"><span class="pre">tau12</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.UNIQUACSolution.tau12" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.UNIQUACSolution.tau21">
+<span class="sig-name descname"><span class="pre">tau21</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.UNIQUACSolution.tau21" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.UNIQUACSolution.z">
+<span class="sig-name descname"><span class="pre">z</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10.0</span></span><a class="headerlink" href="#chemistrykit.thermo.UNIQUACSolution.z" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.thermo.VanDerWaals">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.thermo.</span></span><span class="sig-name descname"><span class="pre">VanDerWaals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/equations_of_state.html#VanDerWaals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.VanDerWaals" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#chemistrykit.thermo.EquationOfState" title="chemistrykit.thermo.core.base_system.EquationOfState"><code class="xref py py-class docutils literal notranslate"><span class="pre">EquationOfState</span></code></a></p>
@@ -1442,6 +1767,105 @@ slope of a plot of <span class="math notranslate nohighlight">\(\ln K\)</span> a
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.thermo.WilsonSolution">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.thermo.</span></span><span class="sig-name descname"><span class="pre">WilsonSolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Lambda12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lambda21</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P1_star</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P2_star</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#WilsonSolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.WilsonSolution" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistrykit.thermo.BinaryActivityModel" title="chemistrykit.thermo.systems.mixtures.BinaryActivityModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryActivityModel</span></code></a></p>
+<p>Wilson’s local-composition model of a non-ideal binary liquid.</p>
+<ol class="upperalpha simple" start="7">
+<li><ol class="upperalpha simple" start="13">
+<li><p>Wilson, <em>J. Am. Chem. Soc.</em> 86, 127 (1964):</p></li>
+</ol>
+</li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\ln\gamma_1 = -\ln(x_1+\Lambda_{12}x_2)
+    + x_2\left(\frac{\Lambda_{12}}{x_1+\Lambda_{12}x_2}
+    - \frac{\Lambda_{21}}{x_2+\Lambda_{21}x_1}\right)\]</div>
+<p>and symmetrically for <span class="math notranslate nohighlight">\(\gamma_2\)</span>. Wilson’s model cannot predict
+liquid-liquid phase splitting, but is accurate for miscible mixtures
+of polar and non-polar components (e.g. alcohols in hydrocarbons),
+including their azeotropes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Lambda12</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Positive, dimensionless Wilson parameters at the temperature of
+interest (see <a class="reference internal" href="#chemistrykit.thermo.WilsonSolution.from_energies" title="chemistrykit.thermo.WilsonSolution.from_energies"><code class="xref py py-meth docutils literal notranslate"><span class="pre">from_energies()</span></code></a>).</p></li>
+<li><p><strong>Lambda21</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Positive, dimensionless Wilson parameters at the temperature of
+interest (see <a class="reference internal" href="#chemistrykit.thermo.WilsonSolution.from_energies" title="chemistrykit.thermo.WilsonSolution.from_energies"><code class="xref py py-meth docutils literal notranslate"><span class="pre">from_energies()</span></code></a>).</p></li>
+<li><p><strong>P1_star</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pure-component vapor pressures at that temperature.</p></li>
+<li><p><strong>P2_star</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pure-component vapor pressures at that temperature.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>With <span class="math notranslate nohighlight">\(\Lambda_{12}=\Lambda_{21}=1\)</span> the mixture is ideal:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sol</span> <span class="o">=</span> <span class="n">WilsonSolution</span><span class="p">(</span><span class="n">Lambda12</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">Lambda21</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">P1_star</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span> <span class="n">P2_star</span><span class="o">=</span><span class="mf">20.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">g</span><span class="p">),</span> <span class="mi">12</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">sol</span><span class="o">.</span><span class="n">activity_coefficients</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)]</span>
+<span class="go">[1.0, 1.0]</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.WilsonSolution.Lambda12">
+<span class="sig-name descname"><span class="pre">Lambda12</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.WilsonSolution.Lambda12" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.WilsonSolution.Lambda21">
+<span class="sig-name descname"><span class="pre">Lambda21</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.WilsonSolution.Lambda21" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.WilsonSolution.P1_star">
+<span class="sig-name descname"><span class="pre">P1_star</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.WilsonSolution.P1_star" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.thermo.WilsonSolution.P2_star">
+<span class="sig-name descname"><span class="pre">P2_star</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.thermo.WilsonSolution.P2_star" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.thermo.WilsonSolution.activity_coefficients">
+<span class="sig-name descname"><span class="pre">activity_coefficients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#WilsonSolution.activity_coefficients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.WilsonSolution.activity_coefficients" title="Link to this definition">#</a></dt>
+<dd><p>Return <span class="math notranslate nohighlight">\((\gamma_1, \gamma_2)\)</span> at liquid mole fraction <cite>x1</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x1</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>tuple of (float or ndarray)</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.thermo.WilsonSolution.from_energies">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_energies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">V2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda21</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P1_star</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P2_star</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.31446261815324</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/thermo/systems/mixtures.html#WilsonSolution.from_energies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.thermo.WilsonSolution.from_energies" title="Link to this definition">#</a></dt>
+<dd><p>Build from liquid molar volumes and interaction energies, <span class="math notranslate nohighlight">\(\Lambda_{12}=(V_2/V_1)e^{-\lambda_{12}/RT}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pure-liquid molar volumes (any consistent unit).</p></li>
+<li><p><strong>V2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pure-liquid molar volumes (any consistent unit).</p></li>
+<li><p><strong>lambda12</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Interaction-energy differences <span class="math notranslate nohighlight">\(\lambda_{12}-\lambda_{11}\)</span>
+and <span class="math notranslate nohighlight">\(\lambda_{21}-\lambda_{22}\)</span>, in J/mol.</p></li>
+<li><p><strong>lambda21</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Interaction-energy differences <span class="math notranslate nohighlight">\(\lambda_{12}-\lambda_{11}\)</span>
+and <span class="math notranslate nohighlight">\(\lambda_{21}-\lambda_{22}\)</span>, in J/mol.</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Absolute temperature, in K.</p></li>
+<li><p><strong>P1_star</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pure-component vapor pressures at <cite>T</cite>.</p></li>
+<li><p><strong>P2_star</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pure-component vapor pressures at <cite>T</cite>.</p></li>
+<li><p><strong>R_gas</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>WilsonSolution</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2129,6 +2553,26 @@ Chatelier’s principle):</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.AntoineEquation"><code class="docutils literal notranslate"><span class="pre">AntoineEquation</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.AntoineEquation.A"><code class="docutils literal notranslate"><span class="pre">AntoineEquation.A</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.AntoineEquation.B"><code class="docutils literal notranslate"><span class="pre">AntoineEquation.B</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.AntoineEquation.C"><code class="docutils literal notranslate"><span class="pre">AntoineEquation.C</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.AntoineEquation.pressure"><code class="docutils literal notranslate"><span class="pre">AntoineEquation.pressure()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.AntoineEquation.temperature"><code class="docutils literal notranslate"><span class="pre">AntoineEquation.temperature()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.BinaryActivityModel"><code class="docutils literal notranslate"><span class="pre">BinaryActivityModel</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.BinaryActivityModel.P1_star"><code class="docutils literal notranslate"><span class="pre">BinaryActivityModel.P1_star</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.BinaryActivityModel.P2_star"><code class="docutils literal notranslate"><span class="pre">BinaryActivityModel.P2_star</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.BinaryActivityModel.activity_coefficients"><code class="docutils literal notranslate"><span class="pre">BinaryActivityModel.activity_coefficients()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.BinaryActivityModel.azeotrope"><code class="docutils literal notranslate"><span class="pre">BinaryActivityModel.azeotrope()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.BinaryActivityModel.excess_gibbs"><code class="docutils literal notranslate"><span class="pre">BinaryActivityModel.excess_gibbs()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.BinaryActivityModel.partial_pressures"><code class="docutils literal notranslate"><span class="pre">BinaryActivityModel.partial_pressures()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.BinaryActivityModel.relative_volatility"><code class="docutils literal notranslate"><span class="pre">BinaryActivityModel.relative_volatility()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.BinaryActivityModel.total_pressure"><code class="docutils literal notranslate"><span class="pre">BinaryActivityModel.total_pressure()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.BinaryActivityModel.vapor_composition"><code class="docutils literal notranslate"><span class="pre">BinaryActivityModel.vapor_composition()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.BinaryIdealSolution"><code class="docutils literal notranslate"><span class="pre">BinaryIdealSolution</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.BinaryIdealSolution.P_A_star"><code class="docutils literal notranslate"><span class="pre">BinaryIdealSolution.P_A_star</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.BinaryIdealSolution.P_B_star"><code class="docutils literal notranslate"><span class="pre">BinaryIdealSolution.P_B_star</span></code></a></li>
@@ -2172,11 +2616,16 @@ Chatelier’s principle):</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.MargulesSolution.P1_star"><code class="docutils literal notranslate"><span class="pre">MargulesSolution.P1_star</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.MargulesSolution.P2_star"><code class="docutils literal notranslate"><span class="pre">MargulesSolution.P2_star</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.MargulesSolution.activity_coefficients"><code class="docutils literal notranslate"><span class="pre">MargulesSolution.activity_coefficients()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.MargulesSolution.excess_gibbs"><code class="docutils literal notranslate"><span class="pre">MargulesSolution.excess_gibbs()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.MargulesSolution.henry_constant_1"><code class="docutils literal notranslate"><span class="pre">MargulesSolution.henry_constant_1</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.MargulesSolution.partial_pressures"><code class="docutils literal notranslate"><span class="pre">MargulesSolution.partial_pressures()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.MargulesSolution.total_pressure"><code class="docutils literal notranslate"><span class="pre">MargulesSolution.total_pressure()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.MargulesSolution.vapor_composition"><code class="docutils literal notranslate"><span class="pre">MargulesSolution.vapor_composition()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.NRTLSolution"><code class="docutils literal notranslate"><span class="pre">NRTLSolution</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.NRTLSolution.P1_star"><code class="docutils literal notranslate"><span class="pre">NRTLSolution.P1_star</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.NRTLSolution.P2_star"><code class="docutils literal notranslate"><span class="pre">NRTLSolution.P2_star</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.NRTLSolution.activity_coefficients"><code class="docutils literal notranslate"><span class="pre">NRTLSolution.activity_coefficients()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.NRTLSolution.alpha"><code class="docutils literal notranslate"><span class="pre">NRTLSolution.alpha</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.NRTLSolution.tau12"><code class="docutils literal notranslate"><span class="pre">NRTLSolution.tau12</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.NRTLSolution.tau21"><code class="docutils literal notranslate"><span class="pre">NRTLSolution.tau21</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.PengRobinson"><code class="docutils literal notranslate"><span class="pre">PengRobinson</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
@@ -2191,6 +2640,19 @@ Chatelier’s principle):</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.RedlichKwong.pressure"><code class="docutils literal notranslate"><span class="pre">RedlichKwong.pressure()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.UNIQUACSolution"><code class="docutils literal notranslate"><span class="pre">UNIQUACSolution</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.UNIQUACSolution.P1_star"><code class="docutils literal notranslate"><span class="pre">UNIQUACSolution.P1_star</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.UNIQUACSolution.P2_star"><code class="docutils literal notranslate"><span class="pre">UNIQUACSolution.P2_star</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.UNIQUACSolution.activity_coefficients"><code class="docutils literal notranslate"><span class="pre">UNIQUACSolution.activity_coefficients()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.UNIQUACSolution.q1"><code class="docutils literal notranslate"><span class="pre">UNIQUACSolution.q1</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.UNIQUACSolution.q2"><code class="docutils literal notranslate"><span class="pre">UNIQUACSolution.q2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.UNIQUACSolution.r1"><code class="docutils literal notranslate"><span class="pre">UNIQUACSolution.r1</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.UNIQUACSolution.r2"><code class="docutils literal notranslate"><span class="pre">UNIQUACSolution.r2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.UNIQUACSolution.tau12"><code class="docutils literal notranslate"><span class="pre">UNIQUACSolution.tau12</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.UNIQUACSolution.tau21"><code class="docutils literal notranslate"><span class="pre">UNIQUACSolution.tau21</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.UNIQUACSolution.z"><code class="docutils literal notranslate"><span class="pre">UNIQUACSolution.z</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.VanDerWaals"><code class="docutils literal notranslate"><span class="pre">VanDerWaals</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.VanDerWaals.from_critical_constants"><code class="docutils literal notranslate"><span class="pre">VanDerWaals.from_critical_constants()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.VanDerWaals.molar_volume"><code class="docutils literal notranslate"><span class="pre">VanDerWaals.molar_volume()</span></code></a></li>
@@ -2203,6 +2665,15 @@ Chatelier’s principle):</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.VantHoffFit.delta_s"><code class="docutils literal notranslate"><span class="pre">VantHoffFit.delta_s</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.VantHoffFit.predict"><code class="docutils literal notranslate"><span class="pre">VantHoffFit.predict()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.VantHoffFit.r_squared"><code class="docutils literal notranslate"><span class="pre">VantHoffFit.r_squared</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.WilsonSolution"><code class="docutils literal notranslate"><span class="pre">WilsonSolution</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.WilsonSolution.Lambda12"><code class="docutils literal notranslate"><span class="pre">WilsonSolution.Lambda12</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.WilsonSolution.Lambda21"><code class="docutils literal notranslate"><span class="pre">WilsonSolution.Lambda21</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.WilsonSolution.P1_star"><code class="docutils literal notranslate"><span class="pre">WilsonSolution.P1_star</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.WilsonSolution.P2_star"><code class="docutils literal notranslate"><span class="pre">WilsonSolution.P2_star</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.WilsonSolution.activity_coefficients"><code class="docutils literal notranslate"><span class="pre">WilsonSolution.activity_coefficients()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.WilsonSolution.from_energies"><code class="docutils literal notranslate"><span class="pre">WilsonSolution.from_energies()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.thermo.boiling_point_elevation"><code class="docutils literal notranslate"><span class="pre">boiling_point_elevation()</span></code></a></li>

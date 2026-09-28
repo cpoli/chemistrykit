@@ -34,7 +34,7 @@ masses = np.array([noble_gases[n][0] for n in names])
 S_exp = np.array([noble_gases[n][1] for n in names])
 S_st = np.array([sackur_tetrode_entropy(mass=m * sc.atomic_mass, T=298.15, P=1.0e5) for m in masses])
 
-for name, s_calc, s_exp in zip(names, S_st, S_exp):
+for name, s_calc, s_exp in zip(names, S_st, S_exp, strict=True):
     print(f"{name:2s}: Sackur-Tetrode {s_calc:7.2f}  tabulated {s_exp:7.2f} J/(mol K)")
 
 # %%
@@ -42,7 +42,7 @@ fig, axes = plt.subplots(1, 2, figsize=(11, 4.5))
 m_grid = np.logspace(0.3, 2.3, 200)
 axes[0].semilogx(m_grid, [sackur_tetrode_entropy(mass=m * sc.atomic_mass, T=298.15, P=1.0e5) for m in m_grid], color="steelblue", label="Sackur-Tetrode")
 axes[0].semilogx(masses, S_exp, "o", color="crimson", label="tabulated (298.15 K, 1 bar)")
-for name, m, s in zip(names, masses, S_exp):
+for name, m, s in zip(names, masses, S_exp, strict=True):
     axes[0].annotate(name, (m, s), textcoords="offset points", xytext=(5, -12))
 axes[0].set_xlabel("atomic mass (u)")
 axes[0].set_ylabel(r"$S_m$ (J mol$^{-1}$ K$^{-1}$)")

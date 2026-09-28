@@ -46,7 +46,7 @@ fig.tight_layout()
 # decades of dilution -- the experimental test Ostwald made with
 # conductivity data for dozens of weak acids:
 
-for Ca, alpha in zip(Ca_values[::20], alpha_exact[::20]):
+for Ca, alpha in zip(Ca_values[::20], alpha_exact[::20], strict=True):
     print(f"Ca = {Ca:.1e} M: alpha = {alpha:.4f}, alpha^2 Ca/(1-alpha) = {alpha**2 * Ca / (1 - alpha):.3e}")
 
 plt.show()

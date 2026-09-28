@@ -461,7 +461,8 @@ levels; the rigid rotor; hydrogen-like radial wavefunctions and orbital
 shapes) and genuinely variational ones (Huckel molecular-orbital theory
 for conjugated pi systems, including Huckel’s 4n+2 aromaticity rule
 checked against the computed spectrum; a minimal Gaussian-basis
-variational treatment of H2+; the effective-nuclear-charge variational
+variational treatment of H2+; closed-shell restricted Hartree-Fock SCF
+in an STO-3G basis for H2 and HeH+; the effective-nuclear-charge variational
 helium atom; Rayleigh-Schrodinger perturbation theory for
 the anharmonic oscillator, checked against exact numerical diagonalization
 in a truncated basis).</p>
@@ -1727,6 +1728,164 @@ diagonalize here.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.quantum.RestrictedHartreeFock">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.quantum.</span></span><span class="sig-name descname"><span class="pre">RestrictedHartreeFock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nuclei</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_electrons</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/quantum/systems/hartree_fock.html#RestrictedHartreeFock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.quantum.RestrictedHartreeFock" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Closed-shell restricted Hartree-Fock (RHF) by the Roothaan-Hall SCF procedure.</p>
+<p>Each doubly occupied spatial orbital is a linear combination of basis
+functions, <span class="math notranslate nohighlight">\(\psi_a=\sum_\mu C_{\mu a}\phi_\mu\)</span>, with coefficients
+solving the Roothaan-Hall equations <span class="math notranslate nohighlight">\(FC=SC\varepsilon\)</span> (C. C. J.
+Roothaan, <em>Rev. Mod. Phys.</em> 23, 69 (1951); G. G. Hall, <em>Proc. R. Soc.
+Lond. A</em> 205, 541 (1951)). The Fock matrix</p>
+<div class="math notranslate nohighlight">
+\[F_{\mu\nu} = H^{core}_{\mu\nu} + \sum_{\lambda\sigma}P_{\lambda\sigma}
+    \left[(\mu\nu|\sigma\lambda) - \tfrac12(\mu\lambda|\sigma\nu)\right]\]</div>
+<p>depends on the density <span class="math notranslate nohighlight">\(P\)</span> built from its own solution, so the
+equations are iterated to self-consistency from a core-Hamiltonian
+(<span class="math notranslate nohighlight">\(P=0\)</span>) guess (Szabo &amp; Ostlund, <em>Modern Quantum Chemistry</em>, 1st
+ed. rev., Ch. 3.4.6). Each step reuses
+<code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.quantum.utils.secular_equation.solve_secular_equation()</span></code>
+for <span class="math notranslate nohighlight">\(FC=SC\varepsilon\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>basis</strong> (<em>sequence</em><em> of </em><em>ContractedGaussian</em>) – s-type basis functions.</p></li>
+<li><p><strong>nuclei</strong> (<em>sequence</em><em> of </em><em>(</em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>array-like</em><em>)</em>) – <code class="docutils literal notranslate"><span class="pre">(Z,</span> <span class="pre">center)</span></code> for each nucleus; centers in m.</p></li>
+<li><p><strong>n_electrons</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Total electron count; must be even (closed shell).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>H2 at 1.4 bohr in STO-3G reproduces Szabo &amp; Ostlund’s -1.117 hartree:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.quantum.systems.helium</span><span class="w"> </span><span class="kn">import</span> <span class="n">HARTREE_ENERGY</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">RestrictedHartreeFock</span><span class="o">.</span><span class="n">h2</span><span class="p">()</span><span class="o">.</span><span class="n">scf</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">total_energy</span> <span class="o">/</span> <span class="n">HARTREE_ENERGY</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">-1.1167</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.quantum.RestrictedHartreeFock.basis">
+<span class="sig-name descname"><span class="pre">basis</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">ContractedGaussian</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#chemistrykit.quantum.RestrictedHartreeFock.basis" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.quantum.RestrictedHartreeFock.core_hamiltonian">
+<span class="sig-name descname"><span class="pre">core_hamiltonian</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/quantum/systems/hartree_fock.html#RestrictedHartreeFock.core_hamiltonian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.quantum.RestrictedHartreeFock.core_hamiltonian" title="Link to this definition">#</a></dt>
+<dd><p>Core Hamiltonian <span class="math notranslate nohighlight">\(H^{core}=T+\sum_AV_A\)</span> (kinetic + nuclear attraction), in J.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray, shape (n_basis, n_basis)</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.quantum.RestrictedHartreeFock.h2">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">h2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bond_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7.408480947620848e-11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zeta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.24</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/quantum/systems/hartree_fock.html#RestrictedHartreeFock.h2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.quantum.RestrictedHartreeFock.h2" title="Link to this definition">#</a></dt>
+<dd><p>H2 in the STO-3G minimal basis (Szabo &amp; Ostlund, Ch. 3.5.2).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bond_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – H-H distance, in m.</p></li>
+<li><p><strong>zeta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Slater exponent of each H 1s function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.quantum.RestrictedHartreeFock" title="chemistrykit.quantum.systems.hartree_fock.RestrictedHartreeFock"><code class="xref py py-class docutils literal notranslate"><span class="pre">RestrictedHartreeFock</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>RestrictedHartreeFock</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.quantum.RestrictedHartreeFock.heh_plus">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">heh_plus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bond_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7.742920944684876e-11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zeta_he</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0925</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zeta_h</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.24</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/quantum/systems/hartree_fock.html#RestrictedHartreeFock.heh_plus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.quantum.RestrictedHartreeFock.heh_plus" title="Link to this definition">#</a></dt>
+<dd><p>HeH+ in the STO-3G minimal basis (Szabo &amp; Ostlund, Ch. 3.5.3 and Appendix B).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bond_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – He-H distance, in m.</p></li>
+<li><p><strong>zeta_he</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Slater exponents of the He and H 1s functions.</p></li>
+<li><p><strong>zeta_h</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Slater exponents of the He and H 1s functions.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.quantum.RestrictedHartreeFock" title="chemistrykit.quantum.systems.hartree_fock.RestrictedHartreeFock"><code class="xref py py-class docutils literal notranslate"><span class="pre">RestrictedHartreeFock</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>RestrictedHartreeFock</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chemistrykit.quantum.RestrictedHartreeFock.nuclear_repulsion">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">nuclear_repulsion</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.quantum.RestrictedHartreeFock.nuclear_repulsion" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(\sum_{A&lt;B}Z_AZ_Be^2/(4\pi\varepsilon_0R_{AB})\)</span>, in J.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.quantum.RestrictedHartreeFock.overlap_matrix">
+<span class="sig-name descname"><span class="pre">overlap_matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/quantum/systems/hartree_fock.html#RestrictedHartreeFock.overlap_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.quantum.RestrictedHartreeFock.overlap_matrix" title="Link to this definition">#</a></dt>
+<dd><p>Overlap matrix <span class="math notranslate nohighlight">\(S_{\mu\nu}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray, shape (n_basis, n_basis)</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.quantum.RestrictedHartreeFock.scf">
+<span class="sig-name descname"><span class="pre">scf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/quantum/systems/hartree_fock.html#RestrictedHartreeFock.scf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.quantum.RestrictedHartreeFock.scf" title="Link to this definition">#</a></dt>
+<dd><p>Iterate the Roothaan-Hall equations to self-consistency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_iter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Convergence threshold on the largest change of any density
+matrix element between iterations (dimensionless).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.quantum.SCFResult" title="chemistrykit.quantum.systems.hartree_fock.SCFResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">SCFResult</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>SCFResult</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.quantum.RestrictedHartreeFock.two_electron_integrals">
+<span class="sig-name descname"><span class="pre">two_electron_integrals</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/quantum/systems/hartree_fock.html#RestrictedHartreeFock.two_electron_integrals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.quantum.RestrictedHartreeFock.two_electron_integrals" title="Link to this definition">#</a></dt>
+<dd><p>All two-electron integrals <span class="math notranslate nohighlight">\((\mu\nu|\lambda\sigma)\)</span> (chemists’ notation), in J.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray, shape (n_basis, n_basis, n_basis, n_basis)</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.quantum.RigidRotor">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.quantum.</span></span><span class="sig-name descname"><span class="pre">RigidRotor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">moment_of_inertia</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/quantum/systems/rigid_rotor.html#RigidRotor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.quantum.RigidRotor" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#chemistrykit.quantum.QuantumSystem" title="chemistrykit.quantum.core.base_system.QuantumSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumSystem</span></code></a></p>
@@ -1852,6 +2011,127 @@ ed., eq. 7.19).</p>
 <span class="go">True</span>
 </pre></div>
 </div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.quantum.SCFResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.quantum.</span></span><span class="sig-name descname"><span class="pre">SCFResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">total_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">electronic_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nuclear_repulsion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbital_energies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coefficients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">density</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iterations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">converged</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_history</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/quantum/systems/hartree_fock.html#SCFResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.quantum.SCFResult" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Result of <a class="reference internal" href="#chemistrykit.quantum.RestrictedHartreeFock.scf" title="chemistrykit.quantum.RestrictedHartreeFock.scf"><code class="xref py py-meth docutils literal notranslate"><span class="pre">RestrictedHartreeFock.scf()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>total_energy</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>electronic_energy</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>nuclear_repulsion</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>orbital_energies</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>coefficients</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>density</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>n_iterations</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a>)</p></li>
+<li><p><strong>converged</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>)</p></li>
+<li><p><strong>energy_history</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.quantum.SCFResult.coefficients">
+<span class="sig-name descname"><span class="pre">coefficients</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.quantum.SCFResult.coefficients" title="Link to this definition">#</a></dt>
+<dd><p>MO coefficients as columns (<span class="math notranslate nohighlight">\(C^TSC=I\)</span>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (n_basis, n_basis)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.quantum.SCFResult.converged">
+<span class="sig-name descname"><span class="pre">converged</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#chemistrykit.quantum.SCFResult.converged" title="Link to this definition">#</a></dt>
+<dd><p>Whether the density converged within the tolerance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.quantum.SCFResult.density">
+<span class="sig-name descname"><span class="pre">density</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.quantum.SCFResult.density" title="Link to this definition">#</a></dt>
+<dd><p>Converged density matrix <span class="math notranslate nohighlight">\(P=2\sum_a^{occ}C_{\mu a}C_{\nu a}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (n_basis, n_basis)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.quantum.SCFResult.electronic_energy">
+<span class="sig-name descname"><span class="pre">electronic_energy</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.quantum.SCFResult.electronic_energy" title="Link to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(\frac12\sum_{\mu\nu}P_{\nu\mu}(H_{\mu\nu}+F_{\mu\nu})\)</span>, in J.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.quantum.SCFResult.energy_history">
+<span class="sig-name descname"><span class="pre">energy_history</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.quantum.SCFResult.energy_history" title="Link to this definition">#</a></dt>
+<dd><p>Total energy after each iteration, in J.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (<a class="reference internal" href="#chemistrykit.quantum.SCFResult.n_iterations" title="chemistrykit.quantum.SCFResult.n_iterations">n_iterations</a>,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.quantum.SCFResult.n_iterations">
+<span class="sig-name descname"><span class="pre">n_iterations</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#chemistrykit.quantum.SCFResult.n_iterations" title="Link to this definition">#</a></dt>
+<dd><p>SCF iterations performed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.quantum.SCFResult.nuclear_repulsion">
+<span class="sig-name descname"><span class="pre">nuclear_repulsion</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.quantum.SCFResult.nuclear_repulsion" title="Link to this definition">#</a></dt>
+<dd><p>Nucleus-nucleus Coulomb repulsion, in J.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.quantum.SCFResult.orbital_energies">
+<span class="sig-name descname"><span class="pre">orbital_energies</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.quantum.SCFResult.orbital_energies" title="Link to this definition">#</a></dt>
+<dd><p>Canonical MO energies, ascending, in J.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (n_basis,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.quantum.SCFResult.total_energy">
+<span class="sig-name descname"><span class="pre">total_energy</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.quantum.SCFResult.total_energy" title="Link to this definition">#</a></dt>
+<dd><p>Electronic energy + nuclear repulsion, in J.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -2564,12 +2844,35 @@ relative to the naive (ordinary) eigenvalue problem:</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.QuantumSystem.energy"><code class="docutils literal notranslate"><span class="pre">QuantumSystem.energy()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.RestrictedHartreeFock"><code class="docutils literal notranslate"><span class="pre">RestrictedHartreeFock</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.RestrictedHartreeFock.basis"><code class="docutils literal notranslate"><span class="pre">RestrictedHartreeFock.basis</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.RestrictedHartreeFock.core_hamiltonian"><code class="docutils literal notranslate"><span class="pre">RestrictedHartreeFock.core_hamiltonian()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.RestrictedHartreeFock.h2"><code class="docutils literal notranslate"><span class="pre">RestrictedHartreeFock.h2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.RestrictedHartreeFock.heh_plus"><code class="docutils literal notranslate"><span class="pre">RestrictedHartreeFock.heh_plus()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.RestrictedHartreeFock.nuclear_repulsion"><code class="docutils literal notranslate"><span class="pre">RestrictedHartreeFock.nuclear_repulsion</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.RestrictedHartreeFock.overlap_matrix"><code class="docutils literal notranslate"><span class="pre">RestrictedHartreeFock.overlap_matrix()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.RestrictedHartreeFock.scf"><code class="docutils literal notranslate"><span class="pre">RestrictedHartreeFock.scf()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.RestrictedHartreeFock.two_electron_integrals"><code class="docutils literal notranslate"><span class="pre">RestrictedHartreeFock.two_electron_integrals()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.RigidRotor"><code class="docutils literal notranslate"><span class="pre">RigidRotor</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.RigidRotor.degeneracy"><code class="docutils literal notranslate"><span class="pre">RigidRotor.degeneracy()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.RigidRotor.energy"><code class="docutils literal notranslate"><span class="pre">RigidRotor.energy()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.RigidRotor.from_diatomic"><code class="docutils literal notranslate"><span class="pre">RigidRotor.from_diatomic()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.RigidRotor.rotational_constant"><code class="docutils literal notranslate"><span class="pre">RigidRotor.rotational_constant</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.RigidRotor.transition_energy"><code class="docutils literal notranslate"><span class="pre">RigidRotor.transition_energy()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.SCFResult"><code class="docutils literal notranslate"><span class="pre">SCFResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.SCFResult.coefficients"><code class="docutils literal notranslate"><span class="pre">SCFResult.coefficients</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.SCFResult.converged"><code class="docutils literal notranslate"><span class="pre">SCFResult.converged</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.SCFResult.density"><code class="docutils literal notranslate"><span class="pre">SCFResult.density</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.SCFResult.electronic_energy"><code class="docutils literal notranslate"><span class="pre">SCFResult.electronic_energy</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.SCFResult.energy_history"><code class="docutils literal notranslate"><span class="pre">SCFResult.energy_history</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.SCFResult.n_iterations"><code class="docutils literal notranslate"><span class="pre">SCFResult.n_iterations</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.SCFResult.nuclear_repulsion"><code class="docutils literal notranslate"><span class="pre">SCFResult.nuclear_repulsion</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.SCFResult.orbital_energies"><code class="docutils literal notranslate"><span class="pre">SCFResult.orbital_energies</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.SCFResult.total_energy"><code class="docutils literal notranslate"><span class="pre">SCFResult.total_energy</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.quantum.VariationalSolver"><code class="docutils literal notranslate"><span class="pre">VariationalSolver</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">

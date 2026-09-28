@@ -486,8 +486,9 @@ implementation in this package at each stop.</p>
 <li><p><a class="reference internal" href="#debye-and-huckel-the-limiting-law-of-ionic-activity" id="id12">1923 – Debye and Huckel: The Limiting Law of Ionic Activity</a></p></li>
 <li><p><a class="reference internal" href="#guntelberg-s-extended-activity-coefficient-approximation" id="id13">1926 – Guntelberg’s Extended Activity-Coefficient Approximation</a></p></li>
 <li><p><a class="reference internal" href="#davies-s-empirical-activity-coefficient-equation" id="id14">1938 – Davies’s Empirical Activity-Coefficient Equation</a></p></li>
-<li><p><a class="reference internal" href="#gran-s-linearized-titration-plot" id="id15">1950 – 1952 – Gran’s Linearized Titration Plot</a></p></li>
-<li><p><a class="reference internal" href="#see-also" id="id16">See Also</a></p></li>
+<li><p><a class="reference internal" href="#jannik-bjerrum-s-stepwise-formation-constants" id="id15">1941 – Jannik Bjerrum’s Stepwise Formation Constants</a></p></li>
+<li><p><a class="reference internal" href="#gran-s-linearized-titration-plot" id="id16">1950 – 1952 – Gran’s Linearized Titration Plot</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id17">See Also</a></p></li>
 </ul>
 </nav>
 <section id="gay-lussac-mohr-and-the-birth-of-volumetric-titration">
@@ -957,8 +958,38 @@ Association</em> (London: Butterworths, 1962).</p>
 <p><a class="reference internal" href="../api/gallery/solutions/activity/plot_03_davies_equation.html"><span class="doc">The Davies equation: activity coefficients that turn back up</span></a></p>
   <div class="sphx-glr-thumbnail-title">The Davies equation: activity coefficients that turn back up</div>
 </div></div></section>
+<section id="jannik-bjerrum-s-stepwise-formation-constants">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">1941 – Jannik Bjerrum’s Stepwise Formation Constants</a><a class="headerlink" href="#jannik-bjerrum-s-stepwise-formation-constants" title="Link to this heading">#</a></h2>
+<p>Metal ions in water pick up ligands one at a time. Before Jannik Bjerrum
+(son of Niels Bjerrum, whose 1914 species diagrams appear above), complex
+formation was usually described by a single overall constant for the
+“final” complex. In his 1941 thesis on metal ammines Bjerrum showed that
+the intermediate complexes <span class="math notranslate nohighlight">\(ML, ML_2, \dots\)</span> are all present in
+comparable amounts, each governed by its own stepwise constant
+<span class="math notranslate nohighlight">\(K_n\)</span>. He also showed that the whole set can be measured. The
+<em>formation function</em> <span class="math notranslate nohighlight">\(\bar n\)</span>, the average number of ligands bound
+per metal, depends only on the free-ligand concentration, and it can be
+obtained from a pH or potential measurement. Where <span class="math notranslate nohighlight">\(\bar n = n -
+\tfrac12\)</span>, <span class="math notranslate nohighlight">\(\log K_n \approx -\log[L]\)</span>. His method, and the
+compilations of stability constants it produced, underpin coordination
+chemistry’s quantitative side: complexometric titration, metal
+speciation in natural waters, and chelation.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/solutions.html#chemistrykit.solutions.complex_fractions" title="chemistrykit.solutions.complex_fractions"><code class="xref py py-func docutils literal notranslate"><span class="pre">complex_fractions()</span></code></a> and
+<a class="reference internal" href="../api/solutions.html#chemistrykit.solutions.average_ligand_number" title="chemistrykit.solutions.average_ligand_number"><code class="xref py py-func docutils literal notranslate"><span class="pre">average_ligand_number()</span></code></a> give the species
+fractions and Bjerrum’s formation function from cumulative constants,
+and <a class="reference internal" href="../api/solutions.html#chemistrykit.solutions.solve_complexation" title="chemistrykit.solutions.solve_complexation"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve_complexation()</span></code></a> solves the ligand
+mass balance for speciation from total concentrations. The example draws
+the Cu(II)-ammonia distribution diagram and recovers the stepwise
+constants with Bjerrum’s half-<span class="math notranslate nohighlight">\(\bar n\)</span> rule.</p>
+<p><em>References:</em> J. Bjerrum, <em>Metal Ammine Formation in Aqueous Solution:
+Theory of the Reversible Step Reactions</em> (Copenhagen: P. Haase and Son,
+1941).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Copper(II) binds ammonia one ligand at a time, Cu(NH_3)_{n-1}^{2+} + NH_3 \rightleftharpoons Cu(NH_3)_n^{2+}, with stepwise constants K_1 &gt; K_2 &gt; K_3 &gt; K_4. Bjerrum showed that the whole ladder follows from the free-ligand concentration alone. The fractions \alpha_n (~chemistrykit.solutions.complex_fractions) and the mean number of bound ligands \bar n (~chemistrykit.solutions.average_ligand_number, Bjerrum&#x27;s formation function) are functions of p[NH_3] only. His &quot;half-\bar n&quot; rule runs the logic backwards: where \bar n = n - \tfrac12, p[NH_3] \approx \log K_n, so the constants can be read off a measured formation curve. The stepwise constants below are of the size Bjerrum measured for Cu(II)-ammonia."><img alt="" src="../_images/sphx_glr_plot_01_bjerrum_metal_ammine_formation_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/solutions/complexation/plot_01_bjerrum_metal_ammine_formation.html"><span class="doc">Jannik Bjerrum’s stepwise metal-ammine formation</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Jannik Bjerrum's stepwise metal-ammine formation</div>
+</div></div></section>
 <section id="gran-s-linearized-titration-plot">
-<h2><a class="toc-backref" href="#id15" role="doc-backlink">1950 – 1952 – Gran’s Linearized Titration Plot</a><a class="headerlink" href="#gran-s-linearized-titration-plot" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">1950 – 1952 – Gran’s Linearized Titration Plot</a><a class="headerlink" href="#gran-s-linearized-titration-plot" title="Link to this heading">#</a></h2>
 <p>Locating an equivalence point as the steepest point of a titration curve
 requires dense, accurate readings exactly where the pH changes fastest
 and is hardest to measure. The Swedish chemist Gunnar Gran showed in
@@ -989,7 +1020,7 @@ titrations. Part II,” Analyst 77, 661-671 (1952).</p>
   <div class="sphx-glr-thumbnail-title">Gran's plot: finding the equivalence point by linear extrapolation</div>
 </div></div></section>
 <section id="see-also">
-<h2><a class="toc-backref" href="#id16" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../api/solutions.html"><span class="doc">chemistrykit.solutions</span></a></p></li>
 <li><p><a class="reference internal" href="md_breakthroughs.html"><span class="doc">Breakthroughs in Molecular Dynamics</span></a></p></li>
@@ -1058,6 +1089,7 @@ titrations. Part II,” Analyst 77, 661-671 (1952).</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debye-and-huckel-the-limiting-law-of-ionic-activity">1923 – Debye and Huckel: The Limiting Law of Ionic Activity</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#guntelberg-s-extended-activity-coefficient-approximation">1926 – Guntelberg’s Extended Activity-Coefficient Approximation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#davies-s-empirical-activity-coefficient-equation">1938 – Davies’s Empirical Activity-Coefficient Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jannik-bjerrum-s-stepwise-formation-constants">1941 – Jannik Bjerrum’s Stepwise Formation Constants</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gran-s-linearized-titration-plot">1950 – 1952 – Gran’s Linearized Titration Plot</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
 </ul>

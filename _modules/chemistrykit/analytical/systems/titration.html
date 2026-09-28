@@ -584,15 +584,18 @@
 
 <span class="sd">    Mass balance on total metal :math:`C_M` and total EDTA added</span>
 <span class="sd">    :math:`C_Y` (both diluted by the growing total volume), with</span>
-<span class="sd">    :math:`x=[MY]`, :math:`[M]=C_M-x`, :math:`[Y]=C_Y-x`, and</span>
-<span class="sd">    :math:`K_f'=x/[(C_M-x)(C_Y-x)]`, gives the exact quadratic</span>
+<span class="sd">    :math:`m=[M]`, :math:`[MY]=C_M-m`, :math:`[Y]=C_Y-C_M+m`, and</span>
+<span class="sd">    :math:`K_f'=[MY]/([M][Y])`, gives the exact quadratic</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        K_f'x^2-\left[K_f'(C_M+C_Y)+1\right]x+K_f'C_MC_Y=0</span>
+<span class="sd">        K_f'm^2+\left[K_f'(C_Y-C_M)+1\right]m-C_M=0</span>
 
-<span class="sd">    solved here in closed form for the physical root :math:`0\le x\le</span>
-<span class="sd">    \min(C_M,C_Y)`, then :math:`pM=-\log_{10}[M]`.</span>
+<span class="sd">    solved here in closed form for its single positive root, then</span>
+<span class="sd">    :math:`pM=-\log_{10}[M]`. Solving for :math:`[M]` directly (rather</span>
+<span class="sd">    than for :math:`[MY]` and subtracting it from :math:`C_M`) avoids</span>
+<span class="sd">    catastrophic cancellation at and past equivalence, where</span>
+<span class="sd">    :math:`[M]\ll C_M` for realistically large :math:`K_f'`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -645,16 +648,12 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_free_metal_concentration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">C_M</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">C_Y</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="n">K</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">K_conditional</span>
-        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">K</span><span class="p">,</span> <span class="o">-</span><span class="p">(</span><span class="n">K</span> <span class="o">*</span> <span class="p">(</span><span class="n">C_M</span> <span class="o">+</span> <span class="n">C_Y</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">K</span> <span class="o">*</span> <span class="n">C_M</span> <span class="o">*</span> <span class="n">C_Y</span>
-        <span class="n">disc</span> <span class="o">=</span> <span class="n">b</span> <span class="o">*</span> <span class="n">b</span> <span class="o">-</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">c</span>
-        <span class="n">sqrt_disc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">disc</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
-        <span class="n">x_minus</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">-</span> <span class="n">sqrt_disc</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
-        <span class="n">x_plus</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">+</span> <span class="n">sqrt_disc</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
-        <span class="n">x_max</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">C_M</span><span class="p">,</span> <span class="n">C_Y</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="n">x_minus</span><span class="p">,</span> <span class="n">x_plus</span><span class="p">):</span>
-            <span class="k">if</span> <span class="o">-</span><span class="mf">1e-15</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">x_max</span> <span class="o">+</span> <span class="mf">1e-15</span><span class="p">:</span>
-                <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">C_M</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="mf">1e-300</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"no physical root found for the M/Y mass-action quadratic"</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span><span class="n">C_Y</span> <span class="o">-</span> <span class="n">C_M</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.0</span>
+        <span class="n">sqrt_disc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="n">b</span> <span class="o">+</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">K</span> <span class="o">*</span> <span class="n">C_M</span><span class="p">)</span>
+        <span class="c1"># Pick the cancellation-free form of the positive root for each sign of b.</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">C_M</span> <span class="o">/</span> <span class="p">(</span><span class="n">b</span> <span class="o">+</span> <span class="n">sqrt_disc</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">sqrt_disc</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">K</span><span class="p">)</span>
 
 <div class="viewcode-block" id="EDTATitration.response_at">
 <a class="viewcode-back" href="../../../../api/analytical.html#chemistrykit.analytical.EDTATitration.response_at">[docs]</a>

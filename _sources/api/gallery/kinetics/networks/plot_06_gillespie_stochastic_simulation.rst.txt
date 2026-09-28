@@ -71,7 +71,7 @@ noisy, and the average over many runs recovers the deterministic curve.
     rng = np.random.default_rng(1976)
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
-    for ax, N in zip(axes, (20, 2000)):
+    for ax, N in zip(axes, (20, 2000), strict=True):
         _, B_det, _ = consecutive_analytic(1.0, c1, c2, t_grid)
         runs = []
         for i in range(100):
@@ -93,7 +93,7 @@ noisy, and the average over many runs recovers the deterministic curve.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.671 seconds)
+   **Total running time of the script:** (0 minutes 1.634 seconds)
 
 
 .. _sphx_glr_download_api_gallery_kinetics_networks_plot_06_gillespie_stochastic_simulation.py:

@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.thermo.systems.phase_equilibria</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""Clausius-Clapeyron phase boundaries and the Gibbs phase rule.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Clausius-Clapeyron and Antoine vapor-pressure curves, and the Gibbs phase rule.</span>
 
 <span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 4 ("Physical</span>
 <span class="sd">transformations of pure substances") for both topics.</span>
@@ -424,7 +424,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">R</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"ClausiusClapeyron"</span><span class="p">,</span> <span class="s2">"gibbs_phase_rule"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"ClausiusClapeyron"</span><span class="p">,</span> <span class="s2">"AntoineEquation"</span><span class="p">,</span> <span class="s2">"gibbs_phase_rule"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="ClausiusClapeyron">
@@ -563,6 +563,80 @@
 <span class="sd">        """</span>
         <span class="n">delta_h_vap</span> <span class="o">=</span> <span class="o">-</span><span class="n">R</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">P2</span> <span class="o">/</span> <span class="n">P1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">T2</span> <span class="o">-</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">T1</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">delta_h_vap</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">delta_h_vap</span><span class="p">),</span> <span class="n">T_ref</span><span class="o">=</span><span class="n">T1</span><span class="p">,</span> <span class="n">P_ref</span><span class="o">=</span><span class="n">P1</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="AntoineEquation">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.AntoineEquation">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AntoineEquation</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The Antoine vapor-pressure equation, :math:`\log_{10}P = A - B/(C+T)`.</span>
+
+<span class="sd">    An empirical three-parameter refinement of the integrated</span>
+<span class="sd">    Clausius-Clapeyron equation (which it reduces to at :math:`C=0`) that</span>
+<span class="sd">    absorbs most of the temperature dependence of</span>
+<span class="sd">    :math:`\Delta H_{vap}` (C. Antoine, *C. R. Acad. Sci.* 107, 681</span>
+<span class="sd">    (1888); Poling, Prausnitz &amp; O'Connell, *The Properties of Gases and</span>
+<span class="sd">    Liquids*, 5th ed., Ch. 7-3). Constants are only valid over the</span>
+<span class="sd">    temperature range they were fitted on, and their units vary between</span>
+<span class="sd">    tables: NIST WebBook gives :math:`P` in bar and :math:`T` in K, many</span>
+<span class="sd">    older tables mmHg and degC. :meth:`pressure` and :meth:`temperature`</span>
+<span class="sd">    use whatever units the constants imply.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A, B, C : float</span>
+<span class="sd">        Antoine constants.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Water, NIST WebBook constants for 344-373 K (P in bar, T in K), at the</span>
+<span class="sd">    normal boiling point:</span>
+
+<span class="sd">    &gt;&gt;&gt; water = AntoineEquation(A=5.08354, B=1663.125, C=-45.622)</span>
+<span class="sd">    &gt;&gt;&gt; round(float(water.pressure(373.15)), 3)</span>
+<span class="sd">    1.013</span>
+<span class="sd">    &gt;&gt;&gt; round(float(water.temperature(1.01325)), 1)</span>
+<span class="sd">    373.1</span>
+<span class="sd">    """</span>
+
+    <span class="n">A</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">B</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">C</span><span class="p">:</span> <span class="nb">float</span>
+
+<div class="viewcode-block" id="AntoineEquation.pressure">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.AntoineEquation.pressure">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Vapor pressure at temperature(s) `T`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        T : float or array-like of float</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float or ndarray</span>
+<span class="sd">        """</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mf">10.0</span> <span class="o">**</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">+</span> <span class="n">T</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="AntoineEquation.temperature">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.AntoineEquation.temperature">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Boiling temperature at pressure(s) `P` (the inverse of :meth:`pressure`).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        P : float or array-like of float</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float or ndarray</span>
+<span class="sd">        """</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">P</span><span class="p">))</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">C</span></div>
 </div>
 
 

@@ -452,7 +452,7 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.integrators</span><span class="w"> </span><span class="kn">import</span> <span class="n">dopri5_integrate</span><span class="p">,</span> <span class="n">rk4_integrate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.integrators</span><span class="w"> </span><span class="kn">import</span> <span class="n">RHSFunc</span><span class="p">,</span> <span class="n">dopri5_integrate</span><span class="p">,</span> <span class="n">rk4_integrate</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"KineticsResult"</span><span class="p">,</span> <span class="s2">"RateLaw"</span><span class="p">,</span> <span class="s2">"ReactionNetwork"</span><span class="p">]</span>
 
@@ -593,7 +593,7 @@
 <span class="sd">    """</span>
 
     <span class="n">species</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">()</span>
-    <span class="n">_rhs_njit</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_rhs_njit</span><span class="p">:</span> <span class="n">RHSFunc</span>  <span class="c1"># set by each concrete subclass's __init__</span>
     <span class="n">params</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state0</span><span class="p">):</span>

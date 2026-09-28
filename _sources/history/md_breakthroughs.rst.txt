@@ -644,6 +644,36 @@ external bath," J. Chem. Phys. 81, 3684-3690 (1984).
 
 .. minigallery:: ../../examples/md/thermostats/plot_02_berendsen_weak_coupling.py
 
+1996 -- Humphrey, Dalke, and Schulten: VMD and the Visual Analysis of Trajectories
+--------------------------------------------------------------------------------------
+
+A molecular-dynamics run produces millions of coordinates, and much of
+what is learned from it is learned by looking. William Humphrey, Andrew
+Dalke and Klaus Schulten's VMD (Visual Molecular Dynamics) made
+interactive viewing and scripted analysis of whole trajectories routine
+for biomolecular and materials simulations alike. It read the output of
+every major MD package and rendered millions of atoms. Viewers of this
+kind, including OVITO (Stukowski, 2010) for materials, standardized on
+a few interchange formats. The simplest is the plain-text XYZ file: an
+atom count, a comment line and one ``symbol x y z`` line per atom,
+repeated per frame. The *extended* XYZ convention stores the periodic
+cell and other metadata as ``key=value`` pairs on that comment line.
+
+*Implementation:* :func:`~chemistrykit.md.write_xyz` writes positions or
+an entire :class:`~chemistrykit.md.MDResult` as multi-frame (extended)
+XYZ, scaling reduced or SI lengths to the angstroms viewers expect, and
+:func:`~chemistrykit.md.read_xyz` reads it back. The example writes a
+liquid-argon trajectory, prints the file header, and analyzes frames
+read back from the file.
+
+*References:* W. Humphrey, A. Dalke, and K. Schulten, "VMD: Visual
+Molecular Dynamics," J. Mol. Graphics 14, 33-38 (1996); A. Stukowski,
+"Visualization and Analysis of Atomistic Simulation Data with OVITO--the
+Open Visualization Tool," Modelling Simul. Mater. Sci. Eng. 18, 015012
+(2010).
+
+.. minigallery:: ../../examples/md/trajectory_io/plot_01_vmd_xyz_trajectory.py
+
 2007 -- Bussi, Donadio, and Parrinello: Stochastic Velocity Rescaling
 --------------------------------------------------------------------------
 

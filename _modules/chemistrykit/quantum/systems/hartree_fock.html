@@ -410,7 +410,15 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.quantum.systems.hartree_fock</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""A minimal variational (Hartree-Fock-style) LCAO treatment of H2+ in a 2-Gaussian basis.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Restricted Hartree-Fock SCF for closed-shell molecules, and a variational H2+ warm-up.</span>
+
+<span class="sd">:class:`RestrictedHartreeFock` is the self-consistent-field (SCF)</span>
+<span class="sd">Roothaan-Hall procedure of Szabo &amp; Ostlund, *Modern Quantum Chemistry*,</span>
+<span class="sd">1st ed. rev., Ch. 3.4-3.5, for closed-shell molecules in a basis of</span>
+<span class="sd">contracted s-type Gaussians (e.g. STO-3G 1s on H2 and HeH+,</span>
+<span class="sd">:meth:`RestrictedHartreeFock.h2` and :meth:`RestrictedHartreeFock.heh_plus`).</span>
+<span class="sd">:class:`H2PlusVariational`, below, is the one-electron special case with</span>
+<span class="sd">no electron-electron repulsion and hence no SCF loop:</span>
 
 <span class="sd">The simplest possible molecule with a real two-center chemical bond,</span>
 <span class="sd">H2+ (one electron, two protons), is exactly solvable in confocal</span>
@@ -452,10 +460,20 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">ELEMENTARY_CHARGE</span><span class="p">,</span> <span class="n">VACUUM_PERMITTIVITY</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.quantum.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">EigenstateResult</span><span class="p">,</span> <span class="n">VariationalSolver</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.quantum.utils.basis_sets</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianPrimitive</span><span class="p">,</span> <span class="n">kinetic_integral</span><span class="p">,</span> <span class="n">nuclear_attraction_integral</span><span class="p">,</span> <span class="n">overlap_integral</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.quantum.utils.basis_sets</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">BOHR_RADIUS</span><span class="p">,</span>
+    <span class="n">ContractedGaussian</span><span class="p">,</span>
+    <span class="n">GaussianPrimitive</span><span class="p">,</span>
+    <span class="n">contracted_electron_repulsion</span><span class="p">,</span>
+    <span class="n">contracted_one_electron</span><span class="p">,</span>
+    <span class="n">kinetic_integral</span><span class="p">,</span>
+    <span class="n">nuclear_attraction_integral</span><span class="p">,</span>
+    <span class="n">overlap_integral</span><span class="p">,</span>
+    <span class="n">sto3g_1s</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.quantum.utils.secular_equation</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_secular_equation</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"H2PlusVariational"</span><span class="p">,</span> <span class="s2">"ExponentOptimizationResult"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"H2PlusVariational"</span><span class="p">,</span> <span class="s2">"ExponentOptimizationResult"</span><span class="p">,</span> <span class="s2">"RestrictedHartreeFock"</span><span class="p">,</span> <span class="s2">"SCFResult"</span><span class="p">]</span>
 
 <span class="c1">#: Coulomb's-law energy scale e^2/(4*pi*epsilon_0), in J*m (proton-proton</span>
 <span class="c1">#: nuclear repulsion is Z_A*Z_B*this / R, with Z_A=Z_B=1).</span>
@@ -672,6 +690,259 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">improvement</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""float: How much lower the optimized energy is than the naive guess's, in J (&gt;= 0 by the variational theorem)."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">naive_energy</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimized_energy</span></div>
+
+
+
+<div class="viewcode-block" id="SCFResult">
+<a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.SCFResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SCFResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Result of :meth:`RestrictedHartreeFock.scf`."""</span>
+
+    <span class="n">total_energy</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">"""float: Electronic energy + nuclear repulsion, in J."""</span>
+
+    <span class="n">electronic_energy</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">"""float: :math:`\\frac12\\sum_{\\mu\\nu}P_{\\nu\\mu}(H_{\\mu\\nu}+F_{\\mu\\nu})`, in J."""</span>
+
+    <span class="n">nuclear_repulsion</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">"""float: Nucleus-nucleus Coulomb repulsion, in J."""</span>
+
+    <span class="n">orbital_energies</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (n_basis,): Canonical MO energies, ascending, in J."""</span>
+
+    <span class="n">coefficients</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (n_basis, n_basis): MO coefficients as columns (:math:`C^TSC=I`)."""</span>
+
+    <span class="n">density</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (n_basis, n_basis): Converged density matrix :math:`P=2\\sum_a^{occ}C_{\\mu a}C_{\\nu a}`."""</span>
+
+    <span class="n">n_iterations</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">"""int: SCF iterations performed."""</span>
+
+    <span class="n">converged</span><span class="p">:</span> <span class="nb">bool</span>
+<span class="w">    </span><span class="sd">"""bool: Whether the density converged within the tolerance."""</span>
+
+    <span class="n">energy_history</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sd">"""ndarray, shape (n_iterations,): Total energy after each iteration, in J."""</span></div>
+
+
+
+<div class="viewcode-block" id="RestrictedHartreeFock">
+<a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.RestrictedHartreeFock">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RestrictedHartreeFock</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Closed-shell restricted Hartree-Fock (RHF) by the Roothaan-Hall SCF procedure.</span>
+
+<span class="sd">    Each doubly occupied spatial orbital is a linear combination of basis</span>
+<span class="sd">    functions, :math:`\psi_a=\sum_\mu C_{\mu a}\phi_\mu`, with coefficients</span>
+<span class="sd">    solving the Roothaan-Hall equations :math:`FC=SC\varepsilon` (C. C. J.</span>
+<span class="sd">    Roothaan, *Rev. Mod. Phys.* 23, 69 (1951); G. G. Hall, *Proc. R. Soc.</span>
+<span class="sd">    Lond. A* 205, 541 (1951)). The Fock matrix</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        F_{\mu\nu} = H^{core}_{\mu\nu} + \sum_{\lambda\sigma}P_{\lambda\sigma}</span>
+<span class="sd">            \left[(\mu\nu|\sigma\lambda) - \tfrac12(\mu\lambda|\sigma\nu)\right]</span>
+
+<span class="sd">    depends on the density :math:`P` built from its own solution, so the</span>
+<span class="sd">    equations are iterated to self-consistency from a core-Hamiltonian</span>
+<span class="sd">    (:math:`P=0`) guess (Szabo &amp; Ostlund, *Modern Quantum Chemistry*, 1st</span>
+<span class="sd">    ed. rev., Ch. 3.4.6). Each step reuses</span>
+<span class="sd">    :func:`chemistrykit.quantum.utils.secular_equation.solve_secular_equation`</span>
+<span class="sd">    for :math:`FC=SC\varepsilon`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    basis : sequence of ContractedGaussian</span>
+<span class="sd">        s-type basis functions.</span>
+<span class="sd">    nuclei : sequence of (float, array-like)</span>
+<span class="sd">        ``(Z, center)`` for each nucleus; centers in m.</span>
+<span class="sd">    n_electrons : int</span>
+<span class="sd">        Total electron count; must be even (closed shell).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    H2 at 1.4 bohr in STO-3G reproduces Szabo &amp; Ostlund's -1.117 hartree:</span>
+
+<span class="sd">    &gt;&gt;&gt; from chemistrykit.quantum.systems.helium import HARTREE_ENERGY</span>
+<span class="sd">    &gt;&gt;&gt; result = RestrictedHartreeFock.h2().scf()</span>
+<span class="sd">    &gt;&gt;&gt; round(result.total_energy / HARTREE_ENERGY, 4)</span>
+<span class="sd">    -1.1167</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basis</span><span class="p">,</span> <span class="n">nuclei</span><span class="p">,</span> <span class="n">n_electrons</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n_electrons</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n_electrons</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"RHF needs a positive, even number of electrons"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n_electrons</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">basis</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"basis too small for the number of occupied orbitals"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ContractedGaussian</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">basis</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nuclei</span> <span class="o">=</span> <span class="p">[(</span><span class="nb">float</span><span class="p">(</span><span class="n">Z</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span> <span class="k">for</span> <span class="n">Z</span><span class="p">,</span> <span class="n">center</span> <span class="ow">in</span> <span class="n">nuclei</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_electrons</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_electrons</span><span class="p">)</span>
+
+<div class="viewcode-block" id="RestrictedHartreeFock.h2">
+<a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.RestrictedHartreeFock.h2">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">h2</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">bond_length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.4</span> <span class="o">*</span> <span class="n">BOHR_RADIUS</span><span class="p">,</span> <span class="n">zeta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.24</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RestrictedHartreeFock</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""H2 in the STO-3G minimal basis (Szabo &amp; Ostlund, Ch. 3.5.2).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        bond_length : float, default 1.4 bohr</span>
+<span class="sd">            H-H distance, in m.</span>
+<span class="sd">        zeta : float, default 1.24</span>
+<span class="sd">            Slater exponent of each H 1s function.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        RestrictedHartreeFock</span>
+<span class="sd">        """</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">bond_length</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">([</span><span class="n">sto3g_1s</span><span class="p">(</span><span class="n">zeta</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="n">sto3g_1s</span><span class="p">(</span><span class="n">zeta</span><span class="p">,</span> <span class="n">b</span><span class="p">)],</span> <span class="p">[(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">b</span><span class="p">)],</span> <span class="n">n_electrons</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RestrictedHartreeFock.heh_plus">
+<a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.RestrictedHartreeFock.heh_plus">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">heh_plus</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">bond_length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.4632</span> <span class="o">*</span> <span class="n">BOHR_RADIUS</span><span class="p">,</span> <span class="n">zeta_he</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0925</span><span class="p">,</span> <span class="n">zeta_h</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.24</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RestrictedHartreeFock</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""HeH+ in the STO-3G minimal basis (Szabo &amp; Ostlund, Ch. 3.5.3 and Appendix B).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        bond_length : float, default 1.4632 bohr</span>
+<span class="sd">            He-H distance, in m.</span>
+<span class="sd">        zeta_he, zeta_h : float</span>
+<span class="sd">            Slater exponents of the He and H 1s functions.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        RestrictedHartreeFock</span>
+<span class="sd">        """</span>
+        <span class="n">he</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">bond_length</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">([</span><span class="n">sto3g_1s</span><span class="p">(</span><span class="n">zeta_he</span><span class="p">,</span> <span class="n">he</span><span class="p">),</span> <span class="n">sto3g_1s</span><span class="p">(</span><span class="n">zeta_h</span><span class="p">,</span> <span class="n">h</span><span class="p">)],</span> <span class="p">[(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">he</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">h</span><span class="p">)],</span> <span class="n">n_electrons</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">nuclear_repulsion</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""float: :math:`\\sum_{A&lt;B}Z_AZ_Be^2/(4\\pi\\varepsilon_0R_{AB})`, in J."""</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">Za</span><span class="p">,</span> <span class="n">Ra</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nuclei</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">Zb</span><span class="p">,</span> <span class="n">Rb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nuclei</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:]:</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="n">Za</span> <span class="o">*</span> <span class="n">Zb</span> <span class="o">*</span> <span class="n">_COULOMB_CONSTANT</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">Ra</span> <span class="o">-</span> <span class="n">Rb</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">total</span>
+
+<div class="viewcode-block" id="RestrictedHartreeFock.overlap_matrix">
+<a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.RestrictedHartreeFock.overlap_matrix">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">overlap_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Overlap matrix :math:`S_{\\mu\\nu}`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ndarray, shape (n_basis, n_basis)</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_one_electron_matrix</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">contracted_one_electron</span><span class="p">(</span><span class="n">overlap_integral</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="RestrictedHartreeFock.core_hamiltonian">
+<a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.RestrictedHartreeFock.core_hamiltonian">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">core_hamiltonian</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Core Hamiltonian :math:`H^{core}=T+\\sum_AV_A` (kinetic + nuclear attraction), in J.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ndarray, shape (n_basis, n_basis)</span>
+<span class="sd">        """</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">element</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="n">contracted_one_electron</span><span class="p">(</span><span class="n">kinetic_integral</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">Z</span><span class="p">,</span> <span class="n">center</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nuclei</span><span class="p">:</span>
+                <span class="n">h</span> <span class="o">+=</span> <span class="n">contracted_one_electron</span><span class="p">(</span><span class="n">nuclear_attraction_integral</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">center</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">h</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_one_electron_matrix</span><span class="p">(</span><span class="n">element</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RestrictedHartreeFock.two_electron_integrals">
+<a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.RestrictedHartreeFock.two_electron_integrals">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">two_electron_integrals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""All two-electron integrals :math:`(\\mu\\nu|\\lambda\\sigma)` (chemists' notation), in J.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ndarray, shape (n_basis, n_basis, n_basis, n_basis)</span>
+<span class="sd">        """</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">)</span>
+        <span class="n">eri</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">i</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">l</span><span class="p">:</span>
+                            <span class="k">continue</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="n">contracted_electron_repulsion</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">l</span><span class="p">])</span>
+                        <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">),</span> <span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">),</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">k</span><span class="p">)):</span>
+                            <span class="n">eri</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">eri</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">eri</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_one_electron_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">)</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">M</span>
+
+<div class="viewcode-block" id="RestrictedHartreeFock.scf">
+<a class="viewcode-back" href="../../../../api/quantum.html#chemistrykit.quantum.RestrictedHartreeFock.scf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SCFResult</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Iterate the Roothaan-Hall equations to self-consistency.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        max_iter : int, default 100</span>
+<span class="sd">        tol : float, default 1e-10</span>
+<span class="sd">            Convergence threshold on the largest change of any density</span>
+<span class="sd">            matrix element between iterations (dimensionless).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        SCFResult</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">max_iter</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"max_iter must be at least 1"</span><span class="p">)</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">overlap_matrix</span><span class="p">()</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">core_hamiltonian</span><span class="p">()</span>
+        <span class="n">eri</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">two_electron_integrals</span><span class="p">()</span>
+        <span class="n">E_nuc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nuclear_repulsion</span>
+        <span class="n">n_occ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_electrons</span> <span class="o">//</span> <span class="mi">2</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">fock</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">H</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"mnls,sl-&gt;mn"</span><span class="p">,</span> <span class="n">eri</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"mlsn,sl-&gt;mn"</span><span class="p">,</span> <span class="n">eri</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
+
+        <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+        <span class="n">history</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">converged</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
+            <span class="n">eps</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">solve_secular_equation</span><span class="p">(</span><span class="n">fock</span><span class="p">(</span><span class="n">P</span><span class="p">),</span> <span class="n">S</span><span class="p">)</span>
+            <span class="n">P_new</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">C</span><span class="p">[:,</span> <span class="p">:</span><span class="n">n_occ</span><span class="p">]</span> <span class="o">@</span> <span class="n">C</span><span class="p">[:,</span> <span class="p">:</span><span class="n">n_occ</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+            <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">P_new</span> <span class="o">*</span> <span class="p">(</span><span class="n">H</span> <span class="o">+</span> <span class="n">fock</span><span class="p">(</span><span class="n">P_new</span><span class="p">))))</span> <span class="o">+</span> <span class="n">E_nuc</span><span class="p">)</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">P_new</span> <span class="o">-</span> <span class="n">P</span><span class="p">)))</span>
+            <span class="n">P</span> <span class="o">=</span> <span class="n">P_new</span>
+            <span class="k">if</span> <span class="n">delta</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+                <span class="n">converged</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">break</span>
+        <span class="k">return</span> <span class="n">SCFResult</span><span class="p">(</span>
+            <span class="n">total_energy</span><span class="o">=</span><span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">electronic_energy</span><span class="o">=</span><span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">E_nuc</span><span class="p">,</span>
+            <span class="n">nuclear_repulsion</span><span class="o">=</span><span class="n">E_nuc</span><span class="p">,</span>
+            <span class="n">orbital_energies</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span>
+            <span class="n">coefficients</span><span class="o">=</span><span class="n">C</span><span class="p">,</span>
+            <span class="n">density</span><span class="o">=</span><span class="n">P</span><span class="p">,</span>
+            <span class="n">n_iterations</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">history</span><span class="p">),</span>
+            <span class="n">converged</span><span class="o">=</span><span class="n">converged</span><span class="p">,</span>
+            <span class="n">energy_history</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">history</span><span class="p">),</span>
+        <span class="p">)</span></div>
+</div>
 
 </pre></div>
 

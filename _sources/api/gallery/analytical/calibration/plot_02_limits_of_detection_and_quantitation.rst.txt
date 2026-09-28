@@ -99,7 +99,7 @@ residual standard deviations above the fitted blank (the intercept):
 .. code-block:: Python
 
     fig, axes = plt.subplots(1, 2, figsize=(11, 4))
-    for ax, (noise, (signal, cal)) in zip(axes, calibrations.items()):
+    for ax, (noise, (signal, cal)) in zip(axes, calibrations.items(), strict=True):
         plot_calibration_curve(concentration, signal, calibration=cal, lod=cal.lod(), ax=ax)
         ax.axvline(cal.loq(), color="darkorange", linestyle=":", label=f"LOQ = {cal.loq():.2f} ppm")
         ax.set_title(f"noise sigma = {noise}: LOD = {cal.lod():.2f} ppm")
@@ -121,7 +121,7 @@ residual standard deviations above the fitted blank (the intercept):
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.085 seconds)
+   **Total running time of the script:** (0 minutes 0.080 seconds)
 
 
 .. _sphx_glr_download_api_gallery_analytical_calibration_plot_02_limits_of_detection_and_quantitation.py:

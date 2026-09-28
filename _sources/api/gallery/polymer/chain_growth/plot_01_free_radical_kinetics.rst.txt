@@ -66,8 +66,8 @@ consumed only slowly, at the classic square-root-of-initiator rate.
  .. code-block:: none
 
     SSA radical concentration:        7.0711e-08
-    Numerically integrated R(t=50):    7.0702e-08
-    Relative difference: 0.01%
+    Numerically integrated R(t=50):    7.0693e-08
+    Relative difference: 0.02%
 
 
 
@@ -84,7 +84,7 @@ of free-radical (vs. e.g. ionic) chain polymerization.
     I_values = np.array([0.0025, 0.01, 0.04, 0.16])
     Rp_values = steady_state_rate_of_polymerization(kd, f, kp, kt, I=I_values, M=M0)
     print("\n[I]      Rp           Rp/sqrt([I])")
-    for I_val, Rp in zip(I_values, Rp_values):
+    for I_val, Rp in zip(I_values, Rp_values, strict=True):
         print(f"{I_val:<8} {Rp:<12.4e} {Rp / np.sqrt(I_val):.4e}")
 
 
@@ -136,7 +136,7 @@ of free-radical (vs. e.g. ionic) chain polymerization.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.355 seconds)
+   **Total running time of the script:** (0 minutes 0.336 seconds)
 
 
 .. _sphx_glr_download_api_gallery_polymer_chain_growth_plot_01_free_radical_kinetics.py:

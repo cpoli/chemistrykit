@@ -436,7 +436,10 @@
 <span class="sd">    Integrated law: :math:`[A](t) = [A]_0 - kt`, valid only while</span>
 <span class="sd">    :math:`[A](t) \geq 0` -- physically, the reaction stops (or crosses</span>
 <span class="sd">    over to a different rate law) once the reactant is exhausted, at</span>
-<span class="sd">    :math:`t = [A]_0 / k`.</span>
+<span class="sd">    :math:`t = [A]_0 / k`. :meth:`concentration` and :meth:`rate` model</span>
+<span class="sd">    that stop: past the exhaustion time the concentration stays at 0 and</span>
+<span class="sd">    the rate drops to 0, rather than extrapolating the line to negative</span>
+<span class="sd">    concentrations.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -452,6 +455,8 @@
 <span class="sd">    0.5</span>
 <span class="sd">    &gt;&gt;&gt; round(law.half_life(), 6)</span>
 <span class="sd">    5.0</span>
+<span class="sd">    &gt;&gt;&gt; float(law.concentration(20.0))  # exhausted at t = C0/k = 10</span>
+<span class="sd">    0.0</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">C0</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
@@ -465,27 +470,41 @@
 <div class="viewcode-block" id="ZeroOrder.concentration">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.ZeroOrder.concentration">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">concentration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`\max([A]_0 - kt, 0)` at time(s) `t`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        t : float or array-like of float</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float or ndarray</span>
+<span class="sd">        """</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">C0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">*</span> <span class="n">t</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">C0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">*</span> <span class="n">t</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ZeroOrder.rate">
 <a class="viewcode-back" href="../../../../api/kinetics.html#chemistrykit.kinetics.ZeroOrder.rate">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Return the (constant) rate ``k``.</span>
+<span class="w">        </span><span class="sd">"""Return the rate: ``k`` until the reactant is exhausted, 0 after.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        t : float or array-like of float, optional</span>
-<span class="sd">            Unused (the rate does not depend on time or concentration for</span>
-<span class="sd">            a zero-order reaction); accepted for interface consistency</span>
-<span class="sd">            with :class:`FirstOrder`/:class:`SecondOrder`.</span>
+<span class="sd">            Time at which to evaluate the rate; defaults to 0 (the</span>
+<span class="sd">            initial rate ``k``). The rate does not depend on</span>
+<span class="sd">            concentration, only on whether any reactant remains, i.e.</span>
+<span class="sd">            whether ``t &lt; C0 / k``.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        float</span>
+<span class="sd">        float or ndarray</span>
 <span class="sd">        """</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span></div>
+        <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">t</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">C0</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ZeroOrder.half_life">

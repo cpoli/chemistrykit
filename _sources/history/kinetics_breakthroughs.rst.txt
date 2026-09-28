@@ -317,9 +317,8 @@ independently at almost the same time, in his 1921 Copenhagen doctoral
 thesis, so the scheme is sometimes credited jointly as the
 Lindemann-Christiansen mechanism.
 
-*Implementation:* while chemistrykit.kinetics has no dedicated
-activation/deactivation unimolecular-mechanism class, the steady-state
-logic Lindemann applied to :math:`A^*` is exactly what
+*Implementation:* the steady-state logic Lindemann applied to
+:math:`A^*` is exactly what
 :func:`~chemistrykit.kinetics.ssa_intermediate_concentration`
 demonstrates for the analogous two-step chain `A -> B -> C`: it
 computes the steady-state estimate :math:`[B]_{ssa} = (k_1/k_2)[A](t)`,
@@ -334,13 +333,21 @@ activation/deactivation/decomposition mechanism itself from the general
 :class:`~chemistrykit.kinetics.systems.networks.StoichiometricNetwork`
 engine and recovers his pressure fall-off curve, first order at high
 bath-gas concentration and second order at low.
+:class:`~chemistrykit.kinetics.LindemannHinshelwood` packages the
+mechanism's steady-state result, :math:`k_{uni}=k_1k_2[M]/(k_{-1}[M]+k_2)`,
+with its limits :math:`k_0` and :math:`k_\infty`, the falloff center
+:math:`[M]_{1/2}` and Lindemann's :math:`1/k_{uni}`-versus-:math:`1/[M]`
+linearization. The second example plots the falloff curve and checks it
+against direct integration of the full mechanism.
 
 *References:* M. Bodenstein, "Eine Theorie der photochemischen
 Reaktionsgeschwindigkeiten," Z. Phys. Chem. 85, 329-397 (1913); F. A.
 Lindemann, discussion remark in "Discussion on the Radiation Theory of
 Chemical Action," Trans. Faraday Soc. 17, 598-606 (1922).
 
-.. minigallery:: ../../examples/kinetics/networks/plot_01_steady_state_lindemann.py
+.. minigallery::
+   ../../examples/kinetics/networks/plot_01_steady_state_lindemann.py
+   ../../examples/kinetics/rate_theory/plot_04_lindemann_hinshelwood_falloff.py
 
 1916 -- 1918 -- Trautz, Lewis, and the Collision Theory of Reaction Rates
 ----------------------------------------------------------------------------
@@ -451,8 +458,8 @@ reactions," recognizing two largely independent -- theoretical and
 experimental -- routes to the same branching-chain picture.
 
 *Implementation:* :class:`chemistrykit.kinetics.systems.networks.StoichiometricNetwork`'s
-general mass-action engine, with no dedicated branching-chain class
-needed, reproduces Semenov's critical condition directly: the example
+general mass-action engine reproduces Semenov's critical condition
+directly: the first example
 below builds a three-step mechanism (initiation :math:`A \to 2R`,
 branching propagation :math:`A + R \to 2R + P`, and linear termination
 :math:`R \to P`) and integrates it twice, with the branching rate
@@ -460,7 +467,13 @@ constant set just below and just above the critical value at which
 branching overtakes termination -- reproducing, respectively, a radical
 population that stays small while the fuel decays gently, and one that
 grows explosively and burns through nearly all of the fuel in a short,
-sharp spike.
+sharp spike. :class:`~chemistrykit.kinetics.ChainBranchingExplosion`
+specializes the criterion to hydrogen-oxygen: branching by
+:math:`H + O_2 \to OH + O` against wall loss and three-body
+:math:`H + O_2 + M \to HO_2 + M`. Its net branching factor is a
+downward parabola in pressure whose two roots are the first and second
+explosion limits. The second example traces those limits across
+temperature into Hinshelwood's explosion peninsula.
 
 *References:* N. Semenoff, "Zur Theorie des Verbrennungsprozesses," Z.
 Phys. 48, 571-582 (1928); N. N. Semenov, *Chemical Kinetics and Chain
@@ -471,7 +484,9 @@ reported across several Proc. R. Soc. Lond. A papers in the late 1920s
 here; see Hinshelwood, *The Kinetics of Chemical Change* (Oxford:
 Clarendon Press, 1940), Ch. 4, for the synthesized account).
 
-.. minigallery:: ../../examples/kinetics/networks/plot_02_chain_branching.py
+.. minigallery::
+   ../../examples/kinetics/networks/plot_02_chain_branching.py
+   ../../examples/kinetics/explosions/plot_01_h2_o2_explosion_peninsula.py
 
 1934 -- Lineweaver and Burk's Double-Reciprocal Linearization
 -------------------------------------------------------------------

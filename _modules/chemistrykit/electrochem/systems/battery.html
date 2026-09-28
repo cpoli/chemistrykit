@@ -422,6 +422,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArrayLike</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.electrochem.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">BatteryDischargeModel</span>
 
@@ -430,7 +431,7 @@
 
 <div class="viewcode-block" id="peukert_discharge_time">
 <a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.peukert_discharge_time">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">peukert_discharge_time</span><span class="p">(</span><span class="n">capacity_peukert</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">current</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">peukert_discharge_time</span><span class="p">(</span><span class="n">capacity_peukert</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">current</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">"""Peukert's-law discharge time at constant current: :math:`t = C_p / I^k`.</span>
 
 <span class="sd">    :math:`C_p` (the "Peukert capacity", in :math:`A^k\cdot h`) and the</span>
@@ -485,7 +486,7 @@
 
 <div class="viewcode-block" id="effective_capacity">
 <a class="viewcode-back" href="../../../../api/electrochem.html#chemistrykit.electrochem.effective_capacity">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">effective_capacity</span><span class="p">(</span><span class="n">capacity_peukert</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">current</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">effective_capacity</span><span class="p">(</span><span class="n">capacity_peukert</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">current</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">"""Effective delivered capacity at a given discharge current: :math:`C_{eff}(I) = I\,t(I) = C_p I^{1-k}`.</span>
 
 <span class="sd">    At the ideal Peukert exponent :math:`k=1`, this is exactly</span>
@@ -589,7 +590,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
 <span class="sd">        """</span>
-        <span class="k">return</span> <span class="n">peukert_discharge_time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">capacity_peukert</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">peukert_discharge_time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">capacity_peukert</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="ConstantCurrentBattery.state_of_charge">

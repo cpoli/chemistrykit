@@ -379,6 +379,7 @@
 <li class="toctree-l2"><a class="reference internal" href="qtest/index.html">Outlier rejection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smoothing/index.html">Signal smoothing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="statistics/index.html">Statistics of replicate measurements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stoichiometry/index.html">Stoichiometry and elemental analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="titration/index.html">Titration curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="uncertainty/index.html">Propagation of uncertainty</a></li>
 </ul>
@@ -407,6 +408,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../kinetics/index.html">chemistrykit.kinetics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../kinetics/arrhenius/index.html">Arrhenius equation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../kinetics/enzyme/index.html">Enzyme kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kinetics/explosions/index.html">Branched-chain explosions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../kinetics/networks/index.html">Reaction networks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../kinetics/oscillators/index.html">Oscillating reactions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../kinetics/rate_laws/index.html">Rate laws</a></li>
@@ -419,6 +421,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../md/pair_potentials/index.html">Pair potentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../md/periodic_boundaries/index.html">Periodic boundaries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../md/thermostats/index.html">Thermostats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../md/trajectory_io/index.html">Trajectory files</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../photochem/index.html">chemistrykit.photochem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -444,7 +447,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../quantum/index.html">chemistrykit.quantum</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../quantum/harmonic_oscillator/index.html">Harmonic oscillator vs. Morse potential</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../quantum/hartree_fock/index.html">Minimal variational H2+ and the LCAO method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quantum/hartree_fock/index.html">Variational H2+, the LCAO method, and Hartree-Fock SCF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quantum/helium/index.html">Variational helium atom</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quantum/huckel/index.html">Huckel molecular-orbital theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quantum/hydrogenlike/index.html">Hydrogen-like atoms</a></li>
@@ -456,6 +459,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../solutions/index.html">chemistrykit.solutions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../solutions/acid_base/index.html">Acid-base equilibria</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../solutions/activity/index.html">Activity coefficients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../solutions/complexation/index.html">Complexation equilibria</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../solutions/solubility/index.html">Solubility equilibria</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../solutions/titration/index.html">Titration curves</a></li>
 </ul>
@@ -485,6 +489,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../structure/dipole/index.html">Dipole moments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../structure/kekule/index.html">Kekulé structures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../structure/lewis/index.html">Lewis structures, oxidation states, and electronegativity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../structure/periodic_table/index.html">The periodic table</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../structure/point_group/index.html">Point-group determination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../structure/ring_strain/index.html">Ring strain</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../structure/vsepr/index.html">VSEPR geometry prediction</a></li>
@@ -579,7 +584,8 @@ gallery); chromatographic plate theory, the van Deemter equation,
 retention indices, and resolution; linear-regression calibration curves
 with limits of detection/quantitation; propagation of uncertainty;
 Dixon’s and Grubbs’ outlier tests; Student’s t intervals and the Horwitz
-function; and Savitzky-Golay smoothing.</p>
+function; Savitzky-Golay smoothing; and stoichiometry and elemental
+analysis (equation balancing, limiting reagents, empirical formulas).</p>
 <p>Each script in this gallery is self-contained and can be run directly
 with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">examples/analytical/&lt;section&gt;/&lt;script&gt;.py</span></code>. Every script
 also carries an RST module docstring as its title/description and uses
@@ -604,6 +610,9 @@ outlier from a small data set.</p></li>
 <li><p><strong>statistics</strong> – Student’s t confidence intervals and the Horwitz
 interlaboratory-precision function.</p></li>
 <li><p><strong>smoothing</strong> – Savitzky-Golay smoothing and differentiation.</p></li>
+<li><p><strong>stoichiometry</strong> – Richter’s stoichiometry (balancing equations,
+equivalents, limiting reagents) and Liebig’s combustion analysis
+(empirical formulas).</p></li>
 </ul>
 <div id='sg-tag-list' class='sphx-glr-tag-list'></div><div class="sphx-glr-thumbnails"></div></section>
 <section id="calibration-curves">
@@ -669,6 +678,17 @@ Horwitz function for expected interlaboratory precision.</p>
 </div><div class="sphx-glr-thumbcontainer" tooltip="horwitz_rsd gives Horwitz&#x27;s empirical expected between-laboratory RSD, 2^{1-0.5\log_{10}C}, which doubles for every 100-fold drop in concentration. Plotted as \pm\text{RSD} against concentration it opens like a trumpet. horrat scores a method&#x27;s observed RSD against it."><img alt="" src="../../../_images/sphx_glr_plot_02_horwitz_trumpet_thumb.png" />
 <p><a class="reference internal" href="statistics/plot_02_horwitz_trumpet.html"><span class="doc">The Horwitz trumpet: interlaboratory precision vs. concentration</span></a></p>
   <div class="sphx-glr-thumbnail-title">The Horwitz trumpet: interlaboratory precision vs. concentration</div>
+</div></div></section>
+<section id="stoichiometry-and-elemental-analysis">
+<h2>Stoichiometry and elemental analysis<a class="headerlink" href="#stoichiometry-and-elemental-analysis" title="Link to this heading">#</a></h2>
+<p>Balancing chemical equations, limiting reagents and yields, and
+empirical formulas from combustion-analysis data.</p>
+<div id='sg-tag-list' class='sphx-glr-tag-list'></div><div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Jeremias Richter, who coined the word stoichiometry, tabulated how many parts by weight of each base neutralize a fixed weight of an acid, and found the proportions were fixed and mutually consistent. Today those numbers follow from a balanced equation and molar masses. balance_equation finds the smallest integer coefficients that conserve every element (and charge) as the exact null space of the composition matrix. Left: Richter-style neutralization equivalents, the grams of each base that neutralize 1000 g of sulfuric acid. Right: product yield as the N2:H2 feed ratio varies. It rises while H2 is limiting and falls once N2 is, with the kink at the stoichiometric 1:3 ratio (~chemistrykit.stoichiometry.limiting_reagent)."><img alt="" src="../../../_images/sphx_glr_plot_01_richter_stoichiometry_thumb.png" />
+<p><a class="reference internal" href="stoichiometry/plot_01_richter_stoichiometry.html"><span class="doc">Richter’s stoichiometry: equivalent weights, balanced equations, limiting reagents</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Richter's stoichiometry: equivalent weights, balanced equations, limiting reagents</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Justus von Liebig&#x27;s Kaliapparat made organic elemental analysis routine. The sample is burned in oxygen over hot copper oxide, the water is caught in calcium chloride, the CO2 in potash bulbs, and both are weighed. Carbon and hydrogen follow from those two masses, oxygen by difference. Below, a 10.00 mg sample of ascorbic acid (vitamin C) is &quot;burned&quot;. Its mass percentages go to empirical_formula, which converts to moles, divides by the smallest, and searches for the smallest multiplier that gives whole numbers. Here that gives C3H4O3, and a molar mass of about 176 g/mol then fixes the molecular formula as C6H8O6. The right panel shows why the multiplier search is needed: the raw mole ratios are 1 : 1.33 : 1, which become whole only after multiplying by 3."><img alt="" src="../../../_images/sphx_glr_plot_02_liebig_combustion_analysis_thumb.png" />
+<p><a class="reference internal" href="stoichiometry/plot_02_liebig_combustion_analysis.html"><span class="doc">Liebig’s combustion analysis: an empirical formula from CO2 and H2O masses</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Liebig's combustion analysis: an empirical formula from CO2 and H2O masses</div>
 </div></div></section>
 <section id="titration-curves">
 <h2>Titration curves<a class="headerlink" href="#titration-curves" title="Link to this heading">#</a></h2>
@@ -750,6 +770,7 @@ powers, cross-checked against a general numerical implementation.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outlier-rejection">Outlier rejection</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-smoothing">Signal smoothing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistics-of-replicate-measurements">Statistics of replicate measurements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stoichiometry-and-elemental-analysis">Stoichiometry and elemental analysis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#titration-curves">Titration curves</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propagation-of-uncertainty">Propagation of uncertainty</a></li>
 </ul>

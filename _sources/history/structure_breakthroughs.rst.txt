@@ -69,6 +69,38 @@ Theory of Benzenoid Hydrocarbons* (Springer, Berlin, 1989).
 
 .. minigallery:: ../../examples/structure/kekule/plot_01_kekule_structures.py
 
+1869 -- Mendeleev's Periodic Table
+--------------------------------------
+
+Dmitri Mendeleev arranged the 63 elements then known in order of atomic
+weight and found that their properties (valence, the formulas of their
+oxides and hydrides, their metallic character) recur periodically. He
+trusted the periodicity more than the weights. He left gaps for elements
+not yet discovered and predicted the properties of three of them
+(gallium, scandium and germanium, all found within 17 years). He also
+put tellurium before iodine despite its larger atomic weight, because
+iodine plainly belonged with the halogens. The weight order was not
+wrong by accident. In 1913 Henry Moseley's X-ray spectra showed that the
+true ordering quantity is the nuclear charge, the atomic number
+:math:`Z`, and the "inversions" (Ar/K, Co/Ni, Te/I) are simply places
+where isotopic composition makes a lower-:math:`Z` element heavier.
+
+*Implementation:* :data:`chemistrykit.periodic_table.PERIODIC_TABLE`
+holds all 118 elements with their standard atomic weights,
+:func:`~chemistrykit.periodic_table.parse_formula` and
+:func:`~chemistrykit.periodic_table.molar_mass` turn formulas into
+masses, and :data:`~chemistrykit.periodic_table.PAULING_ELECTRONEGATIVITY`
+carries one of the periodic properties. The example finds every
+atomic-weight inversion against :math:`Z` and plots electronegativity's
+periodic rise and fall.
+
+*References:* D. Mendelejeff, "Über die Beziehungen der Eigenschaften zu
+den Atomgewichten der Elemente," Z. Chem. 12, 405-406 (1869); H. G. J.
+Moseley, "The High-Frequency Spectra of the Elements," Philos. Mag. 26,
+1024-1034 (1913).
+
+.. minigallery:: ../../examples/structure/periodic_table/plot_01_mendeleev_periodic_table.py
+
 1874 -- Van't Hoff and Le Bel's Tetrahedral Carbon
 ------------------------------------------------------
 

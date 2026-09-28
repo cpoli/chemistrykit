@@ -531,20 +531,21 @@
 <span class="sd">    well-characterized, purely instrumental effect (Skoog, Holler &amp;</span>
 <span class="sd">    Crouch, *Principles of Instrumental Analysis*, 7th ed., Ch. 13.4).</span>
 
-<span class="sd">    A small fraction :math:`p_s` of the light reaching the detector is</span>
-<span class="sd">    "stray" radiation that never actually passed through the fully</span>
-<span class="sd">    absorbing sample path (e.g. light scattered around the sample cell),</span>
-<span class="sd">    so it is *not* attenuated by the sample the way the main beam is.</span>
-<span class="sd">    The detector reads the combined transmitted-plus-stray intensity, so</span>
+<span class="sd">    A small stray-light intensity :math:`P_s=p_sP_0` reaches the detector</span>
+<span class="sd">    without passing through the fully absorbing sample path (e.g. light</span>
+<span class="sd">    scattered around the sample cell), so it is *not* attenuated by the</span>
+<span class="sd">    sample the way the main beam is. It adds to both the sample reading</span>
+<span class="sd">    :math:`P+P_s` and the blank (reference) reading :math:`P_0+P_s`, so</span>
 <span class="sd">    the apparent absorbance is</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        A_{\text{apparent}} = -\log_{10}\!\left(10^{-A_{\text{true}}} + p_s\right)</span>
+<span class="sd">        A_{\text{apparent}} = \log_{10}\frac{P_0+P_s}{P+P_s}</span>
+<span class="sd">        = -\log_{10}\!\left(\frac{10^{-A_{\text{true}}} + p_s}{1+p_s}\right)</span>
 
-<span class="sd">    (normalized so that at `stray_light_fraction=0`, or in the dilute</span>
-<span class="sd">    limit :math:`A_{\text{true}}\to0`, this reduces exactly to the true</span>
-<span class="sd">    Beer-Lambert absorbance). Because the stray-light term does not</span>
+<span class="sd">    which reduces exactly to the true Beer-Lambert absorbance at</span>
+<span class="sd">    `stray_light_fraction=0`, and reads zero for a blank</span>
+<span class="sd">    (:math:`A_{\text{true}}=0`) at any stray-light level. Because the stray-light term does not</span>
 <span class="sd">    shrink as the sample absorbs more strongly, it dominates the</span>
 <span class="sd">    detector reading at high true absorbance, causing the classic</span>
 <span class="sd">    *negative* (sublinear, "rolling over") deviation from Beer-Lambert</span>
@@ -594,7 +595,7 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">0.0</span> <span class="o">&lt;=</span> <span class="n">stray_light_fraction</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"stray_light_fraction must be in [0, 1)"</span><span class="p">)</span>
     <span class="n">true_absorbance</span> <span class="o">=</span> <span class="n">absorbance</span><span class="p">(</span><span class="n">molar_absorptivity</span><span class="p">,</span> <span class="n">concentration</span><span class="p">,</span> <span class="n">path_length</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mf">10.0</span><span class="o">**-</span><span class="n">true_absorbance</span> <span class="o">+</span> <span class="n">stray_light_fraction</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">((</span><span class="mf">10.0</span><span class="o">**-</span><span class="n">true_absorbance</span> <span class="o">+</span> <span class="n">stray_light_fraction</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">stray_light_fraction</span><span class="p">)))</span></div>
 
 </pre></div>
 

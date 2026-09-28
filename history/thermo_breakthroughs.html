@@ -485,12 +485,16 @@ pointer to the corresponding implementation at each stop.</p>
 <li><p><a class="reference internal" href="#le-chatelier-s-principle" id="id8">1884 – Le Chatelier’s Principle</a></p></li>
 <li><p><a class="reference internal" href="#van-t-hoff-s-osmotic-pressure-law-and-the-modern-theory-of-solutions" id="id9">1886 – van’t Hoff’s Osmotic Pressure Law and the Modern Theory of Solutions</a></p></li>
 <li><p><a class="reference internal" href="#raoult-s-law-of-vapor-pressure" id="id10">1887 – Raoult’s Law of Vapor Pressure</a></p></li>
-<li><p><a class="reference internal" href="#margules-s-activity-coefficients-for-non-ideal-solutions" id="id11">1895 – Margules’s Activity Coefficients for Non-Ideal Solutions</a></p></li>
-<li><p><a class="reference internal" href="#lewis-s-fugacity" id="id12">1901 – Lewis’s Fugacity</a></p></li>
-<li><p><a class="reference internal" href="#nernst-s-heat-theorem-and-the-third-law" id="id13">1906 – Nernst’s Heat Theorem and the Third Law</a></p></li>
-<li><p><a class="reference internal" href="#redlich-and-kwong-s-equation-of-state" id="id14">1949 – Redlich and Kwong’s Equation of State</a></p></li>
-<li><p><a class="reference internal" href="#peng-and-robinson-s-equation-of-state" id="id15">1976 – Peng and Robinson’s Equation of State</a></p></li>
-<li><p><a class="reference internal" href="#see-also" id="id16">See Also</a></p></li>
+<li><p><a class="reference internal" href="#antoine-s-vapor-pressure-equation" id="id11">1888 – Antoine’s Vapor-Pressure Equation</a></p></li>
+<li><p><a class="reference internal" href="#margules-s-activity-coefficients-for-non-ideal-solutions" id="id12">1895 – Margules’s Activity Coefficients for Non-Ideal Solutions</a></p></li>
+<li><p><a class="reference internal" href="#lewis-s-fugacity" id="id13">1901 – Lewis’s Fugacity</a></p></li>
+<li><p><a class="reference internal" href="#nernst-s-heat-theorem-and-the-third-law" id="id14">1906 – Nernst’s Heat Theorem and the Third Law</a></p></li>
+<li><p><a class="reference internal" href="#redlich-and-kwong-s-equation-of-state" id="id15">1949 – Redlich and Kwong’s Equation of State</a></p></li>
+<li><p><a class="reference internal" href="#wilson-s-local-composition-model" id="id16">1964 – Wilson’s Local-Composition Model</a></p></li>
+<li><p><a class="reference internal" href="#renon-and-prausnitz-s-non-random-two-liquid-model" id="id17">1968 – Renon and Prausnitz’s Non-Random Two-Liquid Model</a></p></li>
+<li><p><a class="reference internal" href="#abrams-and-prausnitz-s-uniquac" id="id18">1975 – Abrams and Prausnitz’s UNIQUAC</a></p></li>
+<li><p><a class="reference internal" href="#peng-and-robinson-s-equation-of-state" id="id19">1976 – Peng and Robinson’s Equation of State</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id20">See Also</a></p></li>
 </ul>
 </nav>
 <section id="henry-s-law-of-gas-solubility">
@@ -900,8 +904,38 @@ dissolvants,” C. R. Acad. Sci. 104, 1430-1433 (1887).</p>
 <p><a class="reference internal" href="../api/gallery/thermo/mixtures/plot_01_raoult_law_pxy.html"><span class="doc">Raoult’s law and the P-x-y diagram of an ideal solution</span></a></p>
   <div class="sphx-glr-thumbnail-title">Raoult's law and the P-x-y diagram of an ideal solution</div>
 </div></div></section>
+<section id="antoine-s-vapor-pressure-equation">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">1888 – Antoine’s Vapor-Pressure Equation</a><a class="headerlink" href="#antoine-s-vapor-pressure-equation" title="Link to this heading">#</a></h2>
+<p>The Clausius-Clapeyron equation predicts that <span class="math notranslate nohighlight">\(\ln P\)</span> is a straight
+line in <span class="math notranslate nohighlight">\(1/T\)</span>, but only because it assumes a constant enthalpy of
+vaporization. Precise measurements showed a slight, systematic curvature:
+<span class="math notranslate nohighlight">\(\Delta H_{vap}\)</span> shrinks steadily as a liquid heats toward its
+critical point. Louis Charles Antoine, an engineer working on steam, found
+that shifting the temperature scale by one fitted constant absorbs almost
+all of that curvature over a practical range:</p>
+<div class="math notranslate nohighlight">
+\[\log_{10}P = A - \frac{B}{C + T}\]</div>
+<p>With <span class="math notranslate nohighlight">\(C = 0\)</span> it reduces exactly to integrated Clausius-Clapeyron,
+so the third constant is a correction rather than a new theory. That
+modesty is why it lasted. More than a century later Antoine constants
+are still the standard way vapor pressures are tabulated (in the NIST
+Chemistry WebBook, in process-simulation databases, and in every
+distillation calculation), each set valid only over the temperature
+window it was fitted on.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/thermo.html#chemistrykit.thermo.AntoineEquation" title="chemistrykit.thermo.AntoineEquation"><code class="xref py py-class docutils literal notranslate"><span class="pre">AntoineEquation</span></code></a> evaluates
+the equation and its closed-form inverse (the boiling temperature at a
+given pressure) in whatever units its constants were tabulated in. The
+example compares it with Clausius-Clapeyron against steam-table data for
+water, showing the third constant removing the curvature error.</p>
+<p><em>References:</em> C. Antoine, “Tensions des vapeurs; nouvelle relation entre
+les tensions et les températures,” C. R. Acad. Sci. 107, 681-684,
+778-780, 836-837 (1888).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="The integrated Clausius-Clapeyron equation assumes a constant enthalpy of vaporization, so \ln P is exactly linear in 1/T. Real vapor-pressure curves bend slightly, because \Delta H_{vap} shrinks as the temperature rises toward the critical point. Antoine&#x27;s three-constant equation (~chemistrykit.thermo.AntoineEquation), \log_{10}P = A - B/(C+T), absorbs that curvature in the single extra constant C. Below, both are compared with steam-table values for water. The Antoine curve uses the NIST constants for 344-373 K."><img alt="" src="../_images/sphx_glr_plot_03_antoine_vapor_pressure_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/thermo/phase_equilibria/plot_03_antoine_vapor_pressure.html"><span class="doc">Antoine’s equation: vapor pressure beyond Clausius-Clapeyron</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Antoine's equation: vapor pressure beyond Clausius-Clapeyron</div>
+</div></div></section>
 <section id="margules-s-activity-coefficients-for-non-ideal-solutions">
-<h2><a class="toc-backref" href="#id11" role="doc-backlink">1895 – Margules’s Activity Coefficients for Non-Ideal Solutions</a><a class="headerlink" href="#margules-s-activity-coefficients-for-non-ideal-solutions" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">1895 – Margules’s Activity Coefficients for Non-Ideal Solutions</a><a class="headerlink" href="#margules-s-activity-coefficients-for-non-ideal-solutions" title="Link to this heading">#</a></h2>
 <p>Raoult’s law (1887, above) describes an ideal mixture, but most real
 liquid mixtures deviate from it – sometimes so strongly that the vapor
 and liquid have the same composition at some point (an azeotrope), which
@@ -939,7 +973,7 @@ Math.-Naturwiss. Kl., Abt. IIa, 104, 1243-1278 (1895).</p>
   <div class="sphx-glr-thumbnail-title">Margules activity coefficients: deviations from Raoult's law</div>
 </div></div></section>
 <section id="lewis-s-fugacity">
-<h2><a class="toc-backref" href="#id12" role="doc-backlink">1901 – Lewis’s Fugacity</a><a class="headerlink" href="#lewis-s-fugacity" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">1901 – Lewis’s Fugacity</a><a class="headerlink" href="#lewis-s-fugacity" title="Link to this heading">#</a></h2>
 <p>Gibbs’s chemical potential (1876, above) has a simple form only for
 ideal gases: <span class="math notranslate nohighlight">\(\mu = \mu^\circ + RT\ln(P/P^\circ)\)</span>. Gilbert Newton
 Lewis kept that simple form for every real substance by defining a new
@@ -976,7 +1010,7 @@ McGraw-Hill, 1923).</p>
   <div class="sphx-glr-thumbnail-title">Lewis fugacity: the effective pressure of a real gas</div>
 </div></div></section>
 <section id="nernst-s-heat-theorem-and-the-third-law">
-<h2><a class="toc-backref" href="#id13" role="doc-backlink">1906 – Nernst’s Heat Theorem and the Third Law</a><a class="headerlink" href="#nernst-s-heat-theorem-and-the-third-law" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">1906 – Nernst’s Heat Theorem and the Third Law</a><a class="headerlink" href="#nernst-s-heat-theorem-and-the-third-law" title="Link to this heading">#</a></h2>
 <p>Walther Nernst, investigating why calculated chemical affinities from
 purely thermal (calorimetric) measurements kept disagreeing with directly
 measured equilibrium constants at low temperature, proposed his “heat
@@ -1016,7 +1050,7 @@ aus thermischen Messungen,” Nachr. Ges. Wiss. Göttingen, Math.-Phys. Kl.
   <div class="sphx-glr-thumbnail-title">Nernst's heat theorem: reaction entropy vanishes at absolute zero</div>
 </div></div></section>
 <section id="redlich-and-kwong-s-equation-of-state">
-<h2><a class="toc-backref" href="#id14" role="doc-backlink">1949 – Redlich and Kwong’s Equation of State</a><a class="headerlink" href="#redlich-and-kwong-s-equation-of-state" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">1949 – Redlich and Kwong’s Equation of State</a><a class="headerlink" href="#redlich-and-kwong-s-equation-of-state" title="Link to this heading">#</a></h2>
 <p>Otto Redlich and Joseph N. S. Kwong, seeking a cubic equation of state
 accurate enough for real chemical-engineering design work without the
 computational burden of a fully empirical multi-parameter fit, modified
@@ -1052,8 +1086,96 @@ Chem. Rev. 44, 233-244 (1949).</p>
 <p><a class="reference internal" href="../api/gallery/thermo/equations_of_state/plot_03_redlich_kwong.html"><span class="doc">Redlich-Kwong isotherms of CO2 against van der Waals and the ideal gas</span></a></p>
   <div class="sphx-glr-thumbnail-title">Redlich-Kwong isotherms of CO2 against van der Waals and the ideal gas</div>
 </div></div></section>
+<section id="wilson-s-local-composition-model">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">1964 – Wilson’s Local-Composition Model</a><a class="headerlink" href="#wilson-s-local-composition-model" title="Link to this heading">#</a></h2>
+<p>Margules’s and van Laar’s activity-coefficient expressions were
+empirical power series in the bulk composition. Grant Wilson argued
+that a molecule does not see the bulk. Its immediate neighbors are
+enriched in whichever species it attracts more strongly, in proportion
+to Boltzmann factors of the interaction energies. Writing the Flory-
+Huggins entropy of mixing in terms of these <em>local</em> volume fractions
+gave, with just two parameters per pair,</p>
+<div class="math notranslate nohighlight">
+\[\frac{G^E}{RT} = -x_1\ln(x_1+\Lambda_{12}x_2) - x_2\ln(x_2+\Lambda_{21}x_1),
+\qquad \Lambda_{12} = \frac{V_2}{V_1}e^{-\lambda_{12}/RT}.\]</div>
+<p>Wilson’s model fitted strongly non-ideal miscible mixtures (alcohols
+with hydrocarbons or water, the cases where Margules and van Laar
+struggled) far better, and because its parameters are energies it
+carries a built-in temperature dependence. It extends to multicomponent
+mixtures with binary parameters alone. It has one structural blind spot:
+it can never predict two liquid phases.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/thermo.html#chemistrykit.thermo.WilsonSolution" title="chemistrykit.thermo.WilsonSolution"><code class="xref py py-class docutils literal notranslate"><span class="pre">WilsonSolution</span></code></a>
+(with <a class="reference internal" href="../api/thermo.html#chemistrykit.thermo.WilsonSolution.from_energies" title="chemistrykit.thermo.WilsonSolution.from_energies"><code class="xref py py-meth docutils literal notranslate"><span class="pre">from_energies()</span></code></a> for the
+molar-volume and energy form) plugs into the shared modified-Raoult’s-law
+machinery of <a class="reference internal" href="../api/thermo.html#chemistrykit.thermo.BinaryActivityModel" title="chemistrykit.thermo.BinaryActivityModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryActivityModel</span></code></a>. The
+example builds the ethanol-water P-x-y diagram at 70 degC, with Antoine
+vapor pressures, and locates its azeotrope near 90 mol% ethanol.</p>
+<p><em>References:</em> G. M. Wilson, “Vapor-Liquid Equilibrium. XI. A New
+Expression for the Excess Free Energy of Mixing,” J. Am. Chem. Soc. 86,
+127-130 (1964).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Wilson&#x27;s 1964 model (~chemistrykit.thermo.WilsonSolution) assumes each molecule&#x27;s immediate neighborhood differs in composition from the bulk, weighted by Boltzmann factors of the interaction energies. With just two parameters it describes strongly non-ideal miscible mixtures. Below, at 70 degC, pure-component vapor pressures come from Antoine&#x27;s equation (NIST constants), and Wilson parameters of the size fitted to ethanol-water data give the familiar maximum-pressure azeotrope near 90 mol% ethanol. That azeotrope is why ordinary distillation cannot purify ethanol past about 95 wt%."><img alt="" src="../_images/sphx_glr_plot_05_wilson_local_composition_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/thermo/mixtures/plot_05_wilson_local_composition.html"><span class="doc">Wilson’s local-composition model: the ethanol-water azeotrope</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Wilson's local-composition model: the ethanol-water azeotrope</div>
+</div></div></section>
+<section id="renon-and-prausnitz-s-non-random-two-liquid-model">
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">1968 – Renon and Prausnitz’s Non-Random Two-Liquid Model</a><a class="headerlink" href="#renon-and-prausnitz-s-non-random-two-liquid-model" title="Link to this heading">#</a></h2>
+<p>Henri Renon and John Prausnitz kept Wilson’s local-composition idea but
+built it on Scott’s two-liquid picture of a mixture, with a separate
+cell around each kind of molecule. They added a third, <em>non-randomness</em>
+parameter <span class="math notranslate nohighlight">\(\alpha\)</span> that controls how strongly local composition
+departs from the bulk:</p>
+<div class="math notranslate nohighlight">
+\[\frac{G^E}{RT} = x_1x_2\left(\frac{\tau_{21}G_{21}}{x_1+x_2G_{21}}
++ \frac{\tau_{12}G_{12}}{x_2+x_1G_{12}}\right),
+\qquad G_{ij} = e^{-\alpha\tau_{ij}}.\]</div>
+<p>The extra flexibility removed Wilson’s blind spot. NRTL can make the
+Gibbs energy of mixing non-convex, so it describes partially miscible
+liquids and liquid-liquid equilibrium with the same parameters that
+describe vapor-liquid equilibrium. That made it a workhorse of
+process-design software for extraction and heterogeneous azeotropic
+distillation.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/thermo.html#chemistrykit.thermo.NRTLSolution" title="chemistrykit.thermo.NRTLSolution"><code class="xref py py-class docutils literal notranslate"><span class="pre">NRTLSolution</span></code></a>. The example
+shows its Gibbs energy of mixing developing two minima, locates the two
+coexisting liquid compositions by equating component activities, and
+contrasts a strongly non-ideal Wilson mixture that stays a single phase.</p>
+<p><em>References:</em> H. Renon and J. M. Prausnitz, “Local Compositions in
+Thermodynamic Excess Functions for Liquid Mixtures,” AIChE J. 14,
+135-144 (1968).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Wilson&#x27;s model cannot predict liquid-liquid immiscibility: its Gibbs energy of mixing stays convex whatever the parameters. Renon and Prausnitz&#x27;s non-random two-liquid model (~chemistrykit.thermo.NRTLSolution) adds a non-randomness parameter \alpha and can. When"><img alt="" src="../_images/sphx_glr_plot_06_nrtl_liquid_liquid_split_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/thermo/mixtures/plot_06_nrtl_liquid_liquid_split.html"><span class="doc">NRTL: a non-ideal liquid that splits into two phases</span></a></p>
+  <div class="sphx-glr-thumbnail-title">NRTL: a non-ideal liquid that splits into two phases</div>
+</div></div></section>
+<section id="abrams-and-prausnitz-s-uniquac">
+<h2><a class="toc-backref" href="#id18" role="doc-backlink">1975 – Abrams and Prausnitz’s UNIQUAC</a><a class="headerlink" href="#abrams-and-prausnitz-s-uniquac" title="Link to this heading">#</a></h2>
+<p>Denis Abrams and John Prausnitz derived a local-composition model from
+Guggenheim’s quasi-chemical lattice theory, now counting molecular
+<em>surface area</em> rather than just volume. The result splits every activity
+coefficient into two physically distinct pieces:</p>
+<div class="math notranslate nohighlight">
+\[\ln\gamma_i = \ln\gamma_i^{C} + \ln\gamma_i^{R}.\]</div>
+<p>The combinatorial part depends only on each molecule’s van der Waals
+volume <span class="math notranslate nohighlight">\(r\)</span> and area <span class="math notranslate nohighlight">\(q\)</span>, which are fixed by its structure and
+tabulated once. The residual part carries the interaction energies,
+with two parameters per pair. Separating size from energy gave better
+extrapolation to molecules of very different size, and it made UNIQUAC
+the parent of the UNIFAC group-contribution method (Fredenslund, Jones
+and Prausnitz, 1975). UNIFAC estimates the residual term from functional
+groups when no mixture data exist at all.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/thermo.html#chemistrykit.thermo.UNIQUACSolution" title="chemistrykit.thermo.UNIQUACSolution"><code class="xref py py-class docutils literal notranslate"><span class="pre">UNIQUACSolution</span></code></a> evaluates
+both parts for a binary with coordination number <span class="math notranslate nohighlight">\(z=10\)</span>. The
+example decomposes <span class="math notranslate nohighlight">\(\ln\gamma\)</span> for ethanol-water into its
+combinatorial and residual contributions using tabulated <span class="math notranslate nohighlight">\(r\)</span> and
+<span class="math notranslate nohighlight">\(q\)</span>.</p>
+<p><em>References:</em> D. S. Abrams and J. M. Prausnitz, “Statistical
+Thermodynamics of Liquid Mixtures: A New Expression for the Excess Gibbs
+Energy of Partly or Completely Miscible Systems,” AIChE J. 21, 116-128
+(1975).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Abrams and Prausnitz&#x27;s UNIQUAC model (~chemistrykit.thermo.UNIQUACSolution) writes \ln\gamma_i as the sum of two physically distinct parts. The combinatorial part depends only on each molecule&#x27;s van der Waals volume r and surface area q, and arises because big and small molecules pack differently. The residual part depends on the interaction energies. Below, for ethanol-water with tabulated r, q values, the two parts are plotted separately: the size mismatch alone contributes a small negative (Flory-Huggins-like) term, while the energetic part drives the large positive deviations."><img alt="" src="../_images/sphx_glr_plot_07_uniquac_combinatorial_residual_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/thermo/mixtures/plot_07_uniquac_combinatorial_residual.html"><span class="doc">UNIQUAC: separating molecular size from molecular energy</span></a></p>
+  <div class="sphx-glr-thumbnail-title">UNIQUAC: separating molecular size from molecular energy</div>
+</div></div></section>
 <section id="peng-and-robinson-s-equation-of-state">
-<h2><a class="toc-backref" href="#id15" role="doc-backlink">1976 – Peng and Robinson’s Equation of State</a><a class="headerlink" href="#peng-and-robinson-s-equation-of-state" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id19" role="doc-backlink">1976 – Peng and Robinson’s Equation of State</a><a class="headerlink" href="#peng-and-robinson-s-equation-of-state" title="Link to this heading">#</a></h2>
 <p>Redlich-Kwong (1949, above) and Giorgio Soave’s 1972 modification of it
 predicted gas-phase properties well but liquid densities poorly. Ding-Yu
 Peng and Donald B. Robinson, at the University of Alberta, changed the
@@ -1091,7 +1213,7 @@ J. Am. Chem. Soc. 77, 3433-3440 (1955).</p>
   <div class="sphx-glr-thumbnail-title">Peng-Robinson: vapor pressures from the acentric factor</div>
 </div></div></section>
 <section id="see-also">
-<h2><a class="toc-backref" href="#id16" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id20" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../api/thermo.html"><span class="doc">chemistrykit.thermo</span></a></p></li>
 <li><p><a class="reference internal" href="kinetics_breakthroughs.html"><span class="doc">Breakthroughs in Chemical Kinetics</span></a></p></li>
@@ -1156,10 +1278,14 @@ J. Am. Chem. Soc. 77, 3433-3440 (1955).</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#le-chatelier-s-principle">1884 – Le Chatelier’s Principle</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#van-t-hoff-s-osmotic-pressure-law-and-the-modern-theory-of-solutions">1886 – van’t Hoff’s Osmotic Pressure Law and the Modern Theory of Solutions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#raoult-s-law-of-vapor-pressure">1887 – Raoult’s Law of Vapor Pressure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#antoine-s-vapor-pressure-equation">1888 – Antoine’s Vapor-Pressure Equation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#margules-s-activity-coefficients-for-non-ideal-solutions">1895 – Margules’s Activity Coefficients for Non-Ideal Solutions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lewis-s-fugacity">1901 – Lewis’s Fugacity</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nernst-s-heat-theorem-and-the-third-law">1906 – Nernst’s Heat Theorem and the Third Law</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redlich-and-kwong-s-equation-of-state">1949 – Redlich and Kwong’s Equation of State</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wilson-s-local-composition-model">1964 – Wilson’s Local-Composition Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#renon-and-prausnitz-s-non-random-two-liquid-model">1968 – Renon and Prausnitz’s Non-Random Two-Liquid Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abrams-and-prausnitz-s-uniquac">1975 – Abrams and Prausnitz’s UNIQUAC</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#peng-and-robinson-s-equation-of-state">1976 – Peng and Robinson’s Equation of State</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
 </ul>

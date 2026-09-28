@@ -484,7 +484,7 @@
 <div class="viewcode-block" id="EquationOfState.molar_volume">
 <a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.EquationOfState.molar_volume">[docs]</a>
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">molar_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">molar_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">branch</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"vapor"</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Return the molar volume at pressure `P` and temperature `T`.</span>
 
 <span class="sd">        Parameters</span>
@@ -493,6 +493,9 @@
 <span class="sd">            Pressure, in Pa.</span>
 <span class="sd">        T : float</span>
 <span class="sd">            Absolute temperature, in K.</span>
+<span class="sd">        branch : {"vapor", "liquid"}, default "vapor"</span>
+<span class="sd">            Which root to return where a cubic equation of state has</span>
+<span class="sd">            three; ignored by equations of state with a single root.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -503,7 +506,7 @@
 
 <div class="viewcode-block" id="EquationOfState.compressibility_factor">
 <a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.EquationOfState.compressibility_factor">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">compressibility_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compressibility_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">branch</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"vapor"</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">"""Return the compressibility factor :math:`Z = PV_m/(RT)`.</span>
 
 <span class="sd">        :math:`Z = 1` exactly for an ideal gas; deviations from 1</span>
@@ -516,15 +519,14 @@
 <span class="sd">            Pressure, in Pa.</span>
 <span class="sd">        T : float</span>
 <span class="sd">            Absolute temperature, in K.</span>
-<span class="sd">        **kwargs</span>
-<span class="sd">            Forwarded to :meth:`molar_volume` (e.g. ``branch`` for a</span>
-<span class="sd">            cubic EOS).</span>
+<span class="sd">        branch : {"vapor", "liquid"}, default "vapor"</span>
+<span class="sd">            Forwarded to :meth:`molar_volume`.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
 <span class="sd">        """</span>
-        <span class="n">Vm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">molar_volume</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">Vm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">molar_volume</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="n">branch</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">P</span> <span class="o">*</span> <span class="n">Vm</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span></div>
 </div>
 

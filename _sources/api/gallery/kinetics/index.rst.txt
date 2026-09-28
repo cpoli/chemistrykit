@@ -6,6 +6,7 @@ Examples
 This gallery walks through every public feature of ``chemistrykit.kinetics``:
 closed-form integrated rate laws, the Arrhenius temperature dependence,
 collision, diffusion, and transition-state theories of the rate constant,
+Lindemann-Hinshelwood unimolecular falloff, branched-chain explosions,
 Michaelis-Menten enzyme kinetics, a general stoichiometric reaction-network
 engine with exact stochastic simulation, and chemical oscillators.
 
@@ -26,8 +27,8 @@ Sections
   and recovering the activation energy from synthetic rate-vs-temperature
   data via an Arrhenius plot.
 - **rate_theory** -- rate constants from molecular properties: collision
-  theory, Smoluchowski's diffusion limit, and Eyring's transition-state
-  theory.
+  theory, Smoluchowski's diffusion limit, Eyring's transition-state
+  theory, and Lindemann-Hinshelwood unimolecular falloff.
 - **enzyme** -- Michaelis-Menten enzyme kinetics, the Lineweaver-Burk
   linearization, competitive/noncompetitive inhibition, and the full
   substrate-depletion progress curve.
@@ -35,6 +36,8 @@ Sections
   the steady-state approximation and Lindemann fall-off, chain-branching
   explosions, Bateman's consecutive-reaction solution, Eigen's relaxation
   kinetics, parallel reactions, and Gillespie's stochastic simulation.
+- **explosions** -- Semenov's branching criterion and the first and
+  second explosion limits of hydrogen-oxygen.
 - **oscillators** -- the Brusselator limit cycle, Lotka's neutral
   oscillations, and the Oregonator model of the Belousov-Zhabotinsky
   reaction.
@@ -148,6 +151,47 @@ double-reciprocal linearization.
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Lineweaver and Burk's double-reciprocal plot</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+Branched-chain explosions
+-------------------------
+
+Semenov's branching-versus-termination criterion and the first and
+second explosion limits of hydrogen-oxygen mixtures.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In the H2/O2 chain the branching step H + O_2 \to OH + O (net two extra H atoms per event) competes with H loss at the vessel wall and with the three-body H + O_2 + M \to HO_2 + M. Semenov&#x27;s net branching factor (~chemistrykit.kinetics.ChainBranchingExplosion.branching_factor),">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/explosions/images/thumb/sphx_glr_plot_01_h2_o2_explosion_peninsula_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/explosions/plot_01_h2_o2_explosion_peninsula`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">The hydrogen-oxygen explosion peninsula</div>
     </div>
 
 
@@ -426,8 +470,9 @@ Rate theory
 -----------
 
 Predicting a rate constant from molecular properties: hard-sphere
-collision theory, Smoluchowski's diffusion-controlled encounter rate, and
-Eyring's transition-state theory.
+collision theory, Smoluchowski's diffusion-controlled encounter rate,
+Eyring's transition-state theory, and the Lindemann-Hinshelwood pressure
+falloff of unimolecular rate constants.
 
 
 .. raw:: html
@@ -492,6 +537,23 @@ Eyring's transition-state theory.
     </div>
 
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A unimolecular decomposition needs collisions to energize the molecule, so its first-order rate constant depends on pressure. LindemannHinshelwood gives the steady-state result k_{uni}=k_1k_2[M]/(k_{-1}[M]+k_2). It rises linearly at low pressure, where activation is the bottleneck, saturates at k_\infty=k_1k_2/k_{-1} at high pressure, and falls to half of k_\infty at [M]_{1/2}=k_2/k_{-1}. Left: the falloff curve, checked against a direct integration of the full three-step mechanism (~chemistrykit.kinetics.LindemannHinshelwood.network). Right: Lindemann&#x27;s linearization 1/k_{uni} against 1/[M]. Real data curve away from this straight line, the discrepancy that led to Hinshelwood&#x27;s, and later RRK and RRKM, energy-dependent k_2.">
+
+.. only:: html
+
+  .. image:: /api/gallery/kinetics/rate_theory/images/thumb/sphx_glr_plot_04_lindemann_hinshelwood_falloff_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/kinetics/rate_theory/plot_04_lindemann_hinshelwood_falloff`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Lindemann-Hinshelwood falloff of a unimolecular rate constant</div>
+    </div>
+
+
 .. thumbnail-parent-div-close
 
 .. raw:: html
@@ -506,6 +568,7 @@ Eyring's transition-state theory.
 
    /api/gallery/kinetics/arrhenius/index.rst
    /api/gallery/kinetics/enzyme/index.rst
+   /api/gallery/kinetics/explosions/index.rst
    /api/gallery/kinetics/networks/index.rst
    /api/gallery/kinetics/oscillators/index.rst
    /api/gallery/kinetics/rate_laws/index.rst

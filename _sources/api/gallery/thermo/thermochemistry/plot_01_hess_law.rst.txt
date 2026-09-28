@@ -44,7 +44,7 @@ shown here for the combustion of methane.
 
     levels = {"C + O2": 0.0, "CO + 1/2 O2": dH_C_to_CO, "CO2": dH_direct}
     fig, ax = plt.subplots(figsize=(7, 5))
-    for x, (label, H) in zip([0.0, 1.0, 2.0], levels.items()):
+    for x, (label, H) in zip([0.0, 1.0, 2.0], levels.items(), strict=True):
         ax.hlines(H, x - 0.3, x + 0.3, color="black", linewidth=2)
         ax.text(x, H + 10, label, ha="center")
     ax.annotate("", xy=(1.0, dH_C_to_CO), xytext=(0.0, 0.0), arrowprops=dict(arrowstyle="->", color="steelblue"))
@@ -104,7 +104,7 @@ standard enthalpies of formation (kJ/mol):
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.038 seconds)
+   **Total running time of the script:** (0 minutes 0.039 seconds)
 
 
 .. _sphx_glr_download_api_gallery_thermo_thermochemistry_plot_01_hess_law.py:

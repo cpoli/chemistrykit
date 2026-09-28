@@ -57,7 +57,7 @@ names = {1: "H-", 2: "He", 3: "Li+", 4: "Be2+", 5: "B3+"}
 Zs = np.array(sorted(exact))
 variational = np.array([optimize_helium_like_effective_charge(Z).energy / HARTREE_ENERGY for Z in Zs])
 errors = 100.0 * (variational - np.array([exact[Z] for Z in Zs])) / np.abs([exact[Z] for Z in Zs])
-for Z, v, err in zip(Zs, variational, errors):
+for Z, v, err in zip(Zs, variational, errors, strict=True):
     print(f"{names[Z]:5s} Z={Z}: variational {v:9.4f}, exact {exact[Z]:9.4f} hartree ({err:.2f}% high)")
 
 fig2, ax2 = plt.subplots(figsize=(6, 4))

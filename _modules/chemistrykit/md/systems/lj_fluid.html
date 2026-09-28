@@ -632,6 +632,8 @@
 <span class="sd">        Rebuild the neighbor list after this many :meth:`step` calls.</span>
 <span class="sd">    """</span>
 
+    <span class="n">box_length</span><span class="p">:</span> <span class="nb">float</span>  <span class="c1"># an LJ fluid is always periodic, unlike the base class's Optional</span>
+
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">positions</span><span class="p">,</span>
@@ -814,7 +816,7 @@
         <span class="n">box_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">box_length</span>
         <span class="n">r_max</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">box_length</span> <span class="k">if</span> <span class="n">r_max</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">r_max</span>
         <span class="n">pairs_i</span><span class="p">,</span> <span class="n">pairs_j</span> <span class="o">=</span> <span class="n">build_neighbor_list</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">box_length</span><span class="p">,</span> <span class="n">r_max</span><span class="p">)</span>
-        <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_bins</span><span class="p">)</span>
+        <span class="n">counts</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_bins</span><span class="p">)</span>
         <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">n_bins</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">pairs_i</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">diff</span> <span class="o">=</span> <span class="n">minimum_image_displacement</span><span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="n">pairs_i</span><span class="p">],</span> <span class="n">positions</span><span class="p">[</span><span class="n">pairs_j</span><span class="p">],</span> <span class="n">box_length</span><span class="p">)</span>

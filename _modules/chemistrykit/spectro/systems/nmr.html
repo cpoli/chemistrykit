@@ -410,7 +410,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for chemistrykit.spectro.systems.nmr</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">"""First-order NMR multiplet simulation: chemical shifts and J-coupling splitting patterns.</span>
+<span></span><span class="sa">r</span><span class="sd">"""NMR multiplet simulation: first-order splitting patterns and exact second-order (AB, ABX) spectra.</span>
 
 <span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 13.7-13.8, or</span>
 <span class="sd">Silverstein, Webster &amp; Kiemle, *Spectrometric Identification of Organic</span>
@@ -447,6 +447,9 @@
     <span class="s2">"karplus_coupling"</span><span class="p">,</span>
     <span class="s2">"free_induction_decay"</span><span class="p">,</span>
     <span class="s2">"fid_to_spectrum"</span><span class="p">,</span>
+    <span class="s2">"second_order_spectrum"</span><span class="p">,</span>
+    <span class="s2">"ab_quartet"</span><span class="p">,</span>
+    <span class="s2">"abx_spectrum"</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -846,6 +849,179 @@
     <span class="n">spectrum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">*</span> <span class="n">dwell_time</span>
     <span class="n">frequencies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">dwell_time</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">frequencies</span><span class="p">,</span> <span class="n">spectrum</span><span class="o">.</span><span class="n">real</span></div>
+
+
+
+<div class="viewcode-block" id="second_order_spectrum">
+<a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.second_order_spectrum">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">second_order_spectrum</span><span class="p">(</span><span class="n">shifts_ppm</span><span class="p">,</span> <span class="n">j_couplings_hz</span><span class="p">,</span> <span class="n">spectrometer_frequency_mhz</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-8</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Spectrum</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Exact (second-order) stick spectrum of a coupled spin-1/2 system, by diagonalizing its spin Hamiltonian.</span>
+
+<span class="sd">    When :math:`J` is not small against the shift differences</span>
+<span class="sd">    :math:`\Delta\nu`, the first-order rules break down: lines move, lean</span>
+<span class="sd">    towards each other ("roofing"), and new combination lines appear (AB,</span>
+<span class="sd">    ABX, AA'BB' systems). The exact spectrum follows from the liquid-state</span>
+<span class="sd">    spin Hamiltonian in frequency units,</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \hat H = \sum_i \nu_i\hat I_{zi} + \sum_{i&lt;j} J_{ij}\,\hat{\mathbf I}_i\cdot\hat{\mathbf I}_j</span>
+
+<span class="sd">    in the :math:`2^N` product basis: line frequencies are eigenvalue</span>
+<span class="sd">    differences, and intensities are :math:`|\langle f|\hat F_-|i\rangle|^2`</span>
+<span class="sd">    with :math:`\hat F_-=\sum_i\hat I_{-i}` (H. M. McConnell, A. D. McLean &amp;</span>
+<span class="sd">    C. A. Reilly, *J. Chem. Phys.* 23, 1152 (1955); Levitt, *Spin Dynamics*,</span>
+<span class="sd">    2nd ed., Ch. 14; Günther, *NMR Spectroscopy*, 3rd ed., Ch. 4).</span>
+<span class="sd">    Practical up to roughly 10 spins (:math:`2^N` states).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    shifts_ppm : array-like of float, shape (N,)</span>
+<span class="sd">        Chemical shift of each spin, in ppm.</span>
+<span class="sd">    j_couplings_hz : array-like of float, shape (N, N)</span>
+<span class="sd">        Symmetric coupling-constant matrix, in Hz (diagonal ignored).</span>
+<span class="sd">    spectrometer_frequency_mhz : float</span>
+<span class="sd">        Operating frequency, in MHz.</span>
+<span class="sd">    tol : float, default 1e-8</span>
+<span class="sd">        Lines weaker than `tol` times the strongest are dropped; lines</span>
+<span class="sd">        closer than 1e-6 Hz are merged.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Spectrum</span>
+<span class="sd">        `positions` in ppm (ascending), `intensities` relative, summing to</span>
+<span class="sd">        :math:`N\,2^{N-1}` (the same normalization as first-order</span>
+<span class="sd">        multiplets from :func:`first_order_multiplet`).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Two spins far apart in shift reproduce the first-order pair of</span>
+<span class="sd">    doublets; with :math:`J` comparable to :math:`\Delta\nu` the inner lines</span>
+<span class="sd">    grow at the expense of the outer ones (the roof effect):</span>
+
+<span class="sd">    &gt;&gt;&gt; weak = second_order_spectrum([1.0, 3.0], [[0, 7.0], [7.0, 0]], 400.0)</span>
+<span class="sd">    &gt;&gt;&gt; [round(float(i), 1) for i in weak.intensities]</span>
+<span class="sd">    [1.0, 1.0, 1.0, 1.0]</span>
+<span class="sd">    &gt;&gt;&gt; strong = second_order_spectrum([1.00, 1.05], [[0, 10.0], [10.0, 0]], 400.0)</span>
+<span class="sd">    &gt;&gt;&gt; bool(strong.intensities[1] &gt; 2 * strong.intensities[0])</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+    <span class="n">shifts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">shifts_ppm</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">j_couplings_hz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">shifts</span><span class="o">.</span><span class="n">size</span>
+    <span class="k">if</span> <span class="n">J</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"j_couplings_hz must be an (N, N) matrix"</span><span class="p">)</span>
+    <span class="n">nu</span> <span class="o">=</span> <span class="n">shifts</span> <span class="o">*</span> <span class="n">spectrometer_frequency_mhz</span>
+    <span class="n">Iz1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">]])</span>
+    <span class="n">Ip1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]])</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">embed</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">]])</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">op</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">k</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="n">Iz</span> <span class="o">=</span> <span class="p">[</span><span class="n">embed</span><span class="p">(</span><span class="n">Iz1</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">Ip</span> <span class="o">=</span> <span class="p">[</span><span class="n">embed</span><span class="p">(</span><span class="n">Ip1</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">Im</span> <span class="o">=</span> <span class="p">[</span><span class="n">op</span><span class="o">.</span><span class="n">T</span> <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">Ip</span><span class="p">]</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nu</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">Iz</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="n">H</span> <span class="o">=</span> <span class="n">H</span> <span class="o">+</span> <span class="n">J</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">Iz</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">@</span> <span class="n">Iz</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">Ip</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">@</span> <span class="n">Im</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">Im</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">@</span> <span class="n">Ip</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
+    <span class="n">energies</span><span class="p">,</span> <span class="n">vectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+    <span class="n">F_minus</span> <span class="o">=</span> <span class="n">vectors</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="nb">sum</span><span class="p">(</span><span class="n">Im</span><span class="p">)</span> <span class="o">@</span> <span class="n">vectors</span>
+    <span class="n">intensity</span> <span class="o">=</span> <span class="n">F_minus</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">energies</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">energies</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">intensity</span> <span class="o">&gt;</span> <span class="n">tol</span> <span class="o">*</span> <span class="n">intensity</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">freq</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">intensity</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">positions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">intensities</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">positions</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">:</span>
+            <span class="n">intensities</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">a</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">positions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">intensities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Spectrum</span><span class="p">(</span><span class="n">positions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span> <span class="o">/</span> <span class="n">spectrometer_frequency_mhz</span><span class="p">,</span> <span class="n">intensities</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">intensities</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="ab_quartet">
+<a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.ab_quartet">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">ab_quartet</span><span class="p">(</span><span class="n">shift_a_ppm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">shift_b_ppm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">j_ab_hz</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">spectrometer_frequency_mhz</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Spectrum</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Closed-form AB spectrum: four lines with the characteristic "roofed" intensities.</span>
+
+<span class="sd">    With :math:`\Delta\nu=\nu_A-\nu_B`, :math:`D=\sqrt{\Delta\nu^2+J^2}` and</span>
+<span class="sd">    center :math:`\bar\nu`, the lines lie at</span>
+<span class="sd">    :math:`\bar\nu\pm\frac12(D+J)` (outer, intensity :math:`1-J/D`) and</span>
+<span class="sd">    :math:`\bar\nu\pm\frac12(D-J)` (inner, intensity :math:`1+J/D`)</span>
+<span class="sd">    (Günther, *NMR Spectroscopy*, 3rd ed., Ch. 4.3; Pople, Schneider &amp;</span>
+<span class="sd">    Bernstein, *High-resolution Nuclear Magnetic Resonance*, 1959, Ch. 6).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    shift_a_ppm, shift_b_ppm : float</span>
+<span class="sd">        Chemical shifts, in ppm.</span>
+<span class="sd">    j_ab_hz : float</span>
+<span class="sd">        Coupling constant, in Hz.</span>
+<span class="sd">    spectrometer_frequency_mhz : float</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Spectrum</span>
+<span class="sd">        Positions in ppm, ascending.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; q = ab_quartet(1.00, 1.05, 10.0, 400.0)</span>
+<span class="sd">    &gt;&gt;&gt; [round(float(i), 3) for i in q.intensities]</span>
+<span class="sd">    [0.553, 1.447, 1.447, 0.553]</span>
+<span class="sd">    """</span>
+    <span class="n">nu0</span> <span class="o">=</span> <span class="n">spectrometer_frequency_mhz</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">shift_a_ppm</span> <span class="o">+</span> <span class="n">shift_b_ppm</span><span class="p">)</span> <span class="o">*</span> <span class="n">nu0</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">((</span><span class="n">shift_a_ppm</span> <span class="o">-</span> <span class="n">shift_b_ppm</span><span class="p">)</span> <span class="o">*</span> <span class="n">nu0</span><span class="p">,</span> <span class="n">j_ab_hz</span><span class="p">)</span>
+    <span class="n">J</span> <span class="o">=</span> <span class="n">j_ab_hz</span>
+    <span class="n">offsets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="p">(</span><span class="n">D</span> <span class="o">+</span> <span class="n">J</span><span class="p">),</span> <span class="o">-</span><span class="p">(</span><span class="n">D</span> <span class="o">-</span> <span class="n">J</span><span class="p">),</span> <span class="n">D</span> <span class="o">-</span> <span class="n">J</span><span class="p">,</span> <span class="n">D</span> <span class="o">+</span> <span class="n">J</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span>
+    <span class="n">ratio</span> <span class="o">=</span> <span class="n">J</span> <span class="o">/</span> <span class="n">D</span> <span class="k">if</span> <span class="n">D</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">0.0</span>
+    <span class="n">intensities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ratio</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">ratio</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">ratio</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">ratio</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">Spectrum</span><span class="p">(</span><span class="n">positions</span><span class="o">=</span><span class="p">(</span><span class="n">center</span> <span class="o">+</span> <span class="n">offsets</span><span class="p">)</span> <span class="o">/</span> <span class="n">nu0</span><span class="p">,</span> <span class="n">intensities</span><span class="o">=</span><span class="n">intensities</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="abx_spectrum">
+<a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.abx_spectrum">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">abx_spectrum</span><span class="p">(</span><span class="n">shifts_ppm</span><span class="p">,</span> <span class="n">j_ab_hz</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">j_ax_hz</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">j_bx_hz</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">spectrometer_frequency_mhz</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Spectrum</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Exact ABX spectrum: a strongly coupled AB pair, each also coupled to a distant X.</span>
+
+<span class="sd">    The classic three-spin second-order system (e.g. the vinyl protons of</span>
+<span class="sd">    styrene, or a CH2 next to a stereocenter CH): up to 8 AB lines, 6 X</span>
+<span class="sd">    lines (including 2 weak combination lines), and 1 more combination</span>
+<span class="sd">    line (Bernstein, Pople &amp; Schneider, *Can. J. Chem.* 35, 65 (1957);</span>
+<span class="sd">    Günther, *NMR Spectroscopy*, 3rd ed., Ch. 4.4). Evaluated exactly via</span>
+<span class="sd">    :func:`second_order_spectrum`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    shifts_ppm : array-like of float, shape (3,)</span>
+<span class="sd">        Shifts of A, B and X, in ppm.</span>
+<span class="sd">    j_ab_hz, j_ax_hz, j_bx_hz : float</span>
+<span class="sd">        Coupling constants, in Hz.</span>
+<span class="sd">    spectrometer_frequency_mhz : float</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Spectrum</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Total intensity is always :math:`3\cdot2^2=12`:</span>
+
+<span class="sd">    &gt;&gt;&gt; s = abx_spectrum([2.50, 2.55, 4.80], 16.0, 5.0, 8.0, 400.0)</span>
+<span class="sd">    &gt;&gt;&gt; round(float(s.intensities.sum()), 6)</span>
+<span class="sd">    12.0</span>
+<span class="sd">    """</span>
+    <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">j_ab_hz</span><span class="p">,</span> <span class="n">j_ax_hz</span><span class="p">],</span> <span class="p">[</span><span class="n">j_ab_hz</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">j_bx_hz</span><span class="p">],</span> <span class="p">[</span><span class="n">j_ax_hz</span><span class="p">,</span> <span class="n">j_bx_hz</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]])</span>
+    <span class="k">return</span> <span class="n">second_order_spectrum</span><span class="p">(</span><span class="n">shifts_ppm</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">spectrometer_frequency_mhz</span><span class="p">)</span></div>
 
 </pre></div>
 

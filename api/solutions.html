@@ -455,7 +455,9 @@
 </div>
 <p id="module-chemistrykit.solutions">chemistrykit.solutions: solution chemistry.</p>
 <p>pH/pOH and weak acid/base equilibria with Henderson-Hasselbalch buffers,
-Van Slyke buffer capacity, and Bjerrum polyprotic speciation; a full
+Van Slyke buffer capacity, and Bjerrum polyprotic speciation; stepwise
+metal-ligand complexation (species fractions, Bjerrum’s formation
+function, mass-balance speciation); a full
 titration-curve solver (strong/weak acid-base) with Gran-plot
 equivalence-point estimation; solubility equilibria (Ksp, common-ion
 effect); and Debye-Huckel limiting/extended and Davies
@@ -539,6 +541,66 @@ distributing the fixed total concentration
 <dt class="sig sig-object py" id="chemistrykit.solutions.Buffer.pKa">
 <span class="sig-name descname"><span class="pre">pKa</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.solutions.Buffer.pKa" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.solutions.ComplexationEquilibrium">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.solutions.</span></span><span class="sig-name descname"><span class="pre">ComplexationEquilibrium</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">free_ligand</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">species</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average_ligand_number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/solutions/systems/complexation.html#ComplexationEquilibrium"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.solutions.ComplexationEquilibrium" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Result of <a class="reference internal" href="#chemistrykit.solutions.solve_complexation" title="chemistrykit.solutions.solve_complexation"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve_complexation()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>free_ligand</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+<li><p><strong>species</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
+<li><p><strong>average_ligand_number</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.solutions.ComplexationEquilibrium.average_ligand_number">
+<span class="sig-name descname"><span class="pre">average_ligand_number</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.solutions.ComplexationEquilibrium.average_ligand_number" title="Link to this definition">#</a></dt>
+<dd><p>Bjerrum’s formation function at equilibrium.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.solutions.ComplexationEquilibrium.free_ligand">
+<span class="sig-name descname"><span class="pre">free_ligand</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.solutions.ComplexationEquilibrium.free_ligand" title="Link to this definition">#</a></dt>
+<dd><p>Free ligand concentration [L], in mol/L.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chemistrykit.solutions.ComplexationEquilibrium.free_metal">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">free_metal</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.solutions.ComplexationEquilibrium.free_metal" title="Link to this definition">#</a></dt>
+<dd><p>Free metal concentration [M], in mol/L.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.solutions.ComplexationEquilibrium.species">
+<span class="sig-name descname"><span class="pre">species</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a></span><a class="headerlink" href="#chemistrykit.solutions.ComplexationEquilibrium.species" title="Link to this definition">#</a></dt>
+<dd><p>Concentrations of M, ML, …, ML_N, in mol/L.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray, shape (N + 1,)</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -1308,6 +1370,29 @@ ionic strength:</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.solutions.average_ligand_number">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.solutions.</span></span><span class="sig-name descname"><span class="pre">average_ligand_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">L_free</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/solutions/systems/complexation.html#average_ligand_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.solutions.average_ligand_number" title="Link to this definition">#</a></dt>
+<dd><p>Bjerrum’s formation function <span class="math notranslate nohighlight">\(\bar n=\sum_n n\alpha_n\)</span>, the mean number of ligands per metal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L_free</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Free ligand concentration(s), in mol/L.</p></li>
+<li><p><strong>beta</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Cumulative formation constants.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ndarray, shape (len(L_free),)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>For a single step, <span class="math notranslate nohighlight">\(\bar n = 1/2\)</span> exactly where <span class="math notranslate nohighlight">\([L]=1/K_1\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">average_ligand_number</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="p">[</span><span class="mf">1e3</span><span class="p">])[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="chemistrykit.solutions.buffer_capacity">
 <span class="sig-prename descclassname"><span class="pre">chemistrykit.solutions.</span></span><span class="sig-name descname"><span class="pre">buffer_capacity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ka</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Kw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-14</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/solutions/systems/acid_base.html#buffer_capacity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.solutions.buffer_capacity" title="Link to this definition">#</a></dt>
 <dd><p>Van Slyke’s buffer value <span class="math notranslate nohighlight">\(\beta = dC_b/d\mathrm{pH}\)</span> of a weak monoprotic acid.</p>
@@ -1340,6 +1425,57 @@ balance <span class="math notranslate nohighlight">\(C_b = CK_a/(K_a+h) + K_w/h 
 <span class="go">0.0576</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.10</span> <span class="o">/</span> <span class="mi">4</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
 <span class="go">0.0576</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.solutions.complex_fractions">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.solutions.</span></span><span class="sig-name descname"><span class="pre">complex_fractions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">L_free</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/solutions/systems/complexation.html#complex_fractions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.solutions.complex_fractions" title="Link to this definition">#</a></dt>
+<dd><p>Fractions <span class="math notranslate nohighlight">\(\alpha_0, \dots, \alpha_N\)</span> of total metal present as <span class="math notranslate nohighlight">\(M, ML, \dots, ML_N\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L_free</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Free (unbound) ligand concentration(s), in mol/L.</p></li>
+<li><p><strong>beta</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Cumulative formation constants <span class="math notranslate nohighlight">\(\beta_1, \dots, \beta_N\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray</em> – Shape <code class="docutils literal notranslate"><span class="pre">(N</span> <span class="pre">+</span> <span class="pre">1,</span> <span class="pre">len(L_free))</span></code>; row <code class="docutils literal notranslate"><span class="pre">n</span></code> is <span class="math notranslate nohighlight">\(\alpha_n\)</span>. The
+rows sum to 1.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Ag+ with NH3 (<span class="math notranslate nohighlight">\(\log\beta_1=3.31\)</span>, <span class="math notranslate nohighlight">\(\log\beta_2=7.23\)</span>):
+at <span class="math notranslate nohighlight">\([NH_3]=0.01\)</span> M almost all silver is the diammine complex:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">=</span> <span class="n">complex_fractions</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="mf">3.31</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mf">7.23</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">alpha</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="go">[0.001, 0.012, 0.988]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.solutions.cumulative_formation_constants">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.solutions.</span></span><span class="sig-name descname"><span class="pre">cumulative_formation_constants</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">K_stepwise</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/solutions/systems/complexation.html#cumulative_formation_constants"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.solutions.cumulative_formation_constants" title="Link to this definition">#</a></dt>
+<dd><p>Cumulative constants <span class="math notranslate nohighlight">\(\beta_n=\prod_{i\le n}K_i\)</span> from stepwise ones.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>K_stepwise</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – <span class="math notranslate nohighlight">\(K_1, \dots, K_N\)</span>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ndarray, shape (N,)</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cumulative_formation_constants</span><span class="p">([</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">])</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">[100.0, 1000.0]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1652,6 +1788,40 @@ fraction that has lost <code class="docutils literal notranslate"><span class="p
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="chemistrykit.solutions.solve_complexation">
+<span class="sig-prename descclassname"><span class="pre">chemistrykit.solutions.</span></span><span class="sig-name descname"><span class="pre">solve_complexation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M_total</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L_total</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/solutions/systems/complexation.html#solve_complexation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.solutions.solve_complexation" title="Link to this definition">#</a></dt>
+<dd><p>Equilibrium speciation from total metal and total ligand concentrations.</p>
+<p>Solves the ligand mass balance <span class="math notranslate nohighlight">\(L_T = [L] + M_T\,\bar n([L])\)</span> for
+the free ligand concentration by bracketed root-finding
+(<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.brentq.html#scipy.optimize.brentq" title="(in SciPy v1.18.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.brentq()</span></code></a> on <span class="math notranslate nohighlight">\(0 &lt; [L] \le L_T\)</span>). The left
+side minus the right is monotonic in <span class="math notranslate nohighlight">\([L]\)</span>, so the root is
+unique. Protonation of the ligand and hydrolysis of the metal are
+neglected; fold them in through conditional constants if needed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M_total</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Total metal concentration, in mol/L.</p></li>
+<li><p><strong>L_total</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Total ligand concentration, in mol/L.</p></li>
+<li><p><strong>beta</strong> (<em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Cumulative formation constants.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.solutions.ComplexationEquilibrium" title="chemistrykit.solutions.systems.complexation.ComplexationEquilibrium"><code class="xref py py-class docutils literal notranslate"><span class="pre">ComplexationEquilibrium</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>ComplexationEquilibrium</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>0.001 M Ag+ in 0.1 M NH3: nearly all silver ends up as Ag(NH3)2+:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="n">solve_complexation</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="mf">3.31</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mf">7.23</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">eq</span><span class="o">.</span><span class="n">average_ligand_number</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">1.999</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
 
@@ -1707,6 +1877,13 @@ fraction that has lost <code class="docutils literal notranslate"><span class="p
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.Buffer.from_target_ph"><code class="docutils literal notranslate"><span class="pre">Buffer.from_target_ph()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.Buffer.pH"><code class="docutils literal notranslate"><span class="pre">Buffer.pH()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.Buffer.pKa"><code class="docutils literal notranslate"><span class="pre">Buffer.pKa</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.ComplexationEquilibrium"><code class="docutils literal notranslate"><span class="pre">ComplexationEquilibrium</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.ComplexationEquilibrium.average_ligand_number"><code class="docutils literal notranslate"><span class="pre">ComplexationEquilibrium.average_ligand_number</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.ComplexationEquilibrium.free_ligand"><code class="docutils literal notranslate"><span class="pre">ComplexationEquilibrium.free_ligand</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.ComplexationEquilibrium.free_metal"><code class="docutils literal notranslate"><span class="pre">ComplexationEquilibrium.free_metal</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.ComplexationEquilibrium.species"><code class="docutils literal notranslate"><span class="pre">ComplexationEquilibrium.species</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.GranPlotResult"><code class="docutils literal notranslate"><span class="pre">GranPlotResult</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
@@ -1774,7 +1951,10 @@ fraction that has lost <code class="docutils literal notranslate"><span class="p
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.activity_coefficient_davies"><code class="docutils literal notranslate"><span class="pre">activity_coefficient_davies()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.activity_coefficient_debye_huckel_extended"><code class="docutils literal notranslate"><span class="pre">activity_coefficient_debye_huckel_extended()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.activity_coefficient_debye_huckel_limiting"><code class="docutils literal notranslate"><span class="pre">activity_coefficient_debye_huckel_limiting()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.average_ligand_number"><code class="docutils literal notranslate"><span class="pre">average_ligand_number()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.buffer_capacity"><code class="docutils literal notranslate"><span class="pre">buffer_capacity()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.complex_fractions"><code class="docutils literal notranslate"><span class="pre">complex_fractions()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.cumulative_formation_constants"><code class="docutils literal notranslate"><span class="pre">cumulative_formation_constants()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.gran_plot"><code class="docutils literal notranslate"><span class="pre">gran_plot()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.h_from_ph"><code class="docutils literal notranslate"><span class="pre">h_from_ph()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.henderson_hasselbalch_ph"><code class="docutils literal notranslate"><span class="pre">henderson_hasselbalch_ph()</span></code></a></li>
@@ -1786,6 +1966,7 @@ fraction that has lost <code class="docutils literal notranslate"><span class="p
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.ph_from_h"><code class="docutils literal notranslate"><span class="pre">ph_from_h()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.poh_from_oh"><code class="docutils literal notranslate"><span class="pre">poh_from_oh()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.polyprotic_fractions"><code class="docutils literal notranslate"><span class="pre">polyprotic_fractions()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.solutions.solve_complexation"><code class="docutils literal notranslate"><span class="pre">solve_complexation()</span></code></a></li>
 </ul>
   </nav></div>
 

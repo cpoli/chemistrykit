@@ -443,7 +443,7 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.integrators</span><span class="w"> </span><span class="kn">import</span> <span class="n">velocity_verlet_step</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.integrators</span><span class="w"> </span><span class="kn">import</span> <span class="n">RHSFunc</span><span class="p">,</span> <span class="n">velocity_verlet_step</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"MDResult"</span><span class="p">,</span> <span class="s2">"PairPotential"</span><span class="p">,</span> <span class="s2">"AnglePotential"</span><span class="p">,</span> <span class="s2">"MolecularDynamicsSystem"</span><span class="p">]</span>
 
@@ -638,7 +638,7 @@
 <span class="sd">    """</span>
 
     <span class="n">box_length</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">_accel_njit</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_accel_njit</span><span class="p">:</span> <span class="n">RHSFunc</span>  <span class="c1"># set by each concrete subclass's __init__</span>
     <span class="n">params</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">velocities</span><span class="p">,</span> <span class="n">masses</span><span class="p">):</span>

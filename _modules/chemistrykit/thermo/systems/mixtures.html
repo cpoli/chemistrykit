@@ -415,14 +415,21 @@
 <span class="sd">See Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 5 ("Simple</span>
 <span class="sd">mixtures") throughout: Sec. 5.4 for Raoult's and Henry's laws, Sec. 5.5</span>
 <span class="sd">for the colligative properties (freezing-point depression, boiling-point</span>
-<span class="sd">elevation, osmotic pressure).</span>
+<span class="sd">elevation, osmotic pressure). The non-ideal activity-coefficient models</span>
+<span class="sd">(Margules, Wilson, NRTL, UNIQUAC) share one isothermal modified-Raoult's-law</span>
+<span class="sd">VLE implementation, :class:`BinaryActivityModel`; see Prausnitz,</span>
+<span class="sd">Lichtenthaler &amp; de Azevedo, *Molecular Thermodynamics of Fluid-Phase</span>
+<span class="sd">Equilibria*, 3rd ed., Ch. 6-7, for all four.</span>
 <span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">brentq</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">R</span>
 
@@ -434,7 +441,11 @@
     <span class="s2">"freezing_point_depression"</span><span class="p">,</span>
     <span class="s2">"boiling_point_elevation"</span><span class="p">,</span>
     <span class="s2">"osmotic_pressure"</span><span class="p">,</span>
+    <span class="s2">"BinaryActivityModel"</span><span class="p">,</span>
     <span class="s2">"MargulesSolution"</span><span class="p">,</span>
+    <span class="s2">"WilsonSolution"</span><span class="p">,</span>
+    <span class="s2">"NRTLSolution"</span><span class="p">,</span>
+    <span class="s2">"UNIQUACSolution"</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -710,10 +721,158 @@
 
 
 
+<div class="viewcode-block" id="BinaryActivityModel">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.BinaryActivityModel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BinaryActivityModel</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Isothermal vapor-liquid equilibrium of a binary liquid from an activity-coefficient model.</span>
+
+<span class="sd">    Subclasses supply :meth:`activity_coefficients` and the pure-component</span>
+<span class="sd">    vapor pressures ``P1_star``/``P2_star`` at the temperature of</span>
+<span class="sd">    interest (e.g. from :class:`chemistrykit.thermo.AntoineEquation`);</span>
+<span class="sd">    this base turns them into the modified Raoult's law</span>
+<span class="sd">    :math:`P_i = x_i\gamma_iP_i^*` with an ideal vapor, i.e. a P-x-y</span>
+<span class="sd">    diagram (Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch. 5.3).</span>
+<span class="sd">    """</span>
+
+    <span class="n">P1_star</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">P2_star</span><span class="p">:</span> <span class="nb">float</span>
+
+<div class="viewcode-block" id="BinaryActivityModel.activity_coefficients">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.BinaryActivityModel.activity_coefficients">[docs]</a>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">activity_coefficients</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`(\gamma_1, \gamma_2)` at liquid mole fraction `x1`."""</span></div>
+
+
+<div class="viewcode-block" id="BinaryActivityModel.excess_gibbs">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.BinaryActivityModel.excess_gibbs">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">excess_gibbs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Molar excess Gibbs energy :math:`G^E = RT(x_1\ln\gamma_1 + x_2\ln\gamma_2)`, in J/mol.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x1 : float or array-like of float</span>
+<span class="sd">            Liquid-phase mole fraction of component 1.</span>
+<span class="sd">        T : float</span>
+<span class="sd">            Absolute temperature, in K.</span>
+<span class="sd">        R_gas : float, default :data:`chemistrykit.constants.R`</span>
+<span class="sd">            Gas constant.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float or ndarray</span>
+<span class="sd">        """</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">g1</span><span class="p">,</span> <span class="n">g2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activity_coefficients</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">R_gas</span> <span class="o">*</span> <span class="n">T</span> <span class="o">*</span> <span class="p">(</span><span class="n">x1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">g2</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="BinaryActivityModel.partial_pressures">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.BinaryActivityModel.partial_pressures">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">partial_pressures</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`(P_1, P_2)` from the modified Raoult's law :math:`P_i = x_i\gamma_iP_i^*`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x1 : float or array-like of float</span>
+<span class="sd">            Liquid-phase mole fraction of component 1.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple of (float or ndarray)</span>
+<span class="sd">        """</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">g1</span><span class="p">,</span> <span class="n">g2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activity_coefficients</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x1</span> <span class="o">*</span> <span class="n">g1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">P1_star</span><span class="p">,</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">*</span> <span class="n">g2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">P2_star</span></div>
+
+
+<div class="viewcode-block" id="BinaryActivityModel.total_pressure">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.BinaryActivityModel.total_pressure">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">total_pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Total (bubble-point) vapor pressure above a liquid of composition `x1`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x1 : float or array-like of float</span>
+<span class="sd">            Liquid-phase mole fraction of component 1.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float or ndarray</span>
+<span class="sd">        """</span>
+        <span class="n">P1</span><span class="p">,</span> <span class="n">P2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">partial_pressures</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">P1</span> <span class="o">+</span> <span class="n">P2</span></div>
+
+
+<div class="viewcode-block" id="BinaryActivityModel.vapor_composition">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.BinaryActivityModel.vapor_composition">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vapor_composition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Vapor-phase mole fraction of component 1 in equilibrium with liquid `x1`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x1 : float or array-like of float</span>
+<span class="sd">            Liquid-phase mole fraction of component 1.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float or ndarray</span>
+<span class="sd">        """</span>
+        <span class="n">P1</span><span class="p">,</span> <span class="n">P2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">partial_pressures</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">P1</span> <span class="o">/</span> <span class="p">(</span><span class="n">P1</span> <span class="o">+</span> <span class="n">P2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BinaryActivityModel.relative_volatility">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.BinaryActivityModel.relative_volatility">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">relative_volatility</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Relative volatility :math:`\alpha_{12} = \gamma_1P_1^*/(\gamma_2P_2^*)`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x1 : float or array-like of float</span>
+<span class="sd">            Liquid-phase mole fraction of component 1.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float or ndarray</span>
+<span class="sd">        """</span>
+        <span class="n">g1</span><span class="p">,</span> <span class="n">g2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activity_coefficients</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">g1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">P1_star</span> <span class="o">/</span> <span class="p">(</span><span class="n">g2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">P2_star</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BinaryActivityModel.azeotrope">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.BinaryActivityModel.azeotrope">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">azeotrope</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Locate an azeotrope, where vapor and liquid compositions coincide.</span>
+
+<span class="sd">        At an azeotrope :math:`y_1 = x_1`, i.e. the relative volatility is</span>
+<span class="sd">        1. One exists in :math:`0 &lt; x_1 &lt; 1` exactly when</span>
+<span class="sd">        :math:`\ln\alpha_{12}` changes sign across the composition range,</span>
+<span class="sd">        and is found by root bracketing (:func:`scipy.optimize.brentq`).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        (x1, P) or None</span>
+<span class="sd">            Azeotropic composition and pressure, or ``None`` if there is</span>
+<span class="sd">            no sign change (no azeotrope, or an even number of them).</span>
+<span class="sd">        """</span>
+        <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-9</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x1</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relative_volatility</span><span class="p">(</span><span class="n">x1</span><span class="p">)))</span>
+
+        <span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">eps</span><span class="p">)</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">eps</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">x_az</span> <span class="o">=</span> <span class="n">brentq</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">eps</span><span class="p">,</span> <span class="n">xtol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x_az</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">total_pressure</span><span class="p">(</span><span class="n">x_az</span><span class="p">))</span></div>
+</div>
+
+
+
 <div class="viewcode-block" id="MargulesSolution">
 <a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.MargulesSolution">[docs]</a>
 <span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">MargulesSolution</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MargulesSolution</span><span class="p">(</span><span class="n">BinaryActivityModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">"""A non-ideal binary liquid described by the one-parameter (two-suffix) Margules model.</span>
 
 <span class="sd">    Margules expanded the logarithms of the activity coefficients as power</span>
@@ -778,87 +937,266 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">*</span> <span class="n">x2</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">*</span> <span class="n">x1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="MargulesSolution.excess_gibbs">
-<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.MargulesSolution.excess_gibbs">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">excess_gibbs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Molar excess Gibbs energy :math:`G^E = RT\,A\,x_1x_2`, in J/mol.</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">henry_constant_1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Henry's-law constant of component 1 at infinite dilution, :math:`P_1^* e^{A}`."""</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">P1_star</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="WilsonSolution">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.WilsonSolution">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">WilsonSolution</span><span class="p">(</span><span class="n">BinaryActivityModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Wilson's local-composition model of a non-ideal binary liquid.</span>
+
+<span class="sd">    G. M. Wilson, *J. Am. Chem. Soc.* 86, 127 (1964):</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \ln\gamma_1 = -\ln(x_1+\Lambda_{12}x_2)</span>
+<span class="sd">            + x_2\left(\frac{\Lambda_{12}}{x_1+\Lambda_{12}x_2}</span>
+<span class="sd">            - \frac{\Lambda_{21}}{x_2+\Lambda_{21}x_1}\right)</span>
+
+<span class="sd">    and symmetrically for :math:`\gamma_2`. Wilson's model cannot predict</span>
+<span class="sd">    liquid-liquid phase splitting, but is accurate for miscible mixtures</span>
+<span class="sd">    of polar and non-polar components (e.g. alcohols in hydrocarbons),</span>
+<span class="sd">    including their azeotropes.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Lambda12, Lambda21 : float</span>
+<span class="sd">        Positive, dimensionless Wilson parameters at the temperature of</span>
+<span class="sd">        interest (see :meth:`from_energies`).</span>
+<span class="sd">    P1_star, P2_star : float</span>
+<span class="sd">        Pure-component vapor pressures at that temperature.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    With :math:`\Lambda_{12}=\Lambda_{21}=1` the mixture is ideal:</span>
+
+<span class="sd">    &gt;&gt;&gt; sol = WilsonSolution(Lambda12=1.0, Lambda21=1.0, P1_star=30.0, P2_star=20.0)</span>
+<span class="sd">    &gt;&gt;&gt; [round(float(g), 12) for g in sol.activity_coefficients(0.3)]</span>
+<span class="sd">    [1.0, 1.0]</span>
+<span class="sd">    """</span>
+
+    <span class="n">Lambda12</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">Lambda21</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">P1_star</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">P2_star</span><span class="p">:</span> <span class="nb">float</span>
+
+<div class="viewcode-block" id="WilsonSolution.from_energies">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.WilsonSolution.from_energies">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_energies</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">V1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">V2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lambda12</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lambda21</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">P1_star</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">P2_star</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">R_gas</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">R</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Build from liquid molar volumes and interaction energies, :math:`\Lambda_{12}=(V_2/V_1)e^{-\lambda_{12}/RT}`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        x1 : float or array-like of float</span>
-<span class="sd">            Liquid-phase mole fraction of component 1.</span>
+<span class="sd">        V1, V2 : float</span>
+<span class="sd">            Pure-liquid molar volumes (any consistent unit).</span>
+<span class="sd">        lambda12, lambda21 : float</span>
+<span class="sd">            Interaction-energy differences :math:`\lambda_{12}-\lambda_{11}`</span>
+<span class="sd">            and :math:`\lambda_{21}-\lambda_{22}`, in J/mol.</span>
 <span class="sd">        T : float</span>
 <span class="sd">            Absolute temperature, in K.</span>
+<span class="sd">        P1_star, P2_star : float</span>
+<span class="sd">            Pure-component vapor pressures at `T`.</span>
 <span class="sd">        R_gas : float, default :data:`chemistrykit.constants.R`</span>
-<span class="sd">            Gas constant.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        float or ndarray</span>
+<span class="sd">        WilsonSolution</span>
 <span class="sd">        """</span>
-        <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">R_gas</span> <span class="o">*</span> <span class="n">T</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span></div>
+        <span class="n">Lambda12</span> <span class="o">=</span> <span class="n">V2</span> <span class="o">/</span> <span class="n">V1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">lambda12</span> <span class="o">/</span> <span class="p">(</span><span class="n">R_gas</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span>
+        <span class="n">Lambda21</span> <span class="o">=</span> <span class="n">V1</span> <span class="o">/</span> <span class="n">V2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">lambda21</span> <span class="o">/</span> <span class="p">(</span><span class="n">R_gas</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">Lambda12</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">Lambda21</span><span class="p">),</span> <span class="n">P1_star</span><span class="p">,</span> <span class="n">P2_star</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="MargulesSolution.partial_pressures">
-<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.MargulesSolution.partial_pressures">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">partial_pressures</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`(P_1, P_2)` from the modified Raoult's law :math:`P_i = x_i\gamma_iP_i^*`.</span>
+<div class="viewcode-block" id="WilsonSolution.activity_coefficients">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.WilsonSolution.activity_coefficients">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">activity_coefficients</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`(\gamma_1, \gamma_2)` at liquid mole fraction `x1`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        x1 : float or array-like of float</span>
-<span class="sd">            Liquid-phase mole fraction of component 1.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        tuple of (float or ndarray)</span>
 <span class="sd">        """</span>
         <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-        <span class="n">g1</span><span class="p">,</span> <span class="n">g2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activity_coefficients</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">x1</span> <span class="o">*</span> <span class="n">g1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">P1_star</span><span class="p">,</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">*</span> <span class="n">g2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">P2_star</span></div>
+        <span class="n">x2</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">x1</span>
+        <span class="n">d1</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lambda12</span> <span class="o">*</span> <span class="n">x2</span>
+        <span class="n">d2</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lambda21</span> <span class="o">*</span> <span class="n">x1</span>
+        <span class="n">bracket</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lambda12</span> <span class="o">/</span> <span class="n">d1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lambda21</span> <span class="o">/</span> <span class="n">d2</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="o">+</span> <span class="n">x2</span> <span class="o">*</span> <span class="n">bracket</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span> <span class="o">-</span> <span class="n">x1</span> <span class="o">*</span> <span class="n">bracket</span><span class="p">)</span></div>
+</div>
 
 
-<div class="viewcode-block" id="MargulesSolution.total_pressure">
-<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.MargulesSolution.total_pressure">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">total_pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Total vapor pressure above a liquid of composition `x1`.</span>
+
+<div class="viewcode-block" id="NRTLSolution">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.NRTLSolution">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">NRTLSolution</span><span class="p">(</span><span class="n">BinaryActivityModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The non-random two-liquid (NRTL) model of a non-ideal binary liquid.</span>
+
+<span class="sd">    H. Renon &amp; J. M. Prausnitz, *AIChE J.* 14, 135 (1968). With</span>
+<span class="sd">    :math:`G_{ij}=\exp(-\alpha\tau_{ij})`:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \ln\gamma_1 = x_2^2\left[\tau_{21}\left(\frac{G_{21}}{x_1+x_2G_{21}}\right)^2</span>
+<span class="sd">            + \frac{\tau_{12}G_{12}}{(x_2+x_1G_{12})^2}\right]</span>
+
+<span class="sd">    and symmetrically for :math:`\gamma_2`. Unlike Wilson's model, NRTL</span>
+<span class="sd">    can describe partially miscible (liquid-liquid) systems.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    tau12, tau21 : float</span>
+<span class="sd">        Dimensionless interaction parameters at the temperature of</span>
+<span class="sd">        interest (commonly :math:`\tau_{ij}=b_{ij}/RT`).</span>
+<span class="sd">    P1_star, P2_star : float</span>
+<span class="sd">        Pure-component vapor pressures at that temperature.</span>
+<span class="sd">    alpha : float, default 0.3</span>
+<span class="sd">        Non-randomness parameter (0.2-0.47 in Renon &amp; Prausnitz's fits).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    At infinite dilution, :math:`\ln\gamma_1^\infty=\tau_{21}+\tau_{12}e^{-\alpha\tau_{12}}`:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; sol = NRTLSolution(tau12=0.5, tau21=1.2, P1_star=30.0, P2_star=20.0)</span>
+<span class="sd">    &gt;&gt;&gt; g1, _ = sol.activity_coefficients(0.0)</span>
+<span class="sd">    &gt;&gt;&gt; bool(np.isclose(np.log(g1), 1.2 + 0.5 * np.exp(-0.3 * 0.5)))</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+
+    <span class="n">tau12</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">tau21</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">P1_star</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">P2_star</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+<div class="viewcode-block" id="NRTLSolution.activity_coefficients">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.NRTLSolution.activity_coefficients">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">activity_coefficients</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`(\gamma_1, \gamma_2)` at liquid mole fraction `x1`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        x1 : float or array-like of float</span>
-<span class="sd">            Liquid-phase mole fraction of component 1.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        float or ndarray</span>
+<span class="sd">        tuple of (float or ndarray)</span>
 <span class="sd">        """</span>
-        <span class="n">P1</span><span class="p">,</span> <span class="n">P2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">partial_pressures</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">P1</span> <span class="o">+</span> <span class="n">P2</span></div>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">x1</span>
+        <span class="n">G12</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau12</span><span class="p">)</span>
+        <span class="n">G21</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau21</span><span class="p">)</span>
+        <span class="n">d1</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span> <span class="o">*</span> <span class="n">G21</span>
+        <span class="n">d2</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">+</span> <span class="n">x1</span> <span class="o">*</span> <span class="n">G12</span>
+        <span class="n">ln_g1</span> <span class="o">=</span> <span class="n">x2</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tau21</span> <span class="o">*</span> <span class="p">(</span><span class="n">G21</span> <span class="o">/</span> <span class="n">d1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau12</span> <span class="o">*</span> <span class="n">G12</span> <span class="o">/</span> <span class="n">d2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">ln_g2</span> <span class="o">=</span> <span class="n">x1</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tau12</span> <span class="o">*</span> <span class="p">(</span><span class="n">G12</span> <span class="o">/</span> <span class="n">d2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau21</span> <span class="o">*</span> <span class="n">G21</span> <span class="o">/</span> <span class="n">d1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">ln_g1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">ln_g2</span><span class="p">)</span></div>
+</div>
 
 
-<div class="viewcode-block" id="MargulesSolution.vapor_composition">
-<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.MargulesSolution.vapor_composition">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">vapor_composition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Vapor-phase mole fraction of component 1 in equilibrium with liquid `x1`.</span>
+
+<div class="viewcode-block" id="UNIQUACSolution">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.UNIQUACSolution">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">UNIQUACSolution</span><span class="p">(</span><span class="n">BinaryActivityModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""The universal quasi-chemical (UNIQUAC) model of a non-ideal binary liquid.</span>
+
+<span class="sd">    D. S. Abrams &amp; J. M. Prausnitz, *AIChE J.* 21, 116 (1975).</span>
+<span class="sd">    :math:`\ln\gamma_i` is the sum of a combinatorial (size/shape) part,</span>
+<span class="sd">    fixed by each molecule's van der Waals volume `r` and surface area</span>
+<span class="sd">    `q`, and a residual (energetic) part:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \ln\gamma_i^C = \ln\frac{\Phi_i}{x_i} + \frac z2 q_i\ln\frac{\theta_i}{\Phi_i}</span>
+<span class="sd">            + l_i - \frac{\Phi_i}{x_i}\sum_j x_jl_j, \qquad</span>
+<span class="sd">        \ln\gamma_i^R = q_i\left[1-\ln\sum_j\theta_j\tau_{ji}</span>
+<span class="sd">            - \sum_j\frac{\theta_j\tau_{ij}}{\sum_k\theta_k\tau_{kj}}\right]</span>
+
+<span class="sd">    with :math:`\Phi_i=r_ix_i/\sum_jr_jx_j`,</span>
+<span class="sd">    :math:`\theta_i=q_ix_i/\sum_jq_jx_j`,</span>
+<span class="sd">    :math:`l_i=\frac z2(r_i-q_i)-(r_i-1)`, :math:`\tau_{ii}=1` and</span>
+<span class="sd">    coordination number :math:`z=10`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    r1, r2, q1, q2 : float</span>
+<span class="sd">        Relative van der Waals volumes and surface areas (tabulated, e.g.</span>
+<span class="sd">        water r=0.92, q=1.40; ethanol r=2.1055, q=1.972).</span>
+<span class="sd">    tau12, tau21 : float</span>
+<span class="sd">        Dimensionless energy parameters, :math:`\tau_{ij}=\exp(-a_{ij}/T)`.</span>
+<span class="sd">    P1_star, P2_star : float</span>
+<span class="sd">        Pure-component vapor pressures at the temperature of interest.</span>
+<span class="sd">    z : float, default 10.0</span>
+<span class="sd">        Lattice coordination number.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Identical-size molecules with :math:`\tau_{12}=\tau_{21}=1` form an ideal solution:</span>
+
+<span class="sd">    &gt;&gt;&gt; sol = UNIQUACSolution(r1=1.0, r2=1.0, q1=1.0, q2=1.0, tau12=1.0, tau21=1.0, P1_star=30.0, P2_star=20.0)</span>
+<span class="sd">    &gt;&gt;&gt; [round(float(g), 12) for g in sol.activity_coefficients(0.3)]</span>
+<span class="sd">    [1.0, 1.0]</span>
+<span class="sd">    """</span>
+
+    <span class="n">r1</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">r2</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">q1</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">q2</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">tau12</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">tau21</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">P1_star</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">P2_star</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">z</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10.0</span>
+
+<div class="viewcode-block" id="UNIQUACSolution.activity_coefficients">
+<a class="viewcode-back" href="../../../../api/thermo.html#chemistrykit.thermo.UNIQUACSolution.activity_coefficients">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">activity_coefficients</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`(\gamma_1, \gamma_2)` at liquid mole fraction `x1`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        x1 : float or array-like of float</span>
-<span class="sd">            Liquid-phase mole fraction of component 1.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        float or ndarray</span>
+<span class="sd">        tuple of (float or ndarray)</span>
 <span class="sd">        """</span>
-        <span class="n">P1</span><span class="p">,</span> <span class="n">P2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">partial_pressures</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">P1</span> <span class="o">/</span> <span class="p">(</span><span class="n">P1</span> <span class="o">+</span> <span class="n">P2</span><span class="p">)</span></div>
-
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">henry_constant_1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">"""Henry's-law constant of component 1 at infinite dilution, :math:`P_1^* e^{A}`."""</span>
-        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">P1_star</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">))</span></div>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">x1</span>
+        <span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">q1</span><span class="p">,</span> <span class="n">q2</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">q1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">q2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span>
+        <span class="n">rx</span> <span class="o">=</span> <span class="n">r1</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">r2</span> <span class="o">*</span> <span class="n">x2</span>
+        <span class="n">qx</span> <span class="o">=</span> <span class="n">q1</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">q2</span> <span class="o">*</span> <span class="n">x2</span>
+        <span class="n">l1</span> <span class="o">=</span> <span class="n">z</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">r1</span> <span class="o">-</span> <span class="n">q1</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">r1</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">l2</span> <span class="o">=</span> <span class="n">z</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">r2</span> <span class="o">-</span> <span class="n">q2</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">r2</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">lx</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">*</span> <span class="n">l1</span> <span class="o">+</span> <span class="n">x2</span> <span class="o">*</span> <span class="n">l2</span>
+        <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span> <span class="o">=</span> <span class="n">q1</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">/</span> <span class="n">qx</span><span class="p">,</span> <span class="n">q2</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">/</span> <span class="n">qx</span>
+        <span class="n">t12</span><span class="p">,</span> <span class="n">t21</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau12</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau21</span>
+        <span class="n">s1</span> <span class="o">=</span> <span class="n">theta1</span> <span class="o">+</span> <span class="n">theta2</span> <span class="o">*</span> <span class="n">t21</span>
+        <span class="n">s2</span> <span class="o">=</span> <span class="n">theta1</span> <span class="o">*</span> <span class="n">t12</span> <span class="o">+</span> <span class="n">theta2</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">s_own</span><span class="p">,</span> <span class="n">resid</span> <span class="ow">in</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">r1</span><span class="p">,</span> <span class="n">q1</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">theta1</span> <span class="o">/</span> <span class="n">s1</span> <span class="o">+</span> <span class="n">theta2</span> <span class="o">*</span> <span class="n">t12</span> <span class="o">/</span> <span class="n">s2</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">r2</span><span class="p">,</span> <span class="n">q2</span><span class="p">,</span> <span class="n">l2</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">theta1</span> <span class="o">*</span> <span class="n">t21</span> <span class="o">/</span> <span class="n">s1</span> <span class="o">+</span> <span class="n">theta2</span> <span class="o">/</span> <span class="n">s2</span><span class="p">),</span>
+        <span class="p">):</span>
+            <span class="n">phi_over_x</span> <span class="o">=</span> <span class="n">r</span> <span class="o">/</span> <span class="n">rx</span>
+            <span class="n">theta_over_phi</span> <span class="o">=</span> <span class="p">(</span><span class="n">q</span> <span class="o">/</span> <span class="n">qx</span><span class="p">)</span> <span class="o">/</span> <span class="n">phi_over_x</span>
+            <span class="n">ln_comb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">phi_over_x</span><span class="p">)</span> <span class="o">+</span> <span class="n">z</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">q</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">theta_over_phi</span><span class="p">)</span> <span class="o">+</span> <span class="n">l</span> <span class="o">-</span> <span class="n">phi_over_x</span> <span class="o">*</span> <span class="n">lx</span>
+            <span class="n">ln_res</span> <span class="o">=</span> <span class="n">q</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">s_own</span><span class="p">)</span> <span class="o">-</span> <span class="n">resid</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">ln_comb</span> <span class="o">+</span> <span class="n">ln_res</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></div>
+</div>
 
 </pre></div>
 

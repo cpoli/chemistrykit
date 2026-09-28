@@ -485,8 +485,9 @@ implementation in this package at each stop.</p>
 <li><p><a class="reference internal" href="#ryckaert-ciccotti-and-berendsen-shake-and-rigid-bonds" id="id13">1977 – Ryckaert, Ciccotti, and Berendsen: SHAKE and Rigid Bonds</a></p></li>
 <li><p><a class="reference internal" href="#andersen-nose-and-hoover-extended-lagrangian-thermostats" id="id14">1980 – 1985 – Andersen, Nose, and Hoover: Extended-Lagrangian Thermostats</a></p></li>
 <li><p><a class="reference internal" href="#berendsen-s-weak-coupling-thermostat" id="id15">1984 – Berendsen’s Weak-Coupling Thermostat</a></p></li>
-<li><p><a class="reference internal" href="#bussi-donadio-and-parrinello-stochastic-velocity-rescaling" id="id16">2007 – Bussi, Donadio, and Parrinello: Stochastic Velocity Rescaling</a></p></li>
-<li><p><a class="reference internal" href="#see-also" id="id17">See Also</a></p></li>
+<li><p><a class="reference internal" href="#humphrey-dalke-and-schulten-vmd-and-the-visual-analysis-of-trajectories" id="id16">1996 – Humphrey, Dalke, and Schulten: VMD and the Visual Analysis of Trajectories</a></p></li>
+<li><p><a class="reference internal" href="#bussi-donadio-and-parrinello-stochastic-velocity-rescaling" id="id17">2007 – Bussi, Donadio, and Parrinello: Stochastic Velocity Rescaling</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id18">See Also</a></p></li>
 </ul>
 </nav>
 <section id="maxwell-boltzmann-and-the-kinetic-theory-of-gases">
@@ -1065,8 +1066,36 @@ external bath,” J. Chem. Phys. 81, 3684-3690 (1984).</p>
 <p><a class="reference internal" href="../api/gallery/md/thermostats/plot_02_berendsen_weak_coupling.html"><span class="doc">Berendsen’s weak coupling: exponential relaxation to the bath temperature</span></a></p>
   <div class="sphx-glr-thumbnail-title">Berendsen's weak coupling: exponential relaxation to the bath temperature</div>
 </div></div></section>
+<section id="humphrey-dalke-and-schulten-vmd-and-the-visual-analysis-of-trajectories">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">1996 – Humphrey, Dalke, and Schulten: VMD and the Visual Analysis of Trajectories</a><a class="headerlink" href="#humphrey-dalke-and-schulten-vmd-and-the-visual-analysis-of-trajectories" title="Link to this heading">#</a></h2>
+<p>A molecular-dynamics run produces millions of coordinates, and much of
+what is learned from it is learned by looking. William Humphrey, Andrew
+Dalke and Klaus Schulten’s VMD (Visual Molecular Dynamics) made
+interactive viewing and scripted analysis of whole trajectories routine
+for biomolecular and materials simulations alike. It read the output of
+every major MD package and rendered millions of atoms. Viewers of this
+kind, including OVITO (Stukowski, 2010) for materials, standardized on
+a few interchange formats. The simplest is the plain-text XYZ file: an
+atom count, a comment line and one <code class="docutils literal notranslate"><span class="pre">symbol</span> <span class="pre">x</span> <span class="pre">y</span> <span class="pre">z</span></code> line per atom,
+repeated per frame. The <em>extended</em> XYZ convention stores the periodic
+cell and other metadata as <code class="docutils literal notranslate"><span class="pre">key=value</span></code> pairs on that comment line.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/md.html#chemistrykit.md.write_xyz" title="chemistrykit.md.write_xyz"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_xyz()</span></code></a> writes positions or
+an entire <a class="reference internal" href="../api/md.html#chemistrykit.md.MDResult" title="chemistrykit.md.MDResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">MDResult</span></code></a> as multi-frame (extended)
+XYZ, scaling reduced or SI lengths to the angstroms viewers expect, and
+<a class="reference internal" href="../api/md.html#chemistrykit.md.read_xyz" title="chemistrykit.md.read_xyz"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_xyz()</span></code></a> reads it back. The example writes a
+liquid-argon trajectory, prints the file header, and analyzes frames
+read back from the file.</p>
+<p><em>References:</em> W. Humphrey, A. Dalke, and K. Schulten, “VMD: Visual
+Molecular Dynamics,” J. Mol. Graphics 14, 33-38 (1996); A. Stukowski,
+“Visualization and Analysis of Atomistic Simulation Data with OVITO–the
+Open Visualization Tool,” Modelling Simul. Mater. Sci. Eng. 18, 015012
+(2010).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Molecular-dynamics results are usually inspected in a dedicated viewer such as VMD or OVITO, and the lowest common denominator they all read is the XYZ format: an atom count, a comment line, and one symbol x y z row per atom, repeated for every frame. write_xyz writes a whole MDResult this way. It puts the periodic box in the extended-XYZ Lattice= comment that OVITO reads, and scales the Lennard-Jones reduced lengths to angstroms (\sigma = 3.405 Å for argon), since viewers assume Å. The file is then read back with read_xyz and a frame is drawn straight from it."><img alt="" src="../_images/sphx_glr_plot_01_vmd_xyz_trajectory_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/md/trajectory_io/plot_01_vmd_xyz_trajectory.html"><span class="doc">Visualizing a trajectory: XYZ files for VMD and OVITO</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Visualizing a trajectory: XYZ files for VMD and OVITO</div>
+</div></div></section>
 <section id="bussi-donadio-and-parrinello-stochastic-velocity-rescaling">
-<h2><a class="toc-backref" href="#id16" role="doc-backlink">2007 – Bussi, Donadio, and Parrinello: Stochastic Velocity Rescaling</a><a class="headerlink" href="#bussi-donadio-and-parrinello-stochastic-velocity-rescaling" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">2007 – Bussi, Donadio, and Parrinello: Stochastic Velocity Rescaling</a><a class="headerlink" href="#bussi-donadio-and-parrinello-stochastic-velocity-rescaling" title="Link to this heading">#</a></h2>
 <p>Giovanni Bussi, Davide Donadio, and Michele Parrinello repaired the
 flaw in Berendsen’s thermostat while keeping what made it popular. In a
 canonical ensemble the total kinetic energy <span class="math notranslate nohighlight">\(K\)</span> of <span class="math notranslate nohighlight">\(N_f\)</span>
@@ -1098,7 +1127,7 @@ sampling through velocity rescaling,” J. Chem. Phys. 126, 014101 (2007).</p>
   <div class="sphx-glr-thumbnail-title">Bussi-Donadio-Parrinello: stochastic velocity rescaling samples the canonical ensemble</div>
 </div></div></section>
 <section id="see-also">
-<h2><a class="toc-backref" href="#id17" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id18" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../api/md.html"><span class="doc">chemistrykit.md</span></a></p></li>
 <li><p><a class="reference internal" href="solutions_breakthroughs.html"><span class="doc">Breakthroughs in Solution Chemistry</span></a></p></li>
@@ -1168,6 +1197,7 @@ sampling through velocity rescaling,” J. Chem. Phys. 126, 014101 (2007).</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ryckaert-ciccotti-and-berendsen-shake-and-rigid-bonds">1977 – Ryckaert, Ciccotti, and Berendsen: SHAKE and Rigid Bonds</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#andersen-nose-and-hoover-extended-lagrangian-thermostats">1980 – 1985 – Andersen, Nose, and Hoover: Extended-Lagrangian Thermostats</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#berendsen-s-weak-coupling-thermostat">1984 – Berendsen’s Weak-Coupling Thermostat</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#humphrey-dalke-and-schulten-vmd-and-the-visual-analysis-of-trajectories">1996 – Humphrey, Dalke, and Schulten: VMD and the Visual Analysis of Trajectories</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bussi-donadio-and-parrinello-stochastic-velocity-rescaling">2007 – Bussi, Donadio, and Parrinello: Stochastic Velocity Rescaling</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
 </ul>

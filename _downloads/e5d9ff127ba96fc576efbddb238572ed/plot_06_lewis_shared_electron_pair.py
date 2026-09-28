@@ -36,7 +36,7 @@ occupations = {1: (1, 0), 2: (2, 0), 3: (2, 1), 4: (2, 2)}
 # Orbital diagrams: arrows are electrons, paired arrows are Lewis's shared pair.
 
 fig, axes = plt.subplots(1, 4, figsize=(12, 4), sharey=True)
-for ax, (name, n) in zip(axes, cases):
+for ax, (name, n) in zip(axes, cases, strict=True):
     n_b, n_a = occupations[n]
     for x in (-1.0, 1.0):
         ax.hlines(e_atom, x - 0.3, x + 0.3, color="gray")
@@ -61,7 +61,7 @@ fig.tight_layout()
 n_electrons = np.array([n for _, n in cases])
 bond_order = np.array([(occupations[n][0] - occupations[n][1]) / 2 for n in n_electrons])
 energy_change = np.array([occupations[n][0] * e_bond + occupations[n][1] * e_anti - n * e_atom for n in n_electrons])
-for (name, _), bo, de in zip(cases, bond_order, energy_change):
+for (name, _), bo, de in zip(cases, bond_order, energy_change, strict=True):
     print(f"{name:20s} bond order {bo:3.1f}  orbital-energy change {de:+7.2f} eV")
 
 fig2, ax2 = plt.subplots(figsize=(6, 4))

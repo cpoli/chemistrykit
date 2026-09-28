@@ -41,7 +41,7 @@ def ln_Q(T):
 T = np.linspace(100.0, 3000.0, 120)
 dT = 1e-2 * T
 lnQ = np.array([ln_Q(t) for t in T])
-dlnQ = np.array([(ln_Q(t + d) - ln_Q(t - d)) / (2 * d) for t, d in zip(T, dT)])
+dlnQ = np.array([(ln_Q(t + d) - ln_Q(t - d)) / (2 * d) for t, d in zip(T, dT, strict=True)])
 
 A = -K_B * T * lnQ
 U = K_B * T**2 * dlnQ

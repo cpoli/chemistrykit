@@ -7,7 +7,8 @@ This gallery walks through every public feature of ``chemistrykit.md``:
 the Lennard-Jones fluid in reduced units (energy conservation, pressure,
 and the radial distribution function g(r)); Morse/Buckingham/harmonic
 bonded potentials and small bonded clusters; periodic boundaries; SHAKE
-bond constraints; thermostats; and self-diffusion coefficients.
+bond constraints; thermostats; self-diffusion coefficients; and XYZ
+trajectory files for molecular viewers.
 
 Each script in this gallery is self-contained and can be run directly with
 ``python examples/md/<section>/<script>.py``. Every script also carries an
@@ -35,6 +36,8 @@ Sections
 - **constraints** -- rigid bonds enforced with the SHAKE algorithm.
 - **thermostats** -- Nose-Hoover, Berendsen weak-coupling, and stochastic
   velocity-rescaling temperature control.
+- **trajectory_io** -- writing and reading (extended) XYZ trajectories
+  for VMD and OVITO.
 
 
 .. raw:: html
@@ -469,6 +472,47 @@ Bussi-Donadio-Parrinello stochastic velocity rescaling.
 
     </div>
 
+Trajectory files
+----------------
+
+Writing molecular-dynamics trajectories to XYZ files for molecular
+viewers such as VMD and OVITO, and reading them back.
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Molecular-dynamics results are usually inspected in a dedicated viewer such as VMD or OVITO, and the lowest common denominator they all read is the XYZ format: an atom count, a comment line, and one symbol x y z row per atom, repeated for every frame. write_xyz writes a whole MDResult this way. It puts the periodic box in the extended-XYZ Lattice= comment that OVITO reads, and scales the Lennard-Jones reduced lengths to angstroms (\sigma = 3.405 Å for argon), since viewers assume Å. The file is then read back with read_xyz and a frame is drawn straight from it.">
+
+.. only:: html
+
+  .. image:: /api/gallery/md/trajectory_io/images/thumb/sphx_glr_plot_01_vmd_xyz_trajectory_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/md/trajectory_io/plot_01_vmd_xyz_trajectory`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Visualizing a trajectory: XYZ files for VMD and OVITO</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
 
 .. toctree::
    :hidden:
@@ -480,6 +524,7 @@ Bussi-Donadio-Parrinello stochastic velocity rescaling.
    /api/gallery/md/pair_potentials/index.rst
    /api/gallery/md/periodic_boundaries/index.rst
    /api/gallery/md/thermostats/index.rst
+   /api/gallery/md/trajectory_io/index.rst
 
 
 

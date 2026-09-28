@@ -379,6 +379,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../analytical/qtest/index.html">Outlier rejection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../analytical/smoothing/index.html">Signal smoothing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../analytical/statistics/index.html">Statistics of replicate measurements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../analytical/stoichiometry/index.html">Stoichiometry and elemental analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../analytical/titration/index.html">Titration curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../analytical/uncertainty/index.html">Propagation of uncertainty</a></li>
 </ul>
@@ -407,6 +408,7 @@
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">chemistrykit.kinetics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="arrhenius/index.html">Arrhenius equation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="enzyme/index.html">Enzyme kinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="explosions/index.html">Branched-chain explosions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="networks/index.html">Reaction networks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="oscillators/index.html">Oscillating reactions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rate_laws/index.html">Rate laws</a></li>
@@ -419,6 +421,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../md/pair_potentials/index.html">Pair potentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../md/periodic_boundaries/index.html">Periodic boundaries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../md/thermostats/index.html">Thermostats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../md/trajectory_io/index.html">Trajectory files</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../photochem/index.html">chemistrykit.photochem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -444,7 +447,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../quantum/index.html">chemistrykit.quantum</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../quantum/harmonic_oscillator/index.html">Harmonic oscillator vs. Morse potential</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../quantum/hartree_fock/index.html">Minimal variational H2+ and the LCAO method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quantum/hartree_fock/index.html">Variational H2+, the LCAO method, and Hartree-Fock SCF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quantum/helium/index.html">Variational helium atom</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quantum/huckel/index.html">Huckel molecular-orbital theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quantum/hydrogenlike/index.html">Hydrogen-like atoms</a></li>
@@ -456,6 +459,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../solutions/index.html">chemistrykit.solutions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../solutions/acid_base/index.html">Acid-base equilibria</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../solutions/activity/index.html">Activity coefficients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../solutions/complexation/index.html">Complexation equilibria</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../solutions/solubility/index.html">Solubility equilibria</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../solutions/titration/index.html">Titration curves</a></li>
 </ul>
@@ -485,6 +489,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../structure/dipole/index.html">Dipole moments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../structure/kekule/index.html">Kekulé structures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../structure/lewis/index.html">Lewis structures, oxidation states, and electronegativity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../structure/periodic_table/index.html">The periodic table</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../structure/point_group/index.html">Point-group determination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../structure/ring_strain/index.html">Ring strain</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../structure/vsepr/index.html">VSEPR geometry prediction</a></li>
@@ -574,6 +579,7 @@
 <p>This gallery walks through every public feature of <code class="docutils literal notranslate"><span class="pre">chemistrykit.kinetics</span></code>:
 closed-form integrated rate laws, the Arrhenius temperature dependence,
 collision, diffusion, and transition-state theories of the rate constant,
+Lindemann-Hinshelwood unimolecular falloff, branched-chain explosions,
 Michaelis-Menten enzyme kinetics, a general stoichiometric reaction-network
 engine with exact stochastic simulation, and chemical oscillators.</p>
 <p>Each script in this gallery is self-contained and can be run directly with
@@ -592,8 +598,8 @@ Wilhelmy’s first-order sucrose inversion.</p></li>
 and recovering the activation energy from synthetic rate-vs-temperature
 data via an Arrhenius plot.</p></li>
 <li><p><strong>rate_theory</strong> – rate constants from molecular properties: collision
-theory, Smoluchowski’s diffusion limit, and Eyring’s transition-state
-theory.</p></li>
+theory, Smoluchowski’s diffusion limit, Eyring’s transition-state
+theory, and Lindemann-Hinshelwood unimolecular falloff.</p></li>
 <li><p><strong>enzyme</strong> – Michaelis-Menten enzyme kinetics, the Lineweaver-Burk
 linearization, competitive/noncompetitive inhibition, and the full
 substrate-depletion progress curve.</p></li>
@@ -601,6 +607,8 @@ substrate-depletion progress curve.</p></li>
 the steady-state approximation and Lindemann fall-off, chain-branching
 explosions, Bateman’s consecutive-reaction solution, Eigen’s relaxation
 kinetics, parallel reactions, and Gillespie’s stochastic simulation.</p></li>
+<li><p><strong>explosions</strong> – Semenov’s branching criterion and the first and
+second explosion limits of hydrogen-oxygen.</p></li>
 <li><p><strong>oscillators</strong> – the Brusselator limit cycle, Lotka’s neutral
 oscillations, and the Oregonator model of the Belousov-Zhabotinsky
 reaction.</p></li>
@@ -625,6 +633,14 @@ double-reciprocal linearization.</p>
 </div><div class="sphx-glr-thumbcontainer" tooltip="Lineweaver and Burk (1934) inverted the Michaelis-Menten equation into a straight line, 1/v = (K_m/V_{max})(1/[S]) + 1/V_{max}, so V_{max} and K_m could be read off the intercept and slope. fit_lineweaver_burk does exactly that fit on noisy initial-rate data. The second panel shows the method&#x27;s well-known weakness: the same small relative noise becomes a large scatter at the low-[S] (large 1/[S]) end, which dominates the fitted line."><img alt="" src="../../../_images/sphx_glr_plot_02_lineweaver_burk_thumb.png" />
 <p><a class="reference internal" href="enzyme/plot_02_lineweaver_burk.html"><span class="doc">Lineweaver and Burk’s double-reciprocal plot</span></a></p>
   <div class="sphx-glr-thumbnail-title">Lineweaver and Burk's double-reciprocal plot</div>
+</div></div></section>
+<section id="branched-chain-explosions">
+<h2>Branched-chain explosions<a class="headerlink" href="#branched-chain-explosions" title="Link to this heading">#</a></h2>
+<p>Semenov’s branching-versus-termination criterion and the first and
+second explosion limits of hydrogen-oxygen mixtures.</p>
+<div id='sg-tag-list' class='sphx-glr-tag-list'></div><div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="In the H2/O2 chain the branching step H + O_2 \to OH + O (net two extra H atoms per event) competes with H loss at the vessel wall and with the three-body H + O_2 + M \to HO_2 + M. Semenov&#x27;s net branching factor (~chemistrykit.kinetics.ChainBranchingExplosion.branching_factor),"><img alt="" src="../../../_images/sphx_glr_plot_01_h2_o2_explosion_peninsula_thumb.png" />
+<p><a class="reference internal" href="explosions/plot_01_h2_o2_explosion_peninsula.html"><span class="doc">The hydrogen-oxygen explosion peninsula</span></a></p>
+  <div class="sphx-glr-thumbnail-title">The hydrogen-oxygen explosion peninsula</div>
 </div></div></section>
 <section id="reaction-networks">
 <h2>Reaction networks<a class="headerlink" href="#reaction-networks" title="Link to this heading">#</a></h2>
@@ -683,8 +699,9 @@ inversion.</p>
 <section id="rate-theory">
 <h2>Rate theory<a class="headerlink" href="#rate-theory" title="Link to this heading">#</a></h2>
 <p>Predicting a rate constant from molecular properties: hard-sphere
-collision theory, Smoluchowski’s diffusion-controlled encounter rate, and
-Eyring’s transition-state theory.</p>
+collision theory, Smoluchowski’s diffusion-controlled encounter rate,
+Eyring’s transition-state theory, and the Lindemann-Hinshelwood pressure
+falloff of unimolecular rate constants.</p>
 <div id='sg-tag-list' class='sphx-glr-tag-list'></div><div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Trautz (1916) and Lewis (1918) computed a gas-phase rate constant as the number of collisions per unit time times the Boltzmann fraction with enough energy,"><img alt="" src="../../../_images/sphx_glr_plot_01_collision_theory_thumb.png" />
 <p><a class="reference internal" href="rate_theory/plot_01_collision_theory.html"><span class="doc">Trautz-Lewis collision theory: rate constants from molecular collisions</span></a></p>
   <div class="sphx-glr-thumbnail-title">Trautz-Lewis collision theory: rate constants from molecular collisions</div>
@@ -694,6 +711,9 @@ Eyring’s transition-state theory.</p>
 </div><div class="sphx-glr-thumbcontainer" tooltip="Transition-state theory (Eyring; Evans and Polanyi, 1935) writes a rate constant as a universal frequency times an equilibrium constant for forming the activated complex,"><img alt="" src="../../../_images/sphx_glr_plot_03_eyring_transition_state_thumb.png" />
 <p><a class="reference internal" href="rate_theory/plot_03_eyring_transition_state.html"><span class="doc">Eyring’s transition-state theory: activation enthalpy and entropy</span></a></p>
   <div class="sphx-glr-thumbnail-title">Eyring's transition-state theory: activation enthalpy and entropy</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="A unimolecular decomposition needs collisions to energize the molecule, so its first-order rate constant depends on pressure. LindemannHinshelwood gives the steady-state result k_{uni}=k_1k_2[M]/(k_{-1}[M]+k_2). It rises linearly at low pressure, where activation is the bottleneck, saturates at k_\infty=k_1k_2/k_{-1} at high pressure, and falls to half of k_\infty at [M]_{1/2}=k_2/k_{-1}. Left: the falloff curve, checked against a direct integration of the full three-step mechanism (~chemistrykit.kinetics.LindemannHinshelwood.network). Right: Lindemann&#x27;s linearization 1/k_{uni} against 1/[M]. Real data curve away from this straight line, the discrepancy that led to Hinshelwood&#x27;s, and later RRK and RRKM, energy-dependent k_2."><img alt="" src="../../../_images/sphx_glr_plot_04_lindemann_hinshelwood_falloff_thumb.png" />
+<p><a class="reference internal" href="rate_theory/plot_04_lindemann_hinshelwood_falloff.html"><span class="doc">Lindemann-Hinshelwood falloff of a unimolecular rate constant</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Lindemann-Hinshelwood falloff of a unimolecular rate constant</div>
 </div></div><div class="toctree-wrapper compound">
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
@@ -750,6 +770,7 @@ Eyring’s transition-state theory.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sections">Sections</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arrhenius-equation">Arrhenius equation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enzyme-kinetics">Enzyme kinetics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#branched-chain-explosions">Branched-chain explosions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reaction-networks">Reaction networks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oscillating-reactions">Oscillating reactions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rate-laws">Rate laws</a></li>

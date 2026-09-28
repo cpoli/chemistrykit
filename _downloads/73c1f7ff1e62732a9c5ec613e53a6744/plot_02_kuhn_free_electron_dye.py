@@ -52,8 +52,8 @@ fig.tight_layout()
 
 electron_counts = np.arange(6, 22, 2)
 lengths = 0.56e-9 + 0.14e-9 * (electron_counts - 6)
-wavelengths_nm = [conjugated_dye_absorption_wavelength(box_length=Lk, n_pi_electrons=int(n)) * 1e9 for Lk, n in zip(lengths, electron_counts)]
-for n, Lk, wl in zip(electron_counts, lengths, wavelengths_nm):
+wavelengths_nm = [conjugated_dye_absorption_wavelength(box_length=Lk, n_pi_electrons=int(n)) * 1e9 for Lk, n in zip(lengths, electron_counts, strict=True)]
+for n, Lk, wl in zip(electron_counts, lengths, wavelengths_nm, strict=True):
     print(f"{n:2d} pi electrons, L = {Lk * 1e9:.2f} nm -> lambda = {wl:.0f} nm")
 
 fig2, ax2 = plt.subplots(figsize=(6, 4))

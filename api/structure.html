@@ -1105,8 +1105,13 @@ valid Python/LaTeX-free identifier component).</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>steric_number</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of electron domains (sigma bonds + lone pairs).</p></li>
-<li><p><strong>lone_pairs</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of lone pairs on the central atom, <code class="docutils literal notranslate"><span class="pre">&lt;=</span> <span class="pre">steric_number</span></code>.</p></li>
+<li><p><strong>lone_pairs</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of lone pairs on the central atom, <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">steric_number</span></code>
+(at least one domain must be a bond, or there is no molecule).</p></li>
 </ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <cite>steric_number</cite> is outside 2-6 or <cite>lone_pairs</cite> is outside
+    <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;=</span> <span class="pre">lone_pairs</span> <span class="pre">&lt;</span> <span class="pre">steric_number</span></code>.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -1114,6 +1119,8 @@ valid Python/LaTeX-free identifier component).</p>
 <span class="go">'bent'</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">VSEPRGeometry</span><span class="p">(</span><span class="n">steric_number</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">lone_pairs</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">shape_name</span>
 <span class="go">'tetrahedral'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VSEPRGeometry</span><span class="p">(</span><span class="n">steric_number</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">lone_pairs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">shape_name</span>  <span class="c1"># HF, AX1E3</span>
+<span class="go">'linear'</span>
 </pre></div>
 </div>
 <dl class="py property">

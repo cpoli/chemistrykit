@@ -2,13 +2,15 @@
 
 .. _sphx_glr_api_gallery_quantum_hartree_fock:
 
-Minimal variational H2+ and the LCAO method
----------------------------------------------
+Variational H2+, the LCAO method, and Hartree-Fock SCF
+--------------------------------------------------------
 
 The one-electron H2+ molecular ion in a small Gaussian basis: LCAO
 bonding and antibonding orbitals, bonding density, the Born-Oppenheimer
 potential curve, Gaussian-type orbital integrals, the Roothaan-Hall
-secular equation ``HC=SCE``, and the shared electron pair.
+secular equation ``HC=SCE``, and the shared electron pair; then
+closed-shell restricted Hartree-Fock SCF for HeH+ and H2, and the
+STO-3G contracted-Gaussian basis.
 
 
 .. raw:: html
@@ -124,6 +126,40 @@ secular equation ``HC=SCE``, and the shared electron pair.
     </div>
 
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="With two or more electrons the Fock matrix depends on the orbitals being solved for, so the Roothaan-Hall equations FC=SC\varepsilon must be iterated. RestrictedHartreeFock starts from the core Hamiltonian (no electron repulsion), builds the density matrix from the occupied orbital, rebuilds F, and repeats until the density stops changing. Left: the SCF energy of HeH+ (STO-3G, 1.4632 bohr) converging to Szabo &amp; Ostlund&#x27;s -2.860662 hartree. Right: the RHF potential curve of H2. It has a good minimum near 1.35 bohr but rises far above two separate hydrogen atoms at large R. That is the well-known failure of a single doubly occupied orbital to describe bond breaking, since it keeps an ionic H+ H- component at every distance.">
+
+.. only:: html
+
+  .. image:: /api/gallery/quantum/hartree_fock/images/thumb/sphx_glr_plot_07_roothaan_hall_scf_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/quantum/hartree_fock/plot_07_roothaan_hall_scf`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Roothaan-Hall self-consistent field: RHF for HeH+ and H2</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A Slater 1s orbital e^{-\zeta r} has the right cusp and tail but awkward integrals; a Gaussian has easy integrals but the wrong shape. STO-3G (~chemistrykit.quantum.utils.basis_sets.sto3g_1s) fixes three Gaussian exponents and coefficients by a least-squares fit to the Slater function once, for \zeta=1. Every other exponent follows by scaling the Gaussian exponents by \zeta^2. Below, the STO-3G contraction for hydrogen in molecules (\zeta=1.24) is compared with its Slater target and with a single best-fit Gaussian. The error concentrates at the nucleus and in the tail, but the region that matters for bonding is reproduced well.">
+
+.. only:: html
+
+  .. image:: /api/gallery/quantum/hartree_fock/images/thumb/sphx_glr_plot_08_sto3g_minimal_basis_thumb.png
+    :alt:
+
+  :doc:`/api/gallery/quantum/hartree_fock/plot_08_sto3g_minimal_basis`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Hehre, Stewart and Pople's STO-3G basis: three Gaussians for one Slater orbital</div>
+    </div>
+
+
 .. thumbnail-parent-div-close
 
 .. raw:: html
@@ -140,4 +176,6 @@ secular equation ``HC=SCE``, and the shared electron pair.
    /api/gallery/quantum/hartree_fock/plot_04_boys_gaussian_orbitals
    /api/gallery/quantum/hartree_fock/plot_05_roothaan_hall_secular_equation
    /api/gallery/quantum/hartree_fock/plot_06_lewis_shared_electron_pair
+   /api/gallery/quantum/hartree_fock/plot_07_roothaan_hall_scf
+   /api/gallery/quantum/hartree_fock/plot_08_sto3g_minimal_basis
 

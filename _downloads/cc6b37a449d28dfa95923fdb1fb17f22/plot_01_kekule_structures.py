@@ -83,7 +83,7 @@ def draw(ax, xy, bonds, doubles, title):
     double_set = {tuple(sorted(b)) for b in doubles}
     for i, j in bonds:
         is_double = tuple(sorted((i, j))) in double_set
-        ax.plot(*zip(xy[i], xy[j]), color="crimson" if is_double else "black", linewidth=4.0 if is_double else 1.5)
+        ax.plot(*zip(xy[i], xy[j], strict=True), color="crimson" if is_double else "black", linewidth=4.0 if is_double else 1.5)
     ax.set_aspect("equal")
     ax.axis("off")
     ax.set_title(title, fontsize=10)

@@ -494,9 +494,10 @@ corresponding implementation in this package at each stop.</p>
 <li><p><a class="reference internal" href="#herzberg-s-molecular-spectra-and-molecular-structure" id="id12">1939 – 1971 – Herzberg’s Molecular Spectra and Molecular Structure</a></p></li>
 <li><p><a class="reference internal" href="#bloch-purcell-and-the-discovery-of-nuclear-magnetic-resonance" id="id13">1946 – Bloch, Purcell, and the Discovery of Nuclear Magnetic Resonance</a></p></li>
 <li><p><a class="reference internal" href="#ramsey-purcell-and-the-theory-of-spin-spin-coupling" id="id14">1952 – 1953 – Ramsey, Purcell, and the Theory of Spin-Spin Coupling</a></p></li>
-<li><p><a class="reference internal" href="#karplus-and-the-dihedral-angle-dependence-of-vicinal-coupling" id="id15">1959 – 1963 – Karplus and the Dihedral-Angle Dependence of Vicinal Coupling</a></p></li>
-<li><p><a class="reference internal" href="#ernst-anderson-and-fourier-transform-nmr" id="id16">1966 – Ernst, Anderson, and Fourier-Transform NMR</a></p></li>
-<li><p><a class="reference internal" href="#see-also" id="id17">See Also</a></p></li>
+<li><p><a class="reference internal" href="#bernstein-pople-and-schneider-analysis-of-second-order-spectra" id="id15">1957 – Bernstein, Pople, and Schneider: Analysis of Second-Order Spectra</a></p></li>
+<li><p><a class="reference internal" href="#karplus-and-the-dihedral-angle-dependence-of-vicinal-coupling" id="id16">1959 – 1963 – Karplus and the Dihedral-Angle Dependence of Vicinal Coupling</a></p></li>
+<li><p><a class="reference internal" href="#ernst-anderson-and-fourier-transform-nmr" id="id17">1966 – Ernst, Anderson, and Fourier-Transform NMR</a></p></li>
+<li><p><a class="reference internal" href="#see-also" id="id18">See Also</a></p></li>
 </ul>
 </nav>
 <section id="bouguer-lambert-and-beer-s-absorption-law">
@@ -1067,8 +1068,42 @@ Phys. Rev. 91, 303-307 (1953).</p>
 <p><a class="reference internal" href="../api/gallery/spectro/nmr/plot_01_nmr_multiplets.html"><span class="doc">Spin-spin (J) coupling and the n+1 rule: ethanol’s triplet/quartet and a doublet of triplets</span></a></p>
   <div class="sphx-glr-thumbnail-title">Spin-spin (J) coupling and the n+1 rule: ethanol's triplet/quartet and a doublet of triplets</div>
 </div></div></section>
+<section id="bernstein-pople-and-schneider-analysis-of-second-order-spectra">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">1957 – Bernstein, Pople, and Schneider: Analysis of Second-Order Spectra</a><a class="headerlink" href="#bernstein-pople-and-schneider-analysis-of-second-order-spectra" title="Link to this heading">#</a></h2>
+<p>The first-order multiplet rules (<span class="math notranslate nohighlight">\(n+1\)</span> lines, binomial intensities)
+work only when coupled nuclei differ in resonance frequency by much more
+than their coupling constant. Early high-resolution proton spectra often
+violated that condition, showing leaning doublets, lines in unexpected
+places, and extra weak lines. Following McConnell, McLean and Reilly’s
+1955 general treatment, Herbert Bernstein, John Pople and William
+Schneider worked out in closed form how to analyze the commonest such
+cases, the two-spin AB and three-spin ABX systems, by diagonalizing the
+spin Hamiltonian</p>
+<div class="math notranslate nohighlight">
+\[\hat H = \sum_i \nu_i\hat I_{zi} + \sum_{i&lt;j}J_{ij}\,\hat{\mathbf I}_i\cdot\hat{\mathbf I}_j\]</div>
+<p>in the product basis and reading line positions and intensities from its
+eigenvectors. Their labeling scheme (letters close in the alphabet for
+strongly coupled nuclei, distant letters for weakly coupled ones) and
+their 1959 monograph with Pople and Schneider became the standard
+language for second-order NMR.</p>
+<p><em>Implementation:</em> <a class="reference internal" href="../api/spectro.html#chemistrykit.spectro.second_order_spectrum" title="chemistrykit.spectro.second_order_spectrum"><code class="xref py py-func docutils literal notranslate"><span class="pre">second_order_spectrum()</span></code></a>
+diagonalizes the full spin Hamiltonian of any small spin-1/2 system,
+<a class="reference internal" href="../api/spectro.html#chemistrykit.spectro.ab_quartet" title="chemistrykit.spectro.ab_quartet"><code class="xref py py-func docutils literal notranslate"><span class="pre">ab_quartet()</span></code></a> gives the closed-form AB result,
+and <a class="reference internal" href="../api/spectro.html#chemistrykit.spectro.abx_spectrum" title="chemistrykit.spectro.abx_spectrum"><code class="xref py py-func docutils literal notranslate"><span class="pre">abx_spectrum()</span></code></a> wraps the three-spin case.
+The example follows an AX pair into the AB and <span class="math notranslate nohighlight">\(A_2\)</span> limits,
+checks the exact spectrum against the AB formula, and draws the AB part
+of an ABX system.</p>
+<p><em>References:</em> H. M. McConnell, A. D. McLean, and C. A. Reilly, “Analysis
+of Spin-Spin Multiplets in Nuclear Magnetic Resonance Spectra,” J. Chem.
+Phys. 23, 1152-1159 (1955); H. J. Bernstein, J. A. Pople, and W. G.
+Schneider, “The Analysis of Nuclear Magnetic Resonance Spectra. I.
+Systems of Two and Three Nuclei,” Can. J. Chem. 35, 65-81 (1957).</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="First-order rules (doublets of equal lines, spaced by J, centered on each shift) hold only while \Delta\nu \gg J. As the two shifts approach each other the doublets lean toward one another: the inner lines grow and the outer ones shrink, the &quot;roof effect&quot;. At \Delta\nu=0 the two nuclei become equivalent and a single line remains. second_order_spectrum diagonalizes the full spin Hamiltonian, and ab_quartet gives the closed-form AB result it must agree with. The right panel is an ABX system (~chemistrykit.spectro.abx_spectrum), the case Bernstein, Pople and Schneider analyzed: a strongly coupled CH2 pair (AB) next to a distant CH (X). Its AB part is no longer two simple doublets of doublets."><img alt="" src="../_images/sphx_glr_plot_05_abx_second_order_spectra_thumb.png" />
+<p><a class="reference internal" href="../api/gallery/spectro/nmr/plot_05_abx_second_order_spectra.html"><span class="doc">Second-order NMR: from AX to AB, and the ABX system</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Second-order NMR: from AX to AB, and the ABX system</div>
+</div></div></section>
 <section id="karplus-and-the-dihedral-angle-dependence-of-vicinal-coupling">
-<h2><a class="toc-backref" href="#id15" role="doc-backlink">1959 – 1963 – Karplus and the Dihedral-Angle Dependence of Vicinal Coupling</a><a class="headerlink" href="#karplus-and-the-dihedral-angle-dependence-of-vicinal-coupling" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">1959 – 1963 – Karplus and the Dihedral-Angle Dependence of Vicinal Coupling</a><a class="headerlink" href="#karplus-and-the-dihedral-angle-dependence-of-vicinal-coupling" title="Link to this heading">#</a></h2>
 <p>Once spin-spin coupling was understood as an electron-mediated effect,
 the next question was what sets its size. Martin Karplus, using a
 valence-bond calculation of the Fermi-contact mechanism for ethane-like
@@ -1101,7 +1136,7 @@ Soc. 85, 2870-2871 (1963).</p>
   <div class="sphx-glr-thumbnail-title">The Karplus relation: vicinal 3J(H,H) coupling as a function of dihedral angle</div>
 </div></div></section>
 <section id="ernst-anderson-and-fourier-transform-nmr">
-<h2><a class="toc-backref" href="#id16" role="doc-backlink">1966 – Ernst, Anderson, and Fourier-Transform NMR</a><a class="headerlink" href="#ernst-anderson-and-fourier-transform-nmr" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">1966 – Ernst, Anderson, and Fourier-Transform NMR</a><a class="headerlink" href="#ernst-anderson-and-fourier-transform-nmr" title="Link to this heading">#</a></h2>
 <p>Early NMR spectrometers were continuous-wave instruments. They swept the
 field or frequency slowly through each resonance, one frequency at a
 time, so most of each scan was spent recording empty baseline. Richard
@@ -1132,7 +1167,7 @@ Transform Spectroscopy to Magnetic Resonance,” Rev. Sci. Instrum. 37,
   <div class="sphx-glr-thumbnail-title">Fourier-transform NMR: from a free-induction decay to a spectrum</div>
 </div></div></section>
 <section id="see-also">
-<h2><a class="toc-backref" href="#id17" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id18" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../api/spectro.html"><span class="doc">chemistrykit.spectro</span></a></p></li>
 <li><p><a class="reference internal" href="structure_breakthroughs.html"><span class="doc">Breakthroughs in Molecular Structure</span></a></p></li>
@@ -1201,6 +1236,7 @@ Transform Spectroscopy to Magnetic Resonance,” Rev. Sci. Instrum. 37,
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#herzberg-s-molecular-spectra-and-molecular-structure">1939 – 1971 – Herzberg’s Molecular Spectra and Molecular Structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bloch-purcell-and-the-discovery-of-nuclear-magnetic-resonance">1946 – Bloch, Purcell, and the Discovery of Nuclear Magnetic Resonance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ramsey-purcell-and-the-theory-of-spin-spin-coupling">1952 – 1953 – Ramsey, Purcell, and the Theory of Spin-Spin Coupling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bernstein-pople-and-schneider-analysis-of-second-order-spectra">1957 – Bernstein, Pople, and Schneider: Analysis of Second-Order Spectra</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#karplus-and-the-dihedral-angle-dependence-of-vicinal-coupling">1959 – 1963 – Karplus and the Dihedral-Angle Dependence of Vicinal Coupling</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ernst-anderson-and-fourier-transform-nmr">1966 – Ernst, Anderson, and Fourier-Transform NMR</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>

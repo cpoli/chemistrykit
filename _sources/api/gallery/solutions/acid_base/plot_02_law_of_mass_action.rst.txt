@@ -50,7 +50,7 @@ such as :math:`[H^+]/[HA]`, does not.
     Ca_values = np.logspace(-5, 0, 60)
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.5))
-    for (name, Ka), color in zip(acids.items(), ["steelblue", "darkorange", "seagreen"]):
+    for (name, Ka), color in zip(acids.items(), ["steelblue", "darkorange", "seagreen"], strict=True):
         Q_mass_action, Q_other = [], []
         for Ca in Ca_values:
             acid = WeakAcid(Ca=Ca, Ka=Ka)
@@ -117,7 +117,7 @@ the recovered quotient matches :math:`K_a` to rounding error:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.164 seconds)
+   **Total running time of the script:** (0 minutes 0.163 seconds)
 
 
 .. _sphx_glr_download_api_gallery_solutions_acid_base_plot_02_law_of_mass_action.py:

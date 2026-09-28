@@ -479,6 +479,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArrayLike</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"LatticePacking"</span><span class="p">,</span> <span class="s2">"LatticeEnergyModel"</span><span class="p">]</span>
 
@@ -508,7 +509,7 @@
 <div class="viewcode-block" id="LatticePacking.unit_cell_volume">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.LatticePacking.unit_cell_volume">[docs]</a>
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">unit_cell_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unit_cell_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""Return the (conventional) unit-cell volume for lattice constant `a`.</span>
 
 <span class="sd">        Parameters</span>
@@ -525,7 +526,7 @@
 <div class="viewcode-block" id="LatticePacking.atomic_radius">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.LatticePacking.atomic_radius">[docs]</a>
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">atomic_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">atomic_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Return the touching-sphere radius implied by lattice constant `a`.</span>
 
 <span class="sd">        Parameters</span>
@@ -540,7 +541,7 @@
 
 <div class="viewcode-block" id="LatticePacking.packing_fraction">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.LatticePacking.packing_fraction">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">packing_fraction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">packing_fraction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">ArrayLike</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">"""Return the fraction of the unit cell's volume occupied by touching spheres.</span>
 
 <span class="sd">        .. math::</span>

@@ -29,7 +29,7 @@ def broadened_pattern(size_nm):
     for p in peaks:
         fwhm = np.degrees(K * wavelength_nm / (size_nm * np.cos(np.radians(p.two_theta / 2.0))))
         sigma = fwhm / (2.0 * np.sqrt(2.0 * np.log(2.0)))
-        y += p.relative_intensity * np.exp(-0.5 * ((two_theta - p.two_theta) / sigma) ** 2)
+        y += p.multiplicity * p.relative_intensity * np.exp(-0.5 * ((two_theta - p.two_theta) / sigma) ** 2)
     return y
 
 

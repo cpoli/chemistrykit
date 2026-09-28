@@ -43,7 +43,7 @@ axes[1].errorbar(1.0 / S_samples, trials.mean(axis=0), yerr=trials.std(axis=0), 
 axes[1].set_xlabel("1/[S]")
 axes[1].set_ylabel("1/v  (mean +/- std over 200 trials)")
 axes[1].set_title("Same 3% noise, very unequal reciprocal error bars")
-for inv_s, spread in zip(1.0 / S_samples, trials.std(axis=0)):
+for inv_s, spread in zip(1.0 / S_samples, trials.std(axis=0), strict=True):
     print(f"1/[S] = {inv_s:5.3f}: std of 1/v = {spread:.4f}")
 
 fig.tight_layout()

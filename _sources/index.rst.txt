@@ -20,6 +20,19 @@ Brunauer-Emmett-Teller isotherm, whose co-discoverer Paul Emmett went on
 to develop uranium-separation barrier materials for the Manhattan
 Project -- each one linked to the code that reproduces it.
 
+.. important::
+
+   Each domain is a teaching-depth subset of its field, not a complete
+   implementation. chemistrykit is not a replacement for specialist
+   libraries in production work: for that, use the dedicated tools
+   (`RDKit <https://www.rdkit.org/>`__,
+   `PySCF <https://pyscf.org/>`__,
+   `Cantera <https://cantera.org/>`__,
+   `ASE <https://ase-lib.org/>`__,
+   `OpenMM <https://openmm.org/>`__,
+   `pymatgen <https://pymatgen.org/>`__,
+   and the like) directly.
+
 - :mod:`chemistrykit.analytical` -- analytical chemistry: redox and
   complexometric (EDTA) titration-curve simulation with
   equivalence-point detection, alongside :mod:`chemistrykit.solutions`'s
@@ -44,11 +57,14 @@ Project -- each one linked to the code that reproduces it.
   battery discharge model with Peukert's-law rate dependence.
 - :mod:`chemistrykit.kinetics` -- reaction kinetics: integrated rate laws,
   the Arrhenius equation, Michaelis-Menten enzyme kinetics, a general
-  stoichiometric reaction-network engine, and the Brusselator oscillator.
+  stoichiometric reaction-network engine, the Brusselator oscillator,
+  Lindemann-Hinshelwood unimolecular falloff, and H2/O2 chain-branching
+  explosion limits.
 - :mod:`chemistrykit.md` -- molecular dynamics and force fields: the
   Lennard-Jones fluid in reduced units (periodic boundary conditions,
   a Verlet neighbor list, pressure, g(r)), Morse/Buckingham/harmonic
-  bonded potentials, and velocity-rescaling/Nose-Hoover thermostats.
+  bonded potentials, velocity-rescaling/Nose-Hoover thermostats, and XYZ
+  trajectory export for VMD/OVITO.
 - :mod:`chemistrykit.photochem` -- photochemistry: Jablonski-diagram
   excited-state kinetics built on :mod:`chemistrykit.kinetics`'s
   reaction-network engine; fluorescence/phosphorescence quantum yields
@@ -66,18 +82,19 @@ Project -- each one linked to the code that reproduces it.
   models (with the free-electron model of conjugated-dye color); the
   quantum harmonic oscillator vs. the exact Morse potential; the rigid
   rotor; hydrogen-like orbitals; Huckel molecular-orbital theory and its
-  4n+2 aromaticity rule; a minimal variational treatment of H2+; and
+  4n+2 aromaticity rule; a minimal variational treatment of H2+;
+  restricted Hartree-Fock SCF in an STO-3G basis for H2 and HeH+; and
   Rayleigh-Schrodinger perturbation theory for the anharmonic oscillator.
 - :mod:`chemistrykit.solutions` -- solution chemistry: pH/pOH and weak
   acid/base equilibria with Henderson-Hasselbalch buffers, titration
-  curves, Ksp solubility equilibria, and Debye-Huckel activity
-  coefficients.
+  curves, Ksp solubility equilibria, polyprotic and metal-ligand
+  complexation speciation, and Debye-Huckel activity coefficients.
 - :mod:`chemistrykit.spectro` -- spectroscopy: the Beer-Lambert
   absorbance law and its stray-light deviation from linearity;
   rigid-rotor rotational spectra with isotope shifts; harmonic vs. Morse
   vibrational band positions plus a Wilson GF-matrix triatomic
-  normal-mode calculation; Franck-Condon vibronic progressions; and a
-  first-order NMR multiplet simulator.
+  normal-mode calculation; Franck-Condon vibronic progressions; and
+  first-order NMR multiplets plus exact second-order (AB, ABX) spectra.
 - :mod:`chemistrykit.statmech` -- statistical mechanics of molecules:
   translational/rotational/vibrational partition functions and their
   thermodynamic functions, the Maxwell-Boltzmann speed distribution, and
@@ -96,9 +113,40 @@ Project -- each one linked to the code that reproduces it.
   :mod:`chemistrykit.kinetics`'s Arrhenius equation.
 - :mod:`chemistrykit.thermo` -- chemical thermodynamics: equations of
   state (ideal gas, van der Waals, Redlich-Kwong), Clausius-Clapeyron
-  phase boundaries, reaction equilibrium (Kp/Kc, van't Hoff, and a
-  Gibbs-energy-minimization equilibrium-composition solver), and
-  Raoult's/Henry's law mixtures with colligative properties.
+  and Antoine vapor-pressure curves, reaction equilibrium (Kp/Kc, van't
+  Hoff, and a Gibbs-energy-minimization equilibrium-composition solver),
+  Raoult's/Henry's law mixtures with colligative properties, and
+  Margules/Wilson/NRTL/UNIQUAC activity models for non-ideal
+  vapor-liquid equilibrium and azeotropes.
+
+General-chemistry helpers sit at the top level:
+:mod:`chemistrykit.periodic_table` (all 118 elements and a formula
+parser, e.g. ``molar_mass("Ca(OH)2")``) and :mod:`chemistrykit.stoichiometry`
+(equation balancing, including redox; limiting reagents; yields;
+empirical formulas).
+
+Units
+-----
+
+Every function takes and returns plain floats and NumPy arrays; there is
+no unit-tracking library and nothing checks that units are consistent.
+Physical constants in :mod:`chemistrykit.constants` are SI values from
+:mod:`scipy.constants`, and each docstring states the unit of every
+argument and return value. Most models work in SI (J, m, Pa, K,
+mol/m\ :sup:`3`). The exceptions are the conventional ones, documented per
+function: solution concentrations in mol/L, NMR shifts in ppm and
+couplings in Hz, spectroscopic line positions in cm\ :sup:`-1`, the
+Lennard-Jones fluid in reduced units (sigma, epsilon, particle mass), and
+empirical correlations (Antoine constants, activity-model and
+rate-constant parameters) in whatever units their constants were
+tabulated in. Converting inputs to the documented units is the caller's
+job.
+
+**chemistrykit** is part of a family of packages --
+`physicskit <https://cpoli.github.io/physicskit/>`_,
+`mathematicskit <https://cpoli.github.io/mathematicskit/>`_ and
+**chemistrykit** -- that share the same architecture, API conventions,
+and history-driven documentation.
 
 Conventionally imported as ``ck``:
 

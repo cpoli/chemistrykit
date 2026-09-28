@@ -435,7 +435,7 @@
 
 <div class="viewcode-block" id="energy_to_wavenumber">
 <a class="viewcode-back" href="../../../../api/spectro.html#chemistrykit.spectro.energy_to_wavenumber">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">energy_to_wavenumber</span><span class="p">(</span><span class="n">energy_j</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">energy_to_wavenumber</span><span class="p">(</span><span class="n">energy_j</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">"""Convert an energy (in J) to a spectroscopic wavenumber :math:`\tilde\nu=E/(hc)`, in cm^-1.</span>
 
 <span class="sd">    Parameters</span>
@@ -488,7 +488,7 @@
 <span class="sd">    """</span>
     <span class="n">J_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">J_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">transition_energies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">rotor</span><span class="o">.</span><span class="n">transition_energy</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">J</span><span class="p">))</span> <span class="k">for</span> <span class="n">J</span> <span class="ow">in</span> <span class="n">J_values</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">energy_to_wavenumber</span><span class="p">(</span><span class="n">transition_energies</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">energy_to_wavenumber</span><span class="p">(</span><span class="n">transition_energies</span><span class="p">))</span></div>
 
 
 
@@ -498,16 +498,20 @@
 <span class="w">    </span><span class="sa">r</span><span class="sd">"""Build a rotational-spectrum :class:`~chemistrykit.spectro.core.base_system.Spectrum`, with relative intensities.</span>
 
 <span class="sd">    **Approximation flagged explicitly**: the relative intensity of the</span>
-<span class="sd">    :math:`J\to J+1` line is modeled here as proportional to the thermal</span>
-<span class="sd">    (Boltzmann) population of the initial level `J`, weighted by its</span>
-<span class="sd">    :math:`(2J+1)`-fold degeneracy, times a :math:`(J+1)` line-strength</span>
-<span class="sd">    factor coming from the :math:`\Delta J=\pm1` transition-dipole matrix</span>
-<span class="sd">    element (Atkins &amp; de Paula, *Physical Chemistry*, 11th ed., Ch.</span>
-<span class="sd">    12.2(b)):</span>
+<span class="sd">    :math:`J\to J+1` line is modeled here as the thermal (Boltzmann)</span>
+<span class="sd">    population of the initial level `J`, :math:`(2J+1)e^{-E_J/k_BT}`,</span>
+<span class="sd">    times the degeneracy-averaged squared transition dipole</span>
+<span class="sd">    :math:`|\mu_{J+1,J}|^2\propto(J+1)/(2J+1)` of a linear rotor (Atkins &amp;</span>
+<span class="sd">    de Paula, *Physical Chemistry*, 11th ed., Ch. 12.2(b); Bernath,</span>
+<span class="sd">    *Spectra of Atoms and Molecules*, 2nd ed., Ch. 6.5). The</span>
+<span class="sd">    :math:`(2J+1)` factors cancel, leaving</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        I_J \propto (J+1)(2J+1)\exp\!\left[-\frac{E_J}{k_BT}\right]</span>
+<span class="sd">        I_J \propto (J+1)\exp\!\left[-\frac{E_J}{k_BT}\right]</span>
+
+<span class="sd">    The frequency factor and stimulated-emission correction of a full</span>
+<span class="sd">    absorption-coefficient calculation are omitted.</span>
 
 <span class="sd">    This reproduces the qualitative textbook feature of a rotational</span>
 <span class="sd">    spectrum -- intensity rising from `J=0`, peaking at some intermediate</span>
@@ -543,7 +547,7 @@
     <span class="n">J_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">J_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">positions</span> <span class="o">=</span> <span class="n">rotational_line_wavenumbers</span><span class="p">(</span><span class="n">rotor</span><span class="p">,</span> <span class="n">J_max</span><span class="p">)</span>
     <span class="n">energies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">rotor</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">J</span><span class="p">))</span> <span class="k">for</span> <span class="n">J</span> <span class="ow">in</span> <span class="n">J_values</span><span class="p">])</span>
-    <span class="n">intensities</span> <span class="o">=</span> <span class="p">(</span><span class="n">J_values</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">J_values</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">energies</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_B</span> <span class="o">*</span> <span class="n">temperature</span><span class="p">))</span>
+    <span class="n">intensities</span> <span class="o">=</span> <span class="p">(</span><span class="n">J_values</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">energies</span> <span class="o">/</span> <span class="p">(</span><span class="n">K_B</span> <span class="o">*</span> <span class="n">temperature</span><span class="p">))</span>
     <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"J=</span><span class="si">{</span><span class="n">J</span><span class="si">}</span><span class="s2">-&gt;</span><span class="si">{</span><span class="n">J</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">J</span> <span class="ow">in</span> <span class="n">J_values</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">Spectrum</span><span class="p">(</span><span class="n">positions</span><span class="o">=</span><span class="n">positions</span><span class="p">,</span> <span class="n">intensities</span><span class="o">=</span><span class="n">intensities</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span></div>
 

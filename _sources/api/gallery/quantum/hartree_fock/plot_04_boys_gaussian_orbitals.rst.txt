@@ -143,7 +143,7 @@ Slater orbital, Hehre, Stewart & Pople 1969) repairs most of the shape.
 
 
     def contracted(exponents, coefficients):
-        return sum(c * (2.0 * e / np.pi) ** 0.75 * np.exp(-e * r**2) for e, c in zip(exponents, coefficients))
+        return sum(c * (2.0 * e / np.pi) ** 0.75 * np.exp(-e * r**2) for e, c in zip(exponents, coefficients, strict=True))
 
 
     sto1g = contracted([0.270950], [1.0])
@@ -174,7 +174,7 @@ Slater orbital, Hehre, Stewart & Pople 1969) repairs most of the shape.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.119 seconds)
+   **Total running time of the script:** (0 minutes 0.131 seconds)
 
 
 .. _sphx_glr_download_api_gallery_quantum_hartree_fock_plot_04_boys_gaussian_orbitals.py:

@@ -62,7 +62,7 @@ combines independent modes, whose partition functions multiply.
     T = np.linspace(100.0, 3000.0, 120)
     dT = 1e-2 * T
     lnQ = np.array([ln_Q(t) for t in T])
-    dlnQ = np.array([(ln_Q(t + d) - ln_Q(t - d)) / (2 * d) for t, d in zip(T, dT)])
+    dlnQ = np.array([(ln_Q(t + d) - ln_Q(t - d)) / (2 * d) for t, d in zip(T, dT, strict=True)])
 
     A = -K_B * T * lnQ
     U = K_B * T**2 * dlnQ
@@ -138,7 +138,7 @@ are sums over modes. ``thermodynamic_functions`` bundles them:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.084 seconds)
+   **Total running time of the script:** (0 minutes 0.082 seconds)
 
 
 .. _sphx_glr_download_api_gallery_statmech_partition_functions_plot_03_gibbs_canonical_partition_function.py:

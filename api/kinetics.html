@@ -462,7 +462,9 @@ reversible, and steady-state-approximation chain reactions) integrated
 via <code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.integrators</span></code>, the Brusselator oscillating
 reaction network and the Oregonator model of the Belousov-Zhabotinsky
 reaction, collision/diffusion/transition-state theories of the rate
-constant, and Gillespie’s exact stochastic simulation algorithm.</p>
+constant, Lindemann-Hinshelwood unimolecular falloff, Semenov
+branched-chain explosion limits (H2/O2), and Gillespie’s exact
+stochastic simulation algorithm.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.kinetics.ArrheniusFit">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">ArrheniusFit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ea</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_squared</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.31446261815324</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/arrhenius.html#ArrheniusFit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ArrheniusFit" title="Link to this definition">#</a></dt>
@@ -637,6 +639,137 @@ interactive use / plotting outside a numba context).</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="chemistrykit.kinetics.Brusselator.species">
 <span class="sig-name descname"><span class="pre">species</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><span class="pre">Sequence</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('X',</span> <span class="pre">'Y')</span></span><a class="headerlink" href="#chemistrykit.kinetics.Brusselator.species" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ChainBranchingExplosion">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">ChainBranchingExplosion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k_branch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_wall</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_termination</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_O2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3333333333333333</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/explosions.html#ChainBranchingExplosion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ChainBranchingExplosion" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Semenov branching-versus-termination model of the H2/O2 first and second explosion limits.</p>
+<p>Each rate constant may be a number or a callable <code class="docutils literal notranslate"><span class="pre">k(T)</span></code> (e.g. a
+lambda wrapping <a class="reference internal" href="#chemistrykit.kinetics.arrhenius_rate_constant" title="chemistrykit.kinetics.arrhenius_rate_constant"><code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.kinetics.arrhenius_rate_constant()</span></code></a>)
+so the limits can be traced across temperature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k_branch</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – <span class="math notranslate nohighlight">\(k_b\)</span> of <span class="math notranslate nohighlight">\(H + O_2 \to OH + O\)</span>, in m^3 mol^-1 s^-1.</p></li>
+<li><p><strong>k_wall</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – First-order wall-termination rate constant <span class="math notranslate nohighlight">\(k_w\)</span>, in s^-1.</p></li>
+<li><p><strong>k_termination</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – <span class="math notranslate nohighlight">\(k_t\)</span> of <span class="math notranslate nohighlight">\(H + O_2 + M \to HO_2 + M\)</span>, in m^6 mol^-2 s^-1.</p></li>
+<li><p><strong>x_O2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Mole fraction of O2 (stoichiometric 2H2 + O2 by default).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Explosion happens only between the two limits:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">ChainBranchingExplosion</span><span class="p">(</span><span class="n">k_branch</span><span class="o">=</span><span class="mf">1.0e3</span><span class="p">,</span> <span class="n">k_wall</span><span class="o">=</span><span class="mf">50.0</span><span class="p">,</span> <span class="n">k_termination</span><span class="o">=</span><span class="mf">1.0e3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P1</span><span class="p">,</span> <span class="n">P2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">explosion_limits</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mf">800.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">explodes</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">P1</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">),</span> <span class="n">model</span><span class="o">.</span><span class="n">explodes</span><span class="p">((</span><span class="n">P1</span> <span class="o">*</span> <span class="n">P2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">),</span> <span class="n">model</span><span class="o">.</span><span class="n">explodes</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">P2</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">)</span>
+<span class="go">(False, True, False)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ChainBranchingExplosion.branching_factor">
+<span class="sig-name descname"><span class="pre">branching_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.31446261815324</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/explosions.html#ChainBranchingExplosion.branching_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ChainBranchingExplosion.branching_factor" title="Link to this definition">#</a></dt>
+<dd><p>Net branching factor <span class="math notranslate nohighlight">\(\varphi = 2k_bx_{O_2}c - k_w - k_tx_{O_2}c^2\)</span>, in s^-1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>P</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Total pressure, in Pa.</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Temperature, in K.</p></li>
+<li><p><strong>R_gas</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ChainBranchingExplosion.carrier_concentration">
+<span class="sig-name descname"><span class="pre">carrier_concentration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/explosions.html#ChainBranchingExplosion.carrier_concentration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ChainBranchingExplosion.carrier_concentration" title="Link to this definition">#</a></dt>
+<dd><p>Carrier concentration <span class="math notranslate nohighlight">\(n(t)=(n_0+w_0/\varphi)e^{\varphi t}-w_0/\varphi\)</span>.</p>
+<p>The exact solution of <span class="math notranslate nohighlight">\(dn/dt=w_0+\varphi n\)</span>: it levels off
+when <span class="math notranslate nohighlight">\(\varphi&lt;0\)</span> and grows exponentially when <span class="math notranslate nohighlight">\(\varphi&gt;0\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Time(s), in s.</p></li>
+<li><p><strong>P</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pressure (Pa) and temperature (K).</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pressure (Pa) and temperature (K).</p></li>
+<li><p><strong>w0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initiation rate, in mol m^-3 s^-1.</p></li>
+<li><p><strong>n0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial carrier concentration.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ChainBranchingExplosion.explodes">
+<span class="sig-name descname"><span class="pre">explodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/explosions.html#ChainBranchingExplosion.explodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ChainBranchingExplosion.explodes" title="Link to this definition">#</a></dt>
+<dd><p>Whether carriers multiply without bound (<span class="math notranslate nohighlight">\(\varphi &gt; 0\)</span>) at <cite>P</cite>, <cite>T</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>P</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pressure, in Pa.</p></li>
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Temperature, in K.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>bool</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ChainBranchingExplosion.explosion_limits">
+<span class="sig-name descname"><span class="pre">explosion_limits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.31446261815324</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/explosions.html#ChainBranchingExplosion.explosion_limits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ChainBranchingExplosion.explosion_limits" title="Link to this definition">#</a></dt>
+<dd><p>First and second explosion-limit pressures, the roots of <span class="math notranslate nohighlight">\(\varphi=0\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[c_{1,2} = \frac{k_b}{k_t} \mp \sqrt{\frac{k_b^2}{k_t^2} - \frac{k_w}{k_tx_{O_2}}}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Temperature, in K.</p></li>
+<li><p><strong>R_gas</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>] | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>(P1, P2) or None</em> – Limit pressures in Pa, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if <span class="math notranslate nohighlight">\(\varphi&lt;0\)</span> at every
+pressure (below the peninsula’s tip temperature).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ChainBranchingExplosion.k_branch">
+<span class="sig-name descname"><span class="pre">k_branch</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#chemistrykit.kinetics.ChainBranchingExplosion.k_branch" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ChainBranchingExplosion.k_termination">
+<span class="sig-name descname"><span class="pre">k_termination</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#chemistrykit.kinetics.ChainBranchingExplosion.k_termination" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ChainBranchingExplosion.k_wall">
+<span class="sig-name descname"><span class="pre">k_wall</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#chemistrykit.kinetics.ChainBranchingExplosion.k_wall" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.ChainBranchingExplosion.x_O2">
+<span class="sig-name descname"><span class="pre">x_O2</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.3333333333333333</span></span><a class="headerlink" href="#chemistrykit.kinetics.ChainBranchingExplosion.x_O2" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -885,6 +1018,149 @@ sample (rows).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray, shape (n_steps + 1, n_species)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.LindemannHinshelwood">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.kinetics.</span></span><span class="sig-name descname"><span class="pre">LindemannHinshelwood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_minus1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/unimolecular.html#LindemannHinshelwood"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.LindemannHinshelwood" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The Lindemann-Hinshelwood mechanism for a unimolecular reaction A -&gt; P.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Collisional activation rate constant (second order, A + M).</p></li>
+<li><p><strong>k_minus1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Collisional deactivation rate constant (second order, A* + M).</p></li>
+<li><p><strong>k2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Unimolecular decay rate constant of A* (first order).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p><span class="math notranslate nohighlight">\(k_{uni}\)</span> rises linearly at low <span class="math notranslate nohighlight">\([M]\)</span>, is exactly half of
+<span class="math notranslate nohighlight">\(k_\infty\)</span> at <span class="math notranslate nohighlight">\([M]_{1/2}\)</span>, and saturates at high <span class="math notranslate nohighlight">\([M]\)</span>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lh</span> <span class="o">=</span> <span class="n">LindemannHinshelwood</span><span class="p">(</span><span class="n">k1</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k_minus1</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lh</span><span class="o">.</span><span class="n">k_inf</span><span class="p">,</span> <span class="n">lh</span><span class="o">.</span><span class="n">M_half</span>
+<span class="go">(10.0, 10.0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">lh</span><span class="o">.</span><span class="n">rate_constant</span><span class="p">(</span><span class="n">lh</span><span class="o">.</span><span class="n">M_half</span><span class="p">))</span> <span class="o">==</span> <span class="n">lh</span><span class="o">.</span><span class="n">k_inf</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.LindemannHinshelwood.M_half">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">M_half</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.kinetics.LindemannHinshelwood.M_half" title="Link to this definition">#</a></dt>
+<dd><p>Falloff center <span class="math notranslate nohighlight">\([M]_{1/2}=k_2/k_{-1}\)</span>, where <span class="math notranslate nohighlight">\(k_{uni}=k_\infty/2\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.LindemannHinshelwood.inverse_rate_constant">
+<span class="sig-name descname"><span class="pre">inverse_rate_constant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/unimolecular.html#LindemannHinshelwood.inverse_rate_constant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.LindemannHinshelwood.inverse_rate_constant" title="Link to this definition">#</a></dt>
+<dd><p>The Lindemann linearization <span class="math notranslate nohighlight">\(1/k_{uni} = 1/k_\infty + 1/(k_1[M])\)</span>.</p>
+<p>Plotting <span class="math notranslate nohighlight">\(1/k_{uni}\)</span> against <span class="math notranslate nohighlight">\(1/[M]\)</span> gives a straight
+line whose deviations in real data expose the theory’s neglect of
+energy-dependent <span class="math notranslate nohighlight">\(k_2\)</span> (the RRK/RRKM refinement).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>M</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.LindemannHinshelwood.k0">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">k0</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.kinetics.LindemannHinshelwood.k0" title="Link to this definition">#</a></dt>
+<dd><p>Low-pressure limiting (second-order) rate constant, <span class="math notranslate nohighlight">\(k_1\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.LindemannHinshelwood.k1">
+<span class="sig-name descname"><span class="pre">k1</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.kinetics.LindemannHinshelwood.k1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.LindemannHinshelwood.k2">
+<span class="sig-name descname"><span class="pre">k2</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.kinetics.LindemannHinshelwood.k2" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.LindemannHinshelwood.k_inf">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">k_inf</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.kinetics.LindemannHinshelwood.k_inf" title="Link to this definition">#</a></dt>
+<dd><p>High-pressure limiting (first-order) rate constant, <span class="math notranslate nohighlight">\(k_1k_2/k_{-1}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.LindemannHinshelwood.k_minus1">
+<span class="sig-name descname"><span class="pre">k_minus1</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.kinetics.LindemannHinshelwood.k_minus1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.LindemannHinshelwood.network">
+<span class="sig-name descname"><span class="pre">network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/unimolecular.html#LindemannHinshelwood.network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.LindemannHinshelwood.network" title="Link to this definition">#</a></dt>
+<dd><p>The full three-step mechanism at fixed <span class="math notranslate nohighlight">\([M]\)</span>, for numerical integration.</p>
+<p><cite>M</cite> is folded into pseudo-first-order constants <span class="math notranslate nohighlight">\(k_1[M]\)</span>
+and <span class="math notranslate nohighlight">\(k_{-1}[M]\)</span>, so the network needs no steady-state
+approximation; its long-time decay rate of A approaches
+<a class="reference internal" href="#chemistrykit.kinetics.LindemannHinshelwood.rate_constant" title="chemistrykit.kinetics.LindemannHinshelwood.rate_constant"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rate_constant()</span></code></a> when <span class="math notranslate nohighlight">\(A^*\)</span> stays scarce.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Bath-gas concentration.</p></li>
+<li><p><strong>A0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial concentration of A.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#chemistrykit.kinetics.StoichiometricNetwork" title="chemistrykit.kinetics.systems.networks.StoichiometricNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">StoichiometricNetwork</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>StoichiometricNetwork</em> – Species <code class="docutils literal notranslate"><span class="pre">(&quot;A&quot;,</span> <span class="pre">&quot;A*&quot;,</span> <span class="pre">&quot;P&quot;)</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.LindemannHinshelwood.rate_constant">
+<span class="sig-name descname"><span class="pre">rate_constant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/unimolecular.html#LindemannHinshelwood.rate_constant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.LindemannHinshelwood.rate_constant" title="Link to this definition">#</a></dt>
+<dd><p>Effective first-order rate constant <span class="math notranslate nohighlight">\(k_{uni}([M])\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>M</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Bath-gas concentration (e.g. <span class="math notranslate nohighlight">\(P/RT\)</span>).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="chemistrykit.kinetics.LindemannHinshelwood.reduced_pressure">
+<span class="sig-name descname"><span class="pre">reduced_pressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/unimolecular.html#LindemannHinshelwood.reduced_pressure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.LindemannHinshelwood.reduced_pressure" title="Link to this definition">#</a></dt>
+<dd><p>Reduced pressure <span class="math notranslate nohighlight">\(P_r=k_0[M]/k_\infty\)</span>, so that <span class="math notranslate nohighlight">\(k_{uni}/k_\infty = P_r/(1+P_r)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>M</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>float or ndarray</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1534,7 +1810,10 @@ interactive use / plotting outside a numba context).</p>
 <p>Integrated law: <span class="math notranslate nohighlight">\([A](t) = [A]_0 - kt\)</span>, valid only while
 <span class="math notranslate nohighlight">\([A](t) \geq 0\)</span> – physically, the reaction stops (or crosses
 over to a different rate law) once the reactant is exhausted, at
-<span class="math notranslate nohighlight">\(t = [A]_0 / k\)</span>.</p>
+<span class="math notranslate nohighlight">\(t = [A]_0 / k\)</span>. <a class="reference internal" href="#chemistrykit.kinetics.ZeroOrder.concentration" title="chemistrykit.kinetics.ZeroOrder.concentration"><code class="xref py py-meth docutils literal notranslate"><span class="pre">concentration()</span></code></a> and <a class="reference internal" href="#chemistrykit.kinetics.ZeroOrder.rate" title="chemistrykit.kinetics.ZeroOrder.rate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rate()</span></code></a> model
+that stop: past the exhaustion time the concentration stays at 0 and
+the rate drops to 0, rather than extrapolating the line to negative
+concentrations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1549,12 +1828,14 @@ over to a different rate law) once the reactant is exhausted, at
 <span class="go">0.5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">law</span><span class="o">.</span><span class="n">half_life</span><span class="p">(),</span> <span class="mi">6</span><span class="p">)</span>
 <span class="go">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="n">law</span><span class="o">.</span><span class="n">concentration</span><span class="p">(</span><span class="mf">20.0</span><span class="p">))</span>  <span class="c1"># exhausted at t = C0/k = 10</span>
+<span class="go">0.0</span>
 </pre></div>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="chemistrykit.kinetics.ZeroOrder.concentration">
 <span class="sig-name descname"><span class="pre">concentration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/rate_laws.html#ZeroOrder.concentration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ZeroOrder.concentration" title="Link to this definition">#</a></dt>
-<dd><p>Return the reactant concentration at time(s) <cite>t</cite>.</p>
+<dd><p>Return <span class="math notranslate nohighlight">\(\max([A]_0 - kt, 0)\)</span> at time(s) <cite>t</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
@@ -1579,15 +1860,16 @@ over to a different rate law) once the reactant is exhausted, at
 <dl class="py method">
 <dt class="sig sig-object py" id="chemistrykit.kinetics.ZeroOrder.rate">
 <span class="sig-name descname"><span class="pre">rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/kinetics/systems/rate_laws.html#ZeroOrder.rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.kinetics.ZeroOrder.rate" title="Link to this definition">#</a></dt>
-<dd><p>Return the (constant) rate <code class="docutils literal notranslate"><span class="pre">k</span></code>.</p>
+<dd><p>Return the rate: <code class="docutils literal notranslate"><span class="pre">k</span></code> until the reactant is exhausted, 0 after.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Unused (the rate does not depend on time or concentration for
-a zero-order reaction); accepted for interface consistency
-with <a class="reference internal" href="#chemistrykit.kinetics.FirstOrder" title="chemistrykit.kinetics.FirstOrder"><code class="xref py py-class docutils literal notranslate"><span class="pre">FirstOrder</span></code></a>/<a class="reference internal" href="#chemistrykit.kinetics.SecondOrder" title="chemistrykit.kinetics.SecondOrder"><code class="xref py py-class docutils literal notranslate"><span class="pre">SecondOrder</span></code></a>.</p>
+<dd class="field-odd"><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Time at which to evaluate the rate; defaults to 0 (the
+initial rate <code class="docutils literal notranslate"><span class="pre">k</span></code>). The rate does not depend on
+concentration, only on whether any reactant remains, i.e.
+whether <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">&lt;</span> <span class="pre">C0</span> <span class="pre">/</span> <span class="pre">k</span></code>.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>float</em></p>
+<dd class="field-even"><p><em>float or ndarray</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2199,6 +2481,17 @@ should agree closely with <a class="reference internal" href="#chemistrykit.kine
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.Brusselator.species"><code class="docutils literal notranslate"><span class="pre">Brusselator.species</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ChainBranchingExplosion"><code class="docutils literal notranslate"><span class="pre">ChainBranchingExplosion</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ChainBranchingExplosion.branching_factor"><code class="docutils literal notranslate"><span class="pre">ChainBranchingExplosion.branching_factor()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ChainBranchingExplosion.carrier_concentration"><code class="docutils literal notranslate"><span class="pre">ChainBranchingExplosion.carrier_concentration()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ChainBranchingExplosion.explodes"><code class="docutils literal notranslate"><span class="pre">ChainBranchingExplosion.explodes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ChainBranchingExplosion.explosion_limits"><code class="docutils literal notranslate"><span class="pre">ChainBranchingExplosion.explosion_limits()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ChainBranchingExplosion.k_branch"><code class="docutils literal notranslate"><span class="pre">ChainBranchingExplosion.k_branch</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ChainBranchingExplosion.k_termination"><code class="docutils literal notranslate"><span class="pre">ChainBranchingExplosion.k_termination</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ChainBranchingExplosion.k_wall"><code class="docutils literal notranslate"><span class="pre">ChainBranchingExplosion.k_wall</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.ChainBranchingExplosion.x_O2"><code class="docutils literal notranslate"><span class="pre">ChainBranchingExplosion.x_O2</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.EyringFit"><code class="docutils literal notranslate"><span class="pre">EyringFit</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.EyringFit.dG"><code class="docutils literal notranslate"><span class="pre">EyringFit.dG()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.EyringFit.dH"><code class="docutils literal notranslate"><span class="pre">EyringFit.dH</span></code></a></li>
@@ -2220,6 +2513,19 @@ should agree closely with <a class="reference internal" href="#chemistrykit.kine
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.KineticsResult.species"><code class="docutils literal notranslate"><span class="pre">KineticsResult.species</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.KineticsResult.t"><code class="docutils literal notranslate"><span class="pre">KineticsResult.t</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.KineticsResult.y"><code class="docutils literal notranslate"><span class="pre">KineticsResult.y</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.LindemannHinshelwood"><code class="docutils literal notranslate"><span class="pre">LindemannHinshelwood</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.LindemannHinshelwood.M_half"><code class="docutils literal notranslate"><span class="pre">LindemannHinshelwood.M_half</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.LindemannHinshelwood.inverse_rate_constant"><code class="docutils literal notranslate"><span class="pre">LindemannHinshelwood.inverse_rate_constant()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.LindemannHinshelwood.k0"><code class="docutils literal notranslate"><span class="pre">LindemannHinshelwood.k0</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.LindemannHinshelwood.k1"><code class="docutils literal notranslate"><span class="pre">LindemannHinshelwood.k1</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.LindemannHinshelwood.k2"><code class="docutils literal notranslate"><span class="pre">LindemannHinshelwood.k2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.LindemannHinshelwood.k_inf"><code class="docutils literal notranslate"><span class="pre">LindemannHinshelwood.k_inf</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.LindemannHinshelwood.k_minus1"><code class="docutils literal notranslate"><span class="pre">LindemannHinshelwood.k_minus1</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.LindemannHinshelwood.network"><code class="docutils literal notranslate"><span class="pre">LindemannHinshelwood.network()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.LindemannHinshelwood.rate_constant"><code class="docutils literal notranslate"><span class="pre">LindemannHinshelwood.rate_constant()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.LindemannHinshelwood.reduced_pressure"><code class="docutils literal notranslate"><span class="pre">LindemannHinshelwood.reduced_pressure()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemistrykit.kinetics.MichaelisMentenFit"><code class="docutils literal notranslate"><span class="pre">MichaelisMentenFit</span></code></a><ul class="pst-show_toc_level nav section-nav flex-column">

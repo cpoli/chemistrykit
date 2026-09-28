@@ -420,8 +420,10 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">permutations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArrayLike</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">"bragg_angle"</span><span class="p">,</span>
@@ -443,7 +445,7 @@
 
 <div class="viewcode-block" id="bragg_angle">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.bragg_angle">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">bragg_angle</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bragg_angle</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">"""Solve Bragg's law :math:`n\lambda=2d\sin\theta` for the diffraction angle :math:`\theta`.</span>
 
 <span class="sd">    Parameters</span>
@@ -576,7 +578,13 @@
 <span class="w">    </span><span class="sd">"""float: Diffraction angle :math:`2\\theta`, in degrees."""</span>
 
     <span class="n">relative_intensity</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sd">"""float: :math:`|F_{hkl}|^2`, not multiplicity- or Lorentz-polarization-corrected."""</span></div>
+<span class="w">    </span><span class="sd">"""float: :math:`|F_{hkl}|^2`, not multiplicity- or Lorentz-polarization-corrected."""</span>
+
+    <span class="n">multiplicity</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="w">    </span><span class="sd">"""int: Number of symmetry-equivalent :math:`(hkl)` planes (all sign flips and</span>
+<span class="sd">    permutations) in the family this peak represents, e.g. 6 for {100}, 12</span>
+<span class="sd">    for {110}, 8 for {111}; multiply by `relative_intensity` for the</span>
+<span class="sd">    multiplicity-corrected intensity."""</span></div>
 
 
 
@@ -585,12 +593,17 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">powder_xrd_peaks</span><span class="p">(</span><span class="n">lattice_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">hkl_max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">"""Enumerate the allowed powder-XRD peaks of a cubic Bravais lattice up to a Miller-index cutoff.</span>
 
-<span class="sd">    Iterates every :math:`(h,k,l)` with :math:`0\le h,k,l\le` `hkl_max`</span>
-<span class="sd">    (not all zero), computes each reflection's structure factor via</span>
-<span class="sd">    :func:`structure_factor` (dropping systematically-absent</span>
-<span class="sd">    reflections, :math:`|F_{hkl}|^2&lt;10^{-9}`) and Bragg angle via</span>
-<span class="sd">    :func:`bragg_angle` (dropping reflections with no real solution),</span>
-<span class="sd">    and returns the surviving peaks sorted by :math:`2\theta`.</span>
+<span class="sd">    Returns one peak per family of symmetry-equivalent planes</span>
+<span class="sd">    :math:`\{hkl\}`, labelled by its canonical member</span>
+<span class="sd">    :math:`h\ge k\ge l\ge 0` (so BCC's first line is a single (110)</span>
+<span class="sd">    peak with ``multiplicity=12``, not separate (110)/(101)/(011) peaks).</span>
+<span class="sd">    Each family's structure factor comes from :func:`structure_factor`</span>
+<span class="sd">    (systematically-absent families, :math:`|F_{hkl}|^2&lt;10^{-9}`, are</span>
+<span class="sd">    dropped) and its Bragg angle from :func:`bragg_angle` (families with no</span>
+<span class="sd">    real solution are dropped); peaks are sorted by :math:`2\theta`.</span>
+<span class="sd">    Distinct families that happen to share :math:`h^2+k^2+l^2`, and so</span>
+<span class="sd">    :math:`2\theta` (e.g. {300} and {221}), are kept as separate,</span>
+<span class="sd">    coincident peaks.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -601,10 +614,12 @@
 <span class="sd">    wavelength : float</span>
 <span class="sd">        X-ray wavelength.</span>
 <span class="sd">    hkl_max : int, default 3</span>
-<span class="sd">        Largest Miller index to search (non-negative indices only, since</span>
+<span class="sd">        Largest Miller index to search. Only canonical</span>
+<span class="sd">        :math:`h\ge k\ge l\ge 0` indices are enumerated, since</span>
 <span class="sd">        :math:`d_{hkl}` and :math:`|F_{hkl}|` depend only on</span>
 <span class="sd">        :math:`h^2+k^2+l^2` and the mixed-parity pattern, both invariant</span>
-<span class="sd">        under sign flips of any index).</span>
+<span class="sd">        under sign flips and permutations of the indices for these</span>
+<span class="sd">        cubic lattices.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -616,8 +631,8 @@
 <span class="sd">    systematically absent since :math:`1+0+0=1` is odd:</span>
 
 <span class="sd">    &gt;&gt;&gt; peaks = powder_xrd_peaks("BCC", a=286.65, wavelength=154.18, hkl_max=2)</span>
-<span class="sd">    &gt;&gt;&gt; peaks[0].hkl</span>
-<span class="sd">    (1, 1, 0)</span>
+<span class="sd">    &gt;&gt;&gt; peaks[0].hkl, peaks[0].multiplicity</span>
+<span class="sd">    ((1, 1, 0), 12)</span>
 
 <span class="sd">    FCC's first line is (111) -- (100) and (110) are both absent (mixed</span>
 <span class="sd">    parity):</span>
@@ -629,9 +644,9 @@
     <span class="n">basis</span> <span class="o">=</span> <span class="n">_CUBIC_BASES</span><span class="p">[</span><span class="n">lattice_type</span><span class="p">]</span>
     <span class="n">peaks</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">hkl_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">hkl_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">hkl_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">h</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">l</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">h</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">h</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="k">continue</span>
                 <span class="n">F</span> <span class="o">=</span> <span class="n">structure_factor</span><span class="p">((</span><span class="n">h</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">),</span> <span class="n">basis</span><span class="p">)</span>
                 <span class="n">intensity</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">F</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
@@ -641,13 +656,27 @@
                 <span class="n">theta</span> <span class="o">=</span> <span class="n">bragg_angle</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
                     <span class="k">continue</span>
-                <span class="n">peaks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">XRDPeak</span><span class="p">(</span><span class="n">hkl</span><span class="o">=</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">),</span> <span class="n">d_spacing</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">two_theta</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">theta</span><span class="p">)),</span> <span class="n">relative_intensity</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">intensity</span><span class="p">)))</span>
-    <span class="c1"># Peaks that tie exactly on 2*theta (e.g. BCC's (110)/(101)/(011), all</span>
-    <span class="c1"># equivalent by cubic symmetry) are broken by a canonical</span>
-    <span class="c1"># highest-index-first ordering, purely so results are deterministic.</span>
+                <span class="n">peaks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">XRDPeak</span><span class="p">(</span>
+                        <span class="n">hkl</span><span class="o">=</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">),</span>
+                        <span class="n">d_spacing</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">d</span><span class="p">),</span>
+                        <span class="n">two_theta</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">theta</span><span class="p">)),</span>
+                        <span class="n">relative_intensity</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">intensity</span><span class="p">),</span>
+                        <span class="n">multiplicity</span><span class="o">=</span><span class="n">_cubic_multiplicity</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">),</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+    <span class="c1"># Distinct families that tie exactly on 2*theta (e.g. {300}/{221}) are</span>
+    <span class="c1"># ordered highest-index-first, purely so results are deterministic.</span>
     <span class="n">peaks</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">two_theta</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="o">-</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">hkl</span><span class="p">)))</span>
     <span class="k">return</span> <span class="n">peaks</span></div>
 
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_cubic_multiplicity</span><span class="p">(</span><span class="n">h</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">l</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Number of distinct (hkl) related to ``(h, k, l)`` by permutations and sign flips (point group m-3m)."""</span>
+    <span class="n">n_permutations</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">permutations</span><span class="p">((</span><span class="n">h</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">))))</span>
+    <span class="n">n_sign_flips</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">n_permutations</span> <span class="o">*</span> <span class="n">n_sign_flips</span>
 
 
 <div class="viewcode-block" id="scherrer_crystallite_size">

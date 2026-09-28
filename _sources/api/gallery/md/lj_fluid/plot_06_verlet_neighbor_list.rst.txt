@@ -49,11 +49,11 @@ lists built with no skin and with a skin of :math:`0.3\sigma`.
     n = fluid.positions.shape[0]
     L = fluid.box_length
 
-    lists = {skin: set(zip(*[a.tolist() for a in build_neighbor_list(fluid.positions, L, cutoff + skin)])) for skin in (0.0, 0.3)}
+    lists = {skin: set(zip(*[a.tolist() for a in build_neighbor_list(fluid.positions, L, cutoff + skin)], strict=True)) for skin in (0.0, 0.3)}
     missed = {skin: [] for skin in lists}
     for _ in range(n_steps):
         fluid.step(dt)
-        exact = set(zip(*[a.tolist() for a in build_neighbor_list(fluid.positions, L, cutoff)]))
+        exact = set(zip(*[a.tolist() for a in build_neighbor_list(fluid.positions, L, cutoff)], strict=True))
         for skin, pairs in lists.items():
             missed[skin].append(len(exact - pairs))
 
@@ -115,7 +115,7 @@ the saving Verlet's list delivers at every step it is reused:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.663 seconds)
+   **Total running time of the script:** (0 minutes 0.571 seconds)
 
 
 .. _sphx_glr_download_api_gallery_md_lj_fluid_plot_06_verlet_neighbor_list.py:

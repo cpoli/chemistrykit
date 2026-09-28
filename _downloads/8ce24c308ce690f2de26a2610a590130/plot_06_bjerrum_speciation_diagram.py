@@ -25,9 +25,9 @@ systems = {
 }
 
 fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
-for ax, (name, (pKas, labels)) in zip(axes, systems.items()):
+for ax, (name, (pKas, labels)) in zip(axes, systems.items(), strict=True):
     alpha = polyprotic_fractions(pH, [10.0**-pK for pK in pKas])
-    for row, label in zip(alpha, labels):
+    for row, label in zip(alpha, labels, strict=True):
         ax.plot(pH, row, label=label)
     for pK in pKas:
         ax.axvline(pK, color="gray", linestyle=":", linewidth=0.8)

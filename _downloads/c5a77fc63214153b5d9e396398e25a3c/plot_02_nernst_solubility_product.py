@@ -35,7 +35,7 @@ salts = {
 
 Ksp_axis = np.logspace(-35, -5, 200)
 fig, ax = plt.subplots(figsize=(7, 5))
-for (name, (Ksp, p, q)), color in zip(salts.items(), ["steelblue", "darkorange", "seagreen", "purple"]):
+for (name, (Ksp, p, q)), color in zip(salts.items(), ["steelblue", "darkorange", "seagreen", "purple"], strict=True):
     ax.loglog(Ksp_axis, molar_solubility_from_ksp(Ksp_axis, p, q), color=color, alpha=0.5)
     s = molar_solubility_from_ksp(Ksp, p, q)
     ax.plot(Ksp, s, "o", color=color, label=f"{name}: s = {s:.1e} M")

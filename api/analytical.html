@@ -575,12 +575,15 @@ equilibria explicitly, is itself the standard simplification this
 class makes, flagged here as an approximation).</p>
 <p>Mass balance on total metal <span class="math notranslate nohighlight">\(C_M\)</span> and total EDTA added
 <span class="math notranslate nohighlight">\(C_Y\)</span> (both diluted by the growing total volume), with
-<span class="math notranslate nohighlight">\(x=[MY]\)</span>, <span class="math notranslate nohighlight">\([M]=C_M-x\)</span>, <span class="math notranslate nohighlight">\([Y]=C_Y-x\)</span>, and
-<span class="math notranslate nohighlight">\(K_f'=x/[(C_M-x)(C_Y-x)]\)</span>, gives the exact quadratic</p>
+<span class="math notranslate nohighlight">\(m=[M]\)</span>, <span class="math notranslate nohighlight">\([MY]=C_M-m\)</span>, <span class="math notranslate nohighlight">\([Y]=C_Y-C_M+m\)</span>, and
+<span class="math notranslate nohighlight">\(K_f'=[MY]/([M][Y])\)</span>, gives the exact quadratic</p>
 <div class="math notranslate nohighlight">
-\[K_f'x^2-\left[K_f'(C_M+C_Y)+1\right]x+K_f'C_MC_Y=0\]</div>
-<p>solved here in closed form for the physical root <span class="math notranslate nohighlight">\(0\le x\le
-\min(C_M,C_Y)\)</span>, then <span class="math notranslate nohighlight">\(pM=-\log_{10}[M]\)</span>.</p>
+\[K_f'm^2+\left[K_f'(C_Y-C_M)+1\right]m-C_M=0\]</div>
+<p>solved here in closed form for its single positive root, then
+<span class="math notranslate nohighlight">\(pM=-\log_{10}[M]\)</span>. Solving for <span class="math notranslate nohighlight">\([M]\)</span> directly (rather
+than for <span class="math notranslate nohighlight">\([MY]\)</span> and subtracting it from <span class="math notranslate nohighlight">\(C_M\)</span>) avoids
+catastrophic cancellation at and past equivalence, where
+<span class="math notranslate nohighlight">\([M]\ll C_M\)</span> for realistically large <span class="math notranslate nohighlight">\(K_f'\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">

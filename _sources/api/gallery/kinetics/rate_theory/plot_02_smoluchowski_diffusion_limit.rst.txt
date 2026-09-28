@@ -104,7 +104,7 @@ depleted, so encounters are more frequent than at steady state.
  .. code-block:: none
 
 
-    <matplotlib.legend.Legend object at 0x11b484050>
+    <matplotlib.legend.Legend object at 0x1196facf0>
 
 
 
@@ -125,7 +125,7 @@ Viscosity sets the ceiling: 8RT/(3 eta) for several solvents at 298 K
     axes[1].set_xscale("log")
     axes[1].set_xlabel("diffusion-limited k (L mol$^{-1}$ s$^{-1}$)")
     axes[1].set_title("Diffusion limit 8RT/(3 eta) at 298 K")
-    for name, kv in zip(names, k_solvent):
+    for name, kv in zip(names, k_solvent, strict=True):
         print(f"{name:16s}: {kv:.2e} L/(mol s)")
 
     fig.tight_layout()
@@ -151,7 +151,7 @@ Viscosity sets the ceiling: 8RT/(3 eta) for several solvents at 298 K
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.081 seconds)
+   **Total running time of the script:** (0 minutes 0.079 seconds)
 
 
 .. _sphx_glr_download_api_gallery_kinetics_rate_theory_plot_02_smoluchowski_diffusion_limit.py:

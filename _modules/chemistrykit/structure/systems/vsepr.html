@@ -481,26 +481,35 @@
 <span class="p">}</span>
 
 <span class="c1">#: AXE-method shape name for each (steric_number, lone_pairs) combination</span>
-<span class="c1">#: (A = central atom, X = bonded ligand, E = lone pair; e.g. AX2E2 for</span>
-<span class="c1">#: water). This is reference nomenclature data, the same spirit as</span>
+<span class="c1">#: with at least one bonded ligand (A = central atom, X = bonded ligand,</span>
+<span class="c1">#: E = lone pair; e.g. AX2E2 for water, AX1E3 for HF). Every</span>
+<span class="c1">#: single-ligand AX1En entry is "linear", since two atoms always are.</span>
+<span class="c1">#: This is reference nomenclature data, the same spirit as</span>
 <span class="c1">#: :mod:`chemistrykit.periodic_table`'s element table -- the actual</span>
 <span class="c1">#: *geometry* for each entry is still generated as real 3D coordinates by</span>
 <span class="c1">#: :func:`domain_positions` / :func:`build_vsepr_molecule`, not looked up</span>
 <span class="c1">#: here.</span>
 <span class="n">AXE_SHAPE_NAMES</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
     <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s2">"linear"</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="s2">"linear"</span><span class="p">,</span>
     <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s2">"trigonal planar"</span><span class="p">,</span>
     <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="s2">"bent"</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="s2">"linear"</span><span class="p">,</span>
     <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s2">"tetrahedral"</span><span class="p">,</span>
     <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="s2">"trigonal pyramidal"</span><span class="p">,</span>
     <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="s2">"bent"</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span> <span class="s2">"linear"</span><span class="p">,</span>
     <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s2">"trigonal bipyramidal"</span><span class="p">,</span>
     <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="s2">"seesaw"</span><span class="p">,</span>
     <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="s2">"T-shaped"</span><span class="p">,</span>
     <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span> <span class="s2">"linear"</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span> <span class="s2">"linear"</span><span class="p">,</span>
     <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s2">"octahedral"</span><span class="p">,</span>
     <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="s2">"square pyramidal"</span><span class="p">,</span>
     <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="s2">"square planar"</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span> <span class="s2">"T-shaped"</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span> <span class="s2">"linear"</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span> <span class="s2">"linear"</span><span class="p">,</span>
 <span class="p">}</span>
 
 
@@ -613,7 +622,14 @@
 <span class="sd">    steric_number : int</span>
 <span class="sd">        Number of electron domains (sigma bonds + lone pairs).</span>
 <span class="sd">    lone_pairs : int</span>
-<span class="sd">        Number of lone pairs on the central atom, ``&lt;= steric_number``.</span>
+<span class="sd">        Number of lone pairs on the central atom, ``&lt; steric_number``</span>
+<span class="sd">        (at least one domain must be a bond, or there is no molecule).</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If `steric_number` is outside 2-6 or `lone_pairs` is outside</span>
+<span class="sd">        ``0 &lt;= lone_pairs &lt; steric_number``.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -621,6 +637,8 @@
 <span class="sd">    'bent'</span>
 <span class="sd">    &gt;&gt;&gt; VSEPRGeometry(steric_number=4, lone_pairs=0).shape_name</span>
 <span class="sd">    'tetrahedral'</span>
+<span class="sd">    &gt;&gt;&gt; VSEPRGeometry(steric_number=4, lone_pairs=3).shape_name  # HF, AX1E3</span>
+<span class="sd">    'linear'</span>
 <span class="sd">    """</span>
 
     <span class="n">steric_number</span><span class="p">:</span> <span class="nb">int</span>
@@ -629,8 +647,8 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">2</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">steric_number</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"steric_number must be 2, 3, 4, 5, or 6"</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lone_pairs</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">steric_number</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"lone_pairs must be between 0 and steric_number"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lone_pairs</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">steric_number</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"lone_pairs must satisfy 0 &lt;= lone_pairs &lt; steric_number (at least one bonded ligand)"</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">n_bonding_domains</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>

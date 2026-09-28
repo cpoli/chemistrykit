@@ -935,9 +935,12 @@ Mn’s single 5-electron step:</p>
 \[i = i_0\left[\exp\!\left(\frac{\alpha n F\eta}{RT}\right)
              -\exp\!\left(-\frac{(1-\alpha)nF\eta}{RT}\right)\right]\]</div>
 <p>where <span class="math notranslate nohighlight">\(\eta = E - E_{eq}\)</span> is the overpotential, <span class="math notranslate nohighlight">\(i_0\)</span> the
-exchange current density, and <span class="math notranslate nohighlight">\(\alpha\)</span> the (cathodic) charge
-transfer coefficient (Bard &amp; Faulkner, <em>Electrochemical Methods</em>,
-2nd ed., Ch. 3.3, eq. 3.3.11). The first term is the anodic
+exchange current density, and <span class="math notranslate nohighlight">\(\alpha\)</span> the <em>anodic</em> charge
+transfer coefficient, so <span class="math notranslate nohighlight">\(1-\alpha\)</span> is the cathodic one (Bard &amp;
+Faulkner, <em>Electrochemical Methods</em>, 2nd ed., Ch. 3.4, eq. 3.4.11,
+written there with anodic current positive and cathodic coefficient
+<span class="math notranslate nohighlight">\(\alpha_c=1-\alpha\)</span>). The same anodic convention is used by
+every function in this module. The first term is the anodic
 (oxidation) partial current, the second the cathodic (reduction)
 partial current; at <span class="math notranslate nohighlight">\(\eta=0\)</span> they exactly cancel, so no net
 current flows at equilibrium even though both partial reactions are
@@ -949,9 +952,9 @@ thermodynamic “nothing is happening”).</p>
 <li><p><strong>i0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Exchange current density, in A/m^2 (or any consistent current-
 density unit; the same unit is returned).</p></li>
 <li><p><strong>eta</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Overpotential, in V.</p></li>
-<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Charge transfer (symmetry) coefficient, in <span class="math notranslate nohighlight">\((0, 1)\)</span>; 0.5 is
-the common approximation for a simple, symmetric one-electron
-step.</p></li>
+<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Anodic charge transfer (symmetry) coefficient, in <span class="math notranslate nohighlight">\((0, 1)\)</span>;
+0.5 is the common approximation for a simple, symmetric
+one-electron step.</p></li>
 <li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of electrons transferred in the rate-determining step.</p></li>
 <li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Absolute temperature, in K.</p></li>
 <li><p><strong>R_gas</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Gas constant, in J mol^-1 K^-1.</p></li>
@@ -1132,7 +1135,7 @@ Batteries</em>, 3rd ed., Ch. 3.3).</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>capacity_peukert</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Peukert capacity constant, in <span class="math notranslate nohighlight">\(A^k\cdot h\)</span>.</p></li>
-<li><p><strong>current</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Constant discharge current, in A.</p></li>
+<li><p><strong>current</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.ArrayLike" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArrayLike</span></code></a></span>) – Constant discharge current, in A.</p></li>
 <li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Peukert exponent.</p></li>
 </ul>
 </dd>
@@ -1164,9 +1167,10 @@ increases – the real-battery “capacity fade at high rate” effect:</p>
 <span class="sig-prename descclassname"><span class="pre">chemistrykit.electrochem.</span></span><span class="sig-name descname"><span class="pre">exchange_current_density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_ox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_red</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">F</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">96485.33212331001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/electrochem/systems/butler_volmer.html#exchange_current_density"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.electrochem.exchange_current_density" title="Link to this definition">#</a></dt>
 <dd><p>Exchange current density from a standard heterogeneous rate constant and bulk concentrations.</p>
 <div class="math notranslate nohighlight">
-\[i_0 = nFk^0 C_{ox}^{1-\alpha}C_{red}^{\alpha}\]</div>
+\[i_0 = nFk^0 C_{ox}^{\alpha}C_{red}^{1-\alpha}\]</div>
 <p>(Bard &amp; Faulkner, <em>Electrochemical Methods</em>, 2nd ed., Ch. 3.4, eq.
-3.4.6) – the current density that flows equally in both directions
+3.4.6, <span class="math notranslate nohighlight">\(i_0=nFk^0C_{ox}^{1-\alpha_c}C_{red}^{\alpha_c}\)</span>,
+rewritten with this module’s anodic <span class="math notranslate nohighlight">\(\alpha=1-\alpha_c\)</span>) – the current density that flows equally in both directions
 at equilibrium, before any net overpotential is applied.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1178,7 +1182,8 @@ mol/m^3 (consistent with <cite>k0</cite>’s length unit).</p></li>
 <li><p><strong>C_red</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Bulk concentrations of the oxidized and reduced forms, in
 mol/m^3 (consistent with <cite>k0</cite>’s length unit).</p></li>
 <li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Electrons transferred.</p></li>
-<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Charge transfer coefficient.</p></li>
+<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Anodic charge transfer coefficient, as in
+<a class="reference internal" href="#chemistrykit.electrochem.butler_volmer_current_density" title="chemistrykit.electrochem.butler_volmer_current_density"><code class="xref py py-func docutils literal notranslate"><span class="pre">butler_volmer_current_density()</span></code></a>.</p></li>
 <li><p><strong>F</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Faraday constant, in C/mol.</p></li>
 </ul>
 </dd>
@@ -1697,12 +1702,12 @@ reached.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>capacity_peukert</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Peukert capacity constant <span class="math notranslate nohighlight">\(C_p\)</span>, in <span class="math notranslate nohighlight">\(A^k\cdot h\)</span>
 (numerically equal to the rated capacity in Ah only when <cite>k=1</cite>).</p></li>
-<li><p><strong>current</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Constant discharge current, in A.</p></li>
+<li><p><strong>current</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#numpy.typing.ArrayLike" title="(in NumPy v2.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArrayLike</span></code></a></span>) – Constant discharge current, in A.</p></li>
 <li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Peukert exponent, <span class="math notranslate nohighlight">\(\geq1\)</span>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><em>float or ndarray</em> – Discharge time, in h.</p>
@@ -1943,7 +1948,8 @@ b_{cathodic} = \frac{2.303RT}{(1-\alpha) n F}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Charge transfer coefficient.</p></li>
+<li><p><strong>alpha</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Anodic charge transfer coefficient, as in
+<a class="reference internal" href="#chemistrykit.electrochem.butler_volmer_current_density" title="chemistrykit.electrochem.butler_volmer_current_density"><code class="xref py py-func docutils literal notranslate"><span class="pre">butler_volmer_current_density()</span></code></a>.</p></li>
 <li><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Electrons transferred.</p></li>
 <li><p><strong>T</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
 <li><p><strong>R_gas</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>

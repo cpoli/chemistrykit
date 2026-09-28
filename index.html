@@ -405,6 +405,19 @@ breakthroughs behind it – from Wilhelmy’s 1850 first rate law to the
 Brunauer-Emmett-Teller isotherm, whose co-discoverer Paul Emmett went on
 to develop uranium-separation barrier materials for the Manhattan
 Project – each one linked to the code that reproduces it.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Each domain is a teaching-depth subset of its field, not a complete
+implementation. chemistrykit is not a replacement for specialist
+libraries in production work: for that, use the dedicated tools
+(<a class="reference external" href="https://www.rdkit.org/">RDKit</a>,
+<a class="reference external" href="https://pyscf.org/">PySCF</a>,
+<a class="reference external" href="https://cantera.org/">Cantera</a>,
+<a class="reference external" href="https://ase-lib.org/">ASE</a>,
+<a class="reference external" href="https://openmm.org/">OpenMM</a>,
+<a class="reference external" href="https://pymatgen.org/">pymatgen</a>,
+and the like) directly.</p>
+</div>
 <ul class="simple">
 <li><p><a class="reference internal" href="api/analytical.html#module-chemistrykit.analytical" title="chemistrykit.analytical"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.analytical</span></code></a> – analytical chemistry: redox and
 complexometric (EDTA) titration-curve simulation with
@@ -430,11 +443,14 @@ Faraday’s laws of electrolysis; and a simplified constant-current
 battery discharge model with Peukert’s-law rate dependence.</p></li>
 <li><p><a class="reference internal" href="api/kinetics.html#module-chemistrykit.kinetics" title="chemistrykit.kinetics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.kinetics</span></code></a> – reaction kinetics: integrated rate laws,
 the Arrhenius equation, Michaelis-Menten enzyme kinetics, a general
-stoichiometric reaction-network engine, and the Brusselator oscillator.</p></li>
+stoichiometric reaction-network engine, the Brusselator oscillator,
+Lindemann-Hinshelwood unimolecular falloff, and H2/O2 chain-branching
+explosion limits.</p></li>
 <li><p><a class="reference internal" href="api/md.html#module-chemistrykit.md" title="chemistrykit.md"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.md</span></code></a> – molecular dynamics and force fields: the
 Lennard-Jones fluid in reduced units (periodic boundary conditions,
 a Verlet neighbor list, pressure, g(r)), Morse/Buckingham/harmonic
-bonded potentials, and velocity-rescaling/Nose-Hoover thermostats.</p></li>
+bonded potentials, velocity-rescaling/Nose-Hoover thermostats, and XYZ
+trajectory export for VMD/OVITO.</p></li>
 <li><p><a class="reference internal" href="api/photochem.html#module-chemistrykit.photochem" title="chemistrykit.photochem"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.photochem</span></code></a> – photochemistry: Jablonski-diagram
 excited-state kinetics built on <a class="reference internal" href="api/kinetics.html#module-chemistrykit.kinetics" title="chemistrykit.kinetics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.kinetics</span></code></a>’s
 reaction-network engine; fluorescence/phosphorescence quantum yields
@@ -452,18 +468,19 @@ free-radical polymerization kinetics built on
 models (with the free-electron model of conjugated-dye color); the
 quantum harmonic oscillator vs. the exact Morse potential; the rigid
 rotor; hydrogen-like orbitals; Huckel molecular-orbital theory and its
-4n+2 aromaticity rule; a minimal variational treatment of H2+; and
+4n+2 aromaticity rule; a minimal variational treatment of H2+;
+restricted Hartree-Fock SCF in an STO-3G basis for H2 and HeH+; and
 Rayleigh-Schrodinger perturbation theory for the anharmonic oscillator.</p></li>
 <li><p><a class="reference internal" href="api/solutions.html#module-chemistrykit.solutions" title="chemistrykit.solutions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.solutions</span></code></a> – solution chemistry: pH/pOH and weak
 acid/base equilibria with Henderson-Hasselbalch buffers, titration
-curves, Ksp solubility equilibria, and Debye-Huckel activity
-coefficients.</p></li>
+curves, Ksp solubility equilibria, polyprotic and metal-ligand
+complexation speciation, and Debye-Huckel activity coefficients.</p></li>
 <li><p><a class="reference internal" href="api/spectro.html#module-chemistrykit.spectro" title="chemistrykit.spectro"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.spectro</span></code></a> – spectroscopy: the Beer-Lambert
 absorbance law and its stray-light deviation from linearity;
 rigid-rotor rotational spectra with isotope shifts; harmonic vs. Morse
 vibrational band positions plus a Wilson GF-matrix triatomic
-normal-mode calculation; Franck-Condon vibronic progressions; and a
-first-order NMR multiplet simulator.</p></li>
+normal-mode calculation; Franck-Condon vibronic progressions; and
+first-order NMR multiplets plus exact second-order (AB, ABX) spectra.</p></li>
 <li><p><a class="reference internal" href="api/statmech.html#module-chemistrykit.statmech" title="chemistrykit.statmech"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.statmech</span></code></a> – statistical mechanics of molecules:
 translational/rotational/vibrational partition functions and their
 thermodynamic functions, the Maxwell-Boltzmann speed distribution, and
@@ -482,10 +499,37 @@ turnover-frequency/rate-enhancement catalysis model built on
 <a class="reference internal" href="api/kinetics.html#module-chemistrykit.kinetics" title="chemistrykit.kinetics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.kinetics</span></code></a>’s Arrhenius equation.</p></li>
 <li><p><a class="reference internal" href="api/thermo.html#module-chemistrykit.thermo" title="chemistrykit.thermo"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.thermo</span></code></a> – chemical thermodynamics: equations of
 state (ideal gas, van der Waals, Redlich-Kwong), Clausius-Clapeyron
-phase boundaries, reaction equilibrium (Kp/Kc, van’t Hoff, and a
-Gibbs-energy-minimization equilibrium-composition solver), and
-Raoult’s/Henry’s law mixtures with colligative properties.</p></li>
+and Antoine vapor-pressure curves, reaction equilibrium (Kp/Kc, van’t
+Hoff, and a Gibbs-energy-minimization equilibrium-composition solver),
+Raoult’s/Henry’s law mixtures with colligative properties, and
+Margules/Wilson/NRTL/UNIQUAC activity models for non-ideal
+vapor-liquid equilibrium and azeotropes.</p></li>
 </ul>
+<p>General-chemistry helpers sit at the top level:
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.periodic_table</span></code> (all 118 elements and a formula
+parser, e.g. <code class="docutils literal notranslate"><span class="pre">molar_mass(&quot;Ca(OH)2&quot;)</span></code>) and <code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.stoichiometry</span></code>
+(equation balancing, including redox; limiting reagents; yields;
+empirical formulas).</p>
+<section id="units">
+<h2>Units<a class="headerlink" href="#units" title="Link to this heading">#</a></h2>
+<p>Every function takes and returns plain floats and NumPy arrays; there is
+no unit-tracking library and nothing checks that units are consistent.
+Physical constants in <code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.constants</span></code> are SI values from
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/constants.html#module-scipy.constants" title="(in SciPy v1.18.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.constants</span></code></a>, and each docstring states the unit of every
+argument and return value. Most models work in SI (J, m, Pa, K,
+mol/m<sup>3</sup>). The exceptions are the conventional ones, documented per
+function: solution concentrations in mol/L, NMR shifts in ppm and
+couplings in Hz, spectroscopic line positions in cm<sup>-1</sup>, the
+Lennard-Jones fluid in reduced units (sigma, epsilon, particle mass), and
+empirical correlations (Antoine constants, activity-model and
+rate-constant parameters) in whatever units their constants were
+tabulated in. Converting inputs to the documented units is the caller’s
+job.</p>
+<p><strong>chemistrykit</strong> is part of a family of packages –
+<a class="reference external" href="https://cpoli.github.io/physicskit/">physicskit</a>,
+<a class="reference external" href="https://cpoli.github.io/mathematicskit/">mathematicskit</a> and
+<strong>chemistrykit</strong> – that share the same architecture, API conventions,
+and history-driven documentation.</p>
 <p>Conventionally imported as <code class="docutils literal notranslate"><span class="pre">ck</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">chemistrykit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ck</span>
 
@@ -507,6 +551,7 @@ Raoult’s/Henry’s law mixtures with colligative properties.</p></li>
 </div>
 <div class="toctree-wrapper compound">
 </div>
+</section>
 </section>
 
 
@@ -538,6 +583,20 @@ Raoult’s/Henry’s law mixtures with colligative properties.</p></li>
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#units">Units</a><ul class="pst-show_toc_level nav section-nav flex-column">
+</ul>
+</li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
 

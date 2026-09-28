@@ -424,6 +424,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArrayLike</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">chemistrykit.crystal.core.base_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">LatticePacking</span>
 
@@ -457,14 +458,14 @@
 
 <div class="viewcode-block" id="SimpleCubicPacking.unit_cell_volume">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.SimpleCubicPacking.unit_cell_volume">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">unit_cell_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unit_cell_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">):</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">**</span><span class="mi">3</span></div>
 
 
 <div class="viewcode-block" id="SimpleCubicPacking.atomic_radius">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.SimpleCubicPacking.atomic_radius">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">atomic_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">atomic_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span></div>
 </div>
 
@@ -493,14 +494,14 @@
 
 <div class="viewcode-block" id="BodyCenteredCubicPacking.unit_cell_volume">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.BodyCenteredCubicPacking.unit_cell_volume">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">unit_cell_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unit_cell_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">):</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">**</span><span class="mi">3</span></div>
 
 
 <div class="viewcode-block" id="BodyCenteredCubicPacking.atomic_radius">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.BodyCenteredCubicPacking.atomic_radius">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">atomic_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">atomic_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">/</span> <span class="mf">4.0</span></div>
 </div>
 
@@ -531,14 +532,14 @@
 
 <div class="viewcode-block" id="FaceCenteredCubicPacking.unit_cell_volume">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.FaceCenteredCubicPacking.unit_cell_volume">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">unit_cell_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unit_cell_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">):</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">**</span><span class="mi">3</span></div>
 
 
 <div class="viewcode-block" id="FaceCenteredCubicPacking.atomic_radius">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.FaceCenteredCubicPacking.atomic_radius">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">atomic_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">atomic_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">/</span> <span class="mf">4.0</span></div>
 </div>
 
@@ -600,7 +601,7 @@
 
 <div class="viewcode-block" id="HexagonalClosePacking.unit_cell_volume">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.HexagonalClosePacking.unit_cell_volume">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">unit_cell_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unit_cell_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">):</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_over_a</span> <span class="o">*</span> <span class="n">a</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">c</span></div>
@@ -608,7 +609,7 @@
 
 <div class="viewcode-block" id="HexagonalClosePacking.atomic_radius">
 <a class="viewcode-back" href="../../../../api/crystal.html#chemistrykit.crystal.HexagonalClosePacking.atomic_radius">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">atomic_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">atomic_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span></div>
 </div>
 

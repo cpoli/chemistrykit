@@ -81,7 +81,7 @@ assert min(candidates["OCN-"], key=lambda label: score(candidates["OCN-"][label]
 # Formal charge on each atom for every candidate structure:
 
 fig, axes = plt.subplots(1, 3, figsize=(12, 4), sharey=True)
-for ax, (molecule, structures) in zip(axes, candidates.items()):
+for ax, (molecule, structures) in zip(axes, candidates.items(), strict=True):
     width = 0.8 / len(structures)
     for k, (label, s) in enumerate(structures.items()):
         fc = s.formal_charges()
