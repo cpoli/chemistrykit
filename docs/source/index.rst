@@ -20,6 +20,19 @@ Brunauer-Emmett-Teller isotherm, whose co-discoverer Paul Emmett went on
 to develop uranium-separation barrier materials for the Manhattan
 Project -- each one linked to the code that reproduces it.
 
+.. important::
+
+   Each domain is a teaching-depth subset of its field, not a complete
+   implementation. chemistrykit is not a replacement for specialist
+   libraries in production work: for that, use the dedicated tools
+   (`RDKit <https://www.rdkit.org/>`__,
+   `PySCF <https://pyscf.org/>`__,
+   `Cantera <https://cantera.org/>`__,
+   `ASE <https://ase-lib.org/>`__,
+   `OpenMM <https://openmm.org/>`__,
+   `pymatgen <https://pymatgen.org/>`__,
+   and the like) directly.
+
 - :mod:`chemistrykit.analytical` -- analytical chemistry: redox and
   complexometric (EDTA) titration-curve simulation with
   equivalence-point detection, alongside :mod:`chemistrykit.solutions`'s
