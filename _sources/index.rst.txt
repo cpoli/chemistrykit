@@ -12,6 +12,10 @@ own, and educators building a demonstration. All 14 domains from
 ``chemistrykit-spec.md`` (in the repository root) are implemented,
 listed below.
 
+.. image:: _static/images/readme_hero.png
+   :alt: Belousov-Zhabotinsky oscillations, ethanol's 1H NMR spectrum, and van der Waals isotherms of CO2, all drawn with chemistrykit
+   :width: 100%
+
 Every subpackage is grounded in the chemistry it implements, not just
 coded against it: public functions carry runnable, CI-checked examples,
 and each subpackage's :doc:`history </history/index>` page traces the
@@ -40,6 +44,11 @@ Project -- each one linked to the code that reproduces it.
   equation; linear-regression calibration curves with IUPAC-convention
   limits of detection/quantitation; and propagation-of-uncertainty
   formulas plus Dixon's Q-test for outlier rejection.
+
+  .. image:: _static/images/readme_analytical.png
+     :alt: Tsvet's chromatogram of leaf pigments, the van Deemter curve, and EDTA titrations
+     :width: 100%
+
 - :mod:`chemistrykit.crystal` -- crystallography and solid-state
   chemistry: the 7 crystal systems and general unit-cell volume;
   hard-sphere packing (packing fraction, coordination number) for
@@ -48,6 +57,11 @@ Project -- each one linked to the code that reproduces it.
   converging (Evjen-method) numerical Madelung constant; Bragg's law and
   powder-XRD peak positions with structure factors and systematic
   absences; and Schottky/Frenkel point-defect equilibrium.
+
+  .. image:: _static/images/readme_crystal.png
+     :alt: Powder XRD patterns of Fe and Cu, Evjen's Madelung sum, and packing fractions
+     :width: 100%
+
 - :mod:`chemistrykit.electrochem` -- electrochemistry: the Nernst
   equation for standard and concentration cells with Debye-Huckel
   activity corrections; a curated standard-reduction-potential table
@@ -55,22 +69,42 @@ Project -- each one linked to the code that reproduces it.
   Tafel-plot linearization; galvanic vs. electrolytic cells and
   Faraday's laws of electrolysis; and a simplified constant-current
   battery discharge model with Peukert's-law rate dependence.
+
+  .. image:: _static/images/readme_electrochem.png
+     :alt: Butler-Volmer partial currents, a two-ion polarogram, and a Tafel plot
+     :width: 100%
+
 - :mod:`chemistrykit.kinetics` -- reaction kinetics: integrated rate laws,
   the Arrhenius equation, Michaelis-Menten enzyme kinetics, a general
   stoichiometric reaction-network engine, the Brusselator oscillator,
   Lindemann-Hinshelwood unimolecular falloff, and H2/O2 chain-branching
   explosion limits.
+
+  .. image:: _static/images/readme_kinetics.png
+     :alt: Brusselator limit cycle, Oregonator oscillations, and Gillespie stochastic paths
+     :width: 100%
+
 - :mod:`chemistrykit.md` -- molecular dynamics and force fields: the
   Lennard-Jones fluid in reduced units (periodic boundary conditions,
   a Verlet neighbor list, pressure, g(r)), Morse/Buckingham/harmonic
   bonded potentials, velocity-rescaling/Nose-Hoover thermostats, and XYZ
   trajectory export for VMD/OVITO.
+
+  .. image:: _static/images/readme_md.png
+     :alt: Radial distribution function of liquid argon, MD speeds vs. Maxwell-Boltzmann, and mean-squared displacement
+     :width: 100%
+
 - :mod:`chemistrykit.photochem` -- photochemistry: Jablonski-diagram
   excited-state kinetics built on :mod:`chemistrykit.kinetics`'s
   reaction-network engine; fluorescence/phosphorescence quantum yields
   and the photochemical quantum yield via Beer-Lambert; Stern-Volmer
   quenching with a static-vs-dynamic diagnostic; and photostationary-
   state kinetics for a two-state photoswitch.
+
+  .. image:: _static/images/readme_photochem.png
+     :alt: Jablonski state populations, a Stern-Volmer plot, and FRET efficiency vs. distance
+     :width: 100%
+
 - :mod:`chemistrykit.polymer` -- polymer chemistry: ideal random-walk
   chain statistics and the Flory exponent for real chains under
   theta/good/poor solvent conditions; molecular-weight-distribution
@@ -78,6 +112,11 @@ Project -- each one linked to the code that reproduces it.
   step-growth kinetics via the Carothers equation; and chain-growth/
   free-radical polymerization kinetics built on
   :mod:`chemistrykit.kinetics`'s reaction-network engine.
+
+  .. image:: _static/images/readme_polymer.png
+     :alt: A freely jointed chain, the Flory-Schulz distribution, and Flory-Huggins spinodals
+     :width: 100%
+
 - :mod:`chemistrykit.quantum` -- quantum chemistry: particle-in-a-box
   models (with the free-electron model of conjugated-dye color); the
   quantum harmonic oscillator vs. the exact Morse potential; the rigid
@@ -85,32 +124,62 @@ Project -- each one linked to the code that reproduces it.
   4n+2 aromaticity rule; a minimal variational treatment of H2+;
   restricted Hartree-Fock SCF in an STO-3G basis for H2 and HeH+; and
   Rayleigh-Schrodinger perturbation theory for the anharmonic oscillator.
+
+  .. image:: _static/images/readme_quantum.png
+     :alt: Hydrogen radial distributions, H2+ bonding and antibonding orbitals, and Frost circles
+     :width: 100%
+
 - :mod:`chemistrykit.solutions` -- solution chemistry: pH/pOH and weak
   acid/base equilibria with Henderson-Hasselbalch buffers, titration
   curves, Ksp solubility equilibria, polyprotic and metal-ligand
   complexation speciation, and Debye-Huckel activity coefficients.
+
+  .. image:: _static/images/readme_solutions.png
+     :alt: Strong and weak acid titration curves, phosphoric acid speciation, and activity coefficients
+     :width: 100%
+
 - :mod:`chemistrykit.spectro` -- spectroscopy: the Beer-Lambert
   absorbance law and its stray-light deviation from linearity;
   rigid-rotor rotational spectra with isotope shifts; harmonic vs. Morse
   vibrational band positions plus a Wilson GF-matrix triatomic
   normal-mode calculation; Franck-Condon vibronic progressions; and
   first-order NMR multiplets plus exact second-order (AB, ABX) spectra.
+
+  .. image:: _static/images/readme_spectro.png
+     :alt: Ethanol's 1H NMR spectrum, a Franck-Condon progression, and the HCl rotational spectrum
+     :width: 100%
+
 - :mod:`chemistrykit.statmech` -- statistical mechanics of molecules:
   translational/rotational/vibrational partition functions and their
   thermodynamic functions, the Maxwell-Boltzmann speed distribution, and
   a canonical-ensemble lattice-gas adsorption model.
+
+  .. image:: _static/images/readme_statmech.png
+     :alt: Maxwell-Boltzmann speeds, Onsager's Ising magnetization, and Debye vs. Einstein heat capacity
+     :width: 100%
+
 - :mod:`chemistrykit.structure` -- molecular structure and bonding: a
   lightweight ``Molecule`` container; VSEPR geometry prediction with real
   3D coordinate generation; point-group determination from 3D
   coordinates and character tables; bond order from the Pauling length
   correlation and Huckel-theory MO coefficients; and formal-charge/
   oxidation-state assignment from a Lewis structure.
+
+  .. image:: _static/images/readme_structure.png
+     :alt: SF4's seesaw geometry in 3D, crystal-field splitting, and Pauling's bond-order/length correlation
+     :width: 100%
+
 - :mod:`chemistrykit.surface` -- surface chemistry and catalysis:
   Langmuir, Freundlich, and BET adsorption isotherms with their standard
   linearizations for fitting parameters from data; Langmuir-Hinshelwood
   single- and dual-site surface-reaction kinetics; and a
   turnover-frequency/rate-enhancement catalysis model built on
   :mod:`chemistrykit.kinetics`'s Arrhenius equation.
+
+  .. image:: _static/images/readme_surface.png
+     :alt: BET vs. Langmuir isotherms, Balandin's volcano curve, and temperature-programmed desorption
+     :width: 100%
+
 - :mod:`chemistrykit.thermo` -- chemical thermodynamics: equations of
   state (ideal gas, van der Waals, Redlich-Kwong), Clausius-Clapeyron
   and Antoine vapor-pressure curves, reaction equilibrium (Kp/Kc, van't
@@ -118,6 +187,10 @@ Project -- each one linked to the code that reproduces it.
   Raoult's/Henry's law mixtures with colligative properties, and
   Margules/Wilson/NRTL/UNIQUAC activity models for non-ideal
   vapor-liquid equilibrium and azeotropes.
+
+  .. image:: _static/images/readme_thermo.png
+     :alt: van der Waals isotherms of CO2, the ethanol-water azeotrope, and water's phase diagram
+     :width: 100%
 
 General-chemistry helpers sit at the top level:
 :mod:`chemistrykit.periodic_table` (all 118 elements and a formula

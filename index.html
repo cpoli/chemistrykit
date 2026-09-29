@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>chemistrykit &#8212; chemistrykit 0.1.0 documentation</title>
+    <title>chemistrykit &#8212; chemistrykit 0.2.0 documentation</title>
   
   
   
@@ -43,7 +43,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
-    <script src="_static/documentation_options.js?v=38b66d78"></script>
+    <script src="_static/documentation_options.js?v=95e61db4"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/sg-tags.js?v=d80f6fa4"></script>
@@ -398,6 +398,8 @@ through a textbook problem, curious learners exploring a topic on their
 own, and educators building a demonstration. All 14 domains from
 <code class="docutils literal notranslate"><span class="pre">chemistrykit-spec.md</span></code> (in the repository root) are implemented,
 listed below.</p>
+<a class="reference internal image-reference" href="_images/readme_hero.png"><img alt="Belousov-Zhabotinsky oscillations, ethanol's 1H NMR spectrum, and van der Waals isotherms of CO2, all drawn with chemistrykit" src="_images/readme_hero.png" style="width: 100%;" />
+</a>
 <p>Every subpackage is grounded in the chemistry it implements, not just
 coded against it: public functions carry runnable, CI-checked examples,
 and each subpackage’s <a class="reference internal" href="history/index.html"><span class="doc">history</span></a> page traces the
@@ -418,14 +420,17 @@ libraries in production work: for that, use the dedicated tools
 <a class="reference external" href="https://pymatgen.org/">pymatgen</a>,
 and the like) directly.</p>
 </div>
-<ul class="simple">
+<ul>
 <li><p><a class="reference internal" href="api/analytical.html#module-chemistrykit.analytical" title="chemistrykit.analytical"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.analytical</span></code></a> – analytical chemistry: redox and
 complexometric (EDTA) titration-curve simulation with
 equivalence-point detection, alongside <a class="reference internal" href="api/solutions.html#module-chemistrykit.solutions" title="chemistrykit.solutions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.solutions</span></code></a>’s
 acid-base titrations; chromatographic plate theory and the van Deemter
 equation; linear-regression calibration curves with IUPAC-convention
 limits of detection/quantitation; and propagation-of-uncertainty
-formulas plus Dixon’s Q-test for outlier rejection.</p></li>
+formulas plus Dixon’s Q-test for outlier rejection.</p>
+<a class="reference internal image-reference" href="_images/readme_analytical.png"><img alt="Tsvet's chromatogram of leaf pigments, the van Deemter curve, and EDTA titrations" src="_images/readme_analytical.png" style="width: 100%;" />
+</a>
+</li>
 <li><p><a class="reference internal" href="api/crystal.html#module-chemistrykit.crystal" title="chemistrykit.crystal"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.crystal</span></code></a> – crystallography and solid-state
 chemistry: the 7 crystal systems and general unit-cell volume;
 hard-sphere packing (packing fraction, coordination number) for
@@ -433,77 +438,116 @@ SC/BCC/FCC/HCP lattices; ionic-crystal lattice energy via the
 Born-Lande and Kapustinskii equations, backed by a genuinely
 converging (Evjen-method) numerical Madelung constant; Bragg’s law and
 powder-XRD peak positions with structure factors and systematic
-absences; and Schottky/Frenkel point-defect equilibrium.</p></li>
+absences; and Schottky/Frenkel point-defect equilibrium.</p>
+<a class="reference internal image-reference" href="_images/readme_crystal.png"><img alt="Powder XRD patterns of Fe and Cu, Evjen's Madelung sum, and packing fractions" src="_images/readme_crystal.png" style="width: 100%;" />
+</a>
+</li>
 <li><p><a class="reference internal" href="api/electrochem.html#module-chemistrykit.electrochem" title="chemistrykit.electrochem"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.electrochem</span></code></a> – electrochemistry: the Nernst
 equation for standard and concentration cells with Debye-Huckel
 activity corrections; a curated standard-reduction-potential table
 with redox-couple balancing; Butler-Volmer electrode kinetics and
 Tafel-plot linearization; galvanic vs. electrolytic cells and
 Faraday’s laws of electrolysis; and a simplified constant-current
-battery discharge model with Peukert’s-law rate dependence.</p></li>
+battery discharge model with Peukert’s-law rate dependence.</p>
+<a class="reference internal image-reference" href="_images/readme_electrochem.png"><img alt="Butler-Volmer partial currents, a two-ion polarogram, and a Tafel plot" src="_images/readme_electrochem.png" style="width: 100%;" />
+</a>
+</li>
 <li><p><a class="reference internal" href="api/kinetics.html#module-chemistrykit.kinetics" title="chemistrykit.kinetics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.kinetics</span></code></a> – reaction kinetics: integrated rate laws,
 the Arrhenius equation, Michaelis-Menten enzyme kinetics, a general
 stoichiometric reaction-network engine, the Brusselator oscillator,
 Lindemann-Hinshelwood unimolecular falloff, and H2/O2 chain-branching
-explosion limits.</p></li>
+explosion limits.</p>
+<a class="reference internal image-reference" href="_images/readme_kinetics.png"><img alt="Brusselator limit cycle, Oregonator oscillations, and Gillespie stochastic paths" src="_images/readme_kinetics.png" style="width: 100%;" />
+</a>
+</li>
 <li><p><a class="reference internal" href="api/md.html#module-chemistrykit.md" title="chemistrykit.md"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.md</span></code></a> – molecular dynamics and force fields: the
 Lennard-Jones fluid in reduced units (periodic boundary conditions,
 a Verlet neighbor list, pressure, g(r)), Morse/Buckingham/harmonic
 bonded potentials, velocity-rescaling/Nose-Hoover thermostats, and XYZ
-trajectory export for VMD/OVITO.</p></li>
+trajectory export for VMD/OVITO.</p>
+<a class="reference internal image-reference" href="_images/readme_md.png"><img alt="Radial distribution function of liquid argon, MD speeds vs. Maxwell-Boltzmann, and mean-squared displacement" src="_images/readme_md.png" style="width: 100%;" />
+</a>
+</li>
 <li><p><a class="reference internal" href="api/photochem.html#module-chemistrykit.photochem" title="chemistrykit.photochem"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.photochem</span></code></a> – photochemistry: Jablonski-diagram
 excited-state kinetics built on <a class="reference internal" href="api/kinetics.html#module-chemistrykit.kinetics" title="chemistrykit.kinetics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.kinetics</span></code></a>’s
 reaction-network engine; fluorescence/phosphorescence quantum yields
 and the photochemical quantum yield via Beer-Lambert; Stern-Volmer
 quenching with a static-vs-dynamic diagnostic; and photostationary-
-state kinetics for a two-state photoswitch.</p></li>
+state kinetics for a two-state photoswitch.</p>
+<a class="reference internal image-reference" href="_images/readme_photochem.png"><img alt="Jablonski state populations, a Stern-Volmer plot, and FRET efficiency vs. distance" src="_images/readme_photochem.png" style="width: 100%;" />
+</a>
+</li>
 <li><p><a class="reference internal" href="api/polymer.html#module-chemistrykit.polymer" title="chemistrykit.polymer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.polymer</span></code></a> – polymer chemistry: ideal random-walk
 chain statistics and the Flory exponent for real chains under
 theta/good/poor solvent conditions; molecular-weight-distribution
 statistics and the closed-form Flory-Schulz distribution;
 step-growth kinetics via the Carothers equation; and chain-growth/
 free-radical polymerization kinetics built on
-<a class="reference internal" href="api/kinetics.html#module-chemistrykit.kinetics" title="chemistrykit.kinetics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.kinetics</span></code></a>’s reaction-network engine.</p></li>
+<a class="reference internal" href="api/kinetics.html#module-chemistrykit.kinetics" title="chemistrykit.kinetics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.kinetics</span></code></a>’s reaction-network engine.</p>
+<a class="reference internal image-reference" href="_images/readme_polymer.png"><img alt="A freely jointed chain, the Flory-Schulz distribution, and Flory-Huggins spinodals" src="_images/readme_polymer.png" style="width: 100%;" />
+</a>
+</li>
 <li><p><a class="reference internal" href="api/quantum.html#module-chemistrykit.quantum" title="chemistrykit.quantum"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.quantum</span></code></a> – quantum chemistry: particle-in-a-box
 models (with the free-electron model of conjugated-dye color); the
 quantum harmonic oscillator vs. the exact Morse potential; the rigid
 rotor; hydrogen-like orbitals; Huckel molecular-orbital theory and its
 4n+2 aromaticity rule; a minimal variational treatment of H2+;
 restricted Hartree-Fock SCF in an STO-3G basis for H2 and HeH+; and
-Rayleigh-Schrodinger perturbation theory for the anharmonic oscillator.</p></li>
+Rayleigh-Schrodinger perturbation theory for the anharmonic oscillator.</p>
+<a class="reference internal image-reference" href="_images/readme_quantum.png"><img alt="Hydrogen radial distributions, H2+ bonding and antibonding orbitals, and Frost circles" src="_images/readme_quantum.png" style="width: 100%;" />
+</a>
+</li>
 <li><p><a class="reference internal" href="api/solutions.html#module-chemistrykit.solutions" title="chemistrykit.solutions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.solutions</span></code></a> – solution chemistry: pH/pOH and weak
 acid/base equilibria with Henderson-Hasselbalch buffers, titration
 curves, Ksp solubility equilibria, polyprotic and metal-ligand
-complexation speciation, and Debye-Huckel activity coefficients.</p></li>
+complexation speciation, and Debye-Huckel activity coefficients.</p>
+<a class="reference internal image-reference" href="_images/readme_solutions.png"><img alt="Strong and weak acid titration curves, phosphoric acid speciation, and activity coefficients" src="_images/readme_solutions.png" style="width: 100%;" />
+</a>
+</li>
 <li><p><a class="reference internal" href="api/spectro.html#module-chemistrykit.spectro" title="chemistrykit.spectro"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.spectro</span></code></a> – spectroscopy: the Beer-Lambert
 absorbance law and its stray-light deviation from linearity;
 rigid-rotor rotational spectra with isotope shifts; harmonic vs. Morse
 vibrational band positions plus a Wilson GF-matrix triatomic
 normal-mode calculation; Franck-Condon vibronic progressions; and
-first-order NMR multiplets plus exact second-order (AB, ABX) spectra.</p></li>
+first-order NMR multiplets plus exact second-order (AB, ABX) spectra.</p>
+<a class="reference internal image-reference" href="_images/readme_spectro.png"><img alt="Ethanol's 1H NMR spectrum, a Franck-Condon progression, and the HCl rotational spectrum" src="_images/readme_spectro.png" style="width: 100%;" />
+</a>
+</li>
 <li><p><a class="reference internal" href="api/statmech.html#module-chemistrykit.statmech" title="chemistrykit.statmech"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.statmech</span></code></a> – statistical mechanics of molecules:
 translational/rotational/vibrational partition functions and their
 thermodynamic functions, the Maxwell-Boltzmann speed distribution, and
-a canonical-ensemble lattice-gas adsorption model.</p></li>
+a canonical-ensemble lattice-gas adsorption model.</p>
+<a class="reference internal image-reference" href="_images/readme_statmech.png"><img alt="Maxwell-Boltzmann speeds, Onsager's Ising magnetization, and Debye vs. Einstein heat capacity" src="_images/readme_statmech.png" style="width: 100%;" />
+</a>
+</li>
 <li><p><a class="reference internal" href="api/structure.html#module-chemistrykit.structure" title="chemistrykit.structure"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.structure</span></code></a> – molecular structure and bonding: a
 lightweight <code class="docutils literal notranslate"><span class="pre">Molecule</span></code> container; VSEPR geometry prediction with real
 3D coordinate generation; point-group determination from 3D
 coordinates and character tables; bond order from the Pauling length
 correlation and Huckel-theory MO coefficients; and formal-charge/
-oxidation-state assignment from a Lewis structure.</p></li>
+oxidation-state assignment from a Lewis structure.</p>
+<a class="reference internal image-reference" href="_images/readme_structure.png"><img alt="SF4's seesaw geometry in 3D, crystal-field splitting, and Pauling's bond-order/length correlation" src="_images/readme_structure.png" style="width: 100%;" />
+</a>
+</li>
 <li><p><a class="reference internal" href="api/surface.html#module-chemistrykit.surface" title="chemistrykit.surface"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.surface</span></code></a> – surface chemistry and catalysis:
 Langmuir, Freundlich, and BET adsorption isotherms with their standard
 linearizations for fitting parameters from data; Langmuir-Hinshelwood
 single- and dual-site surface-reaction kinetics; and a
 turnover-frequency/rate-enhancement catalysis model built on
-<a class="reference internal" href="api/kinetics.html#module-chemistrykit.kinetics" title="chemistrykit.kinetics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.kinetics</span></code></a>’s Arrhenius equation.</p></li>
+<a class="reference internal" href="api/kinetics.html#module-chemistrykit.kinetics" title="chemistrykit.kinetics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.kinetics</span></code></a>’s Arrhenius equation.</p>
+<a class="reference internal image-reference" href="_images/readme_surface.png"><img alt="BET vs. Langmuir isotherms, Balandin's volcano curve, and temperature-programmed desorption" src="_images/readme_surface.png" style="width: 100%;" />
+</a>
+</li>
 <li><p><a class="reference internal" href="api/thermo.html#module-chemistrykit.thermo" title="chemistrykit.thermo"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.thermo</span></code></a> – chemical thermodynamics: equations of
 state (ideal gas, van der Waals, Redlich-Kwong), Clausius-Clapeyron
 and Antoine vapor-pressure curves, reaction equilibrium (Kp/Kc, van’t
 Hoff, and a Gibbs-energy-minimization equilibrium-composition solver),
 Raoult’s/Henry’s law mixtures with colligative properties, and
 Margules/Wilson/NRTL/UNIQUAC activity models for non-ideal
-vapor-liquid equilibrium and azeotropes.</p></li>
+vapor-liquid equilibrium and azeotropes.</p>
+<a class="reference internal image-reference" href="_images/readme_thermo.png"><img alt="van der Waals isotherms of CO2, the ethanol-water azeotrope, and water's phase diagram" src="_images/readme_thermo.png" style="width: 100%;" />
+</a>
+</li>
 </ul>
 <p>General-chemistry helpers sit at the top level:
 <code class="xref py py-mod docutils literal notranslate"><span class="pre">chemistrykit.periodic_table</span></code> (all 118 elements and a formula
