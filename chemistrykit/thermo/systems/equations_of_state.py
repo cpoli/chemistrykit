@@ -44,7 +44,7 @@ class IdealGas(EquationOfState):
         T = np.asarray(T, dtype=np.float64)
         return self.R * T / Vm
 
-    def molar_volume(self, P, T, **kwargs):
+    def molar_volume(self, P, T, branch: str = "vapor"):
         P = np.asarray(P, dtype=np.float64)
         T = np.asarray(T, dtype=np.float64)
         return self.R * T / P

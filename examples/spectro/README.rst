@@ -7,7 +7,8 @@ linearity; rigid-rotor rotational spectra with isotope shifts; harmonic
 vs. Morse-potential vibrational band positions, plus a genuine triatomic
 normal-mode calculation; Franck-Condon vibronic progressions for
 electronic spectra; NMR from Larmor frequencies and chemical shifts to
-J-coupling multiplets, the Karplus relation, and Fourier-transform NMR;
+J-coupling multiplets, second-order AB/ABX spectra, the Karplus
+relation, and Fourier-transform NMR;
 atomic line spectra (Fraunhofer, Kirchhoff-Bunsen, Balmer-Rydberg); and
 spectral lineshapes.
 
@@ -34,5 +35,6 @@ Sections
 - **electronic** -- Franck-Condon vibronic progressions in a UV-Vis
   absorption band.
 - **nmr** -- Larmor frequencies and chemical shifts, first-order
-  J-coupling multiplets, the Karplus relation, and Fourier-transform NMR.
+  J-coupling multiplets, second-order AB/ABX spectra, the Karplus
+  relation, and Fourier-transform NMR.
 - **lineshapes** -- Gaussian, Lorentzian, and Voigt line profiles.

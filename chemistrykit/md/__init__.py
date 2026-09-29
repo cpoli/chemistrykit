@@ -5,7 +5,8 @@ distribution function g(r)); pairwise potentials (Morse, Buckingham,
 harmonic bond/angle terms); SHAKE bond constraints; velocity-rescaling,
 Berendsen, Nose-Hoover, and stochastic velocity-rescaling thermostats;
 Einstein and Green-Kubo self-diffusion coefficients; periodic boundary conditions with the minimum-image
-convention and a Verlet neighbor list. Integrated via
+convention and a Verlet neighbor list; and XYZ/extended-XYZ trajectory
+reading and writing for viewers such as VMD and OVITO. Integrated via
 :mod:`chemistrykit.integrators`'s velocity-Verlet
 (:func:`chemistrykit.integrators.velocity_verlet_step`) -- not a
 reimplementation, see
@@ -47,8 +48,12 @@ from chemistrykit.md.systems.transport import (
 )
 from chemistrykit.md.utils.neighbor_list import VerletNeighborList, build_neighbor_list
 from chemistrykit.md.utils.pbc import minimum_image_displacement, wrap_positions
+from chemistrykit.md.utils.xyz_io import XYZTrajectory, read_xyz, write_xyz
 
 __all__ = [
+    "XYZTrajectory",
+    "read_xyz",
+    "write_xyz",
     "__version__",
     "MDResult",
     "PairPotential",

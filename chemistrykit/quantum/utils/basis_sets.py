@@ -1,20 +1,22 @@
-r"""Minimal s-type Gaussian-primitive integrals, for the toy Hartree-Fock-style LCAO solver.
+r"""Minimal s-type Gaussian integrals, for the Hartree-Fock-style LCAO solvers.
 
-Only what :class:`chemistrykit.quantum.systems.hartree_fock.H2PlusVariational`
-needs: the overlap, kinetic-energy, and (one-electron) nuclear-attraction
-integrals between two normalized, spherically symmetric ("s-type")
-primitive Gaussians of the same orbital exponent, each centered on a
-different atom. Closed forms for these integrals (in atomic units) are
+Everything :mod:`chemistrykit.quantum.systems.hartree_fock` needs: the
+overlap, kinetic-energy, one-electron nuclear-attraction and two-electron
+repulsion integrals between normalized, spherically symmetric ("s-type")
+primitive Gaussians centered on different atoms, and fixed contractions
+of them (:class:`ContractedGaussian`, e.g. the STO-3G 1s function from
+:func:`sto3g_1s`). Closed forms for these integrals (in atomic units) are
 standard (Szabo & Ostlund, *Modern Quantum Chemistry*, 1st ed. rev.,
-Appendix A, eqs. A.9, A.11, A.33; Boys, *Proc. R. Soc. Lond. A* 200, 542
-(1950), for the general Gaussian-product method) -- reproduced here in SI
-units throughout, following chemistrykit's package-wide convention
+Appendix A, eqs. A.9, A.11, A.33, A.41; Boys, *Proc. R. Soc. Lond. A* 200,
+542 (1950), for the general Gaussian-product method) -- reproduced here in
+SI units throughout, following chemistrykit's package-wide convention
 (see :mod:`chemistrykit.constants`) of computing with actual physical
 constants rather than adopting a rescaled (atomic) unit system.
 
-Only s-type (l=0) Gaussians are implemented -- enough for a minimal 1s-like
-basis on each hydrogen center -- so the general Boys function
-:math:`F_n(x)` is only ever needed at :math:`n=0`.
+Only s-type (l=0) Gaussians are implemented -- enough for a minimal 1s
+basis on each center of H2, HeH+ and similar first-row-free molecules --
+so the general Boys function :math:`F_n(x)` is only ever needed at
+:math:`n=0`.
 """
 
 from __future__ import annotations
@@ -24,12 +26,28 @@ from scipy.special import erf
 
 from chemistrykit.constants import ELECTRON_MASS, ELEMENTARY_CHARGE, HBAR, VACUUM_PERMITTIVITY
 
-__all__ = ["GaussianPrimitive", "boys_f0", "overlap_integral", "kinetic_integral", "nuclear_attraction_integral"]
+__all__ = [
+    "BOHR_RADIUS",
+    "GaussianPrimitive",
+    "ContractedGaussian",
+    "sto3g_1s",
+    "boys_f0",
+    "overlap_integral",
+    "kinetic_integral",
+    "nuclear_attraction_integral",
+    "electron_repulsion_integral",
+    "contracted_one_electron",
+    "contracted_electron_repulsion",
+]
 
 #: Coulomb's-law energy scale e^2/(4*pi*epsilon_0), in J*m -- the
 #: recurring combination in every nuclear-attraction/electron-repulsion
 #: integral below.
 _COULOMB_CONSTANT = ELEMENTARY_CHARGE**2 / (4.0 * np.pi * VACUUM_PERMITTIVITY)
+
+#: The Bohr radius :math:`a_0=4\pi\varepsilon_0\hbar^2/(m_ee^2)`, in m -- the
+#: length unit tabulated Gaussian exponents (in bohr^-2) are converted from.
+BOHR_RADIUS = 4.0 * np.pi * VACUUM_PERMITTIVITY * HBAR**2 / (ELECTRON_MASS * ELEMENTARY_CHARGE**2)
 
 
 class GaussianPrimitive:
@@ -221,3 +239,161 @@ def nuclear_attraction_integral(a: GaussianPrimitive, b: GaussianPrimitive, Z: f
     PC2 = float(np.sum((P - nucleus_center) ** 2))
     prefactor = a.normalization * b.normalization * Z * _COULOMB_CONSTANT * (2.0 * np.pi / p)
     return -prefactor * np.exp(-a.alpha * b.alpha / p * AB2) * boys_f0(p * PC2)
+
+
+def electron_repulsion_integral(a: GaussianPrimitive, b: GaussianPrimitive, c: GaussianPrimitive, d: GaussianPrimitive) -> float:
+    r"""Two-electron repulsion integral :math:`(ab|cd)` between four normalized s-Gaussians.
+
+    :math:`(ab|cd)=\frac{e^2}{4\pi\varepsilon_0}\iint\chi_a(1)\chi_b(1)\,r_{12}^{-1}\,\chi_c(2)\chi_d(2)\,d^3r_1d^3r_2`:
+
+    .. math::
+
+        (ab|cd) = N_aN_bN_cN_d\,\frac{e^2}{4\pi\varepsilon_0}
+            \frac{2\pi^{5/2}}{pq\sqrt{p+q}}
+            e^{-\frac{\alpha_a\alpha_b}{p}|\mathbf R_a-\mathbf R_b|^2
+               -\frac{\alpha_c\alpha_d}{q}|\mathbf R_c-\mathbf R_d|^2}
+            F_0\!\left(\frac{pq}{p+q}|\mathbf P-\mathbf Q|^2\right)
+
+    with :math:`p=\alpha_a+\alpha_b`, :math:`q=\alpha_c+\alpha_d` and
+    :math:`\mathbf P`, :math:`\mathbf Q` the two Gaussian-product centers
+    (Szabo & Ostlund, Appendix A, eq. A.41, in chemists' notation, restored
+    to SI units).
+
+    Parameters
+    ----------
+    a, b, c, d : GaussianPrimitive
+        `a`, `b` hold electron 1; `c`, `d` electron 2.
+
+    Returns
+    -------
+    float
+        Energy, in J (positive -- repulsive).
+
+    Examples
+    --------
+    Two electrons in the same normalized Gaussian repel with
+    :math:`(aa|aa)=\frac{e^2}{4\pi\varepsilon_0}\,2\sqrt{\alpha/\pi}`:
+
+    >>> import numpy as np
+    >>> g = GaussianPrimitive(alpha=1.0e20, center=[0.0, 0.0, 0.0])
+    >>> expected = ELEMENTARY_CHARGE**2 / (4 * np.pi * VACUUM_PERMITTIVITY) * 2 * np.sqrt(1.0e20 / np.pi)
+    >>> bool(np.isclose(electron_repulsion_integral(g, g, g, g), expected))
+    True
+    """
+    p = a.alpha + b.alpha
+    q = c.alpha + d.alpha
+    AB2 = float(np.sum((a.center - b.center) ** 2))
+    CD2 = float(np.sum((c.center - d.center) ** 2))
+    P = (a.alpha * a.center + b.alpha * b.center) / p
+    Q = (c.alpha * c.center + d.alpha * d.center) / q
+    PQ2 = float(np.sum((P - Q) ** 2))
+    norm = a.normalization * b.normalization * c.normalization * d.normalization
+    geometric = 2.0 * np.pi**2.5 / (p * q * np.sqrt(p + q)) * np.exp(-a.alpha * b.alpha / p * AB2 - c.alpha * d.alpha / q * CD2)
+    return norm * _COULOMB_CONSTANT * geometric * boys_f0(p * q / (p + q) * PQ2)
+
+
+class ContractedGaussian:
+    r"""A fixed linear combination of normalized s-type primitives on one center, :math:`\phi=\sum_k d_k\chi_k`.
+
+    Parameters
+    ----------
+    exponents : array-like of float
+        Primitive exponents, in m^-2.
+    coefficients : array-like of float
+        Contraction coefficients :math:`d_k` (for normalized primitives).
+    center : array-like, shape (3,)
+        Center, in m.
+
+    Examples
+    --------
+    >>> phi = sto3g_1s(zeta=1.24, center=[0.0, 0.0, 0.0])
+    >>> len(phi.primitives)
+    3
+    """
+
+    def __init__(self, exponents, coefficients, center):
+        exponents = np.asarray(exponents, dtype=np.float64)
+        coefficients = np.asarray(coefficients, dtype=np.float64)
+        if exponents.shape != coefficients.shape:
+            raise ValueError("exponents and coefficients must have the same shape")
+        self.center = np.asarray(center, dtype=np.float64)
+        self.coefficients = coefficients
+        self.primitives = [GaussianPrimitive(alpha, self.center) for alpha in exponents]
+
+
+#: STO-3G least-squares fit of a zeta=1 Slater 1s orbital by three
+#: Gaussians: exponents (bohr^-2) and contraction coefficients (W. J.
+#: Hehre, R. F. Stewart & J. A. Pople, *J. Chem. Phys.* 51, 2657 (1969);
+#: Szabo & Ostlund, eq. 3.225).
+_STO3G_1S_EXPONENTS = np.array([0.109818, 0.405771, 2.22766])
+_STO3G_1S_COEFFICIENTS = np.array([0.444635, 0.535328, 0.154329])
+
+
+def sto3g_1s(zeta: float, center) -> ContractedGaussian:
+    r"""The STO-3G contracted 1s function for Slater exponent `zeta` (exponents scale as :math:`\zeta^2`).
+
+    Parameters
+    ----------
+    zeta : float
+        Slater orbital exponent, in bohr^-1 (1.24 for H in molecules, 2.0925
+        for He in HeH+; Szabo & Ostlund, Ch. 3.5.2).
+    center : array-like, shape (3,)
+        Center, in m.
+
+    Returns
+    -------
+    ContractedGaussian
+
+    Examples
+    --------
+    The contraction is normalized to within the fit's rounding:
+
+    >>> phi = sto3g_1s(zeta=1.24, center=[0.0, 0.0, 0.0])
+    >>> round(contracted_one_electron(overlap_integral, phi, phi), 5)
+    1.0
+    """
+    return ContractedGaussian(_STO3G_1S_EXPONENTS * zeta**2 / BOHR_RADIUS**2, _STO3G_1S_COEFFICIENTS, center)
+
+
+def contracted_one_electron(integral, a: ContractedGaussian, b: ContractedGaussian, *args) -> float:
+    """Contract a primitive one-electron integral over two :class:`ContractedGaussian` functions.
+
+    Parameters
+    ----------
+    integral : callable
+        :func:`overlap_integral`, :func:`kinetic_integral` or
+        :func:`nuclear_attraction_integral`.
+    a, b : ContractedGaussian
+    *args
+        Extra arguments for `integral` (e.g. ``Z, nucleus_center``).
+
+    Returns
+    -------
+    float
+    """
+    total = 0.0
+    for da, pa in zip(a.coefficients, a.primitives, strict=True):
+        for db, pb in zip(b.coefficients, b.primitives, strict=True):
+            total += da * db * integral(pa, pb, *args)
+    return float(total)
+
+
+def contracted_electron_repulsion(a: ContractedGaussian, b: ContractedGaussian, c: ContractedGaussian, d: ContractedGaussian) -> float:
+    """Contract :func:`electron_repulsion_integral` over four :class:`ContractedGaussian` functions.
+
+    Parameters
+    ----------
+    a, b, c, d : ContractedGaussian
+
+    Returns
+    -------
+    float
+        :math:`(ab|cd)`, in J.
+    """
+    total = 0.0
+    for da, pa in zip(a.coefficients, a.primitives, strict=True):
+        for db, pb in zip(b.coefficients, b.primitives, strict=True):
+            for dc, pc in zip(c.coefficients, c.primitives, strict=True):
+                for dd, pd in zip(d.coefficients, d.primitives, strict=True):
+                    total += da * db * dc * dd * electron_repulsion_integral(pa, pb, pc, pd)
+    return float(total)

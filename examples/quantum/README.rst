@@ -6,7 +6,7 @@ particle-in-a-box models (with the free-electron model of conjugated-dye
 color); the quantum harmonic oscillator compared against the exact Morse
 potential; the rigid rotor; hydrogen-like orbitals; Huckel molecular-orbital
 theory and its aromaticity rule; a minimal variational treatment of H2+;
-and Rayleigh-Schrodinger perturbation theory for the anharmonic oscillator.
+restricted Hartree-Fock SCF in an STO-3G basis; and Rayleigh-Schrodinger perturbation theory for the anharmonic oscillator.
 
 Each script in this gallery is self-contained and can be run directly with
 ``python examples/quantum/<section>/<script>.py``. Every script also
@@ -33,7 +33,8 @@ Sections
   Huckel's 4n+2 aromaticity rule against the computed spectrum.
 - **hartree_fock** -- a minimal 2-Gaussian LCAO variational treatment of
   H2+: solving ``HC=SCE`` and variationally optimizing the orbital
-  exponent to improve on a naive guess.
+  exponent to improve on a naive guess; then the closed-shell
+  Roothaan-Hall SCF for HeH+ and H2 and the STO-3G minimal basis.
 - **perturbation** -- Rayleigh-Schrodinger perturbation theory for the
   quartic anharmonic oscillator, checked against exact numerical
   diagonalization in a truncated basis.

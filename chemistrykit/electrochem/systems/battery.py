@@ -10,13 +10,14 @@ Peukert, *Elektrotechnische Zeitschrift* 20, 20 (1897).
 from __future__ import annotations
 
 import numpy as np
+from numpy.typing import ArrayLike
 
 from chemistrykit.electrochem.core.base_system import BatteryDischargeModel
 
 __all__ = ["peukert_discharge_time", "effective_capacity", "ConstantCurrentBattery"]
 
 
-def peukert_discharge_time(capacity_peukert: float, current: float, k: float = 1.0) -> float:
+def peukert_discharge_time(capacity_peukert: float, current: ArrayLike, k: float = 1.0) -> float | np.ndarray:
     r"""Peukert's-law discharge time at constant current: :math:`t = C_p / I^k`.
 
     :math:`C_p` (the "Peukert capacity", in :math:`A^k\cdot h`) and the
@@ -68,7 +69,7 @@ def peukert_discharge_time(capacity_peukert: float, current: float, k: float = 1
     return float(result) if result.ndim == 0 else result
 
 
-def effective_capacity(capacity_peukert: float, current: float, k: float = 1.0):
+def effective_capacity(capacity_peukert: float, current: ArrayLike, k: float = 1.0):
     r"""Effective delivered capacity at a given discharge current: :math:`C_{eff}(I) = I\,t(I) = C_p I^{1-k}`.
 
     At the ideal Peukert exponent :math:`k=1`, this is exactly
@@ -167,7 +168,7 @@ class ConstantCurrentBattery(BatteryDischargeModel):
         -------
         float
         """
-        return peukert_discharge_time(self.capacity_peukert, self.current, self.k)
+        return float(peukert_discharge_time(self.capacity_peukert, self.current, self.k))
 
     def state_of_charge(self, t):
         t = np.asarray(t, dtype=np.float64)

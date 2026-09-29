@@ -45,7 +45,7 @@ def plot_energy_levels(energies, ax=None, degeneracy_tol: float = 1e-9, labels=N
         _, ax = plt.subplots()
     energies = np.sort(np.asarray(energies, dtype=np.float64))
 
-    groups = []
+    groups: list[list[float]] = []
     for e in energies:
         if groups and abs(e - groups[-1][0]) < degeneracy_tol:
             groups[-1].append(e)

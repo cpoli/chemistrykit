@@ -1,4 +1,4 @@
-r"""Clausius-Clapeyron phase boundaries and the Gibbs phase rule.
+r"""Clausius-Clapeyron and Antoine vapor-pressure curves, and the Gibbs phase rule.
 
 See Atkins & de Paula, *Physical Chemistry*, 11th ed., Ch. 4 ("Physical
 transformations of pure substances") for both topics.
@@ -12,7 +12,7 @@ import numpy as np
 
 from chemistrykit.constants import R
 
-__all__ = ["ClausiusClapeyron", "gibbs_phase_rule"]
+__all__ = ["ClausiusClapeyron", "AntoineEquation", "gibbs_phase_rule"]
 
 
 @dataclass
@@ -141,6 +141,71 @@ class ClausiusClapeyron:
         """
         delta_h_vap = -R * np.log(P2 / P1) / (1.0 / T2 - 1.0 / T1)
         return cls(delta_h_vap=float(delta_h_vap), T_ref=T1, P_ref=P1)
+
+
+@dataclass
+class AntoineEquation:
+    r"""The Antoine vapor-pressure equation, :math:`\log_{10}P = A - B/(C+T)`.
+
+    An empirical three-parameter refinement of the integrated
+    Clausius-Clapeyron equation (which it reduces to at :math:`C=0`) that
+    absorbs most of the temperature dependence of
+    :math:`\Delta H_{vap}` (C. Antoine, *C. R. Acad. Sci.* 107, 681
+    (1888); Poling, Prausnitz & O'Connell, *The Properties of Gases and
+    Liquids*, 5th ed., Ch. 7-3). Constants are only valid over the
+    temperature range they were fitted on, and their units vary between
+    tables: NIST WebBook gives :math:`P` in bar and :math:`T` in K, many
+    older tables mmHg and degC. :meth:`pressure` and :meth:`temperature`
+    use whatever units the constants imply.
+
+    Parameters
+    ----------
+    A, B, C : float
+        Antoine constants.
+
+    Examples
+    --------
+    Water, NIST WebBook constants for 344-373 K (P in bar, T in K), at the
+    normal boiling point:
+
+    >>> water = AntoineEquation(A=5.08354, B=1663.125, C=-45.622)
+    >>> round(float(water.pressure(373.15)), 3)
+    1.013
+    >>> round(float(water.temperature(1.01325)), 1)
+    373.1
+    """
+
+    A: float
+    B: float
+    C: float
+
+    def pressure(self, T):
+        """Vapor pressure at temperature(s) `T`.
+
+        Parameters
+        ----------
+        T : float or array-like of float
+
+        Returns
+        -------
+        float or ndarray
+        """
+        T = np.asarray(T, dtype=np.float64)
+        return 10.0 ** (self.A - self.B / (self.C + T))
+
+    def temperature(self, P):
+        """Boiling temperature at pressure(s) `P` (the inverse of :meth:`pressure`).
+
+        Parameters
+        ----------
+        P : float or array-like of float
+
+        Returns
+        -------
+        float or ndarray
+        """
+        P = np.asarray(P, dtype=np.float64)
+        return self.B / (self.A - np.log10(P)) - self.C
 
 
 def gibbs_phase_rule(n_components: int, n_phases: int, reactions: int = 0) -> int:

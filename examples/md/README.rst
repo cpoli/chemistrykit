@@ -5,7 +5,8 @@ This gallery walks through every public feature of ``chemistrykit.md``:
 the Lennard-Jones fluid in reduced units (energy conservation, pressure,
 and the radial distribution function g(r)); Morse/Buckingham/harmonic
 bonded potentials and small bonded clusters; periodic boundaries; SHAKE
-bond constraints; thermostats; and self-diffusion coefficients.
+bond constraints; thermostats; self-diffusion coefficients; and XYZ
+trajectory files for molecular viewers.
 
 Each script in this gallery is self-contained and can be run directly with
 ``python examples/md/<section>/<script>.py``. Every script also carries an
@@ -33,3 +34,5 @@ Sections
 - **constraints** -- rigid bonds enforced with the SHAKE algorithm.
 - **thermostats** -- Nose-Hoover, Berendsen weak-coupling, and stochastic
   velocity-rescaling temperature control.
+- **trajectory_io** -- writing and reading (extended) XYZ trajectories
+  for VMD and OVITO.

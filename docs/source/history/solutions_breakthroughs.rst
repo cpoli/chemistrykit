@@ -534,6 +534,38 @@ Association* (London: Butterworths, 1962).
 
 .. minigallery:: ../../examples/solutions/activity/plot_03_davies_equation.py
 
+1941 -- Jannik Bjerrum's Stepwise Formation Constants
+---------------------------------------------------------
+
+Metal ions in water pick up ligands one at a time. Before Jannik Bjerrum
+(son of Niels Bjerrum, whose 1914 species diagrams appear above), complex
+formation was usually described by a single overall constant for the
+"final" complex. In his 1941 thesis on metal ammines Bjerrum showed that
+the intermediate complexes :math:`ML, ML_2, \dots` are all present in
+comparable amounts, each governed by its own stepwise constant
+:math:`K_n`. He also showed that the whole set can be measured. The
+*formation function* :math:`\bar n`, the average number of ligands bound
+per metal, depends only on the free-ligand concentration, and it can be
+obtained from a pH or potential measurement. Where :math:`\bar n = n -
+\tfrac12`, :math:`\log K_n \approx -\log[L]`. His method, and the
+compilations of stability constants it produced, underpin coordination
+chemistry's quantitative side: complexometric titration, metal
+speciation in natural waters, and chelation.
+
+*Implementation:* :func:`~chemistrykit.solutions.complex_fractions` and
+:func:`~chemistrykit.solutions.average_ligand_number` give the species
+fractions and Bjerrum's formation function from cumulative constants,
+and :func:`~chemistrykit.solutions.solve_complexation` solves the ligand
+mass balance for speciation from total concentrations. The example draws
+the Cu(II)-ammonia distribution diagram and recovers the stepwise
+constants with Bjerrum's half-:math:`\bar n` rule.
+
+*References:* J. Bjerrum, *Metal Ammine Formation in Aqueous Solution:
+Theory of the Reversible Step Reactions* (Copenhagen: P. Haase and Son,
+1941).
+
+.. minigallery:: ../../examples/solutions/complexation/plot_01_bjerrum_metal_ammine_formation.py
+
 1950 -- 1952 -- Gran's Linearized Titration Plot
 ----------------------------------------------------
 

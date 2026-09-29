@@ -8,8 +8,8 @@ coordinate generation; point-group determination from 3D coordinates
 tables; bond order from the Pauling length correlation and from
 Huckel-theory MO coefficients; formal-charge/oxidation-state
 assignment from a Lewis structure and Pauling electronegativities;
-Kekule-structure enumeration; Baeyer ring angle strain; and dipole
-moments.
+Kekule-structure enumeration; Baeyer ring angle strain; dipole
+moments; and the periodic table.
 
 Each script in this gallery is self-contained and can be run directly with
 ``python examples/structure/<section>/<script>.py``. Every script also
@@ -34,3 +34,5 @@ Sections
 - **kekule** -- Kekule structures of benzene and larger aromatics.
 - **ring_strain** -- Baeyer's angle strain in planar cycloalkanes.
 - **dipole** -- molecular dipole moments from bond dipoles and charges.
+- **periodic_table** -- Mendeleev's periodicity, the atomic-weight
+  inversions, and molar masses from formulas.

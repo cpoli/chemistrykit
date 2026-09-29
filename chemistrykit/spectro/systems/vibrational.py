@@ -103,7 +103,7 @@ def morse_transition_wavenumbers(morse: MorseOscillator, v_max: int) -> np.ndarr
     """
     v_final = np.arange(1, v_max + 1)
     delta_e = morse.energy(v_final) - morse.energy(0)
-    return energy_to_wavenumber(delta_e)
+    return np.asarray(energy_to_wavenumber(delta_e))
 
 
 def anharmonicity_from_overtones(wavenumber_01: float, wavenumber_02: float) -> tuple:

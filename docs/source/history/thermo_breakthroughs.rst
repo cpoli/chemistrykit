@@ -485,6 +485,41 @@ dissolvants," C. R. Acad. Sci. 104, 1430-1433 (1887).
 
 .. minigallery:: ../../examples/thermo/mixtures/plot_01_raoult_law_pxy.py
 
+1888 -- Antoine's Vapor-Pressure Equation
+---------------------------------------------
+
+The Clausius-Clapeyron equation predicts that :math:`\ln P` is a straight
+line in :math:`1/T`, but only because it assumes a constant enthalpy of
+vaporization. Precise measurements showed a slight, systematic curvature:
+:math:`\Delta H_{vap}` shrinks steadily as a liquid heats toward its
+critical point. Louis Charles Antoine, an engineer working on steam, found
+that shifting the temperature scale by one fitted constant absorbs almost
+all of that curvature over a practical range:
+
+.. math::
+
+   \log_{10}P = A - \frac{B}{C + T}
+
+With :math:`C = 0` it reduces exactly to integrated Clausius-Clapeyron,
+so the third constant is a correction rather than a new theory. That
+modesty is why it lasted. More than a century later Antoine constants
+are still the standard way vapor pressures are tabulated (in the NIST
+Chemistry WebBook, in process-simulation databases, and in every
+distillation calculation), each set valid only over the temperature
+window it was fitted on.
+
+*Implementation:* :class:`~chemistrykit.thermo.AntoineEquation` evaluates
+the equation and its closed-form inverse (the boiling temperature at a
+given pressure) in whatever units its constants were tabulated in. The
+example compares it with Clausius-Clapeyron against steam-table data for
+water, showing the third constant removing the curvature error.
+
+*References:* C. Antoine, "Tensions des vapeurs; nouvelle relation entre
+les tensions et les températures," C. R. Acad. Sci. 107, 681-684,
+778-780, 836-837 (1888).
+
+.. minigallery:: ../../examples/thermo/phase_equilibria/plot_03_antoine_vapor_pressure.py
+
 1895 -- Margules's Activity Coefficients for Non-Ideal Solutions
 ------------------------------------------------------------------
 
@@ -655,6 +690,109 @@ Solutions. V. An Equation of State. Fugacities of Gaseous Solutions,"
 Chem. Rev. 44, 233-244 (1949).
 
 .. minigallery:: ../../examples/thermo/equations_of_state/plot_03_redlich_kwong.py
+
+1964 -- Wilson's Local-Composition Model
+--------------------------------------------
+
+Margules's and van Laar's activity-coefficient expressions were
+empirical power series in the bulk composition. Grant Wilson argued
+that a molecule does not see the bulk. Its immediate neighbors are
+enriched in whichever species it attracts more strongly, in proportion
+to Boltzmann factors of the interaction energies. Writing the Flory-
+Huggins entropy of mixing in terms of these *local* volume fractions
+gave, with just two parameters per pair,
+
+.. math::
+
+   \frac{G^E}{RT} = -x_1\ln(x_1+\Lambda_{12}x_2) - x_2\ln(x_2+\Lambda_{21}x_1),
+   \qquad \Lambda_{12} = \frac{V_2}{V_1}e^{-\lambda_{12}/RT}.
+
+Wilson's model fitted strongly non-ideal miscible mixtures (alcohols
+with hydrocarbons or water, the cases where Margules and van Laar
+struggled) far better, and because its parameters are energies it
+carries a built-in temperature dependence. It extends to multicomponent
+mixtures with binary parameters alone. It has one structural blind spot:
+it can never predict two liquid phases.
+
+*Implementation:* :class:`~chemistrykit.thermo.WilsonSolution`
+(with :meth:`~chemistrykit.thermo.WilsonSolution.from_energies` for the
+molar-volume and energy form) plugs into the shared modified-Raoult's-law
+machinery of :class:`~chemistrykit.thermo.BinaryActivityModel`. The
+example builds the ethanol-water P-x-y diagram at 70 degC, with Antoine
+vapor pressures, and locates its azeotrope near 90 mol% ethanol.
+
+*References:* G. M. Wilson, "Vapor-Liquid Equilibrium. XI. A New
+Expression for the Excess Free Energy of Mixing," J. Am. Chem. Soc. 86,
+127-130 (1964).
+
+.. minigallery:: ../../examples/thermo/mixtures/plot_05_wilson_local_composition.py
+
+1968 -- Renon and Prausnitz's Non-Random Two-Liquid Model
+-------------------------------------------------------------
+
+Henri Renon and John Prausnitz kept Wilson's local-composition idea but
+built it on Scott's two-liquid picture of a mixture, with a separate
+cell around each kind of molecule. They added a third, *non-randomness*
+parameter :math:`\alpha` that controls how strongly local composition
+departs from the bulk:
+
+.. math::
+
+   \frac{G^E}{RT} = x_1x_2\left(\frac{\tau_{21}G_{21}}{x_1+x_2G_{21}}
+   + \frac{\tau_{12}G_{12}}{x_2+x_1G_{12}}\right),
+   \qquad G_{ij} = e^{-\alpha\tau_{ij}}.
+
+The extra flexibility removed Wilson's blind spot. NRTL can make the
+Gibbs energy of mixing non-convex, so it describes partially miscible
+liquids and liquid-liquid equilibrium with the same parameters that
+describe vapor-liquid equilibrium. That made it a workhorse of
+process-design software for extraction and heterogeneous azeotropic
+distillation.
+
+*Implementation:* :class:`~chemistrykit.thermo.NRTLSolution`. The example
+shows its Gibbs energy of mixing developing two minima, locates the two
+coexisting liquid compositions by equating component activities, and
+contrasts a strongly non-ideal Wilson mixture that stays a single phase.
+
+*References:* H. Renon and J. M. Prausnitz, "Local Compositions in
+Thermodynamic Excess Functions for Liquid Mixtures," AIChE J. 14,
+135-144 (1968).
+
+.. minigallery:: ../../examples/thermo/mixtures/plot_06_nrtl_liquid_liquid_split.py
+
+1975 -- Abrams and Prausnitz's UNIQUAC
+------------------------------------------
+
+Denis Abrams and John Prausnitz derived a local-composition model from
+Guggenheim's quasi-chemical lattice theory, now counting molecular
+*surface area* rather than just volume. The result splits every activity
+coefficient into two physically distinct pieces:
+
+.. math::
+
+   \ln\gamma_i = \ln\gamma_i^{C} + \ln\gamma_i^{R}.
+
+The combinatorial part depends only on each molecule's van der Waals
+volume :math:`r` and area :math:`q`, which are fixed by its structure and
+tabulated once. The residual part carries the interaction energies,
+with two parameters per pair. Separating size from energy gave better
+extrapolation to molecules of very different size, and it made UNIQUAC
+the parent of the UNIFAC group-contribution method (Fredenslund, Jones
+and Prausnitz, 1975). UNIFAC estimates the residual term from functional
+groups when no mixture data exist at all.
+
+*Implementation:* :class:`~chemistrykit.thermo.UNIQUACSolution` evaluates
+both parts for a binary with coordination number :math:`z=10`. The
+example decomposes :math:`\ln\gamma` for ethanol-water into its
+combinatorial and residual contributions using tabulated :math:`r` and
+:math:`q`.
+
+*References:* D. S. Abrams and J. M. Prausnitz, "Statistical
+Thermodynamics of Liquid Mixtures: A New Expression for the Excess Gibbs
+Energy of Partly or Completely Miscible Systems," AIChE J. 21, 116-128
+(1975).
+
+.. minigallery:: ../../examples/thermo/mixtures/plot_07_uniquac_combinatorial_residual.py
 
 1976 -- Peng and Robinson's Equation of State
 ---------------------------------------------

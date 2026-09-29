@@ -587,6 +587,9 @@ zeroth-order Boys function the nuclear-attraction integral reduces to for
 s-type functions), used directly by
 :class:`chemistrykit.quantum.systems.hartree_fock.H2PlusVariational` to
 build its Hamiltonian and overlap matrices.
+``electron_repulsion_integral()`` adds the two-electron integral the
+same Gaussian-product theorem makes closed-form, which
+:class:`~chemistrykit.quantum.RestrictedHartreeFock` needs below.
 
 *References:* S. F. Boys, "Electronic Wave Functions. I. A General
 Method of Calculation for the Stationary States of Any Molecular
@@ -627,23 +630,26 @@ implements exactly this generalized eigenvalue problem -- via
 theory's approximation, above) -- and is the single shared solver every
 variational model in this subpackage
 (:class:`~chemistrykit.quantum.systems.hartree_fock.H2PlusVariational`,
-:class:`~chemistrykit.quantum.systems.huckel.HuckelSystem`) reduces to;
-:class:`~chemistrykit.quantum.systems.hartree_fock.H2PlusVariational`'s
-own iterative
-:meth:`~chemistrykit.quantum.H2PlusVariational.optimize_exponent`
-(re-solving the secular equation at each trial exponent) is a minimal,
-one-parameter echo of the self-consistent-field loop Roothaan-Hall
-calculations run in full generality. The gallery example builds `H` and
-`S` for H2+ from the Gaussian integrals in
-``chemistrykit.quantum.utils.basis_sets`` in bases of growing size and
-shows the variational energy falling toward the exact value.
+:class:`~chemistrykit.quantum.systems.huckel.HuckelSystem`,
+:class:`~chemistrykit.quantum.RestrictedHartreeFock`) reduces to. The
+first gallery example builds `H` and `S` for the one-electron H2+ from
+the Gaussian integrals in ``chemistrykit.quantum.utils.basis_sets`` in
+bases of growing size and shows the variational energy falling toward
+the exact value. For two or more electrons the equation becomes
+:math:`FC=SC\varepsilon` with a Fock matrix that depends on its own
+solution, and :class:`~chemistrykit.quantum.RestrictedHartreeFock` runs
+the full closed-shell self-consistent-field loop. The second example
+converges HeH+ to Szabo and Ostlund's STO-3G energy and traces the RHF
+potential curve of H2, including its well-known failure at dissociation.
 
 *References:* C. C. J. Roothaan, "New Developments in Molecular Orbital
 Theory," Rev. Mod. Phys. 23, 69-89 (1951); G. G. Hall, "The Molecular
 Orbital Theory of Chemical Valency. VIII. A Method of Calculating
 Ionization Potentials," Proc. R. Soc. Lond. A 205, 541-552 (1951).
 
-.. minigallery:: ../../examples/quantum/hartree_fock/plot_05_roothaan_hall_secular_equation.py
+.. minigallery::
+   ../../examples/quantum/hartree_fock/plot_05_roothaan_hall_secular_equation.py
+   ../../examples/quantum/hartree_fock/plot_07_roothaan_hall_scf.py
 
 1952 -- Fukui's Frontier-Orbital Theory of Reactivity
 -------------------------------------------------------
@@ -679,6 +685,36 @@ Theory of Reactivity in Aromatic Hydrocarbons," J. Chem. Phys. 20,
 722-725 (1952).
 
 .. minigallery:: ../../examples/quantum/huckel/plot_04_fukui_frontier_orbitals.py
+
+1969 -- Hehre, Stewart, and Pople's STO-nG Minimal Basis
+------------------------------------------------------------
+
+Boys's Gaussians made molecular integrals computable but had the wrong
+shape. Slater orbitals had the right shape but intractable integrals.
+Warren Hehre, Robert Stewart and John Pople resolved the trade-off
+pragmatically. They fitted each Slater orbital, once and for all, by a
+fixed least-squares combination of :math:`n` Gaussians ("STO-nG"). Since
+the Slater exponent only rescales the function, one table of
+:math:`\zeta=1` expansion coefficients serves every element: the Gaussian
+exponents simply scale as :math:`\zeta^2`. STO-3G, three Gaussians per
+orbital, was the default basis of Pople's GAUSSIAN 70 program, the first
+widely distributed ab initio code. It put Hartree-Fock calculations on
+real molecules within reach of ordinary chemists, part of the work
+recognized by Pople's 1998 Nobel Prize.
+
+*Implementation:* :func:`~chemistrykit.quantum.utils.basis_sets.sto3g_1s`
+builds the contracted STO-3G 1s function
+(:class:`~chemistrykit.quantum.utils.basis_sets.ContractedGaussian`) for
+any :math:`\zeta`, and :class:`~chemistrykit.quantum.RestrictedHartreeFock`
+uses it for its H2 and HeH+ presets. The example compares the
+contraction with its Slater target and a single Gaussian, then
+reproduces Szabo and Ostlund's STO-3G energies for both molecules.
+
+*References:* W. J. Hehre, R. F. Stewart, and J. A. Pople,
+"Self-Consistent Molecular-Orbital Methods. I. Use of Gaussian Expansions
+of Slater-Type Atomic Orbitals," J. Chem. Phys. 51, 2657-2664 (1969).
+
+.. minigallery:: ../../examples/quantum/hartree_fock/plot_08_sto3g_minimal_basis.py
 
 See Also
 --------

@@ -9,6 +9,65 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `chemistrykit.periodic_table` covers all 118 elements (was Z=1-54);
+  `parse_formula`/`formula_charge` parse condensed formulas with nested
+  groups, hydrates and ionic charges; `molar_mass` accepts a formula
+  string (`molar_mass("Ca(OH)2")`) as well as a dict. Pauling
+  electronegativities and main-group valence counts extended past Xe.
+- `chemistrykit.stoichiometry`: general equation balancing by exact
+  null space (ionic and redox equations included), limiting reagent,
+  reaction extent, theoretical/percent yield, mass percent, and
+  empirical formula from composition.
+- `chemistrykit.quantum.RestrictedHartreeFock`: closed-shell RHF SCF
+  (Roothaan-Hall) with STO-3G presets for H2 and HeH+, reproducing
+  Szabo & Ostlund; `basis_sets` gains two-electron repulsion integrals,
+  contracted Gaussians and `sto3g_1s`.
+- `chemistrykit.thermo`: Wilson, NRTL and UNIQUAC activity models on a
+  shared `BinaryActivityModel` VLE base (P-x-y, relative volatility,
+  azeotrope location), and `AntoineEquation`.
+- `chemistrykit.kinetics`: `LindemannHinshelwood` unimolecular falloff
+  and `ChainBranchingExplosion` (Semenov first/second H2/O2 explosion
+  limits).
+- `chemistrykit.solutions`: metal-ligand complexation (species
+  fractions, Bjerrum formation function, mass-balance speciation).
+- `chemistrykit.md`: `write_xyz`/`read_xyz` (extended XYZ with lattice)
+  for VMD/OVITO.
+- `chemistrykit.spectro`: exact second-order NMR spectra
+  (`second_order_spectrum`, `ab_quartet`, `abx_spectrum`).
+- Docs: a "Units" section stating the plain-float, SI-by-default
+  convention and its documented exceptions.
+- History pages: 11 new breakthroughs, each with its own gallery example
+  -- Antoine (1888), Wilson (1964), Renon-Prausnitz NRTL (1968),
+  Abrams-Prausnitz UNIQUAC (1975), Hehre-Stewart-Pople STO-nG (1969),
+  Jannik Bjerrum's stepwise formation constants (1941),
+  Bernstein-Pople-Schneider second-order NMR (1957), VMD (1996), Richter's
+  stoichiometry (1792-1794), Liebig's combustion analysis (1831), and
+  Mendeleev's periodic table (1869). The Roothaan-Hall,
+  Bodenstein-Lindemann and Semenov-Hinshelwood entries now point at the
+  new implementations, each with an added example.
+
+### Changed
+
+- `MargulesSolution` now inherits its VLE methods from
+  `BinaryActivityModel` (same public API and results).
+- mypy targets `python_version = "3.14"`, and the CI type-check job runs
+  on Python 3.14; numpy's stubs use PEP 695 syntax mypy cannot parse for
+  a 3.10 target, so the old setting stopped mypy before it checked
+  anything. Supported
+  runtime versions are unchanged (`requires-python = ">=3.10"`).
+- `mypy chemistrykit` is now clean (was 34 errors): vectorized
+  parameters are annotated `ArrayLike`, `Optional` defaults are explicit,
+  the njit callback attributes are typed `RHSFunc`, and
+  `EquationOfState.molar_volume`/`compressibility_factor` take an
+  explicit `branch` argument in place of `**kwargs` (`branch` was the
+  only keyword any implementation accepted).
+- `write_xyz` writes the comment as `Comment="..."` on extended-XYZ
+  lines, keeping them valid `key=value` metadata.
+
+## [0.1.0] - 2026-09-27
+
+### Added
+
 - Initial repository scaffold: `pyproject.toml`, shared
   `chemistrykit.integrators` (RK4, leapfrog/velocity-Verlet, Yoshida4,
   adaptive Dormand-Prince, ported from physicskit), `chemistrykit.constants`
@@ -168,4 +227,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `VSEPRGeometry.shape_name` raised a bare `KeyError` for valid inputs
   such as `(steric_number=4, lone_pairs=3)`.
 
-[Unreleased]: https://github.com/cpoli/chemistrykit/compare/main...HEAD
+[Unreleased]: https://github.com/cpoli/chemistrykit/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/cpoli/chemistrykit/releases/tag/v0.1.0

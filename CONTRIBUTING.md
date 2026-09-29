@@ -60,12 +60,12 @@ cd docs && make html
 
 ## Type checking
 
-`mypy` is configured in `pyproject.toml` but not yet fully clean across
-the codebase (mostly matplotlib/numpy stub gaps around animation objects
-and array-typed arguments) — it currently runs in CI as an advisory,
-non-blocking job. New code should type-check cleanly where practical;
-fixing pre-existing errors in code you're not otherwise touching is
-welcome but not required.
+`mypy chemistrykit` passes cleanly with the configuration in
+`pyproject.toml` (which targets Python 3.14 and does not yet check the
+bodies of unannotated functions). It runs in CI as an advisory,
+non-blocking job; keep it clean, so new code should type-check before
+it is merged. Functions that accept a scalar or an array are annotated
+`numpy.typing.ArrayLike`, not `float`.
 
 ## Tests
 

@@ -152,7 +152,7 @@ class NoseHooverThermostat:
     True
     """
 
-    def __init__(self, target_temperature: float, Q: float, dof: int = None, k_b: float = 1.0):
+    def __init__(self, target_temperature: float, Q: float, dof: int | None = None, k_b: float = 1.0):
         if target_temperature <= 0 or Q <= 0:
             raise ValueError("target_temperature and Q must be positive")
         self.target_temperature = float(target_temperature)
@@ -284,7 +284,7 @@ class StochasticVelocityRescalingThermostat:
     True
     """
 
-    def __init__(self, target_temperature: float, tau: float, rng=None, dof: int = None, k_b: float = 1.0):
+    def __init__(self, target_temperature: float, tau: float, rng=None, dof: int | None = None, k_b: float = 1.0):
         if target_temperature <= 0 or tau <= 0:
             raise ValueError("target_temperature and tau must be positive")
         self.target_temperature = float(target_temperature)

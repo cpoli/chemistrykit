@@ -12,6 +12,7 @@ ed. (2014), Ch. 1.2, for the standard derivations reproduced here.
 from __future__ import annotations
 
 import numpy as np
+from numpy.typing import ArrayLike
 
 from chemistrykit.crystal.core.base_system import LatticePacking
 
@@ -41,11 +42,11 @@ class SimpleCubicPacking(LatticePacking):
     coordination_number = 6
     atoms_per_cell = 1.0
 
-    def unit_cell_volume(self, a: float):
+    def unit_cell_volume(self, a: ArrayLike):
         a = np.asarray(a, dtype=np.float64)
         return a**3
 
-    def atomic_radius(self, a: float):
+    def atomic_radius(self, a: ArrayLike):
         return np.asarray(a, dtype=np.float64) / 2.0
 
 
@@ -68,11 +69,11 @@ class BodyCenteredCubicPacking(LatticePacking):
     coordination_number = 8
     atoms_per_cell = 2.0
 
-    def unit_cell_volume(self, a: float):
+    def unit_cell_volume(self, a: ArrayLike):
         a = np.asarray(a, dtype=np.float64)
         return a**3
 
-    def atomic_radius(self, a: float):
+    def atomic_radius(self, a: ArrayLike):
         return np.sqrt(3.0) * np.asarray(a, dtype=np.float64) / 4.0
 
 
@@ -97,11 +98,11 @@ class FaceCenteredCubicPacking(LatticePacking):
     coordination_number = 12
     atoms_per_cell = 4.0
 
-    def unit_cell_volume(self, a: float):
+    def unit_cell_volume(self, a: ArrayLike):
         a = np.asarray(a, dtype=np.float64)
         return a**3
 
-    def atomic_radius(self, a: float):
+    def atomic_radius(self, a: ArrayLike):
         return np.sqrt(2.0) * np.asarray(a, dtype=np.float64) / 4.0
 
 
@@ -157,10 +158,10 @@ class HexagonalClosePacking(LatticePacking):
     def __init__(self, c_over_a: float | None = None):
         self.c_over_a = float(c_over_a) if c_over_a is not None else float(np.sqrt(8.0 / 3.0))
 
-    def unit_cell_volume(self, a: float):
+    def unit_cell_volume(self, a: ArrayLike):
         a = np.asarray(a, dtype=np.float64)
         c = self.c_over_a * a
         return (np.sqrt(3.0) / 2.0) * a**2 * c
 
-    def atomic_radius(self, a: float):
+    def atomic_radius(self, a: ArrayLike):
         return np.asarray(a, dtype=np.float64) / 2.0

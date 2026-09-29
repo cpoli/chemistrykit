@@ -40,7 +40,7 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from chemistrykit.integrators import dopri5_integrate, rk4_integrate
+from chemistrykit.integrators import RHSFunc, dopri5_integrate, rk4_integrate
 
 __all__ = ["KineticsResult", "RateLaw", "ReactionNetwork"]
 
@@ -161,7 +161,7 @@ class ReactionNetwork(ABC):
     """
 
     species: Sequence[str] = ()
-    _rhs_njit = None
+    _rhs_njit: RHSFunc  # set by each concrete subclass's __init__
     params: np.ndarray = np.empty(0)
 
     def __init__(self, state0):

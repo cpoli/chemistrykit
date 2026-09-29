@@ -207,7 +207,7 @@ class ParticleInBox3D(QuantumSystem):
         >>> sorted(degeneracies.values())[-2]
         3
         """
-        energies = {}
+        energies: dict[float, int] = {}
         for nx in range(1, n_max + 1):
             for ny in range(1, n_max + 1):
                 for nz in range(1, n_max + 1):

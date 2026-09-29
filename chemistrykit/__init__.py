@@ -17,13 +17,16 @@ Import as ``ck`` by convention::
     ck.polymer.IdealChain().end_to_end_distance(n=1000, b=0.5)
     ck.crystal.FaceCenteredCubicPacking().packing_fraction()
     ck.analytical.fit_calibration([0, 1, 2, 3], [0.1, 1.0, 2.1, 2.9]).lod()
+    ck.stoichiometry.balance_equation("Fe + O2 -> Fe2O3")
     ck.constants.R
     ck.integrators.rk4_integrate(...)
 
 chemistrykit mirrors the architecture of the sibling project physicskit
 (pk): one subpackage per chemistry domain, sharing common ODE integrators
 (:mod:`chemistrykit.integrators`) and physical/chemical constants
-(:mod:`chemistrykit.constants`). All 14 domains from
+(:mod:`chemistrykit.constants`), plus general-chemistry formula parsing
+and stoichiometry (:mod:`chemistrykit.periodic_table`,
+:mod:`chemistrykit.stoichiometry`). All 14 domains from
 ``chemistrykit-spec.md``'s build plan are implemented; see ``__all__``
 below for the full list.
 """
@@ -42,6 +45,7 @@ from chemistrykit import (
     solutions,
     spectro,
     statmech,
+    stoichiometry,
     structure,
     surface,
     thermo,
@@ -52,6 +56,7 @@ __version__ = "0.1.0"
 __all__ = [
     "constants",
     "integrators",
+    "stoichiometry",
     "kinetics",
     "thermo",
     "solutions",

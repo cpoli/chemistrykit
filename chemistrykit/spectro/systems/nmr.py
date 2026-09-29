@@ -1,4 +1,4 @@
-r"""First-order NMR multiplet simulation: chemical shifts and J-coupling splitting patterns.
+r"""NMR multiplet simulation: first-order splitting patterns and exact second-order (AB, ABX) spectra.
 
 See Atkins & de Paula, *Physical Chemistry*, 11th ed., Ch. 13.7-13.8, or
 Silverstein, Webster & Kiemle, *Spectrometric Identification of Organic
@@ -35,6 +35,9 @@ __all__ = [
     "karplus_coupling",
     "free_induction_decay",
     "fid_to_spectrum",
+    "second_order_spectrum",
+    "ab_quartet",
+    "abx_spectrum",
 ]
 
 
@@ -408,3 +411,167 @@ def fid_to_spectrum(fid, dwell_time: float) -> tuple:
     spectrum = np.fft.fftshift(np.fft.fft(data)) * dwell_time
     frequencies = np.fft.fftshift(np.fft.fftfreq(n, d=dwell_time))
     return frequencies, spectrum.real
+
+
+def second_order_spectrum(shifts_ppm, j_couplings_hz, spectrometer_frequency_mhz: float, tol: float = 1e-8) -> Spectrum:
+    r"""Exact (second-order) stick spectrum of a coupled spin-1/2 system, by diagonalizing its spin Hamiltonian.
+
+    When :math:`J` is not small against the shift differences
+    :math:`\Delta\nu`, the first-order rules break down: lines move, lean
+    towards each other ("roofing"), and new combination lines appear (AB,
+    ABX, AA'BB' systems). The exact spectrum follows from the liquid-state
+    spin Hamiltonian in frequency units,
+
+    .. math::
+
+        \hat H = \sum_i \nu_i\hat I_{zi} + \sum_{i<j} J_{ij}\,\hat{\mathbf I}_i\cdot\hat{\mathbf I}_j
+
+    in the :math:`2^N` product basis: line frequencies are eigenvalue
+    differences, and intensities are :math:`|\langle f|\hat F_-|i\rangle|^2`
+    with :math:`\hat F_-=\sum_i\hat I_{-i}` (H. M. McConnell, A. D. McLean &
+    C. A. Reilly, *J. Chem. Phys.* 23, 1152 (1955); Levitt, *Spin Dynamics*,
+    2nd ed., Ch. 14; Günther, *NMR Spectroscopy*, 3rd ed., Ch. 4).
+    Practical up to roughly 10 spins (:math:`2^N` states).
+
+    Parameters
+    ----------
+    shifts_ppm : array-like of float, shape (N,)
+        Chemical shift of each spin, in ppm.
+    j_couplings_hz : array-like of float, shape (N, N)
+        Symmetric coupling-constant matrix, in Hz (diagonal ignored).
+    spectrometer_frequency_mhz : float
+        Operating frequency, in MHz.
+    tol : float, default 1e-8
+        Lines weaker than `tol` times the strongest are dropped; lines
+        closer than 1e-6 Hz are merged.
+
+    Returns
+    -------
+    Spectrum
+        `positions` in ppm (ascending), `intensities` relative, summing to
+        :math:`N\,2^{N-1}` (the same normalization as first-order
+        multiplets from :func:`first_order_multiplet`).
+
+    Examples
+    --------
+    Two spins far apart in shift reproduce the first-order pair of
+    doublets; with :math:`J` comparable to :math:`\Delta\nu` the inner lines
+    grow at the expense of the outer ones (the roof effect):
+
+    >>> weak = second_order_spectrum([1.0, 3.0], [[0, 7.0], [7.0, 0]], 400.0)
+    >>> [round(float(i), 1) for i in weak.intensities]
+    [1.0, 1.0, 1.0, 1.0]
+    >>> strong = second_order_spectrum([1.00, 1.05], [[0, 10.0], [10.0, 0]], 400.0)
+    >>> bool(strong.intensities[1] > 2 * strong.intensities[0])
+    True
+    """
+    shifts = np.asarray(shifts_ppm, dtype=np.float64)
+    J = np.asarray(j_couplings_hz, dtype=np.float64)
+    n = shifts.size
+    if J.shape != (n, n):
+        raise ValueError("j_couplings_hz must be an (N, N) matrix")
+    nu = shifts * spectrometer_frequency_mhz
+    Iz1 = np.array([[0.5, 0.0], [0.0, -0.5]])
+    Ip1 = np.array([[0.0, 1.0], [0.0, 0.0]])
+
+    def embed(op, k):
+        out = np.array([[1.0]])
+        for i in range(n):
+            out = np.kron(out, op if i == k else np.eye(2))
+        return out
+
+    Iz = [embed(Iz1, k) for k in range(n)]
+    Ip = [embed(Ip1, k) for k in range(n)]
+    Im = [op.T for op in Ip]
+    H = sum(nu[k] * Iz[k] for k in range(n))
+    for i in range(n):
+        for j in range(i + 1, n):
+            H = H + J[i, j] * (Iz[i] @ Iz[j] + 0.5 * (Ip[i] @ Im[j] + Im[i] @ Ip[j]))
+    energies, vectors = np.linalg.eigh(H)
+    F_minus = vectors.T @ sum(Im) @ vectors
+    intensity = F_minus**2
+    freq = energies[None, :] - energies[:, None]
+    mask = intensity > tol * intensity.max()
+    lines = sorted(zip(freq[mask], intensity[mask], strict=True))
+    positions: list[float] = []
+    intensities: list[float] = []
+    for f, a in lines:
+        if positions and abs(f - positions[-1]) < 1e-6:
+            intensities[-1] += a
+        else:
+            positions.append(f)
+            intensities.append(a)
+    return Spectrum(positions=np.array(positions) / spectrometer_frequency_mhz, intensities=np.array(intensities))
+
+
+def ab_quartet(shift_a_ppm: float, shift_b_ppm: float, j_ab_hz: float, spectrometer_frequency_mhz: float) -> Spectrum:
+    r"""Closed-form AB spectrum: four lines with the characteristic "roofed" intensities.
+
+    With :math:`\Delta\nu=\nu_A-\nu_B`, :math:`D=\sqrt{\Delta\nu^2+J^2}` and
+    center :math:`\bar\nu`, the lines lie at
+    :math:`\bar\nu\pm\frac12(D+J)` (outer, intensity :math:`1-J/D`) and
+    :math:`\bar\nu\pm\frac12(D-J)` (inner, intensity :math:`1+J/D`)
+    (Günther, *NMR Spectroscopy*, 3rd ed., Ch. 4.3; Pople, Schneider &
+    Bernstein, *High-resolution Nuclear Magnetic Resonance*, 1959, Ch. 6).
+
+    Parameters
+    ----------
+    shift_a_ppm, shift_b_ppm : float
+        Chemical shifts, in ppm.
+    j_ab_hz : float
+        Coupling constant, in Hz.
+    spectrometer_frequency_mhz : float
+
+    Returns
+    -------
+    Spectrum
+        Positions in ppm, ascending.
+
+    Examples
+    --------
+    >>> q = ab_quartet(1.00, 1.05, 10.0, 400.0)
+    >>> [round(float(i), 3) for i in q.intensities]
+    [0.553, 1.447, 1.447, 0.553]
+    """
+    nu0 = spectrometer_frequency_mhz
+    center = 0.5 * (shift_a_ppm + shift_b_ppm) * nu0
+    D = np.hypot((shift_a_ppm - shift_b_ppm) * nu0, j_ab_hz)
+    J = j_ab_hz
+    offsets = np.array([-(D + J), -(D - J), D - J, D + J]) / 2.0
+    ratio = J / D if D > 0 else 0.0
+    intensities = np.array([1 - ratio, 1 + ratio, 1 + ratio, 1 - ratio])
+    return Spectrum(positions=(center + offsets) / nu0, intensities=intensities)
+
+
+def abx_spectrum(shifts_ppm, j_ab_hz: float, j_ax_hz: float, j_bx_hz: float, spectrometer_frequency_mhz: float) -> Spectrum:
+    r"""Exact ABX spectrum: a strongly coupled AB pair, each also coupled to a distant X.
+
+    The classic three-spin second-order system (e.g. the vinyl protons of
+    styrene, or a CH2 next to a stereocenter CH): up to 8 AB lines, 6 X
+    lines (including 2 weak combination lines), and 1 more combination
+    line (Bernstein, Pople & Schneider, *Can. J. Chem.* 35, 65 (1957);
+    Günther, *NMR Spectroscopy*, 3rd ed., Ch. 4.4). Evaluated exactly via
+    :func:`second_order_spectrum`.
+
+    Parameters
+    ----------
+    shifts_ppm : array-like of float, shape (3,)
+        Shifts of A, B and X, in ppm.
+    j_ab_hz, j_ax_hz, j_bx_hz : float
+        Coupling constants, in Hz.
+    spectrometer_frequency_mhz : float
+
+    Returns
+    -------
+    Spectrum
+
+    Examples
+    --------
+    Total intensity is always :math:`3\cdot2^2=12`:
+
+    >>> s = abx_spectrum([2.50, 2.55, 4.80], 16.0, 5.0, 8.0, 400.0)
+    >>> round(float(s.intensities.sum()), 6)
+    12.0
+    """
+    J = np.array([[0.0, j_ab_hz, j_ax_hz], [j_ab_hz, 0.0, j_bx_hz], [j_ax_hz, j_bx_hz, 0.0]])
+    return second_order_spectrum(shifts_ppm, J, spectrometer_frequency_mhz)

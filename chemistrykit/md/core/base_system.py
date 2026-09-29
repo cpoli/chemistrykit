@@ -31,7 +31,7 @@ from typing import Optional
 
 import numpy as np
 
-from chemistrykit.integrators import velocity_verlet_step
+from chemistrykit.integrators import RHSFunc, velocity_verlet_step
 
 __all__ = ["MDResult", "PairPotential", "AnglePotential", "MolecularDynamicsSystem"]
 
@@ -200,7 +200,7 @@ class MolecularDynamicsSystem(ABC):
     """
 
     box_length: Optional[float] = None
-    _accel_njit = None
+    _accel_njit: RHSFunc  # set by each concrete subclass's __init__
     params: np.ndarray = np.empty(0)
 
     def __init__(self, positions, velocities, masses):

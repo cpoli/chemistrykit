@@ -8,7 +8,9 @@ reversible, and steady-state-approximation chain reactions) integrated
 via :mod:`chemistrykit.integrators`, the Brusselator oscillating
 reaction network and the Oregonator model of the Belousov-Zhabotinsky
 reaction, collision/diffusion/transition-state theories of the rate
-constant, and Gillespie's exact stochastic simulation algorithm.
+constant, Lindemann-Hinshelwood unimolecular falloff, Semenov
+branched-chain explosion limits (H2/O2), and Gillespie's exact
+stochastic simulation algorithm.
 """
 
 __version__ = "0.1.0"
@@ -23,6 +25,7 @@ from chemistrykit.kinetics.systems.enzyme import (
     michaelis_menten_rate,
     noncompetitive_inhibition_rate,
 )
+from chemistrykit.kinetics.systems.explosions import ChainBranchingExplosion
 from chemistrykit.kinetics.systems.networks import (
     StoichiometricNetwork,
     consecutive_analytic,
@@ -41,8 +44,11 @@ from chemistrykit.kinetics.systems.rate_theory import (
     smoluchowski_transient_rate_constant,
 )
 from chemistrykit.kinetics.systems.stochastic import StochasticTrajectory, gillespie_ssa
+from chemistrykit.kinetics.systems.unimolecular import LindemannHinshelwood
 
 __all__ = [
+    "LindemannHinshelwood",
+    "ChainBranchingExplosion",
     "__version__",
     "KineticsResult",
     "RateLaw",

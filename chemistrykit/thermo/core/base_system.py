@@ -65,7 +65,7 @@ class EquationOfState(ABC):
         """
 
     @abstractmethod
-    def molar_volume(self, P, T, **kwargs):
+    def molar_volume(self, P, T, branch: str = "vapor"):
         """Return the molar volume at pressure `P` and temperature `T`.
 
         Parameters
@@ -74,6 +74,9 @@ class EquationOfState(ABC):
             Pressure, in Pa.
         T : float
             Absolute temperature, in K.
+        branch : {"vapor", "liquid"}, default "vapor"
+            Which root to return where a cubic equation of state has
+            three; ignored by equations of state with a single root.
 
         Returns
         -------
@@ -81,7 +84,7 @@ class EquationOfState(ABC):
             Molar volume, in m^3/mol.
         """
 
-    def compressibility_factor(self, P, T, **kwargs):
+    def compressibility_factor(self, P, T, branch: str = "vapor"):
         r"""Return the compressibility factor :math:`Z = PV_m/(RT)`.
 
         :math:`Z = 1` exactly for an ideal gas; deviations from 1
@@ -94,13 +97,12 @@ class EquationOfState(ABC):
             Pressure, in Pa.
         T : float
             Absolute temperature, in K.
-        **kwargs
-            Forwarded to :meth:`molar_volume` (e.g. ``branch`` for a
-            cubic EOS).
+        branch : {"vapor", "liquid"}, default "vapor"
+            Forwarded to :meth:`molar_volume`.
 
         Returns
         -------
         float
         """
-        Vm = self.molar_volume(P, T, **kwargs)
+        Vm = self.molar_volume(P, T, branch=branch)
         return P * Vm / (self.R * T)

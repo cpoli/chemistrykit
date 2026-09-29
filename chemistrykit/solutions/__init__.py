@@ -1,7 +1,9 @@
 """chemistrykit.solutions: solution chemistry.
 
 pH/pOH and weak acid/base equilibria with Henderson-Hasselbalch buffers,
-Van Slyke buffer capacity, and Bjerrum polyprotic speciation; a full
+Van Slyke buffer capacity, and Bjerrum polyprotic speciation; stepwise
+metal-ligand complexation (species fractions, Bjerrum's formation
+function, mass-balance speciation); a full
 titration-curve solver (strong/weak acid-base) with Gran-plot
 equivalence-point estimation; solubility equilibria (Ksp, common-ion
 effect); and Debye-Huckel limiting/extended and Davies
@@ -33,6 +35,13 @@ from chemistrykit.solutions.systems.activity import (
     activity_coefficient_debye_huckel_limiting,
     ionic_strength,
 )
+from chemistrykit.solutions.systems.complexation import (
+    ComplexationEquilibrium,
+    average_ligand_number,
+    complex_fractions,
+    cumulative_formation_constants,
+    solve_complexation,
+)
 from chemistrykit.solutions.systems.solubility import (
     ksp_from_molar_solubility,
     molar_solubility_from_ksp,
@@ -46,6 +55,11 @@ from chemistrykit.solutions.systems.titration import (
 )
 
 __all__ = [
+    "cumulative_formation_constants",
+    "complex_fractions",
+    "average_ligand_number",
+    "ComplexationEquilibrium",
+    "solve_complexation",
     "__version__",
     "WeakElectrolyte",
     "Titration",

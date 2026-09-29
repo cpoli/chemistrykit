@@ -1,0 +1,62 @@
+r"""
+Liebig's combustion analysis: an empirical formula from CO2 and H2O masses
+==========================================================================
+
+Justus von Liebig's *Kaliapparat* made organic elemental analysis
+routine. The sample is burned in oxygen over hot copper oxide, the water
+is caught in calcium chloride, the CO2 in potash bulbs, and both are
+weighed. Carbon and hydrogen follow from those two masses, oxygen by
+difference. Below, a 10.00 mg sample of ascorbic acid (vitamin C) is
+"burned". Its mass percentages go to
+:func:`~chemistrykit.stoichiometry.empirical_formula`, which converts to
+moles, divides by the smallest, and searches for the smallest multiplier
+that gives whole numbers. Here that gives C3H4O3, and a molar mass of
+about 176 g/mol then fixes the molecular formula as C6H8O6. The right
+panel shows why the multiplier search is needed: the raw mole ratios are
+1 : 1.33 : 1, which become whole only after multiplying by 3.
+"""
+
+# %%
+import matplotlib.pyplot as plt
+import numpy as np
+
+from chemistrykit.periodic_table import get_element, molar_mass
+from chemistrykit.stoichiometry import empirical_formula, mass_percent
+
+sample_mg = 10.00
+true = mass_percent("C6H8O6")
+m_CO2 = sample_mg * true["C"] / 100 * molar_mass("CO2") / get_element("C").atomic_mass
+m_H2O = sample_mg * true["H"] / 100 * molar_mass("H2O") / (2 * get_element("H").atomic_mass)
+m_CO2, m_H2O = round(m_CO2, 2), round(m_H2O, 2)  # a microbalance reads to 0.01 mg
+print(f"weighed: {m_CO2:.2f} mg CO2, {m_H2O:.2f} mg H2O")
+
+pct_C = 100 * m_CO2 * get_element("C").atomic_mass / molar_mass("CO2") / sample_mg
+pct_H = 100 * m_H2O * 2 * get_element("H").atomic_mass / molar_mass("H2O") / sample_mg
+pct_O = 100.0 - pct_C - pct_H
+measured = {"C": pct_C, "H": pct_H, "O": pct_O}
+formula = empirical_formula(measured)
+unit = "".join(f"{e}{n}" for e, n in formula.items())
+n_units = round(176.0 / molar_mass(formula))
+print(f"%C = {pct_C:.2f}, %H = {pct_H:.2f}, %O (by difference) = {pct_O:.2f}")
+print(f"empirical formula {unit}; molar mass 176 g/mol -> {n_units} x {unit}")
+
+moles = np.array([measured[e] / get_element(e).atomic_mass for e in "CHO"])
+ratios = moles / moles.min()
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 4.8))
+axes[0].bar(["C", "H", "O"], [pct_C, pct_H, pct_O], color=["black", "lightgray", "firebrick"], edgecolor="black")
+axes[0].set_ylabel("mass percent")
+axes[0].set_title("Composition of ascorbic acid from combustion")
+
+m = np.arange(1, 7)
+for ratio, e, color in zip(ratios, "CHO", ["black", "gray", "firebrick"], strict=True):
+    scaled = ratio * m
+    axes[1].plot(m, np.abs(scaled - np.round(scaled)), "o-", color=color, label=e)
+axes[1].axhline(0.05, color="gray", linestyle="--", label="whole-number tolerance")
+axes[1].set_xlabel("multiplier")
+axes[1].set_ylabel("distance from a whole number")
+axes[1].set_title("Smallest multiplier giving whole numbers: 3")
+axes[1].legend()
+fig.tight_layout()
+
+plt.show()

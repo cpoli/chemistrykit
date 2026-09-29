@@ -1,1 +1,1 @@
-"""Periodic-boundary and neighbor-list numerics supporting chemistrykit.md's systems."""
+"""Periodic-boundary, neighbor-list and XYZ-file numerics supporting chemistrykit.md's systems."""

@@ -325,7 +325,7 @@ class IdealGasMolecule:
         self,
         mass: float,
         volume: float,
-        moment_of_inertia: float = None,
+        moment_of_inertia: float | None = None,
         symmetry_number: int = 1,
         vibrational_frequencies: Sequence[float] = (),
     ):

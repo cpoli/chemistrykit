@@ -67,6 +67,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 
 import numpy as np
+from numpy.typing import ArrayLike
 
 __all__ = ["LatticePacking", "LatticeEnergyModel"]
 
@@ -92,7 +93,7 @@ class LatticePacking(ABC):
     atoms_per_cell: float
 
     @abstractmethod
-    def unit_cell_volume(self, a: float) -> float:
+    def unit_cell_volume(self, a: ArrayLike) -> float | np.ndarray:
         """Return the (conventional) unit-cell volume for lattice constant `a`.
 
         Parameters
@@ -106,7 +107,7 @@ class LatticePacking(ABC):
         """
 
     @abstractmethod
-    def atomic_radius(self, a: float):
+    def atomic_radius(self, a: ArrayLike):
         """Return the touching-sphere radius implied by lattice constant `a`.
 
         Parameters
@@ -118,7 +119,7 @@ class LatticePacking(ABC):
         float or ndarray
         """
 
-    def packing_fraction(self, a: float = 1.0):
+    def packing_fraction(self, a: ArrayLike = 1.0):
         r"""Return the fraction of the unit cell's volume occupied by touching spheres.
 
         .. math::

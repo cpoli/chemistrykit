@@ -9,7 +9,8 @@ Morse (anharmonic) vibrational band positions, built on
 triatomic normal-mode calculation via the Wilson GF-matrix method;
 Franck-Condon vibronic progressions for electronic (UV-Vis) spectra; a
 first-order NMR multiplet simulator (chemical shifts and J-coupling
-splitting patterns), Larmor frequencies, the Karplus relation, and
+splitting patterns) and exact second-order (AB, ABX, general spin-1/2)
+spectra, Larmor frequencies, the Karplus relation, and
 Fourier-transform NMR (free-induction decay to spectrum); the
 Balmer-Rydberg formula for hydrogen-like atomic lines; and Lorentzian/Gaussian/Voigt lineshape utilities
 shared across all of the above.
@@ -32,6 +33,8 @@ from chemistrykit.spectro.systems.electronic import (
     huang_rhys_factor,
 )
 from chemistrykit.spectro.systems.nmr import (
+    ab_quartet,
+    abx_spectrum,
     chemical_shift_ppm,
     fid_to_spectrum,
     first_order_multiplet,
@@ -41,6 +44,7 @@ from chemistrykit.spectro.systems.nmr import (
     multi_coupling_multiplet,
     multiplicity,
     pascals_triangle_intensities,
+    second_order_spectrum,
 )
 from chemistrykit.spectro.systems.rotational import energy_to_wavenumber, isotope_shift_ratio, rotational_line_wavenumbers, rotational_spectrum
 from chemistrykit.spectro.systems.vibrational import (
@@ -53,6 +57,9 @@ from chemistrykit.spectro.systems.vibrational import (
 from chemistrykit.spectro.utils.lineshapes import broaden_stick_spectrum, gaussian, lorentzian, voigt
 
 __all__ = [
+    "second_order_spectrum",
+    "ab_quartet",
+    "abx_spectrum",
     "__version__",
     "Spectrum",
     "absorbance",

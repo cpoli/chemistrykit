@@ -209,6 +209,8 @@ class LJFluid(MolecularDynamicsSystem):
         Rebuild the neighbor list after this many :meth:`step` calls.
     """
 
+    box_length: float  # an LJ fluid is always periodic, unlike the base class's Optional
+
     def __init__(
         self,
         positions,
@@ -377,7 +379,7 @@ class LJFluid(MolecularDynamicsSystem):
         box_length = self.box_length
         r_max = 0.5 * box_length if r_max is None else r_max
         pairs_i, pairs_j = build_neighbor_list(positions, box_length, r_max)
-        counts = np.zeros(n_bins)
+        counts: np.ndarray = np.zeros(n_bins)
         edges = np.linspace(0.0, r_max, n_bins + 1)
         if pairs_i.size > 0:
             diff = minimum_image_displacement(positions[pairs_i], positions[pairs_j], box_length)

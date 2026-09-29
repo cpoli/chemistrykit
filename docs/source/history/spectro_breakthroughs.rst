@@ -645,6 +645,45 @@ Phys. Rev. 91, 303-307 (1953).
 
 .. minigallery:: ../../examples/spectro/nmr/plot_01_nmr_multiplets.py
 
+1957 -- Bernstein, Pople, and Schneider: Analysis of Second-Order Spectra
+-----------------------------------------------------------------------------
+
+The first-order multiplet rules (:math:`n+1` lines, binomial intensities)
+work only when coupled nuclei differ in resonance frequency by much more
+than their coupling constant. Early high-resolution proton spectra often
+violated that condition, showing leaning doublets, lines in unexpected
+places, and extra weak lines. Following McConnell, McLean and Reilly's
+1955 general treatment, Herbert Bernstein, John Pople and William
+Schneider worked out in closed form how to analyze the commonest such
+cases, the two-spin AB and three-spin ABX systems, by diagonalizing the
+spin Hamiltonian
+
+.. math::
+
+   \hat H = \sum_i \nu_i\hat I_{zi} + \sum_{i<j}J_{ij}\,\hat{\mathbf I}_i\cdot\hat{\mathbf I}_j
+
+in the product basis and reading line positions and intensities from its
+eigenvectors. Their labeling scheme (letters close in the alphabet for
+strongly coupled nuclei, distant letters for weakly coupled ones) and
+their 1959 monograph with Pople and Schneider became the standard
+language for second-order NMR.
+
+*Implementation:* :func:`~chemistrykit.spectro.second_order_spectrum`
+diagonalizes the full spin Hamiltonian of any small spin-1/2 system,
+:func:`~chemistrykit.spectro.ab_quartet` gives the closed-form AB result,
+and :func:`~chemistrykit.spectro.abx_spectrum` wraps the three-spin case.
+The example follows an AX pair into the AB and :math:`A_2` limits,
+checks the exact spectrum against the AB formula, and draws the AB part
+of an ABX system.
+
+*References:* H. M. McConnell, A. D. McLean, and C. A. Reilly, "Analysis
+of Spin-Spin Multiplets in Nuclear Magnetic Resonance Spectra," J. Chem.
+Phys. 23, 1152-1159 (1955); H. J. Bernstein, J. A. Pople, and W. G.
+Schneider, "The Analysis of Nuclear Magnetic Resonance Spectra. I.
+Systems of Two and Three Nuclei," Can. J. Chem. 35, 65-81 (1957).
+
+.. minigallery:: ../../examples/spectro/nmr/plot_05_abx_second_order_spectra.py
+
 1959 -- 1963 -- Karplus and the Dihedral-Angle Dependence of Vicinal Coupling
 -----------------------------------------------------------------------------
 

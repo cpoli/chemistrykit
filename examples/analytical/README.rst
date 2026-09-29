@@ -9,7 +9,8 @@ gallery); chromatographic plate theory, the van Deemter equation,
 retention indices, and resolution; linear-regression calibration curves
 with limits of detection/quantitation; propagation of uncertainty;
 Dixon's and Grubbs' outlier tests; Student's t intervals and the Horwitz
-function; and Savitzky-Golay smoothing.
+function; Savitzky-Golay smoothing; and stoichiometry and elemental
+analysis (equation balancing, limiting reagents, empirical formulas).
 
 Each script in this gallery is self-contained and can be run directly
 with ``python examples/analytical/<section>/<script>.py``. Every script
@@ -36,3 +37,6 @@ Sections
 - **statistics** -- Student's t confidence intervals and the Horwitz
   interlaboratory-precision function.
 - **smoothing** -- Savitzky-Golay smoothing and differentiation.
+- **stoichiometry** -- Richter's stoichiometry (balancing equations,
+  equivalents, limiting reagents) and Liebig's combustion analysis
+  (empirical formulas).

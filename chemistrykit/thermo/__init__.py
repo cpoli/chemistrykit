@@ -2,12 +2,13 @@
 
 Equations of state (ideal gas, van der Waals, Redlich-Kwong,
 Peng-Robinson) and Lewis fugacities; Hess's-law thermochemistry;
-Clausius-Clapeyron phase boundaries and the Gibbs phase rule; reaction
+Clausius-Clapeyron and Antoine vapor-pressure curves and the Gibbs phase rule; reaction
 equilibrium (Kp/Kc, the reaction quotient, the van't Hoff equation, and a
 Gibbs-energy-minimization equilibrium-composition solver); and
 Raoult's/Henry's law mixtures with colligative properties (freezing-point
-depression, boiling-point elevation, osmotic pressure) and the Margules
-activity-coefficient model of non-ideal solutions.
+depression, boiling-point elevation, osmotic pressure) and the Margules,
+Wilson, NRTL and UNIQUAC activity-coefficient models of non-ideal
+solutions, with P-x-y vapor-liquid equilibrium and azeotrope location.
 """
 
 __version__ = "0.1.0"
@@ -28,15 +29,19 @@ from chemistrykit.thermo.systems.equilibrium import (
 from chemistrykit.thermo.systems.fugacity import fugacity, fugacity_coefficient, saturation_pressure
 from chemistrykit.thermo.systems.mixtures import (
     CRYOSCOPIC_CONSTANTS,
+    BinaryActivityModel,
     BinaryIdealSolution,
     MargulesSolution,
+    NRTLSolution,
+    UNIQUACSolution,
+    WilsonSolution,
     boiling_point_elevation,
     freezing_point_depression,
     henry_law_pressure,
     osmotic_pressure,
     raoult_vapor_pressure,
 )
-from chemistrykit.thermo.systems.phase_equilibria import ClausiusClapeyron, gibbs_phase_rule
+from chemistrykit.thermo.systems.phase_equilibria import AntoineEquation, ClausiusClapeyron, gibbs_phase_rule
 from chemistrykit.thermo.systems.thermochemistry import hess_law_enthalpy, reaction_enthalpy_from_formation
 
 __all__ = [
@@ -52,6 +57,7 @@ __all__ = [
     "hess_law_enthalpy",
     "reaction_enthalpy_from_formation",
     "ClausiusClapeyron",
+    "AntoineEquation",
     "gibbs_phase_rule",
     "reaction_quotient",
     "kp_from_kc",
@@ -69,5 +75,9 @@ __all__ = [
     "freezing_point_depression",
     "boiling_point_elevation",
     "osmotic_pressure",
+    "BinaryActivityModel",
     "MargulesSolution",
+    "WilsonSolution",
+    "NRTLSolution",
+    "UNIQUACSolution",
 ]

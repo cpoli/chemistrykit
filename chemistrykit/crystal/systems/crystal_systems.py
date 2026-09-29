@@ -33,6 +33,7 @@ from fractions import Fraction
 from math import gcd, isinf, lcm
 
 import numpy as np
+from numpy.typing import ArrayLike
 
 __all__ = [
     "classify_crystal_system",
@@ -140,7 +141,7 @@ def classify_crystal_system(a: float, b: float, c: float, alpha: float, beta: fl
     return "triclinic"
 
 
-def unit_cell_volume(a: float, b: float, c: float, alpha: float, beta: float, gamma: float):
+def unit_cell_volume(a: ArrayLike, b: ArrayLike, c: ArrayLike, alpha: ArrayLike, beta: ArrayLike, gamma: ArrayLike):
     r"""General unit-cell volume from the six lattice parameters, valid for any crystal system.
 
     .. math::

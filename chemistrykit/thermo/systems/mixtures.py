@@ -3,14 +3,21 @@ r"""Raoult's/Henry's law mixtures and colligative properties.
 See Atkins & de Paula, *Physical Chemistry*, 11th ed., Ch. 5 ("Simple
 mixtures") throughout: Sec. 5.4 for Raoult's and Henry's laws, Sec. 5.5
 for the colligative properties (freezing-point depression, boiling-point
-elevation, osmotic pressure).
+elevation, osmotic pressure). The non-ideal activity-coefficient models
+(Margules, Wilson, NRTL, UNIQUAC) share one isothermal modified-Raoult's-law
+VLE implementation, :class:`BinaryActivityModel`; see Prausnitz,
+Lichtenthaler & de Azevedo, *Molecular Thermodynamics of Fluid-Phase
+Equilibria*, 3rd ed., Ch. 6-7, for all four.
 """
 
 from __future__ import annotations
 
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from typing import Optional
 
 import numpy as np
+from scipy.optimize import brentq
 
 from chemistrykit.constants import R
 
@@ -22,7 +29,11 @@ __all__ = [
     "freezing_point_depression",
     "boiling_point_elevation",
     "osmotic_pressure",
+    "BinaryActivityModel",
     "MargulesSolution",
+    "WilsonSolution",
+    "NRTLSolution",
+    "UNIQUACSolution",
 ]
 
 
@@ -274,8 +285,132 @@ def osmotic_pressure(M: float, T: float, i: float = 1.0, R_gas: float = R) -> fl
     return i * M * R_gas * T
 
 
+class BinaryActivityModel(ABC):
+    r"""Isothermal vapor-liquid equilibrium of a binary liquid from an activity-coefficient model.
+
+    Subclasses supply :meth:`activity_coefficients` and the pure-component
+    vapor pressures ``P1_star``/``P2_star`` at the temperature of
+    interest (e.g. from :class:`chemistrykit.thermo.AntoineEquation`);
+    this base turns them into the modified Raoult's law
+    :math:`P_i = x_i\gamma_iP_i^*` with an ideal vapor, i.e. a P-x-y
+    diagram (Atkins & de Paula, *Physical Chemistry*, 11th ed., Ch. 5.3).
+    """
+
+    P1_star: float
+    P2_star: float
+
+    @abstractmethod
+    def activity_coefficients(self, x1):
+        r"""Return :math:`(\gamma_1, \gamma_2)` at liquid mole fraction `x1`."""
+
+    def excess_gibbs(self, x1, T: float, R_gas: float = R):
+        r"""Molar excess Gibbs energy :math:`G^E = RT(x_1\ln\gamma_1 + x_2\ln\gamma_2)`, in J/mol.
+
+        Parameters
+        ----------
+        x1 : float or array-like of float
+            Liquid-phase mole fraction of component 1.
+        T : float
+            Absolute temperature, in K.
+        R_gas : float, default :data:`chemistrykit.constants.R`
+            Gas constant.
+
+        Returns
+        -------
+        float or ndarray
+        """
+        x1 = np.asarray(x1, dtype=np.float64)
+        g1, g2 = self.activity_coefficients(x1)
+        return R_gas * T * (x1 * np.log(g1) + (1.0 - x1) * np.log(g2))
+
+    def partial_pressures(self, x1):
+        r"""Return :math:`(P_1, P_2)` from the modified Raoult's law :math:`P_i = x_i\gamma_iP_i^*`.
+
+        Parameters
+        ----------
+        x1 : float or array-like of float
+            Liquid-phase mole fraction of component 1.
+
+        Returns
+        -------
+        tuple of (float or ndarray)
+        """
+        x1 = np.asarray(x1, dtype=np.float64)
+        g1, g2 = self.activity_coefficients(x1)
+        return x1 * g1 * self.P1_star, (1.0 - x1) * g2 * self.P2_star
+
+    def total_pressure(self, x1):
+        """Total (bubble-point) vapor pressure above a liquid of composition `x1`.
+
+        Parameters
+        ----------
+        x1 : float or array-like of float
+            Liquid-phase mole fraction of component 1.
+
+        Returns
+        -------
+        float or ndarray
+        """
+        P1, P2 = self.partial_pressures(x1)
+        return P1 + P2
+
+    def vapor_composition(self, x1):
+        """Vapor-phase mole fraction of component 1 in equilibrium with liquid `x1`.
+
+        Parameters
+        ----------
+        x1 : float or array-like of float
+            Liquid-phase mole fraction of component 1.
+
+        Returns
+        -------
+        float or ndarray
+        """
+        P1, P2 = self.partial_pressures(x1)
+        return P1 / (P1 + P2)
+
+    def relative_volatility(self, x1):
+        r"""Relative volatility :math:`\alpha_{12} = \gamma_1P_1^*/(\gamma_2P_2^*)`.
+
+        Parameters
+        ----------
+        x1 : float or array-like of float
+            Liquid-phase mole fraction of component 1.
+
+        Returns
+        -------
+        float or ndarray
+        """
+        g1, g2 = self.activity_coefficients(x1)
+        return g1 * self.P1_star / (g2 * self.P2_star)
+
+    def azeotrope(self) -> Optional[tuple[float, float]]:
+        r"""Locate an azeotrope, where vapor and liquid compositions coincide.
+
+        At an azeotrope :math:`y_1 = x_1`, i.e. the relative volatility is
+        1. One exists in :math:`0 < x_1 < 1` exactly when
+        :math:`\ln\alpha_{12}` changes sign across the composition range,
+        and is found by root bracketing (:func:`scipy.optimize.brentq`).
+
+        Returns
+        -------
+        (x1, P) or None
+            Azeotropic composition and pressure, or ``None`` if there is
+            no sign change (no azeotrope, or an even number of them).
+        """
+        eps = 1e-9
+
+        def f(x1):
+            return float(np.log(self.relative_volatility(x1)))
+
+        if f(eps) * f(1.0 - eps) >= 0.0:
+            return None
+        x_az = brentq(f, eps, 1.0 - eps, xtol=1e-12)
+        return x_az, float(self.total_pressure(x_az))
+
+
 @dataclass
-class MargulesSolution:
+class MargulesSolution(BinaryActivityModel):
     r"""A non-ideal binary liquid described by the one-parameter (two-suffix) Margules model.
 
     Margules expanded the logarithms of the activity coefficients as power
@@ -337,72 +472,242 @@ class MargulesSolution:
         x2 = 1.0 - x1
         return np.exp(self.A * x2**2), np.exp(self.A * x1**2)
 
-    def excess_gibbs(self, x1, T: float, R_gas: float = R):
-        r"""Molar excess Gibbs energy :math:`G^E = RT\,A\,x_1x_2`, in J/mol.
+    @property
+    def henry_constant_1(self) -> float:
+        r"""Henry's-law constant of component 1 at infinite dilution, :math:`P_1^* e^{A}`."""
+        return float(self.P1_star * np.exp(self.A))
+
+
+@dataclass
+class WilsonSolution(BinaryActivityModel):
+    r"""Wilson's local-composition model of a non-ideal binary liquid.
+
+    G. M. Wilson, *J. Am. Chem. Soc.* 86, 127 (1964):
+
+    .. math::
+
+        \ln\gamma_1 = -\ln(x_1+\Lambda_{12}x_2)
+            + x_2\left(\frac{\Lambda_{12}}{x_1+\Lambda_{12}x_2}
+            - \frac{\Lambda_{21}}{x_2+\Lambda_{21}x_1}\right)
+
+    and symmetrically for :math:`\gamma_2`. Wilson's model cannot predict
+    liquid-liquid phase splitting, but is accurate for miscible mixtures
+    of polar and non-polar components (e.g. alcohols in hydrocarbons),
+    including their azeotropes.
+
+    Parameters
+    ----------
+    Lambda12, Lambda21 : float
+        Positive, dimensionless Wilson parameters at the temperature of
+        interest (see :meth:`from_energies`).
+    P1_star, P2_star : float
+        Pure-component vapor pressures at that temperature.
+
+    Examples
+    --------
+    With :math:`\Lambda_{12}=\Lambda_{21}=1` the mixture is ideal:
+
+    >>> sol = WilsonSolution(Lambda12=1.0, Lambda21=1.0, P1_star=30.0, P2_star=20.0)
+    >>> [round(float(g), 12) for g in sol.activity_coefficients(0.3)]
+    [1.0, 1.0]
+    """
+
+    Lambda12: float
+    Lambda21: float
+    P1_star: float
+    P2_star: float
+
+    @classmethod
+    def from_energies(cls, V1: float, V2: float, lambda12: float, lambda21: float, T: float, P1_star: float, P2_star: float, R_gas: float = R):
+        r"""Build from liquid molar volumes and interaction energies, :math:`\Lambda_{12}=(V_2/V_1)e^{-\lambda_{12}/RT}`.
 
         Parameters
         ----------
-        x1 : float or array-like of float
-            Liquid-phase mole fraction of component 1.
+        V1, V2 : float
+            Pure-liquid molar volumes (any consistent unit).
+        lambda12, lambda21 : float
+            Interaction-energy differences :math:`\lambda_{12}-\lambda_{11}`
+            and :math:`\lambda_{21}-\lambda_{22}`, in J/mol.
         T : float
             Absolute temperature, in K.
+        P1_star, P2_star : float
+            Pure-component vapor pressures at `T`.
         R_gas : float, default :data:`chemistrykit.constants.R`
-            Gas constant.
 
         Returns
         -------
-        float or ndarray
+        WilsonSolution
         """
-        x1 = np.asarray(x1, dtype=np.float64)
-        return R_gas * T * self.A * x1 * (1.0 - x1)
+        Lambda12 = V2 / V1 * np.exp(-lambda12 / (R_gas * T))
+        Lambda21 = V1 / V2 * np.exp(-lambda21 / (R_gas * T))
+        return cls(float(Lambda12), float(Lambda21), P1_star, P2_star)
 
-    def partial_pressures(self, x1):
-        r"""Return :math:`(P_1, P_2)` from the modified Raoult's law :math:`P_i = x_i\gamma_iP_i^*`.
+    def activity_coefficients(self, x1):
+        r"""Return :math:`(\gamma_1, \gamma_2)` at liquid mole fraction `x1`.
 
         Parameters
         ----------
         x1 : float or array-like of float
-            Liquid-phase mole fraction of component 1.
 
         Returns
         -------
         tuple of (float or ndarray)
         """
         x1 = np.asarray(x1, dtype=np.float64)
-        g1, g2 = self.activity_coefficients(x1)
-        return x1 * g1 * self.P1_star, (1.0 - x1) * g2 * self.P2_star
+        x2 = 1.0 - x1
+        d1 = x1 + self.Lambda12 * x2
+        d2 = x2 + self.Lambda21 * x1
+        bracket = self.Lambda12 / d1 - self.Lambda21 / d2
+        return np.exp(-np.log(d1) + x2 * bracket), np.exp(-np.log(d2) - x1 * bracket)
 
-    def total_pressure(self, x1):
-        """Total vapor pressure above a liquid of composition `x1`.
+
+@dataclass
+class NRTLSolution(BinaryActivityModel):
+    r"""The non-random two-liquid (NRTL) model of a non-ideal binary liquid.
+
+    H. Renon & J. M. Prausnitz, *AIChE J.* 14, 135 (1968). With
+    :math:`G_{ij}=\exp(-\alpha\tau_{ij})`:
+
+    .. math::
+
+        \ln\gamma_1 = x_2^2\left[\tau_{21}\left(\frac{G_{21}}{x_1+x_2G_{21}}\right)^2
+            + \frac{\tau_{12}G_{12}}{(x_2+x_1G_{12})^2}\right]
+
+    and symmetrically for :math:`\gamma_2`. Unlike Wilson's model, NRTL
+    can describe partially miscible (liquid-liquid) systems.
+
+    Parameters
+    ----------
+    tau12, tau21 : float
+        Dimensionless interaction parameters at the temperature of
+        interest (commonly :math:`\tau_{ij}=b_{ij}/RT`).
+    P1_star, P2_star : float
+        Pure-component vapor pressures at that temperature.
+    alpha : float, default 0.3
+        Non-randomness parameter (0.2-0.47 in Renon & Prausnitz's fits).
+
+    Examples
+    --------
+    At infinite dilution, :math:`\ln\gamma_1^\infty=\tau_{21}+\tau_{12}e^{-\alpha\tau_{12}}`:
+
+    >>> import numpy as np
+    >>> sol = NRTLSolution(tau12=0.5, tau21=1.2, P1_star=30.0, P2_star=20.0)
+    >>> g1, _ = sol.activity_coefficients(0.0)
+    >>> bool(np.isclose(np.log(g1), 1.2 + 0.5 * np.exp(-0.3 * 0.5)))
+    True
+    """
+
+    tau12: float
+    tau21: float
+    P1_star: float
+    P2_star: float
+    alpha: float = 0.3
+
+    def activity_coefficients(self, x1):
+        r"""Return :math:`(\gamma_1, \gamma_2)` at liquid mole fraction `x1`.
 
         Parameters
         ----------
         x1 : float or array-like of float
-            Liquid-phase mole fraction of component 1.
 
         Returns
         -------
-        float or ndarray
+        tuple of (float or ndarray)
         """
-        P1, P2 = self.partial_pressures(x1)
-        return P1 + P2
+        x1 = np.asarray(x1, dtype=np.float64)
+        x2 = 1.0 - x1
+        G12 = np.exp(-self.alpha * self.tau12)
+        G21 = np.exp(-self.alpha * self.tau21)
+        d1 = x1 + x2 * G21
+        d2 = x2 + x1 * G12
+        ln_g1 = x2**2 * (self.tau21 * (G21 / d1) ** 2 + self.tau12 * G12 / d2**2)
+        ln_g2 = x1**2 * (self.tau12 * (G12 / d2) ** 2 + self.tau21 * G21 / d1**2)
+        return np.exp(ln_g1), np.exp(ln_g2)
 
-    def vapor_composition(self, x1):
-        """Vapor-phase mole fraction of component 1 in equilibrium with liquid `x1`.
+
+@dataclass
+class UNIQUACSolution(BinaryActivityModel):
+    r"""The universal quasi-chemical (UNIQUAC) model of a non-ideal binary liquid.
+
+    D. S. Abrams & J. M. Prausnitz, *AIChE J.* 21, 116 (1975).
+    :math:`\ln\gamma_i` is the sum of a combinatorial (size/shape) part,
+    fixed by each molecule's van der Waals volume `r` and surface area
+    `q`, and a residual (energetic) part:
+
+    .. math::
+
+        \ln\gamma_i^C = \ln\frac{\Phi_i}{x_i} + \frac z2 q_i\ln\frac{\theta_i}{\Phi_i}
+            + l_i - \frac{\Phi_i}{x_i}\sum_j x_jl_j, \qquad
+        \ln\gamma_i^R = q_i\left[1-\ln\sum_j\theta_j\tau_{ji}
+            - \sum_j\frac{\theta_j\tau_{ij}}{\sum_k\theta_k\tau_{kj}}\right]
+
+    with :math:`\Phi_i=r_ix_i/\sum_jr_jx_j`,
+    :math:`\theta_i=q_ix_i/\sum_jq_jx_j`,
+    :math:`l_i=\frac z2(r_i-q_i)-(r_i-1)`, :math:`\tau_{ii}=1` and
+    coordination number :math:`z=10`.
+
+    Parameters
+    ----------
+    r1, r2, q1, q2 : float
+        Relative van der Waals volumes and surface areas (tabulated, e.g.
+        water r=0.92, q=1.40; ethanol r=2.1055, q=1.972).
+    tau12, tau21 : float
+        Dimensionless energy parameters, :math:`\tau_{ij}=\exp(-a_{ij}/T)`.
+    P1_star, P2_star : float
+        Pure-component vapor pressures at the temperature of interest.
+    z : float, default 10.0
+        Lattice coordination number.
+
+    Examples
+    --------
+    Identical-size molecules with :math:`\tau_{12}=\tau_{21}=1` form an ideal solution:
+
+    >>> sol = UNIQUACSolution(r1=1.0, r2=1.0, q1=1.0, q2=1.0, tau12=1.0, tau21=1.0, P1_star=30.0, P2_star=20.0)
+    >>> [round(float(g), 12) for g in sol.activity_coefficients(0.3)]
+    [1.0, 1.0]
+    """
+
+    r1: float
+    r2: float
+    q1: float
+    q2: float
+    tau12: float
+    tau21: float
+    P1_star: float
+    P2_star: float
+    z: float = 10.0
+
+    def activity_coefficients(self, x1):
+        r"""Return :math:`(\gamma_1, \gamma_2)` at liquid mole fraction `x1`.
 
         Parameters
         ----------
         x1 : float or array-like of float
-            Liquid-phase mole fraction of component 1.
 
         Returns
         -------
-        float or ndarray
+        tuple of (float or ndarray)
         """
-        P1, P2 = self.partial_pressures(x1)
-        return P1 / (P1 + P2)
-
-    @property
-    def henry_constant_1(self) -> float:
-        r"""Henry's-law constant of component 1 at infinite dilution, :math:`P_1^* e^{A}`."""
-        return float(self.P1_star * np.exp(self.A))
+        x1 = np.asarray(x1, dtype=np.float64)
+        x2 = 1.0 - x1
+        r1, r2, q1, q2, z = self.r1, self.r2, self.q1, self.q2, self.z
+        rx = r1 * x1 + r2 * x2
+        qx = q1 * x1 + q2 * x2
+        l1 = z / 2.0 * (r1 - q1) - (r1 - 1.0)
+        l2 = z / 2.0 * (r2 - q2) - (r2 - 1.0)
+        lx = x1 * l1 + x2 * l2
+        theta1, theta2 = q1 * x1 / qx, q2 * x2 / qx
+        t12, t21 = self.tau12, self.tau21
+        s1 = theta1 + theta2 * t21
+        s2 = theta1 * t12 + theta2
+        out = []
+        for r, q, l, s_own, resid in (
+            (r1, q1, l1, s1, theta1 / s1 + theta2 * t12 / s2),
+            (r2, q2, l2, s2, theta1 * t21 / s1 + theta2 / s2),
+        ):
+            phi_over_x = r / rx
+            theta_over_phi = (q / qx) / phi_over_x
+            ln_comb = np.log(phi_over_x) + z / 2.0 * q * np.log(theta_over_phi) + l - phi_over_x * lx
+            ln_res = q * (1.0 - np.log(s_own) - resid)
+            out.append(np.exp(ln_comb + ln_res))
+        return out[0], out[1]

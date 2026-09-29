@@ -32,6 +32,39 @@ corresponding implementation at each stop.
    :local:
    :depth: 1
 
+1792 -- 1794 -- Richter and the Birth of Stoichiometry
+----------------------------------------------------------
+
+Jeremias Benjamin Richter, a mathematician turned chemist, set out to
+make chemistry "a branch of applied mathematics" and coined the word for
+it: *stoichiometry*, the measurement of chemical elements. His careful
+neutralization experiments showed that the weights of different bases
+that neutralize a fixed weight of an acid stand in fixed ratios, and
+that those ratios are the same whichever acid is used. This is the law
+of reciprocal (equivalent) proportions. Richter's tables of equivalent
+weights, reorganized by Fischer in 1802, were among the first
+quantitative regularities in chemistry and an important input to
+Dalton's atomic theory a decade later. In modern terms each ratio
+follows from a balanced equation and molar masses, and balancing is a
+linear-algebra problem: find integer coefficients that conserve every
+element and the total charge.
+
+*Implementation:* :func:`~chemistrykit.stoichiometry.balance_equation`
+computes the exact rational null space of the composition matrix
+(including a charge row for ionic and redox equations), and
+:func:`~chemistrykit.stoichiometry.limiting_reagent`,
+:func:`~chemistrykit.stoichiometry.theoretical_yield` and
+:func:`~chemistrykit.stoichiometry.percent_yield` carry out the yield
+arithmetic. The example tabulates Richter-style neutralization
+equivalents for sulfuric acid and shows the limiting-reagent kink in the
+ammonia yield.
+
+*References:* J. B. Richter, *Anfangsgründe der Stöchyometrie oder
+Meßkunst chymischer Elemente*, 3 vols. (Breslau and Hirschberg,
+1792-1794).
+
+.. minigallery:: ../../examples/analytical/stoichiometry/plot_01_richter_stoichiometry.py
+
 1805 -- Legendre, Gauss, and the Method of Least Squares
 -----------------------------------------------------------
 
@@ -67,6 +100,35 @@ Coelestium in Sectionibus Conicis Solem Ambientium* (Hamburg: Perthes &
 Besser, 1809), Book II, Sec. III.
 
 .. minigallery:: ../../examples/analytical/calibration/plot_01_least_squares_calibration.py
+
+1831 -- Liebig's Kaliapparat and Combustion Analysis
+--------------------------------------------------------
+
+Organic compounds were known by the dozen in the 1820s, but their
+compositions were uncertain, because burning a sample and capturing its
+carbon quantitatively was slow and unreliable. Justus von Liebig's
+*Kaliapparat*, a five-bulb glass absorber filled with potash solution,
+trapped the carbon dioxide from a sample burned over hot copper oxide,
+while a calcium-chloride tube caught the water. Weighing the two before
+and after gave carbon and hydrogen directly, and oxygen by difference.
+An analysis took hours rather than days and was accurate to a few tenths
+of a percent. Liebig's apparatus, and the students he trained to use it
+at Giessen, turned organic chemistry into a quantitative science: the
+empirical formulas it produced were the raw material for the structural
+theories of the following decades.
+
+*Implementation:* :func:`~chemistrykit.stoichiometry.empirical_formula`
+converts mass percentages to the smallest whole-number mole ratio, and
+:func:`~chemistrykit.stoichiometry.mass_percent` gives the composition of
+a known formula. The example simulates the CO2 and H2O weighings for
+ascorbic acid, recovers its empirical formula C3H4O3, and uses the molar
+mass to reach C6H8O6.
+
+*References:* J. Liebig, "Ueber einen neuen Apparat zur Analyse
+organischer Körper, und über die Zusammensetzung einiger organischen
+Substanzen," Ann. Phys. Chem. 21, 1-47 (1831).
+
+.. minigallery:: ../../examples/analytical/stoichiometry/plot_02_liebig_combustion_analysis.py
 
 1889 -- Nernst's Equation and Potentiometric Redox Chemistry
 -----------------------------------------------------------------

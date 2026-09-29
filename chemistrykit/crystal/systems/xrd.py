@@ -11,6 +11,7 @@ from dataclasses import dataclass
 from itertools import permutations
 
 import numpy as np
+from numpy.typing import ArrayLike
 
 __all__ = [
     "bragg_angle",
@@ -30,7 +31,7 @@ _CUBIC_BASES: dict = {
 }
 
 
-def bragg_angle(d: float, wavelength: float, order: int = 1):
+def bragg_angle(d: ArrayLike, wavelength: float, order: int = 1):
     r"""Solve Bragg's law :math:`n\lambda=2d\sin\theta` for the diffraction angle :math:`\theta`.
 
     Parameters

@@ -106,12 +106,15 @@ ignore = [
 line-ending = "lf"
 
 [tool.mypy]
-python_version = "3.10"
+# Not a statement about the package's supported Python versions (that's
+# requires-python = ">=3.10" above, tested on 3.10-3.12 in CI) -- numpy's
+# own .pyi stubs now use PEP 695 `type` aliases that mypy can only parse
+# when targeting 3.12+; the CI type-check job runs on 3.14 to match.
+python_version = "3.14"
 ignore_missing_imports = true
 warn_redundant_casts = true
 warn_unused_ignores = true
-# The codebase does not fully type-check yet (mostly matplotlib/numpy stub
-# gaps around animation and array-typed arguments); this config exists so
-# type checking can be adopted incrementally rather than skipped entirely.
+# `mypy chemistrykit` passes cleanly. Bodies of unannotated functions are
+# not checked yet, so type checking can keep being tightened incrementally.
 # See CONTRIBUTING.md.
 check_untyped_defs = false

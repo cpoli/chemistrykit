@@ -21,7 +21,7 @@ from chemistrykit.spectro.core.base_system import Spectrum
 __all__ = ["energy_to_wavenumber", "rotational_line_wavenumbers", "rotational_spectrum", "isotope_shift_ratio"]
 
 
-def energy_to_wavenumber(energy_j) -> float:
+def energy_to_wavenumber(energy_j) -> float | np.ndarray:
     r"""Convert an energy (in J) to a spectroscopic wavenumber :math:`\tilde\nu=E/(hc)`, in cm^-1.
 
     Parameters
@@ -71,7 +71,7 @@ def rotational_line_wavenumbers(rotor: RigidRotor, J_max: int) -> np.ndarray:
     """
     J_values = np.arange(0, J_max + 1)
     transition_energies = np.array([rotor.transition_energy(int(J)) for J in J_values])
-    return energy_to_wavenumber(transition_energies)
+    return np.asarray(energy_to_wavenumber(transition_energies))
 
 
 def rotational_spectrum(rotor: RigidRotor, J_max: int, temperature: float) -> Spectrum:

@@ -4,6 +4,7 @@ Examples
 This gallery walks through every public feature of ``chemistrykit.kinetics``:
 closed-form integrated rate laws, the Arrhenius temperature dependence,
 collision, diffusion, and transition-state theories of the rate constant,
+Lindemann-Hinshelwood unimolecular falloff, branched-chain explosions,
 Michaelis-Menten enzyme kinetics, a general stoichiometric reaction-network
 engine with exact stochastic simulation, and chemical oscillators.
 
@@ -24,8 +25,8 @@ Sections
   and recovering the activation energy from synthetic rate-vs-temperature
   data via an Arrhenius plot.
 - **rate_theory** -- rate constants from molecular properties: collision
-  theory, Smoluchowski's diffusion limit, and Eyring's transition-state
-  theory.
+  theory, Smoluchowski's diffusion limit, Eyring's transition-state
+  theory, and Lindemann-Hinshelwood unimolecular falloff.
 - **enzyme** -- Michaelis-Menten enzyme kinetics, the Lineweaver-Burk
   linearization, competitive/noncompetitive inhibition, and the full
   substrate-depletion progress curve.
@@ -33,6 +34,8 @@ Sections
   the steady-state approximation and Lindemann fall-off, chain-branching
   explosions, Bateman's consecutive-reaction solution, Eigen's relaxation
   kinetics, parallel reactions, and Gillespie's stochastic simulation.
+- **explosions** -- Semenov's branching criterion and the first and
+  second explosion limits of hydrogen-oxygen.
 - **oscillators** -- the Brusselator limit cycle, Lotka's neutral
   oscillations, and the Oregonator model of the Belousov-Zhabotinsky
   reaction.
