@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-29
+
 ### Added
 
 - `chemistrykit.periodic_table` covers all 118 elements (was Z=1-54);
@@ -63,6 +65,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   only keyword any implementation accepted).
 - `write_xyz` writes the comment as `Comment="..."` on extended-XYZ
   lines, keeping them valid `key=value` metadata.
+- README rewritten in the style of the sibling packages: a hero figure, a
+  three-panel figure per subpackage, PyPI install instructions, a plotting
+  quick start, per-subpackage numpy/scipy/numba notes and a Design section.
+  `docs/make_readme_figure.py` and `docs/make_readme_subpackage_figures.py`
+  regenerate the figures.
 
 ## [0.1.0] - 2026-09-27
 
@@ -227,5 +234,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `VSEPRGeometry.shape_name` raised a bare `KeyError` for valid inputs
   such as `(steric_number=4, lone_pairs=3)`.
 
-[Unreleased]: https://github.com/cpoli/chemistrykit/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/cpoli/chemistrykit/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/cpoli/chemistrykit/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/cpoli/chemistrykit/releases/tag/v0.1.0
