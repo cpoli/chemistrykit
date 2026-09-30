@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- The wheel no longer ships the `tests/` packages (139 files). The sdist
+  still includes the full test suite, via a new `MANIFEST.in`.
+
 ## [0.2.0] - 2026-09-29
 
 ### Added
