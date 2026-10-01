@@ -14,8 +14,6 @@ domain's distribution functions -- see
 ``examples/md/lj_fluid/plot_02_maxwell_boltzmann_check.py``.
 """
 
-__version__ = "0.2.0"
-
 from chemistrykit.statmech.core.base_system import PartitionFunction, ThermodynamicFunctions
 from chemistrykit.statmech.systems.debye_solid import DebyeSolid
 from chemistrykit.statmech.systems.ising import Ising1D, Ising2DOnsager, ising_2d_critical_temperature, kramers_wannier_dual_coupling
@@ -38,7 +36,6 @@ from chemistrykit.statmech.utils.combinatorics import ln_binomial, ln_factorial
 from chemistrykit.statmech.utils.thermal_wavelength import thermal_de_broglie_wavelength
 
 __all__ = [
-    "__version__",
     "PartitionFunction",
     "ThermodynamicFunctions",
     "TranslationalPartitionFunction",

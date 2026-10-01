@@ -23,8 +23,6 @@ Hamiltonian-diagonalization pattern physicskit's
 structure.
 """
 
-__version__ = "0.2.0"
-
 from chemistrykit.quantum.core.base_system import EigenstateResult, QuantumSystem, VariationalSolver
 from chemistrykit.quantum.systems.harmonic_oscillator import MorseOscillator, QuantumHarmonicOscillator, compare_harmonic_vs_morse
 from chemistrykit.quantum.systems.hartree_fock import ExponentOptimizationResult, H2PlusVariational, RestrictedHartreeFock, SCFResult
@@ -53,7 +51,6 @@ from chemistrykit.quantum.systems.rigid_rotor import RigidRotor
 from chemistrykit.quantum.utils.secular_equation import solve_secular_equation
 
 __all__ = [
-    "__version__",
     "QuantumSystem",
     "VariationalSolver",
     "EigenstateResult",

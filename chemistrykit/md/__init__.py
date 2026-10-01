@@ -20,8 +20,6 @@ at the simulation's instantaneous temperature (see
 ``examples/md/lj_fluid/plot_02_maxwell_boltzmann_check.py``).
 """
 
-__version__ = "0.2.0"
-
 from chemistrykit.md.core.base_system import AnglePotential, MDResult, MolecularDynamicsSystem, PairPotential
 from chemistrykit.md.systems.constraints import ShakeMolecule, shake
 from chemistrykit.md.systems.lj_fluid import LennardJones, LJFluid
@@ -54,7 +52,6 @@ __all__ = [
     "XYZTrajectory",
     "read_xyz",
     "write_xyz",
-    "__version__",
     "MDResult",
     "PairPotential",
     "AnglePotential",

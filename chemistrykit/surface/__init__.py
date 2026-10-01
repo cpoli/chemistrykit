@@ -10,8 +10,6 @@ Eley-Rideal kinetics, and temperature-programmed desorption with
 Redhead's peak analysis.
 """
 
-__version__ = "0.2.0"
-
 from chemistrykit.surface.core.base_system import AdsorptionIsotherm
 from chemistrykit.surface.systems.bet import BETFit, BETIsotherm, bet_loading, fit_bet
 from chemistrykit.surface.systems.catalysis import (
@@ -36,7 +34,6 @@ from chemistrykit.surface.systems.temkin import TemkinFit, TemkinIsotherm, fit_t
 from chemistrykit.surface.systems.tpd import TPDResult, first_order_peak_temperature, redhead_desorption_energy, simulate_tpd
 
 __all__ = [
-    "__version__",
     "AdsorptionIsotherm",
     "langmuir_coverage",
     "LangmuirIsotherm",

@@ -14,8 +14,6 @@ crystallite sizes; and Pauling's radius-ratio rule and Goldschmidt's
 perovskite tolerance factor.
 """
 
-__version__ = "0.2.0"
-
 from chemistrykit.crystal.core.base_system import LatticeEnergyModel, LatticePacking
 from chemistrykit.crystal.systems.crystal_chemistry import (
     RADIUS_RATIO_LIMITS,
@@ -50,7 +48,6 @@ from chemistrykit.crystal.systems.xrd import (
 )
 
 __all__ = [
-    "__version__",
     "LatticePacking",
     "LatticeEnergyModel",
     "classify_crystal_system",
