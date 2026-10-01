@@ -14,7 +14,7 @@ emission yields; Förster and Dexter energy transfer; ferrioxalate
 actinometry; and Rehm-Weller electron-transfer quenching.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 from chemistrykit.photochem.core.base_system import PhotostationaryStateResult
 from chemistrykit.photochem.systems.actinometry import ferrioxalate_fe2_moles, ferrioxalate_photon_flux

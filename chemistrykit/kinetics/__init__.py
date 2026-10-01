@@ -13,7 +13,7 @@ branched-chain explosion limits (H2/O2), and Gillespie's exact
 stochastic simulation algorithm.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 from chemistrykit.kinetics.core.base_system import KineticsResult, RateLaw, ReactionNetwork
 from chemistrykit.kinetics.systems.arrhenius import ArrheniusFit, arrhenius_rate_constant, fit_arrhenius

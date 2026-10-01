@@ -15,7 +15,7 @@ Baeyer ring angle strain, and dipole moments from point charges or bond
 dipoles.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 from chemistrykit.structure.core.base_system import Molecule, angle_between, unit_vector
 from chemistrykit.structure.systems.bonding import (

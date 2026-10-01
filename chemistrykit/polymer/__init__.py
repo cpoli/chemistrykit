@@ -15,7 +15,7 @@ Mayo-Lewis copolymer equation; Poisson (living) chain-length
 distributions; and Bernoullian tacticity statistics.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 from chemistrykit.polymer.core.base_system import PolymerChainModel
 from chemistrykit.polymer.systems.chain_growth import (

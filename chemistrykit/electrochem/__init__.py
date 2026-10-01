@@ -13,7 +13,7 @@ limits; and the diffusion-limited currents of electroanalysis (Cottrell,
 Ilkovič, Heyrovský-Ilkovič wave, Randles-Ševčík).
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 from chemistrykit.electrochem.core.base_system import BatteryDischargeModel, DischargeResult
 from chemistrykit.electrochem.systems.battery import ConstantCurrentBattery, effective_capacity, peukert_discharge_time

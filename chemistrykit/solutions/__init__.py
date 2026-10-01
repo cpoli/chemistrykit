@@ -13,7 +13,7 @@ depression, boiling-point elevation, osmotic pressure) live in
 :func:`chemistrykit.thermo.freezing_point_depression` and friends.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 from chemistrykit.solutions.core.base_system import GranPlotResult, Titration, TitrationResult, WeakElectrolyte
 from chemistrykit.solutions.systems.acid_base import (

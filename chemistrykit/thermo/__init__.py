@@ -11,7 +11,7 @@ Wilson, NRTL and UNIQUAC activity-coefficient models of non-ideal
 solutions, with P-x-y vapor-liquid equilibrium and azeotrope location.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 from chemistrykit.thermo.core.base_system import EquationOfState
 from chemistrykit.thermo.systems.equations_of_state import IdealGas, PengRobinson, RedlichKwong, VanDerWaals

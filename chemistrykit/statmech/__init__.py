@@ -14,7 +14,7 @@ domain's distribution functions -- see
 ``examples/md/lj_fluid/plot_02_maxwell_boltzmann_check.py``.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 from chemistrykit.statmech.core.base_system import PartitionFunction, ThermodynamicFunctions
 from chemistrykit.statmech.systems.debye_solid import DebyeSolid

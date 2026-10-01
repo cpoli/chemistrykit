@@ -16,7 +16,7 @@ Balmer-Rydberg formula for hydrogen-like atomic lines; and Lorentzian/Gaussian/V
 shared across all of the above.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 from chemistrykit.spectro.core.base_system import Spectrum
 from chemistrykit.spectro.systems.atomic import rydberg_wavenumber

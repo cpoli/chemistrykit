@@ -12,7 +12,7 @@ resolution equation, Student's t confidence intervals, Grubbs' outlier
 test, the Horwitz precision function, and Savitzky-Golay smoothing.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 from chemistrykit.analytical.core.base_system import TitrationCurve, TitrationCurveResult
 from chemistrykit.analytical.systems.calibration import LinearCalibration, fit_calibration

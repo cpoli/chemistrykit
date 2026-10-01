@@ -10,7 +10,7 @@ Eley-Rideal kinetics, and temperature-programmed desorption with
 Redhead's peak analysis.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 from chemistrykit.surface.core.base_system import AdsorptionIsotherm
 from chemistrykit.surface.systems.bet import BETFit, BETIsotherm, bet_loading, fit_bet
