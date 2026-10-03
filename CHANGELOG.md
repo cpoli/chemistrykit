@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-10-03
+
 ### Changed
 
 - The wheel no longer ships the `tests/` packages (139 files). The sdist
@@ -239,6 +241,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `VSEPRGeometry.shape_name` raised a bare `KeyError` for valid inputs
   such as `(steric_number=4, lone_pairs=3)`.
 
-[Unreleased]: https://github.com/cpoli/chemistrykit/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/cpoli/chemistrykit/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/cpoli/chemistrykit/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/cpoli/chemistrykit/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/cpoli/chemistrykit/releases/tag/v0.1.0

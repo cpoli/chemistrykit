@@ -2,7 +2,7 @@
 
 | | |
 |:--|:-:|
-| Package | [![PyPI version](https://img.shields.io/pypi/v/chemistrykit)](https://pypi.org/project/chemistrykit/) [![Python versions](https://img.shields.io/pypi/pyversions/chemistrykit)](https://pypi.org/project/chemistrykit/) |
+| Package | [![PyPI version](https://img.shields.io/pypi/v/chemistrykit)](https://pypi.org/project/chemistrykit/) [![Python versions](https://img.shields.io/pypi/pyversions/chemistrykit)](https://pypi.org/project/chemistrykit/) [![DOI](https://zenodo.org/badge/1377015934.svg)](https://zenodo.org/badge/latestdoi/1377015934) |
 | Quality | [![License](https://img.shields.io/github/license/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/blob/main/LICENSE) [![CI](https://github.com/cpoli/chemistrykit/actions/workflows/ci.yml/badge.svg)](https://github.com/cpoli/chemistrykit/actions/workflows/ci.yml) [![Coverage](https://img.shields.io/codecov/c/github/cpoli/chemistrykit)](https://codecov.io/gh/cpoli/chemistrykit) [![Coverage (manual)](https://img.shields.io/badge/coverage-96%25-brightgreen)](#coverage) |
 | Documentation | [![Docs](https://img.shields.io/badge/docs-cpoli.github.io%2Fchemistrykit-blue)](https://cpoli.github.io/chemistrykit/) |
 | Code style | [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) |

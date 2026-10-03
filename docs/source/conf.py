@@ -23,7 +23,7 @@ def _raise_animation_embed_limit(gallery_conf, fname):
 project = "chemistrykit"
 copyright = "2026, chemistrykit contributors"
 author = "chemistrykit team"
-release = "0.2.0"
+release = "0.2.1"
 
 extensions = [
     "sphinx.ext.autodoc",
