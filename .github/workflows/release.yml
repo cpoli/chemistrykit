@@ -1,0 +1,80 @@
+name: Release
+
+# Push a tag vX.Y.Z (matching `chemistrykit.__version__`, `version` in
+# pyproject.toml and CITATION.cff, and a "## [X.Y.Z] - date" section in
+# CHANGELOG.md) to publish a release.
+#
+# One-time setup on the services:
+# - PyPI: add this repository as a trusted publisher of chemistrykit
+#   (workflow release.yml, environment pypi).
+# - GitHub: create the environment "pypi" in the repository settings.
+# - Zenodo: enable the repository at zenodo.org/account/settings/github;
+#   every GitHub Release is then archived with its own DOI.
+#
+# The docs on gh-pages are deployed separately and are not rebuilt here.
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  build:
+    name: Build wheel and sdist
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check that the tag matches the package, project and citation versions
+        run: |
+          version=$(sed -n 's/^__version__ = "\(.*\)"$/\1/p' chemistrykit/__init__.py)
+          project=$(sed -n 's/^version = "\(.*\)"$/\1/p' pyproject.toml)
+          citation=$(sed -n 's/^version: *//p' CITATION.cff)
+          echo "tag $GITHUB_REF_NAME, __version__ $version, pyproject.toml $project, CITATION.cff $citation"
+          test "v$version" = "$GITHUB_REF_NAME"
+          test "$project" = "$version"
+          test "$citation" = "$version"
+      - run: pip install build
+      - run: python -m build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  pypi:
+    name: Publish to PyPI
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
+
+  github-release:
+    name: Create the GitHub Release
+    needs: pypi
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - name: Release notes from the CHANGELOG section
+        run: |
+          version=${GITHUB_REF_NAME#v}
+          awk -v v="$version" '
+            /^## / { if (found) exit; if (index($0, "## [" v "] ") == 1) { found = 1; next } }
+            found' CHANGELOG.md > notes.md
+          test -s notes.md
+      - run: gh release create "$GITHUB_REF_NAME" dist/* --title "chemistrykit ${GITHUB_REF_NAME#v}" --notes-file notes.md
+        env:
+          GH_TOKEN: ${{ github.token }}
