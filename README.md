@@ -7,7 +7,7 @@
 | Documentation | [![Docs](https://img.shields.io/badge/docs-cpoli.github.io%2Fchemistrykit-blue)](https://cpoli.github.io/chemistrykit/) |
 | Code style | [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) |
 | Downloads | [![Downloads](https://static.pepy.tech/badge/chemistrykit)](https://pepy.tech/project/chemistrykit) [![Downloads/Month](https://static.pepy.tech/badge/chemistrykit/month)](https://pepy.tech/project/chemistrykit) |
-| Community | [![GitHub Stars](https://img.shields.io/github/stars/cpoli/chemistrykit?style=social)](https://github.com/cpoli/chemistrykit) [![GitHub Forks](https://img.shields.io/github/forks/cpoli/chemistrykit?style=social)](https://github.com/cpoli/chemistrykit) [![Contributors](https://img.shields.io/github/contributors/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/graphs/contributors) [![Last Commit](https://img.shields.io/github/last-commit/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/commits/main) |
+| Community | [![GitHub Stars](https://badgen.net/github/stars/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit) [![GitHub Forks](https://badgen.net/github/forks/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit) [![Contributors](https://badgen.net/github/contributors/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/graphs/contributors) [![Last Commit](https://img.shields.io/github/last-commit/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/commits/main) |
 
 **See the equations of chemistry at work.**
 chemistrykit is a Python toolkit for learning and teaching computational
