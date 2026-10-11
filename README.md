@@ -2,10 +2,10 @@
 
 | | |
 |:--|:-:|
-| Package | [![PyPI version](https://badgen.net/pypi/v/chemistrykit)](https://pypi.org/project/chemistrykit/) [![Python versions](https://img.shields.io/pypi/pyversions/chemistrykit)](https://pypi.org/project/chemistrykit/) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23116472.svg)](https://doi.org/10.5281/zenodo.23116472) |
-| Quality | [![License](https://badgen.net/github/license/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/blob/main/LICENSE) [![CI](https://github.com/cpoli/chemistrykit/actions/workflows/ci.yml/badge.svg)](https://github.com/cpoli/chemistrykit/actions/workflows/ci.yml) [![Coverage](https://codecov.io/gh/cpoli/chemistrykit/branch/main/graph/badge.svg)](https://codecov.io/gh/cpoli/chemistrykit) [![Coverage (manual)](https://img.shields.io/badge/coverage-96%25-brightgreen)](#coverage) |
-| Documentation | [![Docs](https://img.shields.io/badge/docs-cpoli.github.io%2Fchemistrykit-blue)](https://cpoli.github.io/chemistrykit/) |
-| Code style | [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) |
+| Package | [![PyPI version](https://badgen.net/pypi/v/chemistrykit)](https://pypi.org/project/chemistrykit/) [![Python versions](https://badgen.net/pypi/python/chemistrykit)](https://pypi.org/project/chemistrykit/) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23116472.svg)](https://doi.org/10.5281/zenodo.23116472) |
+| Quality | [![License](https://badgen.net/github/license/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/blob/main/LICENSE) [![CI](https://github.com/cpoli/chemistrykit/actions/workflows/ci.yml/badge.svg)](https://github.com/cpoli/chemistrykit/actions/workflows/ci.yml) [![Coverage](https://codecov.io/gh/cpoli/chemistrykit/branch/main/graph/badge.svg)](https://codecov.io/gh/cpoli/chemistrykit) [![Coverage (manual)](https://badgen.net/badge/coverage/96%25/green)](#coverage) |
+| Documentation | [![Docs](https://badgen.net/badge/docs/cpoli.github.io%2Fchemistrykit/blue)](https://cpoli.github.io/chemistrykit/) |
+| Code style | [![Ruff](https://badgen.net/badge/code%20style/ruff/purple)](https://github.com/astral-sh/ruff) |
 | Downloads | [![Downloads](https://static.pepy.tech/badge/chemistrykit)](https://pepy.tech/project/chemistrykit) [![Downloads/Month](https://static.pepy.tech/badge/chemistrykit/month)](https://pepy.tech/project/chemistrykit) |
 | Community | [![GitHub Stars](https://badgen.net/github/stars/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit) [![GitHub Forks](https://badgen.net/github/forks/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit) [![Contributors](https://badgen.net/github/contributors/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/graphs/contributors) [![Last Commit](https://badgen.net/github/last-commit/cpoli/chemistrykit/main)](https://github.com/cpoli/chemistrykit/commits/main) |
 
