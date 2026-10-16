@@ -7,8 +7,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="chemistrykit.md" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://cpoli.github.io/chemistrykit/api/md.html" />
+<meta property="og:site_name" content="chemistrykit" />
+<meta property="og:description" content="chemistrykit.md hub · History · Examples · API reference chemistrykit.md: molecular dynamics and force fields. Lennard-Jones fluid simulation in reduced units (energy, pressure, radial distribution..." />
+<meta property="og:image" content="https://cpoli.github.io/chemistrykit/_static/images/chemistrykit_logo.png" />
+<meta property="og:image:alt" content="chemistrykit" />
+<meta name="description" content="chemistrykit.md hub · History · Examples · API reference chemistrykit.md: molecular dynamics and force fields. Lennard-Jones fluid simulation in reduced units (energy, pressure, radial distribution..." />
 
-    <title>chemistrykit.md &#8212; chemistrykit 0.2.0 documentation</title>
+    <title>chemistrykit.md &#8212; chemistrykit</title>
   
   
   
@@ -43,7 +51,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
-    <script src="../_static/documentation_options.js?v=95e61db4"></script>
+    <script src="../_static/documentation_options.js?v=3ca669d2"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
@@ -51,6 +59,7 @@
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/md';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://cpoli.github.io/chemistrykit/api/md.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="chemistrykit.photochem" href="photochem.html" />
@@ -474,7 +483,7 @@ at the simulation’s instantaneous temperature (see
 <dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.md.AnglePotential">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">AnglePotential</span></span><a class="reference internal" href="../_modules/chemistrykit/md/core/base_system.html#AnglePotential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.AnglePotential" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
 <p>Common interface for a three-body bond-angle potential <span class="math notranslate nohighlight">\(U(\theta)\)</span>.</p>
 <p>Used for angle-bending terms in <a class="reference internal" href="#chemistrykit.md.HarmonicMolecule" title="chemistrykit.md.systems.pair_potentials.HarmonicMolecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">HarmonicMolecule</span></code></a>,
 where <span class="math notranslate nohighlight">\(\theta\)</span> is the angle at a vertex atom <cite>j</cite> between the two
@@ -496,7 +505,7 @@ bonds <cite>i-j</cite> and <cite>k-j</cite>.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.md.BerendsenThermostat">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">BerendsenThermostat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/thermostats.html#BerendsenThermostat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.BerendsenThermostat" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>The Berendsen weak-coupling thermostat.</p>
 <p>Rescales every velocity by a common factor after each step so that the
 instantaneous kinetic temperature relaxes exponentially toward
@@ -513,9 +522,9 @@ the NVT ensemble exactly (see <a class="reference internal" href="#chemistrykit.
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>target_temperature</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – <span class="math notranslate nohighlight">\(T_0\)</span>; must be positive.</p></li>
-<li><p><strong>tau</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Coupling time constant; must be positive.</p></li>
-<li><p><strong>k_b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>target_temperature</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – <span class="math notranslate nohighlight">\(T_0\)</span>; must be positive.</p></li>
+<li><p><strong>tau</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Coupling time constant; must be positive.</p></li>
+<li><p><strong>k_b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -538,11 +547,11 @@ the NVT ensemble exactly (see <a class="reference internal" href="#chemistrykit.
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>system</strong> (<a class="reference internal" href="#chemistrykit.md.MolecularDynamicsSystem" title="chemistrykit.md.core.base_system.MolecularDynamicsSystem"><em>chemistrykit.md.core.base_system.MolecularDynamicsSystem</em></a>)</p></li>
-<li><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -566,9 +575,9 @@ lattice energies (see the future <code class="docutils literal notranslate"><spa
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>A</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Repulsive prefactor (energy units), must be positive.</p></li>
-<li><p><strong>B</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Repulsive exponential decay rate (inverse length), must be positive.</p></li>
-<li><p><strong>C</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Dispersion (attractive <span class="math notranslate nohighlight">\(r^{-6}\)</span>) coefficient (energy *
+<li><p><strong>A</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Repulsive prefactor (energy units), must be positive.</p></li>
+<li><p><strong>B</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Repulsive exponential decay rate (inverse length), must be positive.</p></li>
+<li><p><strong>C</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Dispersion (attractive <span class="math notranslate nohighlight">\(r^{-6}\)</span>) coefficient (energy *
 length<sup>6</sup>), must be non-negative.</p></li>
 </ul>
 </dd>
@@ -590,7 +599,7 @@ are negative:</p>
 <dd><p>Return the potential energy U(r) at separation(s) <cite>r</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a>)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>float or ndarray</em></p>
@@ -608,7 +617,7 @@ and negative is attractive – so the force on particle <cite>i</cite> due to
 particle <cite>j</cite> is <code class="docutils literal notranslate"><span class="pre">f(r)</span> <span class="pre">*</span> <span class="pre">(r_i</span> <span class="pre">-</span> <span class="pre">r_j)</span> <span class="pre">/</span> <span class="pre">r</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a>)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>float or ndarray</em></p>
@@ -635,10 +644,10 @@ simulated trajectory is checked against in the test suite.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>potential</strong> (<a class="reference internal" href="#chemistrykit.md.HarmonicBond" title="chemistrykit.md.HarmonicBond"><em>HarmonicBond</em></a><em> or </em><a class="reference internal" href="#chemistrykit.md.Morse" title="chemistrykit.md.Morse"><em>Morse</em></a>) – The bond potential.</p></li>
-<li><p><strong>m1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Atomic masses.</p></li>
-<li><p><strong>m2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Atomic masses.</p></li>
-<li><p><strong>r0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial bond length.</p></li>
-<li><p><strong>v_rel0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial relative (radial) velocity along <cite>axis</cite>.</p></li>
+<li><p><strong>m1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Atomic masses.</p></li>
+<li><p><strong>m2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Atomic masses.</p></li>
+<li><p><strong>r0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial bond length.</p></li>
+<li><p><strong>v_rel0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Initial relative (radial) velocity along <cite>axis</cite>.</p></li>
 <li><p><strong>axis</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>3</em><em>,</em><em>)</em><em>, </em><em>default</em><em> (</em><em>1</em><em>, </em><em>0</em><em>, </em><em>0</em><em>)</em>) – Bond direction.</p></li>
 </ul>
 </dd>
@@ -649,7 +658,7 @@ simulated trajectory is checked against in the test suite.</p>
 <dd><p>Current separation between the two atoms.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>float</em></p>
@@ -663,7 +672,7 @@ simulated trajectory is checked against in the test suite.</p>
 <dd><p>A single relative-coordinate (bond-stretch) vibrational degree of freedom.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -693,13 +702,13 @@ simulated trajectory is checked against in the test suite.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Harmonic force constant.</p></li>
-<li><p><strong>m1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Atomic masses.</p></li>
-<li><p><strong>m2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Atomic masses.</p></li>
+<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Harmonic force constant.</p></li>
+<li><p><strong>m1</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Atomic masses.</p></li>
+<li><p><strong>m2</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Atomic masses.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><em>float</em></p>
@@ -724,8 +733,8 @@ simulated trajectory is checked against in the test suite.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>k_theta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Force constant (energy per radian squared), must be positive.</p></li>
-<li><p><strong>theta0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Equilibrium angle, in radians.</p></li>
+<li><p><strong>k_theta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Force constant (energy per radian squared), must be positive.</p></li>
+<li><p><strong>theta0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Equilibrium angle, in radians.</p></li>
 </ul>
 </dd>
 </dl>
@@ -765,8 +774,8 @@ Ch. 8, the classical harmonic oscillator).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Force constant, must be positive.</p></li>
-<li><p><strong>r0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Equilibrium bond length.</p></li>
+<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Force constant, must be positive.</p></li>
+<li><p><strong>r0</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Equilibrium bond length.</p></li>
 </ul>
 </dd>
 </dl>
@@ -784,7 +793,7 @@ Ch. 8, the classical harmonic oscillator).</p>
 <dd><p>Return the potential energy U(r) at separation(s) <cite>r</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a>)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>float or ndarray</em></p>
@@ -802,7 +811,7 @@ and negative is attractive – so the force on particle <cite>i</cite> due to
 particle <cite>j</cite> is <code class="docutils literal notranslate"><span class="pre">f(r)</span> <span class="pre">*</span> <span class="pre">(r_i</span> <span class="pre">-</span> <span class="pre">r_j)</span> <span class="pre">/</span> <span class="pre">r</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a>)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>float or ndarray</em></p>
@@ -832,9 +841,9 @@ Applications</em>, 2nd ed., Ch. 4).</p>
 <li><p><strong>positions</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="structure.html#chemistrykit.structure.Molecule.n_atoms" title="chemistrykit.structure.Molecule.n_atoms"><em>n_atoms</em></a><em>, </em><em>3</em><em>)</em>)</p></li>
 <li><p><strong>velocities</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="structure.html#chemistrykit.structure.Molecule.n_atoms" title="chemistrykit.structure.Molecule.n_atoms"><em>n_atoms</em></a><em>, </em><em>3</em><em>)</em>)</p></li>
 <li><p><strong>masses</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="structure.html#chemistrykit.structure.Molecule.n_atoms" title="chemistrykit.structure.Molecule.n_atoms"><em>n_atoms</em></a><em>,</em><em>)</em>)</p></li>
-<li><p><strong>bonds</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a></span>) – Harmonic bonds between atom indices <cite>i</cite>, <cite>j</cite> with force constant
+<li><p><strong>bonds</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a></span>) – Harmonic bonds between atom indices <cite>i</cite>, <cite>j</cite> with force constant
 <cite>k</cite> and equilibrium length <cite>r0</cite>.</p></li>
-<li><p><strong>angles</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a></span>) – Harmonic angle terms at vertex atom <cite>j</cite> (between bonds <cite>i-j</cite> and
+<li><p><strong>angles</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a></span>) – Harmonic angle terms at vertex atom <cite>j</cite> (between bonds <cite>i-j</cite> and
 <cite>k-j</cite>) with force constant <cite>k_theta</cite> and equilibrium angle
 <cite>theta0</cite> (radians).</p></li>
 </ul>
@@ -877,16 +886,16 @@ module docstring for the reduced-units convention.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>positions</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>N</em><em>, </em><em>3</em><em>)</em>)</p></li>
 <li><p><strong>velocities</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>N</em><em>, </em><em>3</em><em>)</em>)</p></li>
-<li><p><strong>box_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Cubic periodic box side length; must be at least <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">cutoff</span></code>
+<li><p><strong>box_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Cubic periodic box side length; must be at least <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">cutoff</span></code>
 for the minimum-image convention to be unambiguous.</p></li>
-<li><p><strong>epsilon</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Lennard-Jones/particle parameters (all particles identical).</p></li>
-<li><p><strong>sigma</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Lennard-Jones/particle parameters (all particles identical).</p></li>
-<li><p><strong>mass</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Lennard-Jones/particle parameters (all particles identical).</p></li>
-<li><p><strong>cutoff</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Interaction cutoff, in units of <cite>sigma</cite> (2.5 is the conventional
+<li><p><strong>epsilon</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Lennard-Jones/particle parameters (all particles identical).</p></li>
+<li><p><strong>sigma</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Lennard-Jones/particle parameters (all particles identical).</p></li>
+<li><p><strong>mass</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Lennard-Jones/particle parameters (all particles identical).</p></li>
+<li><p><strong>cutoff</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Interaction cutoff, in units of <cite>sigma</cite> (2.5 is the conventional
 standard truncation for a liquid-density LJ fluid; Allen &amp;
 Tildesley, <em>Computer Simulation of Liquids</em>, 2nd ed., Ch. 1.4).</p></li>
-<li><p><strong>skin</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Neighbor-list skin distance, see <a class="reference internal" href="#chemistrykit.md.VerletNeighborList" title="chemistrykit.md.utils.neighbor_list.VerletNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">VerletNeighborList</span></code></a>.</p></li>
-<li><p><strong>rebuild_every</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Rebuild the neighbor list after this many <a class="reference internal" href="#chemistrykit.md.LJFluid.step" title="chemistrykit.md.LJFluid.step"><code class="xref py py-meth docutils literal notranslate"><span class="pre">step()</span></code></a> calls.</p></li>
+<li><p><strong>skin</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Neighbor-list skin distance, see <a class="reference internal" href="#chemistrykit.md.VerletNeighborList" title="chemistrykit.md.utils.neighbor_list.VerletNeighborList"><code class="xref py py-class docutils literal notranslate"><span class="pre">VerletNeighborList</span></code></a>.</p></li>
+<li><p><strong>rebuild_every</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Rebuild the neighbor list after this many <a class="reference internal" href="#chemistrykit.md.LJFluid.step" title="chemistrykit.md.LJFluid.step"><code class="xref py py-meth docutils literal notranslate"><span class="pre">step()</span></code></a> calls.</p></li>
 </ul>
 </dd>
 </dl>
@@ -930,15 +939,15 @@ exactly, rather than only on average.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_per_side</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Particles per lattice edge; total particle count is
+<li><p><strong>n_per_side</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Particles per lattice edge; total particle count is
 <code class="docutils literal notranslate"><span class="pre">n_per_side**3</span></code>.</p></li>
-<li><p><strong>density</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Number density <span class="math notranslate nohighlight">\(\rho=N/V\)</span>, in units of <span class="math notranslate nohighlight">\(\sigma^{-3}\)</span>.</p></li>
-<li><p><strong>temperature</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Target temperature, in units of <span class="math notranslate nohighlight">\(\epsilon/k_B\)</span>.</p></li>
-<li><p><strong>epsilon</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
-<li><p><strong>sigma</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
-<li><p><strong>mass</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
-<li><p><strong>cutoff</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
-<li><p><strong>rng</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" title="(in NumPy v2.5)"><em>numpy.random.Generator</em></a><em>, or </em><em>None</em>) – Seed or generator for the initial velocities.</p></li>
+<li><p><strong>density</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Number density <span class="math notranslate nohighlight">\(\rho=N/V\)</span>, in units of <span class="math notranslate nohighlight">\(\sigma^{-3}\)</span>.</p></li>
+<li><p><strong>temperature</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Target temperature, in units of <span class="math notranslate nohighlight">\(\epsilon/k_B\)</span>.</p></li>
+<li><p><strong>epsilon</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>sigma</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>mass</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>cutoff</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>rng</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><em>int</em></a><em>, </em><a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" title="(in NumPy v2.5)"><em>numpy.random.Generator</em></a><em>, or </em><em>None</em>) – Seed or generator for the initial velocities.</p></li>
 <li><p><strong>**kwargs</strong> – Forwarded to the <a class="reference internal" href="#chemistrykit.md.LJFluid" title="chemistrykit.md.LJFluid"><code class="xref py py-class docutils literal notranslate"><span class="pre">LJFluid</span></code></a> constructor (e.g. <code class="docutils literal notranslate"><span class="pre">skin</span></code>,
 <code class="docutils literal notranslate"><span class="pre">rebuild_every</span></code>).</p></li>
 </ul>
@@ -970,10 +979,10 @@ exactly, rather than only on average.</p>
 2.60, generalized from <span class="math notranslate nohighlight">\(d=3\)</span> to general dimension.)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>k_b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p>
+<dd class="field-odd"><p><strong>k_b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><em>float</em></p>
@@ -1017,10 +1026,10 @@ solid.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>r_max</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Maximum separation to histogram; defaults to half the box
+<li><p><strong>r_max</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Maximum separation to histogram; defaults to half the box
 length (beyond which the minimum-image convention is
 ambiguous).</p></li>
-<li><p><strong>n_bins</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>n_bins</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
 <li><p><strong>positions</strong> (<em>ndarray</em><em>, </em><em>shape</em><em> (</em><em>N</em><em>, </em><em>3</em><em>)</em><em>, </em><em>optional</em>) – Configuration to analyze; defaults to the system’s current
 <code class="docutils literal notranslate"><span class="pre">self.positions</span></code>.</p></li>
 </ul>
@@ -1047,10 +1056,10 @@ method exists only to supply that function with this system’s
 wraps <code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.integrators.rk4_integrate()</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Time step.</p>
+<dd class="field-odd"><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Time step.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1061,7 +1070,7 @@ wraps <code class="xref py py-func docutils literal notranslate"><span class="pr
 <dd><p>The virial sum <span class="math notranslate nohighlight">\(W=\sum_{i&lt;j}\vec r_{ij}\cdot\vec F_{ij}\)</span> at the current configuration.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>float</em></p>
@@ -1087,8 +1096,8 @@ London-dispersion attraction (J. E. Lennard-Jones, <em>Proc. R. Soc. A</em>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>epsilon</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Well depth.</p></li>
-<li><p><strong>sigma</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Finite distance at which <code class="docutils literal notranslate"><span class="pre">U(sigma)</span> <span class="pre">==</span> <span class="pre">0</span></code>.</p></li>
+<li><p><strong>epsilon</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Well depth.</p></li>
+<li><p><strong>sigma</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Finite distance at which <code class="docutils literal notranslate"><span class="pre">U(sigma)</span> <span class="pre">==</span> <span class="pre">0</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1114,7 +1123,7 @@ the mechanical-equilibrium separation of an isolated pair:</p>
 <dd><p>Return the potential energy U(r) at separation(s) <cite>r</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a>)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>float or ndarray</em></p>
@@ -1132,7 +1141,7 @@ and negative is attractive – so the force on particle <cite>i</cite> due to
 particle <cite>j</cite> is <code class="docutils literal notranslate"><span class="pre">f(r)</span> <span class="pre">*</span> <span class="pre">(r_i</span> <span class="pre">-</span> <span class="pre">r_j)</span> <span class="pre">/</span> <span class="pre">r</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a>)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>float or ndarray</em></p>
@@ -1142,7 +1151,7 @@ particle <cite>j</cite> is <code class="docutils literal notranslate"><span clas
 
 <dl class="py property">
 <dt class="sig sig-object py" id="chemistrykit.md.LennardJones.r_min">
-<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">r_min</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.md.LennardJones.r_min" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">r_min</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.md.LennardJones.r_min" title="Link to this definition">#</a></dt>
 <dd><p>Separation at the potential minimum, <span class="math notranslate nohighlight">\(2^{1/6}\sigma\)</span>.</p>
 </dd></dl>
 
@@ -1151,7 +1160,7 @@ particle <cite>j</cite> is <code class="docutils literal notranslate"><span clas
 <dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.md.MDResult">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">MDResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kinetic_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">potential_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/core/base_system.html#MDResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.MDResult" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Container for the output of a <a class="reference internal" href="#chemistrykit.md.MolecularDynamicsSystem.run" title="chemistrykit.md.MolecularDynamicsSystem.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">MolecularDynamicsSystem.run()</span></code></a> call.</p>
 <p>Mirrors <a class="reference internal" href="kinetics.html#chemistrykit.kinetics.KineticsResult" title="chemistrykit.kinetics.core.base_system.KineticsResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">chemistrykit.kinetics.core.base_system.KineticsResult</span></code></a>
 (a stable, dataclass return type consumed by visualizers), specialized
@@ -1165,31 +1174,31 @@ to a particle trajectory instead of a concentration one.</p>
 <li><p><strong>kinetic_energy</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
 <li><p><strong>potential_energy</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
 <li><p><strong>temperature</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
-<li><p><strong>box_length</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> | </em><em>None</em>)</p></li>
-<li><p><strong>extra</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a>)</p></li>
+<li><p><strong>box_length</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>extra</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><em>dict</em></a>)</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="chemistrykit.md.MDResult.box_length">
-<span class="sig-name descname"><span class="pre">box_length</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#chemistrykit.md.MDResult.box_length" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">box_length</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#chemistrykit.md.MDResult.box_length" title="Link to this definition">#</a></dt>
 <dd><p>Cubic periodic box side length, or <code class="docutils literal notranslate"><span class="pre">None</span></code> for a
 non-periodic system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)">float</a> or None</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)">float</a> or None</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="chemistrykit.md.MDResult.extra">
-<span class="sig-name descname"><span class="pre">extra</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span><a class="headerlink" href="#chemistrykit.md.MDResult.extra" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">extra</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><span class="pre">dict</span></a></span><a class="headerlink" href="#chemistrykit.md.MDResult.extra" title="Link to this definition">#</a></dt>
 <dd><p>Free-form slot for any additional diagnostics a system
 chooses to attach (e.g. pressure).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1311,7 +1320,7 @@ each sampled frame.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.md.MolecularDynamicsSystem">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">MolecularDynamicsSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">positions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">velocities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">masses</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/core/base_system.html#MolecularDynamicsSystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.MolecularDynamicsSystem" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
 <p>Common engine for a system of particles integrated by velocity-Verlet.</p>
 <p>Concrete subclasses must set, in <code class="docutils literal notranslate"><span class="pre">__init__</span></code> (before calling
 <code class="docutils literal notranslate"><span class="pre">super().__init__(...)</span></code>):</p>
@@ -1342,7 +1351,7 @@ length, for systems that use periodic boundary conditions
 </dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="chemistrykit.md.MolecularDynamicsSystem.box_length">
-<span class="sig-name descname"><span class="pre">box_length</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#chemistrykit.md.MolecularDynamicsSystem.box_length" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">box_length</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#chemistrykit.md.MolecularDynamicsSystem.box_length" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1358,7 +1367,7 @@ different constraints (e.g. a fixed number of internal
 vibrational modes) should override this.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>int</em></p>
@@ -1390,7 +1399,7 @@ vibrational modes) should override this.</p>
 <dd><p>Total kinetic energy, <span class="math notranslate nohighlight">\(K = \sum_i \frac{1}{2} m_i v_i^2\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>float</em></p>
@@ -1409,7 +1418,7 @@ vibrational modes) should override this.</p>
 <dd><p>Total potential energy at the system’s current configuration.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>float</em></p>
@@ -1424,14 +1433,14 @@ vibrational modes) should override this.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Time step.</p></li>
-<li><p><strong>n_steps</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of integration steps (must be a multiple of <cite>sample_every</cite>).</p></li>
-<li><p><strong>thermostat</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><em>object</em></a><em>, </em><em>optional</em>) – An object with an <code class="docutils literal notranslate"><span class="pre">apply(system,</span> <span class="pre">dt)</span></code> method, called once
+<li><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Time step.</p></li>
+<li><p><strong>n_steps</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of integration steps (must be a multiple of <cite>sample_every</cite>).</p></li>
+<li><p><strong>thermostat</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><em>object</em></a><em>, </em><em>optional</em>) – An object with an <code class="docutils literal notranslate"><span class="pre">apply(system,</span> <span class="pre">dt)</span></code> method, called once
 after every step (e.g.
 <a class="reference internal" href="#chemistrykit.md.VelocityRescalingThermostat" title="chemistrykit.md.systems.thermostats.VelocityRescalingThermostat"><code class="xref py py-class docutils literal notranslate"><span class="pre">VelocityRescalingThermostat</span></code></a>,
 <a class="reference internal" href="#chemistrykit.md.NoseHooverThermostat" title="chemistrykit.md.systems.thermostats.NoseHooverThermostat"><code class="xref py py-class docutils literal notranslate"><span class="pre">NoseHooverThermostat</span></code></a>).
 Omit for a microcanonical (NVE) run.</p></li>
-<li><p><strong>sample_every</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Record a frame every this many steps (plus the initial state).</p></li>
+<li><p><strong>sample_every</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Record a frame every this many steps (plus the initial state).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -1455,10 +1464,10 @@ method exists only to supply that function with this system’s
 wraps <code class="xref py py-func docutils literal notranslate"><span class="pre">chemistrykit.integrators.rk4_integrate()</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Time step.</p>
+<dd class="field-odd"><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Time step.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1475,10 +1484,10 @@ eq. 2.60.) In the reduced units used by
 (the default) is the correct choice.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>k_b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Boltzmann constant in the system’s unit system.</p>
+<dd class="field-odd"><p><strong>k_b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Boltzmann constant in the system’s unit system.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><em>float</em></p>
@@ -1507,9 +1516,9 @@ whose classical vibration this potential drives).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>De</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Dissociation energy (well depth), must be positive.</p></li>
-<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Width parameter (inverse length), must be positive.</p></li>
-<li><p><strong>re</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Equilibrium separation.</p></li>
+<li><p><strong>De</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Dissociation energy (well depth), must be positive.</p></li>
+<li><p><strong>a</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Width parameter (inverse length), must be positive.</p></li>
+<li><p><strong>re</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Equilibrium separation.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1533,7 +1542,7 @@ whose classical vibration this potential drives).</p>
 <dd><p>Return the potential energy U(r) at separation(s) <cite>r</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a>)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>float or ndarray</em></p>
@@ -1543,7 +1552,7 @@ whose classical vibration this potential drives).</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="chemistrykit.md.Morse.force_constant">
-<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">force_constant</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.md.Morse.force_constant" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">force_constant</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><span class="pre">float</span></a></span><a class="headerlink" href="#chemistrykit.md.Morse.force_constant" title="Link to this definition">#</a></dt>
 <dd><p>Harmonic force constant at the minimum, <span class="math notranslate nohighlight">\(k=2D_ea^2\)</span>.</p>
 </dd></dl>
 
@@ -1557,7 +1566,7 @@ and negative is attractive – so the force on particle <cite>i</cite> due to
 particle <cite>j</cite> is <code class="docutils literal notranslate"><span class="pre">f(r)</span> <span class="pre">*</span> <span class="pre">(r_i</span> <span class="pre">-</span> <span class="pre">r_j)</span> <span class="pre">/</span> <span class="pre">r</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a>)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>float or ndarray</em></p>
@@ -1575,9 +1584,9 @@ while still capturing anharmonicity/dissociation away from it.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>De</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
-<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
-<li><p><strong>re</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>De</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>k</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>re</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -1600,7 +1609,7 @@ while still capturing anharmonicity/dissociation away from it.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.md.NoseHooverThermostat">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">NoseHooverThermostat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dof</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/thermostats.html#NoseHooverThermostat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.NoseHooverThermostat" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>The Nose-Hoover extended-system thermostat.</p>
 <p>Couples the physical system to a fictitious “friction” degree of
 freedom <span class="math notranslate nohighlight">\(\xi\)</span> whose equation of motion drives the
@@ -1631,14 +1640,14 @@ flagged explicitly here as the approximation it is.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>target_temperature</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Must be positive.</p></li>
-<li><p><strong>Q</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Thermostat “mass” (coupling strength); a larger <cite>Q</cite> couples more
+<li><p><strong>target_temperature</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Must be positive.</p></li>
+<li><p><strong>Q</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Thermostat “mass” (coupling strength); a larger <cite>Q</cite> couples more
 weakly, giving a slower thermostat response. Must be positive.</p></li>
-<li><p><strong>dof</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Degrees of freedom used for the target kinetic energy
+<li><p><strong>dof</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Degrees of freedom used for the target kinetic energy
 <span class="math notranslate nohighlight">\(\text{dof}\cdot k_BT/2\)</span>; defaults to the system’s own
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">degrees_of_freedom()</span></code>
 at the first call to <a class="reference internal" href="#chemistrykit.md.NoseHooverThermostat.apply" title="chemistrykit.md.NoseHooverThermostat.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a>.</p></li>
-<li><p><strong>k_b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>k_b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -1661,11 +1670,11 @@ at the first call to <a class="reference internal" href="#chemistrykit.md.NoseHo
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>system</strong> (<a class="reference internal" href="#chemistrykit.md.MolecularDynamicsSystem" title="chemistrykit.md.core.base_system.MolecularDynamicsSystem"><em>chemistrykit.md.core.base_system.MolecularDynamicsSystem</em></a>)</p></li>
-<li><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1675,7 +1684,7 @@ at the first call to <a class="reference internal" href="#chemistrykit.md.NoseHo
 <dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.md.PairPotential">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">PairPotential</span></span><a class="reference internal" href="../_modules/chemistrykit/md/core/base_system.html#PairPotential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.PairPotential" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
 <p>Common interface for a radially symmetric two-body potential U(r).</p>
 <p>Concrete subclasses (<a class="reference internal" href="#chemistrykit.md.LennardJones" title="chemistrykit.md.systems.lj_fluid.LennardJones"><code class="xref py py-class docutils literal notranslate"><span class="pre">LennardJones</span></code></a>,
 <a class="reference internal" href="#chemistrykit.md.Morse" title="chemistrykit.md.systems.pair_potentials.Morse"><code class="xref py py-class docutils literal notranslate"><span class="pre">Morse</span></code></a>,
@@ -1691,7 +1700,7 @@ for equations of state.</p>
 <dd><p>Return the potential energy U(r) at separation(s) <cite>r</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a>)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>float or ndarray</em></p>
@@ -1709,7 +1718,7 @@ and negative is attractive – so the force on particle <cite>i</cite> due to
 particle <cite>j</cite> is <code class="docutils literal notranslate"><span class="pre">f(r)</span> <span class="pre">*</span> <span class="pre">(r_i</span> <span class="pre">-</span> <span class="pre">r_j)</span> <span class="pre">/</span> <span class="pre">r</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a>)</p>
+<dd class="field-odd"><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a><em> or </em><em>array-like</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a>)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>float or ndarray</em></p>
@@ -1735,12 +1744,12 @@ velocity component (RATTLE’s velocity stage).</p>
 <li><p><strong>positions</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="structure.html#chemistrykit.structure.Molecule.n_atoms" title="chemistrykit.structure.Molecule.n_atoms"><em>n_atoms</em></a><em>, </em><em>3</em><em>)</em>)</p></li>
 <li><p><strong>velocities</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="structure.html#chemistrykit.structure.Molecule.n_atoms" title="chemistrykit.structure.Molecule.n_atoms"><em>n_atoms</em></a><em>, </em><em>3</em><em>)</em>)</p></li>
 <li><p><strong>masses</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="structure.html#chemistrykit.structure.Molecule.n_atoms" title="chemistrykit.structure.Molecule.n_atoms"><em>n_atoms</em></a><em>,</em><em>)</em>)</p></li>
-<li><p><strong>constraints</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a></span>) – Rigid bonds; <cite>positions</cite> should already satisfy them.</p></li>
-<li><p><strong>bonds</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a></span>) – Flexible harmonic terms, as for
+<li><p><strong>constraints</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a></span>) – Rigid bonds; <cite>positions</cite> should already satisfy them.</p></li>
+<li><p><strong>bonds</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a></span>) – Flexible harmonic terms, as for
 <a class="reference internal" href="#chemistrykit.md.HarmonicMolecule" title="chemistrykit.md.systems.pair_potentials.HarmonicMolecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">HarmonicMolecule</span></code></a>.</p></li>
-<li><p><strong>angles</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a></span>) – Flexible harmonic terms, as for
+<li><p><strong>angles</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a></span>) – Flexible harmonic terms, as for
 <a class="reference internal" href="#chemistrykit.md.HarmonicMolecule" title="chemistrykit.md.systems.pair_potentials.HarmonicMolecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">HarmonicMolecule</span></code></a>.</p></li>
-<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -1776,7 +1785,7 @@ velocity component (RATTLE’s velocity stage).</p>
 <dd><p>Cartesian degrees of freedom minus center-of-mass motion and one per constraint.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>int</em></p>
@@ -1790,10 +1799,10 @@ velocity component (RATTLE’s velocity stage).</p>
 <dd><p>Advance one constrained velocity-Verlet (SHAKE/RATTLE) step, in place.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p>
+<dd class="field-odd"><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1803,7 +1812,7 @@ velocity component (RATTLE’s velocity stage).</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.md.StochasticVelocityRescalingThermostat">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">StochasticVelocityRescalingThermostat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dof</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/thermostats.html#StochasticVelocityRescalingThermostat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.StochasticVelocityRescalingThermostat" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>The Bussi-Donadio-Parrinello stochastic velocity-rescaling thermostat.</p>
 <p>Berendsen’s exponential relaxation of the kinetic energy <span class="math notranslate nohighlight">\(K\)</span>
 plus a correctly scaled stochastic term, chosen so that the kinetic
@@ -1823,12 +1832,12 @@ canonical gamma distribution with mean <span class="math notranslate nohighlight
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>target_temperature</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – <span class="math notranslate nohighlight">\(T_0\)</span>; must be positive.</p></li>
-<li><p><strong>tau</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Relaxation time; must be positive.</p></li>
-<li><p><strong>rng</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" title="(in NumPy v2.5)"><em>numpy.random.Generator</em></a><em>, or </em><em>None</em>)</p></li>
-<li><p><strong>dof</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – <span class="math notranslate nohighlight">\(N_f\)</span>; defaults to the system’s
+<li><p><strong>target_temperature</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – <span class="math notranslate nohighlight">\(T_0\)</span>; must be positive.</p></li>
+<li><p><strong>tau</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Relaxation time; must be positive.</p></li>
+<li><p><strong>rng</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><em>int</em></a><em>, </em><a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html#numpy.random.Generator" title="(in NumPy v2.5)"><em>numpy.random.Generator</em></a><em>, or </em><em>None</em>)</p></li>
+<li><p><strong>dof</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – <span class="math notranslate nohighlight">\(N_f\)</span>; defaults to the system’s
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">degrees_of_freedom()</span></code>.</p></li>
-<li><p><strong>k_b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>k_b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -1850,11 +1859,11 @@ canonical gamma distribution with mean <span class="math notranslate nohighlight
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>system</strong> (<a class="reference internal" href="#chemistrykit.md.MolecularDynamicsSystem" title="chemistrykit.md.core.base_system.MolecularDynamicsSystem"><em>chemistrykit.md.core.base_system.MolecularDynamicsSystem</em></a>)</p></li>
-<li><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1864,7 +1873,7 @@ canonical gamma distribution with mean <span class="math notranslate nohighlight
 <dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.md.VelocityRescalingThermostat">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">VelocityRescalingThermostat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/systems/thermostats.html#VelocityRescalingThermostat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.VelocityRescalingThermostat" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Simple (deterministic) velocity-rescaling thermostat.</p>
 <p>Rescales every particle’s velocity by a common factor
 <span class="math notranslate nohighlight">\(\lambda=\sqrt{T_{\text{target}}/T_{\text{current}}}\)</span> every
@@ -1884,9 +1893,9 @@ meant by “velocity rescaling” here.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>target_temperature</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Must be positive.</p></li>
-<li><p><strong>interval</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Rescale every this many calls to <a class="reference internal" href="#chemistrykit.md.VelocityRescalingThermostat.apply" title="chemistrykit.md.VelocityRescalingThermostat.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a> (i.e. MD steps).</p></li>
-<li><p><strong>k_b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Boltzmann constant in the system’s unit system (<code class="docutils literal notranslate"><span class="pre">1.0</span></code> for the
+<li><p><strong>target_temperature</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Must be positive.</p></li>
+<li><p><strong>interval</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Rescale every this many calls to <a class="reference internal" href="#chemistrykit.md.VelocityRescalingThermostat.apply" title="chemistrykit.md.VelocityRescalingThermostat.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a> (i.e. MD steps).</p></li>
+<li><p><strong>k_b</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Boltzmann constant in the system’s unit system (<code class="docutils literal notranslate"><span class="pre">1.0</span></code> for the
 reduced units used by <a class="reference internal" href="#chemistrykit.md.LJFluid" title="chemistrykit.md.systems.lj_fluid.LJFluid"><code class="xref py py-class docutils literal notranslate"><span class="pre">LJFluid</span></code></a>).</p></li>
 </ul>
 </dd>
@@ -1910,12 +1919,12 @@ reduced units used by <a class="reference internal" href="#chemistrykit.md.LJFlu
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>system</strong> (<a class="reference internal" href="#chemistrykit.md.MolecularDynamicsSystem" title="chemistrykit.md.core.base_system.MolecularDynamicsSystem"><em>chemistrykit.md.core.base_system.MolecularDynamicsSystem</em></a>)</p></li>
-<li><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Unused (present for interface symmetry with
+<li><p><strong>dt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Unused (present for interface symmetry with
 <a class="reference internal" href="#chemistrykit.md.NoseHooverThermostat" title="chemistrykit.md.NoseHooverThermostat"><code class="xref py py-class docutils literal notranslate"><span class="pre">NoseHooverThermostat</span></code></a>).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1925,7 +1934,7 @@ reduced units used by <a class="reference internal" href="#chemistrykit.md.LJFlu
 <dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.md.VerletNeighborList">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">VerletNeighborList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cutoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rebuild_every</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/utils/neighbor_list.html#VerletNeighborList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.VerletNeighborList" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A Verlet (“skin”) neighbor list, rebuilt only every few calls.</p>
 <p>Building the pair list with a cutoff enlarged by a <cite>skin</cite> distance
 means the list stays a superset of the true <cite>cutoff</cite>-pairs for
@@ -1942,9 +1951,9 @@ and force an early rebuild once their sum exceeds <cite>skin</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>cutoff</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – The physical interaction cutoff.</p></li>
-<li><p><strong>skin</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Extra distance added to <cite>cutoff</cite> when building the list.</p></li>
-<li><p><strong>rebuild_every</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Rebuild after this many calls to <a class="reference internal" href="#chemistrykit.md.VerletNeighborList.pairs" title="chemistrykit.md.VerletNeighborList.pairs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pairs()</span></code></a>.</p></li>
+<li><p><strong>cutoff</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – The physical interaction cutoff.</p></li>
+<li><p><strong>skin</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Extra distance added to <cite>cutoff</cite> when building the list.</p></li>
+<li><p><strong>rebuild_every</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Rebuild after this many calls to <a class="reference internal" href="#chemistrykit.md.VerletNeighborList.pairs" title="chemistrykit.md.VerletNeighborList.pairs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pairs()</span></code></a>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1956,7 +1965,7 @@ and force an early rebuild once their sum exceeds <cite>skin</cite>.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>positions</strong> (<em>ndarray</em><em>, </em><em>shape</em><em> (</em><em>N</em><em>, </em><em>d</em><em>)</em>)</p></li>
-<li><p><strong>box_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>)</p></li>
+<li><p><strong>box_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -1971,7 +1980,7 @@ and force an early rebuild once their sum exceeds <cite>skin</cite>.</p>
 <dd><p>Force the next call to <a class="reference internal" href="#chemistrykit.md.VerletNeighborList.pairs" title="chemistrykit.md.VerletNeighborList.pairs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pairs()</span></code></a> to rebuild.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1981,24 +1990,24 @@ and force an early rebuild once their sum exceeds <cite>skin</cite>.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="chemistrykit.md.XYZTrajectory">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chemistrykit.md.</span></span><span class="sig-name descname"><span class="pre">XYZTrajectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chemistrykit/md/utils/xyz_io.html#XYZTrajectory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chemistrykit.md.XYZTrajectory" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Frames read back by <a class="reference internal" href="#chemistrykit.md.read_xyz" title="chemistrykit.md.read_xyz"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_xyz()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>symbols</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>)</p></li>
+<li><p><strong>symbols</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><em>list</em></a>)</p></li>
 <li><p><strong>positions</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><em>ndarray</em></a>)</p></li>
-<li><p><strong>comments</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a>)</p></li>
+<li><p><strong>comments</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><em>list</em></a>)</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="chemistrykit.md.XYZTrajectory.comments">
-<span class="sig-name descname"><span class="pre">comments</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#chemistrykit.md.XYZTrajectory.comments" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">comments</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a></span><a class="headerlink" href="#chemistrykit.md.XYZTrajectory.comments" title="Link to this definition">#</a></dt>
 <dd><p>Comment line of each frame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a> of <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a> of <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2016,11 +2025,11 @@ and force an early rebuild once their sum exceeds <cite>skin</cite>.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="chemistrykit.md.XYZTrajectory.symbols">
-<span class="sig-name descname"><span class="pre">symbols</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#chemistrykit.md.XYZTrajectory.symbols" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">symbols</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><span class="pre">list</span></a></span><a class="headerlink" href="#chemistrykit.md.XYZTrajectory.symbols" title="Link to this definition">#</a></dt>
 <dd><p>Element symbol (or label) of each atom.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)">list</a> of <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)">list</a> of <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2044,9 +2053,9 @@ step.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>positions</strong> (<em>ndarray</em><em>, </em><em>shape</em><em> (</em><em>N</em><em>, </em><em>d</em><em>)</em>)</p></li>
-<li><p><strong>box_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Cubic periodic box side length; <code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;=</span> <span class="pre">0</span></code> for an
+<li><p><strong>box_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Cubic periodic box side length; <code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;=</span> <span class="pre">0</span></code> for an
 unbounded (non-periodic) system.</p></li>
-<li><p><strong>cutoff</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pairs farther apart than this are excluded.</p></li>
+<li><p><strong>cutoff</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Pairs farther apart than this are excluded.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -2074,12 +2083,12 @@ unbounded (non-periodic) system.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>t</strong> (<em>array-like</em>) – Lag times.</p></li>
 <li><p><strong>msd</strong> (<em>array-like</em>) – Mean-squared displacement at each lag (see <a class="reference internal" href="#chemistrykit.md.mean_squared_displacement" title="chemistrykit.md.mean_squared_displacement"><code class="xref py py-func docutils literal notranslate"><span class="pre">mean_squared_displacement()</span></code></a>).</p></li>
-<li><p><strong>n_dim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
-<li><p><strong>fit_from</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
+<li><p><strong>n_dim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>fit_from</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><em>float</em></p>
@@ -2106,11 +2115,11 @@ unbounded (non-periodic) system.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>t</strong> (<em>array-like</em>) – Lag times, starting at 0.</p></li>
 <li><p><strong>vacf</strong> (<em>array-like</em>) – Unnormalized velocity autocorrelation (see <a class="reference internal" href="#chemistrykit.md.velocity_autocorrelation" title="chemistrykit.md.velocity_autocorrelation"><code class="xref py py-func docutils literal notranslate"><span class="pre">velocity_autocorrelation()</span></code></a>).</p></li>
-<li><p><strong>n_dim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>n_dim</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><em>float</em></p>
@@ -2139,8 +2148,8 @@ dynamics) integrates to the Stokes-Einstein-like value <span class="math notrans
 <li><p><strong>positions</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_frames</em><em>, </em><em>n_particles</em><em>, </em><em>n_dim</em><em>)</em>) – Sampled positions (e.g. <a class="reference internal" href="#chemistrykit.md.MDResult.positions" title="chemistrykit.md.MDResult.positions"><code class="xref py py-attr docutils literal notranslate"><span class="pre">chemistrykit.md.MDResult.positions</span></code></a>).
 Wrapped periodic positions are unwrapped first via
 <a class="reference internal" href="#chemistrykit.md.unwrap_trajectory" title="chemistrykit.md.unwrap_trajectory"><code class="xref py py-func docutils literal notranslate"><span class="pre">unwrap_trajectory()</span></code></a> when <cite>box_length</cite> is given.</p></li>
-<li><p><strong>box_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>)</p></li>
-<li><p><strong>max_lag</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Largest lag, in frames; defaults to <code class="docutils literal notranslate"><span class="pre">n_frames</span> <span class="pre">//</span> <span class="pre">2</span></code>.</p></li>
+<li><p><strong>box_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>)</p></li>
+<li><p><strong>max_lag</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Largest lag, in frames; defaults to <code class="docutils literal notranslate"><span class="pre">n_frames</span> <span class="pre">//</span> <span class="pre">2</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -2176,7 +2185,7 @@ displacement is returned unchanged.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>r_i</strong> (<em>array-like</em>) – Broadcastable position array(s).</p></li>
 <li><p><strong>r_j</strong> (<em>array-like</em>) – Broadcastable position array(s).</p></li>
-<li><p><strong>box_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>)</p></li>
+<li><p><strong>box_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -2207,8 +2216,8 @@ close together once the box wraps around:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> or </em><em>path-like</em>)</p></li>
-<li><p><strong>scale</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Coordinates are divided by this on reading (the inverse of
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em> or </em><em>path-like</em>)</p></li>
+<li><p><strong>scale</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Coordinates are divided by this on reading (the inverse of
 <a class="reference internal" href="#chemistrykit.md.write_xyz" title="chemistrykit.md.write_xyz"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_xyz()</span></code></a>’s <cite>scale</cite>).</p></li>
 </ul>
 </dd>
@@ -2219,7 +2228,7 @@ close together once the box wraps around:</p>
 <dd class="field-odd"><p><em>XYZTrajectory</em></p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If the file is truncated or frames have different atom counts or
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.15)"><strong>ValueError</strong></a> – If the file is truncated or frames have different atom counts or
     symbols.</p>
 </dd>
 </dl>
@@ -2237,8 +2246,8 @@ close together once the box wraps around:</p>
 their bond vectors set the correction directions.</p></li>
 <li><p><strong>constraints</strong> (<em>sequence</em><em> of </em><em>(</em><em>i</em><em>, </em><em>j</em><em>, </em><em>d</em><em>)</em>) – Atom pairs and their fixed separations.</p></li>
 <li><p><strong>masses</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><a class="reference internal" href="structure.html#chemistrykit.structure.Molecule.n_atoms" title="chemistrykit.structure.Molecule.n_atoms"><em>n_atoms</em></a><em>,</em><em>)</em>)</p></li>
-<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Relative tolerance on <span class="math notranslate nohighlight">\(|s^2 - d^2|/d^2\)</span>.</p></li>
-<li><p><strong>max_iter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
+<li><p><strong>tol</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Relative tolerance on <span class="math notranslate nohighlight">\(|s^2 - d^2|/d^2\)</span>.</p></li>
+<li><p><strong>max_iter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -2273,7 +2282,7 @@ between two samples.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>positions</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_frames</em><em>, </em><em>n_particles</em><em>, </em><em>n_dim</em><em>)</em>)</p></li>
-<li><p><strong>box_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Cubic periodic box side length; <code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;=</span> <span class="pre">0</span></code> returns the
+<li><p><strong>box_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Cubic periodic box side length; <code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;=</span> <span class="pre">0</span></code> returns the
 positions unchanged.</p></li>
 </ul>
 </dd>
@@ -2300,8 +2309,8 @@ positions unchanged.</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>velocities</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_frames</em><em>, </em><em>n_particles</em><em>, </em><em>n_dim</em><em>)</em>)</p></li>
-<li><p><strong>max_lag</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Largest lag, in frames; defaults to <code class="docutils literal notranslate"><span class="pre">n_frames</span> <span class="pre">//</span> <span class="pre">2</span></code>.</p></li>
-<li><p><strong>normalize</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Divide by <span class="math notranslate nohighlight">\(C(0)\)</span>.</p></li>
+<li><p><strong>max_lag</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – Largest lag, in frames; defaults to <code class="docutils literal notranslate"><span class="pre">n_frames</span> <span class="pre">//</span> <span class="pre">2</span></code>.</p></li>
+<li><p><strong>normalize</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Divide by <span class="math notranslate nohighlight">\(C(0)\)</span>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -2325,7 +2334,7 @@ positions unchanged.</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>positions</strong> (<em>array-like</em>)</p></li>
-<li><p><strong>box_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – If <code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;=</span> <span class="pre">0</span></code>, <cite>positions</cite> is returned unchanged (as a
+<li><p><strong>box_length</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> | <a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>) – If <code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;=</span> <span class="pre">0</span></code>, <cite>positions</cite> is returned unchanged (as a
 float array).</p></li>
 </ul>
 </dd>
@@ -2348,22 +2357,22 @@ float array).</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> or </em><em>path-like</em>) – Output file (overwritten).</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em> or </em><em>path-like</em>) – Output file (overwritten).</p></li>
 <li><p><strong>trajectory</strong> (<em>array-like</em><em> or </em><a class="reference internal" href="#chemistrykit.md.MDResult" title="chemistrykit.md.MDResult"><em>MDResult</em></a>) – Positions of shape <code class="docutils literal notranslate"><span class="pre">(n_atoms,</span> <span class="pre">n_dim)</span></code> or <code class="docutils literal notranslate"><span class="pre">(n_frames,</span> <span class="pre">n_atoms,</span>
 <span class="pre">n_dim)</span></code> with <code class="docutils literal notranslate"><span class="pre">n_dim</span></code> 2 or 3 (2D systems get <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">0</span></code>), or an
 <a class="reference internal" href="#chemistrykit.md.MDResult" title="chemistrykit.md.MDResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">chemistrykit.md.MDResult</span></code></a>, whose frame times and
 <code class="docutils literal notranslate"><span class="pre">box_length</span></code> are written too.</p></li>
-<li><p><strong>symbols</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> or </em><em>sequence</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>default &quot;Ar&quot;</em>) – One symbol for every atom, or one per atom.</p></li>
-<li><p><strong>scale</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Factor applied to coordinates (and box length) on writing, e.g.
+<li><p><strong>symbols</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em> or </em><em>sequence</em><em> of </em><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><em>str</em></a><em>, </em><em>default &quot;Ar&quot;</em>) – One symbol for every atom, or one per atom.</p></li>
+<li><p><strong>scale</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Factor applied to coordinates (and box length) on writing, e.g.
 to convert to angstroms.</p></li>
-<li><p><strong>box_length</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – Cubic box side (unscaled), written as an extended-XYZ lattice;
+<li><p><strong>box_length</strong> (<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><em>float</em></a><em>, </em><em>optional</em>) – Cubic box side (unscaled), written as an extended-XYZ lattice;
 taken from an <cite>MDResult</cite> when not given.</p></li>
-<li><p><strong>comment</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Extra text for every frame’s comment line (written as
+<li><p><strong>comment</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Extra text for every frame’s comment line (written as
 <code class="docutils literal notranslate"><span class="pre">Comment=&quot;...&quot;</span></code> when the line is extended XYZ).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
