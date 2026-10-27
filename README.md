@@ -2,12 +2,12 @@
 
 | | |
 |:--|:-:|
-| Package | [![PyPI version](https://badgen.net/pypi/v/chemistrykit)](https://pypi.org/project/chemistrykit/) [![Python versions](https://badgen.net/pypi/python/chemistrykit)](https://pypi.org/project/chemistrykit/) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23116472.svg)](https://doi.org/10.5281/zenodo.23116472) |
-| Quality | [![License](https://badgen.net/github/license/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/blob/main/LICENSE) [![CI](https://github.com/cpoli/chemistrykit/actions/workflows/ci.yml/badge.svg)](https://github.com/cpoli/chemistrykit/actions/workflows/ci.yml) [![Coverage](https://codecov.io/gh/cpoli/chemistrykit/branch/main/graph/badge.svg)](https://codecov.io/gh/cpoli/chemistrykit) [![Coverage (manual)](https://badgen.net/badge/coverage/96%25/green)](#coverage) |
+| Package | [![PyPI version](https://badgen.net/pypi/v/chemistrykit)](https://pypi.org/project/chemistrykit/) [![conda-forge](https://img.shields.io/conda/vn/conda-forge/chemistrykit)](https://anaconda.org/conda-forge/chemistrykit) [![Python versions](https://badgen.net/pypi/python/chemistrykit)](https://pypi.org/project/chemistrykit/) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23116472.svg)](https://doi.org/10.5281/zenodo.23116472) |
+| Quality | [![License](https://img.shields.io/github/license/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/blob/main/LICENSE) [![CI](https://github.com/cpoli/chemistrykit/actions/workflows/ci.yml/badge.svg)](https://github.com/cpoli/chemistrykit/actions/workflows/ci.yml) [![Coverage](https://codecov.io/gh/cpoli/chemistrykit/branch/main/graph/badge.svg)](https://codecov.io/gh/cpoli/chemistrykit) |
 | Documentation | [![Docs](https://badgen.net/badge/docs/cpoli.github.io%2Fchemistrykit/blue)](https://cpoli.github.io/chemistrykit/) |
 | Code style | [![Ruff](https://badgen.net/badge/code%20style/ruff/purple)](https://github.com/astral-sh/ruff) |
 | Downloads | [![Downloads](https://static.pepy.tech/badge/chemistrykit)](https://pepy.tech/project/chemistrykit) [![Downloads/Month](https://static.pepy.tech/badge/chemistrykit/month)](https://pepy.tech/project/chemistrykit) |
-| Community | [![GitHub Stars](https://badgen.net/github/stars/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit) [![GitHub Forks](https://badgen.net/github/forks/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit) [![Contributors](https://badgen.net/github/contributors/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/graphs/contributors) [![Last Commit](https://badgen.net/github/last-commit/cpoli/chemistrykit/main)](https://github.com/cpoli/chemistrykit/commits/main) |
+| Community | [![GitHub Stars](https://img.shields.io/github/stars/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit) [![GitHub Forks](https://img.shields.io/github/forks/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit) [![Contributors](https://img.shields.io/github/contributors/cpoli/chemistrykit)](https://github.com/cpoli/chemistrykit/graphs/contributors) [![Last Commit](https://img.shields.io/github/last-commit/cpoli/chemistrykit/main)](https://github.com/cpoli/chemistrykit/commits/main) |
 
 **See the equations of chemistry at work.**
 chemistrykit is a Python toolkit for learning and teaching computational
@@ -41,6 +41,8 @@ and history-driven documentation.
 
 ```bash
 pip install chemistrykit
+# or
+conda install -c conda-forge chemistrykit
 ```
 
 Then `import chemistrykit as ck`. Runtime dependencies are numpy, scipy,
