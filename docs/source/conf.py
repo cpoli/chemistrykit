@@ -36,6 +36,8 @@ extensions = [
     "myst_parser",
     "sphinx_gallery.gen_gallery",
     "sphinx_design",
+    "sphinx_sitemap",
+    "sphinxext.opengraph",
 ]
 
 templates_path = ["_templates"]
@@ -183,6 +185,9 @@ sphinx_gallery_conf = {
     # back to file-path resolution on every single invocation.
     "backreferences_dir": "gen_modules/backreferences",
     "doc_module": ("chemistrykit",),
+    # Run the examples in one worker process per core; CHEMISTRYKIT_GALLERY_JOBS=1
+    # runs them one at a time in the Sphinx process instead.
+    "parallel": int(os.environ.get("CHEMISTRYKIT_GALLERY_JOBS", os.cpu_count() or 1)),
 }
 
 # As more subpackages land, common attribute names (e.g. "dim", "species")
@@ -192,6 +197,29 @@ sphinx_gallery_conf = {
 suppress_warnings = ["ref.python", "config.cache"]
 
 html_theme = "pydata_sphinx_theme"
+
+# Search-engine metadata: sphinx-sitemap writes sitemap.xml with absolute
+# URLs from html_baseurl, and sphinxext-opengraph adds a <meta
+# name="description"> plus og:* link-preview tags from each page's text.
+# html_baseurl also gives every page a <link rel="canonical">.
+html_baseurl = "https://cpoli.github.io/chemistrykit/"
+html_title = project
+sitemap_url_scheme = "{link}"
+sitemap_excludes = [
+    "search.html",
+    "genindex.html",
+    "py-modindex.html",
+    "*sg_execution_times.html",
+    "_modules/*",
+    # Include-only fragments (card grids, nav strips), not standalone pages.
+    "_generated/grid_*",
+    "_generated/vars.html",
+    "_generated/nav/*",
+]
+ogp_site_url = html_baseurl
+ogp_site_name = project
+ogp_image = html_baseurl + "_static/images/chemistrykit_logo.png"
+ogp_social_cards = {"enable": False}
 html_logo = "_static/images/chemistrykit_logo_transparent.png"
 html_theme_options = {
     "github_url": "https://github.com/cpoli/chemistrykit",
@@ -200,6 +228,12 @@ html_theme_options = {
             "name": "PyPI",
             "url": "https://pypi.org/project/chemistrykit/",
             "icon": "fa-brands fa-python",
+            "type": "fontawesome",
+        },
+        {
+            "name": "Charles Poli",
+            "url": "https://cpoli.github.io/",
+            "icon": "fa-solid fa-user",
             "type": "fontawesome",
         },
     ],
